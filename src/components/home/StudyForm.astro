@@ -1,0 +1,326 @@
+---
+const activities = [
+  "Industria",
+  "Oficinas y terciario",
+  "Retail y distribución",
+  "Hostelería",
+  "Logística",
+  "Otra actividad",
+];
+
+const spends = ["500-1.500 €", "1.500-5.000 €", "5.000-15.000 €", "Más de 15.000 €"];
+const supplies = ["1", "2-5", "6-20", "Más de 20"];
+---
+
+<form class="card" id="estudio">
+  <p class="kicker">Estudio EMAX</p>
+  <ol class="steps">
+    <li class="is-active">1 Empresa</li>
+    <li>2 Situación</li>
+    <li>3 Contacto</li>
+    <li>4 Documentación</li>
+  </ol>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <fieldset class="panel is-active" data-step="1">
+    <legend>Tu empresa</legend>
+    <h2>Cuéntanos cómo consume tu empresa.</h2>
+    <p class="hint">Tres datos para empezar. Ninguna respuesta está seleccionada por defecto.</p>
+
+    <label for="actividad">¿A qué se dedica tu empresa?</label>
+    <select id="actividad" name="actividad" required>
+      <option value="" selected disabled>Selecciona tu actividad</option>
+      {activities.map((item) => <option value={item}>{item}</option>)}
+    </select>
+
+    <p class="q">¿Cuánto pagas aproximadamente al mes?</p>
+    <div class="chips">
+      {
+        spends.map((item) => (
+          <label>
+            <input type="radio" name="gasto" value={item} required />
+            <span>{item}</span>
+          </label>
+        ))
+      }
+    </div>
+
+    <p class="q">¿Cuántos suministros gestionas?</p>
+    <div class="chips chips-4">
+      {
+        supplies.map((item) => (
+          <label>
+            <input type="radio" name="suministros" value={item} required />
+            <span>{item}</span>
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <fieldset class="panel" data-step="2" hidden>
+    <legend>Situación</legend>
+    <h2>Cómo está contratada hoy tu energía.</h2>
+    <p class="hint">Nos basta con una foto aproximada. El análisis fino llega después.</p>
+    <label for="tarifa">¿Qué tipo de contrato tienes ahora?</label>
+    <select id="tarifa" name="tarifa">
+      <option value="" selected disabled>Selecciona una opción</option>
+      <option>Tarifa indexada</option>
+      <option>Precio fijo</option>
+      <option>Mixto / no lo tengo claro</option>
+    </select>
+    <label for="objetivo">¿Qué buscas primero?</label>
+    <select id="objetivo" name="objetivo">
+      <option value="" selected disabled>Selecciona una opción</option>
+      <option>Bajar coste</option>
+      <option>Más control y previsibilidad</option>
+      <option>Ambos</option>
+    </select>
+  </fieldset>
+
+  <fieldset class="panel" data-step="3" hidden>
+    <legend>Contacto</legend>
+    <h2>Para enviarte el estudio.</h2>
+    <p class="hint">Un experto de EMAX te contactará en menos de 24 h. Sin compromiso.</p>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" type="text" autocomplete="name" required />
+    <label for="empresa">Empresa</label>
+    <input id="empresa" name="empresa" type="text" autocomplete="organization" required />
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="email" required />
+    <label for="telefono">Teléfono</label>
+    <input id="telefono" name="telefono" type="tel" autocomplete="tel" required />
+  </fieldset>
+
+  <fieldset class="panel" data-step="4" hidden>
+    <legend>Documentación</legend>
+    <h2>Si tienes una factura, el análisis es más preciso.</h2>
+    <p class="hint">Opcional. También puedes continuar y enviarla después.</p>
+    <label for="factura">Factura o curva de consumo</label>
+    <input id="factura" name="factura" type="file" accept=".pdf,.csv,.xls,.xlsx,image/*" />
+  </fieldset>
+
+  <div class="actions">
+    <p class="fine">Estudio gratuito · Te contactaremos en menos de 24 h · Sin compromiso</p>
+    <div class="nav-btns">
+      <button class="btn btn-ghost" type="button" data-prev hidden>Atrás</button>
+      <button class="btn btn-primary" type="button" data-next>Continuar</button>
+      <button class="btn btn-primary" type="submit" data-submit hidden>Enviar estudio</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  const form = document.querySelector("#estudio");
+  if (form instanceof HTMLFormElement) {
+    const panels = [...form.querySelectorAll("[data-step]")];
+    const steps = [...form.querySelectorAll(".steps li")];
+    const prev = form.querySelector("[data-prev]");
+    const next = form.querySelector("[data-next]");
+    const submit = form.querySelector("[data-submit]");
+    const bar = form.querySelector(".progress span");
+    let current = 1;
+
+    const show = (n: number) => {
+      current = n;
+      panels.forEach((panel) => {
+        const active = Number(panel.getAttribute("data-step")) === n;
+        panel.toggleAttribute("hidden", !active);
+        panel.classList.toggle("is-active", active);
+      });
+      steps.forEach((step, i) => step.classList.toggle("is-active", i < n));
+      if (bar instanceof HTMLElement) bar.style.width = `${(n / 4) * 100}%`;
+      prev?.toggleAttribute("hidden", n === 1);
+      next?.toggleAttribute("hidden", n === 4);
+      submit?.toggleAttribute("hidden", n !== 4);
+    };
+
+    next?.addEventListener("click", () => {
+      const panel = form.querySelector(`[data-step="${current}"]`);
+      const fields = panel?.querySelectorAll("input, select");
+      const valid = fields ? [...fields].every((el) => (el as HTMLInputElement).reportValidity()) : true;
+      if (valid && current < 4) show(current + 1);
+    });
+    prev?.addEventListener("click", () => {
+      if (current > 1) show(current - 1);
+    });
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      window.location.href = "/gracias";
+    });
+    show(1);
+  }
+</script>
+
+<style>
+  .card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(18, 40, 84, 0.72), rgba(8, 18, 42, 0.78));
+    border: 1px solid rgba(110, 190, 255, 0.38);
+    border-radius: 28px;
+    padding: 28px 28px 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
+  }
+
+  .kicker {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .steps .is-active {
+    color: #8ec8ff;
+    font-weight: 700;
+  }
+
+  .progress {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 99px;
+    margin: 10px 0 22px;
+  }
+
+  .progress span {
+    display: block;
+    height: 100%;
+    width: 25%;
+    background: linear-gradient(90deg, #2f5bff, #5cc8ff);
+    border-radius: 99px;
+  }
+
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  legend {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8ec8ff;
+    font-weight: 800;
+  }
+
+  h2 {
+    margin: 8px 0 8px;
+    font-size: 1.45rem;
+    text-transform: uppercase;
+  }
+
+  .hint,
+  .fine {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.88rem;
+  }
+
+  label,
+  .q {
+    display: block;
+    margin: 18px 0 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  select,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="file"] {
+    width: 100%;
+    min-height: 48px;
+    border: 0;
+    border-radius: 14px;
+    padding: 0 16px;
+    background: #cfd6e4;
+    color: var(--chip-text);
+  }
+
+  .chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .chips-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .chips label {
+    margin: 0;
+  }
+
+  .chips input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .chips span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: 14px;
+    background: #cfd6e4;
+    color: var(--chip-text);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .chips span::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border: 2px solid #7b879c;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .chips input:checked + span {
+    outline: 2px solid var(--cyan);
+  }
+
+  .chips input:checked + span::before {
+    border-color: var(--blue);
+    background: radial-gradient(circle, var(--blue) 40%, transparent 45%);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .nav-btns {
+    display: flex;
+    gap: 8px;
+  }
+
+  @media (max-width: 720px) {
+    .chips-4,
+    .steps {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

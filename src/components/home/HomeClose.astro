@@ -1,0 +1,61 @@
+---
+import { site } from "../../data/site";
+---
+
+<section class="close">
+  <div class="orb"></div>
+  <div class="wrap">
+    <h2>Tu próxima factura va a llegar igualmente.</h2>
+    <p>La pregunta es si vas a volver a pagarla sin revisarla.</p>
+    <div class="ctas">
+      <a class="btn btn-ghost" href="/#estudio">Generar mi estudio</a>
+      <a class="btn btn-gradient" href={site.whatsappHref} rel="noopener noreferrer">Whatsapp</a>
+      <a class="btn btn-gradient" href={site.phoneHref}>Llamar a EMAX</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .close {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #082047, #071833);
+    color: var(--white);
+    text-align: center;
+    padding: 92px 0 88px;
+  }
+
+  .orb {
+    position: absolute;
+    right: -80px;
+    bottom: -120px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(62, 200, 255, 0.55), transparent 68%);
+    filter: blur(6px);
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  p {
+    color: #9ec4ff;
+    font-size: 1.15rem;
+  }
+
+  .ctas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 36px;
+  }
+
+  .ctas .btn {
+    min-width: 180px;
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+import Logo from "./Logo.astro";
+import { headerNav, primaryCta } from "../data/site";
+
+const current = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="wrap header-inner">
+    <Logo />
+    <nav class="nav" data-nav aria-label="Principal">
+      {
+        headerNav.map((item) => (
+          <a
+            href={item.href}
+            class:list={["nav-link", { active: current === item.href }]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a class="btn btn-primary nav-cta" href={primaryCta.href}>{primaryCta.label}</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href={primaryCta.href}>{primaryCta.label}</a>
+    <button class="menu-btn" type="button" data-menu aria-expanded="false" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector("[data-menu]");
+  const nav = document.querySelector("[data-nav]");
+  btn?.addEventListener("click", () => {
+    const open = nav?.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(Boolean(open)));
+    btn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--header-h);
+    background: var(--white);
+    border-bottom: 1px solid #eef1f6;
+  }
+
+  .header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex: 1;
+  }
+
+  .nav-link {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--blue);
+  }
+
+  .header-cta {
+    margin-left: auto;
+    font-size: 0.9rem;
+    padding-inline: 18px;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .menu-btn {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  .menu-btn span {
+    display: block;
+    height: 2px;
+    background: var(--ink);
+    margin: 6px 0;
+  }
+
+  @media (max-width: 980px) {
+    .menu-btn {
+      display: block;
+      margin-left: auto;
+    }
+
+    .header-cta {
+      display: none;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      margin-top: 8px;
+    }
+
+    .nav {
+      display: none;
+      position: absolute;
+      inset: var(--header-h) 16px auto;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+    }
+
+    .nav.open {
+      display: flex;
+    }
+
+    .nav-link {
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .nav-link:hover {
+      background: var(--blue-soft);
+    }
+  }
+</style>

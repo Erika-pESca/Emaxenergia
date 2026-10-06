@@ -1,0 +1,111 @@
+---
+import Logo from "./Logo.astro";
+import { footerNav, legalNav, site } from "../data/site";
+---
+
+<footer class="footer">
+  <div class="wrap footer-main">
+    <div class="brand">
+      <Logo variant="light" />
+      <p>{site.tagline}</p>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <a href={site.phoneHref}>{site.phone}</a>
+      <span>España</span>
+    </div>
+    {
+      footerNav.map((group) => (
+        <div class="col">
+          <h2>{group.title}</h2>
+          {group.links.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+  <div class="wrap footer-legal">
+    <small>2026 EMAX Energía. Todos los derechos reservados.</small>
+    <div>
+      {legalNav.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--footer);
+    color: var(--white);
+    padding: 56px 0 28px;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 48px;
+  }
+
+  .brand p,
+  .brand a,
+  .brand span {
+    display: block;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.92rem;
+    margin-top: 8px;
+    max-width: 28ch;
+  }
+
+  .brand p {
+    margin-top: 14px;
+  }
+
+  .col h2 {
+    font-family: var(--font);
+    font-size: 1rem;
+    letter-spacing: 0;
+    margin-bottom: 14px;
+  }
+
+  .col a {
+    display: block;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.92rem;
+    margin-top: 8px;
+  }
+
+  .col a:hover,
+  .brand a:hover {
+    color: var(--white);
+  }
+
+  .footer-legal {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .footer-legal div {
+    display: flex;
+    gap: 28px;
+  }
+
+  @media (max-width: 800px) {
+    .footer-main {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-legal {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

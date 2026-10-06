@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heading: string;
+  text: string;
+}
+
+const { title, description, path, heading, text } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} path={path}>
+  <section class="page-stub">
+    <div class="wrap">
+      <h1>{heading}</h1>
+      <p>{text}</p>
+      <a class="btn btn-primary" href="/#estudio">Analizar mi consumo</a>
+    </div>
+  </section>
+</BaseLayout>
