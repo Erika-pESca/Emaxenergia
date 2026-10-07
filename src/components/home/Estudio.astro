@@ -1,0 +1,298 @@
+---
+// Tarjeta del primer paso del estudio. Los pasos 2 a 4 llegan con su boceto.
+const actividades = [
+  "Industria",
+  "Hostelería",
+  "Comercio",
+  "Oficinas",
+  "Logística",
+  "Agricultura",
+  "Servicios",
+  "Otra",
+];
+
+const pagos = ["500–1.500 €", "1.500–5.000 €", "5.000–15.000 €", "Más de 15.000 €"];
+const suministros = ["1", "2–5", "6–20", "Más de 20"];
+---
+
+<form class="estudio" id="estudio" data-estudio>
+  <p class="marca">Estudio EMAX</p>
+  <ol class="pasos">
+    <li class="activo">1 Empresa</li>
+    <li>2 Situación</li>
+    <li>3 Contacto</li>
+    <li>4 Documentación</li>
+  </ol>
+  <div class="barra" aria-hidden="true"><span></span></div>
+
+  <p class="kicker">Tu empresa</p>
+  <h2>Cuéntanos cómo consume tu empresa.</h2>
+  <p class="ayuda">Tres datos para empezar. Ninguna respuesta está seleccionada por defecto.</p>
+
+  <label class="campo">
+    <span>¿A qué se dedica tu empresa?</span>
+    <select name="actividad" required>
+      <option value="" selected disabled>Selecciona tu actividad</option>
+      {actividades.map((item) => <option value={item}>{item}</option>)}
+    </select>
+  </label>
+
+  <fieldset>
+    <legend>¿Cuánto pagas aproximadamente al mes?</legend>
+    <div class="opciones pago">
+      {
+        pagos.map((item) => (
+          <label class="opcion">
+            <input type="radio" name="pago" value={item} required />
+            <span>{item}</span>
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>¿Cuántos suministros gestionas?</legend>
+    <div class="opciones suministros">
+      {
+        suministros.map((item) => (
+          <label class="opcion">
+            <input type="radio" name="suministros" value={item} required />
+            <span>{item}</span>
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <div class="pie">
+    <p>Estudio gratuito · Te contactaremos en menos de 24 h · Sin compromiso</p>
+    <button class="seguir" type="submit">Continuar</button>
+  </div>
+</form>
+
+<script>
+  const form = document.querySelector("[data-estudio]");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>
+
+<style>
+  .estudio {
+    position: relative;
+    z-index: 1;
+    padding: 26px 24px 22px;
+    border-radius: 28px;
+    color: var(--white);
+    background:
+      linear-gradient(180deg, rgba(14, 36, 74, 0.92), rgba(7, 18, 42, 0.94));
+    border: 1px solid rgba(56, 182, 255, 0.38);
+    box-shadow:
+      0 0 0 1px rgba(56, 182, 255, 0.16),
+      0 0 26px rgba(56, 182, 255, 0.22),
+      0 18px 50px rgba(3, 10, 26, 0.65),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+  }
+
+  /* Destello azul suave alrededor del formulario, sin saturar el contenido */
+  .estudio::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -12px -16px -16px -12px;
+    border-radius: 38px;
+    background:
+      radial-gradient(ellipse at 92% 50%, rgba(56, 182, 255, 0.32), transparent 55%),
+      radial-gradient(ellipse at 15% 85%, rgba(56, 182, 255, 0.22), transparent 55%);
+    filter: blur(18px);
+    pointer-events: none;
+  }
+
+  .marca {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .pasos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .pasos .activo {
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .barra {
+    height: 3px;
+    margin: 10px 0 22px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .barra span {
+    display: block;
+    width: 26%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--blue);
+  }
+
+  .kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  h2 {
+    margin-top: 8px;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .ayuda {
+    margin: 8px 0 18px;
+    max-width: 42ch;
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .campo,
+  fieldset {
+    border: 0;
+    margin: 0 0 16px;
+    padding: 0;
+  }
+
+  .campo span,
+  legend {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    font-weight: 650;
+  }
+
+  select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 42px 0 18px;
+    border: 0;
+    border-radius: 999px;
+    background: #d7dee8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235c6b86' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")
+      right 16px center no-repeat;
+    color: #5c6b86;
+    font: inherit;
+    font-size: 0.95rem;
+    appearance: none;
+  }
+
+  select:valid {
+    color: #1c2838;
+  }
+
+  .opciones {
+    display: grid;
+    gap: 10px;
+  }
+
+  .pago {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .suministros {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .opcion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(#31445f, #28384f);
+    color: var(--white);
+    font-size: 0.86rem;
+    cursor: pointer;
+  }
+
+  .opcion input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--blue);
+  }
+
+  .opcion:has(input:checked) {
+    border-color: var(--cyan);
+    background: #004aad;
+    box-shadow: 0 0 0 1px var(--cyan);
+  }
+
+  .pie {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 6px;
+  }
+
+  .pie p {
+    max-width: 34ch;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .seguir {
+    flex-shrink: 0;
+    min-height: 40px;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--blue);
+    color: var(--white);
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .seguir:hover {
+    background: var(--blue-hover);
+  }
+
+  @media (max-width: 640px) {
+    .pasos {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 6px;
+    }
+
+    .suministros,
+    .pago {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pie {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

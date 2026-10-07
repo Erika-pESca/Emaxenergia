@@ -1,14 +1,35 @@
 ---
+// Inicio. BaseLayout ya incluye cabecera y pie.
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HomeHero from "../components/home/HomeHero.astro";
-import HomeClose from "../components/home/HomeClose.astro";
+import Hero from "../components/home/Hero.astro";
+import Variables from "../components/home/Variables.astro";
+import MetodoTarifa from "../components/home/MetodoTarifa.astro";
+import TecnologiaPersonas from "../components/home/TecnologiaPersonas.astro";
+import MaxiInteligencia from "../components/home/MaxiInteligencia.astro";
+import SectoresPerdidas from "../components/home/SectoresPerdidas.astro";
+import CompromisoAhorro from "../components/home/CompromisoAhorro.astro";
+import MaxiNumeros from "../components/home/MaxiNumeros.astro";
+import CasosReales from "../components/home/CasosReales.astro";
+import ComoEmpezar from "../components/home/ComoEmpezar.astro";
+import CentroConocimiento from "../components/home/CentroConocimiento.astro";
+import ProximaFactura from "../components/home/ProximaFactura.astro";
 ---
 
 <BaseLayout
-  title="Tarifa de luz para empresas"
-  description="EMAX analiza el consumo de tu empresa y diseña una estructura energética a medida. Estudio gratuito, sin compromiso."
+  title="EMAX Energía"
+  description="EMAX analiza cómo consume una empresa y diseña una estructura energética adaptada a ella."
   path="/"
 >
-  <HomeHero />
-  <HomeClose />
+  <Hero />
+  <Variables />
+  <MetodoTarifa />
+  <TecnologiaPersonas />
+  <MaxiInteligencia />
+  <SectoresPerdidas />
+  <CompromisoAhorro />
+  <MaxiNumeros />
+  <CasosReales />
+  <ComoEmpezar />
+  <CentroConocimiento />
+  <ProximaFactura />
 </BaseLayout>

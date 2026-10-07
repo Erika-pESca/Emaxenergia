@@ -1,3 +1,4 @@
+// Genera /robots.txt: permite el rastreo e indica dónde está el sitemap.
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = ({ site }) => {

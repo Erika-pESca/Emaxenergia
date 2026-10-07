@@ -1,0 +1,675 @@
+---
+// Componente de variables energéticas: Precio, Potencia, Horarios y Consumo.
+// Demuestra de manera visual y tecnológica que cada empresa requiere análisis a medida antes de cambiar de tarifa.
+// Efectos visuales activos:
+// 1. Rayo perimetral animado (Border Beam) que recorre continuamente el borde redondeado de cada tarjeta.
+// 2. Aura ambiental brillante y difusa con respiración sutil alrededor de las tarjetas.
+// 3. Animación dinámica continua en las imágenes (zoom suave y deriva en cámara lenta).
+// 4. Haz diagonal de destello reflectante de cristal.
+// 5. Orbes y bolitas tecnológicas flotantes con halos cian y azul corporativo de fondo.
+// Imagen temporal: src/imagenes/imagen de prueba.png.
+import imagenPrueba from "../../imagenes/imagen de prueba.png";
+
+const tarjetas = [
+  {
+    num: "01",
+    titulo: "Precio",
+    alt: "Análisis de precio de energía",
+    delay: "0s",
+  },
+  {
+    num: "02",
+    titulo: "Potencia",
+    alt: "Optimización de potencia contratada",
+    delay: "1.2s",
+  },
+  {
+    num: "03",
+    titulo: "Horarios",
+    alt: "Curvas y horarios de consumo",
+    delay: "2.4s",
+  },
+  {
+    num: "04",
+    titulo: "Consumo",
+    alt: "Medición y datos de consumo",
+    delay: "3.6s",
+  },
+];
+---
+
+<section class="variables">
+  <!-- Luces ambientales de fondo -->
+  <div class="luz luz-izq" aria-hidden="true"></div>
+  <div class="luz luz-der" aria-hidden="true"></div>
+  <div class="luz luz-centro" aria-hidden="true"></div>
+
+  <!-- Orbes y bolitas tecnológicas flotando por la sección -->
+  <div class="orbe orbe-1" aria-hidden="true"></div>
+  <div class="orbe orbe-2" aria-hidden="true"></div>
+  <div class="orbe orbe-3" aria-hidden="true"></div>
+  <div class="orbe orbe-4" aria-hidden="true"></div>
+  <div class="orbe orbe-5" aria-hidden="true"></div>
+  <div class="orbe orbe-6" aria-hidden="true"></div>
+
+  <div class="wrap variables-inner">
+    <div class="encabezado">
+      <h2>CAMBIAR DE COMPAÑÍA ES FÁCIL.</h2>
+      <p class="subtitulo">
+        <span>Saber si realmente te conviene, no tanto.</span>
+      </p>
+    </div>
+
+    <!-- Cuadrícula con las 4 tarjetas tecnológicas -->
+    <div class="tarjetas">
+      {
+        tarjetas.map((item, index) => (
+          <article
+            class="tarjeta"
+            style={`--delay: ${item.delay}; --idx: ${index};`}
+          >
+            <!-- Aura brillante con halo expansivo alrededor de la tarjeta -->
+            <div class="tarjeta-aura" aria-hidden="true"></div>
+
+            <!-- Haz de luz perimetral (Border Beam) que recorre el contorno de la tarjeta -->
+            <div class="tarjeta-borde-luz" aria-hidden="true">
+              <div class="borde-rayo"></div>
+            </div>
+
+            <!-- Cuerpo principal de la tarjeta -->
+            <div class="tarjeta-cuerpo">
+              <!-- Contenedor de imagen animada con deriva y respiración -->
+              <div class="tarjeta-img-wrap">
+                <img
+                  src={imagenPrueba.src}
+                  alt={item.alt}
+                  width={imagenPrueba.width}
+                  height={imagenPrueba.height}
+                  loading="lazy"
+                />
+                <!-- Rejilla tecnológica sutil de datos energéticos -->
+                <div class="tarjeta-malla" aria-hidden="true"></div>
+              </div>
+
+              <!-- Filtro de contraste tecnológico azul oscuro -->
+              <div class="tarjeta-filtro" aria-hidden="true"></div>
+
+              <!-- Haz de destello de cristal en diagonal -->
+              <div class="tarjeta-destello" aria-hidden="true"></div>
+
+              <!-- Cabecera de la tarjeta: solo el número identificador -->
+              <div class="tarjeta-top">
+                <span class="tarjeta-num">{item.num}</span>
+              </div>
+
+              <!-- Título principal -->
+              <div class="tarjeta-info">
+                <h3 class="tarjeta-titulo">{item.titulo}</h3>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Cierre con texto explicativo y llamada a Maxi -->
+    <div class="cierre">
+      <p class="texto-cierre">
+        Tu empresa tiene demasiadas variables para resolverlo escogiendo entre tres tarifas.
+      </p>
+      <a class="btn-maxi" href="/maxi">
+        <span class="btn-luz" aria-hidden="true"></span>
+        <span>Que Maxi haga los números</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .variables {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 40%, #f3f7fd 100%);
+    padding: 96px 0 112px;
+  }
+
+  /* Luces ambientales en los laterales y centro */
+  .luz {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    z-index: 0;
+  }
+
+  .luz-izq {
+    width: 480px;
+    height: 480px;
+    left: -140px;
+    top: 8%;
+    background: radial-gradient(circle, rgba(56, 182, 255, 0.32), rgba(0, 74, 173, 0.15) 50%, transparent 70%);
+    animation: flotar-luz 16s ease-in-out infinite alternate;
+  }
+
+  .luz-der {
+    width: 520px;
+    height: 520px;
+    right: -160px;
+    bottom: 5%;
+    background: radial-gradient(circle, rgba(0, 74, 173, 0.28), rgba(56, 182, 255, 0.24) 45%, transparent 70%);
+    animation: flotar-luz 18s ease-in-out infinite alternate-reverse;
+  }
+
+  .luz-centro {
+    width: 540px;
+    height: 260px;
+    left: calc(50% - 270px);
+    top: 45%;
+    background: radial-gradient(ellipse, rgba(82, 113, 255, 0.14), transparent 70%);
+    filter: blur(90px);
+  }
+
+  /* Bolitas flotantes con brillo y pulsación */
+  .orbe {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    box-shadow: 0 0 16px var(--cyan);
+  }
+
+  .orbe-1 {
+    width: 14px;
+    height: 14px;
+    left: 2%;
+    top: 24%;
+    background: #38b6ff;
+    animation: flotar-orbe-1 12s ease-in-out infinite;
+  }
+
+  .orbe-2 {
+    width: 10px;
+    height: 10px;
+    right: 3%;
+    top: 26%;
+    background: #5271ff;
+    box-shadow: 0 0 14px #5271ff;
+    animation: flotar-orbe-2 15s ease-in-out infinite;
+  }
+
+  .orbe-3 {
+    width: 16px;
+    height: 16px;
+    right: 7%;
+    bottom: 12%;
+    background: #38b6ff;
+    animation: flotar-orbe-1 18s ease-in-out infinite reverse;
+  }
+
+  .orbe-4 {
+    width: 9px;
+    height: 9px;
+    left: 4%;
+    bottom: 16%;
+    background: #5271ff;
+    animation: flotar-orbe-2 11s ease-in-out infinite reverse;
+  }
+
+  .orbe-5 {
+    width: 12px;
+    height: 12px;
+    left: 20%;
+    bottom: 4%;
+    background: #38b6ff;
+    box-shadow: 0 0 14px #38b6ff;
+    animation: flotar-orbe-1 14s ease-in-out infinite 2s;
+  }
+
+  .orbe-6 {
+    width: 10px;
+    height: 10px;
+    right: 22%;
+    bottom: 5%;
+    background: #5271ff;
+    box-shadow: 0 0 12px #5271ff;
+    animation: flotar-orbe-2 13s ease-in-out infinite 1s;
+  }
+
+  .variables-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .encabezado {
+    margin-bottom: 46px;
+  }
+
+  .encabezado h2 {
+    font-family: var(--display);
+    font-size: clamp(2.1rem, 3.8vw, 3.3rem);
+    font-weight: 800;
+    color: var(--blue-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .subtitulo {
+    margin: 14px 0 0;
+    font-family: var(--font);
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    font-weight: 500;
+    color: #1a2744;
+  }
+
+  .subtitulo span {
+    display: inline-block;
+    border-bottom: 2.5px solid var(--blue);
+    padding-bottom: 3px;
+  }
+
+  /* Cuadrícula de tarjetas */
+  .tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 50px;
+  }
+
+  /* Tarjeta contenedor */
+  .tarjeta {
+    position: relative;
+    border-radius: 26px;
+    padding: 2px; /* Espacio para el rayo perimetral */
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tarjeta:hover {
+    transform: translateY(-8px) scale(1.018);
+  }
+
+  /* Aura brillante perimetral con halo difuso */
+  .tarjeta-aura {
+    position: absolute;
+    inset: -3px;
+    border-radius: 28px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(56, 182, 255, 0.6) 0%,
+      rgba(82, 113, 255, 0.4) 40%,
+      rgba(0, 74, 173, 0.3) 70%,
+      transparent 85%
+    );
+    opacity: 0.55;
+    filter: blur(10px);
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+    animation: aura-respirar 4s ease-in-out infinite alternate;
+    animation-delay: var(--delay);
+  }
+
+  .tarjeta:hover .tarjeta-aura {
+    opacity: 0.95;
+    filter: blur(16px);
+  }
+
+  /* Haz de luz perimetral corriendo alrededor del contorno (Border Beam) */
+  .tarjeta-borde-luz {
+    position: absolute;
+    inset: 0;
+    border-radius: 26px;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .borde-rayo {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 240deg,
+      rgba(82, 113, 255, 0.2) 280deg,
+      rgba(56, 182, 255, 0.7) 325deg,
+      rgba(255, 255, 255, 0.65) 352deg,
+      #38b6ff 360deg
+    );
+    animation: girar-rayo 5s linear infinite;
+    animation-delay: var(--delay);
+  }
+
+  /* Cuerpo interno de la tarjeta */
+  .tarjeta-cuerpo {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 24px;
+    aspect-ratio: 4 / 3.5;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 22px 24px;
+    background: #09172c;
+    border: 1px solid rgba(120, 205, 255, 0.35);
+    box-shadow:
+      0 12px 32px rgba(7, 24, 51, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .tarjeta:hover .tarjeta-cuerpo {
+    border-color: rgba(56, 182, 255, 0.95);
+    box-shadow:
+      0 20px 48px rgba(0, 74, 173, 0.35),
+      0 0 28px rgba(56, 182, 255, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  /* Contenedor de la imagen con animación continua de deriva y respiración */
+  .tarjeta-img-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .tarjeta-img-wrap img {
+    position: absolute;
+    inset: -6%;
+    width: 112%;
+    height: 112%;
+    object-fit: cover;
+    animation: deriva-imagen 10s ease-in-out infinite alternate;
+    animation-delay: var(--delay);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  }
+
+  .tarjeta:hover .tarjeta-img-wrap img {
+    transform: scale(1.14);
+    filter: brightness(1.12) contrast(1.04);
+  }
+
+  /* Trama tecnológica sutil de datos */
+  .tarjeta-malla {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(56, 182, 255, 0.22) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.45;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Filtro de contraste tecnológico */
+  .tarjeta-filtro {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(7, 26, 56, 0.48) 0%,
+      rgba(7, 26, 56, 0.65) 50%,
+      rgba(4, 15, 36, 0.9) 100%
+    );
+    transition: background 0.35s ease;
+  }
+
+  .tarjeta:hover .tarjeta-filtro {
+    background: linear-gradient(
+      180deg,
+      rgba(7, 26, 56, 0.28) 0%,
+      rgba(7, 26, 56, 0.48) 50%,
+      rgba(0, 45, 110, 0.84) 100%
+    );
+  }
+
+  /* Haz de luz diagonal de cristal que barre la tarjeta (más clarito y sutil) */
+  .tarjeta-destello {
+    position: absolute;
+    top: -50%;
+    left: -130%;
+    width: 75%;
+    height: 200%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.02) 20%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(56, 182, 255, 0.12) 65%,
+      transparent 100%
+    );
+    transform: rotate(26deg);
+    pointer-events: none;
+    z-index: 2;
+    animation: barrido-destello 5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    animation-delay: var(--delay);
+  }
+
+  /* Cabecera interna de la tarjeta */
+  .tarjeta-top {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+  }
+
+  .tarjeta-num {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.04em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  /* Información inferior */
+  .tarjeta-info {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tarjeta-titulo {
+    font-family: var(--display);
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  .tarjeta:hover .tarjeta-titulo {
+    color: #f0f9ff;
+    transform: translateY(-2px);
+  }
+
+  /* Cierre inferior */
+  .cierre {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .texto-cierre {
+    font-family: var(--font);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #24334f;
+    margin: 0;
+    max-width: 68ch;
+    line-height: 1.5;
+  }
+
+  /* Botón con estilo píldora oscuro, destello y flecha */
+  .btn-maxi {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 30px;
+    border-radius: 999px;
+    background: #071e3d;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 0.96rem;
+    font-weight: 600;
+    border: 1px solid rgba(56, 182, 255, 0.5);
+    box-shadow:
+      0 4px 20px rgba(56, 182, 255, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-maxi:hover {
+    background: #004aad;
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 30px rgba(56, 182, 255, 0.55),
+      0 0 16px rgba(56, 182, 255, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .btn-maxi svg {
+    transition: transform 0.25s ease;
+  }
+
+  .btn-maxi:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* Keyframes de animación */
+
+  /* Girar rayo perimetral (Border Beam) */
+  @keyframes girar-rayo {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Barrido diagonal de cristal suave */
+  @keyframes barrido-destello {
+    0%, 40% {
+      left: -130%;
+      opacity: 0;
+    }
+    45% {
+      opacity: 0.8;
+    }
+    75% {
+      left: 160%;
+      opacity: 0.7;
+    }
+    100% {
+      left: 160%;
+      opacity: 0;
+    }
+  }
+
+  /* Deriva y respiración continua de la imagen */
+  @keyframes deriva-imagen {
+    0% {
+      transform: scale(1.02) translate(0, 0);
+    }
+    50% {
+      transform: scale(1.08) translate(-1.5%, -1%);
+    }
+    100% {
+      transform: scale(1.04) translate(1.5%, 1%);
+    }
+  }
+
+  /* Respiración del aura exterior */
+  @keyframes aura-respirar {
+    0% {
+      opacity: 0.4;
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 0.75;
+      filter: blur(14px);
+    }
+  }
+
+  @keyframes flotar-luz {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(24px, -20px) scale(1.08);
+    }
+  }
+
+  @keyframes flotar-orbe-1 {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(-26px) scale(1.25);
+      opacity: 1;
+    }
+  }
+
+  @keyframes flotar-orbe-2 {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(22px) scale(1.3);
+      opacity: 0.95;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .tarjetas {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .variables {
+      padding: 68px 0 80px;
+    }
+
+    .encabezado {
+      margin-bottom: 34px;
+    }
+
+    .tarjetas {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .tarjeta-cuerpo {
+      aspect-ratio: 16 / 10;
+      min-height: 190px;
+    }
+
+    .btn-maxi {
+      width: 100%;
+    }
+  }
+</style>

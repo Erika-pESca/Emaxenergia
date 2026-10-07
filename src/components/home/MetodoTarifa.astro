@@ -1,0 +1,780 @@
+---
+// Componente: Comparativa "Lo de siempre te pide elegir una tarifa" vs "Método EMAX".
+// Muestra el contraste entre el enfoque tradicional de catálogo (elegir entre 3 tarifas fijas)
+// y el enfoque consultivo tecnológico de EMAX (diseñar estructura según consumo, horarios, potencia, etc.).
+// Ambos cuadros comparten el mismo acabado tecnológico de alta gama:
+// 1. Rayo perimetral animado (Border Beam) recorriendo el contorno de cada tarjeta.
+// 2. Halo y aura ambiental brillante con blur detrás de cada tarjeta.
+// 3. Trama de telemetría y destello suave de cristal sobre las imágenes.
+// 4. Puntos cian luminosos de datos en etiquetas y elementos.
+// 5. Portal energético toroidal en el fondo de la sección.
+// 6. Botón CTA interactivo con halo expansivo.
+// Imagen temporal: src/imagenes/imagen de prueba.png.
+import imagenPrueba from "../../imagenes/imagen de prueba.png";
+---
+
+<section class="metodo-tarifa" id="metodo">
+  <!-- Portal de energía cian en anillo (focalizador visual del boceto original) -->
+  <div class="portal-halo" aria-hidden="true">
+    <div class="portal-circulo"></div>
+  </div>
+
+  <!-- Luces ambientales de fondo estilo tecnológico -->
+  <div class="luz-ambiente luz-azul-izq" aria-hidden="true"></div>
+  <div class="luz-ambiente luz-cyan-der" aria-hidden="true"></div>
+
+  <!-- Orbes y partículas tecnológicas flotando en el fondo -->
+  <div class="orbe orbe-1" aria-hidden="true"></div>
+  <div class="orbe orbe-2" aria-hidden="true"></div>
+  <div class="orbe orbe-3" aria-hidden="true"></div>
+  <div class="orbe orbe-4" aria-hidden="true"></div>
+
+  <div class="wrap metodo-inner">
+    <!-- Encabezado de la sección -->
+    <div class="encabezado">
+      <h2>
+        LO DE SIEMPRE TE PIDE<br />
+        ELEGIR UNA TARIFA.
+      </h2>
+      <p class="subtitulo">Nosotros empezamos preguntando por tu empresa.</p>
+    </div>
+
+    <!-- Comparativa: 2 tarjetas lado a lado con idéntico tratamiento tecnológico -->
+    <div class="comparativa-grid">
+      <!-- Tarjeta 1: Lo de siempre -->
+      <article class="tarjeta tarjeta-siempre">
+        <div class="tarjeta-aura" aria-hidden="true"></div>
+
+        <!-- Rayo perimetral que recorre el borde de la tarjeta -->
+        <div class="tarjeta-borde-luz" aria-hidden="true">
+          <div class="borde-rayo borde-rayo-1"></div>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <!-- Fondo con imagen, trama y filtro de contraste -->
+          <div class="tarjeta-bg">
+            <img
+              src={imagenPrueba.src}
+              alt="Lo de siempre te pide elegir una tarifa"
+              width={imagenPrueba.width}
+              height={imagenPrueba.height}
+              loading="lazy"
+            />
+            <div class="tarjeta-malla" aria-hidden="true"></div>
+            <div class="tarjeta-filtro" aria-hidden="true"></div>
+          </div>
+
+          <!-- Destello de cristal suave diagonal -->
+          <div class="tarjeta-destello destello-1" aria-hidden="true"></div>
+
+          <!-- Contenido textual sobre la imagen -->
+          <div class="tarjeta-contenido">
+            <span class="tarjeta-tag">
+              <span class="punto-tag" aria-hidden="true"></span>
+              LO DE SIEMPRE
+            </span>
+
+            <ul class="lista-items">
+              <li class="item-variable">
+                <span class="punto-var" aria-hidden="true"></span>
+                <span>Tarifa A</span>
+              </li>
+              <li class="item-variable">
+                <span class="punto-var" aria-hidden="true"></span>
+                <span>Tarifa B</span>
+              </li>
+              <li class="item-variable">
+                <span class="punto-var" aria-hidden="true"></span>
+                <span>Tarifa C</span>
+              </li>
+            </ul>
+
+            <p class="tarjeta-pie">
+              <span class="pie-linea" aria-hidden="true"></span>
+              <span>Escoge una.</span>
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tarjeta 2: Método EMAX -->
+      <article class="tarjeta tarjeta-emax">
+        <div class="tarjeta-aura" aria-hidden="true"></div>
+
+        <!-- Rayo perimetral que recorre el borde de la tarjeta -->
+        <div class="tarjeta-borde-luz" aria-hidden="true">
+          <div class="borde-rayo borde-rayo-2"></div>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <!-- Fondo con imagen, trama y filtro de contraste -->
+          <div class="tarjeta-bg">
+            <img
+              src={imagenPrueba.src}
+              alt="Método EMAX: diseñamos tu estructura energética"
+              width={imagenPrueba.width}
+              height={imagenPrueba.height}
+              loading="lazy"
+            />
+            <div class="tarjeta-malla" aria-hidden="true"></div>
+            <div class="tarjeta-filtro" aria-hidden="true"></div>
+          </div>
+
+          <!-- Destello de cristal suave diagonal -->
+          <div class="tarjeta-destello destello-2" aria-hidden="true"></div>
+
+          <!-- Contenido textual sobre la imagen -->
+          <div class="tarjeta-contenido">
+            <span class="tarjeta-tag">
+              <span class="punto-tag" aria-hidden="true"></span>
+              MÉTODO EMAX
+            </span>
+
+            <div class="columnas-items">
+              <ul class="lista-items">
+                <li class="item-variable">
+                  <span class="punto-var" aria-hidden="true"></span>
+                  <span>Consumo</span>
+                </li>
+                <li class="item-variable">
+                  <span class="punto-var" aria-hidden="true"></span>
+                  <span>Horarios</span>
+                </li>
+                <li class="item-variable">
+                  <span class="punto-var" aria-hidden="true"></span>
+                  <span>Potencia</span>
+                </li>
+              </ul>
+              <ul class="lista-items">
+                <li class="item-variable">
+                  <span class="punto-var" aria-hidden="true"></span>
+                  <span>Actividad</span>
+                </li>
+                <li class="item-variable">
+                  <span class="punto-var" aria-hidden="true"></span>
+                  <span>Mercado</span>
+                </li>
+                <li class="item-variable">
+                  <span class="punto-var" aria-hidden="true"></span>
+                  <span>Riesgo</span>
+                </li>
+              </ul>
+            </div>
+
+            <p class="tarjeta-pie">
+              <span class="pie-linea" aria-hidden="true"></span>
+              <span>Diseñamos tu estructura.</span>
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Cierre con mensaje destacado y CTA con flecha y halo -->
+    <div class="cierre-tarifa">
+      <div class="cierre-textos">
+        <h3 class="cierre-titulo">La mejor tarifa no existe.</h3>
+        <p class="cierre-sub">Existe la que necesita tu empresa.</p>
+      </div>
+      <a href="/#estudio" class="btn-disenar">
+        <span>Diseñar la mía</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .metodo-tarifa {
+    position: relative;
+    overflow: hidden;
+    background: #050e1f;
+    color: var(--white);
+    padding: 104px 0 118px;
+  }
+
+  /* Portal energético cian en anillo (focalizador visual del boceto original) */
+  .portal-halo {
+    position: absolute;
+    right: -40px;
+    top: 14%;
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .portal-circulo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 38px solid rgba(56, 182, 255, 0.55);
+    box-shadow:
+      0 0 70px rgba(56, 182, 255, 0.75),
+      inset 0 0 55px rgba(56, 182, 255, 0.5);
+    filter: blur(28px);
+    animation: pulsar-portal 9s ease-in-out infinite alternate;
+  }
+
+  /* Luces ambientales en degradado */
+  .luz-ambiente {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .luz-cyan-der {
+    width: 560px;
+    height: 560px;
+    right: -120px;
+    top: 12%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.35) 0%,
+      rgba(0, 114, 255, 0.2) 40%,
+      transparent 75%
+    );
+    filter: blur(60px);
+  }
+
+  .luz-azul-izq {
+    width: 480px;
+    height: 480px;
+    left: -120px;
+    bottom: 2%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.26) 0%,
+      rgba(0, 74, 173, 0.2) 45%,
+      transparent 75%
+    );
+    filter: blur(65px);
+  }
+
+  /* Orbes tecnológicos flotantes */
+  .orbe {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orbe-1 {
+    width: 12px;
+    height: 12px;
+    left: 4%;
+    top: 18%;
+    background: #38b6ff;
+    box-shadow: 0 0 14px #38b6ff;
+    animation: flotar-orbe 12s ease-in-out infinite;
+  }
+
+  .orbe-2 {
+    width: 9px;
+    height: 9px;
+    right: 32%;
+    top: 8%;
+    background: #5271ff;
+    box-shadow: 0 0 12px #5271ff;
+    animation: flotar-orbe 14s ease-in-out infinite reverse;
+  }
+
+  .orbe-3 {
+    width: 14px;
+    height: 14px;
+    left: 8%;
+    bottom: 12%;
+    background: #38b6ff;
+    box-shadow: 0 0 16px #38b6ff;
+    animation: flotar-orbe 16s ease-in-out infinite 2s;
+  }
+
+  .orbe-4 {
+    width: 8px;
+    height: 8px;
+    right: 14%;
+    bottom: 8%;
+    background: #5271ff;
+    box-shadow: 0 0 12px #5271ff;
+    animation: flotar-orbe 10s ease-in-out infinite reverse 1s;
+  }
+
+  .metodo-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Encabezado */
+  .encabezado {
+    max-width: 780px;
+  }
+
+  .encabezado h2 {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .subtitulo {
+    margin: 18px 0 0;
+    font-family: var(--font);
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    font-weight: 400;
+    color: rgba(220, 235, 255, 0.78);
+    line-height: 1.45;
+  }
+
+  /* Grid de dos tarjetas */
+  .comparativa-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin: 46px 0 52px;
+  }
+
+  /* Tarjeta base */
+  .tarjeta {
+    position: relative;
+    border-radius: 26px;
+    min-width: 0;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tarjeta:hover {
+    transform: translateY(-6px);
+  }
+
+  /* Aura luminosa difusa idéntica en ambos cuadros */
+  .tarjeta-aura {
+    position: absolute;
+    inset: -3px;
+    border-radius: 28px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(56, 182, 255, 0.5) 0%,
+      rgba(82, 113, 255, 0.25) 45%,
+      transparent 75%
+    );
+    opacity: 0.5;
+    filter: blur(15px);
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+  .tarjeta:hover .tarjeta-aura {
+    opacity: 0.85;
+    filter: blur(20px);
+  }
+
+  /* Rayo perimetral (Border Beam) idéntico en ambos cuadros */
+  .tarjeta-borde-luz {
+    position: absolute;
+    inset: 0;
+    border-radius: 26px;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .borde-rayo {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 240deg,
+      rgba(82, 113, 255, 0.2) 280deg,
+      rgba(56, 182, 255, 0.75) 325deg,
+      rgba(255, 255, 255, 0.6) 352deg,
+      #38b6ff 360deg
+    );
+    animation: girar-rayo 5.5s linear infinite;
+  }
+
+  .borde-rayo-2 {
+    animation-delay: -2.75s;
+  }
+
+  /* Cuerpo de la tarjeta con imagen y recorte */
+  .tarjeta-cuerpo {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 24px;
+    aspect-ratio: 16 / 10.2;
+    min-height: 310px;
+    border: 1px solid rgba(120, 205, 255, 0.42);
+    background: #09172c;
+    box-shadow:
+      0 16px 44px rgba(0, 0, 0, 0.5),
+      0 0 24px rgba(56, 182, 255, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tarjeta:hover .tarjeta-cuerpo {
+    border-color: rgba(56, 182, 255, 0.8);
+    box-shadow:
+      0 20px 48px rgba(0, 0, 0, 0.55),
+      0 0 30px rgba(56, 182, 255, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* Fondo de imagen con cámara lenta */
+  .tarjeta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .tarjeta-bg img {
+    position: absolute;
+    inset: -4%;
+    width: 108%;
+    height: 108%;
+    object-fit: cover;
+    object-position: 75% center;
+    animation: deriva-imagen 12s ease-in-out infinite alternate;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tarjeta:hover .tarjeta-bg img {
+    transform: scale(1.05);
+  }
+
+  /* Malla de telemetría */
+  .tarjeta-malla {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(56, 182, 255, 0.2) 1px, transparent 1px);
+    background-size: 18px 18px;
+    opacity: 0.4;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Filtro degradado oscuro para máxima legibilidad del texto en la izquierda */
+  .tarjeta-filtro {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(4, 13, 26, 0.95) 0%,
+      rgba(4, 13, 26, 0.86) 46%,
+      rgba(4, 13, 26, 0.48) 75%,
+      rgba(4, 13, 26, 0.2) 100%
+    );
+  }
+
+  /* Destello de cristal suave diagonal */
+  .tarjeta-destello {
+    position: absolute;
+    top: -50%;
+    left: -130%;
+    width: 75%;
+    height: 200%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.02) 20%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(56, 182, 255, 0.12) 65%,
+      transparent 100%
+    );
+    transform: rotate(26deg);
+    pointer-events: none;
+    z-index: 2;
+    animation: barrido-destello 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  .destello-2 {
+    animation-delay: 2.8s;
+  }
+
+  /* Contenido interno */
+  .tarjeta-contenido {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px 30px 26px;
+    box-sizing: border-box;
+  }
+
+  /* Tag superior */
+  .tarjeta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font);
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #38b6ff;
+  }
+
+  .punto-tag {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #38b6ff;
+    box-shadow: 0 0 10px #38b6ff;
+    animation: pulso-punto 2s ease-in-out infinite;
+  }
+
+  /* Lista de items */
+  .lista-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Items con puntos de telemetría y hover */
+  .item-variable {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font);
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .item-variable:hover {
+    transform: translateX(3px);
+    color: #38b6ff;
+  }
+
+  .punto-var {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #38b6ff;
+    box-shadow: 0 0 6px #38b6ff;
+    flex-shrink: 0;
+  }
+
+  /* Dos columnas de items en la tarjeta de EMAX */
+  .columnas-items {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    justify-content: start;
+  }
+
+  /* Pie de tarjeta */
+  .tarjeta-pie {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .pie-linea {
+    display: inline-block;
+    width: 16px;
+    height: 2px;
+    background: #38b6ff;
+    box-shadow: 0 0 6px #38b6ff;
+    border-radius: 99px;
+  }
+
+  /* Cierre inferior */
+  .cierre-tarifa {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .cierre-titulo {
+    font-family: var(--display);
+    font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .cierre-sub {
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(220, 235, 255, 0.75);
+    margin: 6px 0 0;
+  }
+
+  /* Botón interactivo Diseñar la mía con halo cian y flecha */
+  .btn-disenar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 32px;
+    border-radius: 999px;
+    background: #004aad;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 0.96rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(56, 182, 255, 0.65);
+    box-shadow:
+      0 0 24px rgba(56, 182, 255, 0.45),
+      0 4px 14px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-disenar:hover {
+    background: #0056c7;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 34px rgba(56, 182, 255, 0.75),
+      0 6px 20px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .btn-disenar svg {
+    transition: transform 0.25s ease;
+  }
+
+  .btn-disenar:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Animaciones clave */
+  @keyframes pulsar-portal {
+    0% {
+      transform: scale(0.96) translate(0, 0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.06) translate(-10px, 10px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes girar-rayo {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes barrido-destello {
+    0%, 40% {
+      left: -130%;
+      opacity: 0;
+    }
+    45% {
+      opacity: 0.8;
+    }
+    75% {
+      left: 160%;
+      opacity: 0.7;
+    }
+    100% {
+      left: 160%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes deriva-imagen {
+    0% {
+      transform: scale(1.02) translate(0, 0);
+    }
+    100% {
+      transform: scale(1.07) translate(-1.5%, -1%);
+    }
+  }
+
+  @keyframes pulso-punto {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(0.8);
+    }
+  }
+
+  @keyframes flotar-orbe {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.75;
+    }
+    50% {
+      transform: translateY(-22px) scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .comparativa-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin: 40px 0 44px;
+    }
+
+    .tarjeta-cuerpo {
+      aspect-ratio: 16 / 10;
+      min-height: 280px;
+    }
+
+    .portal-halo {
+      opacity: 0.5;
+      right: -100px;
+      transform: scale(0.8);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .metodo-tarifa {
+      padding: 72px 0 84px;
+    }
+
+    .tarjeta-contenido {
+      padding: 26px 24px 24px;
+    }
+
+    .columnas-items {
+      gap: 24px;
+    }
+
+    .btn-disenar {
+      width: 100%;
+    }
+  }
+</style>

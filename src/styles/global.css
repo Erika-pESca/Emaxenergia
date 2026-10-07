@@ -1,12 +1,17 @@
+/* Colores de marca y tipografía.
+   Títulos: Baloo. Textos: Poppins.
+   Azules: #004AAD, #5271ff, #38b6ff. */
+
 :root {
   --navy: #07122c;
   --navy-deep: #040918;
   --navy-mid: #0b1c40;
-  --blue: #2f5bff;
-  --blue-hover: #1f4bff;
-  --blue-soft: #e8eeff;
-  --cyan: #3ec8ff;
-  --footer: #1563d6;
+  --blue-dark: #004aad;
+  --blue: #5271ff;
+  --blue-hover: #3d5cf0;
+  --blue-soft: #e8ecff;
+  --cyan: #38b6ff;
+  --footer: #004aad;
   --white: #ffffff;
   --ink: #0b1b3a;
   --muted: #5c6b86;
@@ -16,10 +21,10 @@
   --radius: 20px;
   --radius-pill: 999px;
   --shadow: 0 18px 50px rgba(4, 9, 24, 0.28);
-  --header-h: 76px;
+  --header-h: 84px;
   --max: 1180px;
-  --font: "Manrope", system-ui, sans-serif;
-  --display: "Outfit", system-ui, sans-serif;
+  --font: "Poppins", system-ui, sans-serif;
+  --display: "Baloo 2", system-ui, sans-serif;
 }
 
 *,
@@ -124,21 +129,4 @@ p {
 .btn-gradient {
   background: linear-gradient(90deg, #3ea2ff, #6d7bff);
   color: var(--white);
-}
-
-.page-stub {
-  padding: 72px 0 96px;
-  background: var(--white);
-}
-
-.page-stub h1 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  margin-bottom: 16px;
-}
-
-.page-stub p {
-  max-width: 62ch;
-  color: var(--muted);
-  font-size: 1.05rem;
-  margin-bottom: 28px;
 }

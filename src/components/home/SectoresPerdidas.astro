@@ -1,0 +1,717 @@
+---
+// Componente: "NO TODAS LAS EMPRESAS PIERDEN DINERO POR EL MISMO SITIO."
+// Sección de sectores y puntos críticos de coste energético.
+//
+// Fondo Tecnológico de Red de Datos / Nodos Interconectados (Plexus / Constelación):
+// - Canvas interactivo de nodos y líneas de datos que se interconectan según la distancia.
+// - Nodos con halos luminosos cian (#38b6ff) y azul eléctrico (#5271ff).
+// - Interacción con el cursor del ratón (los nodos cercanos se conectan a la posición del usuario).
+// - Tarjetas glassmorphism con transparencia calibrada para que la red tecnológica
+//   fluya con elegancia por detrás y alrededor de todo el contenido.
+
+interface SectorItem {
+  badge: string;
+  titulo: string;
+  tags?: string;
+  ctaText: string;
+  ctaHref: string;
+}
+
+const sectores: SectorItem[] = [
+  {
+    badge: "Restaurantes",
+    titulo: "¿Pagas casi otro sueldo en electricidad?",
+    tags: "Frío · Cocina · Extracción · Potencia",
+    ctaText: "Analizar mi restaurante",
+    ctaHref: "/#estudio",
+  },
+  {
+    badge: "Hoteles",
+    titulo: "La ocupación baja. La factura no siempre.",
+    tags: "Climatización · ACS · Lavandería",
+    ctaText: "Analizar mi hotel",
+    ctaHref: "/#estudio",
+  },
+  {
+    badge: "MAXI",
+    titulo: "Un céntimo deja de ser pequeño cuando produces todo el día",
+    tags: "Curvas · Potencia · Mercado",
+    ctaText: "Analizar mi fábrica",
+    ctaHref: "/#estudio",
+  },
+  {
+    badge: "Retail",
+    titulo: "Un error en un local molesta. En veinte destruye margen.",
+    ctaText: "Analizar mis locales",
+    ctaHref: "/#estudio",
+  },
+  {
+    badge: "Hoteles",
+    titulo: "El frío no descansa. El sobrecoste tampoco.",
+    ctaText: "Analizar mi centro",
+    ctaHref: "/#estudio",
+  },
+  {
+    badge: "MAXI",
+    titulo: "¿No aparece tu actividad?",
+    ctaText: "Presentar mi empresa",
+    ctaHref: "/#estudio",
+  },
+];
+---
+
+<section class="sectores-seccion" id="sectores">
+  <!-- Canvas interactivo: Red de nodos tecnológicos / Constelación de datos (Plexus) -->
+  <canvas class="canvas-nodos" data-nodos-sectores aria-hidden="true"></canvas>
+
+  <!-- Halos ambientales de luz cian y azul profunda -->
+  <div class="luz-ambiente luz-cyan-der" aria-hidden="true"></div>
+  <div class="luz-ambiente luz-azul-izq" aria-hidden="true"></div>
+
+  <div class="wrap sectores-inner">
+    <!-- Título principal -->
+    <div class="encabezado">
+      <h2 class="titulo-seccion">
+        NO TODAS LAS EMPRESAS PIERDEN DINERO POR EL MISMO SITIO.
+      </h2>
+    </div>
+
+    <!-- Rejilla de tarjetas por sector (3 columnas x 2 filas) -->
+    <div class="rejilla-sectores">
+      {
+        sectores.map((s, index) => (
+          <article class="tarjeta-sector" style={`--i: ${index};`}>
+            <!-- Badge superior flotante -->
+            <div class="sector-badge">
+              <span class="punto-badge" aria-hidden="true"></span>
+              <span>{s.badge}</span>
+            </div>
+
+            <!-- Aura difusa detrás de la tarjeta -->
+            <div class="tarjeta-aura" aria-hidden="true"></div>
+
+            <!-- Rayo perimetral que recorre el borde de la tarjeta (Border Beam) -->
+            <div class="tarjeta-borde-luz" aria-hidden="true">
+              <div class="borde-rayo" style={`animation-delay: -${(index * 1.1).toFixed(1)}s;`}></div>
+            </div>
+
+            <!-- Cuerpo de la tarjeta con efecto glassmorphism oscuro limpio -->
+            <div class="tarjeta-cuerpo">
+              <!-- Zona superior limpia de profundidad -->
+              <div class="zona-visual" aria-hidden="true"></div>
+
+              <!-- Bloque inferior de texto y botón -->
+              <div class="zona-info">
+                <h3 class="sector-titulo">{s.titulo}</h3>
+
+                {s.tags && (
+                  <p class="sector-tags">{s.tags}</p>
+                )}
+
+                <div class="sector-accion">
+                  <a href={s.ctaHref} class="btn-sector">
+                    <span>{s.ctaText}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Botón inferior izquierdo "Ver todos los sectores" -->
+    <div class="pie-seccion">
+      <a href="/sectores" class="btn-todos">
+        <span>Ver todos los sectores</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animación Canvas de Red de Nodos Interconectados (Plexus / Constelación de Datos)
+  const canvas = document.querySelector("[data-nodos-sectores]");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (canvas instanceof HTMLCanvasElement && !prefersReduced) {
+    const ctx = canvas.getContext("2d");
+    const seccion = canvas.parentElement;
+
+    if (ctx && seccion) {
+      interface Nodo {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        r: number;
+        color: string;
+        glow: string;
+        pulsar: number;
+        pulsarVel: number;
+      }
+
+      const nodos: Nodo[] = [];
+      let w = 0;
+      let h = 0;
+      let animId = 0;
+      const mouse = { x: -9999, y: -9999, activo: false };
+
+      const redimensionar = () => {
+        const rect = seccion.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = rect.width;
+        h = rect.height;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        // Densidad calibrada de nodos según ancho de pantalla
+        const cantidad = w < 768 ? 42 : w < 1200 ? 68 : 90;
+        nodos.length = 0;
+
+        for (let i = 0; i < cantidad; i++) {
+          const esEspecial = Math.random() < 0.25;
+          nodos.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            r: esEspecial ? Math.random() * 2.2 + 3.2 : Math.random() * 1.5 + 1.6,
+            color: esEspecial ? "#ffffff" : Math.random() < 0.5 ? "#38b6ff" : "#5271ff",
+            glow: esEspecial ? "rgba(255, 255, 255, 0.9)" : "rgba(56, 182, 255, 0.8)",
+            pulsar: Math.random() * Math.PI * 2,
+            pulsarVel: Math.random() * 0.03 + 0.015,
+          });
+        }
+      };
+
+      const dibujar = () => {
+        ctx.clearRect(0, 0, w, h);
+
+        // Actualizar posiciones de nodos
+        for (const n of nodos) {
+          n.x += n.vx;
+          n.y += n.vy;
+          n.pulsar += n.pulsarVel;
+
+          // Rebote suave en los límites
+          if (n.x < -10) n.x = w + 10;
+          else if (n.x > w + 10) n.x = -10;
+          if (n.y < -10) n.y = h + 10;
+          else if (n.y > h + 10) n.y = -10;
+        }
+
+        // 1. Trazar líneas de conexión entre nodos cercanos (Efecto Plexus)
+        const alcanceMax = w < 768 ? 115 : 155;
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i < nodos.length; i++) {
+          for (let j = i + 1; j < nodos.length; j++) {
+            const a = nodos[i];
+            const b = nodos[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < alcanceMax) {
+              const opacidad = (1 - dist / alcanceMax) * 0.55;
+              ctx.strokeStyle = `rgba(56, 182, 255, ${opacidad})`;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // 2. Conectar nodos al cursor del ratón cuando esté dentro de la sección
+        if (mouse.activo) {
+          const alcanceMouse = 180;
+          for (const n of nodos) {
+            const dx = n.x - mouse.x;
+            const dy = n.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < alcanceMouse) {
+              const opacidad = (1 - dist / alcanceMouse) * 0.75;
+              ctx.strokeStyle = `rgba(120, 215, 255, ${opacidad})`;
+              ctx.lineWidth = 1.3;
+              ctx.beginPath();
+              ctx.moveTo(n.x, n.y);
+              ctx.lineTo(mouse.x, mouse.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // 3. Dibujar nodos luminosos con halo de luz
+        for (const n of nodos) {
+          const escalaPulso = 1 + Math.sin(n.pulsar) * 0.22;
+          const radioActual = n.r * escalaPulso;
+
+          // Halo difuso
+          ctx.shadowBlur = radioActual > 3 ? 16 : 8;
+          ctx.shadowColor = n.glow;
+          ctx.fillStyle = n.color;
+
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, radioActual, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Reset sombra para optimizar rendimiento
+        ctx.shadowBlur = 0;
+
+        animId = requestAnimationFrame(dibujar);
+      };
+
+      // Control de eventos de ratón
+      seccion.addEventListener("mousemove", (e) => {
+        const rect = seccion.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        mouse.activo = true;
+      });
+
+      seccion.addEventListener("mouseleave", () => {
+        mouse.activo = false;
+      });
+
+      redimensionar();
+      dibujar();
+
+      const observer = new ResizeObserver(redimensionar);
+      observer.observe(seccion);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          cancelAnimationFrame(animId);
+        } else {
+          dibujar();
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  .sectores-seccion {
+    position: relative;
+    overflow: hidden;
+    background: #040d1e;
+    color: var(--white);
+    padding: 104px 0 114px;
+    scroll-margin-top: var(--header-h);
+  }
+
+  /* Canvas interactivo de red de nodos en el fondo */
+  .canvas-nodos {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  /* Halos ambientales tecnológicos */
+  .luz-ambiente {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Gran resplandor cian vibrante en el lateral derecho */
+  .luz-cyan-der {
+    width: 650px;
+    height: 650px;
+    right: -100px;
+    top: 35%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.4) 0%,
+      rgba(0, 102, 255, 0.2) 45%,
+      rgba(4, 13, 30, 0.1) 70%,
+      transparent 80%
+    );
+    filter: blur(85px);
+    animation: pulsar-halo 9s ease-in-out infinite alternate;
+  }
+
+  .luz-azul-izq {
+    width: 520px;
+    height: 520px;
+    left: -140px;
+    bottom: 10%;
+    background: radial-gradient(
+      circle,
+      rgba(0, 74, 173, 0.32) 0%,
+      rgba(56, 182, 255, 0.14) 45%,
+      transparent 75%
+    );
+    filter: blur(75px);
+  }
+
+  .sectores-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Encabezado */
+  .encabezado {
+    max-width: 920px;
+    margin-bottom: 54px;
+  }
+
+  .titulo-seccion {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 3.8vw, 3.35rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* Rejilla de tarjetas */
+  .rejilla-sectores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 28px;
+    margin-bottom: 48px;
+  }
+
+  /* Tarjeta individual */
+  .tarjeta-sector {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tarjeta-sector:hover {
+    transform: translateY(-6px);
+  }
+
+  /* Badge superior flotante montado en el borde superior */
+  .sector-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 20px;
+    border-radius: 999px;
+    background: rgba(13, 28, 56, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(120, 205, 255, 0.35);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.45),
+      0 0 14px rgba(56, 182, 255, 0.18);
+    pointer-events: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .punto-badge {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38b6ff;
+    box-shadow: 0 0 8px #38b6ff;
+  }
+
+  .tarjeta-sector:hover .sector-badge {
+    border-color: rgba(56, 182, 255, 0.75);
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.5),
+      0 0 18px rgba(56, 182, 255, 0.4);
+  }
+
+  .sector-badge span {
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(220, 235, 255, 0.92);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  /* Aura suave difusa detrás de la tarjeta */
+  .tarjeta-aura {
+    position: absolute;
+    inset: -3px;
+    border-radius: 26px;
+    background: radial-gradient(
+      ellipse at top,
+      rgba(56, 182, 255, 0.32) 0%,
+      rgba(0, 74, 173, 0.16) 50%,
+      transparent 75%
+    );
+    opacity: 0.3;
+    filter: blur(14px);
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .tarjeta-sector:hover .tarjeta-aura {
+    opacity: 0.8;
+  }
+
+  /* Rayo perimetral (Border Beam) animado */
+  .tarjeta-borde-luz {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .borde-rayo {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 250deg,
+      rgba(82, 113, 255, 0.2) 280deg,
+      rgba(56, 182, 255, 0.75) 325deg,
+      rgba(255, 255, 255, 0.65) 352deg,
+      #38b6ff 360deg
+    );
+    animation: girar-rayo 6.5s linear infinite;
+  }
+
+  /* Cuerpo de la tarjeta con glassmorphism translúcido */
+  .tarjeta-cuerpo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 24px;
+    border: 1px solid rgba(120, 205, 255, 0.28);
+    background: linear-gradient(
+      180deg,
+      rgba(9, 23, 50, 0.72) 0%,
+      rgba(5, 14, 32, 0.9) 100%
+    );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 34px 26px 26px;
+    box-shadow:
+      0 20px 48px rgba(0, 0, 0, 0.52),
+      0 0 24px rgba(56, 182, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tarjeta-sector:hover .tarjeta-cuerpo {
+    border-color: rgba(56, 182, 255, 0.75);
+    box-shadow:
+      0 24px 54px rgba(0, 0, 0, 0.6),
+      0 0 32px rgba(56, 182, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+
+  /* Zona superior visual: espacio limpio de profundidad */
+  .zona-visual {
+    position: relative;
+    height: 110px;
+    width: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Bloque inferior de información */
+  .zona-info {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sector-titulo {
+    font-family: var(--font);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.35;
+    margin: 0;
+    letter-spacing: -0.01em;
+    min-height: 2.8em;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .sector-tags {
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: rgba(180, 215, 255, 0.7);
+    margin: 8px 0 0;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    min-height: 1.4em;
+  }
+
+  /* Botón individual dentro de la tarjeta */
+  .sector-accion {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-sector {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 11px 20px;
+    border-radius: 999px;
+    background: #004aad;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(56, 182, 255, 0.55);
+    box-shadow:
+      0 0 20px rgba(56, 182, 255, 0.35),
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+  }
+
+  .btn-sector:hover {
+    background: #0056c7;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 30px rgba(56, 182, 255, 0.65),
+      0 6px 16px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* Botón inferior izquierdo "Ver todos los sectores" */
+  .pie-seccion {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .btn-todos {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 34px;
+    border-radius: 999px;
+    background: #004aad;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 0.96rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(56, 182, 255, 0.65);
+    box-shadow:
+      0 0 26px rgba(56, 182, 255, 0.45),
+      0 4px 14px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-todos:hover {
+    background: #0056c7;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 36px rgba(56, 182, 255, 0.75),
+      0 6px 20px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  /* Animaciones */
+  @keyframes girar-rayo {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes barrido-destello {
+    0% {
+      left: -130%;
+    }
+    40%, 100% {
+      left: 170%;
+    }
+  }
+
+  @keyframes pulsar-halo {
+    0% {
+      transform: scale(0.96);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulsar-resplandor {
+    0% {
+      transform: translateX(-50%) scale(0.92);
+      opacity: 0.55;
+    }
+    100% {
+      transform: translateX(-50%) scale(1.15);
+      opacity: 0.95;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1040px) {
+    .rejilla-sectores {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px 24px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .sectores-seccion {
+      padding: 72px 0 84px;
+    }
+
+    .rejilla-sectores {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .tarjeta-sector {
+      min-height: auto;
+    }
+
+    .zona-visual {
+      height: 55px;
+    }
+
+    .btn-todos {
+      width: 100%;
+    }
+  }
+</style>

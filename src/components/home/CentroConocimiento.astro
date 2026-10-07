@@ -1,0 +1,319 @@
+---
+// Componente: "SI VAS A FIRMAR ALGO... entiéndelo antes."
+// Sección de centro de conocimiento y divulgación energética EMAX.
+//
+// 1. Título Baloo 2 en azul corporativo (#004aad) de gran escala.
+// 2. Subtítulo Poppins: "entiéndelo antes."
+// 3. Rejilla 3x2 de 6 tarjetas azul real (#004aad / #003682) con icono circular:
+//    - Entender mi factura (¿Qué estoy pagando realmente?)
+//    - Potencia contratada (¿Pago por capacidad que no utilizo?)
+//    - Precio fijo o indexado (¿Qué diferencia existe?)
+//    - OMIE (Consultar mercado diario.)
+//    - OMIP (Consultar mercado a plazo.)
+//    - Normativa energética (BOE-MITECO-CNMC)
+// 4. Botón inferior "Entrar al centro de conocimiento" en azul noche.
+// 5. Halos ambientales suaves cian y azul en los extremos.
+
+interface TarjetaConocimiento {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  href: string;
+}
+
+const temas: TarjetaConocimiento[] = [
+  {
+    id: "factura",
+    titulo: "Entender mi factura",
+    descripcion: "¿Qué estoy pagando realmente?",
+    href: "/recursos#factura",
+  },
+  {
+    id: "potencia",
+    titulo: "Potencia contratada",
+    descripcion: "¿Pago por capacidad que no utilizo?",
+    href: "/recursos#potencia",
+  },
+  {
+    id: "precio",
+    titulo: "Precio fijo o indexado",
+    descripcion: "¿Qué diferencia existe?",
+    href: "/recursos#precio",
+  },
+  {
+    id: "omie",
+    titulo: "OMIE",
+    descripcion: "Consultar mercado diario.",
+    href: "/recursos#omie",
+  },
+  {
+    id: "omip",
+    titulo: "OMIP",
+    descripcion: "Consultar mercado a plazo.",
+    href: "/recursos#omip",
+  },
+  {
+    id: "normativa",
+    titulo: "Normativa energética",
+    descripcion: "BOE-MITECO-CNMC",
+    href: "/recursos#normativa",
+  },
+];
+---
+
+<section class="centro-conocimiento" id="conocimiento">
+  <!-- Halos ambientales de luz en el fondo blanco -->
+  <div class="halo-ambiente halo-cyan-izq" aria-hidden="true"></div>
+  <div class="halo-ambiente halo-azul-der" aria-hidden="true"></div>
+
+  <div class="wrap conocimiento-inner">
+    <!-- Encabezado superior -->
+    <div class="encabezado">
+      <h2 class="titulo-conocimiento">SI VAS A FIRMAR ALGO...</h2>
+      <p class="subtitulo-conocimiento">entiéndelo antes.</p>
+    </div>
+
+    <!-- Rejilla 3x2 de tarjetas -->
+    <div class="rejilla-conocimiento">
+      {
+        temas.map((item, index) => (
+          <a href={item.href} class={`tarjeta-conocimiento tarjeta-${item.id}`} style={`--i: ${index};`}>
+            <!-- Borde interactivo con luz -->
+            <div class="tarjeta-borde-luz" aria-hidden="true"></div>
+
+            <div class="tarjeta-cuerpo">
+              <div class="conocimiento-cabecera">
+                <span class="circulo-icono" aria-hidden="true"></span>
+                <h3 class="conocimiento-titulo">{item.titulo}</h3>
+              </div>
+              <p class="conocimiento-desc">{item.descripcion}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Botón inferior izquierdo -->
+    <div class="accion-wrap">
+      <a href="/recursos" class="btn-conocimiento">
+        <span>Entrar al centro de conocimiento</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .centro-conocimiento {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    color: var(--ink);
+    padding: 104px 0 114px;
+    scroll-margin-top: var(--header-h);
+  }
+
+  /* Halos de luz ambiental suave */
+  .halo-ambiente {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .halo-cyan-izq {
+    width: 440px;
+    height: 440px;
+    left: -120px;
+    top: 10%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.3) 0%,
+      rgba(82, 113, 255, 0.12) 45%,
+      transparent 70%
+    );
+    filter: blur(65px);
+  }
+
+  .halo-azul-der {
+    width: 420px;
+    height: 420px;
+    right: -80px;
+    bottom: 5%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.35) 0%,
+      rgba(0, 102, 255, 0.18) 50%,
+      transparent 72%
+    );
+    filter: blur(65px);
+  }
+
+  .conocimiento-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Encabezado */
+  .encabezado {
+    max-width: 860px;
+    margin-bottom: 38px;
+  }
+
+  .titulo-conocimiento {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 3.8vw, 3.3rem);
+    font-weight: 800;
+    color: #004aad;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .subtitulo-conocimiento {
+    margin: 12px 0 0;
+    font-family: var(--font);
+    font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+    font-weight: 400;
+    color: #2a3852;
+    line-height: 1.35;
+  }
+
+  /* Rejilla 3x2 de tarjetas */
+  .rejilla-conocimiento {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 310px));
+    gap: 20px;
+  }
+
+  /* Tarjeta azul corporativa de alta tecnología */
+  .tarjeta-conocimiento {
+    position: relative;
+    text-decoration: none;
+    border-radius: 18px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: block;
+  }
+
+  .tarjeta-conocimiento:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Borde de luz reactivo al hover */
+  .tarjeta-borde-luz {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    border: 1px solid rgba(56, 182, 255, 0.45);
+    pointer-events: none;
+    z-index: 2;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .tarjeta-conocimiento:hover .tarjeta-borde-luz {
+    border-color: rgba(56, 182, 255, 0.9);
+    box-shadow: 0 0 16px rgba(56, 182, 255, 0.45);
+  }
+
+  /* Contenido interno de la tarjeta */
+  .tarjeta-cuerpo {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    min-height: 110px;
+    background: linear-gradient(135deg, #004aad 0%, #003682 100%);
+    border-radius: 18px;
+    padding: 22px 20px 20px;
+    box-shadow:
+      0 10px 24px rgba(0, 42, 110, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Cabecera interna: círculo oscuro con borde + título blanco */
+  .conocimiento-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .circulo-icono {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00255a;
+    border: 1.5px solid rgba(56, 182, 255, 0.4);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+  }
+
+  .conocimiento-titulo {
+    font-family: var(--font);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  /* Subtítulo / pregunta de la tarjeta */
+  .conocimiento-desc {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: rgba(220, 238, 255, 0.85);
+    margin: 0;
+  }
+
+  /* Botón inferior */
+  .accion-wrap {
+    margin-top: 34px;
+  }
+
+  .btn-conocimiento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 30px;
+    border-radius: 999px;
+    background: #00255a;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    box-shadow:
+      0 4px 16px rgba(0, 37, 90, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-conocimiento:hover {
+    background: #003682;
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 24px rgba(0, 37, 90, 0.45),
+      0 0 20px rgba(56, 182, 255, 0.4);
+  }
+
+  /* Responsive */
+  @media (max-width: 760px) {
+    .centro-conocimiento {
+      padding: 76px 0 84px;
+    }
+
+    .rejilla-conocimiento {
+      grid-template-columns: 1fr;
+    }
+
+    .btn-conocimiento {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,581 @@
+---
+// Componente: "MAXI NO BUSCA OFERTAS. Busca oportunidades."
+// Sección de Inteligencia Energética EMAX con el genio "Maxi".
+//
+// Diseño perfeccionado con la máxima fidelidad al boceto:
+// 1. Badge superior "INTELIGENCIA ENERGÉTICA EMAX" con micro-halo y punto de telemetría.
+// 2. Título Baloo 2 "MAXI NO BUSCA OFERTAS." en azul corporativo con máxima fuerza visual.
+// 3. Subtítulo Poppins "Busca oportunidades." en azul cian/eléctrico.
+// 4. Párrafos explicativos claros y bien espaciados.
+// 5. Tarjeta estructurada "MÉTODO EMAX":
+//    - Contenedor slate/glass suave con iluminación interior y relieve elegante.
+//    - Variables en 2 columnas con micro-puntos indicadores interactivos.
+//    - "Diseñamos tu estructura."
+//    - Enlaces interactivos en mayúsculas azules: "SIMULA ESCENARIOS" y "ESTRUCTURA EMAX" con flecha de acción.
+// 6. Botones de acción mejorados:
+//    - "Poner a Maxi a trabajar" (azul noche corporativo con halo profundo).
+//    - "Conocer a Maxi" (cian brillante con texto azul noche y halo eléctrico).
+// 7. Escenario visual de Maxi: contenedor adaptativo con iluminación ambiental.
+---
+
+<section class="maxi-seccion" id="maxi">
+  <!-- Halos ambientales de luz suave -->
+  <div class="halo-ambiente halo-cyan-izq" aria-hidden="true"></div>
+  <div class="halo-ambiente halo-azul-der" aria-hidden="true"></div>
+
+  <div class="wrap maxi-inner">
+    <!-- Columna izquierda: Información, método y botones -->
+    <div class="col-info">
+      <!-- Badge superior -->
+      <div class="badge-emax">
+        <span class="punto-badge" aria-hidden="true"></span>
+        <span class="texto-badge">INTELIGENCIA ENERGÉTICA EMAX</span>
+      </div>
+
+      <!-- Título y subtítulo -->
+      <h2 class="titulo-maxi">MAXI NO BUSCA OFERTAS.</h2>
+      <p class="subtitulo-maxi">Busca oportunidades.</p>
+
+      <!-- Párrafos descriptivos -->
+      <div class="textos-explicacion">
+        <p>Nuestra inteligencia artificial estudia cómo consume tu empresa y construye diferentes escenarios.</p>
+        <p>Después, un especialista EMAX revisa y valida la propuesta.</p>
+      </div>
+
+      <!-- Tarjeta: MÉTODO EMAX -->
+      <div class="tarjeta-metodo">
+        <div class="tarjeta-cabecera">
+          <span class="tarjeta-tag-dot" aria-hidden="true"></span>
+          <h3 class="tarjeta-titulo">MÉTODO EMAX</h3>
+        </div>
+
+        <div class="rejilla-variables">
+          <div class="var-columna">
+            <div class="var-item">
+              <span class="var-dot" aria-hidden="true"></span>
+              <span class="var-texto">Consumo</span>
+            </div>
+            <div class="var-item">
+              <span class="var-dot" aria-hidden="true"></span>
+              <span class="var-texto">Horarios</span>
+            </div>
+            <div class="var-item">
+              <span class="var-dot" aria-hidden="true"></span>
+              <span class="var-texto">Potencia</span>
+            </div>
+          </div>
+          <div class="var-columna">
+            <div class="var-item">
+              <span class="var-dot" aria-hidden="true"></span>
+              <span class="var-texto">Actividad</span>
+            </div>
+            <div class="var-item">
+              <span class="var-dot" aria-hidden="true"></span>
+              <span class="var-texto">Mercado</span>
+            </div>
+            <div class="var-item">
+              <span class="var-dot" aria-hidden="true"></span>
+              <span class="var-texto">Riesgo</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="diseno-texto">Diseñamos tu estructura.</p>
+
+        <div class="enlaces-metodo">
+          <a href="/metodo" class="link-item">
+            <span>SIMULA ESCENARIOS</span>
+            <svg class="link-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="/metodo#estructura" class="link-item">
+            <span>ESTRUCTURA EMAX</span>
+            <svg class="link-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Botones de llamada a la acción -->
+      <div class="acciones-cta">
+        <a href="/#estudio" class="btn-primario">
+          <span>Poner a Maxi a trabajar</span>
+        </a>
+        <a href="/metodo" class="btn-secundario">
+          <span>Conocer a Maxi</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna derecha: Escenario visual de Maxi -->
+    <div class="col-maxi">
+      <div class="escenario-video">
+        <!-- Aura resplandeciente detrás del personaje -->
+        <div class="aura-personaje" aria-hidden="true"></div>
+
+        <!-- Video de Maxi -->
+        <div class="video-contenedor">
+          <video
+            autoplay
+            loop
+            muted
+            playsinline
+            class="video-maxi"
+            title="Maxi - Inteligencia Energética EMAX"
+          >
+            <source src="/video-prueba.mp4" type="video/mp4" />
+            Tu navegador no soporta el formato de video.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .maxi-seccion {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    color: #1e293b;
+    padding: 86px 0 98px;
+    scroll-margin-top: calc(var(--header-h) + 16px);
+  }
+
+  /* Halos ambientales suaves en tonos cian y azul */
+  .halo-ambiente {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .halo-cyan-izq {
+    width: 580px;
+    height: 580px;
+    left: -160px;
+    top: 20%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.28) 0%,
+      rgba(82, 113, 255, 0.12) 48%,
+      transparent 72%
+    );
+    filter: blur(80px);
+  }
+
+  .halo-azul-der {
+    width: 620px;
+    height: 620px;
+    right: -100px;
+    top: 15%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.32) 0%,
+      rgba(82, 113, 255, 0.18) 50%,
+      transparent 75%
+    );
+    filter: blur(85px);
+  }
+
+  .maxi-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: 52px;
+    align-items: center;
+  }
+
+  /* ====================================================
+     COLUMNA IZQUIERDA: CONTENIDO Y TARJETA
+     ==================================================== */
+  .col-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Badge superior con pastilla suave y punto luminoso */
+  .badge-emax {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 18px 7px 14px;
+    border-radius: 999px;
+    background: #eef3ff;
+    border: 1px solid rgba(82, 113, 255, 0.26);
+    box-shadow: 0 2px 10px rgba(82, 113, 255, 0.08);
+    margin-bottom: 22px;
+  }
+
+  .punto-badge {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #38b6ff;
+    box-shadow: 0 0 8px #38b6ff;
+  }
+
+  .texto-badge {
+    font-family: var(--font);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    color: #2b59ff;
+    text-transform: uppercase;
+  }
+
+  /* Títulos con tipografía Baloo 2 e impacto corporativo */
+  .titulo-maxi {
+    font-family: var(--display);
+    font-size: clamp(2.35rem, 4vw, 3.4rem);
+    font-weight: 800;
+    color: #004aad;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .subtitulo-maxi {
+    margin: 10px 0 0;
+    font-family: var(--font);
+    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+    font-weight: 600;
+    color: #0056c7;
+    line-height: 1.3;
+  }
+
+  /* Párrafos explicativos */
+  .textos-explicacion {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .textos-explicacion p {
+    font-family: var(--font);
+    font-size: clamp(0.96rem, 1.2vw, 1.05rem);
+    font-weight: 400;
+    color: #4b586e;
+    line-height: 1.58;
+    margin: 0;
+    max-width: 52ch;
+  }
+
+  /* ====================================================
+     TARJETA "MÉTODO EMAX" (Slate / Light Glass Refinado)
+     ==================================================== */
+  .tarjeta-metodo {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 460px;
+    background: linear-gradient(145deg, #f4f7fb 0%, #ebf1f8 100%);
+    border-radius: 26px;
+    padding: 28px 34px 26px;
+    border: 1px solid rgba(195, 212, 235, 0.85);
+    box-shadow:
+      0 18px 45px -8px rgba(0, 52, 130, 0.08),
+      0 4px 12px rgba(0, 52, 130, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  }
+
+  .tarjeta-metodo:hover {
+    transform: translateY(-3px);
+    border-color: rgba(82, 113, 255, 0.4);
+    box-shadow:
+      0 24px 52px -8px rgba(0, 52, 130, 0.12),
+      0 6px 18px rgba(0, 52, 130, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  .tarjeta-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .tarjeta-tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #004aad;
+    box-shadow: 0 0 6px rgba(0, 74, 173, 0.5);
+  }
+
+  .tarjeta-titulo {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #004aad;
+    letter-spacing: 0.05em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  /* Columnas de variables */
+  .rejilla-variables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 14px;
+  }
+
+  .var-columna {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .var-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    transition: transform 0.18s ease;
+  }
+
+  .var-item:hover {
+    transform: translateX(3px);
+  }
+
+  .var-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #38b6ff;
+    flex-shrink: 0;
+    transition: background 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .var-item:hover .var-dot {
+    background: #004aad;
+    box-shadow: 0 0 6px rgba(0, 74, 173, 0.5);
+  }
+
+  .var-texto {
+    font-family: var(--font);
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #27374d;
+    letter-spacing: 0.01em;
+    transition: color 0.18s ease;
+  }
+
+  .var-item:hover .var-texto {
+    color: #004aad;
+  }
+
+  .diseno-texto {
+    font-family: var(--font);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #475569;
+    margin: 22px 0 16px;
+  }
+
+  /* Enlaces de acción en mayúsculas azules */
+  .enlaces-metodo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #0056c7;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: color 0.2s ease, gap 0.2s ease;
+    width: fit-content;
+  }
+
+  .link-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .link-item:hover {
+    color: #003882;
+    gap: 10px;
+  }
+
+  .link-item:hover .link-arrow {
+    transform: translateX(3px);
+  }
+
+  /* ====================================================
+     BOTONES DE LLAMADA A LA ACCIÓN (CTA)
+     ==================================================== */
+  .acciones-cta {
+    margin-top: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Botón 1: Poner a Maxi a trabajar (Azul noche corporativo) */
+  .btn-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 34px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #004aad 0%, #003180 100%);
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 0.98rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 0 26px rgba(0, 74, 173, 0.42),
+      0 6px 18px rgba(0, 20, 60, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+
+  .btn-primario:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 36px rgba(0, 74, 173, 0.65),
+      0 8px 24px rgba(0, 20, 60, 0.3);
+    filter: brightness(1.05);
+  }
+
+  /* Botón 2: Conocer a Maxi (Cian brillante con texto azul noche) */
+  .btn-secundario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 34px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #38b6ff 0%, #1f9eff 100%);
+    color: #002d6b;
+    font-family: var(--font);
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow:
+      0 0 24px rgba(56, 182, 255, 0.52),
+      0 6px 16px rgba(56, 182, 255, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+
+  .btn-secundario:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 36px rgba(56, 182, 255, 0.78),
+      0 8px 22px rgba(56, 182, 255, 0.36);
+    filter: brightness(1.04);
+  }
+
+  /* ====================================================
+     COLUMNA DERECHA: ESCENARIO VISUAL DE MAXI
+     ==================================================== */
+  .col-maxi {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .escenario-video {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Gran resplandor de fondo detrás de Maxi */
+  .aura-personaje {
+    position: absolute;
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(56, 182, 255, 0.42) 0%,
+      rgba(82, 113, 255, 0.18) 50%,
+      transparent 72%
+    );
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Contenedor del video con esquinas suaves y halo */
+  .video-contenedor {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow:
+      0 18px 44px rgba(0, 74, 173, 0.09),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+    background: #eaecee;
+  }
+
+  .video-maxi {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  /* ====================================================
+     RESPONSIVE
+     ==================================================== */
+  @media (max-width: 980px) {
+    .maxi-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .col-maxi {
+      margin: 0 auto;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .tarjeta-metodo {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .maxi-seccion {
+      padding: 68px 0 76px;
+    }
+
+    .acciones-cta {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .btn-primario,
+    .btn-secundario {
+      width: 100%;
+    }
+
+    .tarjeta-metodo {
+      padding: 24px 22px 22px;
+    }
+  }
+</style>

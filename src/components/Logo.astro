@@ -1,20 +1,19 @@
 ---
+// Logo de src/imagenes/logo-principal.png.
+// "dark" en la cabecera. "light" en el pie: el filtro lo deja blanco.
+import logo from "../imagenes/logo-principal.png";
+
 interface Props {
   variant?: "dark" | "light";
 }
 
 const { variant = "dark" } = Astro.props;
-const ink = variant === "light" ? "#ffffff" : "#0b1b3a";
-const accent = variant === "light" ? "#7ec8ff" : "#2f5bff";
+const height = 48;
+const width = Math.round((height * logo.width) / logo.height);
 ---
 
 <a class:list={["logo", variant]} href="/" aria-label="EMAX Energía, ir al inicio">
-  <svg viewBox="0 0 132 40" width="132" height="40" fill="none" aria-hidden="true">
-    <text x="0" y="26" fill={ink} font-family="Outfit, sans-serif" font-size="26" font-weight="700">e</text>
-    <path d="M20 6 L32 18 H25 L35 34 L22 20 H29 Z" fill={accent} />
-    <text x="38" y="26" fill={ink} font-family="Outfit, sans-serif" font-size="26" font-weight="700">max</text>
-    <text x="70" y="38" fill={accent} font-family="Manrope, sans-serif" font-size="9" font-weight="700">energía</text>
-  </svg>
+  <img src={logo.src} alt="" width={width} height={height} />
 </a>
 
 <style>
@@ -22,5 +21,14 @@ const accent = variant === "light" ? "#7ec8ff" : "#2f5bff";
     display: inline-flex;
     align-items: center;
     flex-shrink: 0;
+  }
+
+  .logo img {
+    height: 48px;
+    width: auto;
+  }
+
+  .logo.light img {
+    filter: brightness(0) invert(1);
   }
 </style>

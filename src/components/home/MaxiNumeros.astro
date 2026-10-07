@@ -1,0 +1,549 @@
+---
+// Componente: "MAXI HACE LOS NÚMEROS. Nosotros damos la cara."
+// Sección comparativa de roles: IA (Maxi) vs. Acompañamiento Humano (Especialista EMAX).
+//
+// 1. Título Baloo 2 en mayúsculas blancas y subtítulo azul cian (#4ba3ff).
+// 2. Dos tarjetas glassmorphic con badges flotantes superiores:
+//    - "MAXI": Analiza., Compara., Detecta., Simula., Diseña.
+//    - "ESPECIALISTA EMAX": Revisa., Explica., Responde., Acompaña.
+// 3. Fila inferior de 3 botones de acción con auras luminosas:
+//    - "Analizar mi factura" (azul noche corporativo con halo cian).
+//    - "Escribir por Whatsapp" (pastilla blanca/cristal con texto azul oscuro).
+//    - "Que me llamen" (pastilla cian brillante con halo de energía).
+// 4. Portal toroidal luminoso cian en el lateral derecho y luz ambiental izquierda.
+---
+
+<section class="maxi-numeros" id="equipo">
+  <!-- Luz ambiental suave en la esquina inferior izquierda -->
+  <div class="luz-ambiente luz-azul-izq" aria-hidden="true"></div>
+
+  <div class="wrap numeros-inner">
+    <div class="numeros-layout">
+      <!-- Columna izquierda: Información, Tarjetas y Acciones -->
+      <div class="columna-info">
+        <!-- Encabezado superior -->
+        <div class="encabezado">
+          <h2 class="titulo-seccion">MAXI HACE LOS NÚMEROS.</h2>
+          <p class="subtitulo-seccion">Nosotros damos la cara.</p>
+        </div>
+
+        <!-- Rejilla con las 2 tarjetas -->
+        <div class="rejilla-comparativa">
+          <!-- Tarjeta 1: MAXI -->
+          <article class="tarjeta-rol tarjeta-maxi">
+            <!-- Badge flotante montado sobre el borde superior -->
+            <div class="rol-badge">
+              <span>MAXI</span>
+            </div>
+
+            <!-- Aura brillante de la tarjeta -->
+            <div class="tarjeta-aura" aria-hidden="true"></div>
+            <div class="tarjeta-borde-luz" aria-hidden="true"></div>
+
+            <!-- Contenido de la tarjeta -->
+            <div class="tarjeta-cuerpo">
+              <ul class="lista-acciones">
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Analiza.</span>
+                </li>
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Compara.</span>
+                </li>
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Detecta.</span>
+                </li>
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Simula.</span>
+                </li>
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Diseña.</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Tarjeta 2: ESPECIALISTA EMAX -->
+          <article class="tarjeta-rol tarjeta-especialista">
+            <!-- Badge flotante montado sobre el borde superior -->
+            <div class="rol-badge badge-especialista">
+              <span>ESPECIALISTA EMAX</span>
+            </div>
+
+            <!-- Aura brillante de la tarjeta -->
+            <div class="tarjeta-aura" aria-hidden="true"></div>
+            <div class="tarjeta-borde-luz" aria-hidden="true"></div>
+
+            <!-- Contenido de la tarjeta -->
+            <div class="tarjeta-cuerpo">
+              <ul class="lista-acciones">
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Revisa.</span>
+                </li>
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Explica.</span>
+                </li>
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Responde.</span>
+                </li>
+                <li class="item-accion">
+                  <span class="punto-item" aria-hidden="true"></span>
+                  <span>Acompaña.</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- Fila de 3 botones de acción inferiores -->
+        <div class="acciones-cta">
+          <a href="/#estudio" class="btn-cta btn-factura">
+            <span>Analizar mi factura</span>
+          </a>
+          <a href="https://wa.me/34900000000" target="_blank" rel="noopener noreferrer" class="btn-cta btn-whatsapp">
+            <span>Escribir por Whatsapp</span>
+          </a>
+          <a href="/contacto" class="btn-cta btn-llamada">
+            <span>Que me llamen</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna derecha: Portal toroidal resplandeciente (Donut de energía) -->
+      <div class="columna-portal" aria-hidden="true">
+        <div class="portal-escenario">
+          <div class="portal-halo"></div>
+          <div class="portal-circulo"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .maxi-numeros {
+    position: relative;
+    overflow: hidden;
+    background: #040d1e;
+    color: var(--white);
+    padding: 100px 0 110px;
+    scroll-margin-top: var(--header-h);
+  }
+
+  /* Luz ambiental difusa en la esquina inferior izquierda */
+  .luz-ambiente {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .luz-azul-izq {
+    width: 480px;
+    height: 480px;
+    left: -100px;
+    bottom: -90px;
+    background: radial-gradient(
+      circle,
+      rgba(0, 102, 255, 0.6) 0%,
+      rgba(56, 182, 255, 0.3) 40%,
+      transparent 70%
+    );
+    filter: blur(65px);
+  }
+
+  .numeros-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Layout principal en 2 columnas: izquierda contenido, derecha portal */
+  .numeros-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .columna-info {
+    flex: 0 0 auto;
+    max-width: 640px;
+  }
+
+  /* Encabezado */
+  .encabezado {
+    margin-bottom: 38px;
+  }
+
+  .titulo-seccion {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .subtitulo-seccion {
+    margin: 12px 0 0;
+    font-family: var(--font);
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    font-weight: 400;
+    color: #4ba3ff;
+    line-height: 1.3;
+  }
+
+  /* Rejilla comparativa de 2 tarjetas */
+  .rejilla-comparativa {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(230px, 260px));
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+
+  /* Tarjeta de cada rol */
+  .tarjeta-rol {
+    position: relative;
+    min-height: 260px;
+    border-radius: 20px;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tarjeta-rol:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Badges superiores montados sobre el borde */
+  .rol-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    padding: 5px 24px;
+    border-radius: 999px;
+    background: rgba(8, 20, 44, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(120, 205, 255, 0.45);
+    box-shadow:
+      0 4px 18px rgba(0, 0, 0, 0.45),
+      0 0 14px rgba(56, 182, 255, 0.2);
+    pointer-events: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tarjeta-rol:hover .rol-badge {
+    border-color: rgba(56, 182, 255, 0.85);
+    box-shadow:
+      0 6px 22px rgba(0, 0, 0, 0.55),
+      0 0 18px rgba(56, 182, 255, 0.45);
+  }
+
+  .rol-badge span {
+    font-family: var(--font);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(220, 235, 255, 0.95);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Aura detrás de la tarjeta */
+  .tarjeta-aura {
+    position: absolute;
+    inset: -3px;
+    border-radius: 22px;
+    background: radial-gradient(
+      ellipse at top,
+      rgba(56, 182, 255, 0.3) 0%,
+      rgba(0, 74, 173, 0.12) 50%,
+      transparent 75%
+    );
+    opacity: 0.35;
+    filter: blur(14px);
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .tarjeta-rol:hover .tarjeta-aura {
+    opacity: 0.85;
+  }
+
+  /* Borde de la tarjeta */
+  .tarjeta-borde-luz {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    border: 1px solid rgba(120, 205, 255, 0.32);
+    pointer-events: none;
+    z-index: 2;
+    transition: border-color 0.35s ease;
+  }
+
+  .tarjeta-rol:hover .tarjeta-borde-luz {
+    border-color: rgba(56, 182, 255, 0.7);
+  }
+
+  /* Cuerpo de vidrio */
+  .tarjeta-cuerpo {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    min-height: 260px;
+    padding: 34px 26px 24px;
+    border-radius: 20px;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 22, 48, 0.72) 0%,
+      rgba(5, 14, 32, 0.88) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 20px 48px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(56, 182, 255, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Lista de acciones con puntos */
+  .lista-acciones {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .item-accion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font);
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .item-accion:hover {
+    transform: translateX(4px);
+    color: #38b6ff;
+  }
+
+  .punto-item {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #38b6ff;
+    box-shadow: 0 0 6px #38b6ff;
+    flex-shrink: 0;
+  }
+
+  /* Fila de 3 botones inferiores */
+  .acciones-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 22px;
+    border-radius: 999px;
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  /* Botón 1: Analizar mi factura (Azul noche corporativo) */
+  .btn-factura {
+    background: #002e6e;
+    color: #ffffff;
+    border: 1px solid rgba(56, 182, 255, 0.55);
+    box-shadow:
+      0 0 24px rgba(0, 102, 255, 0.65),
+      0 0 12px rgba(56, 182, 255, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .btn-factura:hover {
+    background: #003b8c;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 32px rgba(56, 182, 255, 0.75),
+      0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Botón 2: Escribir por Whatsapp (Pastilla blanca brillante) */
+  .btn-whatsapp {
+    background: #ffffff;
+    color: #071e44;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      0 0 20px rgba(56, 182, 255, 0.45),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-whatsapp:hover {
+    background: #f0f7ff;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 30px rgba(56, 182, 255, 0.7),
+      0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Botón 3: Que me llamen (Pastilla cian de alta energía) */
+  .btn-llamada {
+    background: #38b6ff;
+    color: #071e44;
+    font-weight: 600;
+    border: 1px solid rgba(120, 215, 255, 0.8);
+    box-shadow:
+      0 0 26px rgba(56, 182, 255, 0.7),
+      0 0 12px rgba(56, 182, 255, 0.5),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-llamada:hover {
+    background: #25a8f5;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 38px rgba(56, 182, 255, 0.9),
+      0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Columna derecha: Portal toroidal */
+  .columna-portal {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 380px;
+    pointer-events: none;
+  }
+
+  .portal-escenario {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portal-halo {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      transparent 35%,
+      rgba(56, 182, 255, 0.38) 60%,
+      rgba(0, 102, 255, 0.2) 75%,
+      transparent 85%
+    );
+    filter: blur(24px);
+  }
+
+  .portal-circulo {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 42px solid rgba(56, 182, 255, 0.88);
+    box-shadow:
+      0 0 35px rgba(56, 182, 255, 0.95),
+      0 0 80px rgba(0, 114, 255, 0.7),
+      inset 0 0 30px rgba(56, 182, 255, 0.85),
+      inset 0 0 60px rgba(0, 114, 255, 0.55);
+    filter: blur(8px);
+    animation: pulsar-portal 8s ease-in-out infinite alternate;
+  }
+
+  /* Animación del portal */
+  @keyframes pulsar-portal {
+    0% {
+      transform: scale(0.96);
+      opacity: 0.85;
+    }
+    100% {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .portal-escenario {
+      width: 260px;
+      height: 260px;
+    }
+
+    .portal-circulo {
+      width: 210px;
+      height: 210px;
+      border-width: 32px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .maxi-numeros {
+      padding: 72px 0 84px;
+    }
+
+    .numeros-layout {
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .columna-info {
+      max-width: 100%;
+    }
+
+    .rejilla-comparativa {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      width: 100%;
+    }
+
+    .acciones-cta {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .btn-cta {
+      width: 100%;
+    }
+
+    .columna-portal {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,310 @@
+---
+// Componente: "TU PRÓXIMA FACTURA VA A LLEGAR IGUALMENTE."
+// Sección de cierre previa al pie de página con llamada a la acción decisiva.
+//
+// 1. Título Baloo 2 en mayúsculas blancas: "TU PRÓXIMA FACTURA VA A LLEGAR IGUALMENTE."
+// 2. Subtítulo Poppins en azul claro (#4ba3ff): "La pregunta es si vas a volver a pagarla sin revisarla."
+// 3. Fila de 3 botones de acción con resplandores diferenciados:
+//    - "Generar mi estudio" (azul noche corporativo con aura cian).
+//    - "Whatsapp" (pastilla celeste suave con texto azul marino).
+//    - "Llamar a EMAX" (pastilla cian brillante con halo de energía).
+// 4. Recordatorio inferior en texto sutil: "La pregunta es si vas a volver a pagarla sin revisarla."
+// 5. Portal toroidal de luz cian en el lateral derecho y luz ambiental azul inferior izquierda.
+import { site } from "../../data/site";
+---
+
+<section class="proxima-factura" id="cierre-factura">
+  <!-- Portal toroidal de luz cian en el lateral derecho (donut de energía) -->
+  <div class="portal-luz" aria-hidden="true">
+    <div class="portal-halo"></div>
+    <div class="portal-circulo"></div>
+  </div>
+
+  <!-- Luz ambiental suave en la esquina inferior izquierda -->
+  <div class="luz-ambiente luz-azul-izq" aria-hidden="true"></div>
+
+  <div class="wrap factura-inner">
+    <div class="factura-contenido">
+      <!-- Encabezado superior -->
+      <div class="encabezado">
+        <h2 class="titulo-factura">TU PRÓXIMA FACTURA VA A LLEGAR IGUALMENTE.</h2>
+        <p class="subtitulo-factura">La pregunta es si vas a volver a pagarla sin revisarla.</p>
+      </div>
+
+      <!-- Fila de 3 botones de acción -->
+      <div class="acciones-cta">
+        <a href="/#estudio" class="btn-cta btn-estudio">
+          <span>Generar mi estudio</span>
+        </a>
+        <a href="https://wa.me/34900000000" target="_blank" rel="noopener noreferrer" class="btn-cta btn-whatsapp">
+          <span>Whatsapp</span>
+        </a>
+        <a href={site.phoneHref} class="btn-cta btn-llamar">
+          <span>Llamar a EMAX</span>
+        </a>
+      </div>
+
+      <!-- Texto recordatorio inferior -->
+      <p class="nota-cierre">La pregunta es si vas a volver a pagarla sin revisarla.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proxima-factura {
+    position: relative;
+    overflow: hidden;
+    background: #040d1e;
+    color: var(--white);
+    padding: 104px 0 114px;
+    scroll-margin-top: var(--header-h);
+  }
+
+  /* Portal toroidal de luz cian en el lateral derecho */
+  .portal-luz {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    right: clamp(10px, 4vw, 80px);
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portal-halo {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      transparent 35%,
+      rgba(56, 182, 255, 0.42) 60%,
+      rgba(0, 102, 255, 0.22) 75%,
+      transparent 85%
+    );
+    filter: blur(26px);
+  }
+
+  .portal-circulo {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    border: 42px solid rgba(56, 182, 255, 0.88);
+    box-shadow:
+      0 0 40px rgba(56, 182, 255, 0.95),
+      0 0 90px rgba(0, 114, 255, 0.7),
+      inset 0 0 32px rgba(56, 182, 255, 0.85),
+      inset 0 0 65px rgba(0, 114, 255, 0.55);
+    filter: blur(8px);
+    animation: pulsar-portal 8s ease-in-out infinite alternate;
+  }
+
+  /* Luz ambiental difusa inferior izquierda */
+  .luz-ambiente {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .luz-azul-izq {
+    width: 480px;
+    height: 480px;
+    left: -120px;
+    bottom: -90px;
+    background: radial-gradient(
+      circle,
+      rgba(0, 102, 255, 0.6) 0%,
+      rgba(56, 182, 255, 0.3) 45%,
+      transparent 70%
+    );
+    filter: blur(70px);
+  }
+
+  .factura-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .factura-contenido {
+    max-width: 680px;
+  }
+
+  /* Encabezado */
+  .encabezado {
+    margin-bottom: 34px;
+  }
+
+  .titulo-factura {
+    font-family: var(--display);
+    font-size: clamp(2.3rem, 3.8vw, 3.3rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .subtitulo-factura {
+    margin: 14px 0 0;
+    font-family: var(--font);
+    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+    font-weight: 400;
+    color: #4ba3ff;
+    line-height: 1.35;
+  }
+
+  /* Fila de 3 botones de acción */
+  .acciones-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 38px;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-family: var(--font);
+    font-size: 0.92rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Botón 1: Generar mi estudio (Azul corporativo noche con aura) */
+  .btn-estudio {
+    background: #002e6e;
+    color: #ffffff;
+    font-weight: 600;
+    border: 1px solid rgba(56, 182, 255, 0.55);
+    box-shadow:
+      0 0 24px rgba(0, 102, 255, 0.65),
+      0 0 12px rgba(56, 182, 255, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
+  .btn-estudio:hover {
+    background: #003b8c;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 32px rgba(56, 182, 255, 0.75),
+      0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Botón 2: Whatsapp (Pastilla celeste suave / cristal luminoso) */
+  .btn-whatsapp {
+    background: linear-gradient(135deg, #a6dcff 0%, #68bfff 100%);
+    color: #051c3f;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow:
+      0 0 22px rgba(56, 182, 255, 0.55),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-whatsapp:hover {
+    background: linear-gradient(135deg, #b8e4ff 0%, #7eccff 100%);
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 32px rgba(56, 182, 255, 0.8),
+      0 6px 16px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Botón 3: Llamar a EMAX (Pastilla cian de alta energía) */
+  .btn-llamar {
+    background: #38b6ff;
+    color: #051c3f;
+    font-weight: 700;
+    border: 1px solid rgba(120, 215, 255, 0.8);
+    box-shadow:
+      0 0 26px rgba(56, 182, 255, 0.7),
+      0 0 12px rgba(56, 182, 255, 0.5),
+      0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-llamar:hover {
+    background: #25a8f5;
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 38px rgba(56, 182, 255, 0.9),
+      0 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Nota de cierre */
+  .nota-cierre {
+    margin: 0;
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: rgba(180, 210, 250, 0.72);
+    line-height: 1.4;
+  }
+
+  /* Animación del portal */
+  @keyframes pulsar-portal {
+    0% {
+      transform: scale(0.96);
+      opacity: 0.85;
+    }
+    100% {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .portal-luz {
+      width: 270px;
+      height: 270px;
+      right: -30px;
+      opacity: 0.75;
+    }
+
+    .portal-circulo {
+      width: 210px;
+      height: 210px;
+      border-width: 32px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .proxima-factura {
+      padding: 72px 0 84px;
+    }
+
+    .factura-contenido {
+      max-width: 100%;
+    }
+
+    .acciones-cta {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+      margin-bottom: 28px;
+      width: 100%;
+    }
+
+    .btn-cta {
+      width: 100%;
+    }
+
+    .portal-luz {
+      display: none;
+    }
+  }
+</style>
