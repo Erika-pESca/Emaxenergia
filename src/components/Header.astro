@@ -1,37 +1,40 @@
 ---
-// Cabecera Ultra Comercial enfocada en Conversión y Ventas
-// Diseño corporativo edge-to-edge con:
-// 1. Franja superior (Top utility bar) con segmentación Empresas / Comunidades / Hogares y mensaje de confianza.
-// 2. Barra principal de alto impacto comercial con Logo, Navegación B2B, Teléfono directo visible,
-//    botón "Te llamamos gratis" (con lead popover instantáneo) y botón principal "Analizar mi factura".
+// Cabecera Comercial Dinámica y de Alto Impacto
+// Cuenta con:
+// 1. Barra de progreso de scroll en tiempo real (línea gradiente viva).
+// 2. Glider magnético dinámico en los enlaces (la píldora persigue el cursor al pasar el ratón).
+// 3. Compactación inteligente con efecto cristal al hacer scroll (Smart Scroll Morph).
+// 4. Shimmer animado de luz en el botón principal "Analizar mi factura".
+// 5. Radar y vibración interactiva en el teléfono de atención directa.
+// 6. Popover desplegable rápido "Te llamamos gratis".
 import Logo from "./Logo.astro";
 import { site, primaryCta } from "../data/site";
 
 const current = Astro.url.pathname;
 
 const sectoresItems = [
-  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Turnos partidos en horas punta caras" },
-  { href: "/sectores/hoteles", label: "Hoteles y alojamientos", desc: "Estacionalidad y potencia ociosa en invierno" },
-  { href: "/sectores/supermercados", label: "Supermercados y tiendas", desc: "Consumo continuo de cámaras frigoríficas" },
-  { href: "/sectores/logistica-frio", label: "Logística y frío industrial", desc: "Ajuste de peajes en ciclos 24/7" },
-  { href: "/sectores/industria", label: "Industria y fabricación", desc: "Arranque de motores y energía reactiva" },
+  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Turnos partidos en horas punta caras", icono: "🍽️" },
+  { href: "/sectores/hoteles", label: "Hoteles y alojamientos", desc: "Estacionalidad y potencia ociosa en invierno", icono: "🏨" },
+  { href: "/sectores/supermercados", label: "Supermercados y tiendas", desc: "Consumo continuo de cámaras frigoríficas", icono: "🛒" },
+  { href: "/sectores/logistica-frio", label: "Logística y frío industrial", desc: "Ajuste de peajes en ciclos 24/7", icono: "❄️" },
+  { href: "/sectores/industria", label: "Industria y fabricación", desc: "Arranque de motores y energía reactiva", icono: "⚡" },
 ];
 
 const tarifasItems = [
-  { href: "/tarifas", label: "Luz para Empresas", desc: "Peajes 2.0TD, 3.0TD y 6.XTD optimizados" },
-  { href: "/gas-natural", label: "Gas para Empresas", desc: "Suministro RL para negocios e industria" },
-  { href: "/varios-suministros", label: "Múltiples Suministros", desc: "Unificación de facturación multisede" },
+  { href: "/tarifas", label: "Luz para Empresas", desc: "Peajes 2.0TD, 3.0TD y 6.XTD optimizados", badge: "Más contratada" },
+  { href: "/gas-natural", label: "Gas para Empresas", desc: "Suministro RL para negocios e industria", badge: "Ahorro RL" },
+  { href: "/varios-suministros", label: "Múltiples Suministros", desc: "Unificación de facturación multisede", badge: "Multisede" },
 ];
 ---
 
-<header class="cabecera-comercial-root">
-  <!-- 1. FRANJA SUPERIOR (Top Utility & Trust Bar) -->
-  <div class="top-bar">
+<header class="cabecera-dinamica" id="cabecera-principal">
+  <!-- 1. FRANJA SUPERIOR DINÁMICA (Top Utility Bar) -->
+  <div class="top-bar" id="top-bar-elemento">
     <div class="contenedor-cabecera top-bar-contenido">
-      <!-- Selector de segmento -->
+      <!-- Selector interactivo de segmento -->
       <div class="selector-segmentos" role="tablist" aria-label="Segmento de cliente">
         <a href="/" class="segmento-item activo" aria-selected="true">
-          <span class="punto-segmento">●</span>
+          <span class="punto-vivo-azul"></span>
           <span>Empresas y Pymes</span>
         </a>
         <a href="/comunidades-de-propietarios" class="segmento-item" aria-selected="false">
@@ -42,15 +45,18 @@ const tarifasItems = [
         </a>
       </div>
 
-      <!-- Mensaje de confianza central (desktop) -->
+      <!-- Mensaje de confianza con micro-animación -->
       <div class="top-trust-msg">
-        <span class="trust-check">✓</span>
-        <span>Auditoría de factura sin coste · Sin permanencia ni cortes de suministro</span>
+        <span class="trust-icono-pulso">✓</span>
+        <span>Auditoría gratuita sin permanencia ni cortes de suministro</span>
       </div>
 
-      <!-- Enlaces de soporte y horario -->
+      <!-- Enlaces de soporte directo -->
       <div class="top-utilidades">
-        <span class="top-horario">L-V 9:00 – 18:30</span>
+        <span class="top-horario">
+          <span class="punto-horario-verde"></span>
+          L-V 9:00 – 18:30
+        </span>
         <span class="top-sep">|</span>
         <a href="/contacto" class="top-link">Contacto</a>
         <span class="top-sep">|</span>
@@ -59,69 +65,82 @@ const tarifasItems = [
     </div>
   </div>
 
-  <!-- 2. BARRA PRINCIPAL (Main Edge-to-Edge Bar) -->
+  <!-- 2. BARRA PRINCIPAL FLUIDA -->
   <div class="barra-principal">
     <div class="contenedor-cabecera barra-principal-fila">
-      <!-- Marca y especialidad -->
+      <!-- Marca / Logo con micro-interacción -->
       <div class="marca-bloque">
         <Logo variant="dark" />
-        <span class="marca-tag">Empresas</span>
+        <span class="marca-badge-pro">B2B Pro</span>
       </div>
 
-      <!-- Navegación central -->
-      <nav class="nav-principal" data-nav-principal aria-label="Menú principal">
-        <a href="/" class:list={["nav-enlace", { activo: current === "/" }]}>
-          Inicio
+      <!-- Navegación central con Píldora Magnética Deslizante (Glider) -->
+      <nav class="nav-principal" id="nav-principal-menu" aria-label="Menú principal">
+        <!-- Indicador magnético flotante -->
+        <span class="nav-glider" id="nav-glider" aria-hidden="true"></span>
+
+        <a href="/" class:list={["nav-enlace", { activo: current === "/" }]} data-glider-target>
+          <span>Inicio</span>
         </a>
 
-        <a href="/metodo" class:list={["nav-enlace", { activo: current === "/metodo" }]}>
-          El Método
+        <a href="/metodo" class:list={["nav-enlace", { activo: current === "/metodo" }]} data-glider-target>
+          <span>El Método</span>
         </a>
 
-        <!-- Menú desplegable Sectores -->
+        <!-- Menú desplegable dinámico Sectores -->
         <div class="nav-dropdown" data-dropdown>
-          <button type="button" class="nav-enlace con-chevron" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="nav-enlace con-chevron" data-glider-target aria-haspopup="true" aria-expanded="false">
             <span>Sectores</span>
             <svg class="chevron-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="m3 4.5 3 3 3-3"></path>
             </svg>
           </button>
 
-          <div class="dropdown-popover">
+          <div class="dropdown-popover popover-animado">
             <div class="dropdown-header-tag">Auditorías especializadas por sector</div>
             <div class="dropdown-cards-grid">
               {
                 sectoresItems.map((s) => (
                   <a href={s.href} class="dropdown-card">
-                    <strong class="card-nombre">{s.label}</strong>
-                    <span class="card-desc">{s.desc}</span>
+                    <span class="card-emoji" aria-hidden="true">{s.icono}</span>
+                    <div class="card-textos">
+                      <strong class="card-nombre">{s.label}</strong>
+                      <span class="card-desc">{s.desc}</span>
+                    </div>
+                    <span class="card-flecha" aria-hidden="true">→</span>
                   </a>
                 ))
               }
             </div>
             <div class="dropdown-footer-link">
-              <a href="/sectores">Ver todos los sectores empresariales →</a>
+              <a href="/sectores">Ver todos los sectores empresariales <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
 
-        <!-- Menú desplegable Tarifas -->
+        <!-- Menú desplegable dinámico Tarifas -->
         <div class="nav-dropdown" data-dropdown>
-          <button type="button" class="nav-enlace con-chevron" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="nav-enlace con-chevron" data-glider-target aria-haspopup="true" aria-expanded="false">
             <span>Tarifas</span>
             <svg class="chevron-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="m3 4.5 3 3 3-3"></path>
             </svg>
           </button>
 
-          <div class="dropdown-popover popover-tarifas">
+          <div class="dropdown-popover popover-tarifas popover-animado">
             <div class="dropdown-header-tag">Modalidades y suministros</div>
-            <div class="dropdown-cards-grid grid-vertical">
+            <div class="dropdown-cards-grid">
               {
                 tarifasItems.map((t) => (
                   <a href={t.href} class="dropdown-card">
-                    <strong class="card-nombre">{t.label}</strong>
-                    <span class="card-desc">{t.desc}</span>
+                    <div class="card-textos">
+                      <div class="card-head-fila">
+                        <strong class="card-nombre">{t.label}</strong>
+                        <span class="card-badge-mini">{t.badge}</span>
+                      </div>
+                      <span class="card-desc">{t.desc}</span>
+                    </div>
+                    <span class="card-flecha" aria-hidden="true">→</span>
                   </a>
                 ))
               }
@@ -129,20 +148,23 @@ const tarifasItems = [
           </div>
         </div>
 
-        <a href="/guias" class:list={["nav-enlace", { activo: current.startsWith("/guias") }]}>
-          Guías
+        <a href="/guias" class:list={["nav-enlace", { activo: current.startsWith("/guias") }]} data-glider-target>
+          <span>Guías</span>
         </a>
       </nav>
 
-      <!-- MOTOR DE CONVERSIÓN COMERCIAL (Derecha) -->
+      <!-- MOTOR DE CONVERSIÓN CON ANIMACIONES VIVAS -->
       <div class="motor-conversion">
-        <!-- 1. Teléfono directo con estado de llamada -->
-        <a href={site.phoneHref} class="caja-telefono" title={`Llamar gratis al ${site.phone}`}>
-          <div class="tel-icono-circulo" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <span class="tel-pulso-dot"></span>
+        <!-- 1. Teléfono con Radar Sonar y vibración de llamada -->
+        <a href={site.phoneHref} class="caja-telefono-dinamica" title={`Llamar gratis al ${site.phone}`}>
+          <div class="tel-sonar-wrap" aria-hidden="true">
+            <span class="sonar-onda onda-1"></span>
+            <span class="sonar-onda onda-2"></span>
+            <div class="tel-icono-circulo">
+              <svg class="icono-auricular" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
           </div>
           <div class="tel-datos">
             <span class="tel-sub">Llama gratis a un asesor</span>
@@ -150,20 +172,20 @@ const tarifasItems = [
           </div>
         </a>
 
-        <!-- 2. Botón "Te llamamos gratis" con Popover de captura rápida -->
+        <!-- 2. Botón "Te llamamos gratis" con Popover interactivo -->
         <div class="te-llamamos-wrapper" data-te-llamamos>
           <button type="button" class="btn-te-llamamos" data-btn-popover aria-expanded="false">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg class="icono-llamada-entrante" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
             </svg>
-            <span>Te llamamos gratis</span>
+            <span>Te llamamos</span>
           </button>
 
-          <!-- Popover interactivo rápido -->
+          <!-- Popover interactivo con animación -->
           <div class="popover-llamada" data-popover-panel hidden>
             <div class="popover-cabeza">
               <strong>¿A qué número te llamamos?</strong>
-              <p>Te llamará un consultor de EMAX con tu informe.</p>
+              <p>Un consultor de EMAX te llamará con tu informe.</p>
             </div>
             <form class="popover-form" data-form-llamada>
               <div class="popover-input-fila">
@@ -187,10 +209,11 @@ const tarifasItems = [
           </div>
         </div>
 
-        <!-- 3. Botón Principal de Venta: Analizar mi factura -->
-        <a href="/#estudio" class="btn-cta-comercial">
-          <span>Analizar mi factura</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <!-- 3. Botón Principal con Destello Dinámico (Shimmer Wave Effect) -->
+        <a href="/#estudio" class="btn-cta-dinamico">
+          <span class="shimmer-luz" aria-hidden="true"></span>
+          <span class="btn-cta-txt">Analizar mi factura</span>
+          <svg class="btn-cta-flecha" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
@@ -198,15 +221,18 @@ const tarifasItems = [
 
         <!-- Botón menú hamburguesa (móvil) -->
         <button type="button" class="btn-hamburguesa-movil" data-toggle-movil aria-label="Abrir menú" aria-expanded="false">
-          <span class="hamb-linea"></span>
-          <span class="hamb-linea"></span>
-          <span class="hamb-linea"></span>
+          <span class="hamb-linea linea-1"></span>
+          <span class="hamb-linea linea-2"></span>
+          <span class="hamb-linea linea-3"></span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 3. MENÚ MÓVIL DESPLEGABLE -->
+  <!-- 3. BARRA DE PROGRESO DE LECTURA (Scroll Progress Line) -->
+  <div class="scroll-barra-progreso" id="scroll-progress-line" aria-hidden="true"></div>
+
+  <!-- 4. MENÚ MÓVIL DESPLEGABLE -->
   <div class="menu-movil-drawer" data-menu-movil hidden>
     <div class="movil-contenedor">
       <div class="movil-llamada-directa">
@@ -243,8 +269,8 @@ const tarifasItems = [
       </nav>
 
       <div class="movil-cta-bottom">
-        <a href="/#estudio" class="btn-cta-comercial ancho-total">
-          Analizar mi factura ahora
+        <a href="/#estudio" class="btn-cta-dinamico ancho-total">
+          <span class="btn-cta-txt">Analizar mi factura ahora</span>
         </a>
       </div>
     </div>
@@ -252,7 +278,69 @@ const tarifasItems = [
 </header>
 
 <script>
-  // Control de Dropdowns en Desktop
+  // 1. Barra de progreso dinámica al hacer Scroll
+  const progressBar = document.getElementById("scroll-progress-line");
+  const cabecera = document.getElementById("cabecera-principal");
+  const topBar = document.getElementById("top-bar-elemento");
+
+  function actualizarScroll() {
+    const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollActual = window.scrollY;
+    
+    // Progreso porcentual
+    if (progressBar && scrollTotal > 0) {
+      const porcentaje = Math.min(100, Math.max(0, (scrollActual / scrollTotal) * 100));
+      progressBar.style.width = `${porcentaje}%`;
+    }
+
+    // Smart Scroll Morphing (compacta el header y da efecto vidrio)
+    if (scrollActual > 30) {
+      cabecera?.classList.add("es-scrolled");
+    } else {
+      cabecera?.classList.remove("es-scrolled");
+    }
+  }
+
+  window.addEventListener("scroll", actualizarScroll, { passive: true });
+  actualizarScroll();
+
+  // 2. Glider Magnético en los enlaces de navegación (Píldora deslizante)
+  const navContainer = document.getElementById("nav-principal-menu");
+  const glider = document.getElementById("nav-glider");
+  const navLinks = navContainer?.querySelectorAll("[data-glider-target]");
+  const enlaceActivo = navContainer?.querySelector(".nav-enlace.activo");
+
+  function moverGlider(elemento: HTMLElement) {
+    if (!glider || !navContainer) return;
+    const contenedorRect = navContainer.getBoundingClientRect();
+    const elemRect = elemento.getBoundingClientRect();
+    const leftOffset = elemRect.left - contenedorRect.left;
+    
+    glider.style.width = `${elemRect.width}px`;
+    glider.style.transform = `translateX(${leftOffset}px)`;
+    glider.style.opacity = "1";
+  }
+
+  function reiniciarGlider() {
+    if (enlaceActivo) {
+      moverGlider(enlaceActivo as HTMLElement);
+    } else if (glider) {
+      glider.style.opacity = "0";
+    }
+  }
+
+  navLinks?.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      moverGlider(link as HTMLElement);
+    });
+  });
+
+  navContainer?.addEventListener("mouseleave", reiniciarGlider);
+
+  // Inicializar posición al cargar
+  setTimeout(reiniciarGlider, 150);
+
+  // 3. Control de Dropdowns en Desktop
   const dropdownWrappers = document.querySelectorAll("[data-dropdown]");
   dropdownWrappers.forEach((dd) => {
     const btn = dd.querySelector("button");
@@ -264,8 +352,7 @@ const tarifasItems = [
     });
   });
 
-  // Control de Popover "Te llamamos gratis"
-  const popoverWrapper = document.querySelector("[data-te-llamamos]");
+  // 4. Control de Popover "Te llamamos gratis"
   const popoverBtn = document.querySelector("[data-btn-popover]");
   const popoverPanel = document.querySelector("[data-popover-panel]");
   const popoverForm = document.querySelector("[data-form-llamada]");
@@ -306,7 +393,7 @@ const tarifasItems = [
     }
   });
 
-  // Control de Menú Móvil
+  // 5. Control de Menú Móvil
   const toggleMovilBtn = document.querySelector("[data-toggle-movil]");
   const drawerMovil = document.querySelector("[data-menu-movil]");
 
@@ -325,7 +412,6 @@ const tarifasItems = [
     }
   });
 
-  // Cerrar cajón móvil si se hace clic en enlaces
   drawerMovil?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       drawerMovil?.setAttribute("hidden", "true");
@@ -338,9 +424,9 @@ const tarifasItems = [
 
 <style>
   /* ========================================================
-     ESTRUCTURA GENERAL CABECERA
+     ESTRUCTURA GENERAL CABECERA DINÁMICA
      ======================================================== */
-  .cabecera-comercial-root {
+  .cabecera-dinamica {
     position: sticky;
     top: 0;
     left: 0;
@@ -348,16 +434,25 @@ const tarifasItems = [
     width: 100%;
     z-index: 100;
     background: #ffffff;
-    box-shadow: 0 4px 20px rgba(15, 35, 70, 0.06);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 14px rgba(15, 35, 70, 0.05);
+  }
+
+  /* Estado Scrolled (Efecto Vidrio Líquido Compacto) */
+  .cabecera-dinamica.es-scrolled {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(15, 35, 70, 0.09);
   }
 
   .contenedor-cabecera {
-    width: min(1360px, calc(100% - 40px));
+    width: min(1360px, calc(100% - 44px));
     margin-inline: auto;
   }
 
   /* ========================================================
-     1. TOP UTILITY BAR (Franja Superior)
+     1. FRANJA SUPERIOR (Top Utility Bar)
      ======================================================== */
   .top-bar {
     background: #0f2346;
@@ -365,6 +460,14 @@ const tarifasItems = [
     font-size: 0.8125rem;
     height: 38px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.3s ease;
+    overflow: hidden;
+  }
+
+  .cabecera-dinamica.es-scrolled .top-bar {
+    height: 0;
+    opacity: 0;
+    border-bottom: 0;
   }
 
   .top-bar-contenido {
@@ -392,71 +495,105 @@ const tarifasItems = [
     color: #a4b7d1;
     font-weight: 500;
     text-decoration: none;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
   }
 
   .segmento-item:hover {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-1px);
   }
 
   .segmento-item.activo {
     background: #004aad;
     color: #ffffff;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.3);
   }
 
-  .punto-segmento {
-    font-size: 0.65rem;
-    color: #38b6ff;
+  .punto-vivo-azul {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38b6ff;
+    box-shadow: 0 0 6px #38b6ff;
+    animation: pulsoPunto 2s infinite ease-in-out;
+  }
+
+  @keyframes pulsoPunto {
+    0%, 100% { opacity: 0.6; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.2); }
   }
 
   .top-trust-msg {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     color: #cbdcf2;
     font-weight: 500;
   }
 
-  .trust-check {
+  .trust-icono-pulso {
     color: #12b76a;
     font-weight: 800;
+    animation: latido 3s infinite ease-in-out;
+  }
+
+  @keyframes latido {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
   }
 
   .top-utilidades {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     color: #8da1bf;
   }
 
   .top-horario {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: #a4b7d1;
   }
 
+  .punto-horario-verde {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #12b76a;
+    box-shadow: 0 0 6px #12b76a;
+  }
+
   .top-sep {
-    opacity: 0.3;
+    opacity: 0.25;
   }
 
   .top-link {
     color: #cbdcf2;
     text-decoration: none;
-    transition: color 0.15s ease;
+    transition: all 0.2s ease;
   }
 
   .top-link:hover {
     color: #ffffff;
-    text-decoration: underline;
+    transform: translateY(-1px);
   }
 
   /* ========================================================
      2. BARRA PRINCIPAL (Main Bar)
      ======================================================== */
   .barra-principal {
-    height: 74px;
-    background: #ffffff;
+    height: 76px;
+    background: transparent;
     border-bottom: 1.5px solid #e5edf7;
+    transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  }
+
+  .cabecera-dinamica.es-scrolled .barra-principal {
+    height: 66px;
+    border-bottom-color: rgba(229, 237, 247, 0.7);
   }
 
   .barra-principal-fila {
@@ -472,57 +609,82 @@ const tarifasItems = [
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    transition: transform 0.2s ease;
   }
 
-  .marca-tag {
+  .marca-bloque:hover {
+    transform: scale(1.02);
+  }
+
+  .marca-badge-pro {
     font-size: 0.68rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: #edf4fe;
+    letter-spacing: 0.06em;
+    background: linear-gradient(135deg, #edf4fe 0%, #dbe8fd 100%);
     color: #004aad;
     padding: 3px 8px;
     border-radius: var(--radio-pill, 999px);
-    border: 1px solid #d4e4fa;
+    border: 1px solid #c9dffc;
+    box-shadow: 0 2px 6px rgba(0, 74, 173, 0.08);
   }
 
-  /* Navegación central */
+  /* Navegación central con Glider Magnético */
   .nav-principal {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 2px;
+    padding: 4px;
+    background: #f4f8fd;
+    border-radius: var(--radio-pill, 999px);
+    border: 1px solid #e1ecfa;
+  }
+
+  /* Píldora deslizante magnética */
+  .nav-glider {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: calc(100% - 8px);
+    background: #ffffff;
+    border-radius: var(--radio-pill, 999px);
+    box-shadow: 0 3px 10px rgba(15, 35, 70, 0.09), 0 1px 3px rgba(15, 35, 70, 0.04);
+    pointer-events: none;
+    transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.24s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
+    opacity: 0;
+    z-index: 1;
   }
 
   .nav-enlace {
+    position: relative;
+    z-index: 2;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 14px;
-    border-radius: var(--radio-sm, 8px);
-    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: var(--radio-pill, 999px);
+    font-size: 0.92rem;
     font-weight: 600;
     color: var(--tinta, #0f2346);
     background: transparent;
     border: 0;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.15s ease;
+    transition: color 0.18s ease;
+    white-space: nowrap;
   }
 
-  .nav-enlace:hover,
-  .nav-dropdown:hover .nav-enlace,
-  .nav-dropdown.abierto .nav-enlace {
-    background: #f4f8fd;
+  .nav-enlace:hover {
     color: #004aad;
   }
 
   .nav-enlace.activo {
     color: #004aad;
-    background: #edf4fe;
   }
 
   .chevron-svg {
-    transition: transform 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .nav-dropdown:hover .chevron-svg,
@@ -530,43 +692,43 @@ const tarifasItems = [
     transform: rotate(180deg);
   }
 
-  /* Dropdown Megamenú */
+  /* Dropdown Megamenú con animación suave */
   .nav-dropdown {
     position: relative;
   }
 
-  .dropdown-popover {
+  .popover-animado {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 14px);
     left: 50%;
-    transform: translateX(-50%) translateY(6px);
+    transform: translateX(-50%) translateY(8px) scale(0.97);
     background: #ffffff;
-    border: 1px solid #d8e4f5;
+    border: 1px solid #d4e2f5;
     border-radius: var(--radio-tarjeta, 20px);
-    box-shadow: 0 18px 48px rgba(15, 35, 70, 0.13);
-    min-width: 360px;
+    box-shadow: 0 20px 50px rgba(15, 35, 70, 0.15), 0 4px 12px rgba(15, 35, 70, 0.05);
+    min-width: 370px;
     padding: 16px;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.2s ease;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .popover-tarifas {
-    min-width: 330px;
+    min-width: 340px;
   }
 
-  .nav-dropdown:hover .dropdown-popover,
-  .nav-dropdown.abierto .dropdown-popover {
+  .nav-dropdown:hover .popover-animado,
+  .nav-dropdown.abierto .popover-animado {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(0) scale(1);
   }
 
   .dropdown-header-tag {
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: #63738e;
     margin-bottom: 10px;
     padding-left: 6px;
@@ -580,16 +742,39 @@ const tarifasItems = [
 
   .dropdown-card {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 10px 12px;
-    border-radius: var(--radio-sm, 8px);
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: var(--radio-sm, 10px);
     text-decoration: none;
-    transition: background 0.15s ease;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dropdown-card:hover {
     background: #edf4fe;
+    border-color: #d2e4fc;
+    transform: translateX(4px);
+  }
+
+  .card-emoji {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .card-textos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .card-head-fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
   }
 
   .card-nombre {
@@ -598,87 +783,138 @@ const tarifasItems = [
     color: var(--tinta, #0f2346);
   }
 
+  .card-badge-mini {
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: var(--radio-pill, 999px);
+    background: #edf4fe;
+    color: #004aad;
+  }
+
   .card-desc {
     font-size: 0.78rem;
     color: #556784;
+    line-height: 1.3;
+  }
+
+  .card-flecha {
+    color: #004aad;
+    font-weight: 800;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-card:hover .card-flecha {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .dropdown-footer-link {
     margin-top: 10px;
-    padding-top: 8px;
+    padding-top: 10px;
     border-top: 1px solid #e5edf7;
   }
 
   .dropdown-footer-link a {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 700;
     color: #004aad;
     text-decoration: none;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     padding: 4px 6px;
+    transition: transform 0.2s ease;
   }
 
   .dropdown-footer-link a:hover {
-    text-decoration: underline;
+    transform: translateX(4px);
   }
 
   /* ========================================================
-     MOTOR DE CONVERSIÓN COMERCIAL (Derecha)
+     MOTOR DE CONVERSIÓN VIVO (Derecha)
      ======================================================== */
   .motor-conversion {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     margin-left: auto;
   }
 
-  /* Caja Teléfono Directo */
-  .caja-telefono {
+  /* Caja Teléfono con Sonar y Animación */
+  .caja-telefono-dinamica {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 14px;
+    padding: 6px 14px;
     border-radius: var(--radio-pill, 999px);
-    background: #f7faff;
-    border: 1.5px solid #d9e6f8;
+    background: #ffffff;
+    border: 1.5px solid #d4e4fa;
     text-decoration: none;
-    transition: all 0.15s ease;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.05);
   }
 
-  .caja-telefono:hover {
+  .caja-telefono-dinamica:hover {
     border-color: #004aad;
     background: #edf4fe;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 74, 173, 0.12);
+  }
+
+  .caja-telefono-dinamica:hover .icono-auricular {
+    animation: llamadaVibrar 0.5s ease-in-out;
+  }
+
+  @keyframes llamadaVibrar {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-15deg); }
+    40% { transform: rotate(15deg); }
+    60% { transform: rotate(-10deg); }
+    80% { transform: rotate(10deg); }
+  }
+
+  .tel-sonar-wrap {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .tel-icono-circulo {
     position: relative;
-    width: 34px;
-    height: 34px;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: #004aad;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
   }
 
-  .tel-pulso-dot {
+  .sonar-onda {
     position: absolute;
-    bottom: -2px;
-    right: -2px;
-    width: 10px;
-    height: 10px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    background: #12b76a;
-    border: 2px solid #ffffff;
-    animation: pulsoVerde 2s infinite;
+    background: rgba(0, 74, 173, 0.35);
+    animation: sonarRadar 2.4s infinite cubic-bezier(0, 0.2, 0.8, 1);
   }
 
-  @keyframes pulsoVerde {
-    0% { box-shadow: 0 0 0 0 rgba(18, 183, 106, 0.5); }
-    70% { box-shadow: 0 0 0 6px rgba(18, 183, 106, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(18, 183, 106, 0); }
+  .onda-2 {
+    animation-delay: 1.2s;
+  }
+
+  @keyframes sonarRadar {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(2.2); opacity: 0; }
   }
 
   .tel-datos {
@@ -702,7 +938,7 @@ const tarifasItems = [
     line-height: 1.1;
   }
 
-  /* Botón "Te llamamos gratis" */
+  /* Botón "Te llamamos" con Popover */
   .te-llamamos-wrapper {
     position: relative;
   }
@@ -711,41 +947,50 @@ const tarifasItems = [
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    height: 44px;
+    height: 42px;
     padding: 0 16px;
     border-radius: var(--radio-pill, 999px);
     background: #ffffff;
     border: 1.5px solid #004aad;
     color: #004aad;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
   }
 
   .btn-te-llamamos:hover {
     background: #edf4fe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.12);
   }
 
-  /* Popover de captura rápida */
+  .btn-te-llamamos:hover .icono-llamada-entrante {
+    transform: scale(1.15);
+  }
+
+  .icono-llamada-entrante {
+    transition: transform 0.2s ease;
+  }
+
   .popover-llamada {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 14px);
     right: 0;
     background: #ffffff;
     border: 1.5px solid #d4e4fa;
     border-radius: var(--radio-tarjeta, 20px);
-    box-shadow: 0 18px 48px rgba(15, 35, 70, 0.15);
+    box-shadow: 0 20px 50px rgba(15, 35, 70, 0.16);
     width: 320px;
     padding: 18px;
     z-index: 110;
-    animation: slideDown 0.2s ease;
+    animation: popoverSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-6px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes popoverSlide {
+    from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
   .popover-cabeza strong {
@@ -773,6 +1018,7 @@ const tarifasItems = [
     border: 1.5px solid #c9dbee;
     font-size: 0.9rem;
     outline: none;
+    transition: border-color 0.2s ease;
   }
 
   .popover-input:focus {
@@ -789,11 +1035,12 @@ const tarifasItems = [
     font-weight: 700;
     font-size: 0.85rem;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background 0.15s ease, transform 0.15s ease;
   }
 
   .popover-submit:hover {
     background: #003885;
+    transform: scale(1.02);
   }
 
   .popover-privacidad {
@@ -813,43 +1060,85 @@ const tarifasItems = [
     font-weight: 600;
   }
 
-  /* Botón CTA Comercial Principal */
-  .btn-cta-comercial {
+  /* Botón Principal con Efecto Shimmer Dinámico */
+  .btn-cta-dinamico {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    height: 46px;
+    height: 44px;
     padding: 0 22px;
     border-radius: var(--radio-pill, 999px);
-    background: #004aad;
+    background: linear-gradient(135deg, #004aad 0%, #003885 100%);
     color: #ffffff;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 700;
     text-decoration: none;
     border: 0;
-    box-shadow: 0 6px 18px rgba(0, 74, 173, 0.25);
-    transition: all 0.2s ease;
+    box-shadow: 0 6px 20px rgba(0, 74, 173, 0.28);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
   }
 
-  .btn-cta-comercial:hover {
-    background: #003885;
-    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.35);
-    transform: translateY(-1px);
+  /* Onda de luz brillante (Shimmer Effect continuo) */
+  .shimmer-luz {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-25deg);
+    animation: correrLuz 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  @keyframes correrLuz {
+    0% { left: -100%; }
+    30%, 100% { left: 200%; }
+  }
+
+  .btn-cta-dinamico:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(0, 74, 173, 0.42);
+  }
+
+  .btn-cta-flecha {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-cta-dinamico:hover .btn-cta-flecha {
+    transform: translateX(4px);
+  }
+
+  /* ========================================================
+     3. BARRA DE PROGRESO DE SCROLL (Scroll Progress Line)
+     ======================================================== */
+  .scroll-barra-progreso {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2.5px;
+    background: linear-gradient(90deg, #004aad 0%, #38b6ff 60%, #12b76a 100%);
+    transition: width 0.1s linear;
+    z-index: 101;
+  }
+
+  /* Hamburguesa móvil */
   .btn-hamburguesa-movil {
     display: none;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     padding: 10px;
     background: #f4f8fd;
     border: 1px solid #d4e4fa;
     border-radius: 8px;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
 
   .hamb-linea {
@@ -861,12 +1150,22 @@ const tarifasItems = [
     transition: all 0.2s ease;
   }
 
+  .btn-hamburguesa-movil.activo .linea-1 {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .btn-hamburguesa-movil.activo .linea-2 {
+    opacity: 0;
+  }
+  .btn-hamburguesa-movil.activo .linea-3 {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   /* ========================================================
-     3. MENÚ MÓVIL (Drawer)
+     4. MENÚ MÓVIL
      ======================================================== */
   .menu-movil-drawer {
     position: fixed;
-    top: 112px;
+    top: 114px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -875,6 +1174,12 @@ const tarifasItems = [
     z-index: 99;
     overflow-y: auto;
     padding: 24px 0 40px;
+    animation: drawerFade 0.2s ease;
+  }
+
+  @keyframes drawerFade {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .movil-contenedor {
@@ -913,6 +1218,7 @@ const tarifasItems = [
     border-radius: 8px;
     font-weight: 700;
     text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.2);
   }
 
   .movil-links-lista {
@@ -957,8 +1263,8 @@ const tarifasItems = [
   /* ========================================================
      RESPONSIVE MEDIA QUERIES
      ======================================================== */
-  @media (max-width: 1180px) {
-    .caja-telefono {
+  @media (max-width: 1200px) {
+    .caja-telefono-dinamica {
       display: none;
     }
   }
@@ -995,9 +1301,9 @@ const tarifasItems = [
       display: none;
     }
 
-    .btn-cta-comercial {
+    .btn-cta-dinamico {
       height: 40px;
-      padding: 0 14px;
+      padding: 0 16px;
       font-size: 0.85rem;
     }
 
