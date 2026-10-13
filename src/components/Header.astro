@@ -34,7 +34,6 @@ const tarifasItems = [
       <!-- Marca / Logo -->
       <div class="capsula-logo">
         <Logo variant="dark" />
-        <span class="badge-empresa-pill">Empresas</span>
       </div>
 
       <!-- Navegación central con Píldora Magnética Deslizante (Glider) -->
@@ -300,10 +299,26 @@ const tarifasItems = [
   navContainer?.addEventListener("mouseleave", reiniciarGlider);
   setTimeout(reiniciarGlider, 150);
 
-  // 3. Control de Dropdowns en Desktop
+  // 3. Control de Dropdowns en Desktop (Hover con tolerancia + Click)
   const dropdownWrappers = document.querySelectorAll("[data-dropdown]");
   dropdownWrappers.forEach((dd) => {
     const btn = dd.querySelector("button");
+    let timerCierre: any;
+
+    dd.addEventListener("mouseenter", () => {
+      clearTimeout(timerCierre);
+      dropdownWrappers.forEach((d) => {
+        if (d !== dd) d.classList.remove("abierto");
+      });
+      dd.classList.add("abierto");
+    });
+
+    dd.addEventListener("mouseleave", () => {
+      timerCierre = setTimeout(() => {
+        dd.classList.remove("abierto");
+      }, 200); // 200ms de tolerancia para que nunca se cierre al mover el ratón a las opciones
+    });
+
     btn?.addEventListener("click", (e) => {
       e.stopPropagation();
       const isActive = dd.classList.contains("abierto");
@@ -442,17 +457,6 @@ const tarifasItems = [
     transform: scale(1.02);
   }
 
-  .badge-empresa-pill {
-    font-size: 0.68rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: #edf4fe;
-    color: #004aad;
-    padding: 3px 8px;
-    border-radius: var(--radio-pill, 999px);
-    border: 1px solid #c9dffc;
-  }
 
   /* ========================================================
      NAVEGACIÓN CENTRAL CON GLIDER MAGNÉTICO
@@ -522,22 +526,49 @@ const tarifasItems = [
   /* Dropdown Megamenú */
   .nav-dropdown {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Puente invisible hacia abajo para mantener el hover */
+  .nav-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    right: -20px;
+    height: 25px;
+    background: transparent;
+    pointer-events: auto;
   }
 
   .popover-animado {
     position: absolute;
-    top: calc(100% + 14px);
+    top: calc(100% + 12px);
     left: 50%;
-    transform: translateX(-50%) translateY(8px) scale(0.97);
+    transform: translateX(-50%) translateY(6px) scale(0.98);
     background: #ffffff;
     border: 1.5px solid #d4e2f5;
     border-radius: var(--radio-tarjeta, 20px);
-    box-shadow: 0 20px 50px rgba(15, 35, 70, 0.16), 0 4px 12px rgba(15, 35, 70, 0.05);
+    box-shadow: 0 20px 50px rgba(15, 35, 70, 0.18), 0 4px 12px rgba(15, 35, 70, 0.05);
     min-width: 360px;
     padding: 16px;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+    z-index: 9999;
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+  }
+
+  /* Puente superior en el propio popover para unirlo con la cápsula */
+  .popover-animado::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: transparent;
   }
 
   .popover-tarifas {
@@ -545,8 +576,10 @@ const tarifasItems = [
   }
 
   .nav-dropdown:hover .popover-animado,
+  .nav-dropdown:focus-within .popover-animado,
   .nav-dropdown.abierto .popover-animado {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0) scale(1);
   }
