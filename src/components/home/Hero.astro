@@ -2,9 +2,8 @@
 // Hero Principal EMAX Energía
 // Diseñado para captar la atención inmediatamente con:
 // 1. Propuesta de valor contundente y selector de factura mensual (Izquierda).
-// 2. Radiografía Interactiva del caso real del Obrador de Panadería (Derecha),
-//    mostrando exactamente todos los datos del boceto original pero de forma visual,
-//    atractiva y estructurada en pestañas para invitar a la lectura.
+// 2. Tarjeta editorial y humana del Caso Real del Obrador de Panadería (Derecha),
+//    con botón que abre la Ventana Emergente Grande (Modal) con la radiografía completa.
 import { site } from "../../data/site";
 import fotoPanaderia from "../../imagenes/hero-panaderia.jpg";
 
@@ -101,7 +100,7 @@ const tramosGasto = [
         </form>
 
         <p class="selector-footer-nota">
-          Después eliges cómo seguimos: una llamada explicativa o tu factura.
+          Después eliges cómo seguimos: una llamada o tu factura.
         </p>
 
         <div class="badges-confianza">
@@ -116,289 +115,293 @@ const tramosGasto = [
       </a>
     </div>
 
-    <!-- COLUMNA DERECHA: Radiografía Interactiva de Factura (Obrador de panadería) -->
+    <!-- COLUMNA DERECHA: Tarjeta Editorial del Caso Real de Panadería -->
     <div class="hero-factura-col">
-      <aside class="radiografia-card" aria-label="Auditoría real de ejemplo: Obrador de panadería">
-        <!-- Cabecera de la auditoría -->
-        <header class="radiografia-header">
-          <div class="radiografia-intro">
-            <div class="radiografia-subhead">
-              <span class="tag-auditoria">Auditoría real</span>
-              <span class="tag-peaje">Peaje 3.0TD · Febrero 2026</span>
-            </div>
-            <h3 class="radiografia-titulo">Así leemos una factura</h3>
-            <p class="radiografia-sub">Ejemplo real · Obrador de panadería artesanal</p>
-          </div>
-          <div class="foto-mini-wrap">
-            <img
-              src={fotoPanaderia.src}
-              alt="Obrador de panadería auditado"
-              class="foto-mini"
-              width={72}
-              height={72}
-              loading="eager"
-            />
-          </div>
-        </header>
-
-        <!-- Navegador interactivo de hallazgos (Tabs para explorar) -->
-        <nav class="auditoria-tabs" role="tablist" aria-label="Pestañas de la auditoría de factura">
-          <button type="button" class="tab-btn activo" data-tab="tab-consumo" role="tab" aria-selected="true">
-            <span>1. Horarios</span>
-          </button>
-          <button type="button" class="tab-btn" data-tab="tab-potencia" role="tab" aria-selected="false">
-            <span>2. Potencia</span>
-            <span class="tab-alerta-dot" title="Sobrecoste detectado">!</span>
-          </button>
-          <button type="button" class="tab-btn" data-tab="tab-reactiva" role="tab" aria-selected="false">
-            <span>3. Reactiva / Precio</span>
-          </button>
-          <button type="button" class="tab-btn" data-tab="tab-solucion" role="tab" aria-selected="false">
-            <span>4. Solución</span>
-          </button>
-        </nav>
-
-        <!-- CONTENIDO INTERACTIVO DE LAS PESTAÑAS -->
-        <div class="auditoria-paneles">
-          <!-- PANEL 1: Cuándo consume -->
-          <div class="panel-contenido activo" id="tab-consumo" role="tabpanel">
-            <div class="panel-head">
-              <h4 class="panel-tit">Cuándo consume</h4>
-              <span class="badge-panel">Volumen total: 10.080 kWh</span>
-            </div>
-
-            <!-- Gráfico de barras proporcionales -->
-            <div class="desglose-periodos">
-              <div class="periodo-fila">
-                <div class="p-etiqueta">
-                  <span class="p-sigla">P1</span>
-                  <span class="p-nombre">Punta (Tienda)</span>
-                </div>
-                <div class="p-barra-track">
-                  <div class="p-barra-fill p1-fill" style="width: 26%;"></div>
-                </div>
-                <span class="p-kwh">2.600 kWh</span>
-              </div>
-
-              <div class="periodo-fila">
-                <div class="p-etiqueta">
-                  <span class="p-sigla">P2</span>
-                  <span class="p-nombre">Llano</span>
-                </div>
-                <div class="p-barra-track">
-                  <div class="p-barra-fill p2-fill" style="width: 17%;"></div>
-                </div>
-                <span class="p-kwh">1.680 kWh</span>
-              </div>
-
-              <div class="periodo-fila destacada-p6">
-                <div class="p-etiqueta">
-                  <span class="p-sigla">P6</span>
-                  <span class="p-nombre">Valle / Noche (Hornos)</span>
-                </div>
-                <div class="p-barra-track">
-                  <div class="p-barra-fill p6-fill" style="width: 57%;"></div>
-                </div>
-                <span class="p-kwh">5.800 kWh</span>
-              </div>
-            </div>
-
-            <div class="caja-revelacion">
-              <p class="revelacion-texto">
-                <span class="revelacion-ico" aria-hidden="true">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                  </svg>
-                </span>
-                <strong>Más de la mitad se produce de madrugada y en fin de semana: el horno.</strong>
-              </p>
-              <p class="revelacion-nota">En febrero, el peaje 3.0TD solo tiene P1, P2 y P6.</p>
-            </div>
-          </div>
-
-          <!-- PANEL 2: Potencia -->
-          <div class="panel-contenido" id="tab-potencia" role="tabpanel" hidden>
-            <div class="panel-head">
-              <h4 class="panel-tit">Potencia contratada vs. uso real</h4>
-              <span class="badge-alerta-roja">Fuga de margen</span>
-            </div>
-
-            <div class="potencia-comparador">
-              <div class="potencia-fila-dato">
-                <div class="dato-info">
-                  <span class="dato-lbl">Contratada en catálogo</span>
-                  <span class="dato-val">45 kW</span>
-                </div>
-                <div class="dato-barra"><div class="barra-contratada"></div></div>
-              </div>
-
-              <div class="potencia-fila-dato">
-                <div class="dato-info">
-                  <span class="dato-lbl">Maxímetro P1 y P2 (Horas diurnas)</span>
-                  <span class="dato-val">22 kW</span>
-                </div>
-                <div class="dato-barra"><div class="barra-maximetro-dia" style="width: 48%;"></div></div>
-              </div>
-
-              <div class="potencia-fila-dato">
-                <div class="dato-info">
-                  <span class="dato-lbl">Maxímetro P6 (Madrugada con hornos)</span>
-                  <span class="dato-val">40 kW</span>
-                </div>
-                <div class="dato-barra"><div class="barra-maximetro-noche" style="width: 88%;"></div></div>
-              </div>
-            </div>
-
-            <div class="caja-alerta-fuga">
-              <div class="fuga-badge">Sobrecoste evitable</div>
-              <p class="fuga-texto">
-                <span class="fuga-ico" aria-hidden="true">!</span>
-                <strong>Paga de día 23 kW que no usa jamás.</strong>
-              </p>
-              <p class="fuga-sub">
-                Tiene contratada la potencia del horno las 24 horas, tirando dinero en horas de tienda.
-              </p>
-            </div>
-          </div>
-
-          <!-- PANEL 3: Reactiva y Precio plano -->
-          <div class="panel-contenido" id="tab-reactiva" role="tabpanel" hidden>
-            <div class="panel-head">
-              <h4 class="panel-tit">Reactiva y precio del kWh</h4>
-            </div>
-
-            <div class="reactiva-bloque">
-              <div class="reactiva-cabecera">
-                <span class="reactiva-tit">Energía reactiva facturada:</span>
-                <span class="reactiva-total">21,34 € en febrero</span>
-              </div>
-              <div class="reactiva-desglose">
-                <span class="r-periodo">P1: 12,96 €</span>
-                <span class="r-sep">·</span>
-                <span class="r-periodo">P2: 8,38 €</span>
-                <span class="r-nota">(En P6 no se factura)</span>
-              </div>
-              <p class="reactiva-explicacion">
-                Es la reactiva de los motores en horas de tienda.
-              </p>
-            </div>
-
-            <div class="precio-plano-bloque">
-              <div class="precio-head">
-                <span class="precio-lbl">Precio actual del contrato</span>
-                <span class="precio-cifra">0,1450 €/kWh</span>
-                <span class="precio-tag">A cualquier hora</span>
-              </div>
-
-              <div class="reloj-comparativa">
-                <div class="reloj-item">
-                  <span class="hora-ico">05:00 AM</span>
-                  <span class="hora-precio">0,1450 €</span>
-                </div>
-                <span class="igual-signo">=</span>
-                <div class="reloj-item">
-                  <span class="hora-ico">12:00 PM</span>
-                  <span class="hora-precio">0,1450 €</span>
-                </div>
-              </div>
-
-              <p class="precio-conclusion">
-                <span class="fuga-ico" aria-hidden="true">!</span>
-                <strong>Paga igual el kWh de las 5:00 de la madrugada que el de las 12:00 del mediodía.</strong>
-              </p>
-            </div>
-          </div>
-
-          <!-- PANEL 4: Qué decidimos juntos -->
-          <div class="panel-contenido" id="tab-solucion" role="tabpanel" hidden>
-            <div class="panel-head">
-              <h4 class="panel-tit">Qué decidimos juntos</h4>
-              <span class="badge-verde-solucion">Estrategia aplicada</span>
-            </div>
-
-            <div class="solucion-tarjeta">
-              <div class="solucion-check-item">
-                <span class="check-circulo">✓</span>
-                <div>
-                  <strong>Potencia ajustada periodo a periodo:</strong>
-                  <p>22 kW de día y 40 kW de noche. Cero kW fantasma pagados.</p>
-                </div>
-              </div>
-
-              <div class="solucion-check-item">
-                <span class="check-circulo">✓</span>
-                <div>
-                  <strong>Precio en seis periodos diferenciados:</strong>
-                  <p>Aprovechando que más del 50% del consumo va al periodo más barato.</p>
-                </div>
-              </div>
-
-              <div class="solucion-check-item">
-                <span class="check-circulo">✓</span>
-                <div>
-                  <strong>El precio fijo se mantiene:</strong>
-                  <p>Sin incertidumbre ni volatilidad de mercado para el negocio.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="solucion-resultado-fila">
-              <span class="ahorro-anual-cifra">-4.850 € / año</span>
-              <span class="ahorro-anual-lbl">Ahorro conseguido para el obrador</span>
-            </div>
+      <article class="caso-card" aria-label="Caso real auditado: Obrador de panadería">
+        <div class="caso-media">
+          <img
+            src={fotoPanaderia.src}
+            alt="Obrador de panadería artesanal auditado por EMAX"
+            class="caso-foto"
+            width={580}
+            height={300}
+            loading="eager"
+          />
+          <div class="caso-tag-flotante">
+            <span class="punto-verde" aria-hidden="true"></span>
+            <span>Caso real auditado</span>
           </div>
         </div>
 
-        <!-- Pie de la auditoría con llamada al detalle -->
-        <footer class="radiografia-footer">
-          <a href="/#estudio" class="btn-ver-factura">
-            <span>Ver su factura leída, línea a línea</span>
-            <span aria-hidden="true">→</span>
-          </a>
-          <span class="peajes-nota">Peajes y cargos oficiales de 2026.</span>
-        </footer>
-      </aside>
+        <div class="caso-body">
+          <div class="caso-header-info">
+            <span class="caso-categoria">Sector Alimentación</span>
+            <span class="caso-sep">·</span>
+            <span class="caso-peaje">Peaje 3.0TD · Febrero</span>
+          </div>
+
+          <h3 class="caso-titulo">Así leemos una factura</h3>
+          <p class="caso-subtitulo">Ejemplo · obrador de panadería</p>
+
+          <p class="caso-resumen">
+            Horneaban de madrugada con 45 kW contratados a ciegas las 24 horas y tarifa plana: <strong>pagaban de día 23 kW que no usaban jamás</strong>.
+          </p>
+
+          <div class="caso-metricas-grid">
+            <div class="metrica-caja destacada-verde">
+              <span class="metrica-val">-4.850 €</span>
+              <span class="metrica-lbl">Ahorro anual conseguido</span>
+            </div>
+            <div class="metrica-caja">
+              <span class="metrica-val">23 kW</span>
+              <span class="metrica-lbl">Potencia fantasma recortada</span>
+            </div>
+          </div>
+
+          <!-- Botón de apertura de la ventana emergente -->
+          <div class="caso-acciones">
+            <button
+              type="button"
+              class="btn-abrir-auditoria"
+              id="btn-abrir-modal-factura"
+              aria-haspopup="dialog"
+              aria-controls="modal-auditoria-factura"
+            >
+              <span>Ver su factura leída, línea a línea</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+            <span class="caso-nota-peajes">Peajes y cargos oficiales de 2026.</span>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- =========================================================================
+     VENTANA EMERGENTE GRANDE (MODAL): AUDITORÍA LÍNEA A LÍNEA DE LA FACTURA
+     ========================================================================= -->
+<div
+  class="modal-backdrop"
+  id="modal-auditoria-factura"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-factura-titulo"
+  hidden
+>
+  <div class="modal-dialog">
+    <!-- Cabecera del Modal -->
+    <header class="modal-header">
+      <div class="modal-titulares">
+        <div class="modal-etiquetas">
+          <span class="modal-pill-azul">Auditoría real de factura</span>
+          <span class="modal-pill-gris">Peaje 3.0TD · Febrero</span>
+        </div>
+        <h2 id="modal-factura-titulo" class="modal-titulo">Así leemos una factura</h2>
+        <p class="modal-sub">Ejemplo · obrador de panadería</p>
+      </div>
+
+      <button
+        type="button"
+        class="modal-btn-cerrar"
+        id="btn-cerrar-modal-factura"
+        aria-label="Cerrar ventana emergente"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Cuerpo del Modal: Cuadrícula ejecutiva con copies exactos -->
+    <div class="modal-body">
+      <!-- BLOQUE 1: Cuándo consume -->
+      <section class="audit-card">
+        <div class="audit-card-head">
+          <h3 class="audit-card-tit">Cuándo consume</h3>
+          <span class="audit-card-vol">10.080 kWh</span>
+        </div>
+
+        <div class="audit-barras-lista">
+          <div class="audit-fila">
+            <span class="audit-sigla">P1</span>
+            <div class="audit-track">
+              <div class="audit-fill fill-p1" style="width: 26%;"></div>
+            </div>
+            <span class="audit-cifra">2.600 kWh</span>
+          </div>
+
+          <div class="audit-fila">
+            <span class="audit-sigla">P2</span>
+            <div class="audit-track">
+              <div class="audit-fill fill-p2" style="width: 17%;"></div>
+            </div>
+            <span class="audit-cifra">1.680 kWh</span>
+          </div>
+
+          <div class="audit-fila audit-fila-destacada">
+            <span class="audit-sigla sigla-p6">P6</span>
+            <div class="audit-track">
+              <div class="audit-fill fill-p6" style="width: 57%;"></div>
+            </div>
+            <span class="audit-cifra cifra-p6">5.800 kWh</span>
+          </div>
+        </div>
+
+        <div class="audit-conclusiones">
+          <p class="audit-concl-texto">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="audit-ico-azul" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+            </svg>
+            <span>Más de la mitad, de madrugada y en fin de semana: el horno.</span>
+          </p>
+          <p class="audit-nota-sub">En febrero, el peaje 3.0TD solo tiene P1, P2 y P6.</p>
+        </div>
+      </section>
+
+      <!-- BLOQUE 2: Potencia -->
+      <section class="audit-card">
+        <div class="audit-card-head">
+          <h3 class="audit-card-tit">Potencia</h3>
+          <span class="audit-badge-alerta">Fuga detectada</span>
+        </div>
+
+        <div class="audit-barras-lista">
+          <div class="audit-fila">
+            <span class="audit-lbl-potencia">Contratada</span>
+            <div class="audit-track">
+              <div class="audit-fill fill-contratada" style="width: 100%;"></div>
+            </div>
+            <span class="audit-cifra">45 kW</span>
+          </div>
+
+          <div class="audit-fila">
+            <span class="audit-lbl-potencia">Maxímetro P1 y P2</span>
+            <div class="audit-track">
+              <div class="audit-fill fill-p2" style="width: 49%;"></div>
+            </div>
+            <span class="audit-cifra">22 kW</span>
+          </div>
+
+          <div class="audit-fila">
+            <span class="audit-lbl-potencia">Maxímetro P6</span>
+            <div class="audit-track">
+              <div class="audit-fill fill-p6" style="width: 89%;"></div>
+            </div>
+            <span class="audit-cifra">40 kW</span>
+          </div>
+        </div>
+
+        <div class="audit-caja-alerta">
+          <p class="audit-alerta-texto">
+            <span class="audit-alerta-ico" aria-hidden="true">!</span>
+            <strong>Paga de día 23 kW que no usa.</strong>
+          </p>
+        </div>
+      </section>
+
+      <!-- BLOQUE 3: Energía reactiva 21,34 € en febrero -->
+      <section class="audit-card">
+        <div class="audit-card-head">
+          <h3 class="audit-card-tit">Energía reactiva <span class="cifra-destacada-reactiva">21,34 € en febrero</span></h3>
+        </div>
+
+        <div class="audit-reactiva-grid">
+          <div class="reactiva-caja-item">
+            <span class="r-sigla">P1</span>
+            <span class="r-precio">12,96 €</span>
+          </div>
+          <div class="reactiva-caja-item">
+            <span class="r-sigla">P2</span>
+            <span class="r-precio">8,38 €</span>
+          </div>
+        </div>
+
+        <div class="audit-conclusiones">
+          <p class="audit-concl-texto-simple">
+            Es la de las horas de tienda. En P6 no se factura.
+          </p>
+        </div>
+      </section>
+
+      <!-- BLOQUE 4: Precio 0,1450 €/kWh a cualquier hora -->
+      <section class="audit-card">
+        <div class="audit-card-head">
+          <h3 class="audit-card-tit">Precio <span class="cifra-destacada-tarifa">0,1450 €/kWh a cualquier hora</span></h3>
+        </div>
+
+        <div class="audit-precio-comparativa">
+          <div class="hora-bloque">
+            <span class="hora-badge">5:00</span>
+            <span class="hora-coste">0,1450 €</span>
+          </div>
+          <span class="igual-signo">=</span>
+          <div class="hora-bloque">
+            <span class="hora-badge">12:00</span>
+            <span class="hora-coste">0,1450 €</span>
+          </div>
+        </div>
+
+        <div class="audit-caja-alerta">
+          <p class="audit-alerta-texto">
+            <span class="audit-alerta-ico" aria-hidden="true">!</span>
+            <strong>Paga igual el kWh de las 5:00 que el de las 12:00.</strong>
+          </p>
+        </div>
+      </section>
+
+      <!-- BLOQUE 5: Qué decidimos -->
+      <section class="audit-card audit-card-decision">
+        <div class="audit-card-head">
+          <h3 class="audit-card-tit">Qué decidimos</h3>
+          <span class="audit-badge-verde">Estrategia aplicada</span>
+        </div>
+
+        <p class="audit-decision-parrafo">
+          Potencia periodo a periodo y precio en seis periodos. El precio fijo se mantiene.
+        </p>
+
+        <div class="decision-cta-box">
+          <div class="decision-ahorro-wrap">
+            <span class="decision-cifra">-4.850 € / año</span>
+            <span class="decision-sub">Ahorro conseguido para este negocio sin cambiar su forma de trabajar</span>
+          </div>
+
+          <button type="button" class="btn-analizar-desde-modal" id="btn-analizar-desde-modal">
+            <span>Analizar mi factura</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Pie del Modal -->
+    <footer class="modal-footer">
+      <span class="modal-legal">Peajes y cargos oficiales de 2026.</span>
+      <button type="button" class="btn-modal-cerrar-txt" id="btn-cerrar-modal-factura-secundario">
+        Cerrar ventana
+      </button>
+    </footer>
+  </div>
+</div>
+
 <script>
-  // Control de las pestañas interactivas de la auditoría
-  const tabButtons = document.querySelectorAll(".auditoria-tabs .tab-btn");
-  const tabPaneles = document.querySelectorAll(".auditoria-paneles .panel-contenido");
-
-  tabButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const targetId = btn.getAttribute("data-tab");
-
-      // Actualizar estado botones
-      tabButtons.forEach((b) => {
-        b.classList.remove("activo");
-        b.setAttribute("aria-selected", "false");
-      });
-      btn.classList.add("activo");
-      btn.setAttribute("aria-selected", "true");
-
-      // Actualizar paneles visibles
-      tabPaneles.forEach((panel) => {
-        if (panel.id === targetId) {
-          panel.classList.add("activo");
-          panel.removeAttribute("hidden");
-        } else {
-          panel.classList.remove("activo");
-          panel.setAttribute("hidden", "true");
-        }
-      });
-    });
-  });
-
-  // Control del selector de tramos en la columna izquierda
+  // =========================================================================
+  // CONTROL DEL SELECTOR DE TRAMOS (Columna Izquierda)
+  // =========================================================================
   const tramoTriggers = document.querySelectorAll("[data-tramo-trigger]");
   const formTramo = document.querySelector("[data-form-tramo]");
   const tramosGrid = document.querySelector(".tramos-lista");
@@ -430,6 +433,61 @@ const tramosGasto = [
       if (submitBtn) (submitBtn as HTMLElement).style.display = "none";
     }
   });
+
+  // =========================================================================
+  // CONTROL DE LA VENTANA EMERGENTE (MODAL AUDITORÍA DE FACTURA)
+  // =========================================================================
+  const btnAbrirModal = document.getElementById("btn-abrir-modal-factura");
+  const modalBackdrop = document.getElementById("modal-auditoria-factura");
+  const btnCerrarModal = document.getElementById("btn-cerrar-modal-factura");
+  const btnCerrarSecundario = document.getElementById("btn-cerrar-modal-factura-secundario");
+  const btnAnalizarDesdeModal = document.getElementById("btn-analizar-desde-modal");
+
+  function abrirModal() {
+    if (!modalBackdrop) return;
+    modalBackdrop.removeAttribute("hidden");
+    document.body.style.overflow = "hidden";
+    // Enfocar botón de cierre para accesibilidad
+    btnCerrarModal?.focus();
+  }
+
+  function cerrarModal() {
+    if (!modalBackdrop) return;
+    modalBackdrop.setAttribute("hidden", "true");
+    document.body.style.overflow = "";
+    btnAbrirModal?.focus();
+  }
+
+  btnAbrirModal?.addEventListener("click", abrirModal);
+  btnCerrarModal?.addEventListener("click", cerrarModal);
+  btnCerrarSecundario?.addEventListener("click", cerrarModal);
+
+  // Cerrar al hacer clic en el backdrop exterior
+  modalBackdrop?.addEventListener("click", (e) => {
+    if (e.target === modalBackdrop) {
+      cerrarModal();
+    }
+  });
+
+  // Cerrar al pulsar la tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalBackdrop && !modalBackdrop.hasAttribute("hidden")) {
+      cerrarModal();
+    }
+  });
+
+  // Botón dentro del modal "Analizar mi factura"
+  btnAnalizarDesdeModal?.addEventListener("click", () => {
+    cerrarModal();
+    const selectorCard = document.getElementById("estudio");
+    if (selectorCard) {
+      selectorCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      selectorCard.classList.add("selector-resaltado");
+      setTimeout(() => {
+        selectorCard.classList.remove("selector-resaltado");
+      }, 1500);
+    }
+  });
 </script>
 
 <style>
@@ -441,12 +499,14 @@ const tramosGasto = [
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1.05fr;
+    grid-template-columns: 1fr 1fr;
     gap: 48px;
     align-items: start;
   }
 
-  /* Columna Izquierda */
+  /* ==========================================================================
+     COLUMNA IZQUIERDA: PROPUESTA Y SELECTOR
+     ========================================================================== */
   .hero-propuesta {
     display: flex;
     flex-direction: column;
@@ -504,6 +564,12 @@ const tramosGasto = [
     display: flex;
     flex-direction: column;
     gap: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .selector-card.selector-resaltado {
+    outline: 3px solid var(--azul-900, #004aad);
+    box-shadow: 0 0 0 6px rgba(0, 74, 173, 0.2);
   }
 
   .selector-badge {
@@ -653,259 +719,458 @@ const tramosGasto = [
   }
 
   /* ==========================================================================
-     COLUMNA DERECHA: RADIOGRAFÍA INTERACTIVA DE FACTURA
+     COLUMNA DERECHA: TARJETA EDITORIAL DEL CASO REAL (PANADERÍA)
      ========================================================================== */
   .hero-factura-col {
     position: relative;
   }
 
-  .radiografia-card {
+  .caso-card {
     background: #ffffff;
-    border: 1.5px solid #d6e2f2;
+    border: 1.5px solid #d8e4f3;
     border-radius: var(--radio-grande, 28px);
-    box-shadow: 0 16px 44px rgba(15, 35, 70, 0.09);
+    box-shadow: 0 16px 40px rgba(15, 35, 70, 0.08);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .radiografia-header {
-    display: flex;
-    justify-content: space-between;
+  .caso-card:hover {
+    box-shadow: 0 20px 48px rgba(15, 35, 70, 0.12);
+  }
+
+  .caso-media {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background: #eef4fc;
+  }
+
+  .caso-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .caso-card:hover .caso-foto {
+    transform: scale(1.03);
+  }
+
+  .caso-tag-flotante {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: inline-flex;
     align-items: center;
-    padding: 22px 24px;
-    background: #f8fbff;
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
-  }
-
-  .radiografia-subhead {
-    display: flex;
     gap: 8px;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--azul-900, #004aad);
+    box-shadow: 0 4px 14px rgba(15, 35, 70, 0.12);
   }
 
-  .tag-auditoria {
-    font-size: 0.72rem;
-    font-weight: 700;
+  .punto-verde {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #12b76a;
+  }
+
+  .caso-body {
+    padding: 28px 26px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .caso-header-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .caso-categoria {
+    color: var(--azul-900, #004aad);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--azul-900, #004aad);
   }
 
-  .tag-peaje {
-    font-size: 0.72rem;
+  .caso-sep {
+    color: #cbd5e1;
+  }
+
+  .caso-peaje {
+    color: var(--tinta-3, #63738e);
+  }
+
+  .caso-titulo {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--tinta, #0f2346);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .caso-subtitulo {
+    font-size: 0.92rem;
+    color: var(--tinta-2, #3a4b68);
+    font-weight: 500;
+    margin-top: -8px;
+  }
+
+  .caso-resumen {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--tinta-2, #3a4b68);
+  }
+
+  .caso-resumen strong {
+    color: #b42318;
+    background: #fef3f2;
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .caso-metricas-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 12px;
+  }
+
+  .metrica-caja {
+    padding: 14px 16px;
+    border-radius: var(--radio-md, 14px);
+    background: #f8fbff;
+    border: 1px solid #dbe6f5;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .metrica-caja.destacada-verde {
+    background: #f6fef9;
+    border-color: #a6f4c5;
+  }
+
+  .metrica-val {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--tinta, #0f2346);
+    letter-spacing: -0.02em;
+  }
+
+  .destacada-verde .metrica-val {
+    color: #027a48;
+  }
+
+  .metrica-lbl {
+    font-size: 0.78rem;
     color: var(--tinta-3, #63738e);
     font-weight: 600;
   }
 
-  .radiografia-titulo {
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: var(--tinta, #0f2346);
-    margin: 0;
-  }
-
-  .radiografia-sub {
-    font-size: 0.86rem;
-    color: var(--tinta-2, #3a4b68);
-  }
-
-  .foto-mini-wrap {
-    flex-shrink: 0;
-  }
-
-  .foto-mini {
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
-    object-fit: cover;
-    border: 2px solid #ffffff;
-    box-shadow: 0 4px 12px rgba(15, 35, 70, 0.12);
-  }
-
-  /* Pestañas de auditoría */
-  .auditoria-tabs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background: #f0f5fc;
-    border-bottom: 1px solid #dce7f5;
-    padding: 4px;
-    gap: 4px;
-  }
-
-  .tab-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 10px 8px;
-    background: transparent;
-    border: 0;
-    border-radius: var(--radio-sm, 8px);
-    font-family: inherit;
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--tinta-2, #3a4b68);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .tab-btn:hover {
-    color: var(--azul-900, #004aad);
-    background: rgba(255, 255, 255, 0.6);
-  }
-
-  .tab-btn.activo {
-    background: #ffffff;
-    color: var(--azul-900, #004aad);
-    box-shadow: 0 2px 6px rgba(15, 35, 70, 0.08);
-  }
-
-  .tab-alerta-dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #fee4e2;
-    color: #d92d20;
-    font-size: 0.68rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Paneles */
-  .auditoria-paneles {
-    padding: 24px;
-    min-height: 290px;
-  }
-
-  .panel-contenido {
+  .caso-acciones {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    animation: fadeIn 0.2s ease;
+    gap: 10px;
+    padding-top: 6px;
   }
 
-  .panel-contenido[hidden] {
+  .btn-abrir-auditoria {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--azul-900, #004aad);
+    color: #ffffff;
+    border: 0;
+    border-radius: var(--radio-md, 14px);
+    font-family: inherit;
+    font-size: 0.96rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.25);
+  }
+
+  .btn-abrir-auditoria:hover {
+    background: #003a88;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 74, 173, 0.35);
+  }
+
+  .caso-nota-peajes {
+    font-size: 0.78rem;
+    color: var(--tinta-3, #63738e);
+    text-align: center;
+  }
+
+  /* ==========================================================================
+     VENTANA EMERGENTE GRANDE (MODAL DIALOG)
+     ========================================================================== */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(10, 25, 47, 0.65);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+    animation: modalBackdropFadeIn 0.2s ease;
+  }
+
+  .modal-backdrop[hidden] {
     display: none !important;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes modalBackdropFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
-  .panel-head {
+  .modal-dialog {
+    background: #ffffff;
+    border: 1px solid #d4e2f5;
+    border-radius: 28px;
+    box-shadow: 0 24px 64px rgba(10, 25, 47, 0.25);
+    width: 100%;
+    max-width: 880px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes modalSlideUp {
+    from { transform: translateY(16px) scale(0.98); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+
+  /* Cabecera del modal */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 28px 32px 20px;
+    background: #f8fbff;
+    border-bottom: 1px solid #e2edf8;
+  }
+
+  .modal-titulares {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .modal-etiquetas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .modal-pill-azul {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--azul-900, #004aad);
+    background: #eef4fc;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .modal-pill-gris {
+    font-size: 0.74rem;
+    color: var(--tinta-3, #63738e);
+    font-weight: 600;
+  }
+
+  .modal-titulo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--tinta, #0f2346);
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .modal-sub {
+    font-size: 0.95rem;
+    color: var(--tinta-2, #3a4b68);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .modal-btn-cerrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #d4e0f0;
+    color: var(--tinta-2, #3a4b68);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .modal-btn-cerrar:hover {
+    background: #fee4e2;
+    border-color: #fecdca;
+    color: #d92d20;
+    transform: rotate(90deg);
+  }
+
+  /* Cuerpo del modal */
+  .modal-body {
+    padding: 28px 32px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .audit-card {
+    background: #ffffff;
+    border: 1.5px solid #e1ecf8;
+    border-radius: 18px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .audit-card-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .panel-tit {
+  .audit-card-tit {
     font-size: 1.1rem;
     font-weight: 800;
     color: var(--tinta, #0f2346);
     margin: 0;
   }
 
-  .badge-panel {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: var(--radio-pill, 999px);
-    background: var(--azul-suave, #edf4fe);
+  .audit-card-vol {
+    font-size: 0.76rem;
+    font-weight: 700;
+    background: #eef4fc;
     color: var(--azul-900, #004aad);
+    padding: 3px 8px;
+    border-radius: 999px;
   }
 
-  .badge-alerta-roja {
-    font-size: 0.75rem;
+  .audit-badge-alerta {
+    font-size: 0.74rem;
     font-weight: 700;
-    padding: 3px 10px;
-    border-radius: var(--radio-pill, 999px);
     background: #fee4e2;
     color: #d92d20;
+    padding: 3px 8px;
+    border-radius: 999px;
   }
 
-  /* Desglose de periodos */
-  .desglose-periodos {
+  .audit-badge-verde {
+    font-size: 0.74rem;
+    font-weight: 700;
+    background: #ecfdf3;
+    color: #027a48;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  /* Barras de datos */
+  .audit-barras-lista {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background: #f8fbff;
-    padding: 14px 16px;
-    border-radius: var(--radio-md, 14px);
-    border: 1px solid #e1ecf8;
   }
 
-  .periodo-fila {
+  .audit-fila {
     display: grid;
-    grid-template-columns: 140px 1fr 90px;
+    grid-template-columns: 120px 1fr 85px;
     align-items: center;
-    gap: 12px;
-    font-size: 0.85rem;
+    gap: 10px;
+    font-size: 0.86rem;
   }
 
-  .p-etiqueta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .p-sigla {
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: #d8e5f5;
-    font-size: 0.75rem;
+  .audit-sigla {
     font-weight: 800;
     color: var(--azul-900, #004aad);
-  }
-
-  .p-nombre {
-    font-weight: 500;
-    color: var(--tinta-2, #3a4b68);
-  }
-
-  .p-barra-track {
-    height: 10px;
-    background: #e2eaf5;
+    background: #eef4fc;
+    padding: 2px 8px;
     border-radius: 6px;
-    overflow: hidden;
+    width: fit-content;
   }
 
-  .p-barra-fill {
-    height: 100%;
-    border-radius: 6px;
-  }
-
-  .p1-fill { background: #5271ff; }
-  .p2-fill { background: #38b6ff; }
-  .p6-fill { background: #004aad; }
-
-  .p-kwh {
-    font-weight: 700;
-    text-align: right;
-    color: var(--tinta, #0f2346);
-  }
-
-  .periodo-fila.destacada-p6 .p-sigla {
+  .sigla-p6 {
     background: var(--azul-900, #004aad);
     color: #ffffff;
   }
 
-  .periodo-fila.destacada-p6 .p-kwh {
+  .audit-lbl-potencia {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--tinta-2, #3a4b68);
+  }
+
+  .audit-track {
+    height: 10px;
+    background: #e8f0fa;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .audit-fill {
+    height: 100%;
+    border-radius: 6px;
+  }
+
+  .fill-p1 { background: #5271ff; }
+  .fill-p2 { background: #38b6ff; }
+  .fill-p6 { background: #004aad; }
+  .fill-contratada { background: #94a3b8; }
+  .barra-reactiva { background: #d92d20; }
+
+  .audit-cifra {
+    font-weight: 800;
+    text-align: right;
+    color: var(--tinta, #0f2346);
+  }
+
+  .cifra-p6 {
     color: var(--azul-900, #004aad);
   }
 
-  .caja-revelacion {
-    padding: 14px 16px;
-    background: #ffffff;
-    border: 1px solid #dce7f5;
-    border-left: 3px solid var(--azul-900, #004aad);
-    border-radius: var(--radio-sm, 8px);
+  .audit-conclusiones {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 6px;
+    border-top: 1px dashed #e1ecf8;
   }
 
-  .revelacion-texto {
-    font-size: 0.92rem;
+  .audit-concl-texto {
+    font-size: 0.88rem;
     color: var(--tinta, #0f2346);
     line-height: 1.45;
     display: flex;
@@ -913,103 +1178,34 @@ const tramosGasto = [
     gap: 8px;
   }
 
-  .revelacion-ico {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #eef4ff;
+  .audit-ico-azul {
     color: var(--azul-900, #004aad);
     flex-shrink: 0;
   }
 
-  .revelacion-nota {
-    font-size: 0.8rem;
+  .audit-nota-sub {
+    font-size: 0.78rem;
     color: var(--tinta-3, #63738e);
-    margin-top: 4px;
   }
 
-  /* Panel Potencia */
-  .potencia-comparador {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: #f8fbff;
-    padding: 16px;
-    border-radius: var(--radio-md, 14px);
+  .audit-caja-alerta {
+    padding: 10px 14px;
+    background: #fef3f2;
+    border: 1px solid #fecdca;
+    border-radius: 10px;
   }
 
-  .potencia-fila-dato {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .dato-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.86rem;
-  }
-
-  .dato-lbl {
-    color: var(--tinta-2, #3a4b68);
-  }
-
-  .dato-val {
-    font-weight: 800;
-    color: var(--tinta, #0f2346);
-  }
-
-  .dato-barra {
-    height: 8px;
-    background: #e2edf8;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .barra-contratada {
-    width: 100%;
-    height: 100%;
-    background: #8fa7c7;
-  }
-
-  .barra-maximetro-dia {
-    height: 100%;
-    background: #38b6ff;
-  }
-
-  .barra-maximetro-noche {
-    height: 100%;
-    background: #004aad;
-  }
-
-  .caja-alerta-fuga {
-    padding: 16px;
-    background: #fffbfa;
-    border: 1.5px solid #fecdca;
-    border-radius: var(--radio-md, 14px);
-  }
-
-  .fuga-badge {
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #d92d20;
-    margin-bottom: 4px;
-  }
-
-  .fuga-texto {
-    font-size: 1.05rem;
+  .audit-alerta-texto {
+    font-size: 0.92rem;
     color: #b42318;
     line-height: 1.4;
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0;
   }
 
-  .fuga-ico {
+  .audit-alerta-ico {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1018,255 +1214,210 @@ const tramosGasto = [
     border-radius: 50%;
     background: #fee4e2;
     color: #d92d20;
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 800;
     flex-shrink: 0;
   }
 
-  .fuga-sub {
-    font-size: 0.82rem;
-    color: var(--tinta-2, #3a4b68);
-    margin-top: 4px;
+  /* Reactiva */
+  .cifra-destacada-reactiva {
+    font-size: 1rem;
+    color: #d92d20;
+    font-weight: 800;
   }
 
-  /* Panel Reactiva y Precio */
-  .reactiva-bloque {
-    padding: 14px 16px;
-    background: #f8fbff;
-    border-radius: var(--radio-sm, 8px);
-    border: 1px solid #e1edf8;
+  .audit-reactiva-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
-  .reactiva-cabecera {
+  .reactiva-caja-item {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
+    padding: 12px 14px;
+    background: #f8fbff;
+    border: 1px solid #e1ecf8;
+    border-radius: 10px;
   }
 
-  .reactiva-tit {
-    font-size: 0.88rem;
+  .r-sigla {
+    font-weight: 800;
+    color: var(--azul-900, #004aad);
+  }
+
+  .r-precio {
+    font-weight: 800;
+    color: var(--tinta, #0f2346);
+    font-size: 1.05rem;
+  }
+
+  .audit-concl-texto-simple {
+    font-size: 0.86rem;
     color: var(--tinta-2, #3a4b68);
+    margin: 0;
   }
 
-  .reactiva-total {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #b42318;
-  }
-
-  .reactiva-desglose {
-    display: flex;
-    gap: 8px;
-    font-size: 0.8rem;
-    font-weight: 600;
+  /* Precio */
+  .cifra-destacada-tarifa {
+    font-size: 0.98rem;
     color: var(--tinta, #0f2346);
-    margin-top: 4px;
-  }
-
-  .r-nota {
-    color: var(--tinta-3, #63738e);
-    font-weight: 400;
-  }
-
-  .reactiva-explicacion {
-    font-size: 0.8rem;
-    color: var(--tinta-3, #63738e);
-    margin-top: 4px;
-  }
-
-  .precio-plano-bloque {
-    padding: 14px 16px;
-    background: #fffbfa;
-    border: 1px solid #fedf89;
-    border-radius: var(--radio-sm, 8px);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .precio-head {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .precio-lbl {
-    font-size: 0.84rem;
-    color: var(--tinta-3, #63738e);
-  }
-
-  .precio-cifra {
-    font-size: 1.25rem;
     font-weight: 800;
-    color: var(--tinta, #0f2346);
   }
 
-  .precio-tag {
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: var(--radio-pill, 999px);
-    background: #fee4e2;
-    color: #b42318;
-  }
-
-  .reloj-comparativa {
+  .audit-precio-comparativa {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 8px 12px;
-    background: #ffffff;
-    border-radius: var(--radio-sm, 8px);
+    justify-content: center;
+    gap: 20px;
+    padding: 12px;
+    background: #f8fbff;
+    border-radius: 12px;
   }
 
-  .reloj-item {
+  .hora-bloque {
     display: flex;
     flex-direction: column;
-    font-size: 0.84rem;
+    align-items: center;
+    gap: 2px;
   }
 
-  .hora-ico {
-    font-size: 0.75rem;
+  .hora-badge {
+    font-size: 0.78rem;
     font-weight: 700;
     color: var(--tinta-3, #63738e);
   }
 
-  .hora-precio {
+  .hora-coste {
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--tinta, #0f2346);
   }
 
   .igual-signo {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: #d92d20;
   }
 
-  .precio-conclusion {
-    font-size: 0.86rem;
-    color: var(--tinta, #0f2346);
-    line-height: 1.4;
+  /* Bloque Decisión (Ocupa ambas columnas) */
+  .audit-card-decision {
+    grid-column: 1 / -1;
+    background: #f6fef9;
+    border-color: #a6f4c5;
   }
 
-  /* Panel Solución */
-  .badge-verde-solucion {
-    font-size: 0.75rem;
+  .audit-decision-parrafo {
+    font-size: 1.05rem;
     font-weight: 700;
-    padding: 3px 10px;
-    border-radius: var(--radio-pill, 999px);
-    background: var(--verde-fondo, #ecfdf3);
-    color: var(--verde-ok, #067647);
+    color: #054f31;
+    line-height: 1.5;
+    margin: 0;
   }
 
-  .solucion-tarjeta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: var(--azul-suave, #edf4fe);
-    padding: 16px;
-    border-radius: var(--radio-md, 14px);
-    border: 1px solid #d4e2f5;
-  }
-
-  .solucion-check-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 0.88rem;
-  }
-
-  .solucion-check-item strong {
-    color: var(--azul-900, #004aad);
-    display: block;
-  }
-
-  .solucion-check-item p {
-    font-size: 0.82rem;
-    color: var(--tinta-2, #3a4b68);
-    margin-top: 2px;
-  }
-
-  .check-circulo {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--verde-fondo, #ecfdf3);
-    color: var(--verde-ok, #067647);
+  .decision-cta-box {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.75rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .solucion-resultado-fila {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 12px 16px;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 22px;
     background: #ffffff;
-    border: 1.5px solid var(--verde-borde, #abefc6);
-    border-radius: var(--radio-sm, 8px);
+    border: 1.5px solid #a6f4c5;
+    border-radius: 14px;
+    flex-wrap: wrap;
   }
 
-  .ahorro-anual-cifra {
-    font-size: 1.5rem;
+  .decision-ahorro-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .decision-cifra {
+    font-size: 1.6rem;
     font-weight: 800;
-    color: var(--verde-ok, #067647);
+    color: #027a48;
     letter-spacing: -0.02em;
   }
 
-  .ahorro-anual-lbl {
-    font-size: 0.86rem;
-    font-weight: 600;
-    color: var(--tinta, #0f2346);
+  .decision-sub {
+    font-size: 0.84rem;
+    color: var(--tinta-2, #3a4b68);
   }
 
-  /* Pie de radiografía */
-  .radiografia-footer {
-    padding: 16px 24px;
-    background: #f8fbff;
-    border-top: 1px solid var(--linea-fina, #e6edf7);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .btn-ver-factura {
+  .btn-analizar-desde-modal {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.9rem;
+    padding: 13px 22px;
+    background: var(--azul-900, #004aad);
+    color: #ffffff;
+    border: 0;
+    border-radius: var(--radio-md, 14px);
+    font-family: inherit;
+    font-size: 0.95rem;
     font-weight: 700;
-    color: var(--azul-900, #004aad);
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
 
-  .btn-ver-factura:hover {
-    text-decoration: underline;
+  .btn-analizar-desde-modal:hover {
+    background: #003a88;
+    transform: translateY(-2px);
   }
 
-  .peajes-nota {
-    font-size: 0.78rem;
+  /* Pie del modal */
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: #f8fbff;
+    border-top: 1px solid #e2edf8;
+  }
+
+  .modal-legal {
+    font-size: 0.82rem;
     color: var(--tinta-3, #63738e);
+  }
+
+  .btn-modal-cerrar-txt {
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--tinta-2, #3a4b68);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+
+  .btn-modal-cerrar-txt:hover {
+    background: #eef4fc;
+    color: var(--azul-900, #004aad);
   }
 
   .ancho-total {
     width: 100%;
   }
 
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
   @media (max-width: 1024px) {
     .hero-grid {
       grid-template-columns: 1fr;
       gap: 36px;
     }
 
-    .auditoria-tabs {
-      grid-template-columns: repeat(2, 1fr);
+    .modal-body {
+      grid-template-columns: 1fr;
+    }
+
+    .audit-card-decision {
+      grid-column: 1;
     }
   }
 
@@ -1279,20 +1430,37 @@ const tramosGasto = [
       grid-template-columns: 1fr;
     }
 
-    .radiografia-header {
-      padding: 16px;
+    .modal-header {
+      padding: 20px 20px 16px;
     }
 
-    .auditoria-paneles {
-      padding: 16px;
+    .modal-body {
+      padding: 20px;
     }
 
-    .periodo-fila {
+    .modal-footer {
+      padding: 14px 20px;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .decision-cta-box {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .btn-analizar-desde-modal {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .audit-fila {
       grid-template-columns: 1fr;
       gap: 4px;
     }
 
-    .p-kwh {
+    .audit-cifra {
       text-align: left;
     }
   }
