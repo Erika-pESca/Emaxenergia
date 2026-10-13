@@ -13,17 +13,17 @@ import { site, primaryCta } from "../data/site";
 const current = Astro.url.pathname;
 
 const sectoresItems = [
-  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Turnos partidos en horas punta caras", icono: "🍽️" },
-  { href: "/sectores/hoteles", label: "Hoteles y alojamientos", desc: "Estacionalidad y potencia ociosa en invierno", icono: "🏨" },
-  { href: "/sectores/supermercados", label: "Supermercados y tiendas", desc: "Consumo continuo de cámaras frigoríficas", icono: "🛒" },
-  { href: "/sectores/logistica-frio", label: "Logística y frío industrial", desc: "Ajuste de peajes en ciclos 24/7", icono: "❄️" },
-  { href: "/sectores/industria", label: "Industria y fabricación", desc: "Arranque de motores y energía reactiva", icono: "⚡" },
+  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Turnos partidos en horas punta caras", id: "restaurantes" },
+  { href: "/sectores/hoteles", label: "Hoteles y alojamientos", desc: "Estacionalidad y potencia ociosa en invierno", id: "hoteles" },
+  { href: "/sectores/supermercados", label: "Supermercados y tiendas", desc: "Consumo continuo de cámaras frigoríficas", id: "supermercados" },
+  { href: "/sectores/logistica-frio", label: "Logística y frío industrial", desc: "Ajuste de peajes en ciclos 24/7", id: "frio" },
+  { href: "/sectores/industria", label: "Industria y fabricación", desc: "Arranque de motores y energía reactiva", id: "industria" },
 ];
 
 const tarifasItems = [
-  { href: "/tarifas", label: "Luz para Empresas", desc: "Peajes 2.0TD, 3.0TD y 6.XTD optimizados", badge: "Más contratada" },
-  { href: "/gas-natural", label: "Gas para Empresas", desc: "Suministro RL para negocios e industria", badge: "Ahorro RL" },
-  { href: "/varios-suministros", label: "Múltiples Suministros", desc: "Unificación de facturación multisede", badge: "Multisede" },
+  { href: "/tarifas", label: "Luz para Empresas", desc: "Peajes 2.0TD, 3.0TD y 6.XTD optimizados", badge: "Más contratada", id: "luz" },
+  { href: "/gas-natural", label: "Gas para Empresas", desc: "Suministro RL para negocios e industria", badge: "Ahorro RL", id: "gas" },
+  { href: "/varios-suministros", label: "Múltiples Suministros", desc: "Unificación de facturación multisede", badge: "Multisede", id: "multisede" },
 ];
 ---
 
@@ -64,7 +64,53 @@ const tarifasItems = [
               {
                 sectoresItems.map((s) => (
                   <a href={s.href} class="dropdown-card">
-                    <span class="card-emoji" aria-hidden="true">{s.icono}</span>
+                    <span class="card-icono-wrap" aria-hidden="true">
+                      {s.id === "restaurantes" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M18 2v20"></path>
+                          <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Z"></path>
+                          <path d="M6 2v20"></path>
+                          <path d="M3 2v6a3 3 0 0 0 6 0V2"></path>
+                        </svg>
+                      )}
+                      {s.id === "hoteles" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                          <path d="M9 22v-4h6v4"></path>
+                          <path d="M8 6h.01"></path>
+                          <path d="M16 6h.01"></path>
+                          <path d="M8 10h.01"></path>
+                          <path d="M16 10h.01"></path>
+                          <path d="M8 14h.01"></path>
+                          <path d="M16 14h.01"></path>
+                        </svg>
+                      )}
+                      {s.id === "supermercados" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="8" cy="21" r="1"></circle>
+                          <circle cx="19" cy="21" r="1"></circle>
+                          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                        </svg>
+                      )}
+                      {s.id === "frio" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="2" y1="12" x2="22" y2="12"></line>
+                          <line x1="12" y1="2" x2="12" y2="22"></line>
+                          <path d="m20 16-4-4 4-4"></path>
+                          <path d="m4 8 4 4-4 4"></path>
+                          <path d="m16 4-4 4-4-4"></path>
+                          <path d="m8 20 4-4 4 4"></path>
+                        </svg>
+                      )}
+                      {s.id === "industria" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                          <path d="M17 18h1"></path>
+                          <path d="M12 18h1"></path>
+                          <path d="M7 18h1"></path>
+                        </svg>
+                      )}
+                    </span>
                     <div class="card-textos">
                       <strong class="card-nombre">{s.label}</strong>
                       <span class="card-desc">{s.desc}</span>
@@ -95,6 +141,24 @@ const tarifasItems = [
               {
                 tarifasItems.map((t) => (
                   <a href={t.href} class="dropdown-card">
+                    <span class="card-icono-wrap" aria-hidden="true">
+                      {t.id === "luz" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                      )}
+                      {t.id === "gas" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                        </svg>
+                      )}
+                      {t.id === "multisede" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                      )}
+                    </span>
                     <div class="card-textos">
                       <div class="card-head-fila">
                         <strong class="card-nombre">{t.label}</strong>
@@ -618,9 +682,26 @@ const tarifasItems = [
     transform: translateX(4px);
   }
 
-  .card-emoji {
-    font-size: 1.25rem;
+  .card-icono-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #edf4fe;
+    color: #004aad;
+    border: 1px solid #d4e4fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dropdown-card:hover .card-icono-wrap {
+    background: #004aad;
+    color: #ffffff;
+    border-color: #004aad;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.22);
   }
 
   .card-textos {
