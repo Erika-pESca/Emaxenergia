@@ -125,103 +125,66 @@
       </p>
     </div>
 
-    <!-- COLUMNA DERECHA: LecturaHero pura, limpia y tipográfica (Obrador de Panadería) -->
-    <div class="hero-visual">
-      <figure class="lh" id="lectura" aria-labelledby="lh-t">
-        <p class="lh__t" id="lh-t">
-          Así leemos una factura <span class="lh__ej">Ejemplo · obrador de panadería</span>
-        </p>
-
-        <div class="lh__bloques" role="region" aria-labelledby="lh-t" tabindex="0">
-          <!-- 1. Cuándo consume -->
-          <div class="lh__bloque" style="--i:0">
-            <p class="lh__nombre">Cuándo consume</p>
-            <ul role="list" class="lh__barras">
-              <li>
-                <span class="lh__p">P1</span>
-                <span class="lh__pista"><span class="lh__barra" style="--w: 44.8%;"></span></span>
-                <span class="lh__valor">2.600 kWh</span>
-              </li>
-              <li>
-                <span class="lh__p">P2</span>
-                <span class="lh__pista"><span class="lh__barra" style="--w: 29%;"></span></span>
-                <span class="lh__valor">1.680 kWh</span>
-              </li>
-              <li class="destacado">
-                <span class="lh__p">P6</span>
-                <span class="lh__pista"><span class="lh__barra" style="--w: 100%;"></span></span>
-                <span class="lh__valor">5.800 kWh</span>
-              </li>
-            </ul>
-            <p class="lh__lectura">Más de la mitad, de madrugada y en fin de semana: el horno.</p>
-            <p class="lh__nota">En febrero, el peaje 3.0TD solo tiene P1, P2 y P6.</p>
-          </div>
-
-          <!-- 2. Potencia -->
-          <div class="lh__bloque lh__bloque--potencia" style="--i:1">
-            <p class="lh__nombre">Potencia</p>
-            <ul role="list" class="lh__barras lh__barras--ancho">
-              <li>
-                <span class="lh__p">Contratada</span>
-                <span class="lh__pista"><span class="lh__barra" style="--w: 100%;"></span></span>
-                <span class="lh__valor">45 kW</span>
-              </li>
-              <li class="destacado">
-                <span class="lh__p">Maxímetro P1 y P2</span>
-                <span class="lh__pista lh__pista--hueco"><span class="lh__barra" style="--w: 48.9%;"></span></span>
-                <span class="lh__valor">22 kW</span>
-              </li>
-              <li>
-                <span class="lh__p">Maxímetro P6</span>
-                <span class="lh__pista lh__pista--hueco"><span class="lh__barra" style="--w: 88.9%;"></span></span>
-                <span class="lh__valor">40 kW</span>
-              </li>
-            </ul>
-            <p class="lh__lectura lh__lectura--clave">Paga de día 23 kW que no usa.</p>
-          </div>
-
-          <!-- 3. Reactiva -->
-          <div class="lh__bloque" style="--i:2">
-            <p class="lh__nombre">Energía reactiva <span class="lh__total">21,34 € en febrero</span></p>
-            <ul role="list" class="lh__barras">
-              <li>
-                <span class="lh__p">P1</span>
-                <span class="lh__pista"><span class="lh__barra" style="--w: 100%;"></span></span>
-                <span class="lh__valor">12,96 €</span>
-              </li>
-              <li>
-                <span class="lh__p">P2</span>
-                <span class="lh__pista"><span class="lh__barra" style="--w: 64.7%;"></span></span>
-                <span class="lh__valor">8,38 €</span>
-              </li>
-            </ul>
-            <p class="lh__lectura">Es la de las horas de tienda. En P6 no se factura.</p>
-          </div>
-
-          <!-- 4. Precio -->
-          <div class="lh__bloque" style="--i:3">
-            <p class="lh__nombre">Precio <span class="lh__total">0,1450 €/kWh a cualquier hora</span></p>
-            <div class="lh__precio" aria-hidden="true">
-              <span class="lh__linea24"></span>
-              <span class="lh__marca" style="--x: 20.8%;"><i>5:00</i></span>
-              <span class="lh__marca" style="--x: 50%;"><i>12:00</i></span>
-            </div>
-            <p class="lh__lectura">Paga igual el kWh de las 5:00 que el de las 12:00.</p>
-          </div>
-
-          <!-- 5. Qué decidimos -->
-          <div class="lh__bloque lh__bloque--decision" style="--i:4">
-            <p class="lh__nombre">Qué decidimos</p>
-            <p class="lh__lectura lh__lectura--decision">Potencia periodo a periodo y precio en seis periodos. El precio fijo se mantiene.</p>
-            <p class="lh__ficha">
-              <a href="/diagnostico#factura-obrador">Ver su factura leída, línea a línea →</a>
-            </p>
-          </div>
+    <!-- COLUMNA DERECHA: Resumen de la factura de ejemplo con enlace al análisis completo -->
+    <aside class="hero-visual">
+      <div class="sheet-mini" aria-label="Factura de ejemplo, resumida">
+        <div class="sheet-mini-cab">
+          <span class="sheet-mini-tit">Así leemos una factura</span>
+          <span class="sheet-mini-ej">Ejemplo · Obrador de panadería</span>
         </div>
 
-        <figcaption class="lh__pie">Peajes y cargos oficiales de 2026.</figcaption>
-      </figure>
-    </div>
+        <!-- Zona Consumo -->
+        <section class="mini-zona">
+          <h4 class="mini-ztit">Cuándo consume</h4>
+          <div class="mini-fila">
+            <span class="mini-lbl">P1</span>
+            <span class="mini-barra"><i style="--w: 44.8%;"></i></span>
+            <span class="mini-val">2.600 kWh</span>
+          </div>
+          <div class="mini-fila">
+            <span class="mini-lbl">P2</span>
+            <span class="mini-barra"><i style="--w: 29%;"></i></span>
+            <span class="mini-val">1.680 kWh</span>
+          </div>
+          <div class="mini-fila mini-destacada">
+            <span class="mini-lbl"><b>P6</b></span>
+            <span class="mini-barra mini-cian"><i style="--w: 100%;"></i></span>
+            <span class="mini-val">5.800 kWh</span>
+          </div>
+        </section>
+
+        <!-- Zona Potencia -->
+        <section class="mini-zona mini-zona-on">
+          <div class="mini-badge-note">23 kW de más</div>
+          <h4 class="mini-ztit">Potencia</h4>
+          <div class="mini-fila">
+            <span class="mini-lbl">Contratada</span>
+            <span class="mini-barra"><i style="--w: 100%;"></i></span>
+            <span class="mini-val">45 kW</span>
+          </div>
+          <div class="mini-fila mini-destacada">
+            <span class="mini-lbl"><b>Maxímetro P1 y P2</b></span>
+            <span class="mini-barra mini-hueco mini-cian"><i style="--w: 48.9%;"></i></span>
+            <span class="mini-val">22 kW</span>
+          </div>
+          <div class="mini-fila">
+            <span class="mini-lbl">Maxímetro P6</span>
+            <span class="mini-barra mini-hueco"><i style="--w: 88.9%;"></i></span>
+            <span class="mini-val">40 kW</span>
+          </div>
+        </section>
+
+        <!-- Hallazgo clave y enlace al análisis completo -->
+        <p class="mini-finding">Paga de día 23 kW que no usa.</p>
+        <a class="mini-more-link" href="#como-leemos">
+          <span>Ver cómo leemos el resto</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+        </a>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -521,10 +484,13 @@
     document.body.style.overflow = "";
   }
 
-  btnsAbrirFunnel.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      abrirModalFunnel(btn as HTMLButtonElement);
-    });
+  // Apertura del modal por delegación global en document
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement | null;
+    const btn = target?.closest<HTMLButtonElement>("[data-abrir-funnel]");
+    if (btn) {
+      abrirModalFunnel(btn);
+    }
   });
 
   btnCerrarFunnel?.addEventListener("click", cerrarModalFunnel);
@@ -743,204 +709,176 @@
   }
 
   /* ==========================================================================
-     COLUMNA DERECHA: LECTURA HERO (Obrador de Panadería)
-     Estilo tipográfico editorial fiel a la captura 1
+     COLUMNA DERECHA: RESUMEN EDITORIAL DE FACTURA (Sheet Mini)
      ========================================================================== */
   .hero-visual {
     min-width: 0;
   }
 
-  .lh {
-    margin: 0;
+  .sheet-mini {
     background: #ffffff;
-    border: 1px solid #d4e0f0;
+    border: 1px solid #d4e2f2;
     border-radius: 18px;
-    box-shadow: 0 4px 20px rgba(15, 35, 70, 0.05);
-    padding: 22px 24px 18px;
+    box-shadow: 0 8px 30px rgba(15, 35, 70, 0.06);
+    padding: 24px;
+    display: grid;
+    gap: 16px;
   }
 
-  .lh__t {
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: var(--tinta-2, #3a4b68);
-    padding-bottom: 12px;
-    border-bottom: 1px solid #e6edf7;
-    margin: 0 0 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .lh__ej {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 999px;
-    background: #eef5ff;
-    color: var(--azul-900, #004aad);
-    font-size: 0.78rem;
-    font-weight: 600;
-  }
-
-  .lh__bloque {
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f4f9;
-  }
-
-  .lh__bloque--decision {
-    border-bottom: 0;
-  }
-
-  .lh__nombre {
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    margin: 0 0 8px;
+  .sheet-mini-cab {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-  }
-
-  .lh__total {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--tinta-2, #3a4b68);
-  }
-
-  .lh__barras {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 6px;
-  }
-
-  .lh__barras li {
-    display: grid;
-    grid-template-columns: 2.2rem 1fr 6.5rem;
     align-items: center;
-    gap: 10px;
-    font-size: 0.86rem;
-    font-variant-numeric: tabular-nums;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #d6e2f0;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--tinta-3, #63738e);
   }
 
-  .lh__barras--ancho li {
-    grid-template-columns: 7.2rem 1fr 3.5rem;
+  .sheet-mini-ej {
+    background: #eef5ff;
+    color: var(--azul-900, #004aad);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: normal;
   }
 
-  .lh__p {
+  .mini-zona {
+    position: relative;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1.5px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  .mini-zona-on {
+    border-color: var(--azul-900, #004aad);
+    box-shadow: 0 6px 20px -3px rgba(0, 74, 173, 0.15);
+  }
+
+  .mini-badge-note {
+    position: absolute;
+    top: -10px;
+    right: 14px;
+    background: var(--azul-900, #004aad);
+    color: #ffffff;
+    font-family: var(--font-titulos, "Sora", sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 2px 10px;
+    border-radius: 999px;
+    box-shadow: 0 3px 8px rgba(0, 74, 173, 0.25);
+  }
+
+  .mini-ztit {
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+    margin: 0 0 8px;
+  }
+
+  .mini-fila {
+    display: grid;
+    grid-template-columns: 7.2rem 1fr 3.8rem;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    padding: 3px 0;
+  }
+
+  .mini-zona:first-of-type .mini-fila {
+    grid-template-columns: 2.2rem 1fr 6rem;
+  }
+
+  .mini-lbl {
     color: var(--tinta-2, #3a4b68);
     font-size: 0.82rem;
+    white-space: nowrap;
   }
 
-  .destacado .lh__p {
-    color: var(--tinta, #0f2346);
+  .mini-destacada .mini-lbl {
+    color: var(--azul-900, #004aad);
     font-weight: 700;
   }
 
-  .lh__pista {
-    height: 12px;
-    background: #f1f5f9;
-    border-radius: 3px;
+  .mini-barra {
+    height: 10px;
+    background: #e8f0fa;
+    border-radius: 999px;
     overflow: hidden;
+    position: relative;
   }
 
-  .lh__pista--hueco {
-    background: repeating-linear-gradient(135deg, transparent 0 3px, #cbd5e1 3px 4px);
-  }
-
-  .lh__barra {
-    display: block;
-    height: 100%;
+  .mini-barra i {
+    position: absolute;
+    inset: 0 auto 0 0;
     width: var(--w);
     background: var(--azul-900, #004aad);
-    border-radius: 3px;
+    border-radius: 999px;
   }
 
-  .destacado .lh__barra {
-    background: #004aad;
+  .mini-cian i {
+    background: var(--cyan-400, #38b6ff);
   }
 
-  .lh__valor {
+  .mini-hueco {
+    background: repeating-linear-gradient(135deg, #d8e5f5 0 3px, transparent 3px 6px);
+  }
+
+  .mini-val {
     text-align: right;
     font-weight: 600;
     color: var(--tinta, #0f2346);
+    font-variant-numeric: tabular-nums;
   }
 
-  .lh__lectura {
-    margin: 8px 0 0;
-    padding-left: 10px;
-    border-left: 2px solid var(--azul-900, #004aad);
-    font-size: 0.86rem;
-    font-weight: 600;
-    color: var(--tinta, #0f2346);
-    line-height: 1.4;
-  }
-
-  .lh__lectura--clave {
-    background: #eef5ff;
-    padding: 4px 10px;
-    border-radius: 0 6px 6px 0;
-    border-left-color: var(--azul-900, #004aad);
-  }
-
-  .lh__nota {
-    font-size: 0.78rem;
-    color: var(--tinta-3, #63738e);
-    margin: 4px 0 0;
-  }
-
-  .lh__precio {
-    position: relative;
-    height: 28px;
-    margin: 4px 0 2px;
-  }
-
-  .lh__linea24 {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 8px;
-    height: 4px;
-    background: var(--azul-900, #004aad);
-    border-radius: 2px;
-  }
-
-  .lh__marca {
-    position: absolute;
-    left: var(--x);
-    top: 2px;
-    width: 2px;
-    height: 16px;
-    background: #004aad;
-  }
-
-  .lh__marca i {
-    position: absolute;
-    top: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.78rem;
-    font-style: normal;
-    color: var(--tinta-2, #3a4b68);
-    white-space: nowrap;
-    font-weight: 600;
-  }
-
-  .lh__ficha {
-    margin: 10px 0 0;
-    font-size: 0.88rem;
-  }
-
-  .lh__ficha a {
+  .mini-destacada .mini-val {
     color: var(--azul-900, #004aad);
     font-weight: 700;
   }
 
-  .lh__pie {
-    font-size: 0.78rem;
-    color: var(--tinta-3, #63738e);
-    padding-top: 10px;
-    margin: 0;
+  .mini-finding {
+    margin: 2px 0 0;
+    padding: 8px 12px;
+    border-radius: 0 8px 8px 0;
+    border-left: 3px solid var(--azul-900, #004aad);
+    background: #edf5fe;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--azul-900, #004aad);
+  }
+
+  .mini-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--azul-900, #004aad);
+    text-decoration: none;
+    transition: color 0.15s, transform 0.15s;
+    width: fit-content;
+  }
+
+  .mini-more-link:hover {
+    color: var(--azul-900-hover, #003c8c);
+    transform: translateY(2px);
+  }
+
+  .mini-more-link svg {
+    transition: transform 0.15s;
+  }
+
+  .mini-more-link:hover svg {
+    transform: translateY(2px);
   }
 
   /* ==========================================================================
