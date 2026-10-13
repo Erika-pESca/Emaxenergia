@@ -1,674 +1,357 @@
 ---
-// Componente de variables energéticas: Precio, Potencia, Horarios y Consumo.
-// Demuestra de manera visual y tecnológica que cada empresa requiere análisis a medida antes de cambiar de tarifa.
-// Efectos visuales activos:
-// 1. Rayo perimetral animado (Border Beam) que recorre continuamente el borde redondeado de cada tarjeta.
-// 2. Aura ambiental brillante y difusa con respiración sutil alrededor de las tarjetas.
-// 3. Animación dinámica continua en las imágenes (zoom suave y deriva en cámara lenta).
-// 4. Haz diagonal de destello reflectante de cristal.
-// 5. Orbes y bolitas tecnológicas flotantes con halos cian y azul corporativo de fondo.
-// Imagen temporal: src/imagenes/imagen de prueba.png.
-import imagenPrueba from "../../imagenes/imagen de prueba.png";
+// Sección 2: "Cambiar de compañía es fácil. Saber si te conviene, no tanto."
+// Comparativa comercial transparente entre los atajos del mercado y el método real de EMAX.
+// Diseño limpio, humano y sin sobrecarga de animación.
+const atajos = [
+  "Elegir de un catálogo estándar sin ver tu curva.",
+  "Aplicar la regla genérica de tu tipo de negocio.",
+  "Renovar por inercia porque llega la fecha de vencimiento.",
+  "Aceptar una oferta comercial antes de que nadie haya leído tu factura.",
+];
 
-const tarjetas = [
+const pilaresEmax = [
   {
-    num: "01",
-    titulo: "Precio",
-    alt: "Análisis de precio de energía",
-    delay: "0s",
+    titulo: "Cuánto y cuándo consume tu empresa",
+    desc: "Tu consumo por periodos y por meses, traducido a las horas reales de tu negocio: cuánto va a horas caras y cuánto a baratas.",
+    icono: "📊",
   },
   {
-    num: "02",
-    titulo: "Potencia",
-    alt: "Optimización de potencia contratada",
-    delay: "1.2s",
+    titulo: "Tu potencia contratada vs. real",
+    desc: "La potencia que tienes en cada periodo frente a la que usas de verdad. Si te sobra, si te falta y si estás pagando penalizaciones por excesos.",
+    icono: "⚡",
   },
   {
-    num: "03",
-    titulo: "Horarios",
-    alt: "Curvas y horarios de consumo",
-    delay: "2.4s",
+    titulo: "Tu energía reactiva",
+    desc: "Si la pagas en factura, en qué periodos ocurre, cuánto te cuesta al año y si compensa instalar una batería de condensadores.",
+    icono: "🔋",
   },
   {
-    num: "04",
-    titulo: "Consumo",
-    alt: "Medición y datos de consumo",
-    delay: "3.6s",
+    titulo: "Tu propuesta de tarifa a medida",
+    desc: "La tarifa que resulta de cruzar los tres datos anteriores: estructura de precios, optimización de potencias y condiciones transparentes.",
+    icono: "🎯",
   },
 ];
 ---
 
-<section class="variables">
-  <!-- Luces ambientales de fondo -->
-  <div class="luz luz-izq" aria-hidden="true"></div>
-  <div class="luz luz-der" aria-hidden="true"></div>
-  <div class="luz luz-centro" aria-hidden="true"></div>
-
-  <!-- Orbes y bolitas tecnológicas flotando por la sección -->
-  <div class="orbe orbe-1" aria-hidden="true"></div>
-  <div class="orbe orbe-2" aria-hidden="true"></div>
-  <div class="orbe orbe-3" aria-hidden="true"></div>
-  <div class="orbe orbe-4" aria-hidden="true"></div>
-  <div class="orbe orbe-5" aria-hidden="true"></div>
-  <div class="orbe orbe-6" aria-hidden="true"></div>
-
-  <div class="wrap variables-inner">
-    <div class="encabezado">
-      <h2>CAMBIAR DE COMPAÑÍA ES FÁCIL.</h2>
-      <p class="subtitulo">
-        <span>Saber si realmente te conviene, no tanto.</span>
+<section class="comparativa-seccion" id="metodo-comparativa">
+  <div class="contenedor">
+    <div class="seccion-cabecera">
+      <span class="badge badge-azul">El problema del mercado</span>
+      <h2 class="seccion-titulo">Cambiar de compañía es fácil. Saber si te conviene, no tanto.</h2>
+      <p class="seccion-subtitulo">
+        El precio del kWh es lo primero que se suele mirar y <strong>lo último que conviene decidir.</strong>
       </p>
     </div>
 
-    <!-- Cuadrícula con las 4 tarjetas tecnológicas -->
-    <div class="tarjetas">
-      {
-        tarjetas.map((item, index) => (
-          <article
-            class="tarjeta"
-            style={`--delay: ${item.delay}; --idx: ${index};`}
-          >
-            <!-- Aura brillante con halo expansivo alrededor de la tarjeta -->
-            <div class="tarjeta-aura" aria-hidden="true"></div>
+    <div class="comparativa-grid">
+      <!-- Columna 1: Los atajos habituales (Mercado tradicional) -->
+      <article class="tarjeta-comparativa tarjeta-atajos">
+        <header class="tarjeta-cabecera">
+          <span class="badge-alerta">Lo que suele pasar</span>
+          <h3 class="tarjeta-tit">Los atajos habituales</h3>
+          <p class="tarjeta-desc">Cómo contrata la mayoría de empresas antes de conocernos:</p>
+        </header>
 
-            <!-- Haz de luz perimetral (Border Beam) que recorre el contorno de la tarjeta -->
-            <div class="tarjeta-borde-luz" aria-hidden="true">
-              <div class="borde-rayo"></div>
-            </div>
+        <ul class="lista-atajos" role="list">
+          {
+            atajos.map((item) => (
+              <li class="item-atajo">
+                <span class="icono-cruz" aria-hidden="true">✕</span>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
 
-            <!-- Cuerpo principal de la tarjeta -->
-            <div class="tarjeta-cuerpo">
-              <!-- Contenedor de imagen animada con deriva y respiración -->
-              <div class="tarjeta-img-wrap">
-                <img
-                  src={imagenPrueba.src}
-                  alt={item.alt}
-                  width={imagenPrueba.width}
-                  height={imagenPrueba.height}
-                  loading="lazy"
-                />
-                <!-- Rejilla tecnológica sutil de datos energéticos -->
-                <div class="tarjeta-malla" aria-hidden="true"></div>
+        <footer class="atajos-footer">
+          <p class="atajos-conclusion">
+            <span class="alerta-icono" aria-hidden="true">!</span>
+            <strong>Si empiezas por el precio, comparas sin saber qué compras.</strong>
+          </p>
+        </footer>
+      </article>
+
+      <!-- Columna 2: Lo que miramos nosotros (EMAX) -->
+      <article class="tarjeta-comparativa tarjeta-emax tarjeta-blanca">
+        <header class="tarjeta-cabecera">
+          <span class="badge badge-verde">El diagnóstico EMAX</span>
+          <h3 class="tarjeta-tit">Lo que miramos nosotros</h3>
+          <p class="tarjeta-desc">Antes de proponerte una tarifa, auditamos estos 4 factores:</p>
+        </header>
+
+        <div class="lista-pilares">
+          {
+            pilaresEmax.map((pilar, index) => (
+              <div class="pilar-item">
+                <span class="pilar-num">0{index + 1}</span>
+                <div class="pilar-info">
+                  <h4 class="pilar-tit">{pilar.titulo}</h4>
+                  <p class="pilar-desc">{pilar.desc}</p>
+                </div>
               </div>
+            ))
+          }
+        </div>
 
-              <!-- Filtro de contraste tecnológico azul oscuro -->
-              <div class="tarjeta-filtro" aria-hidden="true"></div>
+        <footer class="emax-footer">
+          <div class="metodo-pasos-resumen">
+            <span class="paso-tag">Diagnóstico</span>
+            <span class="flecha-paso">→</span>
+            <span class="paso-tag">Estrategia</span>
+            <span class="flecha-paso">→</span>
+            <span class="paso-tag destacado">Tarifa a medida</span>
+          </div>
 
-              <!-- Haz de destello de cristal en diagonal -->
-              <div class="tarjeta-destello" aria-hidden="true"></div>
-
-              <!-- Cabecera de la tarjeta: solo el número identificador -->
-              <div class="tarjeta-top">
-                <span class="tarjeta-num">{item.num}</span>
-              </div>
-
-              <!-- Título principal -->
-              <div class="tarjeta-info">
-                <h3 class="tarjeta-titulo">{item.titulo}</h3>
-              </div>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-
-    <!-- Cierre con texto explicativo y llamada a Maxi -->
-    <div class="cierre">
-      <p class="texto-cierre">
-        Tu empresa tiene demasiadas variables para resolverlo escogiendo entre tres tarifas.
-      </p>
-      <a class="btn-maxi" href="/maxi">
-        <span class="btn-luz" aria-hidden="true"></span>
-        <span>Que Maxi haga los números</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+          <div class="emax-acciones">
+            <a href="/metodo" class="boton boton-secundario">Ver el método completo</a>
+            <a href="/#estudio" class="boton boton-primario">Analizar mi factura</a>
+          </div>
+        </footer>
+      </article>
     </div>
   </div>
 </section>
 
 <style>
-  .variables {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(180deg, #f8fbff 0%, #ffffff 40%, #f3f7fd 100%);
-    padding: 96px 0 112px;
+  .comparativa-seccion {
+    padding: 72px 0 80px;
+    background: #ffffff;
   }
 
-  /* Luces ambientales en los laterales y centro */
-  .luz {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    filter: blur(80px);
-    z-index: 0;
+  .seccion-cabecera {
+    text-align: center;
+    max-width: 740px;
+    margin: 0 auto 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
   }
 
-  .luz-izq {
-    width: 480px;
-    height: 480px;
-    left: -140px;
-    top: 8%;
-    background: radial-gradient(circle, rgba(56, 182, 255, 0.32), rgba(0, 74, 173, 0.15) 50%, transparent 70%);
-    animation: flotar-luz 16s ease-in-out infinite alternate;
+  .seccion-titulo {
+    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.7rem);
+    color: var(--tinta, #0f2346);
   }
 
-  .luz-der {
-    width: 520px;
-    height: 520px;
-    right: -160px;
-    bottom: 5%;
-    background: radial-gradient(circle, rgba(0, 74, 173, 0.28), rgba(56, 182, 255, 0.24) 45%, transparent 70%);
-    animation: flotar-luz 18s ease-in-out infinite alternate-reverse;
+  .seccion-subtitulo {
+    font-size: 1.125rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.55;
   }
 
-  .luz-centro {
-    width: 540px;
-    height: 260px;
-    left: calc(50% - 270px);
-    top: 45%;
-    background: radial-gradient(ellipse, rgba(82, 113, 255, 0.14), transparent 70%);
-    filter: blur(90px);
-  }
-
-  /* Bolitas flotantes con brillo y pulsación */
-  .orbe {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    box-shadow: 0 0 16px var(--cyan);
-  }
-
-  .orbe-1 {
-    width: 14px;
-    height: 14px;
-    left: 2%;
-    top: 24%;
-    background: #38b6ff;
-    animation: flotar-orbe-1 12s ease-in-out infinite;
-  }
-
-  .orbe-2 {
-    width: 10px;
-    height: 10px;
-    right: 3%;
-    top: 26%;
-    background: #5271ff;
-    box-shadow: 0 0 14px #5271ff;
-    animation: flotar-orbe-2 15s ease-in-out infinite;
-  }
-
-  .orbe-3 {
-    width: 16px;
-    height: 16px;
-    right: 7%;
-    bottom: 12%;
-    background: #38b6ff;
-    animation: flotar-orbe-1 18s ease-in-out infinite reverse;
-  }
-
-  .orbe-4 {
-    width: 9px;
-    height: 9px;
-    left: 4%;
-    bottom: 16%;
-    background: #5271ff;
-    animation: flotar-orbe-2 11s ease-in-out infinite reverse;
-  }
-
-  .orbe-5 {
-    width: 12px;
-    height: 12px;
-    left: 20%;
-    bottom: 4%;
-    background: #38b6ff;
-    box-shadow: 0 0 14px #38b6ff;
-    animation: flotar-orbe-1 14s ease-in-out infinite 2s;
-  }
-
-  .orbe-6 {
-    width: 10px;
-    height: 10px;
-    right: 22%;
-    bottom: 5%;
-    background: #5271ff;
-    box-shadow: 0 0 12px #5271ff;
-    animation: flotar-orbe-2 13s ease-in-out infinite 1s;
-  }
-
-  .variables-inner {
-    position: relative;
-    z-index: 1;
-  }
-
-  .encabezado {
-    margin-bottom: 46px;
-  }
-
-  .encabezado h2 {
-    font-family: var(--display);
-    font-size: clamp(2.1rem, 3.8vw, 3.3rem);
-    font-weight: 800;
-    color: var(--blue-dark);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .subtitulo {
-    margin: 14px 0 0;
-    font-family: var(--font);
-    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
-    font-weight: 500;
-    color: #1a2744;
-  }
-
-  .subtitulo span {
-    display: inline-block;
-    border-bottom: 2.5px solid var(--blue);
-    padding-bottom: 3px;
-  }
-
-  /* Cuadrícula de tarjetas */
-  .tarjetas {
+  .comparativa-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 50px;
+    grid-template-columns: 0.88fr 1.12fr;
+    gap: 32px;
+    align-items: stretch;
   }
 
-  /* Tarjeta contenedor */
-  .tarjeta {
-    position: relative;
-    border-radius: 26px;
-    padding: 2px; /* Espacio para el rayo perimetral */
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .tarjeta:hover {
-    transform: translateY(-8px) scale(1.018);
-  }
-
-  /* Aura brillante perimetral con halo difuso */
-  .tarjeta-aura {
-    position: absolute;
-    inset: -3px;
-    border-radius: 28px;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(56, 182, 255, 0.6) 0%,
-      rgba(82, 113, 255, 0.4) 40%,
-      rgba(0, 74, 173, 0.3) 70%,
-      transparent 85%
-    );
-    opacity: 0.55;
-    filter: blur(10px);
-    z-index: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease, filter 0.4s ease;
-    animation: aura-respirar 4s ease-in-out infinite alternate;
-    animation-delay: var(--delay);
-  }
-
-  .tarjeta:hover .tarjeta-aura {
-    opacity: 0.95;
-    filter: blur(16px);
-  }
-
-  /* Haz de luz perimetral corriendo alrededor del contorno (Border Beam) */
-  .tarjeta-borde-luz {
-    position: absolute;
-    inset: 0;
-    border-radius: 26px;
-    overflow: hidden;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .borde-rayo {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-      from 0deg,
-      transparent 0deg,
-      transparent 240deg,
-      rgba(82, 113, 255, 0.2) 280deg,
-      rgba(56, 182, 255, 0.7) 325deg,
-      rgba(255, 255, 255, 0.65) 352deg,
-      #38b6ff 360deg
-    );
-    animation: girar-rayo 5s linear infinite;
-    animation-delay: var(--delay);
-  }
-
-  /* Cuerpo interno de la tarjeta */
-  .tarjeta-cuerpo {
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-    border-radius: 24px;
-    aspect-ratio: 4 / 3.5;
-    min-height: 220px;
+  /* Tarjeta de atajos */
+  .tarjeta-comparativa {
+    border-radius: var(--radio-grande, 28px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px 22px 24px;
-    background: #09172c;
-    border: 1px solid rgba(120, 205, 255, 0.35);
-    box-shadow:
-      0 12px 32px rgba(7, 24, 51, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    transition: border-color 0.35s ease, box-shadow 0.35s ease;
   }
 
-  .tarjeta:hover .tarjeta-cuerpo {
-    border-color: rgba(56, 182, 255, 0.95);
-    box-shadow:
-      0 20px 48px rgba(0, 74, 173, 0.35),
-      0 0 28px rgba(56, 182, 255, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  .tarjeta-atajos {
+    background: #f7f9fc;
+    border: 1.5px solid var(--linea, #d6e0ee);
+    padding: 36px 30px;
   }
 
-  /* Contenedor de la imagen con animación continua de deriva y respiración */
-  .tarjeta-img-wrap {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
+  .badge-alerta {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: var(--radio-pill, 999px);
+    background: #fff1f0;
+    color: #cf1322;
+    border: 1px solid #ffa39e;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
   }
 
-  .tarjeta-img-wrap img {
-    position: absolute;
-    inset: -6%;
-    width: 112%;
-    height: 112%;
-    object-fit: cover;
-    animation: deriva-imagen 10s ease-in-out infinite alternate;
-    animation-delay: var(--delay);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  .tarjeta-tit {
+    font-size: 1.65rem;
+    color: var(--tinta, #0f2346);
+    margin-bottom: 6px;
   }
 
-  .tarjeta:hover .tarjeta-img-wrap img {
-    transform: scale(1.14);
-    filter: brightness(1.12) contrast(1.04);
+  .tarjeta-desc {
+    font-size: 0.95rem;
+    color: var(--tinta-3, #63738e);
+    margin-bottom: 24px;
   }
 
-  /* Trama tecnológica sutil de datos */
-  .tarjeta-malla {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(56, 182, 255, 0.22) 1px, transparent 1px);
-    background-size: 16px 16px;
-    opacity: 0.45;
-    z-index: 1;
-    pointer-events: none;
+  .lista-atajos {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 0;
+    margin: 0 0 32px;
+    list-style: none;
   }
 
-  /* Filtro de contraste tecnológico */
-  .tarjeta-filtro {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-      180deg,
-      rgba(7, 26, 56, 0.48) 0%,
-      rgba(7, 26, 56, 0.65) 50%,
-      rgba(4, 15, 36, 0.9) 100%
-    );
-    transition: background 0.35s ease;
+  .item-atajo {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.975rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.45;
   }
 
-  .tarjeta:hover .tarjeta-filtro {
-    background: linear-gradient(
-      180deg,
-      rgba(7, 26, 56, 0.28) 0%,
-      rgba(7, 26, 56, 0.48) 50%,
-      rgba(0, 45, 110, 0.84) 100%
-    );
-  }
-
-  /* Haz de luz diagonal de cristal que barre la tarjeta (más clarito y sutil) */
-  .tarjeta-destello {
-    position: absolute;
-    top: -50%;
-    left: -130%;
-    width: 75%;
-    height: 200%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.02) 20%,
-      rgba(255, 255, 255, 0.22) 50%,
-      rgba(56, 182, 255, 0.12) 65%,
-      transparent 100%
-    );
-    transform: rotate(26deg);
-    pointer-events: none;
-    z-index: 2;
-    animation: barrido-destello 5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-    animation-delay: var(--delay);
-  }
-
-  /* Cabecera interna de la tarjeta */
-  .tarjeta-top {
-    position: relative;
-    z-index: 3;
+  .icono-cruz {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fee4e2;
+    color: #d92d20;
     display: flex;
     align-items: center;
-  }
-
-  .tarjeta-num {
-    font-family: var(--display);
-    font-size: 1.1rem;
+    justify-content: center;
+    font-size: 0.78rem;
     font-weight: 800;
-    color: rgba(255, 255, 255, 0.85);
-    letter-spacing: 0.04em;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
-  /* Información inferior */
-  .tarjeta-info {
-    position: relative;
-    z-index: 3;
+  .atajos-footer {
+    padding: 16px;
+    background: #ffffff;
+    border-radius: var(--radio-md, 14px);
+    border: 1px dashed #d0dbe9;
+  }
+
+  .atajos-conclusion {
+    font-size: 0.92rem;
+    color: var(--tinta, #0f2346);
+    line-height: 1.45;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    gap: 10px;
   }
 
-  .tarjeta-titulo {
-    font-family: var(--display);
-    font-size: 1.7rem;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: -0.01em;
-    margin: 0;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
-    transition: color 0.25s ease, transform 0.25s ease;
-  }
-
-  .tarjeta:hover .tarjeta-titulo {
-    color: #f0f9ff;
-    transform: translateY(-2px);
-  }
-
-  /* Cierre inferior */
-  .cierre {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-  }
-
-  .texto-cierre {
-    font-family: var(--font);
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: #24334f;
-    margin: 0;
-    max-width: 68ch;
-    line-height: 1.5;
-  }
-
-  /* Botón con estilo píldora oscuro, destello y flecha */
-  .btn-maxi {
-    position: relative;
-    overflow: hidden;
+  .alerta-icono {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 13px 30px;
-    border-radius: 999px;
-    background: #071e3d;
-    color: #ffffff;
-    font-family: var(--font);
-    font-size: 0.96rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fee4e2;
+    color: #d92d20;
+    font-size: 0.8rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* Tarjeta EMAX */
+  .tarjeta-emax {
+    padding: 36px 32px;
+    border: 2px solid var(--azul-900, #004aad);
+    box-shadow: 0 16px 44px rgba(0, 74, 173, 0.1);
+  }
+
+  .lista-pilares {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+
+  .pilar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px 16px;
+    background: var(--fondo, #f4f7fb);
+    border-radius: var(--radio-md, 14px);
+    transition: background 0.15s ease;
+  }
+
+  .pilar-item:hover {
+    background: var(--azul-suave, #edf4fe);
+  }
+
+  .pilar-num {
+    font-family: var(--font-titulos);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--azul-900, #004aad);
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .pilar-tit {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+    margin-bottom: 4px;
+  }
+
+  .pilar-desc {
+    font-size: 0.88rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.45;
+  }
+
+  .emax-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--linea-fina, #e6edf7);
+  }
+
+  .metodo-pasos-resumen {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
     font-weight: 600;
-    border: 1px solid rgba(56, 182, 255, 0.5);
-    box-shadow:
-      0 4px 20px rgba(56, 182, 255, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .btn-maxi:hover {
-    background: #004aad;
-    transform: translateY(-2px);
-    box-shadow:
-      0 8px 30px rgba(56, 182, 255, 0.55),
-      0 0 16px rgba(56, 182, 255, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  .paso-tag {
+    padding: 4px 12px;
+    border-radius: var(--radio-pill, 999px);
+    background: var(--fondo, #f4f7fb);
+    color: var(--tinta-2, #3a4b68);
   }
 
-  .btn-maxi svg {
-    transition: transform 0.25s ease;
+  .paso-tag.destacado {
+    background: var(--azul-resalte, #ddf1ff);
+    color: var(--azul-900, #004aad);
   }
 
-  .btn-maxi:hover svg {
-    transform: translateX(3px);
+  .flecha-paso {
+    color: var(--tinta-3, #63738e);
   }
 
-  /* Keyframes de animación */
-
-  /* Girar rayo perimetral (Border Beam) */
-  @keyframes girar-rayo {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* Barrido diagonal de cristal suave */
-  @keyframes barrido-destello {
-    0%, 40% {
-      left: -130%;
-      opacity: 0;
-    }
-    45% {
-      opacity: 0.8;
-    }
-    75% {
-      left: 160%;
-      opacity: 0.7;
-    }
-    100% {
-      left: 160%;
-      opacity: 0;
-    }
-  }
-
-  /* Deriva y respiración continua de la imagen */
-  @keyframes deriva-imagen {
-    0% {
-      transform: scale(1.02) translate(0, 0);
-    }
-    50% {
-      transform: scale(1.08) translate(-1.5%, -1%);
-    }
-    100% {
-      transform: scale(1.04) translate(1.5%, 1%);
-    }
-  }
-
-  /* Respiración del aura exterior */
-  @keyframes aura-respirar {
-    0% {
-      opacity: 0.4;
-      filter: blur(8px);
-    }
-    100% {
-      opacity: 0.75;
-      filter: blur(14px);
-    }
-  }
-
-  @keyframes flotar-luz {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      transform: translate(24px, -20px) scale(1.08);
-    }
-  }
-
-  @keyframes flotar-orbe-1 {
-    0%, 100% {
-      transform: translateY(0) scale(1);
-      opacity: 0.8;
-    }
-    50% {
-      transform: translateY(-26px) scale(1.25);
-      opacity: 1;
-    }
-  }
-
-  @keyframes flotar-orbe-2 {
-    0%, 100% {
-      transform: translateY(0) scale(1);
-      opacity: 0.7;
-    }
-    50% {
-      transform: translateY(22px) scale(1.3);
-      opacity: 0.95;
-    }
+  .emax-acciones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   @media (max-width: 980px) {
-    .tarjetas {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .variables {
-      padding: 68px 0 80px;
-    }
-
-    .encabezado {
-      margin-bottom: 34px;
-    }
-
-    .tarjetas {
+    .comparativa-grid {
       grid-template-columns: 1fr;
-      gap: 18px;
-      margin-bottom: 36px;
+      gap: 28px;
     }
 
-    .tarjeta-cuerpo {
-      aspect-ratio: 16 / 10;
-      min-height: 190px;
+    .tarjeta-atajos,
+    .tarjeta-emax {
+      padding: 24px 20px;
     }
 
-    .btn-maxi {
+    .emax-acciones {
+      flex-direction: column;
+    }
+
+    .emax-acciones .boton {
       width: 100%;
     }
   }

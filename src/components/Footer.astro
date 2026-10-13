@@ -1,128 +1,205 @@
 ---
-// Pie. Columnas y enlaces legales salen de src/data/site.ts.
-// variant="light" muestra el logo en blanco sobre el azul.
+// Pie de página institucional de EMAX Energía
+// Columnas, datos de contacto y enlaces legales obtenidos de src/data/site.ts.
 import Logo from "./Logo.astro";
 import { footerNav, legalNav, site } from "../data/site";
 ---
 
-<footer class="footer">
-  <div class="wrap footer-main">
-    <div class="brand">
+<footer class="pie-pagina">
+  <div class="contenedor pie-principal">
+    <div class="pie-marca">
       <Logo variant="light" />
-      <p>{site.tagline}</p>
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-      <a href={site.phoneHref}>{site.phone}</a>
-      <span>España</span>
+      <p class="pie-tagline">{site.tagline}</p>
+      <div class="pie-contacto-directo">
+        <a href={site.phoneHref} class="contacto-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>{site.phone}</span>
+        </a>
+        <a href={`mailto:${site.email}`} class="contacto-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <span>{site.email}</span>
+        </a>
+        <span class="direccion-item">{site.direccion}</span>
+      </div>
     </div>
+
     {
-      footerNav.map((group) => (
-        <div class="col">
-          <h2>{group.title}</h2>
-          {group.links.map((link) => (
-            <a href={link.href}>{link.label}</a>
-          ))}
+      footerNav.map((columna) => (
+        <div class="pie-columna">
+          <h2 class="columna-titulo">{columna.title}</h2>
+          <ul class="columna-lista" role="list">
+            {columna.links.map((link) => (
+              <li>
+                <a href={link.href} class="columna-enlace">{link.label}</a>
+              </li>
+            ))}
+          </ul>
         </div>
       ))
     }
   </div>
-  <div class="wrap footer-legal">
-    <small>2026 EMAX energía. Todos los derechos reservados.</small>
-    <nav aria-label="Legal">
-      {legalNav.map((link) => <a href={link.href}>{link.label}</a>)}
+
+  <div class="contenedor pie-legal">
+    <small class="copia-legal">
+      © {new Date().getFullYear()} {site.name} · {site.legalName} ({site.cif}). Todos los derechos reservados.
+    </small>
+    <nav class="nav-legal" aria-label="Enlaces legales">
+      {legalNav.map((link) => <a href={link.href} class="enlace-legal">{link.label}</a>)}
     </nav>
   </div>
 </footer>
 
 <style>
-  .footer {
-    background: var(--footer);
-    color: var(--white);
-    padding: 64px 0 28px;
+  .pie-pagina {
+    background: #091730;
+    color: #e2eaf5;
+    padding: 72px 0 calc(36px + var(--dock-alto, 64px));
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .footer-main {
+  @media (min-width: 1025px) {
+    .pie-pagina {
+      padding-bottom: 48px;
+    }
+  }
+
+  .pie-principal {
     display: grid;
-    grid-template-columns: 1.45fr 1fr 1fr 0.8fr;
-    gap: 32px 40px;
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: 40px;
     padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  .brand p {
-    max-width: 34ch;
-    margin-top: 18px;
-    font-size: 0.92rem;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.92);
+  .pie-marca {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
-  .brand a,
-  .brand span {
-    display: block;
-    margin-top: 12px;
+  .pie-tagline {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.92);
+    color: #b0c4de;
+    max-width: 32ch;
+    line-height: 1.5;
   }
 
-  .brand a:first-of-type {
-    margin-top: 28px;
+  .pie-contacto-directo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
   }
 
-  .col h2 {
-    font-family: var(--display);
+  .contacto-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    transition: color 0.15s ease;
+  }
+
+  .contacto-item:hover {
+    color: var(--cyan-400, #38b6ff);
+  }
+
+  .direccion-item {
+    font-size: 0.84rem;
+    color: #8da2c0;
+    line-height: 1.4;
+  }
+
+  .columna-titulo {
+    font-family: var(--font-titulos);
     font-size: 1.15rem;
     font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 18px;
     letter-spacing: 0;
-    margin-bottom: 16px;
   }
 
-  .col a {
-    display: block;
-    margin-top: 10px;
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.92);
+  .columna-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .brand a:hover,
-  .col a:hover,
-  .footer-legal a:hover {
-    color: var(--white);
+  .columna-enlace {
+    font-size: 0.9rem;
+    color: #b0c4de;
+    transition: color 0.15s ease;
   }
 
-  .footer-legal {
+  .columna-enlace:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .pie-legal {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px 32px;
-    padding-top: 22px;
-    border-top: 1px solid rgba(255, 255, 255, 0.35);
-    font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.9);
+    gap: 24px;
+    padding-top: 28px;
+    font-size: 0.825rem;
+    color: #8da2c0;
+    flex-wrap: wrap;
   }
 
-  .footer-legal nav {
+  .copia-legal {
+    color: inherit;
+  }
+
+  .nav-legal {
     display: flex;
-    gap: 36px;
+    gap: 24px;
+    flex-wrap: wrap;
   }
 
-  @media (max-width: 860px) {
-    .footer-main {
+  .enlace-legal {
+    color: #b0c4de;
+  }
+
+  .enlace-legal:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1024px) {
+    .pie-principal {
       grid-template-columns: 1fr 1fr;
+      gap: 36px;
     }
 
-    .brand {
+    .pie-marca {
       grid-column: 1 / -1;
     }
   }
 
-  @media (max-width: 560px) {
-    .footer-main {
+  @media (max-width: 640px) {
+    .pie-principal {
       grid-template-columns: 1fr;
     }
 
-    .footer-legal {
+    .pie-legal {
       flex-direction: column;
       align-items: flex-start;
+      gap: 16px;
+    }
+
+    .nav-legal {
+      flex-direction: column;
+      gap: 10px;
     }
   }
 </style>

@@ -1,32 +1,67 @@
-/* Colores de marca y tipografía.
-   Títulos: Baloo. Textos: Poppins.
-   Azules: #004AAD, #5271ff, #38b6ff. */
+/* ==========================================================================
+   EMAX ENERGÍA - SISTEMA DE DISEÑO LUMINOSO, HUMANO Y COMERCIAL
+   Basado en la identidad de marca EMAX con enfoque de conversión amigable.
+   ========================================================================== */
 
 :root {
-  --navy: #07122c;
-  --navy-deep: #040918;
-  --navy-mid: #0b1c40;
-  --blue-dark: #004aad;
-  --blue: #5271ff;
-  --blue-hover: #3d5cf0;
-  --blue-soft: #e8ecff;
-  --cyan: #38b6ff;
-  --footer: #004aad;
-  --white: #ffffff;
-  --ink: #0b1b3a;
-  --muted: #5c6b86;
-  --line: #d7deea;
-  --chip: #cfd6e4;
-  --chip-text: #2a3548;
-  --radius: 20px;
-  --radius-pill: 999px;
-  --shadow: 0 18px 50px rgba(4, 9, 24, 0.28);
-  --header-h: 84px;
-  --max: 1180px;
-  --font: "Poppins", system-ui, sans-serif;
-  --display: "Baloo 2", system-ui, sans-serif;
+  /* Azules corporativos EMAX */
+  --azul-900: #004aad;           /* Azul principal de marca */
+  --azul-900-hover: #003c8c;     /* Hover botones primarios */
+  --azul-700: #0f5bd8;           /* Azul intermedio */
+  --azul-600: #1a6ff7;           /* Azul vivo para interacciones */
+  --azul-cta: #0056e0;           /* CTA vibrante */
+  --cyan-400: #38b6ff;           /* Cian acento EMAX */
+  --azul-resalte: #ddf1ff;       /* Fondos de etiquetas y acentos suaves */
+  --azul-suave: #edf4fe;         /* Fondos de tarjetas secundarias */
+
+  /* Textos y neutros oscuros */
+  --tinta: #0f2346;              /* Texto principal (azul marino profundo) */
+  --tinta-2: #3a4b68;            /* Texto secundario (muy legible) */
+  --tinta-3: #63738e;            /* Texto atenuado / notas */
+  --oscuro: #091730;             /* Fondos oscuros institucionales (footer) */
+
+  /* Superficies y fondos claros (estilo humano, cálido y limpio) */
+  --papel: #ffffff;              /* Blanco puro de tarjetas */
+  --fondo: #f4f7fb;              /* Fondo de página fresco y suave */
+  --fondo-calido: #f7f9fc;       /* Fondo alternado de secciones */
+
+  /* Líneas y bordes */
+  --linea: #d6e0ee;              /* Bordes de tarjetas */
+  --linea-fina: #e6edf7;         /* Separadores */
+  --linea-foco: #38b6ff;         /* Borde en foco/activo */
+
+  /* Garantías y conversión */
+  --verde-ok: #067647;           /* Verde de ahorro verificado */
+  --verde-fondo: #ecfdf3;        /* Fondo badges de ahorro */
+  --verde-borde: #abefc6;
+
+  /* Tipografía corporativa premium */
+  --font-texto: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-titulos: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Escala de radios redondeados (amigables, humanos) */
+  --radio-sm: 8px;
+  --radio-md: 14px;
+  --radio-tarjeta: 20px;
+  --radio-grande: 28px;
+  --radio-pill: 999px;
+
+  /* Sombras suaves y limpias (sin exceso cibernético) */
+  --sombra-subtil: 0 2px 6px rgba(15, 35, 70, 0.04);
+  --sombra-tarjeta: 0 8px 24px rgba(15, 35, 70, 0.07);
+  --sombra-flotante: 0 14px 40px rgba(0, 74, 173, 0.16);
+  --sombra-elevada: 0 18px 48px rgba(15, 35, 70, 0.12);
+
+  /* Layout y dimensiones */
+  --ancho-max: 1200px;
+  --cabecera-alto: 76px;
+  --dock-alto: 68px;
+  --z-cabecera: 40;
+  --z-dock: 45;
+  --z-modal: 100;
 }
 
+/* Reset y base */
 *,
 *::before,
 *::after {
@@ -35,14 +70,23 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
+  color-scheme: light;
 }
 
 body {
   margin: 0;
-  font-family: var(--font);
-  color: var(--ink);
-  background: #f4f6fa;
-  line-height: 1.5;
+  font-family: var(--font-texto);
+  color: var(--tinta);
+  background-color: var(--fondo);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Espacio inferior en páginas para que el Dock flotante no tape contenido */
+body.con-dock {
+  padding-bottom: calc(var(--dock-alto) + 24px);
 }
 
 img,
@@ -54,79 +98,172 @@ svg {
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
-[hidden] {
-  display: none !important;
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--display);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+/* Jerarquía tipográfica con personalidad cercana */
+h1, h2, h3, h4 {
+  font-family: var(--font-titulos);
+  color: var(--tinta);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 1.6rem + 2.2vw, 3.4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem);
+}
+
+h3 {
+  font-size: clamp(1.3rem, 1.15rem + 0.8vw, 1.75rem);
 }
 
 p {
   margin: 0;
+  color: var(--tinta-2);
 }
 
-.skip-link {
-  position: absolute;
-  left: 12px;
-  top: -40px;
-  z-index: 100;
-  background: var(--blue);
-  color: var(--white);
-  padding: 8px 12px;
-  border-radius: 8px;
-}
-
-.skip-link:focus {
-  top: 12px;
-}
-
-.wrap {
-  width: min(var(--max), calc(100% - 40px));
+/* Contenedor central ordenado */
+.contenedor {
+  width: min(var(--ancho-max), calc(100% - 40px));
   margin-inline: auto;
 }
 
-.btn {
+@media (max-width: 640px) {
+  .contenedor {
+    width: calc(100% - 32px);
+  }
+}
+
+/* ==========================================================================
+   COMPONENTES UI COMPARTIDOS (BOTONES, BADGES, TARJETAS)
+   ========================================================================== */
+
+/* Botones con estilo humano y comercial */
+.boton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 44px;
-  padding: 10px 22px;
-  border: 0;
-  border-radius: var(--radius-pill);
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  min-height: 48px;
+  padding: 12px 26px;
+  border-radius: var(--radio-pill);
+  font-size: 0.975rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  user-select: none;
 }
 
-.btn:hover {
+.boton:hover {
   transform: translateY(-1px);
 }
 
-.btn-primary {
-  background: var(--blue);
-  color: var(--white);
+.boton:active {
+  transform: translateY(0);
 }
 
-.btn-primary:hover {
-  background: var(--blue-hover);
+/* Botón primario de venta (Azul EMAX de alto impacto) */
+.boton-primario {
+  background: var(--azul-900);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.28);
 }
 
-.btn-ghost {
+.boton-primario:hover {
+  background: var(--azul-900-hover);
+  box-shadow: 0 6px 20px rgba(0, 74, 173, 0.36);
+  color: #ffffff;
+}
+
+/* Botón secundario suave (blanco con borde limpio) */
+.boton-secundario {
+  background: var(--papel);
+  color: var(--tinta);
+  border: 1.5px solid var(--linea);
+  box-shadow: var(--sombra-subtil);
+}
+
+.boton-secundario:hover {
+  border-color: var(--azul-900);
+  color: var(--azul-900);
+  background: #ffffff;
+}
+
+/* Botón fantasma / transparente */
+.boton-fantasma {
   background: transparent;
-  color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: var(--azul-900);
 }
 
-.btn-gradient {
-  background: linear-gradient(90deg, #3ea2ff, #6d7bff);
-  color: var(--white);
+.boton-fantasma:hover {
+  background: var(--azul-resalte);
+}
+
+/* Badges y etiquetas de confianza */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radio-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge-azul {
+  background: var(--azul-resalte);
+  color: var(--azul-900);
+}
+
+.badge-verde {
+  background: var(--verde-fondo);
+  color: var(--verde-ok);
+  border: 1px solid var(--verde-borde);
+}
+
+/* Tarjeta estándar limpia */
+.tarjeta-blanca {
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-tarjeta);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tarjeta-blanca:hover {
+  box-shadow: var(--sombra-elevada);
+  border-color: #cbd8ec;
+}
+
+/* Accesibilidad */
+.saltar-enlace {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  background: var(--azul-900);
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: var(--radio-sm);
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.saltar-enlace:focus {
+  top: 16px;
 }

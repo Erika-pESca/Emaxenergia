@@ -1,158 +1,1008 @@
 ---
-// Cabecera. Los enlaces y el botón salen de src/data/site.ts.
-// En pantallas estrechas el menú se abre con el botón de abajo.
+// Cabecera Ultra Comercial enfocada en Conversión y Ventas
+// Diseño corporativo edge-to-edge con:
+// 1. Franja superior (Top utility bar) con segmentación Empresas / Comunidades / Hogares y mensaje de confianza.
+// 2. Barra principal de alto impacto comercial con Logo, Navegación B2B, Teléfono directo visible,
+//    botón "Te llamamos gratis" (con lead popover instantáneo) y botón principal "Analizar mi factura".
 import Logo from "./Logo.astro";
-import { headerNav, primaryCta } from "../data/site";
+import { site, primaryCta } from "../data/site";
 
 const current = Astro.url.pathname;
+
+const sectoresItems = [
+  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Turnos partidos en horas punta caras" },
+  { href: "/sectores/hoteles", label: "Hoteles y alojamientos", desc: "Estacionalidad y potencia ociosa en invierno" },
+  { href: "/sectores/supermercados", label: "Supermercados y tiendas", desc: "Consumo continuo de cámaras frigoríficas" },
+  { href: "/sectores/logistica-frio", label: "Logística y frío industrial", desc: "Ajuste de peajes en ciclos 24/7" },
+  { href: "/sectores/industria", label: "Industria y fabricación", desc: "Arranque de motores y energía reactiva" },
+];
+
+const tarifasItems = [
+  { href: "/tarifas", label: "Luz para Empresas", desc: "Peajes 2.0TD, 3.0TD y 6.XTD optimizados" },
+  { href: "/gas-natural", label: "Gas para Empresas", desc: "Suministro RL para negocios e industria" },
+  { href: "/varios-suministros", label: "Múltiples Suministros", desc: "Unificación de facturación multisede" },
+];
 ---
 
-<header class="header">
-  <div class="wrap header-inner">
-    <Logo />
-    <nav class="nav" data-nav aria-label="Principal">
-      {
-        headerNav.map((item) => (
-          <a
-            href={item.href}
-            class:list={["nav-link", { active: current === item.href }]}
-            aria-current={current === item.href ? "page" : undefined}
-          >
-            {item.label}
-          </a>
-        ))
-      }
-      <a class="btn btn-primary nav-cta" href={primaryCta.href}>{primaryCta.label}</a>
-    </nav>
-    <a class="btn btn-primary header-cta" href={primaryCta.href}>{primaryCta.label}</a>
-    <button class="menu-btn" type="button" data-menu aria-expanded="false" aria-label="Abrir menú">
-      <span></span>
-      <span></span>
-    </button>
+<header class="cabecera-comercial-root">
+  <!-- 1. FRANJA SUPERIOR (Top Utility & Trust Bar) -->
+  <div class="top-bar">
+    <div class="contenedor-cabecera top-bar-contenido">
+      <!-- Selector de segmento -->
+      <div class="selector-segmentos" role="tablist" aria-label="Segmento de cliente">
+        <a href="/" class="segmento-item activo" aria-selected="true">
+          <span class="punto-segmento">●</span>
+          <span>Empresas y Pymes</span>
+        </a>
+        <a href="/comunidades-de-propietarios" class="segmento-item" aria-selected="false">
+          <span>Comunidades</span>
+        </a>
+        <a href="/particulares" class="segmento-item" aria-selected="false">
+          <span>Particulares</span>
+        </a>
+      </div>
+
+      <!-- Mensaje de confianza central (desktop) -->
+      <div class="top-trust-msg">
+        <span class="trust-check">✓</span>
+        <span>Auditoría de factura sin coste · Sin permanencia ni cortes de suministro</span>
+      </div>
+
+      <!-- Enlaces de soporte y horario -->
+      <div class="top-utilidades">
+        <span class="top-horario">L-V 9:00 – 18:30</span>
+        <span class="top-sep">|</span>
+        <a href="/contacto" class="top-link">Contacto</a>
+        <span class="top-sep">|</span>
+        <a href="/atencion-al-cliente" class="top-link">Atención al cliente</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. BARRA PRINCIPAL (Main Edge-to-Edge Bar) -->
+  <div class="barra-principal">
+    <div class="contenedor-cabecera barra-principal-fila">
+      <!-- Marca y especialidad -->
+      <div class="marca-bloque">
+        <Logo variant="dark" />
+        <span class="marca-tag">Empresas</span>
+      </div>
+
+      <!-- Navegación central -->
+      <nav class="nav-principal" data-nav-principal aria-label="Menú principal">
+        <a href="/" class:list={["nav-enlace", { activo: current === "/" }]}>
+          Inicio
+        </a>
+
+        <a href="/metodo" class:list={["nav-enlace", { activo: current === "/metodo" }]}>
+          El Método
+        </a>
+
+        <!-- Menú desplegable Sectores -->
+        <div class="nav-dropdown" data-dropdown>
+          <button type="button" class="nav-enlace con-chevron" aria-haspopup="true" aria-expanded="false">
+            <span>Sectores</span>
+            <svg class="chevron-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 4.5 3 3 3-3"></path>
+            </svg>
+          </button>
+
+          <div class="dropdown-popover">
+            <div class="dropdown-header-tag">Auditorías especializadas por sector</div>
+            <div class="dropdown-cards-grid">
+              {
+                sectoresItems.map((s) => (
+                  <a href={s.href} class="dropdown-card">
+                    <strong class="card-nombre">{s.label}</strong>
+                    <span class="card-desc">{s.desc}</span>
+                  </a>
+                ))
+              }
+            </div>
+            <div class="dropdown-footer-link">
+              <a href="/sectores">Ver todos los sectores empresariales →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menú desplegable Tarifas -->
+        <div class="nav-dropdown" data-dropdown>
+          <button type="button" class="nav-enlace con-chevron" aria-haspopup="true" aria-expanded="false">
+            <span>Tarifas</span>
+            <svg class="chevron-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 4.5 3 3 3-3"></path>
+            </svg>
+          </button>
+
+          <div class="dropdown-popover popover-tarifas">
+            <div class="dropdown-header-tag">Modalidades y suministros</div>
+            <div class="dropdown-cards-grid grid-vertical">
+              {
+                tarifasItems.map((t) => (
+                  <a href={t.href} class="dropdown-card">
+                    <strong class="card-nombre">{t.label}</strong>
+                    <span class="card-desc">{t.desc}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <a href="/guias" class:list={["nav-enlace", { activo: current.startsWith("/guias") }]}>
+          Guías
+        </a>
+      </nav>
+
+      <!-- MOTOR DE CONVERSIÓN COMERCIAL (Derecha) -->
+      <div class="motor-conversion">
+        <!-- 1. Teléfono directo con estado de llamada -->
+        <a href={site.phoneHref} class="caja-telefono" title={`Llamar gratis al ${site.phone}`}>
+          <div class="tel-icono-circulo" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span class="tel-pulso-dot"></span>
+          </div>
+          <div class="tel-datos">
+            <span class="tel-sub">Llama gratis a un asesor</span>
+            <strong class="tel-cifra">{site.phone}</strong>
+          </div>
+        </a>
+
+        <!-- 2. Botón "Te llamamos gratis" con Popover de captura rápida -->
+        <div class="te-llamamos-wrapper" data-te-llamamos>
+          <button type="button" class="btn-te-llamamos" data-btn-popover aria-expanded="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>Te llamamos gratis</span>
+          </button>
+
+          <!-- Popover interactivo rápido -->
+          <div class="popover-llamada" data-popover-panel hidden>
+            <div class="popover-cabeza">
+              <strong>¿A qué número te llamamos?</strong>
+              <p>Te llamará un consultor de EMAX con tu informe.</p>
+            </div>
+            <form class="popover-form" data-form-llamada>
+              <div class="popover-input-fila">
+                <input
+                  type="tel"
+                  name="telefono_llamame"
+                  class="popover-input"
+                  placeholder="Ej. 600 000 000"
+                  required
+                  aria-label="Tu número de teléfono"
+                />
+                <button type="submit" class="popover-submit">
+                  Llamadme
+                </button>
+              </div>
+              <span class="popover-privacidad">Sin coste ni compromiso. Respetamos tu privacidad.</span>
+              <div class="popover-exito" data-popover-exito hidden>
+                ✓ ¡Recibido! Te llamaremos en breve.
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 3. Botón Principal de Venta: Analizar mi factura -->
+        <a href="/#estudio" class="btn-cta-comercial">
+          <span>Analizar mi factura</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- Botón menú hamburguesa (móvil) -->
+        <button type="button" class="btn-hamburguesa-movil" data-toggle-movil aria-label="Abrir menú" aria-expanded="false">
+          <span class="hamb-linea"></span>
+          <span class="hamb-linea"></span>
+          <span class="hamb-linea"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MENÚ MÓVIL DESPLEGABLE -->
+  <div class="menu-movil-drawer" data-menu-movil hidden>
+    <div class="movil-contenedor">
+      <div class="movil-llamada-directa">
+        <span class="movil-llamada-tit">Atención directa para empresas:</span>
+        <a href={site.phoneHref} class="movil-tel-boton">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>Llamar al {site.phone}</span>
+        </a>
+      </div>
+
+      <nav class="movil-links-lista" aria-label="Navegación móvil">
+        <a href="/" class="movil-link">Inicio</a>
+        <a href="/metodo" class="movil-link">El Método</a>
+
+        <div class="movil-grupo-titulo">Sectores empresariales</div>
+        {
+          sectoresItems.map((s) => (
+            <a href={s.href} class="movil-sublink">{s.label}</a>
+          ))
+        }
+
+        <div class="movil-grupo-titulo">Tarifas</div>
+        {
+          tarifasItems.map((t) => (
+            <a href={t.href} class="movil-sublink">{t.label}</a>
+          ))
+        }
+
+        <div class="movil-grupo-titulo">Otros</div>
+        <a href="/guias" class="movil-link">Guías energéticas</a>
+        <a href="/contacto" class="movil-link">Contacto y oficinas</a>
+      </nav>
+
+      <div class="movil-cta-bottom">
+        <a href="/#estudio" class="btn-cta-comercial ancho-total">
+          Analizar mi factura ahora
+        </a>
+      </div>
+    </div>
   </div>
 </header>
 
 <script>
-  const btn = document.querySelector("[data-menu]");
-  const nav = document.querySelector("[data-nav]");
-  btn?.addEventListener("click", () => {
-    const open = nav?.classList.toggle("open");
-    btn.setAttribute("aria-expanded", String(Boolean(open)));
-    btn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  // Control de Dropdowns en Desktop
+  const dropdownWrappers = document.querySelectorAll("[data-dropdown]");
+  dropdownWrappers.forEach((dd) => {
+    const btn = dd.querySelector("button");
+    btn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isActive = dd.classList.contains("abierto");
+      dropdownWrappers.forEach((d) => d.classList.remove("abierto"));
+      if (!isActive) dd.classList.add("abierto");
+    });
+  });
+
+  // Control de Popover "Te llamamos gratis"
+  const popoverWrapper = document.querySelector("[data-te-llamamos]");
+  const popoverBtn = document.querySelector("[data-btn-popover]");
+  const popoverPanel = document.querySelector("[data-popover-panel]");
+  const popoverForm = document.querySelector("[data-form-llamada]");
+  const popoverExito = document.querySelector("[data-popover-exito]");
+
+  popoverBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isHidden = popoverPanel?.hasAttribute("hidden");
+    if (isHidden) {
+      popoverPanel?.removeAttribute("hidden");
+      popoverBtn?.setAttribute("aria-expanded", "true");
+    } else {
+      popoverPanel?.setAttribute("hidden", "true");
+      popoverBtn?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  popoverForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (popoverExito) {
+      popoverExito.removeAttribute("hidden");
+      setTimeout(() => {
+        popoverPanel?.setAttribute("hidden", "true");
+        popoverBtn?.setAttribute("aria-expanded", "false");
+      }, 3000);
+    }
+  });
+
+  // Cerrar al hacer clic fuera
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest("[data-dropdown]")) {
+      dropdownWrappers.forEach((d) => d.classList.remove("abierto"));
+    }
+    if (!target.closest("[data-te-llamamos]")) {
+      popoverPanel?.setAttribute("hidden", "true");
+      popoverBtn?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Control de Menú Móvil
+  const toggleMovilBtn = document.querySelector("[data-toggle-movil]");
+  const drawerMovil = document.querySelector("[data-menu-movil]");
+
+  toggleMovilBtn?.addEventListener("click", () => {
+    const isHidden = drawerMovil?.hasAttribute("hidden");
+    if (isHidden) {
+      drawerMovil?.removeAttribute("hidden");
+      toggleMovilBtn?.setAttribute("aria-expanded", "true");
+      toggleMovilBtn?.classList.add("activo");
+      document.body.style.overflow = "hidden";
+    } else {
+      drawerMovil?.setAttribute("hidden", "true");
+      toggleMovilBtn?.setAttribute("aria-expanded", "false");
+      toggleMovilBtn?.classList.remove("activo");
+      document.body.style.overflow = "";
+    }
+  });
+
+  // Cerrar cajón móvil si se hace clic en enlaces
+  drawerMovil?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      drawerMovil?.setAttribute("hidden", "true");
+      toggleMovilBtn?.setAttribute("aria-expanded", "false");
+      toggleMovilBtn?.classList.remove("activo");
+      document.body.style.overflow = "";
+    });
   });
 </script>
 
 <style>
-  .header {
+  /* ========================================================
+     ESTRUCTURA GENERAL CABECERA
+     ======================================================== */
+  .cabecera-comercial-root {
     position: sticky;
     top: 0;
-    z-index: 50;
-    height: var(--header-h);
-    background: var(--white);
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(15, 35, 70, 0.06);
   }
 
-  .header-inner {
+  .contenedor-cabecera {
+    width: min(1360px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  /* ========================================================
+     1. TOP UTILITY BAR (Franja Superior)
+     ======================================================== */
+  .top-bar {
+    background: #0f2346;
+    color: #e2eaf5;
+    font-size: 0.8125rem;
+    height: 38px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .top-bar-contenido {
     height: 100%;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    column-gap: 40px;
-  }
-
-  .nav {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 32px;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .nav-link {
-    font-size: 0.95rem;
+  .selector-segmentos {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+  }
+
+  .segmento-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px;
+    height: 28px;
+    border-radius: var(--radio-pill, 999px);
+    color: #a4b7d1;
     font-weight: 500;
-    color: #091f44;
+    text-decoration: none;
+    transition: all 0.15s ease;
   }
 
-  .nav-link:hover {
-    color: var(--blue);
+  .segmento-item:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
   }
 
-  .header-cta {
-    background: var(--blue);
-    min-height: 40px;
-    padding: 10px 18px;
-    font-size: 0.92rem;
+  .segmento-item.activo {
+    background: #004aad;
+    color: #ffffff;
     font-weight: 600;
   }
 
-  .header-cta:hover {
-    background: var(--blue-hover);
-    transform: none;
+  .punto-segmento {
+    font-size: 0.65rem;
+    color: #38b6ff;
   }
 
-  .nav-cta {
-    display: none;
+  .top-trust-msg {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #cbdcf2;
+    font-weight: 500;
   }
 
-  .menu-btn {
-    display: none;
-    width: 42px;
-    height: 42px;
-    border: 0;
+  .trust-check {
+    color: #12b76a;
+    font-weight: 800;
+  }
+
+  .top-utilidades {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8da1bf;
+  }
+
+  .top-horario {
+    color: #a4b7d1;
+  }
+
+  .top-sep {
+    opacity: 0.3;
+  }
+
+  .top-link {
+    color: #cbdcf2;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .top-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  /* ========================================================
+     2. BARRA PRINCIPAL (Main Bar)
+     ======================================================== */
+  .barra-principal {
+    height: 74px;
+    background: #ffffff;
+    border-bottom: 1.5px solid #e5edf7;
+  }
+
+  .barra-principal-fila {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .marca-bloque {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .marca-tag {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: #edf4fe;
+    color: #004aad;
+    padding: 3px 8px;
+    border-radius: var(--radio-pill, 999px);
+    border: 1px solid #d4e4fa;
+  }
+
+  /* Navegación central */
+  .nav-principal {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-enlace {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: var(--radio-sm, 8px);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--tinta, #0f2346);
     background: transparent;
+    border: 0;
     cursor: pointer;
-    padding: 10px;
+    text-decoration: none;
+    transition: all 0.15s ease;
   }
 
-  .menu-btn span {
+  .nav-enlace:hover,
+  .nav-dropdown:hover .nav-enlace,
+  .nav-dropdown.abierto .nav-enlace {
+    background: #f4f8fd;
+    color: #004aad;
+  }
+
+  .nav-enlace.activo {
+    color: #004aad;
+    background: #edf4fe;
+  }
+
+  .chevron-svg {
+    transition: transform 0.2s ease;
+  }
+
+  .nav-dropdown:hover .chevron-svg,
+  .nav-dropdown.abierto .chevron-svg {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown Megamenú */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .dropdown-popover {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    background: #ffffff;
+    border: 1px solid #d8e4f5;
+    border-radius: var(--radio-tarjeta, 20px);
+    box-shadow: 0 18px 48px rgba(15, 35, 70, 0.13);
+    min-width: 360px;
+    padding: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+
+  .popover-tarifas {
+    min-width: 330px;
+  }
+
+  .nav-dropdown:hover .dropdown-popover,
+  .nav-dropdown.abierto .dropdown-popover {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-header-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #63738e;
+    margin-bottom: 10px;
+    padding-left: 6px;
+  }
+
+  .dropdown-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .dropdown-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    border-radius: var(--radio-sm, 8px);
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .dropdown-card:hover {
+    background: #edf4fe;
+  }
+
+  .card-nombre {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    color: #556784;
+  }
+
+  .dropdown-footer-link {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #e5edf7;
+  }
+
+  .dropdown-footer-link a {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #004aad;
+    text-decoration: none;
     display: block;
-    height: 2px;
-    background: #091f44;
-    margin: 6px 0;
+    padding: 4px 6px;
   }
 
-  @media (max-width: 980px) {
-    .header-inner {
-      grid-template-columns: 1fr auto;
-    }
+  .dropdown-footer-link a:hover {
+    text-decoration: underline;
+  }
 
-    .menu-btn {
-      display: block;
-    }
+  /* ========================================================
+     MOTOR DE CONVERSIÓN COMERCIAL (Derecha)
+     ======================================================== */
+  .motor-conversion {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: auto;
+  }
 
-    .header-cta {
+  /* Caja Teléfono Directo */
+  .caja-telefono {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: var(--radio-pill, 999px);
+    background: #f7faff;
+    border: 1.5px solid #d9e6f8;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .caja-telefono:hover {
+    border-color: #004aad;
+    background: #edf4fe;
+  }
+
+  .tel-icono-circulo {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #004aad;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tel-pulso-dot {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #12b76a;
+    border: 2px solid #ffffff;
+    animation: pulsoVerde 2s infinite;
+  }
+
+  @keyframes pulsoVerde {
+    0% { box-shadow: 0 0 0 0 rgba(18, 183, 106, 0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(18, 183, 106, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(18, 183, 106, 0); }
+  }
+
+  .tel-datos {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .tel-sub {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #556784;
+  }
+
+  .tel-cifra {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #004aad;
+    line-height: 1.1;
+  }
+
+  /* Botón "Te llamamos gratis" */
+  .te-llamamos-wrapper {
+    position: relative;
+  }
+
+  .btn-te-llamamos {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: var(--radio-pill, 999px);
+    background: #ffffff;
+    border: 1.5px solid #004aad;
+    color: #004aad;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .btn-te-llamamos:hover {
+    background: #edf4fe;
+  }
+
+  /* Popover de captura rápida */
+  .popover-llamada {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    background: #ffffff;
+    border: 1.5px solid #d4e4fa;
+    border-radius: var(--radio-tarjeta, 20px);
+    box-shadow: 0 18px 48px rgba(15, 35, 70, 0.15);
+    width: 320px;
+    padding: 18px;
+    z-index: 110;
+    animation: slideDown 0.2s ease;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .popover-cabeza strong {
+    font-size: 0.95rem;
+    color: var(--tinta, #0f2346);
+    display: block;
+  }
+
+  .popover-cabeza p {
+    font-size: 0.8rem;
+    color: #556784;
+    margin: 4px 0 12px;
+  }
+
+  .popover-input-fila {
+    display: flex;
+    gap: 6px;
+  }
+
+  .popover-input {
+    flex: 1;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1.5px solid #c9dbee;
+    font-size: 0.9rem;
+    outline: none;
+  }
+
+  .popover-input:focus {
+    border-color: #004aad;
+  }
+
+  .popover-submit {
+    height: 40px;
+    padding: 0 14px;
+    background: #004aad;
+    color: #ffffff;
+    border: 0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .popover-submit:hover {
+    background: #003885;
+  }
+
+  .popover-privacidad {
+    display: block;
+    font-size: 0.72rem;
+    color: #7b8ea8;
+    margin-top: 8px;
+  }
+
+  .popover-exito {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #ecfdf3;
+    border-radius: 6px;
+    color: #027a48;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  /* Botón CTA Comercial Principal */
+  .btn-cta-comercial {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 46px;
+    padding: 0 22px;
+    border-radius: var(--radio-pill, 999px);
+    background: #004aad;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 0;
+    box-shadow: 0 6px 18px rgba(0, 74, 173, 0.25);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn-cta-comercial:hover {
+    background: #003885;
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .btn-hamburguesa-movil {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background: #f4f8fd;
+    border: 1px solid #d4e4fa;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .hamb-linea {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #0f2346;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+
+  /* ========================================================
+     3. MENÚ MÓVIL (Drawer)
+     ======================================================== */
+  .menu-movil-drawer {
+    position: fixed;
+    top: 112px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    border-top: 1px solid #e1eaf5;
+    z-index: 99;
+    overflow-y: auto;
+    padding: 24px 0 40px;
+  }
+
+  .movil-contenedor {
+    width: min(100% - 40px, 480px);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .movil-llamada-directa {
+    padding: 16px;
+    background: #f7faff;
+    border: 1.5px solid #d4e4fa;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .movil-llamada-tit {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #556784;
+    margin-bottom: 8px;
+  }
+
+  .movil-tel-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 44px;
+    background: #004aad;
+    color: #ffffff;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .movil-links-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .movil-link {
+    padding: 12px 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f2346;
+    text-decoration: none;
+    border-radius: 8px;
+  }
+
+  .movil-grupo-titulo {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #004aad;
+    padding: 16px 14px 4px;
+  }
+
+  .movil-sublink {
+    padding: 8px 14px;
+    font-size: 0.92rem;
+    color: #3a4b68;
+    text-decoration: none;
+  }
+
+  .movil-cta-bottom {
+    margin-top: 16px;
+  }
+
+  .ancho-total {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ========================================================
+     RESPONSIVE MEDIA QUERIES
+     ======================================================== */
+  @media (max-width: 1180px) {
+    .caja-telefono {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .nav-principal {
       display: none;
     }
 
-    .nav-cta {
-      display: inline-flex;
-      margin-top: 8px;
-      background: var(--blue);
-    }
-
-    .nav {
+    .top-trust-msg {
       display: none;
-      position: absolute;
-      inset: var(--header-h) 16px auto;
-      background: var(--white);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      padding: 16px;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 4px;
     }
 
-    .nav.open {
+    .btn-hamburguesa-movil {
       display: flex;
     }
+  }
 
-    .nav-link {
-      padding: 12px;
-      border-radius: 10px;
+  @media (max-width: 768px) {
+    .top-bar {
+      height: 34px;
+      font-size: 0.75rem;
     }
 
-    .nav-link:hover {
-      background: var(--blue-soft);
+    .top-utilidades {
+      display: none;
+    }
+
+    .barra-principal {
+      height: 64px;
+    }
+
+    .btn-te-llamamos {
+      display: none;
+    }
+
+    .btn-cta-comercial {
+      height: 40px;
+      padding: 0 14px;
+      font-size: 0.85rem;
+    }
+
+    .menu-movil-drawer {
+      top: 98px;
     }
   }
 </style>

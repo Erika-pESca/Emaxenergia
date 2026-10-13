@@ -1,310 +1,270 @@
 ---
-// Componente: "TU PRÓXIMA FACTURA VA A LLEGAR IGUALMENTE."
-// Sección de cierre previa al pie de página con llamada a la acción decisiva.
-//
-// 1. Título Baloo 2 en mayúsculas blancas: "TU PRÓXIMA FACTURA VA A LLEGAR IGUALMENTE."
-// 2. Subtítulo Poppins en azul claro (#4ba3ff): "La pregunta es si vas a volver a pagarla sin revisarla."
-// 3. Fila de 3 botones de acción con resplandores diferenciados:
-//    - "Generar mi estudio" (azul noche corporativo con aura cian).
-//    - "Whatsapp" (pastilla celeste suave con texto azul marino).
-//    - "Llamar a EMAX" (pastilla cian brillante con halo de energía).
-// 4. Recordatorio inferior en texto sutil: "La pregunta es si vas a volver a pagarla sin revisarla."
-// 5. Portal toroidal de luz cian en el lateral derecho y luz ambiental azul inferior izquierda.
+// Sección 7 (Cierre final antes del Footer): "La tarifa no se elige: se construye."
+// Cierre comercial amigable y definitivo para capturar al usuario antes del pie de página.
 import { site } from "../../data/site";
+
+const tramosCierre = [
+  { etiqueta: "Menos de 300 €", valor: "<300" },
+  { etiqueta: "300 – 1.000 €", valor: "300-1000" },
+  { etiqueta: "1.000 – 3.000 €", valor: "1000-3000" },
+  { etiqueta: "Más de 3.000 €", valor: ">3000" },
+];
 ---
 
-<section class="proxima-factura" id="cierre-factura">
-  <!-- Portal toroidal de luz cian en el lateral derecho (donut de energía) -->
-  <div class="portal-luz" aria-hidden="true">
-    <div class="portal-halo"></div>
-    <div class="portal-circulo"></div>
-  </div>
-
-  <!-- Luz ambiental suave en la esquina inferior izquierda -->
-  <div class="luz-ambiente luz-azul-izq" aria-hidden="true"></div>
-
-  <div class="wrap factura-inner">
-    <div class="factura-contenido">
-      <!-- Encabezado superior -->
-      <div class="encabezado">
-        <h2 class="titulo-factura">TU PRÓXIMA FACTURA VA A LLEGAR IGUALMENTE.</h2>
-        <p class="subtitulo-factura">La pregunta es si vas a volver a pagarla sin revisarla.</p>
+<section class="cierre-seccion" id="cierre-ventas">
+  <div class="contenedor">
+    <div class="cierre-caja tarjeta-blanca">
+      <div class="cierre-header">
+        <div class="kicker-wrap">
+          <span class="kicker-punto" aria-hidden="true"></span>
+          <span class="kicker-texto">Empieza hoy mismo</span>
+        </div>
+        <h2 class="cierre-titulo">La tarifa no se elige: se construye.</h2>
+        <p class="cierre-subtitulo">
+          Nosotros la construimos con tus datos reales. Empieza por lo que pagas al mes.
+        </p>
       </div>
 
-      <!-- Fila de 3 botones de acción -->
-      <div class="acciones-cta">
-        <a href="/#estudio" class="btn-cta btn-estudio">
-          <span>Generar mi estudio</span>
-        </a>
-        <a href="https://wa.me/34900000000" target="_blank" rel="noopener noreferrer" class="btn-cta btn-whatsapp">
-          <span>Whatsapp</span>
-        </a>
-        <a href={site.phoneHref} class="btn-cta btn-llamar">
-          <span>Llamar a EMAX</span>
-        </a>
-      </div>
+      <div class="cierre-caminos-grid">
+        <!-- Camino A: Quiero los números -->
+        <div class="camino-card">
+          <div class="camino-top">
+            <span class="camino-badge-step">Opción A</span>
+            <h3 class="camino-tit">Quiero los números</h3>
+            <p class="camino-desc">¿Cuánto paga tu empresa de luz al mes aproximadamente?</p>
+          </div>
 
-      <!-- Texto recordatorio inferior -->
-      <p class="nota-cierre">La pregunta es si vas a volver a pagarla sin revisarla.</p>
+          <div class="tramos-cierre-lista">
+            {
+              tramosCierre.map((t) => (
+                <a href="/#estudio" class="tramo-cierre-btn">
+                  <span>{t.etiqueta}</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Camino B: Quiero hablar directo -->
+        <div class="camino-card camino-telefono">
+          <div class="camino-top">
+            <span class="camino-badge-step destacada">Opción B</span>
+            <h3 class="camino-tit">Prefiero hablar con un especialista</h3>
+            <p class="camino-desc">Llámanos ahora mismo o solicita llamada directa en tu horario preferido.</p>
+          </div>
+
+          <div class="telefono-destacado-box">
+            <span class="tel-label">Línea directa para empresas</span>
+            <a href={site.phoneHref} class="tel-enlace-grande">
+              {site.phone}
+            </a>
+            <span class="tel-horario">{site.horario}</span>
+          </div>
+
+          <a href="/contacto" class="boton boton-primario ancho-total">
+            Solicitar llamada gratuita
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .proxima-factura {
-    position: relative;
-    overflow: hidden;
-    background: #040d1e;
-    color: var(--white);
-    padding: 104px 0 114px;
-    scroll-margin-top: var(--header-h);
+  .cierre-seccion {
+    padding: 76px 0 84px;
+    background: #ffffff;
   }
 
-  /* Portal toroidal de luz cian en el lateral derecho */
-  .portal-luz {
-    position: absolute;
-    width: 360px;
-    height: 360px;
-    right: clamp(10px, 4vw, 80px);
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .cierre-caja {
+    padding: 56px 44px;
+    border-radius: var(--radio-grande, 28px);
+    border: 1.5px solid #d4e2f5;
+    background: #f8fbff;
   }
 
-  .portal-halo {
-    position: absolute;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      transparent 35%,
-      rgba(56, 182, 255, 0.42) 60%,
-      rgba(0, 102, 255, 0.22) 75%,
-      transparent 85%
-    );
-    filter: blur(26px);
-  }
-
-  .portal-circulo {
-    position: relative;
-    width: 270px;
-    height: 270px;
-    border-radius: 50%;
-    border: 42px solid rgba(56, 182, 255, 0.88);
-    box-shadow:
-      0 0 40px rgba(56, 182, 255, 0.95),
-      0 0 90px rgba(0, 114, 255, 0.7),
-      inset 0 0 32px rgba(56, 182, 255, 0.85),
-      inset 0 0 65px rgba(0, 114, 255, 0.55);
-    filter: blur(8px);
-    animation: pulsar-portal 8s ease-in-out infinite alternate;
-  }
-
-  /* Luz ambiental difusa inferior izquierda */
-  .luz-ambiente {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .luz-azul-izq {
-    width: 480px;
-    height: 480px;
-    left: -120px;
-    bottom: -90px;
-    background: radial-gradient(
-      circle,
-      rgba(0, 102, 255, 0.6) 0%,
-      rgba(56, 182, 255, 0.3) 45%,
-      transparent 70%
-    );
-    filter: blur(70px);
-  }
-
-  .factura-inner {
-    position: relative;
-    z-index: 1;
-  }
-
-  .factura-contenido {
+  .cierre-header {
+    text-align: center;
     max-width: 680px;
-  }
-
-  /* Encabezado */
-  .encabezado {
-    margin-bottom: 34px;
-  }
-
-  .titulo-factura {
-    font-family: var(--display);
-    font-size: clamp(2.3rem, 3.8vw, 3.3rem);
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    margin: 0;
-  }
-
-  .subtitulo-factura {
-    margin: 14px 0 0;
-    font-family: var(--font);
-    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-    font-weight: 400;
-    color: #4ba3ff;
-    line-height: 1.35;
-  }
-
-  /* Fila de 3 botones de acción */
-  .acciones-cta {
+    margin: 0 auto 48px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 38px;
+    gap: 12px;
   }
 
-  .btn-cta {
+  .kicker-wrap {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: 12px 26px;
-    border-radius: 999px;
-    font-family: var(--font);
-    font-size: 0.92rem;
-    letter-spacing: 0.01em;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    text-align: center;
-    white-space: nowrap;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: var(--radio-pill, 999px);
+    background: #ffffff;
+    border: 1px solid #d8e5f5;
   }
 
-  /* Botón 1: Generar mi estudio (Azul corporativo noche con aura) */
-  .btn-estudio {
-    background: #002e6e;
-    color: #ffffff;
-    font-weight: 600;
-    border: 1px solid rgba(56, 182, 255, 0.55);
-    box-shadow:
-      0 0 24px rgba(0, 102, 255, 0.65),
-      0 0 12px rgba(56, 182, 255, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  .kicker-punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--azul-900, #004aad);
   }
 
-  .btn-estudio:hover {
-    background: #003b8c;
-    transform: translateY(-2px);
-    box-shadow:
-      0 0 32px rgba(56, 182, 255, 0.75),
-      0 4px 16px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Botón 2: Whatsapp (Pastilla celeste suave / cristal luminoso) */
-  .btn-whatsapp {
-    background: linear-gradient(135deg, #a6dcff 0%, #68bfff 100%);
-    color: #051c3f;
+  .kicker-texto {
+    font-size: 0.78rem;
     font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    box-shadow:
-      0 0 22px rgba(56, 182, 255, 0.55),
-      0 4px 12px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--azul-900, #004aad);
   }
 
-  .btn-whatsapp:hover {
-    background: linear-gradient(135deg, #b8e4ff 0%, #7eccff 100%);
-    transform: translateY(-2px);
-    box-shadow:
-      0 0 32px rgba(56, 182, 255, 0.8),
-      0 6px 16px rgba(0, 0, 0, 0.25);
+  .cierre-titulo {
+    font-size: clamp(2rem, 1.6rem + 1.8vw, 2.9rem);
+    color: var(--tinta, #0f2346);
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
-  /* Botón 3: Llamar a EMAX (Pastilla cian de alta energía) */
-  .btn-llamar {
-    background: #38b6ff;
-    color: #051c3f;
+  .cierre-subtitulo {
+    font-size: 1.15rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.55;
+  }
+
+  .cierre-caminos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .camino-card {
+    padding: 32px 28px;
+    background: #ffffff;
+    border: 1.5px solid #d6e2f2;
+    border-radius: var(--radio-grande, 28px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .camino-top {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .camino-badge-step {
+    font-size: 0.75rem;
     font-weight: 700;
-    border: 1px solid rgba(120, 215, 255, 0.8);
-    box-shadow:
-      0 0 26px rgba(56, 182, 255, 0.7),
-      0 0 12px rgba(56, 182, 255, 0.5),
-      0 4px 12px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--azul-900, #004aad);
   }
 
-  .btn-llamar:hover {
-    background: #25a8f5;
-    transform: translateY(-2px);
-    box-shadow:
-      0 0 38px rgba(56, 182, 255, 0.9),
-      0 6px 16px rgba(0, 0, 0, 0.3);
+  .camino-badge-step.destacada {
+    color: var(--verde-ok, #067647);
   }
 
-  /* Nota de cierre */
-  .nota-cierre {
+  .camino-tit {
+    font-size: 1.35rem;
+    color: var(--tinta, #0f2346);
+    font-weight: 800;
     margin: 0;
-    font-family: var(--font);
-    font-size: 0.92rem;
-    font-weight: 400;
-    color: rgba(180, 210, 250, 0.72);
-    line-height: 1.4;
   }
 
-  /* Animación del portal */
-  @keyframes pulsar-portal {
-    0% {
-      transform: scale(0.96);
-      opacity: 0.85;
-    }
-    100% {
-      transform: scale(1.04);
-      opacity: 1;
-    }
+  .camino-desc {
+    font-size: 0.9rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.45;
   }
 
-  /* Responsive */
-  @media (max-width: 900px) {
-    .portal-luz {
-      width: 270px;
-      height: 270px;
-      right: -30px;
-      opacity: 0.75;
-    }
-
-    .portal-circulo {
-      width: 210px;
-      height: 210px;
-      border-width: 32px;
-    }
+  .tramos-cierre-lista {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
   }
 
-  @media (max-width: 760px) {
-    .proxima-factura {
-      padding: 72px 0 84px;
+  .tramo-cierre-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--fondo, #f4f7fb);
+    border: 1.5px solid #d6e0ee;
+    border-radius: var(--radio-md, 14px);
+    font-size: 0.925rem;
+    font-weight: 600;
+    color: var(--tinta, #0f2346);
+    transition: all 0.15s ease;
+  }
+
+  .tramo-cierre-btn:hover {
+    background: #ffffff;
+    border-color: var(--azul-900, #004aad);
+    color: var(--azul-900, #004aad);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.12);
+  }
+
+  .camino-telefono {
+    border: 2px solid var(--azul-900, #004aad);
+    box-shadow: 0 12px 32px rgba(0, 74, 173, 0.08);
+  }
+
+  .telefono-destacado-box {
+    padding: 18px 20px;
+    background: var(--azul-suave, #edf4fe);
+    border-radius: var(--radio-md, 14px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .tel-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--azul-900, #004aad);
+  }
+
+  .tel-enlace-grande {
+    font-family: var(--font-titulos);
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--tinta, #0f2346);
+    line-height: 1.1;
+  }
+
+  .tel-enlace-grande:hover {
+    color: var(--azul-900, #004aad);
+  }
+
+  .tel-horario {
+    font-size: 0.8rem;
+    color: var(--tinta-3, #63738e);
+  }
+
+  .ancho-total {
+    width: 100%;
+  }
+
+  @media (max-width: 980px) {
+    .cierre-caja {
+      padding: 32px 20px;
     }
 
-    .factura-contenido {
-      max-width: 100%;
+    .cierre-caminos-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
 
-    .acciones-cta {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 14px;
-      margin-bottom: 28px;
-      width: 100%;
-    }
-
-    .btn-cta {
-      width: 100%;
-    }
-
-    .portal-luz {
-      display: none;
+    .tramos-cierre-lista {
+      grid-template-columns: 1fr;
     }
   }
 </style>

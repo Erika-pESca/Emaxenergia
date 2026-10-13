@@ -2,6 +2,7 @@
 // Estructura de cada página. El contenido de la página entra en <slot />.
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Dock from "../components/Dock.astro";
 import Seo from "../components/Seo.astro";
 import "../styles/global.css";
 
@@ -23,17 +24,18 @@ const { title, description, path } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <Seo title={title} description={description} path={path} />
   </head>
-  <body>
-    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <body class="con-dock">
+    <a class="saltar-enlace" href="#contenido">Saltar al contenido</a>
     <Header />
     <main id="contenido">
       <slot />
     </main>
+    <Dock />
     <Footer />
   </body>
 </html>

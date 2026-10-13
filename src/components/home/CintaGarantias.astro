@@ -1,0 +1,115 @@
+---
+// Franja de Garantías y Compromisos Comerciales EMAX
+// Diseño estático, limpio y corporativo (sin animaciones excesivas ni efecto IA).
+// Genera confianza inmediata tras el Hero con 4 garantías clave.
+const garantias = [
+  {
+    titulo: "Sin permanencia",
+    detalle: "Tú mantienes el control de tu suministro.",
+  },
+  {
+    titulo: "Informe técnico gratuito",
+    detalle: "Por escrito y con datos de tu contador.",
+  },
+  {
+    titulo: "Asesor personal asignado",
+    detalle: "Una persona real da la cara y te llama.",
+  },
+  {
+    titulo: "Cero cortes de luz",
+    detalle: "Continuidad del suministro 100% garantizada.",
+  },
+];
+---
+
+<section class="franja-garantias" aria-label="Garantías comerciales de EMAX Energía">
+  <div class="contenedor garantias-grid">
+    {
+      garantias.map((g) => (
+        <div class="garantia-item">
+          <div class="garantia-check-icono" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="garantia-textos">
+            <strong class="garantia-titulo">{g.titulo}</strong>
+            <span class="garantia-detalle">{g.detalle}</span>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .franja-garantias {
+    background: #f7faff;
+    border-top: 1px solid #e2edf8;
+    border-bottom: 1px solid #e2edf8;
+    padding: 22px 0;
+  }
+
+  .garantias-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+
+  .garantia-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .garantia-check-icono {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #edf4fe;
+    color: #004aad;
+    border: 1.5px solid #cce0fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .garantia-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .garantia-titulo {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+    line-height: 1.25;
+  }
+
+  .garantia-detalle {
+    font-size: 0.8rem;
+    color: #556784;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 1024px) {
+    .garantias-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .garantias-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .franja-garantias {
+      padding: 18px 0;
+    }
+  }
+</style>

@@ -1,522 +1,384 @@
 ---
-// Componente: "TECNOLOGÍA PARA ANALIZAR. Personas para estar a tu lado."
-// Enfoque visual fiel al boceto:
-// 1. Cabecera con título Baloo 2, subtítulo azul/cian y párrafos explicativos.
-// 2. Escenario central con las 3 tarjetas de atención tecnológica (Teléfono, WhatsApp, Análisis)
-//    con efecto glassmorphism, auras brillantes y animación flotante alrededor del eje central.
-// 3. Silueta sutil tecnológica preparada para albergar la imagen del teléfono central en cuanto esté disponible.
-// 4. Botón inferior izquierdo "Hablar con EMAX" con halo luminoso.
+// Sección 3: "Maxi hace los números. Una persona de EMAX da la cara."
+// Humanización de la marca: combina la potencia analítica de los datos con el asesoramiento
+// cercano y directo de un especialista humano con fotografía real y trato profesional.
+import { site } from "../../data/site";
+import fotoConsultor from "../../imagenes/consultor-emax.jpg";
+
+const funcionesMaxi = [
+  { texto: "Lee tu consumo real periodo a periodo y mes a mes.", detalle: "Desglosa curvas de carga cuartohorarias completas." },
+  { texto: "Cruza tu potencia contratada con tus maxímetros reales.", detalle: "Detecta kW contratados que nunca llegas a usar." },
+  { texto: "Identifica recargos por energía reactiva y excesos.", detalle: "Señala penalizaciones evitables en tu factura." },
+];
+
+const funcionesEspecialista = [
+  { texto: "Audita y valida los cálculos generados por Maxi.", detalle: "Criterio técnico de auditor colegiado aplicado a tu sector." },
+  { texto: "Decide qué conviene cambiar y qué se mantiene.", detalle: "Si tu contrato actual ya es bueno, te lo dice por escrito." },
+  { texto: "Te llama por teléfono con tu informe delante.", detalle: "Explicaciones claras, directas y en tu propio idioma." },
+];
 ---
 
-<section class="tec-personas" id="soporte">
-  <!-- Luces ambientales de fondo estilo tecnológico -->
-  <div class="luz-ambiente luz-cyan-der" aria-hidden="true"></div>
-  <div class="luz-ambiente luz-azul-izq" aria-hidden="true"></div>
-
-  <!-- Orbes tecnológicos flotantes -->
-  <div class="orbe orbe-1" aria-hidden="true"></div>
-  <div class="orbe orbe-2" aria-hidden="true"></div>
-  <div class="orbe orbe-3" aria-hidden="true"></div>
-
-  <div class="wrap tec-inner">
-    <!-- Encabezado superior -->
-    <div class="encabezado">
-      <h2>TECNOLOGÍA PARA ANALIZAR.</h2>
-      <p class="subtitulo">Personas para estar a tu lado.</p>
-      <div class="parrafos">
-        <p>No queremos que tengas que llamar a un teléfono diferente cada vez que tengas una duda.</p>
-        <p>Tu especialista conoce tu empresa, tus suministros y las decisiones que hemos tomado contigo.</p>
+<section class="maxi-humano-seccion" id="equipo">
+  <div class="contenedor">
+    <div class="seccion-cabecera">
+      <div class="kicker-wrap">
+        <span class="kicker-punto" aria-hidden="true"></span>
+        <span class="kicker-texto">Tecnología de datos + Consultoría humana</span>
       </div>
+      <h2 class="seccion-titulo">Maxi hace los números. Una persona de EMAX da la cara.</h2>
+      <p class="seccion-subtitulo">
+        Maxi no decide por ti. Te da mejores datos para decidir con criterio propio y un especialista asignado a tu lado.
+      </p>
     </div>
 
-    <!-- Escenario central con las 3 tarjetas flotantes (glassmorphism) -->
-    <div class="escenario-central">
-      <!-- Foco de luz y halo cian en el centro -->
-      <div class="foco-energia" aria-hidden="true"></div>
+    <div class="dupla-grid">
+      <!-- Tarjeta 1: Maxi (El motor de datos) -->
+      <article class="tarjeta-dupla tarjeta-maxi">
+        <header class="dupla-header">
+          <div class="icono-entidad icono-maxi" aria-hidden="true">
+            <span class="letra-m">M</span>
+          </div>
+          <div>
+            <span class="entidad-tipo">Motor algorítmico</span>
+            <h3 class="entidad-nombre">Maxi</h3>
+          </div>
+        </header>
 
-      <!-- Silueta sutil tecnológica de referencia para el teléfono -->
-      <div class="silueta-telefono" aria-hidden="true">
-        <div class="telefono-isla"></div>
-        <div class="telefono-pantalla"></div>
-      </div>
+        <p class="entidad-descripcion">
+          Algoritmo especializado que procesa miles de lecturas cuartohorarias y cruza peajes oficiales en segundos.
+        </p>
 
-      <!-- Cuadro 1: Teléfono (superior izquierdo) -->
-      <article class="cuadro-glass cuadro-telefono">
-        <div class="cuadro-aura" aria-hidden="true"></div>
-        <div class="cuadro-cuerpo">
-          <h3 class="cuadro-titulo">Teléfono</h3>
-          <p class="cuadro-desc">Habla con nuestro equipo.</p>
+        <ul class="funciones-lista" role="list">
+          {
+            funcionesMaxi.map((f) => (
+              <li class="funcion-item">
+                <span class="funcion-bullet" aria-hidden="true">✓</span>
+                <div>
+                  <strong class="funcion-texto">{f.texto}</strong>
+                  <span class="funcion-detalle">{f.detalle}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="dupla-footer-nota">
+          <span>Precisión analítica matemática sin sesgo comercial</span>
         </div>
       </article>
 
-      <!-- Cuadro 2: WhatsApp (superior derecho) -->
-      <article class="cuadro-glass cuadro-whatsapp">
-        <div class="cuadro-aura" aria-hidden="true"></div>
-        <div class="cuadro-cuerpo">
-          <h3 class="cuadro-titulo">WhatsApp</h3>
-          <p class="cuadro-desc">Escribe cuando lo necesites.</p>
+      <!-- Tarjeta 2: Tu Especialista Humano EMAX (Con fotografía real) -->
+      <article class="tarjeta-dupla tarjeta-especialista tarjeta-blanca">
+        <header class="dupla-header con-foto">
+          <img
+            src={fotoConsultor.src}
+            alt="Consultor energético de EMAX Energía en oficina"
+            class="avatar-foto"
+            width={64}
+            height={64}
+            loading="lazy"
+          />
+          <div>
+            <span class="entidad-tipo destacado-verde">Tu consultor asignado</span>
+            <h3 class="entidad-nombre">Tu especialista EMAX</h3>
+          </div>
+        </header>
+
+        <p class="entidad-descripcion">
+          Un consultor energético con nombre y apellidos que conoce tu negocio, da la cara y te acompaña en cada decisión.
+        </p>
+
+        <ul class="funciones-lista" role="list">
+          {
+            funcionesEspecialista.map((f) => (
+              <li class="funcion-item">
+                <span class="funcion-bullet verde" aria-hidden="true">✓</span>
+                <div>
+                  <strong class="funcion-texto">{f.texto}</strong>
+                  <span class="funcion-detalle">{f.detalle}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="especialista-contacto-box">
+          <div class="contacto-directo-info">
+            <div class="tel-icono-wrap" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div>
+              <strong class="contacto-tel">Teléfono directo: {site.phone}</strong>
+              <span class="contacto-sub">Sin centralitas automáticas ni robots</span>
+            </div>
+          </div>
+          <a href="/#estudio" class="boton boton-primario ancho-total">
+            Solicitar análisis con especialista
+          </a>
         </div>
       </article>
-
-      <!-- Cuadro 3: Análisis (inferior izquierdo) -->
-      <article class="cuadro-glass cuadro-analisis">
-        <div class="cuadro-aura" aria-hidden="true"></div>
-        <div class="cuadro-cuerpo">
-          <h3 class="cuadro-titulo">Análisis</h3>
-          <p class="cuadro-desc">Deja que Maxi revise los datos.</p>
-        </div>
-      </article>
-    </div>
-
-    <!-- Botón CTA inferior izquierdo -->
-    <div class="pie-seccion">
-      <a href="/#estudio" class="btn-hablar">
-        <span>Hablar con EMAX</span>
-      </a>
     </div>
   </div>
 </section>
 
 <style>
-  .tec-personas {
-    position: relative;
-    overflow: hidden;
-    background: #040d1e;
-    color: var(--white);
-    padding: 104px 0 118px;
+  .maxi-humano-seccion {
+    padding: 76px 0 84px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--linea-fina, #e6edf7);
   }
 
-  /* Luces ambientales y halos */
-  .luz-ambiente {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* Gran resplandor cian eléctrico en el lateral derecho */
-  .luz-cyan-der {
-    width: 620px;
-    height: 620px;
-    right: -80px;
-    top: 18%;
-    background: radial-gradient(
-      circle,
-      rgba(56, 182, 255, 0.45) 0%,
-      rgba(0, 102, 255, 0.28) 40%,
-      rgba(4, 13, 30, 0.1) 70%,
-      transparent 80%
-    );
-    filter: blur(75px);
-    animation: pulsar-foco 10s ease-in-out infinite alternate;
-  }
-
-  .luz-azul-izq {
-    width: 500px;
-    height: 500px;
-    left: -140px;
-    bottom: 5%;
-    background: radial-gradient(
-      circle,
-      rgba(0, 74, 173, 0.3) 0%,
-      rgba(56, 182, 255, 0.16) 45%,
-      transparent 75%
-    );
-    filter: blur(70px);
-  }
-
-  /* Orbes tecnológicos */
-  .orbe {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .orbe-1 {
-    width: 12px;
-    height: 12px;
-    left: 4%;
-    top: 20%;
-    background: #38b6ff;
-    box-shadow: 0 0 14px #38b6ff;
-    animation: flotar-orbe 12s ease-in-out infinite;
-  }
-
-  .orbe-2 {
-    width: 9px;
-    height: 9px;
-    right: 18%;
-    top: 10%;
-    background: #5271ff;
-    box-shadow: 0 0 12px #5271ff;
-    animation: flotar-orbe 15s ease-in-out infinite reverse;
-  }
-
-  .orbe-3 {
-    width: 10px;
-    height: 10px;
-    left: 8%;
-    bottom: 12%;
-    background: #38b6ff;
-    box-shadow: 0 0 12px #38b6ff;
-    animation: flotar-orbe 11s ease-in-out infinite 1s;
-  }
-
-  .tec-inner {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Encabezado superior */
-  .encabezado {
-    max-width: 820px;
-  }
-
-  .encabezado h2 {
-    font-family: var(--display);
-    font-size: clamp(2.2rem, 4vw, 3.4rem);
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    margin: 0;
-  }
-
-  .subtitulo {
-    margin: 16px 0 0;
-    font-family: var(--font);
-    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-    font-weight: 600;
-    color: #38b6ff;
-    line-height: 1.35;
-  }
-
-  .parrafos {
-    margin-top: 20px;
+  .seccion-cabecera {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 52px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 14px;
   }
 
-  .parrafos p {
-    font-family: var(--font);
-    font-size: clamp(0.96rem, 1.25vw, 1.05rem);
-    font-weight: 400;
-    color: rgba(220, 235, 255, 0.78);
-    line-height: 1.55;
-    max-width: 72ch;
-  }
-
-  /* Escenario central con las tarjetas y el teléfono */
-  .escenario-central {
-    position: relative;
-    width: 100%;
-    max-width: 580px;
-    height: 500px;
-    margin: 48px auto 40px;
-  }
-
-  /* Foco de luz detrás del teléfono y las tarjetas */
-  .foco-energia {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 360px;
-    height: 360px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(56, 182, 255, 0.3) 0%,
-      rgba(0, 74, 173, 0.2) 50%,
-      transparent 75%
-    );
-    filter: blur(50px);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* Silueta sutil tecnológica de referencia para el teléfono */
-  .silueta-telefono {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 215px;
-    height: 430px;
-    border-radius: 40px;
-    background: linear-gradient(
-      180deg,
-      rgba(11, 27, 54, 0.6) 0%,
-      rgba(5, 15, 33, 0.85) 100%
-    );
-    border: 1.5px solid rgba(120, 205, 255, 0.28);
-    box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.65),
-      inset 0 0 24px rgba(56, 182, 255, 0.12);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .telefono-isla {
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 64px;
-    height: 17px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  .telefono-pantalla {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      transparent 50%
-    );
-  }
-
-  /* Cuadros glassmorphism */
-  .cuadro-glass {
-    position: absolute;
-    width: 235px;
-    z-index: 2;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .cuadro-glass:hover {
-    transform: translateY(-6px) scale(1.02);
-  }
-
-  /* Posiciones exactas del boceto */
-  /* Cuadro 1: Teléfono (superior izquierdo, montado sobre el teléfono) */
-  .cuadro-telefono {
-    top: 50px;
-    left: 0;
-    animation: flotar-cuadro-1 7s ease-in-out infinite;
-  }
-
-  /* Cuadro 2: WhatsApp (superior derecho, montado sobre el teléfono) */
-  .cuadro-whatsapp {
-    top: 78px;
-    right: 0;
-    animation: flotar-cuadro-2 8s ease-in-out infinite;
-  }
-
-  /* Cuadro 3: Análisis (inferior izquierdo, montado sobre la parte baja del teléfono) */
-  .cuadro-analisis {
-    bottom: 52px;
-    left: 20px;
-    animation: flotar-cuadro-3 7.5s ease-in-out infinite;
-  }
-
-  /* Aura brillante difusa detrás de cada cuadro */
-  .cuadro-aura {
-    position: absolute;
-    inset: -3px;
-    border-radius: 24px;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(56, 182, 255, 0.45) 0%,
-      rgba(82, 113, 255, 0.2) 50%,
-      transparent 80%
-    );
-    opacity: 0.4;
-    filter: blur(12px);
-    z-index: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease, filter 0.35s ease;
-  }
-
-  .cuadro-glass:hover .cuadro-aura {
-    opacity: 0.85;
-    filter: blur(18px);
-  }
-
-  /* Cuerpo de vidrio translúcido */
-  .cuadro-cuerpo {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 22px 24px;
-    border-radius: 22px;
-    background: linear-gradient(
-      135deg,
-      rgba(15, 36, 72, 0.72) 0%,
-      rgba(7, 20, 44, 0.88) 100%
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(120, 205, 255, 0.38);
-    box-shadow:
-      0 18px 40px rgba(0, 0, 0, 0.45),
-      0 0 20px rgba(56, 182, 255, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .cuadro-glass:hover .cuadro-cuerpo {
-    border-color: rgba(56, 182, 255, 0.85);
-    box-shadow:
-      0 22px 48px rgba(0, 0, 0, 0.55),
-      0 0 28px rgba(56, 182, 255, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  }
-
-  .cuadro-titulo {
-    font-family: var(--display);
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: -0.01em;
-    margin: 0;
-    line-height: 1.15;
-  }
-
-  .cuadro-desc {
-    font-family: var(--font);
-    font-size: 0.88rem;
-    font-weight: 400;
-    color: rgba(220, 235, 255, 0.8);
-    margin: 6px 0 0;
-    line-height: 1.35;
-  }
-
-  /* Botón inferior izquierdo */
-  .pie-seccion {
-    margin-top: 10px;
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  .btn-hablar {
+  .kicker-wrap {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: var(--radio-pill, 999px);
+    background: var(--azul-suave, #edf4fe);
+  }
+
+  .kicker-punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--azul-900, #004aad);
+  }
+
+  .kicker-texto {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--azul-900, #004aad);
+  }
+
+  .seccion-titulo {
+    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.7rem);
+    color: var(--tinta, #0f2346);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .seccion-subtitulo {
+    font-size: 1.125rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.55;
+  }
+
+  .dupla-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .tarjeta-dupla {
+    border-radius: var(--radio-grande, 28px);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tarjeta-maxi {
+    background: #f8fbff;
+    border: 1.5px solid #d4e2f5;
+    box-shadow: 0 8px 24px rgba(15, 35, 70, 0.04);
+  }
+
+  .tarjeta-especialista {
+    background: #ffffff;
+    border: 2px solid var(--azul-900, #004aad);
+    box-shadow: 0 16px 44px rgba(0, 74, 173, 0.1);
+  }
+
+  .dupla-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .icono-entidad {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 13px 34px;
-    border-radius: 999px;
-    background: #004aad;
-    color: #ffffff;
-    font-family: var(--font);
-    font-size: 0.96rem;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .icono-maxi {
+    background: #0f2346;
+    color: #38b6ff;
+  }
+
+  .letra-m {
+    font-family: var(--font-titulos);
+    font-weight: 800;
+  }
+
+  .avatar-foto {
+    width: 58px;
+    height: 58px;
+    border-radius: 16px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--azul-900, #004aad);
+  }
+
+  .entidad-tipo {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tinta-3, #63738e);
+    display: block;
+  }
+
+  .entidad-tipo.destacado-verde {
+    color: var(--verde-ok, #067647);
+  }
+
+  .entidad-nombre {
+    font-size: 1.45rem;
+    color: var(--tinta, #0f2346);
+    font-weight: 800;
+  }
+
+  .entidad-descripcion {
+    font-size: 0.95rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.55;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+  }
+
+  .funciones-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 0;
+    margin: 0 0 28px;
+    list-style: none;
+    flex-grow: 1;
+  }
+
+  .funcion-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .funcion-bullet {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--azul-suave, #edf4fe);
+    color: var(--azul-900, #004aad);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .funcion-bullet.verde {
+    background: var(--verde-fondo, #ecfdf3);
+    color: var(--verde-ok, #067647);
+  }
+
+  .funcion-texto {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--tinta, #0f2346);
+    line-height: 1.4;
+  }
+
+  .funcion-detalle {
+    display: block;
+    font-size: 0.84rem;
+    color: var(--tinta-3, #63738e);
+    margin-top: 2px;
+  }
+
+  .dupla-footer-nota {
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 1px solid #dbe6f5;
+    border-radius: var(--radio-sm, 8px);
+    font-size: 0.85rem;
     font-weight: 600;
-    letter-spacing: 0.01em;
-    border: 1px solid rgba(56, 182, 255, 0.65);
-    box-shadow:
-      0 0 26px rgba(56, 182, 255, 0.45),
-      0 4px 14px rgba(0, 0, 0, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    color: var(--tinta-2, #3a4b68);
   }
 
-  .btn-hablar:hover {
-    background: #0056c7;
-    transform: translateY(-2px);
-    box-shadow:
-      0 0 36px rgba(56, 182, 255, 0.75),
-      0 6px 20px rgba(0, 0, 0, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  .especialista-contacto-box {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px;
+    background: var(--azul-suave, #edf4fe);
+    border-radius: var(--radio-md, 14px);
   }
 
-  /* Animaciones flotantes */
-  @keyframes pulsar-foco {
-    0% {
-      transform: scale(0.95);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(1.08);
-      opacity: 1;
-    }
+  .contacto-directo-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  @keyframes flotar-cuadro-1 {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-8px);
-    }
+  .tel-icono-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--azul-900, #004aad);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
-  @keyframes flotar-cuadro-2 {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(8px);
-    }
+  .contacto-tel {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--azul-900, #004aad);
   }
 
-  @keyframes flotar-cuadro-3 {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-7px);
-    }
+  .contacto-sub {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--tinta-3, #63738e);
   }
 
-  @keyframes flotar-orbe {
-    0%, 100% {
-      transform: translateY(0);
-      opacity: 0.75;
-    }
-    50% {
-      transform: translateY(-20px) scale(1.2);
-      opacity: 1;
-    }
+  .ancho-total {
+    width: 100%;
   }
 
-  /* Responsive */
-  @media (max-width: 680px) {
-    .tec-personas {
-      padding: 72px 0 84px;
+  @media (max-width: 980px) {
+    .dupla-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
     }
 
-    .escenario-central {
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin: 36px 0 32px;
-    }
-
-    .silueta-telefono {
-      display: none;
-    }
-
-    .foco-energia {
-      display: none;
-    }
-
-    .cuadro-glass {
-      position: relative;
-      top: auto;
-      left: auto;
-      right: auto;
-      bottom: auto;
-      width: 100%;
-      animation: none;
-    }
-
-    .cuadro-cuerpo {
-      padding: 18px 20px;
-    }
-
-    .btn-hablar {
-      width: 100%;
+    .tarjeta-dupla {
+      padding: 24px 20px;
     }
   }
 </style>

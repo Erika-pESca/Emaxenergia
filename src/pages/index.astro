@@ -1,35 +1,44 @@
 ---
-// Inicio. BaseLayout ya incluye cabecera y pie.
+// Página de inicio de EMAX Energía
+// Diseñada con enfoque comercial humano, transparente y de alta conversión.
+// BaseLayout incluye automáticamente la Cabecera, el Dock flotante y el Pie.
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/home/Hero.astro";
+import CintaGarantias from "../components/home/CintaGarantias.astro";
 import Variables from "../components/home/Variables.astro";
-import MetodoTarifa from "../components/home/MetodoTarifa.astro";
 import TecnologiaPersonas from "../components/home/TecnologiaPersonas.astro";
-import MaxiInteligencia from "../components/home/MaxiInteligencia.astro";
-import SectoresPerdidas from "../components/home/SectoresPerdidas.astro";
-import CompromisoAhorro from "../components/home/CompromisoAhorro.astro";
-import MaxiNumeros from "../components/home/MaxiNumeros.astro";
-import CasosReales from "../components/home/CasosReales.astro";
 import ComoEmpezar from "../components/home/ComoEmpezar.astro";
+import SectoresPerdidas from "../components/home/SectoresPerdidas.astro";
 import CentroConocimiento from "../components/home/CentroConocimiento.astro";
 import ProximaFactura from "../components/home/ProximaFactura.astro";
 ---
 
 <BaseLayout
-  title="EMAX Energía"
-  description="EMAX analiza cómo consume una empresa y diseña una estructura energética adaptada a ella."
+  title="EMAX Energía · Energía para empresas, a partir de tu consumo"
+  description="Antes de proponerte una tarifa, leemos cómo consume tu empresa y te lo explicamos: potencia, periodos y lo que no depende de nadie. Empieza por tu factura."
   path="/"
 >
+  <!-- 1. Hero con propuesta de valor, selector interactivo y caso real auditado -->
   <Hero />
+
+  <!-- 2. Franja continua de garantías y confianza ("Sin líos") -->
+  <CintaGarantias />
+
+  <!-- 3. Los atajos habituales del mercado vs. Lo que miramos nosotros -->
   <Variables />
-  <MetodoTarifa />
+
+  <!-- 4. Maxi procesa los números, un especialista humano de EMAX da la cara -->
   <TecnologiaPersonas />
-  <MaxiInteligencia />
-  <SectoresPerdidas />
-  <CompromisoAhorro />
-  <MaxiNumeros />
-  <CasosReales />
+
+  <!-- 5. Proceso sin fricción en 3 pasos + Compromisos por escrito -->
   <ComoEmpezar />
+
+  <!-- 6. Especialización por sectores (Hostelería, Hoteles, Frío, Industria, etc.) -->
+  <SectoresPerdidas />
+
+  <!-- 7. Divulgación y guías transparentes para decidir con criterio -->
   <CentroConocimiento />
+
+  <!-- 8. Cierre comercial antes del pie de página -->
   <ProximaFactura />
 </BaseLayout>
