@@ -1,115 +1,137 @@
 ---
-// Franja de Garantías y Compromisos Comerciales EMAX
-// Diseño estático, limpio y corporativo (sin animaciones excesivas ni efecto IA).
-// Genera confianza inmediata tras el Hero con 4 garantías clave.
-const garantias = [
-  {
-    titulo: "Sin permanencia",
-    detalle: "Tú mantienes el control de tu suministro.",
-  },
-  {
-    titulo: "Informe técnico gratuito",
-    detalle: "Por escrito y con datos de tu contador.",
-  },
-  {
-    titulo: "Asesor personal asignado",
-    detalle: "Una persona real da la cara y te llama.",
-  },
-  {
-    titulo: "Cero cortes de luz",
-    detalle: "Continuidad del suministro 100% garantizada.",
-  },
+// Franja de Garantías en Movimiento Continuo (Ticker / Marquee Infinito)
+// Estilo idéntico a la captura: fondo menta suave, tipografía mayúscula nítida y rombo separador.
+const itemsGarantia = [
+  "SIN EXTRAS QUE NO PEDISTE",
+  "SIN CORTES DE LUZ",
+  "SIN PERMANENCIA",
+  "SIN LETRA PEQUEÑA",
+  "ASESOR PERSONAL ASIGNADO",
+  "INFORME TÉCNICO GRATUITO",
+  "SIN SUBIDAS INESPERADAS",
+  "CERO PAPELEOS",
 ];
 ---
 
-<section class="franja-garantias" aria-label="Garantías comerciales de EMAX Energía">
-  <div class="contenedor garantias-grid">
-    {
-      garantias.map((g) => (
-        <div class="garantia-item">
-          <div class="garantia-check-icono" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </div>
-          <div class="garantia-textos">
-            <strong class="garantia-titulo">{g.titulo}</strong>
-            <span class="garantia-detalle">{g.detalle}</span>
-          </div>
-        </div>
-      ))
-    }
+<section class="cinta-ticker-seccion" aria-label="Compromisos y garantías comerciales de EMAX">
+  <div class="ticker-contenedor">
+    <div class="ticker-track">
+      <!-- Primer grupo -->
+      <div class="ticker-grupo">
+        {
+          itemsGarantia.map((item) => (
+            <span class="ticker-elemento">
+              <span class="ticker-texto">{item}</span>
+              <span class="ticker-rombo" aria-hidden="true">✦</span>
+            </span>
+          ))
+        }
+      </div>
+
+      <!-- Segundo grupo clonado para el bucle circular infinito sin saltos -->
+      <div class="ticker-grupo" aria-hidden="true">
+        {
+          itemsGarantia.map((item) => (
+            <span class="ticker-elemento">
+              <span class="ticker-texto">{item}</span>
+              <span class="ticker-rombo" aria-hidden="true">✦</span>
+            </span>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
-  .franja-garantias {
-    background: #ffffff;
-    border-top: 1px solid #e1ecf7;
-    border-bottom: 1px solid #e1ecf7;
-    padding: 22px 0;
+  .cinta-ticker-seccion {
+    background: #eaf6f5; /* Fondo menta pastel suave idéntico a la captura */
+    border-top: 1px solid #d2eae7;
+    border-bottom: 1px solid #d2eae7;
+    padding: 13px 0;
+    overflow: hidden;
+    user-select: none;
+    position: relative;
   }
 
-  .garantias-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    align-items: center;
+  .ticker-contenedor {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
   }
 
-  .garantia-item {
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: circularMarquee 32s linear infinite;
+  }
+
+  .ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  .ticker-grupo {
     display: flex;
     align-items: center;
-    gap: 12px;
-  }
-
-  .garantia-check-icono {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #edf4fe;
-    color: #004aad;
-    border: 1.5px solid #cce0fc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-shrink: 0;
+    white-space: nowrap;
   }
 
-  .garantia-textos {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .ticker-elemento {
+    display: inline-flex;
+    align-items: center;
   }
 
-  .garantia-titulo {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    line-height: 1.25;
+  .ticker-texto {
+    font-family: var(--font-titulos, "Sora", sans-serif);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a424e; /* Tono verde-azulado corporativo oscuro */
+    transition: color 0.15s ease;
   }
 
-  .garantia-detalle {
-    font-size: 0.8rem;
-    color: #556784;
-    line-height: 1.3;
+  .ticker-rombo {
+    display: inline-block;
+    margin: 0 32px;
+    color: #1a424e;
+    font-size: 0.76rem;
+    opacity: 0.85;
+    line-height: 1;
   }
 
-  @media (max-width: 1024px) {
-    .garantias-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+  /* Animación continua en bucle infinito (movimiento continuo hacia la izquierda) */
+  @keyframes circularMarquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+      overflow-x: auto;
     }
   }
 
   @media (max-width: 600px) {
-    .garantias-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
+    .cinta-ticker-seccion {
+      padding: 11px 0;
     }
 
-    .franja-garantias {
-      padding: 18px 0;
+    .ticker-texto {
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+    }
+
+    .ticker-rombo {
+      margin: 0 20px;
+      font-size: 0.7rem;
     }
   }
 </style>
