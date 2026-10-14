@@ -1,0 +1,302 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Hero inicio Emax</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=IBM+Plex+Sans:wght@400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Concepto: el selector de gasto es lo único con peso. La lectura de factura queda al lado, plana y en fondo suave:
+     cuatro conclusiones legibles sin abrir nada y una sola gráfica abierta a la vez.
+     Los tokens son los de src/styles/tokens.css, con los mismos nombres. */
+  :root {
+    --tinta: #0F2346; --tinta-2: #4A5A75;
+    --azul-900: #004AAD; --azul-900-hover: #003C8C; --azul-700: #5271FF; --azul-400: #38B6FF;
+    --resalte: #DDF1FF; --papel: #FFFFFF; --suave: #F3F6FB;
+    --linea: #C9D3E3; --linea-fina: #E6EBF3;
+    --f-marca: 'Baloo 2', 'Poppins', system-ui, sans-serif;
+    --f-texto: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --f-dato: 'IBM Plex Sans', 'Poppins', system-ui, sans-serif;
+    --t-xs: .8125rem; --t-s: .875rem; --t-m: 1rem;
+    --t-l: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
+    --t-xl: clamp(1.25rem, 1.12rem + .55vw, 1.5rem);
+    --e-1: 4px; --e-2: 8px; --e-3: 12px; --e-4: 16px; --e-5: 24px; --e-6: 32px; --e-7: 48px; --e-8: 64px;
+    --r-campo: 6px; --r-boton: 8px; --r-tarjeta: 12px; --r-pastilla: 999px;
+    --sombra-papel: 0 1px 2px rgba(15, 35, 70, .08), 0 8px 24px rgba(15, 35, 70, .06);
+    --sombra-flotante: 0 12px 40px rgba(15, 35, 70, .18);
+  }
+  body {
+    background: var(--papel); color: var(--tinta);
+    font: 400 var(--t-m)/1.6 var(--f-texto);
+    padding-inline: var(--e-4);
+    padding-block: 12px 0;
+  }
+  .contenedor { max-width: 1200px; margin-inline: auto; }
+
+  /* Cabecera (referencia: la del proyecto, simplificada) */
+  .cab {
+    position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); z-index: 10;
+    max-width: 1200px; margin-inline: auto;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--e-4);
+    padding: 8px 12px 8px 20px; background: var(--papel); border-radius: var(--r-pastilla); box-shadow: var(--sombra-flotante);
+  }
+  .cab__logo img { display: block; height: 30px; width: auto; }
+  .cab__menu { display: none; gap: 4px; }
+  .cab__menu a { padding: 8px 14px; border-radius: var(--r-pastilla); color: var(--tinta); text-decoration: none; font-weight: 500; font-size: var(--t-s); }
+  .cab__menu a[aria-current] { background: var(--resalte); color: var(--azul-900); }
+  .cab__acc { display: flex; align-items: center; gap: var(--e-2); }
+  .cab__tel { display: none; font: 600 var(--t-s)/1.1 var(--f-dato); }
+  .cab__tel small { display: block; font: 600 10px/1.2 var(--f-texto); letter-spacing: .06em; color: var(--tinta-2); }
+  .cab__cta {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px;
+    background: var(--azul-900); color: #fff; border-radius: var(--r-pastilla); text-decoration: none;
+    font-weight: 600; font-size: var(--t-s); transition: background-color .15s;
+  }
+  .cab__cta:hover { background: var(--azul-900-hover); }
+  @media (min-width: 1024px) { .cab__menu { display: flex; } .cab__tel { display: block; } }
+
+  /* Hero */
+  .hv6 { padding: var(--e-6) 0 var(--e-7); }
+  .hv6__rejilla { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--e-6); }
+  .hv6__texto, .hv6__visual { min-width: 0; }
+  .hv6__ante { font: 500 var(--t-s)/1.4 var(--f-texto); color: var(--azul-900); margin: 0 0 var(--e-2); }
+  .hv6__h1 {
+    margin: 0; font-family: var(--f-marca); font-weight: 600;
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem); line-height: 1.08; letter-spacing: -.01em;
+    max-width: 13em; text-wrap: balance;
+  }
+  .hv6__sub { margin: var(--e-3) 0 0; font-size: var(--t-l); color: var(--tinta-2); max-width: 34em; }
+  .hv6__tarjeta { margin-top: var(--e-5); }
+  @media (min-width: 1024px) {
+    .hv6 { padding: var(--e-7) 0 var(--e-8); }
+    .hv6__rejilla { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--e-7); align-items: start; }
+  }
+  @media (min-width: 1280px) { .hv6__rejilla { column-gap: var(--e-8); } }
+
+  /* Selector de gasto: lo único con color y relieve */
+  .tg { background: var(--papel); border: 1px solid var(--linea); border-radius: var(--r-tarjeta); box-shadow: var(--sombra-papel); padding: var(--e-4); max-width: 38rem; }
+  @media (min-width: 768px) { .tg { padding: var(--e-5); } }
+  .tg__cab { margin: 0; font: 500 var(--t-xs)/1.3 var(--f-texto); color: var(--azul-900); letter-spacing: .04em; text-transform: uppercase; }
+  .tg__p { margin: var(--e-1) 0 0; font: 600 var(--t-xl)/1.25 var(--f-texto); text-wrap: balance; }
+  .tg__a { margin: 2px 0 0; font-size: var(--t-s); color: var(--tinta-2); }
+  .tg__tramos { list-style: none; margin: var(--e-4) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e-2); }
+  .tg__tramo {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--e-2); width: 100%; box-sizing: border-box;
+    min-height: 56px; padding: var(--e-2) var(--e-4); border: 1.5px solid var(--azul-900); border-radius: var(--r-boton);
+    color: var(--azul-900); background: var(--papel); text-decoration: none;
+    font: 600 var(--t-m)/1.2 var(--f-dato); font-variant-numeric: tabular-nums;
+    transition: background-color .15s;
+  }
+  .tg__tramo svg { flex: none; transition: transform .15s; }
+  .tg__tramo:hover { background: var(--resalte); }
+  .tg__tramo:hover svg { transform: translateX(2px); }
+  .tg__linea { margin: var(--e-3) 0 0; font-size: var(--t-s); color: var(--tinta-2); }
+
+  .hv6__confianza { list-style: none; margin: var(--e-5) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--e-2) var(--e-5); font-size: var(--t-s); }
+  .hv6__confianza li { display: inline-flex; align-items: center; gap: var(--e-2); }
+  .hv6__confianza svg { flex: none; color: var(--azul-900); }
+  .hv6__otros { margin: var(--e-4) 0 0; font-size: var(--t-xs); color: var(--tinta-2); }
+  .hv6__otros a { color: var(--azul-900); font-weight: 600; }
+
+  /* Lectura de la factura: plana, fondo suave, una gráfica abierta */
+  .lh { margin: 0; background: var(--suave); border: 1px solid var(--linea-fina); border-top: 3px solid var(--azul-900); border-radius: var(--r-tarjeta); padding: var(--e-4) var(--e-4) var(--e-2); }
+  @media (min-width: 768px) { .lh { padding: var(--e-5) var(--e-5) var(--e-3); } }
+  .lh__cab { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-2) var(--e-3); padding-bottom: var(--e-3); }
+  .lh__t { margin: 0; font: 600 var(--t-m)/1.3 var(--f-texto); }
+  .lh__ej { padding: 1px 10px; border-radius: var(--r-pastilla); background: var(--resalte); color: var(--azul-900); font-size: var(--t-xs); font-weight: 600; }
+
+  .fila { border-top: 1px solid var(--linea); }
+  .fila summary {
+    list-style: none; cursor: pointer; padding: 14px 0;
+    display: grid; grid-template-columns: minmax(0, 1fr) auto 22px; grid-template-areas: "t f c" "s s c"; column-gap: var(--e-3); row-gap: 2px; align-items: center;
+  }
+  .fila summary::-webkit-details-marker { display: none; }
+  .fila summary:focus-visible { outline: 3px solid var(--azul-900); outline-offset: 2px; border-radius: var(--r-campo); }
+  .fila__t { grid-area: t; font: 500 var(--t-xs)/1.3 var(--f-texto); color: var(--tinta-2); }
+  .fila__f { grid-area: f; text-align: right; font: 600 1.125rem/1.1 var(--f-dato); font-variant-numeric: tabular-nums; color: var(--tinta); }
+  .fila__f small { display: block; margin-bottom: 1px; font: 500 11px/1.2 var(--f-texto); color: var(--tinta-2); }
+  .fila__s { grid-area: s; font: 600 var(--t-m)/1.4 var(--f-texto); color: var(--tinta); }
+  .fila__c { grid-area: c; justify-self: end; color: var(--azul-900); transition: transform .2s; }
+  .fila[open] .fila__c { transform: rotate(180deg); }
+  .fila summary:hover .fila__t { color: var(--azul-900); }
+
+  /* La que vale dinero: cifra grande y marcador */
+  .fila--clave .fila__f { font-size: 1.75rem; color: var(--azul-900); }
+  .fila--clave .fila__s { display: inline; justify-self: start; background: var(--resalte); padding: 1px 8px 1px 6px; border-radius: 0 var(--r-campo) var(--r-campo) 0; border-left: 3px solid var(--azul-900); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .fila--clave summary { grid-template-areas: "t f c" "s f c"; }
+
+  .fila__cuerpo { padding: 0 0 var(--e-4); }
+  .barras { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .barras li { display: grid; grid-template-columns: 2rem minmax(0, 1fr) 6rem; align-items: center; gap: var(--e-2); font: 400 var(--t-s)/1.3 var(--f-dato); font-variant-numeric: tabular-nums; }
+  .barras--ancho li { grid-template-columns: 7.2rem minmax(0, 1fr) 3.5rem; }
+  .barras .p { color: var(--tinta-2); font-size: var(--t-xs); font-family: var(--f-texto); }
+  .barras .valor { text-align: right; font-weight: 500; }
+  .barras .dest .p { color: var(--tinta); font-weight: 600; }
+  .pista { height: 10px; background: var(--linea-fina); border-radius: 2px; overflow: hidden; }
+  .pista--hueco { background: repeating-linear-gradient(135deg, transparent 0 3px, var(--linea) 3px 4px); }
+  .barra { display: block; height: 100%; width: var(--w); background: var(--azul-900); border-radius: 2px; }
+  .dest .barra { background: var(--azul-400); }
+  .nota { margin: var(--e-2) 0 0; font-size: var(--t-xs); color: var(--tinta-2); }
+  .precio { position: relative; height: 34px; margin: var(--e-2) 0 0; }
+  .precio__linea { position: absolute; left: 0; right: 0; top: 8px; height: 4px; background: var(--azul-900); border-radius: 2px; }
+  .precio__marca { position: absolute; left: var(--x); top: 2px; width: 2px; height: 16px; background: var(--azul-400); }
+  .precio__marca i { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); font: 400 var(--t-xs)/1.2 var(--f-dato); font-style: normal; color: var(--tinta-2); white-space: nowrap; }
+
+  .decide { border-top: 1px solid var(--linea); padding: 14px 0 var(--e-3); }
+  .decide__t { margin: 0; font: 500 var(--t-xs)/1.3 var(--f-texto); color: var(--tinta-2); }
+  .decide__s { margin: 2px 0 0; font: 600 var(--t-m)/1.4 var(--f-texto); }
+  .decide__ver { display: inline-block; margin-top: var(--e-2); font-weight: 600; font-size: var(--t-s); color: var(--azul-900); }
+  .lh__pie { margin: 0; padding-top: var(--e-2); border-top: 1px solid var(--linea); font-size: var(--t-xs); color: var(--tinta-2); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fila[open] .barra { animation: crece .5s ease-out both; }
+    @keyframes crece { from { width: 0; } }
+  }
+
+  /* Notas de rediseño (fuera del hero) */
+  .notas { background: var(--suave); padding: var(--e-7) var(--e-4); margin-inline: calc(-1 * var(--e-4)); }
+  .notas__in { max-width: 1200px; margin-inline: auto; }
+  .notas h2 { margin: 0 0 var(--e-4); font: 600 var(--t-xl)/1.25 var(--f-texto); }
+  .notas ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--e-3); max-width: 46rem; }
+  .notas li { padding-left: var(--e-4); border-left: 3px solid var(--azul-700); color: var(--tinta); }
+  .notas li span { color: var(--tinta-2); }
+  .notas p { margin: var(--e-5) 0 0; font-size: var(--t-s); color: var(--tinta-2); max-width: 46rem; }
+
+  a:focus-visible { outline: 3px solid var(--azul-900); outline-offset: 3px; }
+</style>
+
+<header class="cab">
+  <a class="cab__logo" href="#" aria-label="EMAX Energía, inicio"><img alt="EMAX Energía" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNDQ0IDEwMDgiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iRU1BWCBFbmVyZ8OtYSI+PGcgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBmaWxsPSIjMjczNDhCIiBkPSJNMjk5LjAgNTk0LjBDMjEzLjIgNTg5LjkgMTQwLjMgNTYxLjUgODguOCA1MTIuMUM1NS43IDQ4MC40IDMwLjkgNDM4LjcgMTcuNCAzOTEuN0MwLjEgMzMxLjcgLTAuMCAyNTIuOSAxNy4xIDE5My42QzI5LjggMTQ5LjEgNTcuOSAxMDMuNiA5MC4zIDc0LjdDMTMyLjYgMzYuOSAxODQuNyAxNC44IDI1MS41IDYuNEMyNzAuMiA0LjAgMzEwLjggNC4wIDMzMC4wIDYuNEM0MzguMyAxOS43IDUxOS41IDgwLjMgNTQ5LjMgMTcwLjBDNTU3LjUgMTk0LjQgNTYxLjAgMjE2LjYgNTYxLjEgMjQzLjBDNTYxLjIgMjcxLjIgNTU2LjAgMjg4LjEgNTQyLjcgMzAyLjZDNTMxLjQgMzE1LjAgNTExLjUgMzI1LjQgNDkwLjggMzMwLjBDNDg4LjIgMzMwLjUgNDIyLjcgMzQwLjUgMzQ1LjMgMzUyLjBDMjY3LjggMzYzLjYgMjAzLjAgMzczLjMgMjAxLjIgMzczLjZDMTk5LjUgMzc0LjAgMTk4LjAgMzc0LjggMTk4LjAgMzc1LjZDMTk4LjAgMzc4LjYgMjA4LjUgMzk3LjAgMjE0LjEgNDAzLjhDMjU3LjIgNDU1LjggMzY5LjggNDY0LjMgNDY3LjAgNDIyLjhDNDczLjMgNDIwLjEgNDgyLjAgNDE1LjkgNDg2LjMgNDEzLjVMNDk0LjIgNDA5LjFMNDk5LjMgNDEyLjlDNTAyLjIgNDE1LjAgNTA3LjUgNDE5LjggNTExLjEgNDIzLjZDNTMwLjUgNDQ0LjAgNTM5LjQgNDY3LjkgNTM2LjkgNDkzLjRDNTM1LjcgNTA2LjAgNTMzLjcgNTEzLjAgNTI4LjMgNTIzLjhDNTE5LjggNTQwLjkgNTA1LjUgNTUzLjYgNDgxLjggNTY1LjBDNDUyLjcgNTc5LjAgNDI2LjQgNTg1LjggMzgxLjAgNTkxLjBDMzY1LjEgNTkyLjggMzI2LjYgNTk1LjEgMzE4LjAgNTk0LjhDMzE2LjEgNTk0LjggMzA3LjUgNTk0LjQgMjk5LjAgNTk0LjBaTTI4My44IDIyOS42QzMzNS4xIDIyMS4yIDM3Ny40IDIxNC4wIDM3Ny43IDIxMy42QzM3OC44IDIxMi42IDM3Ni4zIDIwNC4yIDM3Mi41IDE5Ni4zQzM2NC40IDE3OS4xIDM1MC4zIDE2My40IDMzNi4yIDE1Ni4yQzMxMC4wIDE0Mi42IDI2Ny40IDE0Mi44IDIzOS43IDE1Ni42QzIyOC4yIDE2Mi40IDIxOS44IDE2OC40IDIxMi40IDE3Ni4yQzE5Ny43IDE5MS43IDE4OS43IDIwOC41IDE4NS41IDIzMi40QzE4My4yIDI0NS42IDE4My4zIDI0Ni4yIDE4Ny4yIDI0NS41QzE4OS4wIDI0NS4yIDIzMi41IDIzOC4wIDI4My44IDIyOS42WiIvPjxwYXRoIGZpbGw9IiNGQkI1MTkiIGQ9Ik03ODIuMiA2NjcuOUM3OTEuNSA2NTMuNiA4MDkuMiA2MjEuMyA4NzcuNCA0OTQuMUM5MjEuMiA0MTIuNSA5NTYuOSAzNDUuNSA5NTYuNyAzNDUuNEM5NTYuNSAzNDUuMiA3NDQuMyAzMDcuMiA3MDAuMCAyOTkuNEM2OTIuMCAyOTguMCA2ODQuNyAyOTYuNiA2ODMuNyAyOTYuMkM2ODIuMyAyOTUuNiA3NDcuMiAyNjAuMiA5MjUuMiAxNjQuMEMxMDU5LjAgOTEuNyAxMTc0LjEgMjkuNSAxMTgwLjkgMjUuOEMxMTg3LjggMjIuMSAxMTkzLjYgMTkuMCAxMTkzLjggMTkuMEMxMTk0LjAgMTkuMCAxMTkzLjEgMjAuNCAxMTkxLjkgMjIuMUwxMTg5LjcgMjUuMkwxMTkxLjggMjQuMUMxMTkzLjAgMjMuNCAxMTk0LjAgMjMuMiAxMTk0LjAgMjMuNUMxMTk0LjAgMjMuOCAxMTQ2LjcgNzkuMiAxMDg4LjkgMTQ2LjZDMTAzMS4xIDIxNC4wIDk4NC4yIDI2OS41IDk4NC43IDI3MC4wQzk4NS4xIDI3MC40IDEwMjIuOSAyNzcuMyAxMDY4LjUgMjg1LjRDMTExNC4yIDI5My41IDExNjEuMiAzMDEuOSAxMTczLjAgMzA0LjFDMTE4NC44IDMwNi4yIDExOTQuOCAzMDguMCAxMTk1LjIgMzA4LjBDMTE5NS42IDMwOC4wIDExOTYuMCAzMDguNiAxMTk2LjAgMzA5LjRDMTE5Ni4wIDMxMC45IDc4NC43IDY2OS4zIDc4Mi4zIDY2OS45Qzc4MC44IDY3MC4yIDc4MC44IDY3MC4wIDc4Mi4yIDY2Ny45WiIvPjxwYXRoIGZpbGw9IiMyNzM0OEIiIGQ9Ik0yNTE2LjAgNTk0LjBDMjM4Ny41IDU4OC4yIDIzMDUuOCA1NDAuOSAyMjgzLjUgNDU5LjRDMjI3OS4yIDQ0My45IDIyNzcuOSA0MzQuMiAyMjc3LjMgNDE0LjlDMjI3Ni42IDM5My42IDIyNzcuOCAzNzkuMSAyMjgxLjYgMzYyLjBDMjI4Ny4yIDMzNy4wIDIyOTcuMCAzMTYuOSAyMzEyLjUgMjk4LjdDMjMzNy45IDI2OC43IDIzODUuNSAyNDYuOSAyNDQ1LjUgMjM3LjZDMjQ1NS4wIDIzNi4xIDI2MTIuMSAyMTkuMCAyNjE2LjEgMjE5LjBDMjYxNy44IDIxOS4wIDI2MTguMCAyMTguMiAyNjE4LjAgMjEyLjhDMjYxOC4wIDE4OS43IDI2MDguOSAxNzQuMyAyNTg5LjQgMTY0LjNDMjU3Mi40IDE1NS42IDI1NTUuMCAxNTEuOCAyNTIyLjggMTUwLjBDMjQ2OS4yIDE0Ny4wIDI0MTIuMyAxNTYuNyAyMzUyLjQgMTc5LjFMMjM0Ni40IDE4MS40TDIzNDIuNSAxNzguNEMyMzM2LjcgMTc0LjAgMjMyOC4wIDE2Mi41IDIzMjIuOCAxNTIuNEMyMzE0LjAgMTM1LjIgMjMxMC4zIDExOC40IDIzMTEuMyAxMDAuMUMyMzEyLjUgNzkuNiAyMzE3LjYgNjYuNyAyMzI5LjMgNTQuNEMyMzQ4LjcgMzMuOSAyMzgxLjIgMjAuNCAyNDMwLjMgMTIuNUMyNTA2LjEgMC4zIDI1ODIuNyAxLjggMjY0NC4wIDE2LjZDMjY3Mi4xIDIzLjQgMjcwNS4zIDM3LjQgMjcyNS41IDUwLjhDMjc3MC45IDgxLjEgMjc5Ni45IDEyMy43IDI4MDQuNyAxODEuMEMyODA2LjQgMTkzLjYgMjgwNi41IDIwNC4zIDI4MDYuNSAzMzguMEwyODA2LjUgNDgxLjVMMjgwNC4zIDQ4OS41QzI4MDAuMyA1MDMuNCAyNzk1LjkgNTExLjAgMjc4NS4yIDUyMi4xQzI3NTAuOCA1NTguMCAyNjk2LjUgNTgwLjQgMjYyMS4wIDU4OS45QzI1OTAuOCA1OTMuNyAyNTQ3LjQgNTk1LjQgMjUxNi4wIDU5NC4wWk0zMzI5LjAgNTg4LjNDMzMwNy44IDU4Ni4zIDMyOTEuNiA1ODAuOSAzMjc2LjggNTcwLjhDMzI3MC4xIDU2Ni4zIDMyNTUuNyA1NTIuMyAzMjQ0LjYgNTM5LjVDMzIzMy4xIDUyNi4zIDMyMjIuOSA1MTIuNSAzMTg4LjEgNDYyLjdDMzE3MC44IDQzOC4xIDMxNTYuNCA0MTguMyAzMTU1LjkgNDE4LjdDMzE1NS41IDQxOS4xIDMxMjkuNSA0NTYuNiAzMDk4LjAgNTAyLjBMMzA0MC45IDU4NC41TDMwMzUuMiA1ODUuM0MzMDI2LjIgNTg2LjYgMjk4OS44IDU4NS41IDI5NzkuNSA1ODMuNkMyOTYxLjUgNTgwLjMgMjk0My41IDU3My41IDI5MzIuMSA1NjUuN0MyOTI5LjcgNTY0LjEgMjkyNC43IDU1OS44IDI5MjAuOSA1NTYuMkMyOTAwLjAgNTM2LjYgMjg5Mi45IDUxMC43IDI5MDAuMCA0ODAuM0MyOTAyLjggNDY4LjUgMjkwNi4yIDQ2MS4wIDI5MTQuNSA0NDguNUMyOTI1LjAgNDMyLjggMjkzNi4zIDQxOS4wIDI5OTQuOCAzNTEuMUwzMDQ2LjggMjkwLjdMMzAyOS43IDI3MC43QzI4OTIuNyAxMTAuNCAyODkzLjkgMTExLjggMjg5NC42IDEwOC42QzI4OTUuOSAxMDIuMiAyOTAyLjMgODMuMyAyOTA1LjcgNzYuMUMyOTEzLjYgNTguOCAyOTMwLjAgMzguNSAyOTQzLjUgMjkuM0MyOTY1LjMgMTQuNiAyOTkyLjUgOS44IDMwMjAuOSAxNS42QzMwMzkuMyAxOS40IDMwNDguNiAyNS4wIDMwNjUuOCA0Mi4yQzMwODMuMiA1OS44IDMwODQuNyA2MS44IDMxNDEuNCAxMzYuM0MzMTY0LjkgMTY3LjMgMzE3My41IDE3Ny45IDMxNzQuNCAxNzcuMUMzMTc1LjAgMTc2LjUgMzIwMi41IDEzOS40IDMyMzUuNSA5NC43TDMyOTUuNiAxMy41TDMzMDguMCAxMy44QzMzMzIuNCAxNC4zIDMzNTguMiAxOS4wIDMzNzYuNCAyNi40QzM0MDQuMSAzNy41IDM0MjEuNyA1NC4xIDM0MjguNyA3NS41QzM0MzEuMCA4Mi41IDM0MzEuMyA4NS4xIDM0MzEuMyA5Ni41QzM0MzEuMiAxMjYuMyAzNDIyLjkgMTQxLjYgMzM3MS42IDIwNS41QzMzNjcuMiAyMTEuMCAzMzQ3LjIgMjMzLjkgMzMyNy4yIDI1Ni4zQzMzMDcuMiAyNzguNyAzMjkxLjAgMjk3LjYgMzI5MS4zIDI5OC4zQzMyOTEuNiAyOTkuMCAzMzI1LjEgMzQzLjUgMzM2NS44IDM5Ny4yTDM0MzkuOCA0OTUuMEwzNDM4LjMgNTAyLjZDMzQzMS44IDUzNy4zIDM0MTIuNiA1NjMuNyAzMzgzLjUgNTc4LjBDMzM2Ni42IDU4Ni4zIDMzNDYuOSA1OTAuMSAzMzI5LjAgNTg4LjNaTTE0MTYuMCA1ODMuOUMxMzk0LjIgNTgxLjQgMTM4MC43IDU3Ny4xIDEzNjkuMSA1NjguOUMxMzUyLjIgNTU3LjEgMTM0Mi40IDUzNy4wIDEzMzkuOSA1MDkuMEMxMzM5LjMgNTAxLjQgMTMzOS4wIDQzNS4yIDEzMzkuMiAzMTUuMEwxMzM5LjYgMTMyLjVMMTM0MS44IDEyNC4zQzEzNDYuMiAxMDcuNyAxMzUzLjYgOTYuMSAxMzY4LjkgODEuN0MxNDA2LjcgNDYuMiAxNDc3LjMgMTcuMiAxNTQ4LjUgOC4wQzE1OTYuOCAxLjcgMTY0MS4zIDMuNSAxNjgxLjggMTMuNUMxNzE2LjMgMjIuMCAxNzM5LjIgMzEuNyAxNzY0LjMgNDguN0MxNzcwLjMgNTIuNyAxNzc1LjMgNTYuMCAxNzc1LjUgNTYuMEMxNzc1LjcgNTYuMCAxNzgwLjcgNTMuMCAxNzg2LjcgNDkuNEMxODA1LjggMzcuNyAxODM1LjEgMjQuNCAxODU3LjAgMTcuNUMxODk1LjEgNS41IDE5NDkuMiAxLjIgMTk5My40IDYuNkMyMDQ2LjQgMTMuMSAyMDg4LjggMjkuOSAyMTIxLjcgNTcuM0MyMTQ5LjggODAuNyAyMTcxLjcgMTE3LjkgMjE4MC4xIDE1Ni4yQzIxODUuNyAxODEuOSAyMTg1LjQgMTY5LjEgMjE4NS43IDM3OS45QzIxODUuOSA0ODYuOSAyMTg1LjcgNTc0LjcgMjE4NS4zIDU3NS4xQzIxODQuMyA1NzYuMSAyMTYxLjIgNTgwLjMgMjE0NS4wIDU4Mi42QzIxMzguMyA1ODMuNSAyMTIyLjcgNTg0LjQgMjEwNy41IDU4NC43QzIwNjguNiA1ODUuNSAyMDQ3LjkgNTgyLjYgMjAzMC4wIDU3My45QzIwMTUuNCA1NjYuNyAyMDAzLjIgNTUyLjMgMTk5Ny41IDUzNS41QzE5OTIuNCA1MjAuMiAxOTkyLjcgNTI5LjEgMTk5Mi4wIDM2MS41QzE5OTEuNSAyMTYuMCAxOTkxLjMgMjA1LjEgMTk4OS42IDE5OS41QzE5ODUuNCAxODUuMiAxOTc5LjEgMTc2LjIgMTk2OC4zIDE2OS4wQzE5NTUuMCAxNjAuMSAxOTQyLjMgMTU2LjggMTkyMi4wIDE1Ni43QzE5MTEuNSAxNTYuNyAxOTA2LjggMTU3LjIgMTkwMC45IDE1OC44QzE4ODkuNCAxNjEuOSAxODc3LjQgMTY2LjkgMTg2OC4yIDE3Mi41TDE4NTkuOSAxNzcuNUwxODYwLjAgMzc2LjJMMTg2MC4wIDU3NC45TDE4NTYuMyA1NzUuOUMxODUxLjAgNTc3LjMgMTgzMS45IDU4MC42IDE4MTcuMCA1ODIuN0MxODAxLjEgNTg0LjkgMTc0OS4yIDU4NS4yIDE3MzYuMCA1ODMuMkMxNzExLjkgNTc5LjQgMTcwMC4zIDU3NC40IDE2ODguNCA1NjIuNkMxNjc3LjQgNTUxLjUgMTY3Mi43IDU0Mi44IDE2NjguMiA1MjUuMEMxNjY2LjggNTE5LjIgMTY2Ni41IDUwMi4yIDE2NjYuMCAzNjMuNUwxNjY1LjQgMjA4LjVMMTY2My4yIDIwMC43QzE2NTguNCAxODMuNCAxNjQ5LjcgMTczLjMgMTYzMy4wIDE2NS4yQzE2MTYuNyAxNTcuNCAxNjAwLjIgMTU0LjcgMTU4MS42IDE1Ny4wQzE1NjguOSAxNTguNSAxNTYxLjQgMTYwLjggMTU0Ni4yIDE2OC4wTDE1MzQuMCAxNzMuOUwxNTM0LjAgMzc0LjRMMTUzNC4wIDU3NC45TDE1MzAuMiA1NzUuOUMxNTE5LjEgNTc4LjggMTQ5Ni41IDU4Mi4zIDE0NzguNSA1ODQuMEMxNDY1LjYgNTg1LjIgMTQyNi44IDU4NS4xIDE0MTYuMCA1ODMuOVpNMjU4Mi4wIDQ0OS4wQzI1OTYuMiA0NDYuNSAyNjA5LjMgNDQyLjkgMjYxNS4xIDQ0MC4wTDI2MTkuMCA0MzguMEwyNjE5LjAgMzkyLjVDMjYxOS4wIDM2Ny41IDI2MTguNyAzNDcuMCAyNjE4LjIgMzQ3LjBDMjYxMi4xIDM0Ny4wIDI1MjEuNSAzNTUuNCAyNTE2LjAgMzU2LjVDMjQ5Mi40IDM2MS4yIDI0NzQuMiAzNzEuNyAyNDY4LjIgMzg0LjBDMjQ2My4zIDM5NC4yIDI0NjMuNiA0MTAuNCAyNDY5LjAgNDIxLjdDMjQ3My4xIDQzMC42IDI0ODEuNiA0MzkuMiAyNDkwLjQgNDQzLjVDMjUwNC42IDQ1MC40IDI1MTQuOSA0NTEuOSAyNTQ1LjUgNDUxLjZDMjU2NS4wIDQ1MS4zIDI1NzEuOSA0NTAuOCAyNTgyLjAgNDQ5LjBaIi8+PHBhdGggZmlsbD0iIzI3MzQ4QiIgZD0iTTI5NjcuMCAxMDAzLjBDMjkyOC4yIDk5OS4yIDI5MDguNSA5ODcuNSAyOTA1LjEgOTY2LjNDMjkwMy40IDk1NS42IDI5MDYuMyA5NDQuMiAyOTEyLjggOTM2LjVDMjkxNi44IDkzMS43IDI5MTcuNSA5MzEuNiAyOTI1LjMgOTM1LjNDMjkzNC45IDkzOS44IDI5NDkuNiA5NDQuNSAyOTU5LjIgOTQ2LjBDMjk3MS4xIDk0Ny45IDI5OTQuOCA5NDYuOSAzMDAzLjAgOTQ0LjFDMzAxOC4yIDkzOC45IDMwMjQuNyA5MzEuMyAzMDI1LjcgOTE3LjNDMzAyNi4yIDkxMC43IDMwMjYuMSA5MDkuNyAzMDI0LjggOTEwLjNDMjk5OC44IDkyMC4yIDI5NjIuOSA5MTguOSAyOTM4LjUgOTA3LjFDMjkyMy41IDg5OS45IDI5MTIuOSA4OTAuMSAyOTA0LjAgODc1LjJDMjg4Ny41IDg0Ny4zIDI4ODUuNSA4MDEuNiAyODk5LjUgNzcxLjJDMjkxMi45IDc0Mi4yIDI5NDAuNSA3MjQuMCAyOTc4LjggNzE4LjlDMjk5MS4zIDcxNy4yIDMwMjAuMSA3MTguMyAzMDMxLjAgNzIwLjhDMzA1My40IDcyNi4xIDMwNzAuMyA3MzQuNCAzMDgyLjEgNzQ2LjBDMzA5My44IDc1Ny41IDMwOTMuMCA3NDkuNyAzMDkzLjAgODQ2LjdDMzA5My4wIDkzNi43IDMwOTMuMCA5MzcuMCAzMDg3LjEgOTUxLjBDMzA3OS44IDk2OC40IDMwNjMuOCA5ODQuNSAzMDQ1LjUgOTkyLjVDMzAzNy42IDk5Ni4wIDMwMjQuMyA5OTkuOCAzMDEzLjUgMTAwMS42QzMwMDIuNCAxMDAzLjQgMjk3OC40IDEwMDQuMiAyOTY3LjAgMTAwMy4wWk0yMTE1LjIgOTMzLjlDMjA1MS42IDkyNi43IDIwMTUuMCA4ODYuMyAyMDE1LjAgODIzLjJDMjAxNS4wIDc4OS41IDIwMjQuNyA3NjQuOSAyMDQ1LjggNzQ0LjlDMjA2NC43IDcyNy4wIDIwODkuNCA3MTguMCAyMTIwLjAgNzE4LjBDMjEzNS40IDcxOC4wIDIxNDYuNyA3MTkuOCAyMTU5LjYgNzI0LjVDMjE5Ni4yIDczNy42IDIyMTkuMCA3NjguNiAyMjE5LjAgODA1LjNDMjIxOS4wIDgyMi43IDIyMTMuNSA4MzAuOCAyMTk4LjUgODM2LjBDMjE5NS41IDgzNy4wIDIxNjkuNiA4NDEuMyAyMTQwLjggODQ1LjVDMjExMi4wIDg0OS43IDIwODcuOSA4NTMuMyAyMDg3LjIgODUzLjZDMjA4NS4yIDg1NC4yIDIwOTAuMiA4NjMuMCAyMDk1LjMgODY3LjdDMjEwMC43IDg3Mi43IDIxMDUuMSA4NzUuMCAyMTE1LjAgODc4LjFDMjEyMS43IDg4MC4zIDIxMjQuMyA4ODAuNSAyMTM5LjUgODgwLjRDMjE1NC41IDg4MC4zIDIxNTcuNyA4ODAuMCAyMTY2LjMgODc3LjdDMjE3MS43IDg3Ni4zIDIxNzkuOCA4NzMuNSAyMTg0LjMgODcxLjVDMjE5Ni4zIDg2Ni4xIDIxOTUuNSA4NjYuMSAyMjAwLjcgODcxLjVDMjIwNy4zIDg3OC40IDIyMTAuNCA4ODUuOCAyMjEwLjQgODk0LjVDMjIxMC4zIDkxMS4xIDIyMDAuMCA5MjEuNyAyMTc2LjggOTI4LjhDMjE2Mi4zIDkzMy4zIDIxMzEuOSA5MzUuOCAyMTE1LjIgOTMzLjlaTTI1ODkuNiA5MzQuMEMyNTUxLjYgOTI5LjYgMjUyNC40IDkxNC44IDI1MDcuMSA4ODguOUMyNDkzLjcgODY5LjAgMjQ4OC4yIDg0Ni44IDI0ODkuMyA4MTcuNUMyNDkwLjYgNzg1LjggMjQ5OC43IDc2Ni4wIDI1MTguNCA3NDYuNUMyNTMzLjQgNzMxLjYgMjU0OS44IDcyMy40IDI1NzIuNCA3MTkuNUMyNTgzLjcgNzE3LjYgMjYwNC4yIDcxNy42IDI2MTUuMyA3MTkuNUMyNjYxLjUgNzI3LjUgMjY5My4wIDc2Mi40IDI2OTMuMCA4MDUuM0MyNjkzLjAgODIyLjcgMjY4Ny41IDgzMC44IDI2NzIuNSA4MzYuMEMyNjY5LjUgODM3LjAgMjY0My42IDg0MS4zIDI2MTQuOCA4NDUuNUMyNTg2LjAgODQ5LjcgMjU2MS45IDg1My4zIDI1NjEuMiA4NTMuNkMyNTU5LjIgODU0LjIgMjU2NC4yIDg2My4wIDI1NjkuMyA4NjcuN0MyNTc0LjcgODcyLjcgMjU3OS4xIDg3NS4wIDI1ODkuMCA4NzguMUMyNTk1LjcgODgwLjMgMjU5OC4zIDg4MC41IDI2MTMuNSA4ODAuNEMyNjI4LjUgODgwLjMgMjYzMS43IDg4MC4wIDI2NDAuMyA4NzcuN0MyNjQ1LjcgODc2LjMgMjY1My44IDg3My41IDI2NTguMyA4NzEuNUMyNjcwLjMgODY2LjIgMjY2OS41IDg2Ni4yIDI2NzQuNCA4NzEuMkMyNjgxLjIgODc4LjMgMjY4NC41IDg4Ni4wIDI2ODQuNCA4OTQuNUMyNjg0LjIgOTExLjIgMjY3NC4wIDkyMS43IDI2NTAuOCA5MjguOEMyNjM2LjQgOTMzLjMgMjYwNS45IDkzNS44IDI1ODkuNiA5MzQuMFpNMzMyNS4wIDkzNC4wQzMyOTMuNSA5MzEuMSAzMjY5LjUgOTIwLjcgMzI1Ny4zIDkwNC41QzMyNDguMCA4OTIuMiAzMjQ0LjUgODgwLjEgMzI0NS4zIDg2Mi41QzMyNDYuNiA4MzMuNiAzMjU5LjkgODE2LjcgMzI4OC41IDgwNy43QzMyOTkuMiA4MDQuNCAzMzEwLjMgODAyLjYgMzM0Mi44IDc5OS40TDMzNzAuMCA3OTYuNkwzMzcwLjAgNzkyLjhDMzM3MC4wIDc4MC42IDMzNjAuMiA3NzQuMCAzMzM5LjQgNzcyLjBDMzMyMS4wIDc3MC4zIDMyOTkuMCA3NzMuMiAzMjc5LjMgNzc5LjlMMzI3MC41IDc4Mi45TDMyNjYuNCA3NzguN0MzMjU4LjcgNzcwLjcgMzI1NS43IDc1NS4yIDMyNTkuNiA3NDMuN0MzMjYxLjQgNzM4LjMgMzI2Ny41IDczMi4zIDMyNzUuMSA3MjguNUMzMjkyLjMgNzE5LjcgMzMzNy4yIDcxNS4zIDMzNjUuOSA3MTkuNkMzMzc5LjEgNzIxLjUgMzM5NS4yIDcyNi43IDM0MDUuMCA3MzIuMkMzNDE1LjggNzM4LjEgMzQyNi41IDc0OS4yIDM0MzEuOCA3NTkuN0MzNDM5LjQgNzc1LjAgMzQzOS41IDc3Ni4yIDM0MzkuNSA4MzkuMEMzNDM5LjUgOTAzLjkgMzQ0MC4xIDg5OS45IDM0MjkuMiA5MTAuMkMzNDE0LjggOTIzLjggMzM5Mi45IDkzMS4zIDMzNjAuNSA5MzQuMEMzMzQ2LjQgOTM1LjEgMzMzNy44IDkzNS4xIDMzMjUuMCA5MzQuMFpNMjI3Ni41IDkzMC4wQzIyNjEuOCA5MjYuOCAyMjU1LjcgOTE5LjYgMjI1My45IDkwMi45QzIyNTMuMyA4OTcuNiAyMjUzLjAgODY3LjggMjI1My4yIDgyOS4zQzIyNTMuNSA3NTguMyAyMjUzLjMgNzYwLjkgMjI1OS42IDc1MS44QzIyNjguNCA3MzkuMiAyMjkyLjYgNzI2LjggMjMyMC40IDcyMC44QzIzMjkuMiA3MTguOCAyMzMzLjUgNzE4LjYgMjM1NC41IDcxOC41QzIzNzQuMSA3MTguNSAyMzgwLjAgNzE4LjggMjM4Ni44IDcyMC4zQzI0MTYuOCA3MjYuOSAyNDM2LjMgNzQwLjMgMjQ0Ni41IDc2MS41QzI0NTMuNyA3NzYuNCAyNDUzLjQgNzcyLjQgMjQ1My43IDg1NC4yTDI0NTQuMSA5MjcuOEwyNDQ2LjggOTI5LjJDMjQ0Mi40IDkzMC4wIDI0MzIuNiA5MzAuNSAyNDIyLjAgOTMwLjVDMjQwNi4yIDkzMC40IDI0MDQuMCA5MzAuMiAyMzk4LjggOTI4LjJDMjM5NS4wIDkyNi42IDIzOTEuOSA5MjQuNSAyMzg5LjUgOTIxLjdDMjM4Mi42IDkxMy43IDIzODIuNyA5MTQuMiAyMzgyLjEgODQ3LjhMMjM4MS41IDc4OC4yTDIzNzguNSA3ODMuOUMyMzc2LjcgNzgxLjMgMjM3My41IDc3OC42IDIzNzAuNSA3NzcuMUMyMzY2LjAgNzc0LjggMjM2NC40IDc3NC41IDIzNTQuMCA3NzQuNUMyMzQxLjkgNzc0LjUgMjMzNS4wIDc3Ni4wIDIzMjguMiA3ODAuMkwyMzI1LjAgNzgyLjJMMjMyNS4wIDg1NS4wTDIzMjUuMCA5MjcuOEwyMzE4LjggOTI5LjBDMjMxMC45IDkzMC41IDIyODEuOSA5MzEuMiAyMjc2LjUgOTMwLjBaTTI3NTAuMSA5MzAuMEMyNzM5LjQgOTI3LjcgMjczMi44IDkyMi4yIDI3MjkuNCA5MTIuN0MyNzI3LjcgOTA3LjkgMjcyNy42IDkwMi41IDI3MjcuMiA4NDEuNUMyNzI2LjkgNzcyLjAgMjcyNy4yIDc2My4yIDI3MzEuMiA3NTUuMkMyNzM5LjYgNzM3LjggMjc3NC45IDcyMi40IDI4MTQuNiA3MTguOUMyODQwLjcgNzE2LjUgMjg1OS44IDcyMi4yIDI4NjYuNyA3MzQuNUMyODY5LjQgNzM5LjMgMjg3MS4yIDc0OS41IDI4NzAuNCA3NTUuMkMyODY5LjMgNzYzLjQgMjg2NS45IDc3Mi4xIDI4NjMuNiA3NzIuOUMyODYyLjUgNzczLjQgMjg1Ni4xIDc3NC4wIDI4NDkuNSA3NzQuM0MyODM3LjEgNzc1LjAgMjgxNy42IDc3OC41IDI4MDUuOCA3ODIuMkwyNzk5LjAgNzg0LjNMMjc5OS4wIDg1Ni4wTDI3OTkuMCA5MjcuOEwyNzkyLjggOTI5LjBDMjc4NC44IDkzMC41IDI3NTUuOSA5MzEuMiAyNzUwLjEgOTMwLjBaTTMxNjEuNSA5MzAuMEMzMTUxLjcgOTI4LjAgMzE0Ni4xIDkyNC4wIDMxNDIuMyA5MTYuMkwzMTM5LjUgOTEwLjVMMzEzOS4yIDgxOC44QzMxMzkuMCA3MzEuOCAzMTM5LjEgNzI3LjEgMzE0MC43IDcyNi42QzMxNDEuNyA3MjYuMyAzMTQ3LjcgNzI1LjMgMzE1NC4wIDcyNC40QzMxNjYuMSA3MjIuNyAzMTgyLjggNzIyLjkgMzE5MC4yIDcyNS4wQzMxOTcuMSA3MjcuMCAzMjAzLjIgNzMyLjAgMzIwNi41IDczOC40TDMyMDkuNSA3NDQuNEwzMjA5LjggODM2LjBMMzIxMC4xIDkyNy43TDMxOTguOCA5MjkuM0MzMTg3LjEgOTMxLjEgMzE2OC41IDkzMS40IDMxNjEuNSA5MzAuMFpNMzM1Ny41IDg4MC45QzMzNjAuNyA4ODAuMyAzMzY1LjEgODc5LjEgMzM2Ny4yIDg3OC4zTDMzNzEuMCA4NzYuOEwzMzcxLjAgODYwLjRDMzM3MS4wIDg0NC4xIDMzNzEuMCA4NDQuMCAzMzY4LjggODQ0LjBDMzM2Ny41IDg0NC4wIDMzNTkuMSA4NDQuNyAzMzUwLjAgODQ1LjVDMzMzMi45IDg0Ny4wIDMzMjUuNiA4NDguNiAzMzIwLjYgODUxLjlDMzMwOS40IDg1OS40IDMzMTMuMiA4NzYuMiAzMzI3LjEgODgwLjVDMzMzMi41IDg4Mi4yIDMzNDkuNSA4ODIuNCAzMzU3LjUgODgwLjlaTTMwMDguMSA4NjIuNUMzMDEwLjYgODYyLjIgMzAxNS40IDg2MC42IDMwMTguOCA4NTkuMEwzMDI1LjAgODU2LjFMMzAyNS4wIDgxNy42TDMwMjUuMCA3NzkuMUwzMDIyLjIgNzc3LjdDMzAxNi44IDc3NC45IDMwMDguOSA3NzMuNyAyOTk5LjAgNzc0LjJDMjk5MC45IDc3NC42IDI5ODguMiA3NzUuMiAyOTgyLjkgNzc3LjdDMjk3Mi43IDc4Mi41IDI5NjYuNSA3OTAuMSAyOTYzLjYgODAxLjVDMjk2MS41IDgwOS40IDI5NjEuNSA4MjguNiAyOTYzLjUgODM2LjVDMjk2Ny42IDg1Mi4xIDI5NzcuMyA4NjEuMiAyOTkyLjAgODYzLjBDMjk5Ny41IDg2My42IDI5OTkuMyA4NjMuNiAzMDA4LjEgODYyLjVaTTIxMTcuOCA4MDAuM0wyMTUyLjEgNzk0LjdMMjE1MS41IDc5Mi4xQzIxNTAuNiA3ODguMiAyMTQ0LjUgNzc5LjUgMjE0MC43IDc3Ni42QzIxMzQuNCA3NzEuOCAyMTMwLjMgNzcwLjYgMjExOS41IDc3MC42QzIxMTEuNCA3NzAuNyAyMTA4LjMgNzcxLjEgMjEwMy41IDc3My4wQzIwOTUuNCA3NzYuMiAyMDg3LjEgNzg0LjQgMjA4NC4yIDc5Mi4zQzIwODEuMiA4MDAuMiAyMDgwLjMgODA2LjAgMjA4Mi4xIDgwNi4wQzIwODIuOSA4MDYuMCAyMDk4LjkgODAzLjUgMjExNy44IDgwMC4zWk0yNTkxLjggODAwLjNMMjYyNi4xIDc5NC43TDI2MjUuNSA3OTIuMUMyNjI0LjYgNzg4LjIgMjYxOC41IDc3OS41IDI2MTQuNyA3NzYuNkMyNjA4LjQgNzcxLjggMjYwNC4zIDc3MC42IDI1OTMuNSA3NzAuNkMyNTg1LjQgNzcwLjcgMjU4Mi4zIDc3MS4xIDI1NzcuNSA3NzMuMEMyNTY5LjQgNzc2LjIgMjU2MS4xIDc4NC40IDI1NTguMiA3OTIuM0MyNTU1LjIgODAwLjIgMjU1NC4zIDgwNi4wIDI1NTYuMSA4MDYuMEMyNTU2LjkgODA2LjAgMjU3Mi45IDgwMy41IDI1OTEuOCA4MDAuM1pNMzE1NC4zIDcwNC4xQzMxMzUuNyA2OTcuNyAzMTI2LjkgNjc5LjQgMzEzNS42IDY2NS4zQzMxMzguMSA2NjEuMyAzMTQzLjggNjU2LjcgMzE2OS4wIDYzOC4zQzMyMDIuNSA2MTQuMCAzMjAwLjMgNjE1LjAgMzIxMy4wIDYxNy4xQzMyMjUuNCA2MTkuMSAzMjMzLjYgNjI0LjIgMzIzOC40IDYzMy4xQzMyNDEuOCA2MzkuMiAzMjQyLjMgNjQ2LjYgMzI0MC4xIDY1NC4zQzMyMzguMiA2NjAuNyAzMjMwLjkgNjY4LjcgMzIyMS43IDY3NC40QzMyMTEuOCA2ODAuNCAzMTYyLjYgNzA2LjAgMzE2MC45IDcwNi4wQzMxNjAuMSA3MDUuOSAzMTU3LjIgNzA1LjEgMzE1NC4zIDcwNC4xWiIvPjwvZz48L3N2Zz4="></a>
+  <nav class="cab__menu" aria-label="Principal">
+    <a href="#" aria-current="page">Inicio</a><a href="#">El Método</a><a href="#">Sectores</a><a href="#">Tarifas</a><a href="#">Guías</a>
+  </nav>
+  <div class="cab__acc">
+    <div class="cab__tel"><small>LLAMA GRATIS</small>933 949 343</div>
+    <a class="cab__cta" href="#">Analizar mi factura <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</header>
+
+<section class="hv6" aria-labelledby="h1">
+  <div class="contenedor hv6__rejilla">
+    <div class="hv6__texto">
+      <p class="hv6__ante">Energía para empresas</p>
+      <h1 class="hv6__h1" id="h1">La mejor tarifa es la que necesita tu empresa.</h1>
+      <p class="hv6__sub">Y esa no está en ningún catálogo. Analizamos tu suministro y la construimos contigo.</p>
+
+      <div class="hv6__tarjeta">
+        <div class="tg" role="group" aria-labelledby="tg-p">
+          <p class="tg__cab">Empieza aquí · sin coste</p>
+          <p class="tg__p" id="tg-p">¿Cuánto paga tu empresa de luz al mes?</p>
+          <p class="tg__a">Aproximado. Si tienes varios suministros, súmalos.</p>
+          <ul class="tg__tramos">
+            <li><a class="tg__tramo" href="#"><span>Menos de 300&nbsp;€</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a class="tg__tramo" href="#"><span>300 – 1.000&nbsp;€</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a class="tg__tramo" href="#"><span>1.000 – 3.000&nbsp;€</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+            <li><a class="tg__tramo" href="#"><span>Más de 3.000&nbsp;€</span><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+          </ul>
+          <p class="tg__linea">Después eliges cómo seguimos: una llamada o tu factura.</p>
+        </div>
+      </div>
+
+      <ul class="hv6__confianza">
+        <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M2.5 8.2 7.8 2.9h5.3v5.3L7.8 13.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2.5 13.5 13.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Análisis sin coste</span></li>
+        <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M4.4 2.5 6 2.2l1 2.8-1.3.9a7 7 0 0 0 4.5 4.5l.9-1.3 2.8 1-.3 1.6a1.3 1.3 0 0 1-1.3 1.1A10.3 10.3 0 0 1 3.3 3.8a1.3 1.3 0 0 1 1.1-1.3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><span>Te llama una persona, en la franja que elijas</span></li>
+        <li><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><path d="M4 1.8h5.5L12 4.3v9.9H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 11.5c1-.9 1.6-.9 2.1 0s1.1.9 2 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span>No cambias de compañía sin firmarlo</span></li>
+      </ul>
+      <p class="hv6__otros">¿Comunidad de vecinos o vivienda? <a href="#">Empieza aquí</a></p>
+    </div>
+
+    <div class="hv6__visual">
+      <figure class="lh" id="lectura" aria-labelledby="lh-t">
+        <div class="lh__cab">
+          <p class="lh__t" id="lh-t">Así leemos una factura</p>
+          <span class="lh__ej">Ejemplo · obrador de panadería</span>
+        </div>
+
+        <details class="fila" name="lectura">
+          <summary>
+            <span class="fila__t">Cuándo consume</span>
+            <span class="fila__f"><small>P6</small>5.800 kWh</span>
+            <span class="fila__s">Más de la mitad, de madrugada y en fin de semana: el horno.</span>
+            <svg class="fila__c" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="fila__cuerpo">
+            <ul class="barras">
+              <li><span class="p">P1</span><span class="pista"><span class="barra" style="--w:44.8%"></span></span><span class="valor">2.600 kWh</span></li>
+              <li><span class="p">P2</span><span class="pista"><span class="barra" style="--w:29%"></span></span><span class="valor">1.680 kWh</span></li>
+              <li class="dest"><span class="p">P6</span><span class="pista"><span class="barra" style="--w:100%"></span></span><span class="valor">5.800 kWh</span></li>
+            </ul>
+            <p class="nota">En febrero, el peaje 3.0TD solo tiene P1, P2 y P6.</p>
+          </div>
+        </details>
+
+        <details class="fila fila--clave" name="lectura" open>
+          <summary>
+            <span class="fila__t">Potencia</span>
+            <span class="fila__f">23 kW</span>
+            <span class="fila__s">Paga de día 23 kW que no usa.</span>
+            <svg class="fila__c" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="fila__cuerpo">
+            <ul class="barras barras--ancho">
+              <li><span class="p">Contratada</span><span class="pista"><span class="barra" style="--w:100%"></span></span><span class="valor">45 kW</span></li>
+              <li class="dest"><span class="p">Maxímetro P1 y P2</span><span class="pista pista--hueco"><span class="barra" style="--w:48.9%"></span></span><span class="valor">22 kW</span></li>
+              <li><span class="p">Maxímetro P6</span><span class="pista pista--hueco"><span class="barra" style="--w:88.9%"></span></span><span class="valor">40 kW</span></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="fila" name="lectura">
+          <summary>
+            <span class="fila__t">Energía reactiva</span>
+            <span class="fila__f"><small>en febrero</small>21,34 €</span>
+            <span class="fila__s">Es la de las horas de tienda. En P6 no se factura.</span>
+            <svg class="fila__c" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="fila__cuerpo">
+            <ul class="barras">
+              <li><span class="p">P1</span><span class="pista"><span class="barra" style="--w:100%"></span></span><span class="valor">12,96 €</span></li>
+              <li><span class="p">P2</span><span class="pista"><span class="barra" style="--w:64.7%"></span></span><span class="valor">8,38 €</span></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="fila" name="lectura">
+          <summary>
+            <span class="fila__t">Precio</span>
+            <span class="fila__f"><small>a cualquier hora</small>0,1450 €/kWh</span>
+            <span class="fila__s">Paga igual el kWh de las 5:00 que el de las 12:00.</span>
+            <svg class="fila__c" aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="fila__cuerpo">
+            <div class="precio" aria-hidden="true">
+              <span class="precio__linea"></span>
+              <span class="precio__marca" style="--x:20.8%"><i>5:00</i></span>
+              <span class="precio__marca" style="--x:50%"><i>12:00</i></span>
+            </div>
+          </div>
+        </details>
+
+        <div class="decide">
+          <p class="decide__t">Qué decidimos</p>
+          <p class="decide__s">Potencia periodo a periodo y precio en seis periodos. El precio fijo se mantiene.</p>
+          <a class="decide__ver" href="#">Ver su factura leída, línea a línea →</a>
+        </div>
+        <figcaption class="lh__pie">Peajes y cargos oficiales de 2026.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="notas" aria-labelledby="notas-t">
+  <div class="notas__in">
+    <h2 id="notas-t">Qué cambia respecto a la v12.16</h2>
+    <ul>
+      <li>Las cuatro conclusiones se leen sin abrir nada. <span>Solo una gráfica está abierta a la vez; las demás se abren con un toque.</span></li>
+      <li>Potencia lleva la cifra grande, porque es la que se traduce en euros. <span>Va con el marcador de la marca y abierta por defecto.</span></li>
+      <li>La lectura pasa a fondo suave y sin sombra. <span>El selector de gasto es lo único con relieve y color.</span></li>
+      <li>Los cuatro tramos son una cuadrícula 2×2 de ancho igual. <span>En móvil, el acordeón sustituye al carrusel.</span></li>
+    </ul>
+    <p>Mismo copy aprobado, mismos tokens, sin degradados ni efectos. Las etiquetas pequeñas (P6, en febrero, a cualquier hora) salen de los datos y del copy que ya existen.</p>
+  </div>
+</section>
+
+</body></html>
