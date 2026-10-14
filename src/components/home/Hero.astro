@@ -589,14 +589,14 @@ import imagenCasa from "../../imagenes/casa.jpeg";
      ========================================================================== */
   .hero-seccion {
     position: relative;
-    padding: 44px 0 68px;
-    background-color: #07152b;
+    padding: 44px 0 76px;
+    background-color: #0c1a2e;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     overflow: hidden;
     isolation: isolate;
   }
 
-  /* Capa fotográfica con oscurecido para resaltar textos y tarjetas */
+  /* Capa fotográfica: clara, viva y bien visible */
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -611,21 +611,31 @@ import imagenCasa from "../../imagenes/casa.jpeg";
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center 36%;
     transform: scale(1.02);
-    filter: brightness(0.68) saturate(1.15);
+    filter: brightness(0.96) saturate(1.1);
   }
 
   .hero-bg-overlay {
     position: absolute;
     inset: 0;
-    /* Gradiente oscuro corporativo con tonos azul marino profundo de EMAX */
-    background: linear-gradient(
-      140deg,
-      rgba(7, 20, 42, 0.90) 0%,
-      rgba(10, 26, 56, 0.85) 50%,
-      rgba(5, 16, 35, 0.92) 100%
-    );
+    /* Overlay gradual: protege la lectura a la izquierda para el texto blanco,
+       pero deja la foto 80%-90% clara, luminosa y muy visible en el centro y derecha */
+    background:
+      linear-gradient(
+        to right,
+        rgba(6, 17, 36, 0.76) 0%,
+        rgba(6, 17, 36, 0.54) 38%,
+        rgba(6, 17, 36, 0.18) 68%,
+        rgba(6, 17, 36, 0.08) 100%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(6, 17, 36, 0.35) 0%,
+        transparent 30%,
+        transparent 70%,
+        rgba(6, 17, 36, 0.50) 100%
+      );
   }
 
   .hero-grid {
@@ -663,16 +673,16 @@ import imagenCasa from "../../imagenes/casa.jpeg";
     letter-spacing: -0.015em;
     margin: 0 0 16px;
     text-wrap: balance;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75), 0 1px 3px rgba(0, 0, 0, 0.9);
   }
 
   .hero-subtitulo {
     font-size: 1.12rem;
-    color: #cddcf0;
+    color: #f0f6fc;
     line-height: 1.55;
     margin: 0 0 28px;
     max-width: 44ch;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
   }
 
   /* Tarjeta de gasto (TarjetaGasto limpia) */
@@ -764,7 +774,8 @@ import imagenCasa from "../../imagenes/casa.jpeg";
     flex-wrap: wrap;
     gap: 10px 22px;
     font-size: 0.86rem;
-    color: #dbe7f5;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
   }
 
   .hero-confianza li {
@@ -775,6 +786,7 @@ import imagenCasa from "../../imagenes/casa.jpeg";
 
   .hero-confianza svg {
     color: #38b6ff;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
     flex-shrink: 0;
   }
 
@@ -784,7 +796,8 @@ import imagenCasa from "../../imagenes/casa.jpeg";
   }
 
   .hero-otros a {
-    color: #c4d7ed;
+    color: #f0f6fc;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
   }
 
   .hero-otros u {
