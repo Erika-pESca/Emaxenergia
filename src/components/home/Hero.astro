@@ -516,16 +516,19 @@ import imagenCasa from "../../imagenes/casa.jpeg";
      ========================================================================== */
   .hero-seccion {
     position: relative;
-    /* La imagen sube por detrás del header flotante (66px de cápsula) */
+    /* La imagen cubre la parte superior detrás del header y deja asomar sutilmente la sección siguiente */
     margin-top: -66px;
-    padding: calc(66px + 64px) 0 72px;
+    min-height: calc(88vh + 66px);
+    display: flex;
+    align-items: center;
+    padding: calc(66px + 36px) 0 48px;
     background-color: #0c1a2e;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     overflow: hidden;
     isolation: isolate;
   }
 
-  /* Capa fotográfica: clara, viva y bien visible */
+  /* Capa fotográfica: clara, viva y bien visible en toda la pantalla */
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -540,7 +543,7 @@ import imagenCasa from "../../imagenes/casa.jpeg";
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 38%;
+    object-position: center 46%;
     transform: scale(1.02);
     filter: brightness(0.98) saturate(1.12);
   }
@@ -570,9 +573,13 @@ import imagenCasa from "../../imagenes/casa.jpeg";
   .hero-grid {
     position: relative;
     z-index: 2;
+    width: 100%;
+    max-width: 1380px;
+    margin-inline: auto;
+    padding-inline: clamp(16px, 3.5vw, 44px);
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.92fr);
-    gap: 48px;
+    gap: clamp(32px, 4vw, 56px);
     align-items: center;
   }
 
@@ -595,11 +602,12 @@ import imagenCasa from "../../imagenes/casa.jpeg";
   }
 
   .hero-h1 {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
     font-size: clamp(2.1rem, 1.6rem + 2.4vw, 3.35rem);
     color: #ffffff;
-    line-height: 1.08;
+    line-height: 1.15;
     font-weight: 700;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
     margin: 0 0 16px;
     text-wrap: balance;
     text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75), 0 1px 3px rgba(0, 0, 0, 0.9);

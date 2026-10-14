@@ -177,6 +177,9 @@ const tarifasItems = [
         <a href="/guias" class:list={["nav-enlace", { activo: current.startsWith("/guias") }]} data-glider-target>
           <span>Guías</span>
         </a>
+
+        <!-- Barra de progreso viva en la base de la cápsula del menú -->
+        <div class="capsula-scroll-progreso" id="scroll-progress-line" aria-hidden="true"></div>
       </nav>
 
       <!-- MOTOR DE CONVERSIÓN CON ANIMACIONES VIVAS -->
@@ -252,9 +255,6 @@ const tarifasItems = [
           <span class="hamb-linea linea-3"></span>
         </button>
       </div>
-
-      <!-- Barra de progreso viva en la base curvada de la cápsula -->
-      <div class="capsula-scroll-progreso" id="scroll-progress-line" aria-hidden="true"></div>
     </div>
   </div>
 
@@ -1183,10 +1183,15 @@ const tarifasItems = [
     justify-content: center;
   }
 
+  .contenedor-capsula {
+    width: min(1380px, calc(100% - clamp(24px, 4vw, 48px)));
+    margin-inline: auto;
+  }
+
   /* ========================================================
      CABECERA SEPARADA EN TRES BLOQUES (logo · menú · acciones)
-     Cada bloque es su propia cápsula para que el menú no se
-     confunda con el resto ni con la foto del hero.
+     Logo a la izquierda, menú centrado matemáticamente, 
+     acciones a la derecha y barra de progreso integrada.
      ======================================================== */
   .capsula-globo,
   .capsula-globo.es-elevada {
@@ -1197,7 +1202,10 @@ const tarifasItems = [
     box-shadow: none;
     transform: none;
     padding: 0;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
     pointer-events: none;
   }
 
@@ -1218,10 +1226,13 @@ const tarifasItems = [
   }
 
   .capsula-logo {
+    justify-self: start;
     padding: 0 22px;
   }
 
   .nav-capsula {
+    justify-self: center;
+    position: relative;
     padding: 0 6px;
     gap: 2px;
   }
@@ -1234,6 +1245,7 @@ const tarifasItems = [
   }
 
   .capsula-acciones {
+    justify-self: end;
     padding: 0 7px 0 10px;
   }
 
@@ -1244,8 +1256,19 @@ const tarifasItems = [
     box-shadow: 0 14px 36px rgba(0, 74, 173, 0.16), 0 3px 10px rgba(15, 35, 70, 0.08);
   }
 
+  /* Barra de progreso de lectura bajo la cápsula central */
   .capsula-scroll-progreso {
-    display: none;
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 18px;
+    right: 18px;
+    width: 0%;
+    height: 2.5px;
+    background: linear-gradient(90deg, #004aad 0%, #38b6ff 60%, #12b76a 100%);
+    border-radius: var(--radio-pill, 999px);
+    transition: width 0.1s linear;
+    z-index: 10;
   }
 
   /* ========================================================
