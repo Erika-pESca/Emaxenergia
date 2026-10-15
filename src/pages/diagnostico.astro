@@ -1,0 +1,39 @@
+---
+// Página: Diagnóstico de Factura e Informe de tu Empresa
+// Muestra qué recibes en tu informe de diagnóstico y el desglose de auditoría
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AsiLeemosFactura from "../components/home/AsiLeemosFactura.astro";
+import Variables from "../components/home/Variables.astro";
+import TecnologiaPersonas from "../components/home/TecnologiaPersonas.astro";
+import ProximaFactura from "../components/home/ProximaFactura.astro";
+---
+
+<BaseLayout
+  title="Qué recibes en tu informe · Diagnóstico EMAX Energía"
+  description="El informe de tu empresa, bloque a bloque: curva de consumo, potencias optimizadas, eliminación de reactiva y comparativa técnica."
+  path="/diagnostico"
+>
+  <div class="diagnostico-page-wrapper">
+    <!-- 1. Caso real auditado línea a línea (con id factura-obrador para enlaces directos) -->
+    <div id="factura-obrador">
+      <AsiLeemosFactura />
+    </div>
+
+    <!-- 2. Comparativa técnica de diagnóstico -->
+    <Variables />
+
+    <!-- 3. Quién lee tus datos (Tecnología + Asesor) -->
+    <TecnologiaPersonas />
+
+    <!-- 4. Cierre y solicitud de estudio -->
+    <ProximaFactura />
+  </div>
+</BaseLayout>
+
+<style>
+  .diagnostico-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

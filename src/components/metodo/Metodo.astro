@@ -1,0 +1,39 @@
+---
+// Componente principal de la sección El Método de EMAX Energía
+// Agrupa de manera modular y organizada todas las partes del método:
+// 1. Hero: "Antes de elegir tarifa, hay cinco decisiones" + selector de gasto
+// 2. TresEtapas: Diagnóstico -> Estrategia -> Tarifa
+// 3. CincoDecisiones: Los 5 acordeones con datos, límites, fuentes y enlaces
+// 4. QuienLeeTusDatos: Maxi (tecnología) + Consultor (personas)
+// 5. CierreMetodo: Cierre oscuro con llamada a la acción y teléfono
+import HeroMetodo from "./HeroMetodo.astro";
+import TresEtapas from "./TresEtapas.astro";
+import CincoDecisiones from "./CincoDecisiones.astro";
+import QuienLeeTusDatos from "./QuienLeeTusDatos.astro";
+import CierreMetodo from "./CierreMetodo.astro";
+---
+
+<div class="metodo-root">
+  <!-- 1. Hero con propuesta inicial y selector de gasto -->
+  <HeroMetodo />
+
+  <!-- 2. Tres etapas del método: Diagnóstico, Estrategia y Tarifa -->
+  <TresEtapas />
+
+  <!-- 3. Las cinco decisiones estratégicas detalladas -->
+  <CincoDecisiones />
+
+  <!-- 4. Quién lee tus datos: Inteligencia Maxi + Especialistas humanos -->
+  <QuienLeeTusDatos />
+
+  <!-- 5. Cierre comercial con selector de gasto y llamada telefónica -->
+  <CierreMetodo />
+</div>
+
+<style>
+  .metodo-root {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

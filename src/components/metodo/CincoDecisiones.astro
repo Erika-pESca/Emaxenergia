@@ -1,0 +1,656 @@
+---
+// Componente CincoDecisiones de la sección El Método
+// Estructura y diseño idénticos a los componentes de src/components/home:
+// 5 decisiones estratégicas con acordeones interactivos, datos contrastados y enlaces a guías
+interface EnlaceGuia {
+  texto: string;
+  href: string;
+}
+
+interface FilaDecision {
+  etiqueta: string;
+  contenido: string;
+  esDato?: boolean;
+  esFuente?: boolean;
+}
+
+interface Decision {
+  id: string;
+  numero: number;
+  titulo: string;
+  resumen: string;
+  filas: FilaDecision[];
+  enlaces: EnlaceGuia[];
+  detalleTracking: string;
+}
+
+const decisiones: Decision[] = [
+  {
+    id: "potencia",
+    numero: 1,
+    titulo: "¿Pagas la potencia que usas?",
+    resumen: "Bajar la potencia de algún periodo, subirla si estás pagando excesos, o dejarla como está.",
+    detalleTracking: "metodo · decisión 1",
+    filas: [
+      {
+        etiqueta: "Entrada",
+        contenido: "La potencia contratada se paga cada día y en cada periodo, la uses o no. Es la parte de la factura que más se parece a una cuota fija obligatoria.",
+      },
+      {
+        etiqueta: "El dato",
+        contenido: "La potencia contratada en cada periodo frente a la que tu empresa ha llegado a usar: los maxímetros de los últimos doce meses o, si nos autorizas, tu curva de consumo hora a hora.",
+        esDato: true,
+      },
+      {
+        etiqueta: "Límites",
+        contenido: "En peajes 3.0TD y 6.1TD cada periodo debe tener igual o mayor potencia que el anterior (de P1 a P6 en escala creciente). Por eso, a veces un periodo lleva más potencia de la que usa. El cambio lo ejecuta la distribuidora, que puede limitarlo a un cambio voluntario cada doce meses. Contratar menos de lo que usas tampoco compensa: el precio del exceso está diseñado para penalizar. Por eso, sin maxímetros ni curva, nunca recomendamos tocar la potencia.",
+      },
+      {
+        etiqueta: "Fuentes",
+        contenido: "Circular 3/2020 de la CNMC, artículos 6.2 y 8.9",
+        esFuente: true,
+      },
+    ],
+    enlaces: [
+      { texto: "Guía de potencia contratada →", href: "/guias/potencia-contratada" },
+      { texto: "Evitar exceso de potencia →", href: "/guias/exceso-de-potencia" },
+    ],
+  },
+  {
+    id: "penalizaciones",
+    numero: 2,
+    titulo: "¿Pagas penalizaciones que se corrigen fuera del contrato?",
+    resumen: "Ajustar la potencia, si hay excesos. Corregir la instalación, si la reactiva lo justifica. O dejarlo, si lo que pagas es poco.",
+    detalleTracking: "metodo · decisión 2",
+    filas: [
+      {
+        etiqueta: "Entrada",
+        contenido: "Hay dos recargos que no dependen del precio que pactes con la compañía, sino de cómo usa la energía tu propia instalación: los excesos de potencia y la energía reactiva inductiva.",
+      },
+      {
+        etiqueta: "El dato",
+        contenido: "Los excesos y la reactiva que aparecen en tu factura, periodo a periodo, y cuánto suman en el acumulado anual de tu cuenta de resultados.",
+        esDato: true,
+      },
+      {
+        etiqueta: "Límites",
+        contenido: "La reactiva no se soluciona cambiando de comercializadora: se corrige en tu cuadro eléctrico, normalmente instalando una batería de condensadores dimensionada. Es una inversión, y solo tiene sentido si se amortiza en un plazo razonable: te lo calculamos con tus costes anuales delante. La reactiva no se factura en P6, ni en suministros 2.0TD de 15 kW o menos.",
+      },
+      {
+        etiqueta: "Fuentes",
+        contenido: "Circular 3/2020 de la CNMC, art. 9.5 · Resolución de peajes de la CNMC para 2026, anexo III",
+        esFuente: true,
+      },
+    ],
+    enlaces: [
+      { texto: "Guía de energía reactiva →", href: "/guias/energia-reactiva" },
+      { texto: "Gestión de excesos →", href: "/guias/exceso-de-potencia" },
+    ],
+  },
+  {
+    id: "cuando-consumes",
+    numero: 3,
+    titulo: "¿Cuándo consume tu empresa?",
+    resumen: "Una estructura de precio a medida: seis periodos (Genio), día y noche (Ingenio) o un precio único las 24 horas (Deseo).",
+    detalleTracking: "metodo · decisión 3",
+    filas: [
+      {
+        etiqueta: "Entrada",
+        contenido: "No todas las horas cuestan lo mismo. La parte regulada del kWh (peajes y cargos) cambia según la hora, el día y la temporada del año. En 3.0TD, el kWh en el periodo punta más caro llega a multiplicar por 22 veces el precio del periodo valle.",
+      },
+      {
+        etiqueta: "El dato",
+        contenido: "Cómo se reparte tu consumo entre periodos (de P1 a P6 en 3.0TD y 6.1TD; punta, llano y valle en 2.0TD), traducido a los turnos reales de tu negocio: cocinas, cámaras 24h, maquinaria y fines de semana.",
+        esDato: true,
+      },
+      {
+        etiqueta: "Límites",
+        contenido: "Los peajes y cargos oficiales de la distribuidora se liquidan siempre por los periodos regulados por ley, elijas la estructura que elijas. Lo que cambia es cómo empaquetamos el precio de la energía. La modalidad Genio solo existe en peajes con seis periodos (3.0TD y 6.1TD). Ingenio y Deseo se adaptan a cualquier suministro.",
+      },
+      {
+        etiqueta: "Fuentes",
+        contenido: "Circular 3/2020 de la CNMC, art. 7 · Resolución de peajes 2026 y Orden TED/1524/2025",
+        esFuente: true,
+      },
+    ],
+    enlaces: [
+      { texto: "El peaje 3.0TD y sus periodos →", href: "/guias/peaje-3-0td" },
+      { texto: "Estructuras de tarifa por dentro →", href: "/tarifas#estructura" },
+    ],
+  },
+  {
+    id: "riesgo",
+    numero: 4,
+    titulo: "¿Qué riesgo puede asumir tu empresa?",
+    resumen: "Precio fijo garantizado, precio indexado a mercado transparente o Cuota Fija de tesorería.",
+    detalleTracking: "metodo · decisión 4",
+    filas: [
+      {
+        etiqueta: "Entrada",
+        contenido: "Fijo o indexado es la pregunta que más te habrán hecho los comerciales y la que menos se responde con datos. No depende de adivinar qué hará el mercado mayorista, sino de la tolerancia de tu tesorería.",
+      },
+      {
+        etiqueta: "El dato",
+        contenido: "Cuatro preguntas clave: ¿un mes caro de mercado descuadra tu margen? ¿Tu consumo tiene picos estacionales muy marcados? ¿Consumes en horas de solar barata o puedes desplazar procesos? ¿Tienes tiempo para seguir el mercado?",
+        esDato: true,
+      },
+      {
+        etiqueta: "Qué asumes en cada una",
+        contenido: "<strong>Precio fijo:</strong> certeza total en el precio del kWh, asumiendo pagar algo más si el mercado baja.<br /><strong>Indexado:</strong> pagas la energía a precio de coste mayorista OMIE, asumiendo la volatilidad tanto al alza como a la baja.<br /><strong>Cuota Fija:</strong> previsibilidad presupuestaria mensual con regularización anual según consumo real.",
+      },
+      {
+        etiqueta: "Límites",
+        contenido: "No decidimos por corazonadas sobre el precio futuro. E incluso en tarifa indexada, los componentes regulados (peajes y cargos) siguen su propio calendario oficial inamovible.",
+      },
+    ],
+    enlaces: [
+      { texto: "Guía: Precio fijo o indexado →", href: "/guias/precio-fijo-o-indexado" },
+      { texto: "Comparativa de modalidades →", href: "/tarifas#modalidad" },
+    ],
+  },
+  {
+    id: "condiciones",
+    numero: 5,
+    titulo: "¿Cuándo y en qué condiciones?",
+    resumen: "Duración del contrato, fecha óptima de entrada y condiciones claras. A veces, la mejor recomendación es esperar.",
+    detalleTracking: "metodo · decisión 5",
+    filas: [
+      {
+        etiqueta: "Entrada",
+        contenido: "Una buena tarifa que se activa en un mal momento puede acarrearte una penalización por rescisión anticipada en tu compañía actual. Por eso el calendario también se audita y se planifica.",
+      },
+      {
+        etiqueta: "El dato",
+        contenido: "La fecha exacta de vencimiento de tu contrato vigente, las cláusulas de permanencia que apliquen y los hitos futuros de tu negocio: aperturas, nuevos turnos o reformas de potencia.",
+        esDato: true,
+      },
+      {
+        etiqueta: "Límites",
+        contenido: "Las condiciones se pactan contigo con total transparencia. Si una propuesta incluye compromiso de permanencia, te especificamos qué contraprestación económica recibes a cambio. Y cualquier modificación debe notificarse por escrito con al menos 30 días de antelación.",
+      },
+      {
+        etiqueta: "Fuentes",
+        contenido: "Real Decreto 88/2026, artículo 6.1.m",
+        esFuente: true,
+      },
+    ],
+    enlaces: [
+      { texto: "Cartas de revisión de precio de la comercializadora →", href: "/guias/revision-precio-luz-empresa" },
+    ],
+  },
+];
+---
+
+<section class="decisiones-seccion" id="decisiones" aria-labelledby="h2-decisiones">
+  <div class="contenedor">
+    <div class="seccion-cabecera">
+      <div class="kicker-wrap">
+        <span class="kicker-punto" aria-hidden="true"></span>
+        <span class="kicker-texto">Etapa 2 · Estrategia</span>
+      </div>
+      <h2 class="seccion-titulo" id="h2-decisiones">Las cinco decisiones</h2>
+      <p class="seccion-subtitulo">
+        Cada una se responde con un dato contrastado de tu empresa y concluye en una optimización técnica o en dejarlo como está. Haz clic en cada una para desplegar el análisis completo.
+      </p>
+    </div>
+
+    <!-- Acordeones interactivos de las 5 decisiones -->
+    <div class="decisiones-acordeon" id="acordeon-decisiones">
+      {
+        decisiones.map((item) => (
+          <details class="det-tarjeta" id={item.id} data-detalle={item.detalleTracking}>
+            <summary class="det-summary">
+              <span class="det-numero-circulo" aria-hidden="true">{item.numero}</span>
+              <div class="det-titulares">
+                <h3 class="det-titulo">{item.titulo}</h3>
+                <p class="det-resumen">{item.resumen}</p>
+              </div>
+              <span class="det-icono-chevron" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 7.5l5 5 5-5" />
+                </svg>
+              </span>
+            </summary>
+
+            <div class="det-panel-cuerpo">
+              <dl class="det-filas-dl">
+                {
+                  item.filas.map((fila) => (
+                    <div class:list={["det-fila", { "det-fila-dato": fila.esDato, "det-fila-fuente": fila.esFuente }]}>
+                      <dt class="det-dt">{fila.etiqueta}</dt>
+                      <dd class="det-dd" set:html={fila.contenido} />
+                    </div>
+                  ))
+                }
+
+                {
+                  item.enlaces.length > 0 && (
+                    <div class="det-fila det-fila-enlaces">
+                      <dt class="det-dt">Para saber más</dt>
+                      <dd class="det-dd det-tags-enlaces">
+                        {
+                          item.enlaces.map((enlace) => (
+                            <a href={enlace.href} class="enlace-pildora">
+                              {enlace.texto}
+                            </a>
+                          ))
+                        }
+                      </dd>
+                    </div>
+                  )
+                }
+              </dl>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <!-- Cierre de sección decisiones con llamadas a la acción -->
+    <div class="decisiones-cierre-caja tarjeta-blanca">
+      <div class="cierre-caja-contenido">
+        <span class="badge badge-azul">Compromiso por escrito</span>
+        <p class="cierre-caja-texto">
+          Estas cinco decisiones quedan documentadas en tu informe técnico personalizado, para que las revises con calma con quien tú decidas: tu gestor, tu socio o tu responsable de planta.
+        </p>
+      </div>
+      <div class="cierre-caja-botones">
+        <button
+          type="button"
+          class="boton-cta-primario"
+          data-abrir-funnel
+          data-tramo-id="300-1000"
+          data-tramo-label="Estudio completo"
+          data-tramo-rango="las 5 decisiones de tu empresa"
+          data-tramo-msg="Preparamos tu informe con las 5 decisiones calculadas fila a fila."
+        >
+          <span>Analizar mi consumo sin coste</span>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3.5 10.5 8 6 12.5"></path>
+          </svg>
+        </button>
+        <a href="/diagnostico#factura-obrador" class="enlace-factura-ejemplo">
+          Ver factura real leída (caso panadería) →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Control interactivo para mejorar la apertura suave de los acordeones
+  const acordeon = document.getElementById("acordeon-decisiones");
+  if (acordeon) {
+    const todosDetails = acordeon.querySelectorAll<HTMLDetailsElement>("details");
+    todosDetails.forEach((targetDetail) => {
+      targetDetail.addEventListener("toggle", () => {
+        if (targetDetail.open) {
+          targetDetail.classList.add("det-abierto");
+        } else {
+          targetDetail.classList.remove("det-abierto");
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  /* ==========================================================================
+     DECISIONES SECCIÓN - IDÉNTICO A src/components/home/Variables.astro & AsiLeemosFactura.astro
+     ========================================================================== */
+  .decisiones-seccion {
+    padding: var(--e-8, 64px) 0;
+    background-color: var(--papel, #ffffff);
+    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+  }
+
+  @media (width >= 1024px) {
+    .decisiones-seccion {
+      padding: var(--e-9, 80px) 0;
+    }
+  }
+
+  .seccion-cabecera {
+    max-width: 48rem;
+    margin-bottom: 40px;
+  }
+
+  .kicker-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--azul-resalte, #ddf1ff);
+    padding: 6px 14px;
+    border-radius: var(--radio-pill, 999px);
+    margin-bottom: 14px;
+  }
+
+  .kicker-punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--azul-600, #1a6ff7);
+    display: inline-block;
+  }
+
+  .kicker-texto {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--azul-900, #004aad);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .seccion-titulo {
+    font-family: var(--font-titulos, serif);
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+    line-height: 1.22;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .seccion-subtitulo {
+    font-size: 1.125rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Lista de acordeones en tarjetas */
+  .decisiones-acordeon {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .det-tarjeta {
+    background: var(--papel, #ffffff);
+    border: 1.5px solid var(--linea, #d6e0ee);
+    border-radius: var(--radio-tarjeta, 20px);
+    overflow: hidden;
+    transition: all 0.2s ease;
+    box-shadow: var(--sombra-subtil, 0 2px 6px rgba(15, 35, 70, 0.04));
+  }
+
+  .det-tarjeta:hover {
+    border-color: var(--cyan-400, #38b6ff);
+    box-shadow: var(--sombra-tarjeta, 0 8px 24px rgba(15, 35, 70, 0.07));
+  }
+
+  .det-tarjeta[open] {
+    border-color: var(--azul-900, #004aad);
+    box-shadow: var(--sombra-flotante, 0 14px 40px rgba(0, 74, 173, 0.12));
+    background: #ffffff;
+  }
+
+  .det-summary {
+    padding: 22px 24px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+    user-select: none;
+    list-style: none;
+    transition: background 0.15s;
+  }
+
+  .det-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .det-summary:focus-visible {
+    outline: 2px solid var(--azul-900, #004aad);
+    outline-offset: -2px;
+  }
+
+  .det-numero-circulo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--azul-900, #004aad);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.1rem;
+    font-family: var(--font-display, sans-serif);
+    box-shadow: 0 4px 10px rgba(0, 74, 173, 0.25);
+    flex-shrink: 0;
+  }
+
+  .det-tarjeta[open] .det-numero-circulo {
+    background: var(--cyan-400, #38b6ff);
+    color: var(--oscuro, #091730);
+  }
+
+  .det-titulares {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .det-titulo {
+    font-family: var(--font-titulos, serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .det-resumen {
+    font-size: 0.92rem;
+    color: var(--tinta-2, #3a4b68);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .det-icono-chevron {
+    color: var(--azul-900, #004aad);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--azul-suave, #edf4fe);
+    transition: transform 0.25s ease, background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .det-tarjeta[open] .det-icono-chevron {
+    transform: rotate(180deg);
+    background: var(--azul-900, #004aad);
+    color: #fff;
+  }
+
+  /* Cuerpo interior de la tarjeta desplegada */
+  .det-panel-cuerpo {
+    padding: 0 24px 26px calc(40px + 18px + 24px);
+  }
+
+  @media (max-width: 700px) {
+    .det-panel-cuerpo {
+      padding: 0 18px 20px;
+    }
+  }
+
+  .det-filas-dl {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0;
+  }
+
+  .det-fila {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--linea-fina, #e6edf7);
+  }
+
+  @media (max-width: 640px) {
+    .det-fila {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+
+  .det-dt {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--tinta-3, #63738e);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-top: 2px;
+  }
+
+  .det-dd {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--tinta, #0f2346);
+    line-height: 1.55;
+  }
+
+  .det-fila-dato .det-dd {
+    background: var(--azul-resalte, #ddf1ff);
+    border-left: 3.5px solid var(--azul-600, #1a6ff7);
+    padding: 10px 14px;
+    border-radius: 0 var(--radio-sm, 8px) var(--radio-sm, 8px) 0;
+    font-weight: 500;
+  }
+
+  .det-fila-fuente .det-dd {
+    font-size: 0.8125rem;
+    color: var(--tinta-3, #63738e);
+    font-style: italic;
+  }
+
+  .det-tags-enlaces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .enlace-pildora {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--azul-suave, #edf4fe);
+    color: var(--azul-900, #004aad);
+    font-weight: 600;
+    font-size: 0.84rem;
+    border-radius: var(--radio-pill, 999px);
+    text-decoration: none;
+    border: 1px solid rgba(0, 74, 173, 0.15);
+    transition: all 0.15s;
+  }
+
+  .enlace-pildora:hover {
+    background: var(--azul-900, #004aad);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  /* Cierre inferior de la sección decisiones */
+  .decisiones-cierre-caja {
+    background: var(--papel, #ffffff);
+    border: 1px solid var(--linea, #d6e0ee);
+    border-radius: var(--radio-tarjeta, 20px);
+    padding: 32px 28px;
+    box-shadow: var(--sombra-tarjeta, 0 8px 24px rgba(15, 35, 70, 0.07));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+  }
+
+  @media (max-width: 900px) {
+    .decisiones-cierre-caja {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px 20px;
+    }
+  }
+
+  .cierre-caja-contenido {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .badge-azul {
+    display: inline-flex;
+    align-items: center;
+    background: var(--azul-resalte, #ddf1ff);
+    color: var(--azul-900, #004aad);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radio-pill, 999px);
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .cierre-caja-texto {
+    font-size: 1rem;
+    color: var(--tinta-2, #3a4b68);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .cierre-caja-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    flex-shrink: 0;
+  }
+
+  .boton-cta-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 0 24px;
+    background: var(--azul-900, #004aad);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: var(--radio-pill, 999px);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.25);
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+
+  .boton-cta-primario:hover {
+    background: var(--azul-900-hover, #003c8c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 74, 173, 0.35);
+  }
+
+  .enlace-factura-ejemplo {
+    color: var(--azul-900, #004aad);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+
+  .enlace-factura-ejemplo:hover {
+    color: var(--azul-700, #0f5bd8);
+  }
+</style>

@@ -1,275 +1,369 @@
 ---
-// Sección 5: "¿A qué se dedica tu empresa?"
-// Segmentación sectorial profesional: cómo afecta la estructura de consumo a cada tipo de negocio.
-interface Sector {
+// Sección: "¿A qué se dedica TU EMPRESA?"
+// Especialización por sectores de negocio con tarjetas visuales según boceto
+import imagenPrueba from "../../imagenes/imagen de prueba.png";
+
+interface SectorItem {
   id: string;
-  categoria: string;
-  nombre: string;
-  dolorClave: string;
-  detalle: string;
-  enlaceTexto: string;
+  titulo: string;
+  desc: string;
 }
 
-const sectores: Sector[] = [
+const sectores: SectorItem[] = [
   {
-    id: "restaurantes",
-    categoria: "Hostelería",
-    nombre: "Restaurantes y cafeterías",
-    dolorClave: "Los dos turnos de servicio caen en las horas más caras",
-    detalle: "Y la maquinaria de refrigeración no se apaga ni el día de descanso del personal.",
-    enlaceTexto: "Ver auditoría para hostelería",
+    id: "hosteleria",
+    titulo: "Restaurante u hostelería",
+    desc: "Los dos servicios caen en las horas caras, y el frío no para ni el día de cierre.",
   },
   {
-    id: "hoteles",
-    categoria: "Alojamientos",
-    nombre: "Hoteles y apartamentos",
-    dolorClave: "En febrero sigues pagando la potencia de agosto",
-    detalle: "La estacionalidad turística no debería encarecer los meses de baja ocupación.",
-    enlaceTexto: "Ver auditoría para hoteles",
+    id: "hotel",
+    titulo: "Hotel",
+    desc: "En febrero sigues pagando la potencia de agosto.",
   },
   {
-    id: "supermercados",
-    categoria: "Alimentación",
-    nombre: "Supermercados y tiendas",
-    dolorClave: "Tu tienda nunca se apaga del todo",
-    detalle: "Las cámaras de frío y vitrinas pesan más en tu factura que los picos de apertura.",
-    enlaceTexto: "Ver auditoría para retail",
+    id: "supermercado",
+    titulo: "Supermercado o alimentación",
+    desc: "Tu tienda nunca se apaga: el frío pesa más que los picos.",
   },
   {
-    id: "logistica-frio",
-    categoria: "Frío industrial",
-    nombre: "Logística y congelación",
-    dolorClave: "Trabajar de noche no es lo mismo que consumir en P6",
-    detalle: "La normativa penaliza fuertemente los desajustes en ciclos continuos de enfriamiento.",
-    enlaceTexto: "Ver auditoría de frío",
+    id: "logistica",
+    titulo: "Logística y frío",
+    desc: "Trabajar de noche no es lo mismo que consumir en P6.",
   },
   {
     id: "industria",
-    categoria: "Fabricación",
-    nombre: "Industria y talleres",
-    dolorClave: "Un turno más cambia completamente la factura",
-    detalle: "El arranque de motores pesados y la energía reactiva reducen el margen de cada producto.",
-    enlaceTexto: "Ver auditoría para industria",
+    titulo: "Industria",
+    desc: "Un turno más cambia la factura.",
   },
   {
-    id: "varios-locales",
-    categoria: "Cadenas",
-    nombre: "Empresas con múltiples sedes",
-    dolorClave: "Un desajuste en un local se nota poco. En veinte, destruye margen",
-    detalle: "Auditar y unificar potencias en toda la red de locales genera ahorros masivos acumulados.",
-    enlaceTexto: "Ver auditoría multisede",
+    id: "multisede",
+    titulo: "Varios locales o sedes",
+    desc: "Un local con la potencia mal ajustada se nota poco. En veinte, se nota en el margen.",
+  },
+  {
+    id: "otro",
+    titulo: "Otro negocio",
+    desc: "Talleres, clínicas, oficinas, comercios: lo que cuenta es cuándo consumes, no a qué te dedicas.",
   },
 ];
 ---
 
 <section class="sectores-seccion" id="sectores">
   <div class="contenedor">
-    <div class="seccion-cabecera">
-      <div class="kicker-wrap">
-        <span class="kicker-punto" aria-hidden="true"></span>
-        <span class="kicker-texto">Especialización por sector empresarial</span>
+    <!-- Encabezado idéntico al boceto -->
+    <header class="sectores-cabecera">
+      <div class="sectores-kicker">
+        <span>PARA CADA NEGOCIO</span>
+        <span class="sectores-kicker-bar" aria-hidden="true">|</span>
       </div>
-      <h2 class="seccion-titulo">¿A qué se dedica tu empresa?</h2>
-      <p class="seccion-subtitulo">
-        Una nave industrial, un hotel y un restaurante <strong>no se dejan la factura en el mismo sitio.</strong>
-      </p>
-    </div>
+      <h2 class="sectores-titulo">
+        ¿A <span class="sectores-titulo-cursiva">qué se dedica</span> TU<br />
+        EMPRESA?
+      </h2>
+    </header>
 
-    <div class="sectores-grid">
+    <!-- Grilla de 7 tarjetas: 4 en la fila superior, 3 centradas en la inferior -->
+    <div class="sectores-cards-grid">
       {
         sectores.map((s) => (
-          <article class="sector-tarjeta tarjeta-blanca">
-            <div class="sector-cabecera-tarjeta">
-              <span class="sector-categoria-badge">{s.categoria}</span>
-              <h3 class="sector-nombre">{s.nombre}</h3>
+          <article class="sector-card">
+            <!-- Imagen superior con corte diagonal -->
+            <div class="sector-card-media">
+              <img
+                src={imagenPrueba.src}
+                alt={s.titulo}
+                class="sector-card-img"
+                loading="lazy"
+              />
             </div>
 
-            <p class="sector-dolor">
-              "{s.dolorClave}."
-            </p>
-
-            <p class="sector-detalle">{s.detalle}</p>
-
-            <div class="sector-accion">
-              <a href="/#estudio" class="sector-link">
-                <span>{s.enlaceTexto}</span>
-                <span aria-hidden="true">→</span>
-              </a>
+            <!-- Contenido inferior con botón y textos -->
+            <div class="sector-card-body">
+              <div class="sector-card-header">
+                <h3 class="sector-card-titulo">{s.titulo}</h3>
+                <a
+                  href="/#estudio"
+                  class="sector-card-btn"
+                  aria-label={`Ver solución para ${s.titulo}`}
+                  data-abrir-funnel
+                  data-tramo-label={s.titulo}
+                  data-tramo-rango="Auditoría energética personalizada"
+                  data-tramo-msg={`Nos centramos en la operativa de ${s.titulo} para auditar tu potencia, reactiva y periodos.`}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </a>
+              </div>
+              <p class="sector-card-desc">{s.desc}</p>
             </div>
           </article>
         ))
       }
-
-      <!-- Tarjeta especial: Talleres, clínicas y otros comercios -->
-      <article class="sector-tarjeta tarjeta-blanca tarjeta-otro-negocio">
-        <div class="sector-cabecera-tarjeta">
-          <span class="sector-categoria-badge badge-destacada">Cualquier sector</span>
-          <h3 class="sector-nombre">Clínicas, talleres, oficinas y comercios</h3>
-        </div>
-
-        <p class="sector-dolor">
-          "Lo que cuenta es cuándo consumes, no solo a qué te dedicas."
-        </p>
-
-        <p class="sector-detalle">
-          Cualquier empresa con suministro 2.0TD, 3.0TD o 6.XTD puede auditar sus excesos y pagar lo que realmente corresponde.
-        </p>
-
-        <div class="sector-accion">
-          <a href="/#estudio" class="boton boton-primario ancho-total">
-            Analizar mi negocio ahora
-          </a>
-        </div>
-      </article>
     </div>
   </div>
 </section>
 
 <style>
+  /* ==========================================================================
+     SECCIÓN SECTORES: DISEÑO LIMPIO Y MODERNO SEGÚN BOCETO
+     ========================================================================== */
   .sectores-seccion {
-    padding: 76px 0 84px;
-    background: #f8fbff;
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+    padding: clamp(64px, 8vw, 96px) 0;
+    background: #e5e8ee; /* Fondo gris suave idéntico al boceto */
+    border-top: 1px solid #d8dee8;
+    border-bottom: 1px solid #d8dee8;
   }
 
-  .seccion-cabecera {
+  .contenedor {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 40px);
+  }
+
+  /* Encabezado */
+  .sectores-cabecera {
     text-align: center;
-    max-width: 740px;
-    margin: 0 auto 52px;
+    margin-bottom: clamp(44px, 6vw, 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
   }
 
-  .kicker-wrap {
+  .sectores-kicker {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: var(--radio-pill, 999px);
-    background: #ffffff;
-    border: 1px solid #d8e5f5;
-  }
-
-  .kicker-punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--azul-900, #004aad);
-  }
-
-  .kicker-texto {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--azul-900, #004aad);
-  }
-
-  .seccion-titulo {
-    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.7rem);
-    color: var(--tinta, #0f2346);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  .seccion-subtitulo {
-    font-size: 1.125rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-  }
-
-  .sectores-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-  }
-
-  .sector-tarjeta {
-    padding: 30px 26px;
-    border-radius: var(--radio-grande, 28px);
-    border: 1.5px solid #dce7f5;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
-  }
-
-  .sector-cabecera-tarjeta {
-    display: flex;
-    flex-direction: column;
     gap: 6px;
-  }
-
-  .sector-categoria-badge {
-    font-size: 0.75rem;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.72rem;
     font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--azul-900, #004aad);
+    color: #5d6d84;
   }
 
-  .sector-categoria-badge.badge-destacada {
-    color: var(--verde-ok, #067647);
-  }
-
-  .sector-nombre {
-    font-size: 1.25rem;
-    color: var(--tinta, #0f2346);
-    line-height: 1.25;
+  .sectores-kicker-bar {
+    color: #38b6ff;
+    font-size: 1.15em;
     font-weight: 800;
   }
 
-  .sector-dolor {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--azul-900, #004aad);
-    line-height: 1.4;
+  .sectores-titulo {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    color: #0b1d3a;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0;
   }
 
-  .sector-detalle {
-    font-size: 0.9rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-    flex-grow: 1;
+  .sectores-titulo-cursiva {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #004aad;
+    font-size: 1.08em;
   }
 
-  .sector-accion {
-    padding-top: 14px;
-    border-top: 1px solid var(--linea-fina, #e6edf7);
+  /* ==========================================================================
+     GRILLA DE TARJETAS: 4 EN FILA SUPERIOR, 3 EN INFERIOR CENTRADAS
+     ========================================================================== */
+  .sectores-cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(18px, 2vw, 24px);
   }
 
-  .sector-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.925rem;
-    font-weight: 600;
-    color: var(--azul-900, #004aad);
-  }
-
-  .sector-link:hover {
-    text-decoration: underline;
-  }
-
-  .tarjeta-otro-negocio {
+  .sector-card {
+    position: relative;
+    width: calc(25% - 18px);
     background: #ffffff;
-    border: 2px solid var(--azul-900, #004aad);
-    box-shadow: 0 12px 36px rgba(0, 74, 173, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1.5px solid rgba(0, 74, 173, 0.08);
+    box-shadow: 0 4px 18px rgba(11, 29, 58, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.35s ease;
   }
 
-  .ancho-total {
+  /* Halo y resplandor de luz al pasar el cursor */
+  .sector-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(56, 182, 255, 0.7);
+    box-shadow: 0 16px 36px -4px rgba(0, 74, 173, 0.22),
+                0 0 28px 2px rgba(56, 182, 255, 0.40);
+  }
+
+  /* Haz de luz (shimmer) que recorre la tarjeta al hacer hover */
+  .sector-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -70%;
+    width: 45%;
+    height: 200%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 15%,
+      rgba(56, 182, 255, 0.35) 45%,
+      rgba(255, 255, 255, 0.75) 50%,
+      rgba(56, 182, 255, 0.35) 55%,
+      rgba(255, 255, 255, 0) 85%,
+      transparent 100%
+    );
+    transform: rotate(25deg);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .sector-card:hover::after {
+    opacity: 1;
+    left: 140%;
+    transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  }
+
+  /* Contenedor de imagen */
+  .sector-card-media {
+    position: relative;
     width: 100%;
+    height: 165px;
+    background: #cfd6e0;
+    overflow: hidden;
   }
 
-  @media (max-width: 680px) {
-    .sectores-grid {
-      grid-template-columns: 1fr;
+  .sector-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+
+  .sector-card:hover .sector-card-img {
+    transform: scale(1.06);
+  }
+
+  /* Destello luminoso sobre la imagen al hacer hover */
+  .sector-card-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 75% 25%,
+      rgba(56, 182, 255, 0.45) 0%,
+      rgba(0, 74, 173, 0.15) 50%,
+      transparent 80%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  .sector-card:hover .sector-card-media::after {
+    opacity: 1;
+  }
+
+  /* Cuerpo blanco de la tarjeta con corte diagonal hacia arriba a la derecha */
+  .sector-card-body {
+    position: relative;
+    background: #ffffff;
+    margin-top: -24px;
+    clip-path: polygon(0 24px, 100% 0, 100% 100%, 0 100%);
+    padding: 24px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    z-index: 2;
+  }
+
+  .sector-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .sector-card-titulo {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #0b1d3a;
+    line-height: 1.3;
+    margin: 0;
+    transition: color 0.25s ease;
+  }
+
+  .sector-card:hover .sector-card-titulo {
+    color: #004aad;
+  }
+
+  /* Botón circular con flecha y brillo luminoso */
+  .sector-card-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #e5f2ff;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .sector-card:hover .sector-card-btn {
+    background: #004aad;
+    color: #ffffff;
+    transform: scale(1.1) translateX(2px);
+    box-shadow: 0 0 14px rgba(56, 182, 255, 0.8), 0 0 6px #004aad;
+  }
+
+  .sector-card-desc {
+    font-family: var(--font-cuerpo, sans-serif);
+    font-size: 0.82rem;
+    color: #4b5b73;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1100px) {
+    .sector-card {
+      width: calc(33.333% - 16px);
+    }
+  }
+
+  @media (max-width: 820px) {
+    .sector-card {
+      width: calc(50% - 12px);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .sector-card {
+      width: 100%;
+      max-width: 360px;
     }
 
-    .sector-tarjeta {
-      padding: 24px 20px;
+    .sectores-seccion {
+      padding: 52px 0;
     }
   }
 </style>

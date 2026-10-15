@@ -1,384 +1,394 @@
 ---
-// Sección 3: "Maxi hace los números. Una persona de EMAX da la cara."
-// Humanización de la marca: combina la potencia analítica de los datos con el asesoramiento
-// cercano y directo de un especialista humano con fotografía real y trato profesional.
-import { site } from "../../data/site";
-import fotoConsultor from "../../imagenes/consultor-emax.jpg";
+// Sección 3: "Maxi hace los números." — fiel al boceto.
+// Izquierda: titular + botón. Centro: tarjetas Maxi → Tu especialista (avatares circulares pequeños).
+// Derecha: imagen grande de Maxi (círculo que sale por el borde derecho).
+// Paleta oficial: #004AAD · #5271ff · #38b6ff
+import maxiImg from "../../imagenes/maxi.jpg";
+import personalImg from "../../imagenes/personal.jpg";
 
 const funcionesMaxi = [
-  { texto: "Lee tu consumo real periodo a periodo y mes a mes.", detalle: "Desglosa curvas de carga cuartohorarias completas." },
-  { texto: "Cruza tu potencia contratada con tus maxímetros reales.", detalle: "Detecta kW contratados que nunca llegas a usar." },
-  { texto: "Identifica recargos por energía reactiva y excesos.", detalle: "Señala penalizaciones evitables en tu factura." },
+  { icono: "chart", texto: "Lee tu consumo por periodos y por meses." },
+  { icono: "bolt", texto: "Cruza tu potencia contratada con tus maxímetros." },
+  { icono: "doc", texto: "Marca la reactiva y los excesos que pagas." },
 ];
 
 const funcionesEspecialista = [
-  { texto: "Audita y valida los cálculos generados por Maxi.", detalle: "Criterio técnico de auditor colegiado aplicado a tu sector." },
-  { texto: "Decide qué conviene cambiar y qué se mantiene.", detalle: "Si tu contrato actual ya es bueno, te lo dice por escrito." },
-  { texto: "Te llama por teléfono con tu informe delante.", detalle: "Explicaciones claras, directas y en tu propio idioma." },
+  { icono: "search", texto: "Revisa lo que ha leído Maxi." },
+  { icono: "gear", texto: "Decide qué se recomienda y qué se mantiene." },
+  { icono: "phone", texto: "Te llama con tu informe delante." },
+  { icono: "hand", texto: "Empezamos a trabajar juntos con tu propia tarifa, construida con tu consumo." },
 ];
+
+const iconos: Record<string, string> = {
+  chart: '<line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="18" y1="20" x2="18" y2="10"/>',
+  bolt: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  doc: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>',
+  search: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  hand: '<path d="M12 8.5c-1-2-4-2-4.5.5S9 13 12 15c3-2 4.5-4 4.5-6s-3.5-2.5-4.5-.5z"/><path d="M3 18h4l3 2h6a2 2 0 0 0 0-4h-3"/><path d="M7 18v-2"/>',
+};
 ---
 
-<section class="maxi-humano-seccion" id="equipo">
-  <div class="contenedor">
-    <div class="seccion-cabecera">
-      <div class="kicker-wrap">
-        <span class="kicker-punto" aria-hidden="true"></span>
-        <span class="kicker-texto">Tecnología de datos + Consultoría humana</span>
-      </div>
-      <h2 class="seccion-titulo">Maxi hace los números. Una persona de EMAX da la cara.</h2>
-      <p class="seccion-subtitulo">
-        Maxi no decide por ti. Te da mejores datos para decidir con criterio propio y un especialista asignado a tu lado.
-      </p>
+<section class="maxi-humano-seccion-oscura" id="equipo">
+  <div class="contenedor maxi-layout">
+    <!-- ================= IZQUIERDA: titular ================= -->
+    <div class="maxi-texto">
+      <span class="maxi-kicker">Energía para empresas</span>
+      <h2 class="maxi-titulo">
+        Maxi hace los <span class="maxi-titulo-cursiva">números.</span>
+      </h2>
+      <p class="maxi-bajada">Maxi no decide por ti. Te da mejores datos para decidir.</p>
+      <a href="/metodo" class="maxi-boton">
+        <span>Cómo trabajamos</span>
+        <span class="maxi-boton-flecha" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </span>
+      </a>
     </div>
 
-    <div class="dupla-grid">
-      <!-- Tarjeta 1: Maxi (El motor de datos) -->
-      <article class="tarjeta-dupla tarjeta-maxi">
-        <header class="dupla-header">
-          <div class="icono-entidad icono-maxi" aria-hidden="true">
-            <span class="letra-m">M</span>
+    <!-- ================= CENTRO: tarjetas Maxi → Especialista ================= -->
+    <div class="maxi-tarjetas">
+      <article class="maxi-card" tabindex="0">
+        <header class="maxi-card-head">
+          <div class="avatar-foto-wrap" aria-hidden="true">
+            <img src={maxiImg.src} alt="Maxi" class="avatar-foto-circulo" />
           </div>
-          <div>
-            <span class="entidad-tipo">Motor algorítmico</span>
-            <h3 class="entidad-nombre">Maxi</h3>
-          </div>
+          <h3 class="maxi-card-nombre">Maxi</h3>
         </header>
-
-        <p class="entidad-descripcion">
-          Algoritmo especializado que procesa miles de lecturas cuartohorarias y cruza peajes oficiales en segundos.
-        </p>
-
-        <ul class="funciones-lista" role="list">
+        <ul class="maxi-lista" role="list">
           {
             funcionesMaxi.map((f) => (
-              <li class="funcion-item">
-                <span class="funcion-bullet" aria-hidden="true">✓</span>
-                <div>
-                  <strong class="funcion-texto">{f.texto}</strong>
-                  <span class="funcion-detalle">{f.detalle}</span>
-                </div>
+              <li class="maxi-item">
+                <span class="maxi-item-icono" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={iconos[f.icono]} />
+                </span>
+                <span class="maxi-item-texto">{f.texto}</span>
               </li>
             ))
           }
         </ul>
-
-        <div class="dupla-footer-nota">
-          <span>Precisión analítica matemática sin sesgo comercial</span>
-        </div>
       </article>
 
-      <!-- Tarjeta 2: Tu Especialista Humano EMAX (Con fotografía real) -->
-      <article class="tarjeta-dupla tarjeta-especialista tarjeta-blanca">
-        <header class="dupla-header con-foto">
-          <img
-            src={fotoConsultor.src}
-            alt="Consultor energético de EMAX Energía en oficina"
-            class="avatar-foto"
-            width={64}
-            height={64}
-            loading="lazy"
-          />
-          <div>
-            <span class="entidad-tipo destacado-verde">Tu consultor asignado</span>
-            <h3 class="entidad-nombre">Tu especialista EMAX</h3>
+      <span class="maxi-flecha-medio" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </span>
+
+      <article class="maxi-card" tabindex="0">
+        <header class="maxi-card-head">
+          <div class="avatar-foto-wrap" aria-hidden="true">
+            <img src={personalImg.src} alt="Tu especialista EMAX" class="avatar-foto-circulo" />
           </div>
+          <h3 class="maxi-card-nombre">Tu especialista</h3>
         </header>
-
-        <p class="entidad-descripcion">
-          Un consultor energético con nombre y apellidos que conoce tu negocio, da la cara y te acompaña en cada decisión.
-        </p>
-
-        <ul class="funciones-lista" role="list">
+        <ul class="maxi-lista" role="list">
           {
             funcionesEspecialista.map((f) => (
-              <li class="funcion-item">
-                <span class="funcion-bullet verde" aria-hidden="true">✓</span>
-                <div>
-                  <strong class="funcion-texto">{f.texto}</strong>
-                  <span class="funcion-detalle">{f.detalle}</span>
-                </div>
+              <li class="maxi-item">
+                <span class="maxi-item-icono" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" set:html={iconos[f.icono]} />
+                </span>
+                <span class="maxi-item-texto">{f.texto}</span>
               </li>
             ))
           }
         </ul>
-
-        <div class="especialista-contacto-box">
-          <div class="contacto-directo-info">
-            <div class="tel-icono-wrap" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-            </div>
-            <div>
-              <strong class="contacto-tel">Teléfono directo: {site.phone}</strong>
-              <span class="contacto-sub">Sin centralitas automáticas ni robots</span>
-            </div>
-          </div>
-          <a href="/#estudio" class="boton boton-primario ancho-total">
-            Solicitar análisis con especialista
-          </a>
-        </div>
       </article>
     </div>
+  </div>
+
+  <!-- ================= DERECHA: imagen grande de Maxi ================= -->
+  <div class="maxi-imagen-grande" aria-hidden="true">
+    <img src={maxiImg.src} alt="" class="maxi-imagen-grande-img" loading="lazy" decoding="async" />
+    <div class="maxi-imagen-overlay-azul"></div>
   </div>
 </section>
 
 <style>
-  .maxi-humano-seccion {
-    padding: 76px 0 84px;
-    background: #ffffff;
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+  /* ==========================================================================
+     SECCIÓN "MAXI HACE LOS NÚMEROS" — fiel al boceto
+     ========================================================================== */
+  .maxi-humano-seccion-oscura {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(56px, 7vw, 96px) 0;
+    background: linear-gradient(155deg, #0a2349 0%, #0b2a55 55%, #081d3d 100%);
   }
 
-  .seccion-cabecera {
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto 52px;
+  .contenedor {
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: clamp(18px, 4vw, 48px);
+  }
+
+  .maxi-layout {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(260px, 0.75fr) minmax(460px, 1.25fr);
+    gap: clamp(24px, 3.5vw, 48px);
+    align-items: center;
+    padding-right: clamp(160px, 18vw, 280px);
+  }
+
+  /* ---------------- Texto izquierdo ---------------- */
+  .maxi-texto {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 14px;
+    align-items: flex-start;
   }
 
-  .kicker-wrap {
+  .maxi-kicker {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9db4d3;
+    padding-right: 8px;
+    border-right: 3px solid #38b6ff;
+  }
+
+  .maxi-titulo {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .maxi-titulo-cursiva {
+    display: block;
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #38b6ff;
+    font-size: 1.15em;
+  }
+
+  .maxi-bajada {
+    margin: 0;
+    max-width: 280px;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    line-height: 1.55;
+    color: #ffffff;
+  }
+
+  .maxi-boton {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: var(--radio-pill, 999px);
-    background: var(--azul-suave, #edf4fe);
-  }
-
-  .kicker-punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--azul-900, #004aad);
-  }
-
-  .kicker-texto {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--azul-900, #004aad);
-  }
-
-  .seccion-titulo {
-    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.7rem);
-    color: var(--tinta, #0f2346);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  .seccion-subtitulo {
-    font-size: 1.125rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-  }
-
-  .dupla-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: stretch;
-  }
-
-  .tarjeta-dupla {
-    border-radius: var(--radio-grande, 28px);
-    padding: 36px 32px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .tarjeta-maxi {
-    background: #f8fbff;
-    border: 1.5px solid #d4e2f5;
-    box-shadow: 0 8px 24px rgba(15, 35, 70, 0.04);
-  }
-
-  .tarjeta-especialista {
-    background: #ffffff;
-    border: 2px solid var(--azul-900, #004aad);
-    box-shadow: 0 16px 44px rgba(0, 74, 173, 0.1);
-  }
-
-  .dupla-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 18px;
-  }
-
-  .icono-entidad {
-    width: 58px;
-    height: 58px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    flex-shrink: 0;
-  }
-
-  .icono-maxi {
-    background: #0f2346;
+    gap: 12px;
+    background: #004aad;
     color: #38b6ff;
-  }
-
-  .letra-m {
-    font-family: var(--font-titulos);
-    font-weight: 800;
-  }
-
-  .avatar-foto {
-    width: 58px;
-    height: 58px;
-    border-radius: 16px;
-    object-fit: cover;
-    flex-shrink: 0;
-    border: 2px solid var(--azul-900, #004aad);
-  }
-
-  .entidad-tipo {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--tinta-3, #63738e);
-    display: block;
-  }
-
-  .entidad-tipo.destacado-verde {
-    color: var(--verde-ok, #067647);
-  }
-
-  .entidad-nombre {
-    font-size: 1.45rem;
-    color: var(--tinta, #0f2346);
-    font-weight: 800;
-  }
-
-  .entidad-descripcion {
-    font-size: 0.95rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-    margin-bottom: 24px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
-  }
-
-  .funciones-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 0;
-    margin: 0 0 28px;
-    list-style: none;
-    flex-grow: 1;
-  }
-
-  .funcion-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .funcion-bullet {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--azul-suave, #edf4fe);
-    color: var(--azul-900, #004aad);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 800;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .funcion-bullet.verde {
-    background: var(--verde-fondo, #ecfdf3);
-    color: var(--verde-ok, #067647);
-  }
-
-  .funcion-texto {
-    display: block;
-    font-size: 0.95rem;
-    color: var(--tinta, #0f2346);
-    line-height: 1.4;
-  }
-
-  .funcion-detalle {
-    display: block;
-    font-size: 0.84rem;
-    color: var(--tinta-3, #63738e);
-    margin-top: 2px;
-  }
-
-  .dupla-footer-nota {
-    padding: 12px 16px;
-    background: #ffffff;
-    border: 1px solid #dbe6f5;
-    border-radius: var(--radio-sm, 8px);
-    font-size: 0.85rem;
+    font-family: var(--font-display, "Sora", sans-serif);
     font-weight: 600;
-    color: var(--tinta-2, #3a4b68);
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    padding: 9px 12px 9px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.45);
+    transition: transform 0.2s ease, background 0.2s ease;
   }
 
-  .especialista-contacto-box {
+  .maxi-boton:hover {
+    background: #003a88;
+    transform: translateY(-1px);
+  }
+
+  .maxi-boton-flecha {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #38b6ff;
+    color: #004aad;
+    display: grid;
+    place-items: center;
+  }
+
+  /* ---------------- Tarjetas centrales ---------------- */
+  .maxi-tarjetas {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 14px;
-    padding: 20px;
-    background: var(--azul-suave, #edf4fe);
-    border-radius: var(--radio-md, 14px);
   }
 
-  .contacto-directo-info {
+  .maxi-card {
+    flex: 1 1 0;
+    min-width: 0;
+    background: rgba(8, 22, 48, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 22px;
+    padding: 16px 18px 18px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .maxi-card:hover,
+  .maxi-card:focus-visible {
+    transform: translateY(-5px);
+    border-color: #38b6ff;
+    box-shadow: 0 18px 40px -10px rgba(56, 182, 255, 0.3);
+    outline: none;
+  }
+
+  .maxi-card-head {
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-bottom: 8px;
   }
 
-  .tel-icono-wrap {
-    width: 36px;
-    height: 36px;
+  /* Avatar circular pequeño (se mantiene como estaba) */
+  .avatar-foto-wrap {
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: #ffffff;
-    color: var(--azul-900, #004aad);
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2.5px solid #38b6ff;
+    background: #081329;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  .avatar-foto-circulo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .maxi-card-nombre {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #38b6ff;
+    margin: 0;
+  }
+
+  .maxi-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .maxi-item {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .maxi-item:first-child {
+    border-top: 0;
+  }
+
+  .maxi-item-icono {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #004aad;
+    display: grid;
+    place-items: center;
     flex-shrink: 0;
   }
 
-  .contacto-tel {
-    display: block;
-    font-size: 0.95rem;
-    color: var(--azul-900, #004aad);
+  .maxi-item-texto {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    line-height: 1.45;
+    color: #ffffff;
   }
 
-  .contacto-sub {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--tinta-3, #63738e);
+  .maxi-flecha-medio {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #38b6ff;
+    color: #0a2349;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 18px rgba(56, 182, 255, 0.5);
   }
 
-  .ancho-total {
+  /* ---------------- Imagen grande (derecha, círculo idéntico al boceto) ---------------- */
+  .maxi-imagen-grande {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: -140px;
+    width: clamp(520px, 48vw, 760px);
+    aspect-ratio: 1 / 1;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(56, 182, 255, 0.4);
+    background: #081d3d;
+    box-shadow: -15px 0 60px rgba(0, 0, 0, 0.45), 0 0 50px rgba(56, 182, 255, 0.15);
+  }
+
+  .maxi-imagen-grande-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 35% 24%;
+    display: block;
+    transform: scale(1.05);
   }
 
-  @media (max-width: 980px) {
-    .dupla-grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
+  /* Capa de azul transparente sobre la imagen para fusionar con el fondo y la estética corporativa */
+  .maxi-imagen-overlay-azul {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 35, 73, 0.42) 0%,
+      rgba(0, 74, 173, 0.35) 50%,
+      rgba(6, 17, 36, 0.45) 100%
+    );
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
 
-    .tarjeta-dupla {
-      padding: 24px 20px;
+  /* ---------------- Responsive ---------------- */
+  @media (max-width: 1100px) {
+    .maxi-layout {
+      grid-template-columns: 1fr;
+    }
+    .maxi-imagen-grande {
+      top: auto;
+      bottom: -100px;
+      right: -80px;
+      width: 420px;
+      opacity: 0.35;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .maxi-tarjetas {
+      flex-direction: column;
+    }
+    .maxi-flecha-medio {
+      transform: rotate(90deg);
+    }
+    .maxi-card {
+      width: 100%;
     }
   }
 </style>

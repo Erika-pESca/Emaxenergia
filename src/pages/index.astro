@@ -4,8 +4,6 @@
 // BaseLayout incluye automáticamente la Cabecera, el Dock flotante y el Pie.
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/home/Hero.astro";
-import CintaGarantias from "../components/home/CintaGarantias.astro";
-import AsiLeemosFactura from "../components/home/AsiLeemosFactura.astro";
 import Variables from "../components/home/Variables.astro";
 import TecnologiaPersonas from "../components/home/TecnologiaPersonas.astro";
 import ComoEmpezar from "../components/home/ComoEmpezar.astro";
@@ -19,16 +17,10 @@ import ProximaFactura from "../components/home/ProximaFactura.astro";
   description="Antes de proponerte una tarifa, leemos cómo consume tu empresa y te lo explicamos: potencia, periodos y lo que no depende de nadie. Empieza por tu factura."
   path="/"
 >
-  <!-- 1. Hero con propuesta a la izquierda y selector de gasto interactivo a la derecha -->
+  <!-- 1. Hero con propuesta a la izquierda y factura auditada interactiva a la derecha -->
   <Hero />
 
-  <!-- 2. Franja continua de garantías y confianza ("Sin líos") -->
-  <CintaGarantias />
-
-  <!-- 3. Caso real auditado: Así leemos tu factura (Obrador de panadería) -->
-  <AsiLeemosFactura />
-
-  <!-- 4. Los atajos habituales del mercado vs. Lo que miramos nosotros -->
+  <!-- 2. Los atajos habituales del mercado vs. Lo que miramos nosotros -->
   <Variables />
 
   <!-- 4. Maxi procesa los números, un especialista humano de EMAX da la cara -->

@@ -1,16 +1,40 @@
 ---
-// Cabecera Dinámica en Cápsula Flotante (Globo Glassmorphism)
-// Combina:
-// 1. Estructura de cápsula / globo flotante suspendida (border-radius: 999px, blur de cristal).
-// 2. Glider magnético dinámico en los enlaces (la píldora persigue el cursor en tiempo real).
-// 3. Shimmer continuo de luz en el botón comercial "Analizar mi factura".
-// 4. Radar sonar continuo y vibración en el teléfono de atención a empresas.
-// 5. Barra de lectura y progreso de scroll integrada en la base de la cápsula.
+// Cabecera Dinámica en 3 Islas Flotantes (Glassmorphism de Alta Precisión)
+// 1. Tres bloques suspendidos: Logo · Menú de Navegación · Conversión y Acciones.
+// 2. Glider magnético dinámico que acompaña los enlaces del menú.
+// 3. Menús desplegables consistentes, equilibrados y con estética premium en Método, Sectores y Tarifas.
+// 4. Shimmer de luz continuo en CTA comercial y sonar activo en el teléfono de atención.
+// 5. Barra de lectura y progreso de scroll integrada en la base de la cápsula central.
 // 6. Popover desplegable interactivo "Te llamamos gratis".
 import Logo from "./Logo.astro";
 import { site, primaryCta } from "../data/site";
 
 const current = Astro.url.pathname;
+
+const metodoItems = [
+  {
+    href: "/metodo",
+    label: "El método",
+    badge: "3 etapas",
+    desc: "Diagnóstico, tres etapas y cinco decisiones antes de elegir tarifa",
+    id: "metodo"
+  },
+  {
+    href: "/diagnostico",
+    label: "Qué recibes",
+    badge: "Informe 0 €",
+    badgeType: "verde",
+    desc: "Tu estudio de consumo, maxímetros y reactiva bloque a bloque",
+    id: "diagnostico"
+  },
+  {
+    href: "/metodo#quien-lee-tus-datos",
+    label: "Quién audita",
+    badge: "Maxi + Asesor",
+    desc: "Inteligencia cuartohoraria cruzada con auditor colegiado",
+    id: "quien"
+  }
+];
 
 const sectoresItems = [
   { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Turnos partidos en horas punta caras", id: "restaurantes" },
@@ -29,14 +53,14 @@ const tarifasItems = [
 
 <header class="cabecera-flotante-root" id="cabecera-flotante">
   <div class="contenedor-capsula">
-    <!-- CÁPSULA / GLOBO SUSPENDIDO -->
+    <!-- CÁPSULA / CONTENEDOR DE 3 ISLAS SUSPENDIDAS -->
     <div class="capsula-globo" id="capsula-globo">
-      <!-- Marca / Logo -->
+      <!-- 1. ISLA LOGO -->
       <div class="capsula-logo">
         <Logo variant="dark" />
       </div>
 
-      <!-- Navegación central con Píldora Magnética Deslizante (Glider) -->
+      <!-- 2. ISLA NAVEGACIÓN CENTRAL CON GLIDER MAGNÉTICO -->
       <nav class="nav-capsula" id="nav-capsula-menu" aria-label="Menú principal">
         <!-- Indicador magnético flotante que persigue el cursor -->
         <span class="nav-glider" id="nav-glider" aria-hidden="true"></span>
@@ -45,25 +69,89 @@ const tarifasItems = [
           <span>Inicio</span>
         </a>
 
-        <a href="/metodo" class:list={["nav-enlace", { activo: current === "/metodo" }]} data-glider-target>
-          <span>El Método</span>
-        </a>
+        <!-- Menú desplegable dinámico Método -->
+        <div class="nav-dropdown" data-dropdown>
+          <button
+            type="button"
+            class:list={["nav-enlace con-chevron", { activo: current.startsWith("/metodo") || current.startsWith("/diagnostico") }]}
+            data-glider-target
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span>Método</span>
+            <svg class="chevron-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 4.5 3 3 3-3"></path>
+            </svg>
+          </button>
+
+          <div class="dropdown-popover popover-metodo popover-animado">
+            <div class="dropdown-header-tag">Metodología y entregables</div>
+            <div class="dropdown-cards-grid">
+              {
+                metodoItems.map((m) => (
+                  <a href={m.href} class:list={["dropdown-card", { "card-activo": current === m.href }]}>
+                    <span class="card-icono-wrap" aria-hidden="true">
+                      {m.id === "metodo" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="m2 17 10 5 10-5"></path>
+                          <path d="m2 12 10 5 10-5"></path>
+                          <path d="M12 2 2 7l10 5 10-5-10-5Z"></path>
+                        </svg>
+                      )}
+                      {m.id === "diagnostico" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                          <path d="m9 15 2 2 4-4"></path>
+                        </svg>
+                      )}
+                      {m.id === "quien" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="9" cy="7" r="4"></circle>
+                          <path d="m19 8 2 2 4-4"></path>
+                        </svg>
+                      )}
+                    </span>
+                    <div class="card-textos">
+                      <div class="card-head-fila">
+                        <strong class="card-nombre">{m.label}</strong>
+                        <span class:list={["card-badge-mini", { "badge-verde": m.badgeType === "verde" }]}>{m.badge}</span>
+                      </div>
+                      <span class="card-desc">{m.desc}</span>
+                    </div>
+                    <span class="card-flecha" aria-hidden="true">→</span>
+                  </a>
+                ))
+              }
+            </div>
+            <div class="dropdown-footer-link">
+              <a href="/metodo">Conoce las tres etapas y cinco decisiones <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
 
         <!-- Menú desplegable dinámico Sectores -->
         <div class="nav-dropdown" data-dropdown>
-          <button type="button" class="nav-enlace con-chevron" data-glider-target aria-haspopup="true" aria-expanded="false">
+          <button
+            type="button"
+            class:list={["nav-enlace con-chevron", { activo: current.startsWith("/sectores") }]}
+            data-glider-target
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             <span>Sectores</span>
             <svg class="chevron-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="m3 4.5 3 3 3-3"></path>
             </svg>
           </button>
 
-          <div class="dropdown-popover popover-animado">
+          <div class="dropdown-popover popover-sectores popover-animado">
             <div class="dropdown-header-tag">Auditorías especializadas por sector</div>
             <div class="dropdown-cards-grid">
               {
                 sectoresItems.map((s) => (
-                  <a href={s.href} class="dropdown-card">
+                  <a href={s.href} class:list={["dropdown-card", { "card-activo": current === s.href }]}>
                     <span class="card-icono-wrap" aria-hidden="true">
                       {s.id === "restaurantes" && (
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -128,7 +216,13 @@ const tarifasItems = [
 
         <!-- Menú desplegable dinámico Tarifas -->
         <div class="nav-dropdown" data-dropdown>
-          <button type="button" class="nav-enlace con-chevron" data-glider-target aria-haspopup="true" aria-expanded="false">
+          <button
+            type="button"
+            class:list={["nav-enlace con-chevron", { activo: current.startsWith("/tarifas") || current.startsWith("/gas-natural") || current.startsWith("/varios-suministros") }]}
+            data-glider-target
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             <span>Tarifas</span>
             <svg class="chevron-svg" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="m3 4.5 3 3 3-3"></path>
@@ -140,7 +234,7 @@ const tarifasItems = [
             <div class="dropdown-cards-grid">
               {
                 tarifasItems.map((t) => (
-                  <a href={t.href} class="dropdown-card">
+                  <a href={t.href} class:list={["dropdown-card", { "card-activo": current === t.href }]}>
                     <span class="card-icono-wrap" aria-hidden="true">
                       {t.id === "luz" && (
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -171,6 +265,9 @@ const tarifasItems = [
                 ))
               }
             </div>
+            <div class="dropdown-footer-link">
+              <a href="/tarifas">Ver todas las tarifas y comparativa técnica <span aria-hidden="true">→</span></a>
+            </div>
           </div>
         </div>
 
@@ -178,11 +275,11 @@ const tarifasItems = [
           <span>Guías</span>
         </a>
 
-        <!-- Barra de progreso viva en la base de la cápsula del menú -->
+        <!-- Barra de progreso de lectura integrada en la base del menú central -->
         <div class="capsula-scroll-progreso" id="scroll-progress-line" aria-hidden="true"></div>
       </nav>
 
-      <!-- MOTOR DE CONVERSIÓN CON ANIMACIONES VIVAS -->
+      <!-- 3. ISLA DE ACCIONES Y CONVERSIÓN -->
       <div class="capsula-acciones">
         <!-- 1. Teléfono con Radar Sonar y vibración de llamada -->
         <a href={site.phoneHref} class="caja-telefono-sonar" title={`Llamar gratis al ${site.phone}`}>
@@ -273,7 +370,10 @@ const tarifasItems = [
 
       <nav class="movil-links-lista" aria-label="Navegación móvil">
         <a href="/" class="movil-link">Inicio</a>
-        <a href="/metodo" class="movil-link">El Método</a>
+        <div class="movil-grupo-titulo">El Método</div>
+        <a href="/metodo" class="movil-sublink">El método · Tres etapas y cinco decisiones</a>
+        <a href="/diagnostico" class="movil-sublink">Qué recibes · Informe de tu empresa</a>
+        <a href="/metodo#quien-lee-tus-datos" class="movil-sublink">Quién audita · Maxi + Consultor colegiado</a>
 
         <div class="movil-grupo-titulo">Sectores empresariales</div>
         {
@@ -363,7 +463,7 @@ const tarifasItems = [
   navContainer?.addEventListener("mouseleave", reiniciarGlider);
   setTimeout(reiniciarGlider, 150);
 
-  // 3. Control de Dropdowns en Desktop (Hover con tolerancia + Click)
+  // 3. Control de Dropdowns en Desktop (Hover con tolerancia + Click + Cierre mutuo)
   const dropdownWrappers = document.querySelectorAll("[data-dropdown]");
   dropdownWrappers.forEach((dd) => {
     const btn = dd.querySelector("button");
@@ -372,22 +472,43 @@ const tarifasItems = [
     dd.addEventListener("mouseenter", () => {
       clearTimeout(timerCierre);
       dropdownWrappers.forEach((d) => {
-        if (d !== dd) d.classList.remove("abierto");
+        if (d !== dd) {
+          d.classList.remove("abierto");
+          d.querySelector("button")?.setAttribute("aria-expanded", "false");
+        }
       });
       dd.classList.add("abierto");
+      btn?.setAttribute("aria-expanded", "true");
     });
 
     dd.addEventListener("mouseleave", () => {
       timerCierre = setTimeout(() => {
         dd.classList.remove("abierto");
-      }, 200); // 200ms de tolerancia para que nunca se cierre al mover el ratón a las opciones
+        btn?.setAttribute("aria-expanded", "false");
+      }, 180); // 180ms de tolerancia
     });
 
     btn?.addEventListener("click", (e) => {
       e.stopPropagation();
       const isActive = dd.classList.contains("abierto");
-      dropdownWrappers.forEach((d) => d.classList.remove("abierto"));
-      if (!isActive) dd.classList.add("abierto");
+      dropdownWrappers.forEach((d) => {
+        d.classList.remove("abierto");
+        d.querySelector("button")?.setAttribute("aria-expanded", "false");
+      });
+      if (!isActive) {
+        dd.classList.add("abierto");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    // Accesibilidad por teclado
+    btn?.addEventListener("focus", () => {
+      dropdownWrappers.forEach((d) => {
+        if (d !== dd) {
+          d.classList.remove("abierto");
+          d.querySelector("button")?.setAttribute("aria-expanded", "false");
+        }
+      });
     });
   });
 
@@ -424,7 +545,10 @@ const tarifasItems = [
   document.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     if (!target.closest("[data-dropdown]")) {
-      dropdownWrappers.forEach((d) => d.classList.remove("abierto"));
+      dropdownWrappers.forEach((d) => {
+        d.classList.remove("abierto");
+        d.querySelector("button")?.setAttribute("aria-expanded", "false");
+      });
     }
     if (!target.closest("[data-te-llamamos]")) {
       popoverPanel?.setAttribute("hidden", "true");
@@ -463,7 +587,8 @@ const tarifasItems = [
 
 <style>
   /* ========================================================
-     ESTRUCTURA DE CÁPSULA / GLOBO FLOTANTE
+     ESTRUCTURA DE CABECERA FLOTANTE (3 Islas Glassmorphism)
+     Logo · Menú central con Glider · Acciones de Conversión
      ======================================================== */
   .cabecera-flotante-root {
     position: sticky;
@@ -476,75 +601,95 @@ const tarifasItems = [
     transition: transform 0.25s ease;
   }
 
+  /* Alineación exacta y armónica del contenedor */
   .contenedor-capsula {
-    width: min(1280px, calc(100% - 28px));
+    width: calc(100% - 24px);
     margin-inline: auto;
   }
 
-  /* El Globo / Cápsula suspendida */
+  /* Contenedor Grid de 3 Islas Flotantes */
   .capsula-globo {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0;
+    box-shadow: none;
+    transform: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    pointer-events: none;
     position: relative;
+    transition: all 0.25s ease;
+  }
+
+  /* Cada isla suspendida con Glassmorphism suave y elegante */
+  .capsula-logo,
+  .nav-capsula,
+  .capsula-acciones {
     pointer-events: auto;
+    height: 58px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    height: 66px;
-    padding: 0 10px 0 20px;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1.5px solid rgba(225, 237, 250, 0.9);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(225, 237, 250, 0.92);
     border-radius: var(--radio-pill, 999px);
-    box-shadow: 0 12px 36px rgba(15, 35, 70, 0.08), 0 2px 6px rgba(15, 35, 70, 0.03);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(4, 12, 28, 0.16), 0 2px 6px rgba(4, 12, 28, 0.05);
+    transition: box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
   }
 
-  /* Estado Elevado al hacer scroll */
-  .capsula-globo.es-elevada {
-    background: rgba(255, 255, 255, 0.98);
+  /* Elevación al hacer scroll */
+  .capsula-globo.es-elevada .capsula-logo,
+  .capsula-globo.es-elevada .nav-capsula,
+  .capsula-globo.es-elevada .capsula-acciones {
+    background: rgba(255, 255, 255, 0.99);
     border-color: rgba(0, 74, 173, 0.18);
-    box-shadow: 0 18px 48px rgba(0, 74, 173, 0.13), 0 4px 12px rgba(15, 35, 70, 0.06);
-    transform: translateY(-2px);
+    box-shadow: 0 14px 38px rgba(0, 74, 173, 0.16), 0 3px 10px rgba(15, 35, 70, 0.08);
   }
 
-  /* Marca / Logo */
+  /* --------------------------------------------------------
+     1. ISLA LOGO (Izquierda)
+     -------------------------------------------------------- */
   .capsula-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    justify-self: start;
+    padding: 0 22px;
     flex-shrink: 0;
-    transition: transform 0.2s ease;
   }
 
   .capsula-logo:hover {
     transform: scale(1.02);
   }
 
-
-  /* ========================================================
-     NAVEGACIÓN CENTRAL CON GLIDER MAGNÉTICO
-     ======================================================== */
-  .nav-capsula {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    padding: 3px;
-    background: #f4f8fd;
-    border-radius: var(--radio-pill, 999px);
-    border: 1px solid #e1ecfa;
+  .capsula-logo :global(.logo img) {
+    height: 38px;
+    width: auto;
+    display: block;
   }
 
-  /* Glider magnético */
+  /* --------------------------------------------------------
+     2. ISLA NAVEGACIÓN CENTRAL CON GLIDER MAGNÉTICO
+     -------------------------------------------------------- */
+  .nav-capsula {
+    justify-self: center;
+    position: relative;
+    padding: 0 10px;
+    gap: 6px;
+  }
+
+  /* Glider magnético deslizante */
   .nav-glider {
     position: absolute;
-    top: 3px;
+    top: 8px;
     left: 0;
-    height: calc(100% - 6px);
-    background: #ffffff;
+    height: calc(100% - 16px);
+    background: #eef5ff;
+    border: 1px solid #dbeafe;
     border-radius: var(--radio-pill, 999px);
-    box-shadow: 0 3px 10px rgba(15, 35, 70, 0.09), 0 1px 3px rgba(15, 35, 70, 0.04);
+    box-shadow: 0 1px 3px rgba(0, 74, 173, 0.08);
     pointer-events: none;
     transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.24s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
     opacity: 0;
@@ -557,9 +702,10 @@ const tarifasItems = [
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 15px;
+    height: 42px;
+    padding: 0 16px;
     border-radius: var(--radio-pill, 999px);
-    font-size: 0.9rem;
+    font-size: 0.94rem;
     font-weight: 600;
     color: var(--tinta, #0f2346);
     background: transparent;
@@ -570,38 +716,55 @@ const tarifasItems = [
     white-space: nowrap;
   }
 
-  .nav-enlace:hover {
-    color: #004aad;
-  }
-
+  .nav-enlace:hover,
   .nav-enlace.activo {
     color: #004aad;
   }
 
   .chevron-svg {
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #63738e;
   }
 
   .nav-dropdown:hover .chevron-svg,
   .nav-dropdown.abierto .chevron-svg {
     transform: rotate(180deg);
+    color: #004aad;
   }
 
-  /* Dropdown Megamenú */
+  /* Barra de progreso de lectura bajo la cápsula central */
+  .capsula-scroll-progreso {
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 20px;
+    right: 20px;
+    width: 0%;
+    height: 2.5px;
+    background: linear-gradient(90deg, #004aad 0%, #38b6ff 60%, #12b76a 100%);
+    border-radius: var(--radio-pill, 999px);
+    transition: width 0.1s linear;
+    z-index: 10;
+  }
+
+  /* --------------------------------------------------------
+     MENÚS DESPLEGABLES (DROPDOWNS / POPOVERS)
+     Posicionamiento unificado y centrado con la cápsula central
+     -------------------------------------------------------- */
   .nav-dropdown {
-    position: relative;
+    position: static;
     display: inline-flex;
     align-items: center;
   }
 
-  /* Puente invisible hacia abajo para mantener el hover */
+  /* Puente invisible hacia abajo para mantener el hover continuo sin saltos */
   .nav-dropdown::after {
     content: "";
     position: absolute;
     top: 100%;
-    left: -20px;
-    right: -20px;
-    height: 25px;
+    left: 0;
+    right: 0;
+    height: 20px;
     background: transparent;
     pointer-events: auto;
   }
@@ -612,19 +775,17 @@ const tarifasItems = [
     left: 50%;
     transform: translateX(-50%) translateY(6px) scale(0.98);
     background: #ffffff;
-    border: 1.5px solid #d4e2f5;
-    border-radius: var(--radio-tarjeta, 20px);
-    box-shadow: 0 20px 50px rgba(15, 35, 70, 0.18), 0 4px 12px rgba(15, 35, 70, 0.05);
-    min-width: 360px;
-    padding: 16px;
+    border: 1px solid #d4e2f5;
+    border-radius: 20px;
+    box-shadow: 0 20px 48px rgba(15, 35, 70, 0.16), 0 4px 12px rgba(15, 35, 70, 0.05);
+    padding: 14px;
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
     z-index: 9999;
-    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
   }
 
-  /* Puente superior en el propio popover para unirlo con la cápsula */
   .popover-animado::before {
     content: "";
     position: absolute;
@@ -635,12 +796,7 @@ const tarifasItems = [
     background: transparent;
   }
 
-  .popover-tarifas {
-    min-width: 330px;
-  }
-
   .nav-dropdown:hover .popover-animado,
-  .nav-dropdown:focus-within .popover-animado,
   .nav-dropdown.abierto .popover-animado {
     opacity: 1;
     visibility: visible;
@@ -648,43 +804,57 @@ const tarifasItems = [
     transform: translateX(-50%) translateY(0) scale(1);
   }
 
+  /* Anchos armónicos y perfectamente centrados bajo el menú central */
+  .popover-metodo {
+    width: 395px;
+  }
+
+  .popover-sectores {
+    width: 390px;
+  }
+
+  .popover-tarifas {
+    width: 405px;
+  }
+
   .dropdown-header-tag {
-    font-size: 0.72rem;
+    font-size: 0.70rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.07em;
     color: #63738e;
-    margin-bottom: 10px;
-    padding-left: 6px;
+    margin-bottom: 8px;
+    padding: 2px 6px;
   }
 
   .dropdown-cards-grid {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
 
   .dropdown-card {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
-    border-radius: var(--radio-sm, 10px);
+    padding: 10px 12px;
+    border-radius: 12px;
     text-decoration: none;
     background: transparent;
     border: 1px solid transparent;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .dropdown-card:hover {
-    background: #edf4fe;
-    border-color: #d2e4fc;
-    transform: translateX(4px);
+  .dropdown-card:hover,
+  .dropdown-card.card-activo {
+    background: #f0f6ff;
+    border-color: #d6e6fa;
+    transform: translateX(3px);
   }
 
   .card-icono-wrap {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 10px;
     background: #edf4fe;
     color: #004aad;
@@ -696,7 +866,8 @@ const tarifasItems = [
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .dropdown-card:hover .card-icono-wrap {
+  .dropdown-card:hover .card-icono-wrap,
+  .dropdown-card.card-activo .card-icono-wrap {
     background: #004aad;
     color: #ffffff;
     border-color: #004aad;
@@ -706,6 +877,7 @@ const tarifasItems = [
 
   .card-textos {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -719,33 +891,49 @@ const tarifasItems = [
   }
 
   .card-nombre {
-    font-size: 0.92rem;
+    font-size: 0.90rem;
     font-weight: 700;
     color: var(--tinta, #0f2346);
+    white-space: nowrap;
+    transition: color 0.18s ease;
   }
 
-  .card-badge-mini {
-    font-size: 0.68rem;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: var(--radio-pill, 999px);
-    background: #edf4fe;
+  .dropdown-card:hover .card-nombre,
+  .dropdown-card.card-activo .card-nombre {
     color: #004aad;
   }
 
+  .card-badge-mini {
+    font-size: 0.66rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: var(--radio-pill, 999px);
+    background: #e8f2fe;
+    color: #004aad;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .card-badge-mini.badge-verde {
+    background: #ecfdf3;
+    color: #027a48;
+    border: 1px solid #c9efd9;
+  }
+
   .card-desc {
-    font-size: 0.78rem;
+    font-size: 0.77rem;
     color: #556784;
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
   .card-flecha {
     color: #004aad;
     font-weight: 800;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     opacity: 0;
     transform: translateX(-4px);
     transition: all 0.2s ease;
+    flex-shrink: 0;
   }
 
   .dropdown-card:hover .card-flecha {
@@ -754,13 +942,13 @@ const tarifasItems = [
   }
 
   .dropdown-footer-link {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #e5edf7;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eaf0f8;
   }
 
   .dropdown-footer-link a {
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: #004aad;
     text-decoration: none;
@@ -768,20 +956,28 @@ const tarifasItems = [
     align-items: center;
     gap: 6px;
     padding: 4px 6px;
-    transition: transform 0.2s ease;
+    border-radius: 6px;
+    transition: all 0.2s ease;
   }
 
   .dropdown-footer-link a:hover {
-    transform: translateX(4px);
+    background: #f0f6ff;
+    transform: translateX(3px);
   }
 
-  /* ========================================================
-     ACCIONES Y CONVERSIÓN EN LA CÁPSULA
-     ======================================================== */
+  /* --------------------------------------------------------
+     3. ISLA ACCIONES Y CONVERSIÓN (Derecha)
+     -------------------------------------------------------- */
   .capsula-acciones {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    justify-self: end;
+    width: max-content;
+    padding: 0 5px 0 6px;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .capsula-acciones > * {
+    flex-shrink: 0;
   }
 
   /* Caja Teléfono con Sonar */
@@ -789,19 +985,18 @@ const tarifasItems = [
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 12px;
+    padding: 4px 10px 4px 6px;
     border-radius: var(--radio-pill, 999px);
-    background: #ffffff;
-    border: 1.5px solid #d4e4fa;
+    background: transparent;
+    border: 1px solid transparent;
     text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.2s ease;
   }
 
   .caja-telefono-sonar:hover {
-    border-color: #004aad;
     background: #edf4fe;
+    border-color: #d4e4fa;
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.12);
   }
 
   .caja-telefono-sonar:hover .icono-auricular {
@@ -859,22 +1054,29 @@ const tarifasItems = [
   .tel-textos {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     text-align: left;
+    min-width: max-content;
   }
 
   .tel-sub {
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: 0.62rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: #556784;
+    color: #63738e;
     line-height: 1;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
   }
 
   .tel-cifra {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     font-weight: 800;
     color: #004aad;
-    line-height: 1.1;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
   /* Botón "Te llamamos" */
@@ -887,12 +1089,12 @@ const tarifasItems = [
     align-items: center;
     gap: 6px;
     height: 38px;
-    padding: 0 14px;
+    padding: 0 11px;
     border-radius: var(--radio-pill, 999px);
     background: #ffffff;
     border: 1.5px solid #004aad;
     color: #004aad;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -989,23 +1191,23 @@ const tarifasItems = [
     font-weight: 600;
   }
 
-  /* Botón Principal con Shimmer */
+  /* Botón Principal con Destello Shimmer */
   .btn-cta-shimmer {
     position: relative;
     overflow: hidden;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    height: 42px;
-    padding: 0 20px;
+    gap: 6px;
+    height: 40px;
+    padding: 0 14px;
     border-radius: var(--radio-pill, 999px);
     background: linear-gradient(135deg, #004aad 0%, #003885 100%);
     color: #ffffff;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 700;
     text-decoration: none;
     border: 0;
-    box-shadow: 0 6px 18px rgba(0, 74, 173, 0.25);
+    box-shadow: 0 5px 16px rgba(0, 74, 173, 0.28);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     white-space: nowrap;
   }
@@ -1027,8 +1229,8 @@ const tarifasItems = [
   }
 
   .btn-cta-shimmer:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 26px rgba(0, 74, 173, 0.4);
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.38);
   }
 
   .btn-cta-flecha {
@@ -1036,24 +1238,10 @@ const tarifasItems = [
   }
 
   .btn-cta-shimmer:hover .btn-cta-flecha {
-    transform: translateX(4px);
+    transform: translateX(3px);
   }
 
-  /* Barra de progreso curvada en la base de la cápsula */
-  .capsula-scroll-progreso {
-    position: absolute;
-    bottom: -1px;
-    left: 24px;
-    right: 24px;
-    width: 0%;
-    height: 2.5px;
-    background: linear-gradient(90deg, #004aad 0%, #38b6ff 60%, #12b76a 100%);
-    border-radius: var(--radio-pill, 999px);
-    transition: width 0.1s linear;
-    z-index: 10;
-  }
-
-  /* Hamburguesa móvil */
+  /* Botón Hamburguesa Móvil */
   .btn-hamburguesa-capsula {
     display: none;
     flex-direction: column;
@@ -1064,8 +1252,9 @@ const tarifasItems = [
     padding: 8px;
     background: #f4f8fd;
     border: 1px solid #d4e4fa;
-    border-radius: 8px;
+    border-radius: 999px;
     cursor: pointer;
+    flex-shrink: 0;
   }
 
   .hamb-linea {
@@ -1090,7 +1279,7 @@ const tarifasItems = [
   /* Menú Móvil */
   .menu-movil-drawer {
     position: fixed;
-    top: 90px;
+    top: 86px;
     left: 16px;
     right: 16px;
     background: #ffffff;
@@ -1099,7 +1288,7 @@ const tarifasItems = [
     box-shadow: 0 20px 60px rgba(15, 35, 70, 0.2);
     z-index: 99;
     overflow-y: auto;
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 110px);
     padding: 20px;
     animation: drawerFade 0.2s ease;
   }
@@ -1183,104 +1372,33 @@ const tarifasItems = [
     justify-content: center;
   }
 
-  .contenedor-capsula {
-    width: min(1380px, calc(100% - clamp(24px, 4vw, 48px)));
-    margin-inline: auto;
-  }
-
-  /* ========================================================
-     CABECERA SEPARADA EN TRES BLOQUES (logo · menú · acciones)
-     Logo a la izquierda, menú centrado matemáticamente, 
-     acciones a la derecha y barra de progreso integrada.
-     ======================================================== */
-  .capsula-globo,
-  .capsula-globo.es-elevada {
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: 0;
-    box-shadow: none;
-    transform: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 16px;
-    pointer-events: none;
-  }
-
-  .capsula-logo,
-  .nav-capsula,
-  .capsula-acciones {
-    pointer-events: auto;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(225, 237, 250, 0.9);
-    border-radius: var(--radio-pill, 999px);
-    box-shadow: 0 10px 30px rgba(4, 12, 28, 0.18), 0 2px 6px rgba(4, 12, 28, 0.06);
-    transition: box-shadow 0.25s ease, background 0.25s ease;
-  }
-
-  .capsula-logo {
-    justify-self: start;
-    padding: 0 22px;
-  }
-
-  .nav-capsula {
-    justify-self: center;
-    position: relative;
-    padding: 0 6px;
-    gap: 2px;
-  }
-
-  .nav-glider {
-    top: 9px;
-    height: calc(100% - 18px);
-    background: #eef5ff;
-    box-shadow: none;
-  }
-
-  .capsula-acciones {
-    justify-self: end;
-    padding: 0 7px 0 10px;
-  }
-
-  .capsula-globo.es-elevada .capsula-logo,
-  .capsula-globo.es-elevada .nav-capsula,
-  .capsula-globo.es-elevada .capsula-acciones {
-    background: rgba(255, 255, 255, 0.99);
-    box-shadow: 0 14px 36px rgba(0, 74, 173, 0.16), 0 3px 10px rgba(15, 35, 70, 0.08);
-  }
-
-  /* Barra de progreso de lectura bajo la cápsula central */
-  .capsula-scroll-progreso {
-    display: block;
-    position: absolute;
-    bottom: -1px;
-    left: 18px;
-    right: 18px;
-    width: 0%;
-    height: 2.5px;
-    background: linear-gradient(90deg, #004aad 0%, #38b6ff 60%, #12b76a 100%);
-    border-radius: var(--radio-pill, 999px);
-    transition: width 0.1s linear;
-    z-index: 10;
-  }
-
   /* ========================================================
      RESPONSIVE MEDIA QUERIES
+     Adaptación armónica y progresiva según ancho de pantalla
      ======================================================== */
-  @media (max-width: 1180px) {
+  @media (max-width: 1540px) {
+    .capsula-globo {
+      grid-template-columns: minmax(0, 1fr) auto max-content;
+    }
+  }
+
+  @media (max-width: 1280px) {
+    .btn-te-llamamos-capsula {
+      display: none;
+    }
+
+    .capsula-globo {
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 1120px) {
     .caja-telefono-sonar {
       display: none;
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 960px) {
     .nav-capsula {
       display: none;
     }
@@ -1288,12 +1406,11 @@ const tarifasItems = [
     .btn-hamburguesa-capsula {
       display: flex;
     }
-  }
 
-  @media (max-width: 768px) {
     .capsula-globo {
-      height: 58px;
-      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .capsula-logo,
@@ -1305,14 +1422,33 @@ const tarifasItems = [
       padding: 0 16px;
     }
 
-    .btn-te-llamamos-capsula {
-      display: none;
+    .capsula-logo :global(.logo img) {
+      height: 32px;
     }
 
     .btn-cta-shimmer {
       height: 38px;
       padding: 0 14px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contenedor-capsula {
+      width: calc(100% - 20px);
+    }
+
+    .capsula-logo {
+      padding: 0 12px;
+    }
+
+    .capsula-logo :global(.logo img) {
+      height: 28px;
+    }
+
+    .btn-cta-shimmer {
+      padding: 0 12px;
+      font-size: 0.78rem;
     }
   }
 </style>

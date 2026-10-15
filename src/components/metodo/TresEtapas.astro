@@ -1,0 +1,549 @@
+---
+// Componente TresEtapas de la sección El Método
+// Estructura y diseño idénticos a los componentes de src/components/home:
+// Explica el orden analítico: 1. Diagnóstico, 2. Estrategia (las 5 decisiones), 3. Tarifa
+interface Etapa {
+  num: string;
+  nombre: string;
+  quien: string;
+  desc: string;
+}
+
+const etapas: Etapa[] = [
+  {
+    num: "1",
+    nombre: "Diagnóstico",
+    quien: "Maxi + especialista",
+    desc: "Qué miramos: consumo histórico por periodos, potencia contratada frente a maxímetros reales, penalizaciones por reactiva y contrato actual.",
+  },
+  {
+    num: "2",
+    nombre: "Estrategia",
+    quien: "Especialista colegiado",
+    desc: "Las cinco decisiones clave: qué se corrige (potencias, excesos, reactiva) y qué se mantiene porque ya funciona en tu empresa.",
+  },
+  {
+    num: "3",
+    nombre: "Tarifa",
+    quien: "EMAX Energía",
+    desc: "Construida fila a fila: estructura horaria adaptada a tus turnos, modalidad de riesgo adecuada y condiciones transparentes sin sorpresas.",
+  },
+];
+---
+
+<section class="proceso-seccion" id="orden-metodo" aria-labelledby="h2-orden">
+  <div class="contenedor">
+    <div class="seccion-cabecera">
+      <div class="kicker-wrap">
+        <span class="kicker-punto" aria-hidden="true"></span>
+        <span class="kicker-texto">Orden metodológico en 3 etapas</span>
+      </div>
+      <h2 class="seccion-titulo" id="h2-orden">
+        Primero entendemos cómo consume tu empresa. Después decidimos qué hacer.
+      </h2>
+      <p class="seccion-subtitulo">
+        Tres etapas rigurosas y transparentes. Las cinco decisiones son la segunda fase.
+      </p>
+    </div>
+
+    <!-- Contenedor del Timeline horizontal con Beam iluminado -->
+    <!-- Contenedor del Timeline Vertical con haz de luz continuo -->
+    <div class="timeline-vertical-wrap" id="procesoTimeline">
+      <!-- Pista vertical central -->
+      <div class="timeline-v-track" aria-hidden="true">
+        <div class="timeline-v-beam" id="procesoBeam"></div>
+      </div>
+
+      <!-- Lista vertical de las 3 etapas -->
+      <div class="timeline-v-items">
+        {
+          etapas.map((etapa) => (
+            <div
+              class:list={[
+                "timeline-v-fila",
+                `fila-${etapa.num}`,
+                etapa.num === "2" ? "lado-izq" : "lado-der",
+                "tb-item",
+              ]}
+              data-etapa-num={etapa.num}
+            >
+              {/* Para etapa 2 (lado-izq): Tarjeta en columna 1, Nodo en columna 2 */}
+              {etapa.num === "2" ? (
+                <>
+                  <article class="timeline-v-card tarjeta-blanca">
+                    <header class="timeline-v-card-top">
+                      <span class="paso-fase-etiqueta">Etapa {etapa.num}</span>
+                      <span class="paso-quien-badge">
+                        <span class="quien-dot" aria-hidden="true"></span>
+                        {etapa.quien}
+                      </span>
+                    </header>
+                    <h3 class="paso-titulo">{etapa.nombre}</h3>
+                    <p class="paso-desc">{etapa.desc}</p>
+                  </article>
+
+                  <div class="timeline-v-nodo">
+                    <span class="timeline-v-dot tb-dot">{etapa.num}</span>
+                  </div>
+                  <div class="timeline-v-vacio" aria-hidden="true"></div>
+                </>
+              ) : (
+                /* Para etapa 1 y 3 (lado-der): Vacío en col 1, Nodo en col 2, Tarjeta en col 3 */
+                <>
+                  <div class="timeline-v-vacio" aria-hidden="true"></div>
+                  <div class="timeline-v-nodo">
+                    <span class="timeline-v-dot tb-dot">{etapa.num}</span>
+                  </div>
+
+                  <article class="timeline-v-card tarjeta-blanca">
+                    <header class="timeline-v-card-top">
+                      <span class="paso-fase-etiqueta">Etapa {etapa.num}</span>
+                      <span class="paso-quien-badge">
+                        <span class="quien-dot" aria-hidden="true"></span>
+                        {etapa.quien}
+                      </span>
+                    </header>
+                    <h3 class="paso-titulo">{etapa.nombre}</h3>
+                    <p class="paso-desc">{etapa.desc}</p>
+                  </article>
+                </>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Enlace contextual inferior centrado -->
+      <div class="proceso-footer" id="procesoFooter">
+        <a href="/diagnostico" class="enlace-diagnostico-btn" id="btnDiagnosticoDestino">
+          <span class="btn-luz-punto" aria-hidden="true"></span>
+          <span>Qué recibes en tu informe de diagnóstico</span>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3.5 10.5 8 6 12.5"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     PROCESO SECCIÓN (TRES ETAPAS) - IDÉNTICO A src/components/home/ComoEmpezar.astro
+     ========================================================================== */
+  .proceso-seccion {
+    padding: var(--e-8, 64px) 0;
+    background-color: var(--fondo-calido, #f7f9fc);
+    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+  }
+
+  @media (width >= 1024px) {
+    .proceso-seccion {
+      padding: var(--e-9, 80px) 0;
+    }
+  }
+
+  .seccion-cabecera {
+    max-width: 48rem;
+    margin-bottom: 40px;
+  }
+
+  .kicker-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--azul-resalte, #ddf1ff);
+    padding: 6px 14px;
+    border-radius: var(--radio-pill, 999px);
+    margin-bottom: 14px;
+  }
+
+  .kicker-punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--azul-600, #1a6ff7);
+    display: inline-block;
+  }
+
+  .kicker-texto {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--azul-900, #004aad);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .seccion-titulo {
+    font-family: var(--font-titulos, serif);
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+    line-height: 1.22;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .seccion-subtitulo {
+    font-size: 1.125rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     TIMELINE VERTICAL ALTERNADO CON HAZ DE LUZ CONTINUO
+     - Etapa 1: Derecha
+     - Etapa 2: Izquierda
+     - Etapa 3: Derecha
+     - Botón: Centro
+     ========================================================================== */
+  .timeline-vertical-wrap {
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 0 0;
+  }
+
+  /* Pista vertical central */
+  .timeline-v-track {
+    position: absolute;
+    top: 40px;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: #e2eaf5;
+    border-radius: 999px;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-v-track {
+      left: 28px;
+      transform: none;
+    }
+  }
+
+  /* Haz de luz de gradiente azul claro a medio que baja con el scroll */
+  .timeline-v-beam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0%;
+    background: linear-gradient(180deg, #1a6ff7 0%, #38b6ff 70%, #60a5fa 100%);
+    box-shadow: 0 0 16px 2px rgba(56, 182, 255, 0.7);
+    border-radius: 999px;
+    transition: height 0.12s ease-out;
+    will-change: height;
+  }
+
+  /* Lista de filas de etapas */
+  .timeline-v-items {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  /* Fila base de etapa */
+  .timeline-v-fila {
+    display: grid;
+    grid-template-columns: 1fr 64px 1fr;
+    align-items: center;
+    position: relative;
+    min-height: 140px;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-v-fila {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      padding-left: 8px;
+    }
+  }
+
+  /* Nodo central del número sobre el riel */
+  .timeline-v-nodo {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    height: 100%;
+    z-index: 3;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-v-nodo {
+      flex-shrink: 0;
+      align-self: center;
+      margin-top: 0;
+    }
+  }
+
+  .timeline-v-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--tinta-2, #3a4b68);
+    border: 2px solid #cbdbee;
+    font-weight: 800;
+    font-size: 1.15rem;
+    font-family: var(--font-display, sans-serif);
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(15, 35, 70, 0.06);
+  }
+
+  /* Punto iluminado al pasar el scroll */
+  .timeline-v-fila.lit .timeline-v-dot {
+    background: #1a6ff7;
+    color: #ffffff;
+    border-color: #38b6ff;
+    box-shadow: 0 0 16px rgba(26, 111, 247, 0.6);
+    transform: scale(1.08);
+  }
+
+  /* Ubicación alternada de tarjetas en Desktop */
+  /* Etapa 1 y 3 a la derecha */
+  .timeline-v-fila.lado-der .timeline-v-card {
+    margin-left: 20px;
+  }
+
+  /* Etapa 2 a la izquierda */
+  .timeline-v-fila.lado-izq .timeline-v-card {
+    margin-right: 20px;
+  }
+
+  .timeline-v-vacio {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-v-vacio {
+      display: none;
+    }
+
+    .timeline-v-fila.lado-der .timeline-v-card,
+    .timeline-v-fila.lado-izq .timeline-v-card {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  /* Tarjeta blanca */
+  .timeline-v-card {
+    background: #ffffff;
+    border: 1.5px solid var(--linea, #d6e0ee);
+    border-radius: 18px;
+    padding: 26px 24px;
+    box-shadow: 0 4px 18px rgba(15, 35, 70, 0.05);
+    transition: all 0.35s ease;
+    position: relative;
+    opacity: 0.65;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  /* Resaltado de color azul suave al hacer scroll (sin ser oscuro) */
+  .timeline-v-fila.lit .timeline-v-card {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: #93c5fd; /* Azul suave */
+    background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+    box-shadow:
+      0 0 0 2px rgba(59, 130, 246, 0.18),
+      0 12px 30px rgba(37, 99, 235, 0.1);
+  }
+
+  .timeline-v-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .paso-fase-etiqueta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--tinta-3, #63738e);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-v-fila.lit .paso-fase-etiqueta {
+    color: #1a6ff7;
+  }
+
+  .paso-quien-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #edf4fe;
+    color: var(--azul-900, #004aad);
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  .quien-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #1a6ff7;
+  }
+
+  .paso-titulo {
+    font-family: var(--font-titulos, serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--tinta, #0f2346);
+    line-height: 1.3;
+    margin: 0 0 8px;
+  }
+
+  .paso-desc {
+    font-size: 0.92rem;
+    color: var(--tinta-2, #3a4b68);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Botón centrado en el footer */
+  .proceso-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 16px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .enlace-diagnostico-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    background: #ffffff;
+    border: 1.5px solid var(--azul-900, #004aad);
+    border-radius: 999px;
+    color: var(--azul-900, #004aad);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(15, 35, 70, 0.06);
+    transition: all 0.3s ease;
+  }
+
+  .btn-luz-punto {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbdbee;
+    transition: all 0.3s ease;
+  }
+
+  /* Resaltado del botón al terminar el recorrido */
+  .enlace-diagnostico-btn.lit {
+    border-color: #38b6ff;
+    box-shadow: 0 0 24px rgba(56, 182, 255, 0.4), 0 8px 24px rgba(0, 74, 173, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .enlace-diagnostico-btn.lit .btn-luz-punto {
+    background: #00e599;
+    box-shadow: 0 0 10px #00e599, 0 0 4px #00e599;
+  }
+
+  .enlace-diagnostico-btn:hover {
+    background: #eef5ff;
+    transform: translateY(-2px);
+  }
+
+  .enlace-diagnostico-btn svg {
+    transition: transform 0.15s;
+  }
+
+  .enlace-diagnostico-btn:hover svg {
+    transform: translateX(4px);
+  }
+</style>
+
+<script>
+  // =========================================================================
+  // ANIMACIÓN DE HAZ DE LUZ VERTICAL (BEAM) CON ILUMINACIÓN AL SCROLL
+  // =========================================================================
+  function initProcesoBeamVertical() {
+    const timeline = document.getElementById("procesoTimeline");
+    const beam = document.getElementById("procesoBeam");
+    const btnDestino = document.getElementById("btnDiagnosticoDestino");
+    if (!timeline || !beam) return;
+
+    const items = Array.from(timeline.querySelectorAll<HTMLElement>(".tb-item"));
+    let ticking = false;
+
+    function actualizarBeam() {
+      const rect = timeline.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // La línea de lectura media en la pantalla (58% de la altura visible)
+      const lineaLectura = windowHeight * 0.58;
+      
+      // Avance vertical dentro del contenedor
+      const filled = Math.max(0, Math.min(rect.height - 70, lineaLectura - rect.top));
+      beam.style.height = `${filled}px`;
+
+      // Iluminar cada nodo y tarjeta al pasar la línea de lectura
+      items.forEach((item) => {
+        const dot = item.querySelector<HTMLElement>(".tb-dot");
+        if (!dot) return;
+        const dr = dot.getBoundingClientRect();
+        const pasado = dr.top + dr.height / 2 <= lineaLectura;
+        item.classList.toggle("lit", pasado);
+      });
+
+      // Iluminar el botón centrado al llegar al final del timeline
+      if (btnDestino) {
+        const btnRect = btnDestino.getBoundingClientRect();
+        const botonAlcanzado = btnRect.top <= lineaLectura + 40;
+        btnDestino.classList.toggle("lit", botonAlcanzado);
+      }
+
+      ticking = false;
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(actualizarBeam);
+        }
+      },
+      { passive: true }
+    );
+
+    window.addEventListener("resize", actualizarBeam);
+    actualizarBeam();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProcesoBeamVertical);
+  } else {
+    initProcesoBeamVertical();
+  }
+</script>

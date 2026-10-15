@@ -1,359 +1,655 @@
 ---
 // Sección 2: "Cambiar de compañía es fácil. Saber si te conviene, no tanto."
-// Comparativa comercial transparente entre los atajos del mercado y el método real de EMAX.
-// Diseño limpio, humano y sin sobrecarga de animación.
+// Diseño editorial de alta gama: Columna izquierda anclada con titular y "Los atajos habituales",
+// y columna derecha con las 4 tarjetas de diagnóstico con imágenes reales y acabados premium.
+// Colores y tipografía alineados al boceto y a la paleta oficial: #004AAD · #5271ff · #38b6ff
+
 const atajos = [
-  "Elegir de un catálogo estándar sin ver tu curva.",
-  "Aplicar la regla genérica de tu tipo de negocio.",
-  "Renovar por inercia porque llega la fecha de vencimiento.",
-  "Aceptar una oferta comercial antes de que nadie haya leído tu factura.",
+  "Elegir de un catálogo.",
+  "Aplicar la regla de tu tipo de negocio.",
+  "Renovar porque llega la fecha.",
+  "Aceptar la oferta que te llega antes de que nadie mire tu factura.",
 ];
 
 const pilaresEmax = [
   {
+    num: "01",
     titulo: "Cuánto y cuándo consume tu empresa",
-    desc: "Tu consumo por periodos y por meses, traducido a las horas reales de tu negocio: cuánto va a horas caras y cuánto a baratas.",
-    icono: "📊",
+    desc: "Tu consumo por periodos y por meses, traducido a las horas de tu negocio: cuánto va a las horas caras y cuánto a las baratas.",
+    tag: "Curva horaria",
+    foto: "/imagenes/tarjeta-curva-negocio.jpg",
+    alt: "Curva de consumo horario en tablet sobre mesa de panadería",
   },
   {
-    titulo: "Tu potencia contratada vs. real",
-    desc: "La potencia que tienes en cada periodo frente a la que usas de verdad. Si te sobra, si te falta y si estás pagando penalizaciones por excesos.",
-    icono: "⚡",
+    num: "02",
+    titulo: "Tu potencia",
+    desc: "La potencia que tienes contratada en cada periodo frente a la que usas de verdad. Si te sobra, si te falta y si pagas excesos.",
+    tag: "Ajuste P1–P6",
+    foto: "/imagenes/tarjeta-tecnico-potencia.jpg",
+    alt: "Auditoría de potencias en cuadro eléctrico industrial",
   },
   {
+    num: "03",
     titulo: "Tu energía reactiva",
-    desc: "Si la pagas en factura, en qué periodos ocurre, cuánto te cuesta al año y si compensa instalar una batería de condensadores.",
-    icono: "🔋",
+    desc: "Si la pagas, en qué periodos, cuánto al año y si compensa corregirla.",
+    tag: "0 € penalizaciones",
+    foto: "/imagenes/tarjeta-energia-reactiva.jpg",
+    alt: "Batería de condensadores y análisis de reactiva industrial",
   },
   {
-    titulo: "Tu propuesta de tarifa a medida",
-    desc: "La tarifa que resulta de cruzar los tres datos anteriores: estructura de precios, optimización de potencias y condiciones transparentes.",
-    icono: "🎯",
+    num: "04",
+    titulo: "Tu propuesta de tarifa",
+    desc: "La tarifa que sale de los tres bloques anteriores: estructura, modalidad, potencias y condiciones.",
+    tag: "A medida",
+    foto: "/imagenes/tarjeta-propuesta-medida.jpg",
+    alt: "Propuesta de tarifa y estudio técnico detallado",
   },
 ];
 ---
 
-<section class="comparativa-seccion" id="metodo-comparativa">
+<section class="seccion-metodo-editorial" id="metodo-comparativa">
   <div class="contenedor">
-    <div class="seccion-cabecera">
-      <span class="badge badge-azul">El problema del mercado</span>
-      <h2 class="seccion-titulo">Cambiar de compañía es fácil. Saber si te conviene, no tanto.</h2>
-      <p class="seccion-subtitulo">
-        El precio del kWh es lo primero que se suele mirar y <strong>lo último que conviene decidir.</strong>
-      </p>
-    </div>
-
-    <div class="comparativa-grid">
-      <!-- Columna 1: Los atajos habituales (Mercado tradicional) -->
-      <article class="tarjeta-comparativa tarjeta-atajos">
-        <header class="tarjeta-cabecera">
-          <span class="badge-alerta">Lo que suele pasar</span>
-          <h3 class="tarjeta-tit">Los atajos habituales</h3>
-          <p class="tarjeta-desc">Cómo contrata la mayoría de empresas antes de conocernos:</p>
-        </header>
-
-        <ul class="lista-atajos" role="list">
-          {
-            atajos.map((item) => (
-              <li class="item-atajo">
-                <span class="icono-cruz" aria-hidden="true">✕</span>
-                <span>{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-
-        <footer class="atajos-footer">
-          <p class="atajos-conclusion">
-            <span class="alerta-icono" aria-hidden="true">!</span>
-            <strong>Si empiezas por el precio, comparas sin saber qué compras.</strong>
+    <div class="layout-editorial-dos-columnas">
+      
+      <!-- ================= COLUMNA IZQUIERDA (Sticky): TITULAR + LOS ATAJOS ================= -->
+      <aside class="columna-izquierda-sticky">
+        <div class="cabecera-bloque">
+          <span class="cabecera-badge">
+            <span class="punto-verde" aria-hidden="true"></span>
+            <span>Energía para empresas</span>
+          </span>
+          <h2 class="editorial-titulo">
+            Cambiar de compañía <span class="titulo-facil">es fácil.</span><br />
+            <span class="titulo-azul">Saber si te conviene, no tanto.</span>
+          </h2>
+          <p class="editorial-bajada">
+            El precio del kWh es lo primero que se suele mirar y <strong>lo último que conviene decidir.</strong>
           </p>
-        </footer>
-      </article>
+        </div>
 
-      <!-- Columna 2: Lo que miramos nosotros (EMAX) -->
-      <article class="tarjeta-comparativa tarjeta-emax tarjeta-blanca">
-        <header class="tarjeta-cabecera">
-          <span class="badge badge-verde">El diagnóstico EMAX</span>
-          <h3 class="tarjeta-tit">Lo que miramos nosotros</h3>
-          <p class="tarjeta-desc">Antes de proponerte una tarifa, auditamos estos 4 factores:</p>
+        <!-- Tarjeta: Los atajos habituales -->
+        <article class="tarjeta-atajos-elegante">
+          <header class="atajos-header">
+            <span class="punto-rojo" aria-hidden="true"></span>
+            <h3 class="atajos-tit">Los atajos habituales</h3>
+          </header>
+
+          <ul class="lista-atajos-limpia" role="list">
+            {
+              atajos.map((item) => (
+                <li class="item-atajo-li">
+                  <span class="bullet-punto" aria-hidden="true">•</span>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <footer class="atajos-pie-mensaje">
+            <p class="atajos-aviso-texto">
+              Si empiezas por el precio, <strong>comparas sin saber qué compras.</strong>
+            </p>
+          </footer>
+        </article>
+      </aside>
+
+      <!-- ================= COLUMNA DERECHA: LO QUE MIRAMOS NOSOTROS ================= -->
+      <main class="columna-derecha-tarjetas">
+        <header class="derecha-encabezado">
+          <span class="tag-metodo-badge">El diagnóstico EMAX</span>
+          <h3 class="derecha-tit-seccion">Lo que miramos nosotros</h3>
         </header>
 
-        <div class="lista-pilares">
+        <!-- Feed vertical de las 4 tarjetas con fotos -->
+        <div class="feed-tarjetas-factores">
           {
-            pilaresEmax.map((pilar, index) => (
-              <div class="pilar-item">
-                <span class="pilar-num">0{index + 1}</span>
-                <div class="pilar-info">
-                  <h4 class="pilar-tit">{pilar.titulo}</h4>
-                  <p class="pilar-desc">{pilar.desc}</p>
+            pilaresEmax.map((pilar) => (
+              <article class="factor-card-horizontal" tabindex="0">
+                <div class="factor-info-lado">
+                  <div class="factor-top-meta">
+                    <span class="factor-num-pill">{pilar.num}</span>
+                    <span class="factor-etiqueta-tag">{pilar.tag}</span>
+                  </div>
+                  <h4 class="factor-h4">{pilar.titulo}</h4>
+                  <p class="factor-desc">{pilar.desc}</p>
                 </div>
-              </div>
+
+                <div class="factor-foto-lado">
+                  <img
+                    src={pilar.foto}
+                    alt={pilar.alt}
+                    class="factor-thumb-img"
+                    loading="lazy"
+                    width="260"
+                    height="190"
+                  />
+                  <div class="factor-foto-shimmer" aria-hidden="true"></div>
+                </div>
+              </article>
             ))
           }
         </div>
 
-        <footer class="emax-footer">
-          <div class="metodo-pasos-resumen">
-            <span class="paso-tag">Diagnóstico</span>
-            <span class="flecha-paso">→</span>
-            <span class="paso-tag">Estrategia</span>
-            <span class="flecha-paso">→</span>
-            <span class="paso-tag destacado">Tarifa a medida</span>
+        <!-- Cierre inferior: Diagnóstico -> Estrategia -> Tarifa + Botones -->
+        <footer class="cierre-acciones-bloque">
+          <div class="flujo-etapas">
+            <span class="etapa-item">Diagnóstico</span>
+            <span class="etapa-flecha" aria-hidden="true">→</span>
+            <span class="etapa-item">Estrategia</span>
+            <span class="etapa-flecha" aria-hidden="true">→</span>
+            <span class="etapa-item etapa-destacada">Tarifa.</span>
           </div>
 
-          <div class="emax-acciones">
-            <a href="/metodo" class="boton boton-secundario">Ver el método completo</a>
-            <a href="/#estudio" class="boton boton-primario">Analizar mi factura</a>
+          <div class="botones-fila-cierre">
+            <a href="/metodo" class="btn-metodo-capsula">
+              <span>Ver el método completo</span>
+              <span class="flecha-circular">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </span>
+            </a>
+
+            <button
+              type="button"
+              class="btn-informe-capsula"
+              data-abrir-funnel
+              data-tramo-id="general"
+              data-tramo-label="Qué incluye tu informe"
+              data-tramo-rango="Auditoría energética personalizada"
+              data-tramo-msg="Analizamos tu factura técnica y te mostramos qué incluye tu informe a medida."
+            >
+              <span>Qué incluye tu informe</span>
+              <span class="flecha-circular-azul">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </span>
+            </button>
           </div>
         </footer>
-      </article>
+      </main>
+
     </div>
   </div>
 </section>
 
 <style>
-  .comparativa-seccion {
-    padding: 72px 0 80px;
-    background: #f4f8fc;
+  /* ==========================================================================
+     DISEÑO EDITORIAL "LO QUE MIRAMOS NOSOTROS"
+     Estructura intacta; solo colores y tipografía según boceto.
+     Paleta: #004AAD (azul fuerte) · #5271ff (azul vivo) · #38b6ff (cian)
+     ========================================================================== */
+  .seccion-metodo-editorial {
+    background: #e4e7ec;
+    padding: clamp(60px, 7vw, 100px) 0;
+    border-top: 1px solid #d5d9e0;
+    border-bottom: 1px solid #d5d9e0;
+    position: relative;
+    z-index: 1;
   }
 
-  .seccion-cabecera {
-    text-align: center;
-    max-width: 740px;
-    margin: 0 auto 52px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
+  .contenedor {
+    max-width: 1220px;
+    margin-inline: auto;
+    padding-inline: clamp(18px, 4vw, 40px);
   }
 
-  .seccion-titulo {
-    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.7rem);
-    color: var(--tinta, #0f2346);
-  }
-
-  .seccion-subtitulo {
-    font-size: 1.125rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-  }
-
-  .comparativa-grid {
+  /* Grid 2 Columnas: Izquierda fija / Derecha scrolleable */
+  .layout-editorial-dos-columnas {
     display: grid;
-    grid-template-columns: 0.88fr 1.12fr;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(36px, 5vw, 68px);
+    align-items: start;
+  }
+
+  /* ==========================================================================
+     COLUMNA IZQUIERDA (STICKY)
+     ========================================================================== */
+  .columna-izquierda-sticky {
+    position: sticky;
+    top: 96px;
+    display: flex;
+    flex-direction: column;
     gap: 32px;
-    align-items: stretch;
   }
 
-  /* Tarjeta de atajos */
-  .tarjeta-comparativa {
-    border-radius: var(--radio-grande, 28px);
+  .cabecera-bloque {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .tarjeta-atajos {
-    background: #ffffff;
-    border: 1.5px solid var(--linea, #d6e0ee);
-    padding: 36px 30px;
-    box-shadow: 0 4px 20px rgba(15, 35, 70, 0.04);
-  }
-
-  .badge-alerta {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: var(--radio-pill, 999px);
-    background: #fff1f0;
-    color: #cf1322;
-    border: 1px solid #ffa39e;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-
-  .tarjeta-tit {
-    font-size: 1.65rem;
-    color: var(--tinta, #0f2346);
-    margin-bottom: 6px;
-  }
-
-  .tarjeta-desc {
-    font-size: 0.95rem;
-    color: var(--tinta-3, #63738e);
-    margin-bottom: 24px;
-  }
-
-  .lista-atajos {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 0;
-    margin: 0 0 32px;
-    list-style: none;
-  }
-
-  .item-atajo {
-    display: flex;
-    align-items: flex-start;
     gap: 12px;
-    font-size: 0.975rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.45;
   }
 
-  .icono-cruz {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #fee4e2;
-    color: #d92d20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.78rem;
-    font-weight: 800;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .atajos-footer {
-    padding: 16px;
-    background: #ffffff;
-    border-radius: var(--radio-md, 14px);
-    border: 1px dashed #d0dbe9;
-  }
-
-  .atajos-conclusion {
-    font-size: 0.92rem;
-    color: var(--tinta, #0f2346);
-    line-height: 1.45;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .alerta-icono {
+  /* Rótulo pequeño gris con barra cian a la derecha (como el boceto) */
+  .cabecera-badge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #fee4e2;
-    color: #d92d20;
-    font-size: 0.8rem;
+    gap: 8px;
+    background: transparent;
+    color: #5b6678;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0 8px 0 0;
+    border: 0;
+    border-right: 3px solid #38b6ff;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    align-self: flex-start;
+  }
+
+  .punto-verde {
+    display: none;
+  }
+
+  /* Titular en mayúsculas, sans-serif en negrita, con "es fácil." cursiva */
+  .editorial-titulo {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
     font-weight: 800;
-    flex-shrink: 0;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: #0f2346;
+    margin: 0;
   }
 
-  /* Tarjeta EMAX */
-  .tarjeta-emax {
-    padding: 36px 32px;
-    border: 2px solid var(--azul-900, #004aad);
-    box-shadow: 0 16px 44px rgba(0, 74, 173, 0.1);
+  .titulo-facil {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #004aad;
+    font-size: 1.1em;
   }
 
-  .lista-pilares {
+  .titulo-azul {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.45em;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #0f2346;
+  }
+
+  .editorial-bajada {
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: #004aad;
+    line-height: 1.55;
+    margin: 4px 0 0;
+    max-width: 440px;
+  }
+
+  .editorial-bajada strong {
+    color: #004aad;
+    font-weight: 400;
+  }
+
+  /* Tarjeta: Los atajos habituales */
+  .tarjeta-atajos-elegante {
+    background: #f4f5f7;
+    border-radius: 22px;
+    border: 0;
+    padding: 26px 24px;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    margin-bottom: 32px;
-  }
-
-  .pilar-item {
-    display: flex;
-    align-items: flex-start;
     gap: 16px;
-    padding: 12px 16px;
-    background: var(--fondo, #f4f7fb);
-    border-radius: var(--radio-md, 14px);
-    transition: background 0.15s ease;
+    max-width: 440px;
   }
 
-  .pilar-item:hover {
-    background: var(--azul-suave, #edf4fe);
-  }
-
-  .pilar-num {
-    font-family: var(--font-titulos);
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--azul-900, #004aad);
-    line-height: 1;
-    margin-top: 2px;
-  }
-
-  .pilar-tit {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    margin-bottom: 4px;
-  }
-
-  .pilar-desc {
-    font-size: 0.88rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.45;
-  }
-
-  .emax-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--linea-fina, #e6edf7);
-  }
-
-  .metodo-pasos-resumen {
+  .atajos-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
-    font-size: 0.88rem;
-    font-weight: 600;
   }
 
-  .paso-tag {
-    padding: 4px 12px;
-    border-radius: var(--radio-pill, 999px);
-    background: var(--fondo, #f4f7fb);
-    color: var(--tinta-2, #3a4b68);
+  .punto-rojo {
+    display: none;
   }
 
-  .paso-tag.destacado {
-    background: var(--azul-resalte, #ddf1ff);
-    color: var(--azul-900, #004aad);
+  .atajos-tit {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #004aad;
+    margin: 0;
   }
 
-  .flecha-paso {
-    color: var(--tinta-3, #63738e);
-  }
-
-  .emax-acciones {
+  .lista-atajos-limpia {
+    margin: 0;
+    padding: 0;
+    list-style: none;
     display: flex;
+    flex-direction: column;
     gap: 12px;
+  }
+
+  .item-atajo-li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.84rem;
+    letter-spacing: 0.02em;
+    color: #2a3550;
+    line-height: 1.45;
+  }
+
+  .bullet-punto {
+    color: #5b6678;
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .atajos-pie-mensaje {
+    padding-top: 14px;
+    border-top: 1.5px solid #5271ff;
+    margin-top: 4px;
+  }
+
+  .atajos-aviso-texto {
+    margin: 0;
+    font-size: 0.84rem;
+    letter-spacing: 0.02em;
+    color: #004aad;
+    line-height: 1.45;
+  }
+
+  .atajos-aviso-texto strong {
+    font-weight: 400;
+  }
+
+  /* ==========================================================================
+     COLUMNA DERECHA (LO QUE MIRAMOS NOSOTROS)
+     ========================================================================== */
+  .columna-derecha-tarjetas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .derecha-encabezado {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .tag-metodo-badge {
+    align-self: flex-start;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: #38b6ff;
+    color: #ffffff;
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 0;
+  }
+
+  .derecha-tit-seccion {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #0f2346;
+    margin: 0;
+  }
+
+  /* Feed de Tarjetas de Factores */
+  .feed-tarjetas-factores {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .factor-card-horizontal {
+    border-radius: 16px;
+    border: 0;
+    padding: clamp(20px, 3vw, 24px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    gap: 20px;
+    align-items: center;
+    color: #ffffff;
+    box-shadow: 0 4px 18px rgba(15, 35, 70, 0.08);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+
+  /* Alternancia de colores como el boceto: cian / azul fuerte */
+  .factor-card-horizontal:nth-child(odd) {
+    background: #38b6ff;
+  }
+
+  .factor-card-horizontal:nth-child(even) {
+    background: #004aad;
+  }
+
+  .factor-card-horizontal:hover,
+  .factor-card-horizontal:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -8px rgba(0, 74, 173, 0.35);
+    outline: none;
+  }
+
+  .factor-info-lado {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .factor-top-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2px;
+  }
+
+  .factor-num-pill {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #004aad;
+    background: #ffffff;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+
+  .factor-etiqueta-tag {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+
+  .factor-h4 {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .factor-desc {
+    margin: 0;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.5;
+  }
+
+  /* Imagen de la tarjeta */
+  .factor-foto-lado {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    height: 130px;
+    width: 100%;
+    background: #d8dde5;
+    box-shadow: 0 4px 12px rgba(15, 35, 70, 0.12);
+  }
+
+  .factor-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .factor-card-horizontal:hover .factor-thumb-img {
+    transform: scale(1.08);
+  }
+
+  .factor-foto-shimmer {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+    pointer-events: none;
+  }
+
+  /* ==========================================================================
+     CIERRE INFERIOR: FLUJO + BOTONES
+     ========================================================================== */
+  .cierre-acciones-bloque {
+    margin-top: 14px;
+    padding-top: 22px;
+    border-top: 1px solid #d0d5dd;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .flujo-etapas {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #0f2346;
+    letter-spacing: 0.03em;
+  }
+
+  .etapa-item {
+    color: #0f2346;
+  }
+
+  .etapa-destacada {
+    color: #0f2346;
+  }
+
+  .etapa-flecha {
+    color: #0f2346;
+    font-weight: 500;
+  }
+
+  .botones-fila-cierre {
+    display: flex;
+    align-items: center;
+    gap: 14px;
     flex-wrap: wrap;
   }
 
+  /* Ambos botones: cápsula azul fuerte, texto cian y flecha circular cian (boceto) */
+  .btn-metodo-capsula,
+  .btn-informe-capsula {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #004aad;
+    color: #38b6ff;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    padding: 9px 12px 9px 20px;
+    border-radius: 999px;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.3);
+  }
+
+  .btn-metodo-capsula:hover,
+  .btn-informe-capsula:hover {
+    background: #003a88;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 74, 173, 0.4);
+  }
+
+  .flecha-circular,
+  .flecha-circular-azul {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #38b6ff;
+    color: #004aad;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-metodo-capsula:hover .flecha-circular,
+  .btn-informe-capsula:hover .flecha-circular-azul {
+    transform: translateX(3px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
   @media (max-width: 980px) {
-    .comparativa-grid {
+    .layout-editorial-dos-columnas {
       grid-template-columns: 1fr;
-      gap: 28px;
+      gap: 40px;
     }
 
-    .tarjeta-atajos,
-    .tarjeta-emax {
-      padding: 24px 20px;
+    .columna-izquierda-sticky {
+      position: static;
     }
 
-    .emax-acciones {
+    .tarjeta-atajos-elegante {
+      max-width: 100%;
+    }
+
+    .factor-card-horizontal {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .factor-foto-lado {
+      height: 160px;
+    }
+
+    .botones-fila-cierre {
       flex-direction: column;
+      align-items: stretch;
     }
 
-    .emax-acciones .boton {
-      width: 100%;
+    .btn-metodo-capsula,
+    .btn-informe-capsula {
+      justify-content: center;
     }
   }
 </style>
