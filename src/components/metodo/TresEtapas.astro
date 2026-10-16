@@ -34,15 +34,14 @@ const etapas: Etapa[] = [
 <section class="proceso-seccion" id="orden-metodo" aria-labelledby="h2-orden">
   <div class="contenedor">
     <div class="seccion-cabecera">
-      <div class="kicker-wrap">
-        <span class="kicker-punto" aria-hidden="true"></span>
-        <span class="kicker-texto">Orden metodológico en 3 etapas</span>
-      </div>
+      <p class="seccion-kicker">
+        ¿CÓMO CAMBIARTE? <span class="kicker-sep" aria-hidden="true">|</span>
+      </p>
       <h2 class="seccion-titulo" id="h2-orden">
-        Primero entendemos cómo consume tu empresa. Después decidimos qué hacer.
+        PRIMERO ENTENDEMOS CÓMO CONSUME TU EMPRESA. DESPUÉS <span class="titulo-cursiva">decidimos qué hacer.</span>
       </h2>
       <p class="seccion-subtitulo">
-        Tres etapas rigurosas y transparentes. Las cinco decisiones son la segunda fase.
+        Tres etapas. Las cinco decisiones son la segunda.
       </p>
     </div>
 
@@ -70,16 +69,19 @@ const etapas: Etapa[] = [
               {/* Para etapa 2 (lado-izq): Tarjeta en columna 1, Nodo en columna 2 */}
               {etapa.num === "2" ? (
                 <>
-                  <article class="timeline-v-card tarjeta-blanca">
-                    <header class="timeline-v-card-top">
-                      <span class="paso-fase-etiqueta">Etapa {etapa.num}</span>
-                      <span class="paso-quien-badge">
-                        <span class="quien-dot" aria-hidden="true"></span>
-                        {etapa.quien}
-                      </span>
-                    </header>
-                    <h3 class="paso-titulo">{etapa.nombre}</h3>
-                    <p class="paso-desc">{etapa.desc}</p>
+                  <article class:list={["timeline-v-card", `card-color-${etapa.num}`]}>
+                    <div class="timeline-v-card-fill" aria-hidden="true"></div>
+                    <div class="timeline-v-card-body">
+                      <header class="timeline-v-card-top">
+                        <span class="paso-fase-etiqueta">Etapa {etapa.num}</span>
+                        <span class="paso-quien-badge">
+                          <span class="quien-dot" aria-hidden="true"></span>
+                          {etapa.quien}
+                        </span>
+                      </header>
+                      <h3 class="paso-titulo">{etapa.nombre}</h3>
+                      <p class="paso-desc">{etapa.desc}</p>
+                    </div>
                   </article>
 
                   <div class="timeline-v-nodo">
@@ -95,16 +97,19 @@ const etapas: Etapa[] = [
                     <span class="timeline-v-dot tb-dot">{etapa.num}</span>
                   </div>
 
-                  <article class="timeline-v-card tarjeta-blanca">
-                    <header class="timeline-v-card-top">
-                      <span class="paso-fase-etiqueta">Etapa {etapa.num}</span>
-                      <span class="paso-quien-badge">
-                        <span class="quien-dot" aria-hidden="true"></span>
-                        {etapa.quien}
-                      </span>
-                    </header>
-                    <h3 class="paso-titulo">{etapa.nombre}</h3>
-                    <p class="paso-desc">{etapa.desc}</p>
+                  <article class:list={["timeline-v-card", `card-color-${etapa.num}`]}>
+                    <div class="timeline-v-card-fill" aria-hidden="true"></div>
+                    <div class="timeline-v-card-body">
+                      <header class="timeline-v-card-top">
+                        <span class="paso-fase-etiqueta">Etapa {etapa.num}</span>
+                        <span class="paso-quien-badge">
+                          <span class="quien-dot" aria-hidden="true"></span>
+                          {etapa.quien}
+                        </span>
+                      </header>
+                      <h3 class="paso-titulo">{etapa.nombre}</h3>
+                      <p class="paso-desc">{etapa.desc}</p>
+                    </div>
                   </article>
                 </>
               )}
@@ -144,49 +149,55 @@ const etapas: Etapa[] = [
   }
 
   .seccion-cabecera {
-    max-width: 48rem;
-    margin-bottom: 40px;
+    max-width: 54rem;
+    margin-inline: auto;
+    text-align: center;
+    margin-bottom: 52px;
   }
 
-  .kicker-wrap {
+  .seccion-kicker {
+    font-family: "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #8da4be;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: var(--azul-resalte, #ddf1ff);
-    padding: 6px 14px;
-    border-radius: var(--radio-pill, 999px);
-    margin-bottom: 14px;
+    justify-content: center;
+    gap: 6px;
   }
 
-  .kicker-punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--azul-600, #1a6ff7);
-    display: inline-block;
-  }
-
-  .kicker-texto {
-    font-size: 0.8125rem;
+  .seccion-kicker .kicker-sep {
+    color: #1a6ff7;
     font-weight: 700;
-    color: var(--azul-900, #004aad);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   .seccion-titulo {
-    font-family: var(--font-titulos, serif);
-    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    line-height: 1.22;
-    margin: 0 0 14px;
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.85rem, 1.5rem + 1.8vw, 2.75rem);
+    font-weight: 800;
+    color: #0f2346;
+    line-height: 1.18;
+    margin: 0 0 16px;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva {
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #1a6ff7;
     letter-spacing: -0.01em;
+    display: inline-block;
   }
 
   .seccion-subtitulo {
-    font-size: 1.125rem;
-    color: var(--tinta-2, #3a4b68);
+    font-size: 1.05rem;
+    color: #63738e;
     line-height: 1.5;
     margin: 0;
   }
@@ -341,29 +352,68 @@ const etapas: Etapa[] = [
     }
   }
 
-  /* Tarjeta blanca */
+  /* ==========================================================================
+     TARJETAS CON PINTURA PROGRESIVA AL SCROLL
+     - Inician en blanco corporativo con bordes y tipografía nítida
+     - Se van pintando suavemente a medida que el haz baja hacia el número
+     - Al pasar el centro del número se pintan al 100% (azul celeste 1/3, azul profundo 2)
+     ========================================================================== */
   .timeline-v-card {
-    background: #ffffff;
-    border: 1.5px solid var(--linea, #d6e0ee);
-    border-radius: 18px;
-    padding: 26px 24px;
-    box-shadow: 0 4px 18px rgba(15, 35, 70, 0.05);
-    transition: all 0.35s ease;
     position: relative;
-    opacity: 0.65;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1.5px solid #d8e5f2;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(15, 35, 70, 0.05);
     margin-top: auto;
     margin-bottom: auto;
+    transform: scale(0.985);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
   }
 
-  /* Resaltado de color azul suave al hacer scroll (sin ser oscuro) */
   .timeline-v-fila.lit .timeline-v-card {
-    opacity: 1;
-    transform: translateY(0);
-    border-color: #93c5fd; /* Azul suave */
-    background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
-    box-shadow:
-      0 0 0 2px rgba(59, 130, 246, 0.18),
-      0 12px 30px rgba(37, 99, 235, 0.1);
+    transform: scale(1);
+  }
+
+  /* Capa de relleno de color que se intensifica suavemente con --p-pintura */
+  .timeline-v-card-fill {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: var(--p-pintura, 0);
+    transition: opacity 0.08s linear;
+    will-change: opacity;
+  }
+
+  /* Etapa 1 y 3: Azul celeste eléctrico (#1ea1f2 / #28a9f5) */
+  .timeline-v-card.card-color-1 .timeline-v-card-fill,
+  .timeline-v-card.card-color-3 .timeline-v-card-fill {
+    background: linear-gradient(135deg, #28a9f5 0%, #1793e5 100%);
+  }
+
+  .timeline-v-fila.lit .timeline-v-card.card-color-1,
+  .timeline-v-fila.lit .timeline-v-card.card-color-3 {
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 16px 36px rgba(23, 147, 229, 0.42), 0 0 0 2px rgba(255, 255, 255, 0.45);
+  }
+
+  /* Etapa 2: Azul profundo corporativo (#004aad) */
+  .timeline-v-card.card-color-2 .timeline-v-card-fill {
+    background: linear-gradient(135deg, #0054c2 0%, #003c94 100%);
+  }
+
+  .timeline-v-fila.lit .timeline-v-card.card-color-2 {
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 16px 36px rgba(0, 74, 173, 0.45), 0 0 0 2px rgba(255, 255, 255, 0.45);
+  }
+
+  /* Contenido interno sobre la capa de pintura */
+  .timeline-v-card-body {
+    position: relative;
+    z-index: 2;
+    padding: 28px 26px;
   }
 
   .timeline-v-card-top {
@@ -371,54 +421,85 @@ const etapas: Etapa[] = [
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
+  /* Etiqueta de fase (Etapa 1, 2, 3) */
   .paso-fase-etiqueta {
+    font-family: "Sora", sans-serif;
     font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--tinta-3, #63738e);
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
   }
 
-  .timeline-v-fila.lit .paso-fase-etiqueta {
-    color: #1a6ff7;
+  .timeline-v-card.card-color-1 .paso-fase-etiqueta,
+  .timeline-v-card.card-color-3 .paso-fase-etiqueta {
+    color: #1793e5;
+    border: 1.5px solid color-mix(in srgb, transparent calc(var(--p-pintura, 0) * 100%), rgba(23, 147, 229, 0.3));
   }
 
+  .timeline-v-card.card-color-2 .paso-fase-etiqueta {
+    color: #004aad;
+    border: 1.5px solid color-mix(in srgb, transparent calc(var(--p-pintura, 0) * 100%), rgba(0, 74, 173, 0.3));
+  }
+
+  /* Badge de quién interviene */
   .paso-quien-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #edf4fe;
-    color: var(--azul-900, #004aad);
-    font-size: 0.76rem;
-    font-weight: 700;
-    padding: 3px 9px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 12px;
     border-radius: 999px;
+    background: color-mix(in srgb, rgba(255, 255, 255, 0.22) calc(var(--p-pintura, 0) * 100%), #f1f5f9);
+    color: color-mix(in srgb, #ffffff calc(var(--p-pintura, 0) * 100%), #3a4b68);
+    border: 1px solid color-mix(in srgb, rgba(255, 255, 255, 0.32) calc(var(--p-pintura, 0) * 100%), #dbe4ef);
+    backdrop-filter: blur(8px);
+    transition: all 0.12s linear;
   }
 
   .quien-dot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: #1a6ff7;
+    transition: background-color 0.12s linear;
   }
 
+  .timeline-v-card.card-color-1 .quien-dot,
+  .timeline-v-card.card-color-3 .quien-dot {
+    background: color-mix(in srgb, #ffffff calc(var(--p-pintura, 0) * 100%), #1793e5);
+  }
+
+  .timeline-v-card.card-color-2 .quien-dot {
+    background: color-mix(in srgb, #00d4ff calc(var(--p-pintura, 0) * 100%), #004aad);
+  }
+
+  /* Título y descripción con transición de color fluida mediante color-mix */
   .paso-titulo {
-    font-family: var(--font-titulos, serif);
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    line-height: 1.3;
+    font-family: "Sora", sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.25;
     margin: 0 0 8px;
+    letter-spacing: -0.015em;
+    color: color-mix(in srgb, #ffffff calc(var(--p-pintura, 0) * 100%), #0f2346);
+    transition: color 0.12s linear;
   }
 
   .paso-desc {
-    font-size: 0.92rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.5;
+    font-size: 0.95rem;
+    line-height: 1.55;
     margin: 0;
+    color: color-mix(in srgb, rgba(255, 255, 255, 0.95) calc(var(--p-pintura, 0) * 100%), #475569);
+    transition: color 0.12s linear;
   }
 
   /* Botón centrado en el footer */
@@ -485,7 +566,7 @@ const etapas: Etapa[] = [
 
 <script>
   // =========================================================================
-  // ANIMACIÓN DE HAZ DE LUZ VERTICAL (BEAM) CON ILUMINACIÓN AL SCROLL
+  // ANIMACIÓN DE HAZ DE LUZ VERTICAL (BEAM) CON PINTURA SUAVE Y CONTINUA
   // =========================================================================
   function initProcesoBeamVertical() {
     const timeline = document.getElementById("procesoTimeline");
@@ -503,17 +584,35 @@ const etapas: Etapa[] = [
       // La línea de lectura media en la pantalla (58% de la altura visible)
       const lineaLectura = windowHeight * 0.58;
       
-      // Avance vertical dentro del contenedor
+      // Avance vertical dentro del riel del timeline
       const filled = Math.max(0, Math.min(rect.height - 70, lineaLectura - rect.top));
       beam.style.height = `${filled}px`;
 
-      // Iluminar cada nodo y tarjeta al pasar la línea de lectura
+      // Pintura progresiva suave de cada tarjeta y nodo al compás del scroll
       items.forEach((item) => {
         const dot = item.querySelector<HTMLElement>(".tb-dot");
-        if (!dot) return;
+        const card = item.querySelector<HTMLElement>(".timeline-v-card");
+        if (!dot || !card) return;
+
         const dr = dot.getBoundingClientRect();
-        const pasado = dr.top + dr.height / 2 <= lineaLectura;
+        const centroDot = dr.top + dr.height / 2;
+
+        // Se empieza a pintar suavemente con 260px de anticipación antes de llegar al centro del número
+        const distanciaVentana = 260;
+        const startY = centroDot - distanciaVentana;
+
+        let progreso = 0;
+        if (lineaLectura >= centroDot) {
+          progreso = 1;
+        } else if (lineaLectura <= startY) {
+          progreso = 0;
+        } else {
+          progreso = (lineaLectura - startY) / distanciaVentana;
+        }
+
+        const pasado = centroDot <= lineaLectura;
         item.classList.toggle("lit", pasado);
+        card.style.setProperty("--p-pintura", (pasado ? 1 : progreso).toFixed(3));
       });
 
       // Iluminar el botón centrado al llegar al final del timeline
@@ -546,4 +645,6 @@ const etapas: Etapa[] = [
   } else {
     initProcesoBeamVertical();
   }
+
+  document.addEventListener("astro:page-load", initProcesoBeamVertical);
 </script>

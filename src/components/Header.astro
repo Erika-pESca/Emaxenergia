@@ -26,13 +26,6 @@ const metodoItems = [
     badgeType: "verde",
     desc: "Tu estudio de consumo, maxímetros y reactiva bloque a bloque",
     id: "diagnostico"
-  },
-  {
-    href: "/metodo#quien-lee-tus-datos",
-    label: "Quién audita",
-    badge: "Maxi + Asesor",
-    desc: "Inteligencia cuartohoraria cruzada con auditor colegiado",
-    id: "quien"
   }
 ];
 
@@ -276,7 +269,9 @@ const tarifasItems = [
         </a>
 
         <!-- Barra de progreso de lectura integrada en la base del menú central -->
-        <div class="capsula-scroll-progreso" id="scroll-progress-line" aria-hidden="true"></div>
+        <div class="capsula-scroll-track" aria-hidden="true">
+          <div class="capsula-scroll-progreso" id="scroll-progress-line"></div>
+        </div>
       </nav>
 
       <!-- 3. ISLA DE ACCIONES Y CONVERSIÓN -->
@@ -373,7 +368,6 @@ const tarifasItems = [
         <div class="movil-grupo-titulo">El Método</div>
         <a href="/metodo" class="movil-sublink">El método · Tres etapas y cinco decisiones</a>
         <a href="/diagnostico" class="movil-sublink">Qué recibes · Informe de tu empresa</a>
-        <a href="/metodo#quien-lee-tus-datos" class="movil-sublink">Quién audita · Maxi + Consultor colegiado</a>
 
         <div class="movil-grupo-titulo">Sectores empresariales</div>
         {
@@ -656,6 +650,7 @@ const tarifasItems = [
      -------------------------------------------------------- */
   .capsula-logo {
     justify-self: start;
+    margin-left: clamp(249px, 4.2vw, 68px);
     padding: 0 22px;
     flex-shrink: 0;
   }
@@ -732,19 +727,27 @@ const tarifasItems = [
     color: #004aad;
   }
 
-  /* Barra de progreso de lectura bajo la cápsula central */
-  .capsula-scroll-progreso {
+  /* Pista y barra de progreso de lectura bajo la cápsula central */
+  .capsula-scroll-track {
     display: block;
     position: absolute;
-    bottom: -1px;
-    left: 20px;
-    right: 20px;
-    width: 0%;
+    bottom: 0px;
+    left: 24px;
+    right: 24px;
     height: 2.5px;
+    border-radius: var(--radio-pill, 999px);
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .capsula-scroll-progreso {
+    display: block;
+    width: 0%;
+    height: 100%;
     background: linear-gradient(90deg, #004aad 0%, #38b6ff 60%, #12b76a 100%);
     border-radius: var(--radio-pill, 999px);
     transition: width 0.1s linear;
-    z-index: 10;
   }
 
   /* --------------------------------------------------------

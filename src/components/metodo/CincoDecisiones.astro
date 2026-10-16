@@ -122,7 +122,7 @@ const decisiones: Decision[] = [
     id: "riesgo",
     numero: 4,
     titulo: "¿Qué riesgo puede asumir tu empresa?",
-    resumen: "Precio fijo garantizado, precio indexado a mercado transparente o Cuota Fija de tesorería.",
+    resumen: "Precio fijo, indexado o Cuota Fija.",
     detalleTracking: "metodo · decisión 4",
     filas: [
       {
@@ -152,7 +152,7 @@ const decisiones: Decision[] = [
     id: "condiciones",
     numero: 5,
     titulo: "¿Cuándo y en qué condiciones?",
-    resumen: "Duración del contrato, fecha óptima de entrada y condiciones claras. A veces, la mejor recomendación es esperar.",
+    resumen: "Duración, fecha de entrada y condiciones. A veces, esperar.",
     detalleTracking: "metodo · decisión 5",
     filas: [
       {
@@ -182,360 +182,555 @@ const decisiones: Decision[] = [
 ---
 
 <section class="decisiones-seccion" id="decisiones" aria-labelledby="h2-decisiones">
-  <div class="contenedor">
-    <div class="seccion-cabecera">
-      <div class="kicker-wrap">
-        <span class="kicker-punto" aria-hidden="true"></span>
-        <span class="kicker-texto">Etapa 2 · Estrategia</span>
-      </div>
-      <h2 class="seccion-titulo" id="h2-decisiones">Las cinco decisiones</h2>
-      <p class="seccion-subtitulo">
-        Cada una se responde con un dato contrastado de tu empresa y concluye en una optimización técnica o en dejarlo como está. Haz clic en cada una para desplegar el análisis completo.
+  <div class="contenedor decisiones-layout">
+    <!-- Columna Izquierda: Kicker, Título, Explicación, Tarjeta Blanca y Botones -->
+    <div class="decisiones-col-izq">
+      <p class="decisiones-kicker">
+        TU PLAN EN 5 PASOS <span class="kicker-sep" aria-hidden="true">|</span>
       </p>
-    </div>
 
-    <!-- Acordeones interactivos de las 5 decisiones -->
-    <div class="decisiones-acordeon" id="acordeon-decisiones">
-      {
-        decisiones.map((item) => (
-          <details class="det-tarjeta" id={item.id} data-detalle={item.detalleTracking}>
-            <summary class="det-summary">
-              <span class="det-numero-circulo" aria-hidden="true">{item.numero}</span>
-              <div class="det-titulares">
-                <h3 class="det-titulo">{item.titulo}</h3>
-                <p class="det-resumen">{item.resumen}</p>
-              </div>
-              <span class="det-icono-chevron" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 7.5l5 5 5-5" />
-                </svg>
-              </span>
-            </summary>
+      <h2 class="decisiones-titulo" id="h2-decisiones">
+        LAS <span class="titulo-cursiva">cinco</span><br />DECISIONES
+      </h2>
 
-            <div class="det-panel-cuerpo">
-              <dl class="det-filas-dl">
-                {
-                  item.filas.map((fila) => (
-                    <div class:list={["det-fila", { "det-fila-dato": fila.esDato, "det-fila-fuente": fila.esFuente }]}>
-                      <dt class="det-dt">{fila.etiqueta}</dt>
-                      <dd class="det-dd" set:html={fila.contenido} />
-                    </div>
-                  ))
-                }
+      <p class="decisiones-intro">
+        Es la etapa de Estrategia. Cada una se responde con un dato de tu empresa y puede acabar en un cambio o en dejarlo como está. Ábrelas para ver el detalle.
+      </p>
 
-                {
-                  item.enlaces.length > 0 && (
-                    <div class="det-fila det-fila-enlaces">
-                      <dt class="det-dt">Para saber más</dt>
-                      <dd class="det-dd det-tags-enlaces">
-                        {
-                          item.enlaces.map((enlace) => (
-                            <a href={enlace.href} class="enlace-pildora">
-                              {enlace.texto}
-                            </a>
-                          ))
-                        }
-                      </dd>
-                    </div>
-                  )
-                }
-              </dl>
-            </div>
-          </details>
-        ))
-      }
-    </div>
-
-    <!-- Cierre de sección decisiones con llamadas a la acción -->
-    <div class="decisiones-cierre-caja tarjeta-blanca">
-      <div class="cierre-caja-contenido">
-        <span class="badge badge-azul">Compromiso por escrito</span>
-        <p class="cierre-caja-texto">
-          Estas cinco decisiones quedan documentadas en tu informe técnico personalizado, para que las revises con calma con quien tú decidas: tu gestor, tu socio o tu responsable de planta.
+      <!-- Tarjeta Blanca Flotante con Icono de Documento -->
+      <div class="decisiones-callout-card">
+        <div class="callout-icono" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <p class="callout-texto">
+          Estas cinco decisiones quedan por escrito en tu informe, para que las revises con quien quieras: tu gestoría, tu socio o tu responsable de mantenimiento.
         </p>
       </div>
-      <div class="cierre-caja-botones">
+
+      <!-- Botones de Acción -->
+      <div class="decisiones-acciones">
         <button
           type="button"
-          class="boton-cta-primario"
+          class="btn-decision-primario"
           data-abrir-funnel
           data-tramo-id="300-1000"
           data-tramo-label="Estudio completo"
           data-tramo-rango="las 5 decisiones de tu empresa"
           data-tramo-msg="Preparamos tu informe con las 5 decisiones calculadas fila a fila."
         >
-          <span>Analizar mi consumo sin coste</span>
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 3.5 10.5 8 6 12.5"></path>
-          </svg>
+          <span>Analizar mi consumo</span>
+          <span class="btn-circulo-icono" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </span>
         </button>
-        <a href="/diagnostico#factura-obrador" class="enlace-factura-ejemplo">
-          Ver factura real leída (caso panadería) →
+
+        <a href="/diagnostico#factura-obrador" class="btn-decision-secundario">
+          <span>Ver la factura de un ejemplo, leída</span>
+          <span class="btn-circulo-icono" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </span>
         </a>
       </div>
+    </div>
+
+    <!-- Columna Derecha: Lista vertical de las 5 decisiones con números en cian -->
+    <div class="decisiones-col-der" id="acordeon-decisiones">
+      {
+        decisiones.map((item) => (
+          <div class="decision-fila-item">
+            <div class="decision-num-circulo" aria-hidden="true">
+              {item.numero}
+            </div>
+
+            <details class="det-tarjeta" id={item.id} name="decision-acordeon" data-detalle={item.detalleTracking}>
+              <summary class="det-summary">
+                <div class="det-titulares">
+                  <h3 class="det-titulo">{item.titulo}</h3>
+                  <p class="det-resumen">{item.resumen}</p>
+                </div>
+                <span class="det-toggle-btn" aria-hidden="true">
+                  <svg class="icono-flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m4 6 4 4 4-4"></path>
+                  </svg>
+                </span>
+              </summary>
+
+              <div class="det-panel-cuerpo">
+                <dl class="det-filas-dl">
+                  {
+                    item.filas.map((fila) => (
+                      <div class:list={["det-fila", { "det-fila-dato": fila.esDato, "det-fila-fuente": fila.esFuente }]}>
+                        <dt class="det-dt">{fila.etiqueta}</dt>
+                        <dd class="det-dd" set:html={fila.contenido} />
+                      </div>
+                    ))
+                  }
+
+                  {
+                    item.enlaces.length > 0 && (
+                      <div class="det-fila det-fila-enlaces">
+                        <dt class="det-dt">Para saber más</dt>
+                        <dd class="det-dd det-tags-enlaces">
+                          {
+                            item.enlaces.map((enlace) => (
+                              <a href={enlace.href} class="enlace-pildora">
+                                {enlace.texto}
+                              </a>
+                            ))
+                          }
+                        </dd>
+                      </div>
+                    )
+                  }
+                </dl>
+              </div>
+            </details>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <script>
-  // Control interactivo para mejorar la apertura suave de los acordeones
-  const acordeon = document.getElementById("acordeon-decisiones");
-  if (acordeon) {
+  // Control interactivo para acordeón exclusivo (solo uno abierto a la vez)
+  function initAcordeonDecisiones() {
+    const acordeon = document.getElementById("acordeon-decisiones");
+    if (!acordeon) return;
+
     const todosDetails = acordeon.querySelectorAll<HTMLDetailsElement>("details");
     todosDetails.forEach((targetDetail) => {
       targetDetail.addEventListener("toggle", () => {
         if (targetDetail.open) {
           targetDetail.classList.add("det-abierto");
+          // Cerrar los demás acordeones abiertos
+          todosDetails.forEach((otroDetail) => {
+            if (otroDetail !== targetDetail && otroDetail.open) {
+              otroDetail.open = false;
+              otroDetail.classList.remove("det-abierto");
+            }
+          });
         } else {
           targetDetail.classList.remove("det-abierto");
         }
       });
     });
   }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAcordeonDecisiones);
+  } else {
+    initAcordeonDecisiones();
+  }
+  document.addEventListener("astro:page-load", initAcordeonDecisiones);
 </script>
 
 <style>
   /* ==========================================================================
-     DECISIONES SECCIÓN - IDÉNTICO A src/components/home/Variables.astro & AsiLeemosFactura.astro
+     SECCIÓN CINCO DECISIONES - DISEÑO OSCURO OFICIAL CON GRID DE 2 COLUMNAS
      ========================================================================== */
   .decisiones-seccion {
-    padding: var(--e-8, 64px) 0;
-    background-color: var(--papel, #ffffff);
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+    background-color: #08172e;
+    background-image: radial-gradient(circle at 10% 20%, rgba(26, 111, 247, 0.12) 0%, transparent 45%),
+                      radial-gradient(circle at 90% 80%, rgba(56, 182, 255, 0.08) 0%, transparent 40%);
+    padding: 80px 0 96px;
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
   }
 
-  @media (width >= 1024px) {
-    .decisiones-seccion {
-      padding: var(--e-9, 80px) 0;
+  .decisiones-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.38fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .decisiones-layout {
+      grid-template-columns: 1fr;
+      gap: 48px;
     }
   }
 
-  .seccion-cabecera {
-    max-width: 48rem;
-    margin-bottom: 40px;
+  /* ==========================================================================
+     COLUMNA IZQUIERDA: KICKER, TÍTULO, INTRO, TARJETA BLANCA Y BOTONES
+     ========================================================================== */
+  .decisiones-col-izq {
+    position: sticky;
+    top: 96px;
   }
 
-  .kicker-wrap {
+  @media (max-width: 1024px) {
+    .decisiones-col-izq {
+      position: static;
+    }
+  }
+
+  .decisiones-kicker {
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #8da4be;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--azul-resalte, #ddf1ff);
-    padding: 6px 14px;
-    border-radius: var(--radio-pill, 999px);
-    margin-bottom: 14px;
   }
 
-  .kicker-punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--azul-600, #1a6ff7);
+  .kicker-sep {
+    color: #38b6ff;
+    font-weight: 800;
+  }
+
+  .decisiones-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2.3rem, 1.8rem + 2vw, 3.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.08;
+    margin: 0 0 20px;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva {
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: lowercase;
+    color: #28a9f5;
+    letter-spacing: -0.01em;
     display: inline-block;
   }
 
-  .kicker-texto {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: var(--azul-900, #004aad);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .decisiones-intro {
+    font-family: "Inter", sans-serif;
+    font-size: 1.02rem;
+    color: #a5b8d0;
+    line-height: 1.6;
+    margin: 0 0 26px;
+    max-width: 32rem;
   }
 
-  .seccion-titulo {
-    font-family: var(--font-titulos, serif);
-    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    line-height: 1.22;
-    margin: 0 0 14px;
-    letter-spacing: -0.01em;
+  /* Tarjeta blanca flotante */
+  .decisiones-callout-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+    max-width: 33rem;
   }
 
-  .seccion-subtitulo {
-    font-size: 1.125rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.5;
+  .callout-icono {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #e8f3fe;
+    color: #1a6ff7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .callout-texto {
+    font-family: "Inter", sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.48;
+    color: #0f2346;
+    font-weight: 500;
     margin: 0;
   }
 
-  /* Lista de acordeones en tarjetas */
-  .decisiones-acordeon {
+  /* Botones de acción inferiores */
+  .decisiones-acciones {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
   }
 
+  .btn-decision-primario {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px 8px 22px;
+    background: #0070e0;
+    color: #ffffff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 112, 224, 0.35);
+    transition: all 0.25s ease;
+  }
+
+  .btn-decision-primario:hover {
+    background: #0080ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 112, 224, 0.5);
+  }
+
+  .btn-decision-secundario {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px 8px 22px;
+    background: rgba(0, 112, 224, 0.22);
+    color: #ffffff;
+    border: 1px solid rgba(56, 182, 255, 0.35);
+    font-family: "Sora", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-decision-secundario:hover {
+    background: rgba(0, 112, 224, 0.35);
+    border-color: rgba(56, 182, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn-circulo-icono {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #0056b3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-decision-secundario .btn-circulo-icono {
+    background: #0070e0;
+  }
+
+  .btn-decision-primario:hover .btn-circulo-icono,
+  .btn-decision-secundario:hover .btn-circulo-icono {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     COLUMNA DERECHA: FILAS CON CÍRCULOS NUMÉRICOS Y ACORDEONES OSCUROS
+     ========================================================================== */
+  .decisiones-col-der {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .decision-fila-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  /* Círculo numérico cian con texto oscuro */
+  .decision-num-circulo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #08172e;
+    font-family: "Sora", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 6px;
+    box-shadow: 0 4px 16px rgba(0, 194, 255, 0.4);
+  }
+
+  @media (max-width: 640px) {
+    .decision-fila-item {
+      gap: 12px;
+    }
+    .decision-num-circulo {
+      width: 40px;
+      height: 40px;
+      font-size: 1.15rem;
+    }
+  }
+
+  /* Tarjeta de acordeón */
   .det-tarjeta {
-    background: var(--papel, #ffffff);
-    border: 1.5px solid var(--linea, #d6e0ee);
-    border-radius: var(--radio-tarjeta, 20px);
+    flex: 1;
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
     overflow: hidden;
-    transition: all 0.2s ease;
-    box-shadow: var(--sombra-subtil, 0 2px 6px rgba(15, 35, 70, 0.04));
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    backdrop-filter: blur(10px);
   }
 
   .det-tarjeta:hover {
-    border-color: var(--cyan-400, #38b6ff);
-    box-shadow: var(--sombra-tarjeta, 0 8px 24px rgba(15, 35, 70, 0.07));
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(56, 182, 255, 0.4);
   }
 
   .det-tarjeta[open] {
-    border-color: var(--azul-900, #004aad);
-    box-shadow: var(--sombra-flotante, 0 14px 40px rgba(0, 74, 173, 0.12));
-    background: #ffffff;
+    background: rgba(14, 38, 70, 0.85);
+    border-color: rgba(56, 182, 255, 0.55);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
   }
 
+  /* Summary */
   .det-summary {
-    padding: 22px 24px;
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    display: flex;
     align-items: center;
-    gap: 18px;
-    user-select: none;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    cursor: pointer;
     list-style: none;
-    transition: background 0.15s;
+    user-select: none;
   }
 
   .det-summary::-webkit-details-marker {
     display: none;
   }
 
-  .det-summary:focus-visible {
-    outline: 2px solid var(--azul-900, #004aad);
-    outline-offset: -2px;
-  }
-
-  .det-numero-circulo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--azul-900, #004aad);
-    color: #fff;
-    font-weight: 800;
-    font-size: 1.1rem;
-    font-family: var(--font-display, sans-serif);
-    box-shadow: 0 4px 10px rgba(0, 74, 173, 0.25);
-    flex-shrink: 0;
-  }
-
-  .det-tarjeta[open] .det-numero-circulo {
-    background: var(--cyan-400, #38b6ff);
-    color: var(--oscuro, #091730);
-  }
-
   .det-titulares {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    flex: 1;
+    min-width: 0;
   }
 
   .det-titulo {
-    font-family: var(--font-titulos, serif);
-    font-size: 1.25rem;
+    font-family: "Sora", sans-serif;
+    font-size: 1.12rem;
     font-weight: 700;
-    color: var(--tinta, #0f2346);
-    margin: 0;
+    color: #38b6ff;
     line-height: 1.3;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
   }
 
   .det-resumen {
-    font-size: 0.92rem;
-    color: var(--tinta-2, #3a4b68);
-    margin: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 0.88rem;
+    color: #9cb2ce;
     line-height: 1.45;
+    margin: 0;
   }
 
-  .det-icono-chevron {
-    color: var(--azul-900, #004aad);
-    display: inline-flex;
+  /* Botón circular blanco con flecha hacia abajo */
+  .det-toggle-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #08172e;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--azul-suave, #edf4fe);
-    transition: transform 0.25s ease, background 0.15s;
     flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
   }
 
-  .det-tarjeta[open] .det-icono-chevron {
+  .det-tarjeta:hover .det-toggle-btn {
+    background: #38b6ff;
+    color: #ffffff;
+  }
+
+  .det-tarjeta[open] .det-toggle-btn {
     transform: rotate(180deg);
-    background: var(--azul-900, #004aad);
-    color: #fff;
+    background: #ffffff;
+    color: #08172e;
   }
 
-  /* Cuerpo interior de la tarjeta desplegada */
+  .det-tarjeta[open]:hover .det-toggle-btn {
+    background: #38b6ff;
+    color: #ffffff;
+  }
+
+  /* Cuerpo desplegable */
   .det-panel-cuerpo {
-    padding: 0 24px 26px calc(40px + 18px + 24px);
-  }
-
-  @media (max-width: 700px) {
-    .det-panel-cuerpo {
-      padding: 0 18px 20px;
-    }
+    padding: 0 24px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 4px;
   }
 
   .det-filas-dl {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    margin: 0;
+    margin: 16px 0 0;
   }
 
   .det-fila {
-    display: grid;
-    grid-template-columns: 140px minmax(0, 1fr);
-    gap: 20px;
-    padding-top: 14px;
-    border-top: 1px solid var(--linea-fina, #e6edf7);
-  }
-
-  @media (max-width: 640px) {
-    .det-fila {
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .det-dt {
-    font-size: 0.8125rem;
+    font-family: "Sora", sans-serif;
+    font-size: 0.74rem;
     font-weight: 700;
-    color: var(--tinta-3, #63738e);
+    color: #38b6ff;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding-top: 2px;
+    letter-spacing: 0.06em;
   }
 
   .det-dd {
     margin: 0;
-    font-size: 0.9375rem;
-    color: var(--tinta, #0f2346);
+    font-family: "Inter", sans-serif;
+    font-size: 0.92rem;
     line-height: 1.55;
+    color: #e0ecfa;
   }
 
   .det-fila-dato .det-dd {
-    background: var(--azul-resalte, #ddf1ff);
-    border-left: 3.5px solid var(--azul-600, #1a6ff7);
+    background: rgba(56, 182, 255, 0.1);
+    border-left: 3px solid #38b6ff;
     padding: 10px 14px;
-    border-radius: 0 var(--radio-sm, 8px) var(--radio-sm, 8px) 0;
+    border-radius: 0 8px 8px 0;
+    color: #ffffff;
     font-weight: 500;
   }
 
   .det-fila-fuente .det-dd {
-    font-size: 0.8125rem;
-    color: var(--tinta-3, #63738e);
+    font-size: 0.8rem;
+    color: #8da4be;
     font-style: italic;
   }
 
   .det-tags-enlaces {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
+    margin-top: 6px;
   }
 
   .enlace-pildora {
@@ -543,114 +738,20 @@ const decisiones: Decision[] = [
     align-items: center;
     gap: 6px;
     padding: 6px 14px;
-    background: var(--azul-suave, #edf4fe);
-    color: var(--azul-900, #004aad);
+    border-radius: 999px;
+    background: rgba(56, 182, 255, 0.14);
+    border: 1px solid rgba(56, 182, 255, 0.35);
+    color: #38b6ff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.82rem;
     font-weight: 600;
-    font-size: 0.84rem;
-    border-radius: var(--radio-pill, 999px);
     text-decoration: none;
-    border: 1px solid rgba(0, 74, 173, 0.15);
-    transition: all 0.15s;
+    transition: all 0.2s ease;
   }
 
   .enlace-pildora:hover {
-    background: var(--azul-900, #004aad);
-    color: #fff;
+    background: #38b6ff;
+    color: #08172e;
     transform: translateY(-1px);
-  }
-
-  /* Cierre inferior de la sección decisiones */
-  .decisiones-cierre-caja {
-    background: var(--papel, #ffffff);
-    border: 1px solid var(--linea, #d6e0ee);
-    border-radius: var(--radio-tarjeta, 20px);
-    padding: 32px 28px;
-    box-shadow: var(--sombra-tarjeta, 0 8px 24px rgba(15, 35, 70, 0.07));
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
-  }
-
-  @media (max-width: 900px) {
-    .decisiones-cierre-caja {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 24px 20px;
-    }
-  }
-
-  .cierre-caja-contenido {
-    max-width: 40rem;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .badge-azul {
-    display: inline-flex;
-    align-items: center;
-    background: var(--azul-resalte, #ddf1ff);
-    color: var(--azul-900, #004aad);
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: var(--radio-pill, 999px);
-    width: fit-content;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .cierre-caja-texto {
-    font-size: 1rem;
-    color: var(--tinta-2, #3a4b68);
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  .cierre-caja-botones {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-    flex-shrink: 0;
-  }
-
-  .boton-cta-primario {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 50px;
-    padding: 0 24px;
-    background: var(--azul-900, #004aad);
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.95rem;
-    border: none;
-    border-radius: var(--radio-pill, 999px);
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.25);
-    transition: all 0.15s;
-    font-family: inherit;
-  }
-
-  .boton-cta-primario:hover {
-    background: var(--azul-900-hover, #003c8c);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 74, 173, 0.35);
-  }
-
-  .enlace-factura-ejemplo {
-    color: var(--azul-900, #004aad);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color 0.15s;
-  }
-
-  .enlace-factura-ejemplo:hover {
-    color: var(--azul-700, #0f5bd8);
   }
 </style>

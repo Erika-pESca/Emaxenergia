@@ -72,6 +72,7 @@ const compromisos = [
         <button
           type="button"
           class="btn-timeline-final"
+          data-btn-probar
           data-abrir-funnel
           data-tramo-id="general"
           data-tramo-label="Probar gratis"
@@ -203,107 +204,234 @@ const compromisos = [
 </section>
 
 <script>
-  // Control en tiempo real: la línea avanza al bajar y retrocede al subir con el scroll
-  function setupScrollTimeline() {
+  // Bloqueo suave estilo Satia: la página se detiene en la sección y el scroll
+  // hace avanzar la línea 1 → 2 → 3 → Probar. Al terminar, la página sigue bajando.
+  function setupScrollLockTimeline() {
+    const section = document.getElementById("como-funciona");
     const widget = document.querySelector<HTMLElement>("[data-timeline-widget]");
-    if (!widget) return;
+    if (!section || !widget) return;
+    if (section.dataset.lockInit === "1") return;
+    section.dataset.lockInit = "1";
 
     const fillLine = widget.querySelector<HTMLElement>("[data-timeline-fill]");
     const cursor = widget.querySelector<HTMLElement>("[data-timeline-cursor]");
     const buttons = Array.from(widget.querySelectorAll<HTMLButtonElement>("[data-step-btn]"));
+    const btnProbar = widget.querySelector<HTMLButtonElement>("[data-btn-probar]");
 
-    let isTicking = false;
+    const TOP_BAR_H = 76; // altura de la barra superior fija
+    const SPEED = 520; // px de rueda necesarios para recorrer toda la línea
+    const COOLDOWN = 520; // ms que se absorbe la inercia al terminar/volver al inicio
 
-    function onScrollUpdate() {
-      const rect = widget.getBoundingClientRect();
-      const vh = window.innerHeight;
+    let target = 0; // progreso objetivo (0..1)
+    let current = 0; // progreso pintado (se interpola suavemente)
+    let lineRaf = 0;
+    let glideRaf = 0;
+    let isGliding = false;
+    let cooldownUntil = 0;
+    let lastOff = Infinity;
 
-      // Rango de activación proporcional dentro de la vista:
-      // Empieza cuando el widget entra por el 78% inferior de la pantalla
-      // Llega al 100% cuando el widget alcanza el 26% superior
-      const startY = vh * 0.78;
-      const endY = vh * 0.26;
+    const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
+    const isDesktop = () => window.innerWidth > 900;
+    const offset = () => section.getBoundingClientRect().top - TOP_BAR_H;
+    const jumpTo = (y: number) => window.scrollTo({ top: y, behavior: "instant" as ScrollBehavior });
 
-      const rawP = (startY - rect.top) / (startY - endY);
-      const p = Math.max(0, Math.min(1, rawP));
-
+    function renderUI(p: number) {
       const pct = (p * 100).toFixed(2);
-
-      // Ancho de la línea y posición del cursor en tiempo real (avanza y retrocede)
-      if (fillLine) {
-        fillLine.style.width = `${pct}%`;
-      }
+      if (fillLine) fillLine.style.width = `${pct}%`;
       if (cursor) {
         cursor.style.left = `${pct}%`;
-        cursor.style.opacity = p > 0.02 ? "1" : "0.3";
+        cursor.style.opacity = p > 0.01 ? "1" : "0.3";
       }
 
-      // Umbrales para activar cada paso dinámicamente:
-      // Paso 1: activo desde el principio
-      // Paso 2: activo al llegar a la mitad (~46%)
-      // Paso 3: activo al llegar al final (~92%)
-      const thresholds = [0.02, 0.46, 0.92];
+      const thresholds = [0.0, 0.38, 0.74];
       buttons.forEach((btn, i) => {
-        const isReached = p >= thresholds[i];
-        btn.classList.toggle("active", isReached);
-
+        btn.classList.toggle("active", p >= thresholds[i]);
         const isCurrent =
-          (i === 0 && p < 0.46) ||
-          (i === 1 && p >= 0.46 && p < 0.92) ||
-          (i === 2 && p >= 0.92);
+          (i === 0 && p < 0.38) ||
+          (i === 1 && p >= 0.38 && p < 0.74) ||
+          (i === 2 && p >= 0.74 && p < 0.94);
         btn.classList.toggle("current", isCurrent);
       });
+
+      if (btnProbar) btnProbar.classList.toggle("active", p >= 0.94);
     }
 
-    function requestTick() {
-      if (!isTicking) {
-        isTicking = true;
-        requestAnimationFrame(() => {
-          onScrollUpdate();
-          isTicking = false;
-        });
+    // Interpolación suave de la línea (sin saltos entre impulsos de rueda)
+    function lineTick() {
+      current += (target - current) * 0.12;
+      if (Math.abs(target - current) < 0.0015) current = target;
+      renderUI(current);
+      lineRaf = current !== target ? requestAnimationFrame(lineTick) : 0;
+    }
+
+    function setTarget(v: number, immediate = false) {
+      target = clamp01(v);
+      if (immediate) {
+        current = target;
+        renderUI(current);
+        return;
       }
+      if (!lineRaf) lineRaf = requestAnimationFrame(lineTick);
     }
 
-    // Permitir clic en un paso para navegar suavemente a esa altura
+    // Desliza la página con ease-out hasta dejar la sección justo bajo la barra
+    function glideToPin(duration = 380) {
+      cancelAnimationFrame(glideRaf);
+      const startY = window.scrollY;
+      const dist = offset();
+      if (Math.abs(dist) < 1) return;
+      const t0 = performance.now();
+      isGliding = true;
+      const step = (now: number) => {
+        const t = Math.min(1, (now - t0) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        jumpTo(startY + dist * eased);
+        if (t < 1) {
+          glideRaf = requestAnimationFrame(step);
+        } else {
+          isGliding = false;
+        }
+      };
+      glideRaf = requestAnimationFrame(step);
+    }
+
+    // Lógica común para rueda y touch. Devuelve true si se consume el gesto.
+    function consume(d: number): boolean {
+      if (!isDesktop() || !d) return false;
+      const now = performance.now();
+      const off = offset();
+      const pinned = Math.abs(off) <= 2;
+
+      // Mientras se desliza hasta la posición, el gesto alimenta la línea
+      if (isGliding) {
+        if ((d > 0 && target < 1) || (d < 0 && target > 0)) setTarget(target + d / SPEED);
+        return true;
+      }
+
+      // Absorber la inercia del trackpad justo al terminar
+      if (now < cooldownUntil) return true;
+
+      if (d > 0 && target < 1) {
+        if (pinned) {
+          setTarget(target + d / SPEED);
+          if (target >= 1) cooldownUntil = now + COOLDOWN;
+          return true;
+        }
+        // Este impulso cruzaría la posición: frenamos suavemente en ella
+        if (off > 0 && off <= d + 6) {
+          glideToPin(Math.min(420, 180 + off * 2));
+          return true;
+        }
+      }
+
+      if (d < 0 && target > 0) {
+        if (pinned) {
+          setTarget(target + d / SPEED);
+          if (target <= 0) cooldownUntil = now + COOLDOWN;
+          return true;
+        }
+        if (off < 0 && off >= d - 6) {
+          glideToPin(Math.min(420, 180 + Math.abs(off) * 2));
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function normDelta(e: WheelEvent) {
+      if (e.deltaMode === 1) return e.deltaY * 16;
+      if (e.deltaMode === 2) return e.deltaY * window.innerHeight;
+      return e.deltaY;
+    }
+
+    window.addEventListener(
+      "wheel",
+      (e) => {
+        if (consume(normDelta(e))) e.preventDefault();
+      },
+      { passive: false }
+    );
+
+    let lastTouchY = 0;
+    window.addEventListener(
+      "touchstart",
+      (e) => {
+        if (e.touches.length === 1) lastTouchY = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+    window.addEventListener(
+      "touchmove",
+      (e) => {
+        if (e.touches.length !== 1) return;
+        const y = e.touches[0].clientY;
+        const d = lastTouchY - y;
+        lastTouchY = y;
+        if (consume(d * 1.4)) e.preventDefault();
+      },
+      { passive: false }
+    );
+
+    // Red de seguridad: si la inercia nativa se pasa un poco de la posición,
+    // la corregimos en el mismo frame (imperceptible). Si se salta la sección
+    // entera (barra de scroll, teclado, enlace), sincronizamos el estado.
+    window.addEventListener(
+      "scroll",
+      () => {
+        const off = offset();
+        if (isDesktop() && !isGliding) {
+          if (target < 1 && lastOff > 2 && off < 2 && off > -160) {
+            jumpTo(window.scrollY + off);
+            lastOff = 0;
+            return;
+          }
+          if (target > 0 && lastOff < -2 && off > -2 && off < 160) {
+            jumpTo(window.scrollY + off);
+            lastOff = 0;
+            return;
+          }
+        }
+        const rect = section.getBoundingClientRect();
+        if (rect.bottom < TOP_BAR_H && target < 1) setTarget(1, true);
+        else if (rect.top > window.innerHeight && target > 0) setTarget(0, true);
+        lastOff = off;
+      },
+      { passive: true }
+    );
+
+    // Clics directos en los pasos
     buttons.forEach((btn, idx) => {
       btn.addEventListener("click", () => {
-        const vh = window.innerHeight;
-        const startY = vh * 0.78;
-        const endY = vh * 0.26;
-        const targetP = idx === 0 ? 0.05 : idx === 1 ? 0.52 : 0.98;
-
-        const currentRectTop = widget.getBoundingClientRect().top;
-        const desiredRectTop = startY - targetP * (startY - endY);
-        const delta = currentRectTop - desiredRectTop;
-
-        window.scrollBy({
-          top: delta,
-          behavior: "smooth",
-        });
+        setTarget(idx === 0 ? 0 : idx === 1 ? 0.42 : 0.82);
       });
     });
 
-    window.addEventListener("scroll", requestTick, { passive: true });
-    window.addEventListener("resize", requestTick, { passive: true });
+    if (btnProbar) {
+      btnProbar.addEventListener("click", () => setTarget(1));
+    }
 
-    onScrollUpdate();
+    // Estado inicial según la posición de carga
+    const r = section.getBoundingClientRect();
+    setTarget(r.bottom < TOP_BAR_H ? 1 : 0, true);
+    lastOff = offset();
   }
 
   // Inicializar al cargar y en cambios de página de Astro
-  setupScrollTimeline();
-  document.addEventListener("astro:page-load", setupScrollTimeline);
+  setupScrollLockTimeline();
+  document.addEventListener("astro:page-load", setupScrollLockTimeline);
 </script>
 
 <style>
   /* ==========================================================================
-     SECCIÓN PRINCIPAL: COMPACTA, ELEGANTE Y PROPORCIONADA
+     SECCIÓN COMPACTA SIN ESPACIO VACÍO:
+     La pantalla interactúa limpiamente con los pasos 1, 2, 3 hasta Probar
      ========================================================================== */
   .proceso-seccion {
-    padding: clamp(56px, 7vw, 84px) 0 clamp(64px, 8vw, 92px);
+    padding: clamp(48px, 5.5vw, 64px) 0 clamp(40px, 4.5vw, 52px);
     background: #e4e7ec;
     border-top: 1px solid #d5d9e0;
-    border-bottom: 1px solid #d5d9e0;
+    position: relative;
   }
 
   .contenedor {
@@ -314,7 +442,7 @@ const compromisos = [
 
   /* Encabezado centrado idéntico al boceto */
   .proceso-cabecera {
-    margin-bottom: clamp(44px, 6vw, 60px);
+    margin-bottom: clamp(40px, 5vw, 52px);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -359,7 +487,7 @@ const compromisos = [
      ========================================================================== */
   .timeline-widget {
     position: relative;
-    margin-bottom: clamp(48px, 6vw, 64px);
+    margin-bottom: 0;
   }
 
   /* Pista de la línea horizontal */
@@ -399,11 +527,12 @@ const compromisos = [
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .btn-timeline-final:hover {
+  .btn-timeline-final:hover,
+  .btn-timeline-final.active {
     background: #003a88;
     border-color: #38b6ff;
-    box-shadow: 0 8px 26px rgba(0, 74, 173, 0.55), 0 0 18px rgba(56, 182, 255, 0.4);
-    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 0 0 3px rgba(56, 182, 255, 0.4), 0 8px 26px rgba(0, 74, 173, 0.55), 0 0 18px rgba(56, 182, 255, 0.4);
+    transform: translateY(-2px) scale(1.05);
   }
 
   .btn-timeline-final svg {
@@ -411,7 +540,8 @@ const compromisos = [
     transition: transform 0.2s ease;
   }
 
-  .btn-timeline-final:hover svg {
+  .btn-timeline-final:hover svg,
+  .btn-timeline-final.active svg {
     transform: translateX(3px);
   }
 
@@ -438,7 +568,7 @@ const compromisos = [
     width: 0%;
     background: linear-gradient(90deg, #004aad 0%, #19a9f0 50%, #12b76a 100%);
     border-radius: 99px;
-    transition: width 0.1s ease-out;
+    will-change: width;
     box-shadow: 0 0 14px rgba(25, 169, 240, 0.5);
   }
 
@@ -454,7 +584,8 @@ const compromisos = [
     background: #ffffff;
     box-shadow: 0 0 0 3px rgba(25, 169, 240, 0.5),
                 0 0 16px 4px rgba(25, 169, 240, 0.85);
-    transition: left 0.1s ease-out, opacity 0.2s ease;
+    transition: opacity 0.2s ease;
+    will-change: left;
     z-index: 2;
   }
 
@@ -892,9 +1023,24 @@ const compromisos = [
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
+    .proceso-pin-section {
+      height: auto;
+      border-bottom: 1px solid #d5d9e0;
+    }
+
+    .proceso-sticky-container {
+      position: static;
+      height: auto;
+      padding: clamp(48px, 7vw, 64px) 0;
+    }
+
     .timeline-track {
       display: none; /* En móvil se apilan limpiamente */
+    }
+
+    .timeline-btn-final-wrap {
+      display: none;
     }
 
     .pasos-row {

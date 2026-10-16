@@ -1,24 +1,12 @@
 ---
 // Hero Principal de El Método EMAX
-// Diseño editorial sobrio, humano y corporativo:
-// 1. Izquierda: Kicker badge + Titular serif + Subtítulo + 5 Píldoras de decisión interactivas con salto suave
-// 2. Derecha: Ficha de auditoría ejecutiva tangible con datos reales + Selector de gasto integrado que abre el modal
-// 3. Modal Funnel completo para iniciar el estudio sin coste
+// Con fondo_metodo.jpg oficial de marca:
+// 1. Imagen de fondo fondo_metodo.jpg que va de azul royal a la izquierda a luz clara a la derecha
+// 2. Columna izquierda: Kicker badge, H1, subtítulo, secuencia 5 decisiones y garantías sobre fondo azul
+// 3. Columna derecha: Tarjeta glassmórfica sobre la zona de luz con título azul #0056d6, subtítulo oscuro y botones azul #004aad con flecha cian
+// 4. Conexión nativa con el modal unificado Formulario.astro
 import { site } from "../../data/site";
-
-interface DecisionPill {
-  id: string;
-  num: string;
-  nombre: string;
-}
-
-const decisionesPills: DecisionPill[] = [
-  { id: "potencia", num: "1", nombre: "Potencia" },
-  { id: "penalizaciones", num: "2", nombre: "Penalizaciones" },
-  { id: "cuando-consumes", num: "3", nombre: "Horarios" },
-  { id: "riesgo", num: "4", nombre: "Riesgo" },
-  { id: "condiciones", num: "5", nombre: "Condiciones" },
-];
+import fondoMetodo from "../../imagenes/fondo_metodo.jpg";
 
 interface TramoGasto {
   id: string;
@@ -30,25 +18,25 @@ interface TramoGasto {
 const tramos: TramoGasto[] = [
   {
     id: "menos-300",
-    etiqueta: "Menos de 300 €",
+    etiqueta: "MENOS DE 300€",
     rango: "menos de 3.600 € al año en luz",
     msg: "Con este gasto hacemos un estudio sencillo. Lo más cómodo suele ser empezar con los datos básicos de tu factura.",
   },
   {
     id: "300-1000",
-    etiqueta: "300 – 1.000 €",
+    etiqueta: "300 - 1.000€",
     rango: "entre 3.600 y 12.000 € al año en luz",
     msg: "Con este gasto merece la pena mirar tu factura con detalle: la potencia, los periodos y las condiciones.",
   },
   {
     id: "1000-3000",
-    etiqueta: "1.000 – 3.000 €",
+    etiqueta: "1.000 - 3.000€",
     rango: "entre 12.000 y 36.000 € al año en luz",
     msg: "Con este gasto te atiende un gestor especialista que revisa tu suministro completo y tus maxímetros.",
   },
   {
     id: "mas-3000",
-    etiqueta: "Más de 3.000 €",
+    etiqueta: "Más de 3.000€",
     rango: "más de 36.000 € al año en luz",
     msg: "Con este gasto realizamos una auditoría técnica completa de potencia, reactiva y periodos de alta tensión.",
   },
@@ -60,16 +48,31 @@ const tramos: TramoGasto[] = [
   id="hero-metodo"
   aria-labelledby="hero-metodo-h1"
 >
-  <div class="contenedor hero-grid">
-    <!-- COLUMNA IZQUIERDA: Titular, subtítulo y 5 píldoras interactivas -->
+  <!-- Fondo fotográfico fondo_metodo.jpg oficial -->
+  <div class="hero-bg" aria-hidden="true">
+    <img
+      src={fondoMetodo.src}
+      alt=""
+      class="hero-bg-img"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="hero-metodo-contenedor">
+    <!-- COLUMNA IZQUIERDA: Titular, propuesta, secuencia técnica y garantías -->
     <div class="hero-propuesta">
       <div class="kicker-wrap">
         <span class="kicker-punto" aria-hidden="true"></span>
-        <span class="kicker-texto">El método EMAX</span>
+        <span class="kicker-texto">El Método EMAX</span>
+        <span class="kicker-sep" aria-hidden="true">|</span>
+        <span class="kicker-sub">Auditoría previa</span>
       </div>
 
       <h1 id="hero-metodo-h1" class="hero-h1">
-        Antes de elegir tarifa, hay cinco decisiones.
+        ANTES DE ELEGIR<br />
+        TARIFA, HAY <span class="hero-cursiva">cinco decisiones.</span>
       </h1>
 
       <p class="hero-subtitulo">
@@ -77,299 +80,292 @@ const tramos: TramoGasto[] = [
         ese orden y con tus datos reales. La tarifa sale al final.
       </p>
 
-      <!-- 5 Píldoras interactivas de decisión que incitan a hacer clic -->
-      <div class="pildoras-bloque">
-        <span class="pildoras-label">Explorar las 5 decisiones:</span>
-        <div
-          class="pildoras-lista"
-          role="navigation"
-          aria-label="Acceso directo a decisiones"
-        >
-          {
-            decisionesPills.map((d) => (
-              <a
-                href={`#${d.id}`}
-                class="pildora-btn"
-                data-salto-decision={d.id}
-              >
-                <span class="pildora-num">{d.num}</span>
-                <span class="pildora-txt">{d.nombre}</span>
-                <span class="pildora-flecha" aria-hidden="true">
-                  ↓
-                </span>
-              </a>
-            ))
-          }
+      <!-- Secuencia visible de las 5 decisiones del método -->
+      <div class="hero-secuencia-decisiones" aria-label="Las 5 decisiones en orden">
+        <span class="secuencia-label">El orden del análisis:</span>
+        <div class="secuencia-tags">
+          <span class="dec-tag"><span class="dec-num">1</span> Potencia</span>
+          <span class="dec-flecha" aria-hidden="true">→</span>
+          <span class="dec-tag"><span class="dec-num">2</span> Penalizaciones</span>
+          <span class="dec-flecha" aria-hidden="true">→</span>
+          <span class="dec-tag"><span class="dec-num">3</span> Horarios</span>
+          <span class="dec-flecha" aria-hidden="true">→</span>
+          <span class="dec-tag"><span class="dec-num">4</span> Riesgo</span>
+          <span class="dec-flecha" aria-hidden="true">→</span>
+          <span class="dec-tag"><span class="dec-num">5</span> Condiciones</span>
         </div>
       </div>
 
-      <!-- Garantías sutiles en franja horizontal -->
+      <!-- Franja de garantías técnicas -->
       <div class="hero-garantias-franja">
         <span class="garantia-item">
-          <svg
-            aria-hidden="true"
-            width="15"
-            height="15"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline>
           </svg>
-          Análisis sin coste
+          Estudio técnico sin coste
         </span>
         <span class="garantia-sep">·</span>
         <span class="garantia-item">
-          <svg
-            aria-hidden="true"
-            width="15"
-            height="15"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline>
           </svg>
-          Te llama un especialista humano
+          Sin permanencia ni cambios forzados
         </span>
         <span class="garantia-sep">·</span>
         <span class="garantia-item">
-          <svg
-            aria-hidden="true"
-            width="15"
-            height="15"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline>
           </svg>
-          Sin cambios sin tu firma
+          Informe por escrito
         </span>
       </div>
     </div>
 
-    <!-- COLUMNA DERECHA: Ficha de auditoría ejecutiva real con selector integrado -->
+    <!-- COLUMNA DERECHA: Ficha Glassmórfica equilibrada y compacta -->
     <div class="hero-card-col">
       <div class="ficha-auditoria">
         <!-- Cabecera de la ficha -->
         <header class="ficha-header">
           <h2 class="ficha-titulo">¿Cuánto paga tu empresa de luz al mes?</h2>
           <p class="ficha-sub">
-            En total, sumando todos tus suministros. Con una cifra aproximada
-            nos basta.
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
           </p>
         </header>
 
-        <!-- Selector de tramos de gasto -->
-        <div class="ficha-selector-seccion">
-          <div class="ficha-tramos-grid">
-            {
-              tramos.map((item) => (
-                <button
-                  type="button"
-                  class="ficha-tramo-btn"
-                  data-abrir-funnel
-                  data-tramo-id={item.id}
-                  data-tramo-label={item.etiqueta}
-                  data-tramo-rango={item.rango}
-                  data-tramo-msg={item.msg}
-                >
-                  <span class="tramo-txt">{item.etiqueta}</span>
-                </button>
-              ))
-            }
-          </div>
+        <!-- Selector de tramos de gasto que abren el Formulario / Funnel unificado -->
+        <div class="ficha-tramos-grid">
+          {
+            tramos.map((item) => (
+              <button
+                type="button"
+                class="ficha-tramo-btn"
+                data-abrir-funnel
+                data-tramo-id={item.id}
+                data-tramo-label={`Estudio para empresa: ${item.etiqueta}`}
+                data-tramo-rango={item.rango}
+                data-tramo-msg={item.msg}
+              >
+                <span class="tramo-txt">{item.etiqueta}</span>
+                <span class="tramo-icono" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </span>
+              </button>
+            ))
+          }
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
-
-<script>
-  // Salto suave y apertura automática de acordeones al hacer clic en las 5 píldoras
-  document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement | null;
-    const pill = target?.closest<HTMLAnchorElement>("[data-salto-decision]");
-    if (pill) {
-      const decisionId = pill.getAttribute("data-salto-decision");
-      if (decisionId) {
-        const targetElement = document.getElementById(decisionId);
-        if (targetElement) {
-          if (targetElement.tagName.toLowerCase() === "details") {
-            (targetElement as HTMLDetailsElement).open = true;
-          }
-        }
-      }
-    }
-  });
-</script>
-
 <style>
   /* ==========================================================================
-     HERO METODO - DISEÑO EDITORIAL SOBRIO Y CORPORATIVO
+     HERO METODO - FONDO fondo_metodo.jpg Y DISEÑO CORPORATIVO
      ========================================================================== */
   .hero-metodo-seccion {
-    margin-top: -66px;
-    padding: calc(66px + 34px) 0 48px;
-    background-color: var(--fondo, #f4f7fb);
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    min-height: calc(84vh + 78px);
+    display: flex;
+    align-items: center;
+    padding: calc(78px + 48px) 0 72px;
+    background-color: #004aad;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    overflow: hidden;
   }
 
-  @media (width >= 1024px) {
-    .hero-metodo-seccion {
-      margin-top: -66px;
-      padding: calc(66px + 32px) 0 56px;
-    }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
   }
 
-  .hero-grid {
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-metodo-contenedor {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 48px;
+    grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 60px);
     align-items: center;
   }
 
   @media (max-width: 1024px) {
-    .hero-grid {
+    .hero-metodo-contenedor {
       grid-template-columns: 1fr;
-      gap: 44px;
+      gap: 40px;
     }
+  }
+
+  /* Columna Izquierda: Mensaje y Titular de Gran Impacto */
+  .hero-propuesta {
+    display: flex;
+    flex-direction: column;
   }
 
   .kicker-wrap {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--azul-resalte, #ddf1ff);
-    padding: 5px 12px;
-    border-radius: var(--radio-pill, 999px);
-    margin-bottom: 14px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    margin-bottom: 20px;
+    width: fit-content;
+    backdrop-filter: blur(10px);
   }
 
   .kicker-punto {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--azul-600, #1a6ff7);
-    display: inline-block;
+    background: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
   }
 
   .kicker-texto {
-    font-size: 0.78rem;
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: var(--azul-900, #004aad);
+    color: #ffffff;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+  }
+
+  .kicker-sep {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+  }
+
+  .kicker-sub {
+    font-family: "Sora", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #38bdf8;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .hero-h1 {
-    font-family: var(--font-titulos, serif);
-    font-size: clamp(2.1rem, 1.7rem + 2vw, 3.1rem);
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--tinta, #0f2346);
-    margin: 0 0 16px;
-    letter-spacing: -0.015em;
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2.3rem, 1.9rem + 2vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.12;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+    margin: 0 0 18px;
+    text-transform: uppercase;
+  }
+
+  .hero-cursiva {
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #38bdf8;
+    letter-spacing: -0.01em;
+    display: inline-block;
   }
 
   .hero-subtitulo {
-    font-size: 1.1rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-    margin: 0 0 28px;
-    max-width: 36em;
+    font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+    line-height: 1.6;
+    color: rgba(240, 248, 255, 0.95);
+    margin: 0 0 24px;
+    max-width: 580px;
+    font-weight: 400;
   }
 
-  /* 5 Píldoras interactivas */
-  .pildoras-bloque {
-    margin-bottom: 28px;
-  }
-
-  .pildoras-label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--tinta-3, #63738e);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 10px;
-  }
-
-  .pildoras-lista {
+  /* Secuencia de las 5 decisiones */
+  .hero-secuencia-decisiones {
     display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .secuencia-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #38bdf8;
+  }
+
+  .secuencia-tags {
+    display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .pildora-btn {
+  .dec-tag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 13px;
-    background: #ffffff;
-    border: 1.5px solid #d0ddec;
-    border-radius: var(--radio-pill, 999px);
-    color: var(--tinta, #0f2346);
-    font-size: 0.88rem;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 5px 11px;
+    border-radius: 8px;
+    font-size: 0.82rem;
     font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 2px 4px rgba(15, 35, 70, 0.04);
-    transition: all 0.15s ease;
+    color: #ffffff;
+    backdrop-filter: blur(8px);
   }
 
-  .pildora-btn:hover {
-    border-color: var(--azul-900, #004aad);
-    color: var(--azul-900, #004aad);
-    background: var(--azul-suave, #edf4fe);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 74, 173, 0.12);
-  }
-
-  .pildora-num {
+  .dec-num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
     border-radius: 50%;
-    background: var(--azul-suave, #edf4fe);
-    color: var(--azul-900, #004aad);
-    font-size: 0.75rem;
+    background: #00d4ff;
+    color: #004aad;
+    font-size: 0.7rem;
     font-weight: 800;
   }
 
-  .pildora-btn:hover .pildora-num {
-    background: var(--azul-900, #004aad);
-    color: #fff;
-  }
-
-  .pildora-flecha {
-    color: var(--tinta-3, #63738e);
+  .dec-flecha {
+    color: rgba(255, 255, 255, 0.4);
     font-size: 0.85rem;
-    transition: transform 0.15s;
   }
 
-  .pildora-btn:hover .pildora-flecha {
-    transform: translateY(2px);
-    color: var(--azul-900, #004aad);
-  }
-
-  /* Franja horizontal de garantías */
+  /* Garantías */
   .hero-garantias-franja {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
     padding-top: 18px;
-    border-top: 1px solid var(--linea-fina, #e6edf7);
-    font-size: 0.88rem;
-    color: var(--tinta-2, #3a4b68);
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 0.84rem;
+    color: rgba(240, 248, 255, 0.9);
   }
 
   .garantia-item {
@@ -380,72 +376,67 @@ const tramos: TramoGasto[] = [
   }
 
   .garantia-item svg {
-    color: var(--verde-ok, #067647);
+    color: #38bdf8;
   }
 
   .garantia-sep {
-    color: #cbd5e1;
-    font-weight: 700;
+    color: rgba(255, 255, 255, 0.35);
   }
 
-  /* ==========================================================================
-     COLUMNA DERECHA: FICHA DE AUDITORÍA EJECUTIVA TANGIBLE
-     ========================================================================== */
-  .ficha-auditoria {
-    background: #ffffff;
-    border: 1px solid var(--linea-fina, #e6edf7);
-    border-radius: 16px;
-    padding: 32px 28px;
-    box-shadow: 0 4px 20px rgba(15, 35, 70, 0.05);
+  /* Columna Derecha: Tarjeta Glassmórfica sobre la zona luminosa */
+  .hero-card-col {
     position: relative;
-    animation: pulsoSombraAzul 3.6s ease-in-out infinite;
+    display: flex;
+    justify-content: flex-end;
   }
 
-  @keyframes pulsoSombraAzul {
-    0%, 100% {
-      box-shadow: 0 4px 20px rgba(15, 35, 70, 0.05);
+  @media (max-width: 1024px) {
+    .hero-card-col {
+      justify-content: flex-start;
     }
-    50% {
-      box-shadow:
-        0 0 0 1px rgba(26, 111, 247, 0.25),
-        0 0 35px rgba(26, 111, 247, 0.42),
-        0 14px 40px rgba(0, 74, 173, 0.18);
-    }
+  }
+
+  .ficha-auditoria {
+    width: 100%;
+    max-width: 530px;
+    background: rgba(255, 255, 255, 0.28);
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 28px;
+    padding: clamp(28px, 3.4vw, 38px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 24px 60px rgba(0, 16, 48, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.85);
   }
 
   .ficha-header {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .ficha-titulo {
-    font-family: inherit;
-    font-size: 1.35rem;
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.24rem, 1.1rem + 0.4vw, 1.48rem);
     font-weight: 700;
-    color: var(--tinta, #0f2346);
+    color: #0056d6;
     line-height: 1.25;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
+    letter-spacing: -0.015em;
   }
 
   .ficha-sub {
-    font-size: 0.95rem;
-    color: var(--tinta-2, #3a4b68);
+    font-size: 0.94rem;
+    color: #1e293b;
     margin: 0;
     line-height: 1.5;
-  }
-
-  .ficha-selector-seccion {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    font-weight: 500;
   }
 
   .ficha-tramos-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 13px;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 540px) {
     .ficha-tramos-grid {
       grid-template-columns: 1fr;
     }
@@ -453,42 +444,54 @@ const tramos: TramoGasto[] = [
 
   .ficha-tramo-btn {
     width: 100%;
-    padding: 14px 16px;
-    border: 1.5px solid var(--azul-900, #004aad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px 17px;
+    background: #004aad;
+    border: 1.5px solid rgba(0, 74, 173, 0.25);
     border-radius: 12px;
-    background: #ffffff;
-    color: var(--azul-900, #004aad);
+    color: #ffffff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.92rem;
     font-weight: 700;
-    font-size: 0.95rem;
     cursor: pointer;
-    text-align: center;
-    font-family: inherit;
-    transition: all 0.15s ease;
+    text-align: left;
+    box-shadow: 0 6px 16px rgba(0, 25, 75, 0.25);
+    transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
   }
 
   .ficha-tramo-btn:hover {
-    background: var(--azul-suave, #edf4fe);
-    border-color: var(--azul-900, #004aad);
-    color: var(--azul-900, #004aad);
-    transform: translateY(-1px);
+    background: #005ce6;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 74, 173, 0.4);
   }
 
-  .ficha-micro-link {
-    text-align: left;
-    margin-top: 4px;
+  .tramo-txt {
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
-  .link-ver-decisiones {
-    font-size: 0.9rem;
-    color: var(--azul-900, #004aad);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    font-weight: 500;
-    transition: opacity 0.15s;
+  .tramo-icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #00d4ff;
+    color: #004aad;
+    flex-shrink: 0;
+    transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
   }
 
-  .link-ver-decisiones:hover {
-    opacity: 0.8;
+  .ficha-tramo-btn:hover .tramo-icono {
+    transform: translateX(3px);
+    background: #ffffff;
+    color: #004aad;
   }
-
-  </style>
+</style>

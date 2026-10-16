@@ -1,121 +1,78 @@
 ---
 // Componente QuienLeeTusDatos de la sección El Método
-// Estructura y diseño idénticos a src/components/home/TecnologiaPersonas.astro:
-// Combina la potencia del motor algorítmico Maxi con la cercanía y el criterio de un consultor colegiado
+// 3 tarjetas interactivas con imágenes reales y animación expansiva al hover
+import fotoPersonal from "../../imagenes/personal.jpg";
+import fotoMaxi from "../../imagenes/maxi.jpg";
 import fotoConsultor from "../../imagenes/consultor-emax.jpg";
 
-const funcionesMaxi = [
-  { texto: "Relaciona la información de consumo de tu suministro.", detalle: "Qué pasa en cada periodo, con qué potencia y en qué meses del año." },
-  { texto: "Cruza tu potencia contratada con tus maxímetros reales.", detalle: "Detecta kW ociosos por los que pagas cuota fija innecesaria." },
-  { texto: "Identifica excesos y penalizaciones por energía reactiva.", detalle: "Calcula el acumulado anual evitable en tu factura." },
-];
+interface TarjetaData {
+  titulo: string;
+  desc: string;
+  foto: ImageMetadata;
+  alt: string;
+}
 
-const funcionesEspecialista = [
-  { texto: "Interpreta y audita lo que ha procesado Maxi.", detalle: "Criterio técnico colegiado adaptado a la operativa real de tu empresa." },
-  { texto: "Decide qué conviene cambiar y qué se mantiene.", detalle: "Si tu contrato actual ya es el más adecuado, te lo dice con honestidad." },
-  { texto: "Firma tu informe y te lo explica por teléfono.", detalle: "Atención directa con una persona que conoce tu caso de principio a fin." },
+const tarjetas: TarjetaData[] = [
+  {
+    titulo: "La persona",
+    desc: "Un especialista interpreta lo que ha leído Maxi.",
+    foto: fotoPersonal,
+    alt: "Especialista energética de EMAX analizando informe de consumo",
+  },
+  {
+    titulo: "Maxi",
+    desc: "Maxi es la tecnología de análisis de EMAX. Relaciona la información de consumo de tu suministro y ayuda al equipo a estudiarlo: qué pasa en cada periodo, con qué potencia, en qué meses.",
+    foto: fotoMaxi,
+    alt: "Maxi, tecnología de análisis de datos de EMAX Energía",
+  },
+  {
+    titulo: "Lo que Maxi no hace",
+    desc: "Maxi no decide solo",
+    foto: fotoConsultor,
+    alt: "Consultor energético colegiado de EMAX supervisando datos",
+  },
 ];
 ---
 
-<section class="maxi-humano-seccion" id="maxi" aria-labelledby="h2-maxi">
+<section class="quien-lee-seccion" id="quien-lee-datos" aria-labelledby="h2-quien-lee">
   <div class="contenedor">
     <div class="seccion-cabecera">
-      <div class="kicker-wrap">
-        <span class="kicker-punto" aria-hidden="true"></span>
-        <span class="kicker-texto">Tecnología de datos + Criterio humano</span>
-      </div>
-      <h2 class="seccion-titulo" id="h2-maxi">Quién lee tus datos</h2>
-      <p class="seccion-subtitulo">
-        Maxi no decide por ti. Te da mejores datos para decidir con criterio propio y un especialista asignado a tu lado.
+      <p class="seccion-kicker">
+        ASI FUNCIONA <span class="kicker-sep" aria-hidden="true">|</span>
       </p>
+      <h2 class="seccion-titulo" id="h2-quien-lee">
+        QUIÉN LEE TUS DATOS
+      </h2>
     </div>
 
-    <!-- Rejilla de dupla idéntica a home/TecnologiaPersonas -->
-    <div class="dupla-grid">
-      <!-- Tarjeta 1: Maxi (El motor de datos) -->
-      <article class="tarjeta-dupla tarjeta-maxi">
-        <header class="dupla-header">
-          <div class="icono-entidad icono-maxi" aria-hidden="true">
-            <span class="letra-m">M</span>
-          </div>
-          <div>
-            <span class="entidad-tipo">Motor de análisis EMAX</span>
-            <h3 class="entidad-nombre">Maxi</h3>
-          </div>
-        </header>
+    <!-- Rejilla de las 3 tarjetas interactivas con fotos y efecto expansivo al hover -->
+    <div class="tarjetas-grid">
+      {
+        tarjetas.map((t, idx) => (
+          <article class:list={["tarjeta-quien", `tarjeta-${idx + 1}`]}>
+            <div class="tarjeta-img-wrap">
+              <img
+                src={t.foto.src}
+                alt={t.alt}
+                class="tarjeta-foto"
+                loading="lazy"
+              />
+              <div class="tarjeta-sombra-gradiente" aria-hidden="true"></div>
+            </div>
 
-        <p class="entidad-descripcion">
-          Tecnología de análisis de datos que procesa lecturas cuartohorarias, cruza curvas de carga y detecta desviaciones en segundos.
-        </p>
-
-        <ul class="funciones-lista" role="list">
-          {
-            funcionesMaxi.map((f) => (
-              <li class="funcion-item">
-                <span class="funcion-bullet" aria-hidden="true">✓</span>
-                <div>
-                  <strong class="funcion-texto">{f.texto}</strong>
-                  <span class="funcion-detalle">{f.detalle}</span>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-
-        <!-- Lo que Maxi no hace (advertencia honesta del método) -->
-        <div class="dupla-alerta-honestidad">
-          <span class="alerta-etiqueta">Lo que Maxi no hace:</span>
-          <p class="alerta-texto">
-            Maxi no decide solo, no garantiza resultados milagro, no sustituye a tu consultor y nunca toca tu contador.
-          </p>
-        </div>
-      </article>
-
-      <!-- Tarjeta 2: Tu Especialista Humano EMAX (Con fotografía real de oficina) -->
-      <article class="tarjeta-dupla tarjeta-especialista tarjeta-blanca">
-        <header class="dupla-header con-foto">
-          <img
-            src={fotoConsultor.src}
-            alt="Consultor energético especialista de EMAX Energía"
-            class="avatar-foto"
-            width={64}
-            height={64}
-            loading="lazy"
-          />
-          <div>
-            <span class="entidad-tipo destacado-verde">Tu consultor asignado</span>
-            <h3 class="entidad-nombre">La persona</h3>
-          </div>
-        </header>
-
-        <p class="entidad-descripcion">
-          Un especialista en energía para empresas con nombre y apellidos que conoce tu sector, da la cara y te acompaña en cada decisión.
-        </p>
-
-        <ul class="funciones-lista" role="list">
-          {
-            funcionesEspecialista.map((f) => (
-              <li class="funcion-item">
-                <span class="funcion-bullet verde" aria-hidden="true">✓</span>
-                <div>
-                  <strong class="funcion-texto">{f.texto}</strong>
-                  <span class="funcion-detalle">{f.detalle}</span>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-
-        <div class="dupla-footer-nota">
-          <span>Un consultor asignado que te atiende por teléfono con tu informe delante</span>
-        </div>
-      </article>
+            <div class="tarjeta-info-caja">
+              <h3 class="tarjeta-titulo">{t.titulo}</h3>
+              <p class="tarjeta-desc">{t.desc}</p>
+            </div>
+          </article>
+        ))
+      }
     </div>
 
-    <!-- Lema destacado institucional -->
-    <div class="maxi-lema-caja">
-      <p class="maxi-lema-frase">
-        «Maxi no decide por ti. Te da mejores datos para decidir.»
+    <!-- Lema inferior centrado -->
+    <div class="quien-lema-wrap">
+      <p class="quien-lema-texto">
+        Maxi no decide por ti. Te da mejores datos para decidir.
       </p>
     </div>
   </div>
@@ -123,271 +80,205 @@ const funcionesEspecialista = [
 
 <style>
   /* ==========================================================================
-     QUIÉN LEE TUS DATOS - IDÉNTICO A src/components/home/TecnologiaPersonas.astro
+     SECCIÓN QUIÉN LEE TUS DATOS
      ========================================================================== */
-  .maxi-humano-seccion {
+  .quien-lee-seccion {
     padding: var(--e-8, 64px) 0;
-    background-color: var(--fondo-calido, #f7f9fc);
+    background-color: #ffffff;
     border-bottom: 1px solid var(--linea-fina, #e6edf7);
   }
 
   @media (width >= 1024px) {
-    .maxi-humano-seccion {
-      padding: var(--e-9, 80px) 0;
+    .quien-lee-seccion {
+      padding: 80px 0 96px;
     }
   }
 
   .seccion-cabecera {
-    max-width: 48rem;
-    margin-bottom: 40px;
+    max-width: 54rem;
+    margin-bottom: 44px;
   }
 
-  .kicker-wrap {
+  .seccion-kicker {
+    font-family: "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #8da4be;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: var(--azul-resalte, #ddf1ff);
-    padding: 6px 14px;
-    border-radius: var(--radio-pill, 999px);
-    margin-bottom: 14px;
+    gap: 6px;
   }
 
-  .kicker-punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--azul-600, #1a6ff7);
-    display: inline-block;
-  }
-
-  .kicker-texto {
-    font-size: 0.8125rem;
+  .kicker-sep {
+    color: #1a6ff7;
     font-weight: 700;
-    color: var(--azul-900, #004aad);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   .seccion-titulo {
-    font-family: var(--font-titulos, serif);
-    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    line-height: 1.22;
-    margin: 0 0 14px;
-    letter-spacing: -0.01em;
-  }
-
-  .seccion-subtitulo {
-    font-size: 1.125rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.5;
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2rem, 1.6rem + 1.8vw, 2.85rem);
+    font-weight: 800;
+    color: #0f2346;
+    line-height: 1.15;
     margin: 0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
   }
 
-  /* Rejilla de las 2 tarjetas */
-  .dupla-grid {
+  /* ==========================================================================
+     REJILLA DE TARJETAS Y ANIMACIÓN EXPANSIVA AL HOVER ("MÁS GRANDE Y GORDITO")
+     ========================================================================== */
+  .tarjetas-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 28px;
-    margin-bottom: 32px;
+    align-items: stretch;
   }
 
-  @media (max-width: 860px) {
-    .dupla-grid {
+  @media (max-width: 960px) {
+    .tarjetas-grid {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 32px;
+      max-width: 520px;
+      margin-inline: auto;
     }
   }
 
-  .tarjeta-dupla {
-    background: var(--papel, #ffffff);
-    border: 1px solid var(--linea, #d6e0ee);
-    border-radius: var(--radio-tarjeta, 20px);
-    padding: 32px 28px 24px;
-    box-shadow: var(--sombra-tarjeta, 0 8px 24px rgba(15, 35, 70, 0.07));
-    display: flex;
-    flex-direction: column;
+  /* Tarjeta base */
+  .tarjeta-quien {
     position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .tarjeta-dupla:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--sombra-flotante, 0 14px 40px rgba(0, 74, 173, 0.16));
-  }
-
-  .dupla-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .icono-entidad {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.75rem;
-    font-family: var(--font-display, sans-serif);
-    flex-shrink: 0;
-  }
-
-  .icono-maxi {
-    background: linear-gradient(135deg, #004aad 0%, #1a6ff7 100%);
-    color: #fff;
-    box-shadow: 0 6px 16px rgba(0, 74, 173, 0.25);
-  }
-
-  .avatar-foto {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    object-fit: cover;
-    box-shadow: 0 4px 14px rgba(15, 35, 70, 0.15);
-    border: 2px solid #fff;
-    flex-shrink: 0;
-  }
-
-  .entidad-tipo {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--tinta-3, #63738e);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 2px;
-  }
-
-  .entidad-tipo.destacado-verde {
-    color: var(--verde-ok, #067647);
-  }
-
-  .entidad-nombre {
-    font-family: var(--font-titulos, serif);
-    font-size: 1.45rem;
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    margin: 0;
-  }
-
-  .entidad-descripcion {
-    font-size: 0.95rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.5;
-    margin: 0 0 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
-  }
-
-  .funciones-lista {
-    list-style: none;
-    margin: 0 0 24px;
-    padding: 0;
+    height: 540px;
+    border-radius: 26px;
+    overflow: hidden;
+    background: #0d1e38;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    justify-content: flex-end;
+    box-shadow: 0 12px 30px rgba(15, 35, 70, 0.09);
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition:
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.35s ease,
+      opacity 0.35s ease;
+    will-change: transform, box-shadow;
   }
 
-  .funcion-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
+  /* Efecto de foco: atenuar sutilmente las hermanas para que la activa resalte */
+  .tarjetas-grid:hover .tarjeta-quien:not(:hover) {
+    opacity: 0.88;
+    transform: scale(0.985);
   }
 
-  .funcion-bullet {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--azul-resalte, #ddf1ff);
-    color: var(--azul-900, #004aad);
-    font-size: 0.75rem;
+  /* Hover de la tarjeta activa: SE HACE MÁS GRANDE Y GORDITA RESALTANDO */
+  .tarjeta-quien:hover {
+    transform: scale(1.05) translateY(-8px);
+    border-color: #00c2ff;
+    box-shadow:
+      0 26px 54px rgba(0, 112, 224, 0.28),
+      0 0 0 4px #00c2ff,
+      0 0 32px rgba(0, 194, 255, 0.45);
+    z-index: 5;
+    opacity: 1 !important;
+  }
+
+  /* Contenedor de la fotografía */
+  .tarjeta-img-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .tarjeta-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tarjeta-quien:hover .tarjeta-foto {
+    transform: scale(1.07);
+  }
+
+  /* Gradiente para asegurar legibilidad */
+  .tarjeta-sombra-gradiente {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 23, 46, 0.08) 0%,
+      rgba(8, 23, 46, 0.28) 45%,
+      rgba(8, 23, 46, 0.88) 85%,
+      rgba(8, 23, 46, 0.98) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Caja inferior de información con esquinas superiores redondeadas */
+  .tarjeta-info-caja {
+    position: relative;
+    z-index: 2;
+    background: rgba(14, 34, 64, 0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px 20px 0 0;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: none;
+    padding: 24px 22px 28px;
+    margin: 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .tarjeta-quien:hover .tarjeta-info-caja {
+    background: rgba(12, 30, 58, 0.94);
+    border-color: rgba(56, 182, 255, 0.4);
+  }
+
+  .tarjeta-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: 1.4rem;
     font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
+    color: #00c2ff;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+    transition: text-shadow 0.3s ease;
   }
 
-  .funcion-bullet.verde {
-    background: var(--verde-fondo, #ecfdf3);
-    color: var(--verde-ok, #067647);
+  .tarjeta-quien:hover .tarjeta-titulo {
+    text-shadow: 0 0 18px rgba(0, 194, 255, 0.6);
   }
 
-  .funcion-texto {
-    display: block;
-    font-size: 0.93rem;
-    font-weight: 600;
-    color: var(--tinta, #0f2346);
-    line-height: 1.35;
-  }
-
-  .funcion-detalle {
-    display: block;
-    font-size: 0.84rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.4;
-    margin-top: 2px;
-  }
-
-  .dupla-alerta-honestidad {
-    background: #fff8f5;
-    border: 1px solid #ffd8cc;
-    border-radius: 12px;
-    padding: 12px 14px;
-    margin-top: auto;
-  }
-
-  .alerta-etiqueta {
-    display: block;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #c2410c;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
-  }
-
-  .alerta-texto {
-    font-size: 0.85rem;
-    color: #7c2d12;
+  .tarjeta-desc {
+    font-family: "Inter", sans-serif;
+    font-size: 0.92rem;
+    color: #e2eaf5;
+    line-height: 1.5;
     margin: 0;
-    line-height: 1.4;
   }
 
-  .dupla-footer-nota {
-    background: var(--fondo, #f4f7fb);
-    border: 1px solid var(--linea-fina, #e6edf7);
-    border-radius: 12px;
-    padding: 12px 14px;
-    margin-top: auto;
-    font-size: 0.85rem;
-    color: var(--tinta-2, #3a4b68);
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
-  /* Lema final */
-  .maxi-lema-caja {
-    background: var(--papel, #ffffff);
-    border: 1.5px solid var(--linea, #d6e0ee);
-    border-radius: var(--radio-tarjeta, 20px);
-    padding: 24px 32px;
+  /* ==========================================================================
+     LEMA FINAL CENTRADO
+     ========================================================================== */
+  .quien-lema-wrap {
     text-align: center;
-    box-shadow: var(--sombra-subtil, 0 2px 6px rgba(15, 35, 70, 0.04));
+    margin-top: 52px;
   }
 
-  .maxi-lema-frase {
-    font-family: var(--font-titulos, serif);
-    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+  .quien-lema-texto {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
     font-weight: 700;
-    color: var(--azul-900, #004aad);
+    color: #0f2346;
+    line-height: 1.4;
     margin: 0;
-    font-style: italic;
+    letter-spacing: -0.01em;
   }
 </style>
