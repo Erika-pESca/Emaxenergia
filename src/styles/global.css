@@ -87,9 +87,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Espacio inferior en páginas para que el Dock flotante no tape contenido */
-body.con-dock {
-  padding-bottom: calc(var(--dock-alto) + 24px);
+/* El Dock flotante descansa sobre el pie de página; main llega limpio al footer */
+body.con-dock > main {
+  padding-bottom: 0;
 }
 
 img,

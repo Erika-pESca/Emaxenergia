@@ -79,6 +79,19 @@ const sectores: SectorItem[] = [
 
             <!-- Contenido inferior con botón y textos -->
             <div class="sector-card-body">
+              <!-- Curva blanca orgánica idéntica al boceto de Figma -->
+              <svg
+                class="sector-card-curve"
+                viewBox="0 0 300 46"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M 0,36 C 80,34 160,24 220,13 C 255,7 278,5 292,10 C 297,12 300,15 300,18 L 300,46 L 0,46 Z"
+                  fill="#ffffff"
+                />
+              </svg>
+
               <div class="sector-card-header">
                 <h3 class="sector-card-titulo">{s.titulo}</h3>
                 <a
@@ -90,7 +103,7 @@ const sectores: SectorItem[] = [
                   data-tramo-rango="Auditoría energética personalizada"
                   data-tramo-msg={`Nos centramos en la operativa de ${s.titulo} para auditar tu potencia, reactiva y periodos.`}
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polyline points="9 18 15 12 9 6" />
                   </svg>
                 </a>
@@ -184,10 +197,10 @@ const sectores: SectorItem[] = [
     position: relative;
     width: calc(25% - 18px);
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: 28px;
     overflow: hidden;
     border: 1.5px solid rgba(0, 74, 173, 0.08);
-    box-shadow: 0 4px 18px rgba(11, 29, 58, 0.05);
+    box-shadow: 0 4px 20px rgba(11, 29, 58, 0.05);
     display: flex;
     flex-direction: column;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -195,49 +208,20 @@ const sectores: SectorItem[] = [
                 border-color 0.35s ease;
   }
 
-  /* Halo y resplandor de luz al pasar el cursor */
+  /* Resplandor y borde azul a los alrededores al pasar el cursor + agrandamiento dinámico */
   .sector-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(56, 182, 255, 0.7);
-    box-shadow: 0 16px 36px -4px rgba(0, 74, 173, 0.22),
-                0 0 28px 2px rgba(56, 182, 255, 0.40);
-  }
-
-  /* Haz de luz (shimmer) que recorre la tarjeta al hacer hover */
-  .sector-card::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -70%;
-    width: 45%;
-    height: 200%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0) 15%,
-      rgba(56, 182, 255, 0.35) 45%,
-      rgba(255, 255, 255, 0.75) 50%,
-      rgba(56, 182, 255, 0.35) 55%,
-      rgba(255, 255, 255, 0) 85%,
-      transparent 100%
-    );
-    transform: rotate(25deg);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  .sector-card:hover::after {
-    opacity: 1;
-    left: 140%;
-    transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    transform: translateY(-8px) scale(1.03);
+    border-color: #38b6ff;
+    box-shadow: 0 20px 42px -6px rgba(0, 74, 173, 0.22),
+                0 0 24px rgba(56, 182, 255, 0.42);
+    z-index: 5;
   }
 
   /* Contenedor de imagen */
   .sector-card-media {
     position: relative;
     width: 100%;
-    height: 165px;
+    height: 195px;
     background: #cfd6e0;
     overflow: hidden;
   }
@@ -248,61 +232,49 @@ const sectores: SectorItem[] = [
     object-fit: cover;
     object-position: center;
     display: block;
-    transition: transform 0.45s ease;
+    transition: transform 0.4s ease;
   }
 
   .sector-card:hover .sector-card-img {
-    transform: scale(1.06);
+    transform: scale(1.05);
   }
 
-  /* Destello luminoso sobre la imagen al hacer hover */
-  .sector-card-media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 75% 25%,
-      rgba(56, 182, 255, 0.45) 0%,
-      rgba(0, 74, 173, 0.15) 50%,
-      transparent 80%
-    );
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    mix-blend-mode: screen;
-  }
-
-  .sector-card:hover .sector-card-media::after {
-    opacity: 1;
-  }
-
-  /* Cuerpo blanco de la tarjeta con corte diagonal hacia arriba a la derecha */
+  /* Cuerpo blanco de la tarjeta con curva superior suave */
   .sector-card-body {
     position: relative;
     background: #ffffff;
-    margin-top: -24px;
-    clip-path: polygon(0 24px, 100% 0, 100% 100%, 0 100%);
-    padding: 24px 20px 24px;
+    padding: 20px 24px 28px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     z-index: 2;
   }
 
+  .sector-card-curve {
+    position: absolute;
+    top: -45px;
+    left: 0;
+    width: 100%;
+    height: 46px;
+    display: block;
+    pointer-events: none;
+    z-index: 3;
+  }
+
   .sector-card-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
+    gap: 14px;
+    margin-bottom: 12px;
   }
 
   .sector-card-titulo {
     font-family: var(--font-display, "Sora", sans-serif);
-    font-size: 1.02rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    color: #0b1d3a;
-    line-height: 1.3;
+    color: #071d49;
+    line-height: 1.25;
     margin: 0;
     transition: color 0.25s ease;
   }
@@ -311,32 +283,32 @@ const sectores: SectorItem[] = [
     color: #004aad;
   }
 
-  /* Botón circular con flecha y brillo luminoso */
+  /* Botón circular con flecha idéntico al boceto */
   .sector-card-btn {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
     border-radius: 50%;
-    background: #e5f2ff;
+    background: #eaf3ff;
     color: #004aad;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    flex-shrink: 0;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
   }
 
   .sector-card:hover .sector-card-btn {
     background: #004aad;
     color: #ffffff;
-    transform: scale(1.1) translateX(2px);
-    box-shadow: 0 0 14px rgba(56, 182, 255, 0.8), 0 0 6px #004aad;
+    transform: scale(1.06);
   }
 
   .sector-card-desc {
     font-family: var(--font-cuerpo, sans-serif);
-    font-size: 0.82rem;
-    color: #4b5b73;
+    font-size: 0.88rem;
+    color: #071d49;
     line-height: 1.5;
     margin: 0;
   }

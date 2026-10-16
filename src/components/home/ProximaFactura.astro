@@ -1,70 +1,147 @@
 ---
-// Sección 7 (Cierre final antes del Footer): "La tarifa no se elige: se construye."
-// Cierre comercial amigable y definitivo para capturar al usuario antes del pie de página.
+// Sección Cierre Final / Formulario: "La tarifa no se elige: se construye."
+// Diseño fiel al boceto de Figma con selectores de tramo y llamada directa
+
 import { site } from "../../data/site";
+import personalImg from "../../imagenes/personal.jpg";
 
 const tramosCierre = [
-  { etiqueta: "Menos de 300 €", valor: "<300" },
-  { etiqueta: "300 – 1.000 €", valor: "300-1000" },
-  { etiqueta: "1.000 – 3.000 €", valor: "1000-3000" },
-  { etiqueta: "Más de 3.000 €", valor: ">3000" },
+  {
+    etiqueta: "MENOS DE 300€",
+    valor: "<300",
+    rango: "menos de 300 € al mes",
+    msg: "Construimos una propuesta técnica con el término de potencia ajustado al milímetro para que no pagues de más.",
+  },
+  {
+    etiqueta: "300 - 1.000€",
+    valor: "300-1000",
+    rango: "entre 3.600 y 12.000 € al año en luz",
+    msg: "Analizamos tu curva horaria y optimizamos tus potencias para maximizar tu ahorro mensual.",
+  },
+  {
+    etiqueta: "1.000 - 3.000€",
+    valor: "1000-3000",
+    rango: "entre 12.000 y 36.000 € al año",
+    msg: "Auditoría exhaustiva de cuartohorarias, penalizaciones de reactiva y oportunidad en mercado indexado vs fijo.",
+  },
+  {
+    etiqueta: "Más de 3.000€",
+    valor: ">3000",
+    rango: "más de 36.000 € al año en energía",
+    msg: "Un consultor senior de EMAX revisa tus peajes, maxímetros y coberturas OMIE de forma personalizada.",
+  },
 ];
 ---
 
 <section class="cierre-seccion" id="cierre-ventas">
-  <div class="contenedor">
-    <div class="cierre-caja tarjeta-blanca">
-      <div class="cierre-header">
-        <div class="kicker-wrap">
-          <span class="kicker-punto" aria-hidden="true"></span>
-          <span class="kicker-texto">Empieza hoy mismo</span>
+  <div class="contenedor cierre-contenedor-expandido">
+    <div class="cierre-box">
+      <!-- Columna izquierda: Mensaje de cierre de impacto y foto del consultor -->
+      <div class="cierre-col-izq">
+        <div class="cierre-textos">
+          <div class="cierre-kicker">
+            <span>TARIFA A TU MEDIDA</span>
+            <span class="cierre-kicker-bar" aria-hidden="true">|</span>
+          </div>
+
+          <h2 class="cierre-titulo">
+            LA TARIFA NO SE ELIGE:<br />
+            <span class="cierre-titulo-cursiva">se construye.</span>
+          </h2>
+
+          <p class="cierre-subtitulo">
+            Nosotros la construimos con tus datos.<br />
+            Empieza por lo que pagas.
+          </p>
         </div>
-        <h2 class="cierre-titulo">La tarifa no se elige: se construye.</h2>
-        <p class="cierre-subtitulo">
-          Nosotros la construimos con tus datos reales. Empieza por lo que pagas al mes.
-        </p>
+
+        <!-- Círculo con la foto de la consultora (ordenado y limpio debajo del texto) -->
+        <div class="cierre-circulo-foto" aria-hidden="true">
+          <img
+            src={personalImg.src}
+            alt="Consultora energética de Emax Energía"
+            class="cierre-img-circulo"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
 
-      <div class="cierre-caminos-grid">
-        <!-- Camino A: Quiero los números -->
-        <div class="camino-card">
-          <div class="camino-top">
-            <span class="camino-badge-step">Opción A</span>
-            <h3 class="camino-tit">Quiero los números</h3>
-            <p class="camino-desc">¿Cuánto paga tu empresa de luz al mes aproximadamente?</p>
+      <!-- Columna derecha: Tarjeta flotante blanca con selector y llamada -->
+      <div class="cierre-col-der">
+        <div class="cierre-card-blanca">
+          <!-- Kicker de la tarjeta -->
+          <div class="cierre-kicker">
+            <span>EMPIEZA AHORA</span>
+            <span class="cierre-kicker-bar" aria-hidden="true">|</span>
           </div>
 
-          <div class="tramos-cierre-lista">
-            {
-              tramosCierre.map((t) => (
-                <a href="/#estudio" class="tramo-cierre-btn">
-                  <span>{t.etiqueta}</span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              ))
-            }
-          </div>
-        </div>
+          <h3 class="card-tit-grande">¿Cómo quieres empezar?</h3>
 
-        <!-- Camino B: Quiero hablar directo -->
-        <div class="camino-card camino-telefono">
-          <div class="camino-top">
-            <span class="camino-badge-step destacada">Opción B</span>
-            <h3 class="camino-tit">Prefiero hablar con un especialista</h3>
-            <p class="camino-desc">Llámanos ahora mismo o solicita llamada directa en tu horario preferido.</p>
+          <!-- Bloque 1: Quiero los números -->
+          <div class="bloque-paso">
+            <span class="paso-label">Quiero los números</span>
+            <h4 class="paso-pregunta">¿Cuánto paga tu empresa de luz al mes?</h4>
+            <p class="paso-ayuda">
+              En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+            </p>
+
+            <!-- Rejilla de 4 botones azules 2x2 -->
+            <div class="tramos-grid">
+              {
+                tramosCierre.map((t) => (
+                  <button
+                    type="button"
+                    class="btn-tramo-azul"
+                    data-abrir-funnel
+                    data-tramo-id={t.valor}
+                    data-tramo-label={t.etiqueta}
+                    data-tramo-rango={t.rango}
+                    data-tramo-msg={t.msg}
+                  >
+                    <span class="btn-tramo-txt">{t.etiqueta}</span>
+                    <span class="btn-tramo-circulo" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6" />
+                      </svg>
+                    </span>
+                  </button>
+                ))
+              }
+            </div>
           </div>
 
-          <div class="telefono-destacado-box">
-            <span class="tel-label">Línea directa para empresas</span>
-            <a href={site.phoneHref} class="tel-enlace-grande">
-              {site.phone}
-            </a>
-            <span class="tel-horario">{site.horario}</span>
-          </div>
+          <!-- Línea divisoria sutil -->
+          <div class="cierre-card-divider" aria-hidden="true"></div>
 
-          <a href="/contacto" class="boton boton-primario ancho-total">
-            Solicitar llamada gratuita
-          </a>
+          <!-- Bloque 2: Hablemos -->
+          <div class="bloque-hablemos">
+            <div class="cierre-kicker">
+              <span>HABLEMOS</span>
+              <span class="cierre-kicker-bar" aria-hidden="true">|</span>
+            </div>
+
+            <div class="hablemos-fila">
+              <div class="hablemos-icono-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <circle cx="11.5" cy="14.5" r="2.8" />
+                  <line x1="13.5" y1="16.5" x2="16" y2="19" />
+                </svg>
+              </div>
+
+              <div class="hablemos-textos">
+                <div class="hablemos-linea-tel">
+                  <span class="hablemos-lead">Llama al </span>
+                  <a href={site.phoneHref} class="hablemos-tel-num">{site.phone}</a>
+                </div>
+                <span class="hablemos-horario">
+                  De lunes a viernes, de 9:00 a 13:00 y de 15:00 a 19:00
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -72,199 +149,343 @@ const tramosCierre = [
 </section>
 
 <style>
+  /* ==========================================================================
+     SECCIÓN FORMULARIO / CIERRE (ESTILO FIGMA)
+     ========================================================================== */
   .cierre-seccion {
-    padding: 76px 0 84px;
-    background: #ffffff;
+    width: 100%;
+    padding: 0;
+    background: #eaedf2;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
   }
 
-  .cierre-caja {
-    padding: 56px 44px;
-    border-radius: var(--radio-grande, 28px);
-    border: 1.5px solid #d4e2f5;
-    background: #f8fbff;
+  .cierre-contenedor-expandido {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(56px, 6vw, 84px) clamp(24px, 4vw, 64px) clamp(48px, 5vw, 72px);
+    box-sizing: border-box;
   }
 
-  .cierre-header {
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto 48px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .kicker-wrap {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: var(--radio-pill, 999px);
-    background: #ffffff;
-    border: 1px solid #d8e5f5;
-  }
-
-  .kicker-punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--azul-900, #004aad);
-  }
-
-  .kicker-texto {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--azul-900, #004aad);
-  }
-
-  .cierre-titulo {
-    font-size: clamp(2rem, 1.6rem + 1.8vw, 2.9rem);
-    color: var(--tinta, #0f2346);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  .cierre-subtitulo {
-    font-size: 1.15rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-  }
-
-  .cierre-caminos-grid {
+  /* Caja contenedora de la sección (estilo boceto Figma) */
+  .cierre-box {
+    position: relative;
+    background: transparent;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
-
-  .camino-card {
-    padding: 32px 28px;
-    background: #ffffff;
-    border: 1.5px solid #d6e2f2;
-    border-radius: var(--radio-grande, 28px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  .camino-top {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .camino-badge-step {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--azul-900, #004aad);
-  }
-
-  .camino-badge-step.destacada {
-    color: var(--verde-ok, #067647);
-  }
-
-  .camino-tit {
-    font-size: 1.35rem;
-    color: var(--tinta, #0f2346);
-    font-weight: 800;
-    margin: 0;
-  }
-
-  .camino-desc {
-    font-size: 0.9rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.45;
-  }
-
-  .tramos-cierre-lista {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .tramo-cierre-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    background: var(--fondo, #f4f7fb);
-    border: 1.5px solid #d6e0ee;
-    border-radius: var(--radio-md, 14px);
-    font-size: 0.925rem;
-    font-weight: 600;
-    color: var(--tinta, #0f2346);
-    transition: all 0.15s ease;
-  }
-
-  .tramo-cierre-btn:hover {
-    background: #ffffff;
-    border-color: var(--azul-900, #004aad);
-    color: var(--azul-900, #004aad);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.12);
-  }
-
-  .camino-telefono {
-    border: 2px solid var(--azul-900, #004aad);
-    box-shadow: 0 12px 32px rgba(0, 74, 173, 0.08);
-  }
-
-  .telefono-destacado-box {
-    padding: 18px 20px;
-    background: var(--azul-suave, #edf4fe);
-    border-radius: var(--radio-md, 14px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 4px;
-  }
-
-  .tel-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--azul-900, #004aad);
-  }
-
-  .tel-enlace-grande {
-    font-family: var(--font-titulos);
-    font-size: 1.9rem;
-    font-weight: 800;
-    color: var(--tinta, #0f2346);
-    line-height: 1.1;
-  }
-
-  .tel-enlace-grande:hover {
-    color: var(--azul-900, #004aad);
-  }
-
-  .tel-horario {
-    font-size: 0.8rem;
-    color: var(--tinta-3, #63738e);
-  }
-
-  .ancho-total {
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(32px, 5vw, 68px);
+    align-items: stretch;
     width: 100%;
   }
 
-  @media (max-width: 980px) {
-    .cierre-caja {
-      padding: 32px 20px;
+  /* Columna izquierda: textos y foto */
+  .cierre-col-izq {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: clamp(8px, 1.5vw, 16px);
+    max-width: 520px;
+  }
+
+  .cierre-textos {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Círculo con la foto del consultor (ordenado y limpio) */
+  .cierre-circulo-foto {
+    width: clamp(230px, 20vw, 300px);
+    height: clamp(230px, 20vw, 300px);
+    border-radius: 50%;
+    overflow: hidden;
+    background: #ccd4e0;
+    margin-top: clamp(28px, 3vw, 40px);
+    box-shadow: 0 16px 40px rgba(11, 29, 58, 0.12);
+    border: 4px solid #ffffff;
+    flex-shrink: 0;
+  }
+
+  .cierre-img-circulo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+  }
+
+  .cierre-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 14px;
+  }
+
+  .cierre-kicker-bar {
+    color: #38b6ff;
+    font-weight: 800;
+    font-size: 1.1em;
+  }
+
+  .cierre-titulo {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+    color: #0b1d3a;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+
+  .cierre-titulo-cursiva {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #004aad;
+    font-size: 1.12em;
+  }
+
+  .cierre-subtitulo {
+    font-family: var(--font-cuerpo, sans-serif);
+    font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+    color: #475569;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Columna derecha: Tarjeta blanca */
+  .cierre-col-der {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cierre-card-blanca {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: clamp(28px, 4vw, 44px);
+    box-shadow: 0 16px 44px rgba(11, 29, 58, 0.08);
+    border: 1px solid rgba(0, 74, 173, 0.06);
+  }
+
+  .card-tit-grande {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.25rem, 1.6vw, 1.55rem);
+    font-weight: 700;
+    color: #004aad;
+    margin: 0 0 24px;
+    line-height: 1.3;
+  }
+
+  /* Bloque de paso */
+  .bloque-paso {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .paso-label {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #0b1d3a;
+    margin-bottom: 6px;
+  }
+
+  .paso-pregunta {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.05rem, 1.3vw, 1.22rem);
+    font-weight: 700;
+    color: #004aad;
+    margin: 0 0 8px;
+    line-height: 1.35;
+  }
+
+  .paso-ayuda {
+    font-family: var(--font-cuerpo, sans-serif);
+    font-size: 0.84rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0 0 20px;
+  }
+
+  /* Rejilla de 4 botones 2x2 */
+  .tramos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .btn-tramo-azul {
+    background: #004aad;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover {
+    background: #003a88;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 74, 173, 0.4);
+  }
+
+  .btn-tramo-txt {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .btn-tramo-circulo {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #081d3e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover .btn-tramo-circulo {
+    transform: translateX(2px);
+  }
+
+  /* Línea divisoria */
+  .cierre-card-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 28px 0 22px;
+  }
+
+  /* Bloque Hablemos */
+  .bloque-hablemos {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hablemos-fila {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  .hablemos-icono-badge {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%;
+    background: #004aad;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.25);
+  }
+
+  .hablemos-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .hablemos-linea-tel {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #0b1d3a;
+  }
+
+  .hablemos-tel-num {
+    color: #004aad;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .hablemos-tel-num:hover {
+    color: #003a88;
+    text-decoration: underline;
+  }
+
+  .hablemos-horario {
+    font-family: var(--font-cuerpo, sans-serif);
+    font-size: 0.78rem;
+    color: #64748b;
+    line-height: 1.4;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .cierre-contenedor-expandido {
+      padding: 44px 20px;
     }
 
-    .cierre-caminos-grid {
+    .cierre-box {
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 36px;
+      min-height: auto;
+      align-items: center;
     }
 
-    .tramos-cierre-lista {
+    .cierre-col-izq {
+      padding-top: 0;
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    .cierre-textos {
+      align-items: center;
+    }
+
+    .cierre-kicker {
+      justify-content: center;
+    }
+
+    .cierre-circulo-foto {
+      width: 240px;
+      height: 240px;
+      margin: 24px auto 0;
+      box-shadow: 0 14px 32px rgba(11, 29, 58, 0.12);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cierre-card-blanca {
+      padding: 24px 18px;
+    }
+
+    .tramos-grid {
       grid-template-columns: 1fr;
+    }
+
+    .hablemos-fila {
+      align-items: flex-start;
     }
   }
 </style>

@@ -1,0 +1,949 @@
+---
+// Componente Unificado: Formulario / Funnel de Captación y Auditoría Técnica EMAX
+// Centralizado en un único archivo para toda la web y preparado para conexión con el Backend.
+
+import { site } from "../data/site";
+---
+
+<!-- =========================================================================
+     MODAL UNIFICADO: FORMULARIO DE ESTUDIO TÉCNICO Y CONTACTO
+     ========================================================================= -->
+<div
+  class="modal-backdrop"
+  id="modal-funnel"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-funnel-titulo"
+  hidden
+>
+  <div class="modal-dialog">
+    <!-- Cabecera del modal -->
+    <header class="modal-cabecera">
+      <div class="modal-marca-wrap">
+        <span class="modal-marca">e<span class="rayo">⚡</span>max <span class="marca-sub">energía</span></span>
+        <a href={site.phoneHref} class="modal-tel">{site.phone}</a>
+      </div>
+
+      <!-- Barra de etapas del formulario -->
+      <nav class="fn-etapas" aria-label="Progreso del estudio">
+        <span class="fn-etapa activa" data-etapa-indicador="1">Tu empresa</span>
+        <span class="fn-etapa-sep">/</span>
+        <span class="fn-etapa" data-etapa-indicador="2">Cómo empezamos</span>
+        <span class="fn-etapa-sep">/</span>
+        <span class="fn-etapa" data-etapa-indicador="3">Tus datos</span>
+        <span class="fn-etapa-sep">/</span>
+        <span class="fn-etapa" data-etapa-indicador="4">Listo</span>
+      </nav>
+
+      <button
+        type="button"
+        class="modal-btn-cerrar"
+        id="btn-cerrar-funnel"
+        aria-label="Cerrar ventana y volver a la web"
+      >
+        <span>Volver a la web</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <div class="modal-cuerpo-grid">
+      <!-- COLUMNA IZQUIERDA: Formulario dinámico con paleta original -->
+      <div class="fn-col-izq">
+        <!-- PASO 1: Suministros de la empresa -->
+        <div class="fn-paso-vista" id="fn-paso-1">
+          <div class="fn-resultado">
+            <p class="fn-resultado-cifra" id="fn-resultado-texto">
+              Estudio técnico gratuito para tu empresa.
+            </p>
+            <p class="fn-resultado-comun">Sin cambiarte de compañía ni asumir permanencias.</p>
+            <p class="fn-resultado-msg" id="fn-resultado-msg">
+              Revisamos tu curva de consumo, la potencia contratada vs demandada y eliminamos penalizaciones innecesarias.
+            </p>
+          </div>
+
+          <h2 id="modal-funnel-titulo" class="fn-titulo">¿Cuántos suministros o sedes tiene tu empresa?</h2>
+
+          <div class="fn-dos-botones">
+            <button type="button" class="fn-opcion-btn" data-elegir-suministro="uno">
+              Uno
+            </button>
+            <button type="button" class="fn-opcion-btn" data-elegir-suministro="varios">
+              Varios
+            </button>
+          </div>
+
+          <p class="fn-ayuda">Cada local, nave o sede con su propio contador cuenta como un suministro.</p>
+
+          <div class="fn-porque">
+            <p class="fn-porque-t">Por qué te lo preguntamos</p>
+            <p class="fn-porque-c">Con varios suministros te atiende un gestor especialista que optimiza cada punto y el conjunto.</p>
+          </div>
+        </div>
+
+        <!-- PASO 2: Cómo empezamos -->
+        <div class="fn-paso-vista" id="fn-paso-2" hidden>
+          <h2 class="fn-titulo">¿Cómo prefieres empezar?</h2>
+          <p class="fn-sub">Elige lo que te resulte más cómodo para poner en marcha el estudio.</p>
+
+          <div class="fn-canales-lista">
+            <button type="button" class="fn-canal-tarjeta" data-elegir-canal="llamada">
+              <div class="fn-canal-info">
+                <strong class="fn-canal-tit">Una llamada</strong>
+                <span class="fn-canal-desc">Un consultor te llama en la franja que elijas, con tu informe técnico delante.</span>
+              </div>
+              <span class="fn-canal-flecha">→</span>
+            </button>
+
+            <button type="button" class="fn-canal-tarjeta" data-elegir-canal="factura">
+              <div class="fn-canal-info">
+                <strong class="fn-canal-tit">Subir mi factura</strong>
+                <span class="fn-canal-desc">Foto o PDF de tu factura más reciente para hacer la auditoría inmediata.</span>
+              </div>
+              <span class="fn-canal-flecha">→</span>
+            </button>
+          </div>
+
+          <div class="fn-porque">
+            <p class="fn-porque-t">Sin compromiso comercial</p>
+            <p class="fn-porque-c">Te explicamos los números antes de pedirte nada. Si no te compensa, te lo decimos con honestidad.</p>
+          </div>
+
+          <button type="button" class="fn-atras-btn" data-ir-paso="1">
+            ← Atrás
+          </button>
+        </div>
+
+        <!-- PASO 3: Datos de contacto -->
+        <div class="fn-paso-vista" id="fn-paso-3" hidden>
+          <h2 class="fn-titulo">¿Dónde te llamamos?</h2>
+          <p class="fn-sub">Dinos a quién preguntar y en qué franja horaria te va mejor hablar.</p>
+
+          <form class="fn-formulario" id="fn-form-datos">
+            <!-- Campos ocultos para metadatos de lead y backend -->
+            <input type="hidden" id="fn-input-suministros" name="suministros" value="uno" />
+            <input type="hidden" id="fn-input-canal" name="canal" value="llamada" />
+            <input type="hidden" id="fn-input-tramo" name="tramo_origen" value="general" />
+
+            <div class="fn-campo">
+              <label for="fn-input-nombre">Tu nombre o empresa</label>
+              <input type="text" id="fn-input-nombre" name="nombre" required placeholder="Ej. Obrador La Espiga" autocomplete="organization" />
+            </div>
+
+            <div class="fn-campo">
+              <label for="fn-input-telefono">Teléfono de contacto</label>
+              <input type="tel" id="fn-input-telefono" name="telefono" required placeholder="Ej. 600 000 000" autocomplete="tel" />
+            </div>
+
+            <fieldset class="fn-grupo-franja">
+              <legend>¿Cuándo te va mejor que te llamemos?</legend>
+              <label class="fn-radio-label">
+                <input type="radio" name="franja" value="manana" checked />
+                <span>Por la mañana, de 9:00 a 13:00</span>
+              </label>
+              <label class="fn-radio-label">
+                <input type="radio" name="franja" value="tarde" />
+                <span>Por la tarde, de 15:00 a 19:00</span>
+              </label>
+            </fieldset>
+
+            <p class="fn-antes-boton">
+              Al pulsar, un consultor técnico te llamará con tu informe elaborado sin ningún coste ni permanencia.
+            </p>
+
+            <button type="submit" class="boton-fn-enviar" id="btn-submit-formulario">
+              <span>Solicitar la llamada con mi informe</span>
+            </button>
+          </form>
+
+          <button type="button" class="fn-atras-btn" data-ir-paso="2">
+            ← Atrás
+          </button>
+        </div>
+
+        <!-- PASO 4: Confirmación -->
+        <div class="fn-paso-vista" id="fn-paso-4" hidden>
+          <div class="fn-exito-tarjeta">
+            <span class="fn-exito-check" aria-hidden="true">✓</span>
+            <h2 class="fn-titulo">Hecho. Hemos recibido tu solicitud.</h2>
+            <p class="fn-sub">
+              Un consultor especialista de EMAX revisará los datos de tu empresa y te contactará en la franja elegida.
+            </p>
+          </div>
+
+          <div class="fn-resumen-confirmacion">
+            <p><strong>Lo que va a pasar ahora:</strong></p>
+            <ul>
+              <li>Revisamos tu consumo por periodos y maxímetros.</li>
+              <li>Te llamamos para explicártelo por teléfono con tu informe delante.</li>
+              <li>Te lo mandamos por escrito decidas lo que decidas.</li>
+            </ul>
+          </div>
+
+          <button type="button" class="boton-fn-enviar" id="btn-finalizar-funnel">
+            Volver a la web
+          </button>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: Qué va a pasar (Original limpio) -->
+      <aside class="fn-panel" aria-label="Información del proceso de EMAX">
+        <h3 class="fn-panel-t">Qué va a pasar</h3>
+
+        <ol class="fn-panel-pasos">
+          <li>
+            <span class="cifra">1</span>
+            <div>
+              <strong>Nos dices cómo consume tu empresa y cómo prefieres empezar.</strong>
+            </div>
+          </li>
+          <li>
+            <span class="cifra">2</span>
+            <div>
+              <strong>Maxi lee tu factura o los datos de tu suministro, y un especialista revisa los números.</strong>
+            </div>
+          </li>
+          <li>
+            <span class="cifra">3</span>
+            <div>
+              <strong>Un consultor te llama, cuando tú digas, con tu informe técnico delante.</strong>
+            </div>
+          </li>
+          <li>
+            <span class="cifra">4</span>
+            <div>
+              <strong>Te lo mandamos por escrito. Y decides tú.</strong>
+            </div>
+          </li>
+        </ol>
+
+        <div class="fn-panel-cierre">
+          <p class="fn-panel-cierre-linea">Recibes tu informe decidas lo que decidas.</p>
+          <p class="fn-panel-sin-coste">El análisis no tiene coste.</p>
+          <p class="fn-panel-cierre-sub">
+            Si tu contrato actual ya encaja con cómo consume tu empresa, te lo decimos por escrito en lugar de proponerte un cambio forzado.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+  // =========================================================================
+  // CONTROL GLOBAL DEL FORMULARIO Y CONEXIÓN CON BACKEND
+  // =========================================================================
+  function inicializarFormularioUnificado() {
+    const modalFunnel = document.getElementById("modal-funnel");
+    const btnCerrarFunnel = document.getElementById("btn-cerrar-funnel");
+    const btnFinalizarFunnel = document.getElementById("btn-finalizar-funnel");
+
+    const pasoVistas: Record<number, HTMLElement | null> = {
+      1: document.getElementById("fn-paso-1"),
+      2: document.getElementById("fn-paso-2"),
+      3: document.getElementById("fn-paso-3"),
+      4: document.getElementById("fn-paso-4"),
+    };
+
+    const etapaIndicadores = document.querySelectorAll("[data-etapa-indicador]");
+
+    // Campos ocultos
+    const inputSuministros = document.getElementById("fn-input-suministros") as HTMLInputElement | null;
+    const inputCanal = document.getElementById("fn-input-canal") as HTMLInputElement | null;
+    const inputTramo = document.getElementById("fn-input-tramo") as HTMLInputElement | null;
+
+    // Elementos dinámicos del encabezado del paso 1
+    const resultadoTexto = document.getElementById("fn-resultado-texto");
+    const resultadoMsg = document.getElementById("fn-resultado-msg");
+
+    function irAlPaso(numPaso: number) {
+      Object.keys(pasoVistas).forEach((key) => {
+        const k = Number(key);
+        const vista = pasoVistas[k];
+        if (vista) {
+          if (k === numPaso) {
+            vista.removeAttribute("hidden");
+          } else {
+            vista.setAttribute("hidden", "true");
+          }
+        }
+      });
+
+      etapaIndicadores.forEach((ind) => {
+        const idx = Number(ind.getAttribute("data-etapa-indicador"));
+        if (idx === numPaso) {
+          ind.classList.add("activa");
+        } else {
+          ind.classList.remove("activa");
+        }
+      });
+    }
+
+    function abrirModalFunnel(btn?: HTMLElement | null) {
+      if (!modalFunnel) return;
+
+      // Si el botón que abrió el modal tiene información de tramo / sector, personalizar el mensaje:
+      if (btn) {
+        const label = btn.getAttribute("data-tramo-label") || "Estudio para tu empresa";
+        const msg = btn.getAttribute("data-tramo-msg") || "Revisamos tu curva de consumo, la potencia contratada vs demandada y eliminamos penalizaciones innecesarias.";
+        const tramoId = btn.getAttribute("data-tramo-id") || "general";
+
+        if (resultadoTexto) resultadoTexto.textContent = label;
+        if (resultadoMsg) resultadoMsg.textContent = msg;
+        if (inputTramo) inputTramo.value = tramoId;
+      }
+
+      irAlPaso(1);
+      modalFunnel.removeAttribute("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function cerrarModalFunnel() {
+      if (!modalFunnel) return;
+      modalFunnel.setAttribute("hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // Delegación global: cualquier botón con data-abrir-funnel en toda la web abre este único formulario
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement | null;
+      const btn = target?.closest<HTMLElement>("[data-abrir-funnel]");
+      if (btn) {
+        e.preventDefault();
+        abrirModalFunnel(btn);
+      }
+    });
+
+    btnCerrarFunnel?.addEventListener("click", cerrarModalFunnel);
+    btnFinalizarFunnel?.addEventListener("click", cerrarModalFunnel);
+
+    // Cerrar con Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modalFunnel && !modalFunnel.hasAttribute("hidden")) {
+        cerrarModalFunnel();
+      }
+    });
+
+    // Cerrar al hacer clic fuera
+    modalFunnel?.addEventListener("click", (e) => {
+      if (e.target === modalFunnel) {
+        cerrarModalFunnel();
+      }
+    });
+
+    // Paso 1: Selección de suministros
+    document.querySelectorAll<HTMLButtonElement>("[data-elegir-suministro]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const val = b.getAttribute("data-elegir-suministro") || "uno";
+        if (inputSuministros) inputSuministros.value = val;
+        irAlPaso(2);
+      });
+    });
+
+    // Paso 2: Selección de canal de contacto
+    document.querySelectorAll<HTMLButtonElement>("[data-elegir-canal]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const canal = b.getAttribute("data-elegir-canal") || "llamada";
+        if (inputCanal) inputCanal.value = canal;
+        irAlPaso(3);
+      });
+    });
+
+    // Botones de vuelta atrás
+    document.querySelectorAll<HTMLButtonElement>("[data-ir-paso]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const target = Number(b.getAttribute("data-ir-paso")) || 1;
+        irAlPaso(target);
+      });
+    });
+
+    // =========================================================================
+    // CONEXIÓN CON EL BACKEND (API / CRM / EMAIL)
+    // =========================================================================
+    // Esta función centraliza el envío de datos. Cuando el backend esté listo,
+    // solo se configura aquí y funcionará para todos los formularios de la web.
+    async function enviarLeadAlBackend(datos: Record<string, string>) {
+      /*
+      // EJEMPLO DE CONEXIÓN CON ENDPOINT BACKEND:
+      try {
+        const respuesta = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        return respuesta.ok;
+      } catch (error) {
+        console.error("Error al enviar lead al backend:", error);
+        return false;
+      }
+      */
+      console.log("Lead capturado correctamente para el backend:", datos);
+      return true;
+    }
+
+    // Paso 3: Envío del formulario
+    const formDatos = document.getElementById("fn-form-datos") as HTMLFormElement | null;
+    formDatos?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(formDatos);
+      const datosLead: Record<string, string> = {
+        nombre: String(formData.get("nombre") || ""),
+        telefono: String(formData.get("telefono") || ""),
+        franja: String(formData.get("franja") || "manana"),
+        suministros: inputSuministros?.value || "uno",
+        canal: inputCanal?.value || "llamada",
+        tramo_origen: inputTramo?.value || "general",
+        fecha: new Date().toISOString(),
+      };
+
+      // Llamada a la función del backend
+      await enviarLeadAlBackend(datosLead);
+
+      // Avanzar a la pantalla de éxito
+      irAlPaso(4);
+    });
+  }
+
+  inicializarFormularioUnificado();
+  document.addEventListener("astro:page-load", inicializarFormularioUnificado);
+</script>
+
+<style>
+  /* ==========================================================================
+     MODAL FUNNEL / FORMULARIO UNIFICADO EMAX
+     ========================================================================== */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(8, 20, 42, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 3vw, 32px);
+    overflow-y: auto;
+  }
+
+  .modal-backdrop[hidden] {
+    display: none !important;
+  }
+
+  .modal-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    background: #ffffff;
+    border: 1px solid #dce6f2;
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(0, 20, 50, 0.35);
+    overflow: hidden;
+    animation: modalEntrar 0.25s ease-out;
+  }
+
+  @keyframes modalEntrar {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  /* Cabecera original en blanco */
+  .modal-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+    background: #ffffff;
+    border-bottom: 1px solid #e8eef6;
+  }
+
+  .modal-marca-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .modal-marca {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #0f2346;
+  }
+
+  .modal-marca .rayo {
+    color: #0066ff;
+  }
+
+  .marca-sub {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #63738e;
+  }
+
+  .modal-tel {
+    font-size: 0.85rem;
+    color: #0f2346;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .modal-tel:hover {
+    color: #004aad;
+  }
+
+  .fn-etapas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+
+  .fn-etapa {
+    color: #63738e;
+    font-weight: 500;
+  }
+
+  .fn-etapa.activa {
+    color: #004aad;
+    font-weight: 700;
+  }
+
+  .fn-etapa-sep {
+    color: #cbd5e1;
+  }
+
+  .modal-btn-cerrar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid #dce6f2;
+    color: #3a4b68;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 7px 13px;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .modal-btn-cerrar:hover {
+    background: #f1f5f9;
+    color: #0f2346;
+  }
+
+  .modal-cuerpo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  }
+
+  .fn-col-izq {
+    padding: 32px 32px 36px;
+    background: #ffffff;
+  }
+
+  .fn-resultado {
+    background: #f0f7ff;
+    border: 1px solid #c7e0fc;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+  }
+
+  .fn-resultado-cifra {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #004aad;
+    margin: 0 0 4px;
+  }
+
+  .fn-resultado-comun {
+    font-size: 0.82rem;
+    color: #0f2346;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .fn-resultado-msg {
+    font-size: 0.80rem;
+    color: #3a4b68;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .fn-titulo {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0 0 10px;
+  }
+
+  .fn-sub {
+    font-size: 0.86rem;
+    color: #63738e;
+    margin: 0 0 20px;
+  }
+
+  .fn-dos-botones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .fn-opcion-btn {
+    padding: 15px 18px;
+    background: #ffffff;
+    border: 1.5px solid #d0deef;
+    border-radius: 10px;
+    color: #0f2346;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .fn-opcion-btn:hover {
+    background: #f0f7ff;
+    border-color: #004aad;
+    color: #004aad;
+  }
+
+  .fn-ayuda {
+    font-size: 0.8rem;
+    color: #63738e;
+    margin: 0 0 18px;
+  }
+
+  .fn-porque {
+    background: #f8fafc;
+    border-left: 3px solid #004aad;
+    padding: 11px 14px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 22px;
+  }
+
+  .fn-porque-t {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #004aad;
+    text-transform: uppercase;
+    margin: 0 0 3px;
+  }
+
+  .fn-porque-c {
+    font-size: 0.80rem;
+    color: #3a4b68;
+    margin: 0;
+  }
+
+  .fn-canales-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .fn-canal-tarjeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: #ffffff;
+    border: 1.5px solid #dce6f2;
+    border-radius: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .fn-canal-tarjeta:hover {
+    background: #f8fbff;
+    border-color: #004aad;
+  }
+
+  .fn-canal-tit {
+    display: block;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin-bottom: 3px;
+  }
+
+  .fn-canal-desc {
+    display: block;
+    font-size: 0.78rem;
+    color: #63738e;
+    line-height: 1.35;
+  }
+
+  .fn-canal-flecha {
+    font-size: 1.2rem;
+    color: #004aad;
+    padding-left: 10px;
+  }
+
+  .fn-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .fn-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .fn-campo label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #0f2346;
+  }
+
+  .fn-campo input {
+    background: #ffffff;
+    border: 1.5px solid #d0deef;
+    border-radius: 8px;
+    padding: 11px 13px;
+    color: #0f2346;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .fn-campo input:focus {
+    border-color: #004aad;
+  }
+
+  .fn-grupo-franja {
+    border: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .fn-grupo-franja legend {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #0f2346;
+    margin-bottom: 4px;
+  }
+
+  .fn-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid #dce6f2;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: #0f2346;
+    cursor: pointer;
+  }
+
+  .fn-radio-label:hover {
+    background: #f8fbff;
+  }
+
+  .fn-antes-boton {
+    font-size: 0.76rem;
+    color: #63738e;
+    margin: 4px 0 0;
+    line-height: 1.35;
+  }
+
+  .boton-fn-enviar {
+    background: #004aad;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.96rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s ease;
+  }
+
+  .boton-fn-enviar:hover {
+    background: #003a88;
+  }
+
+  .fn-atras-btn {
+    background: transparent;
+    border: none;
+    color: #63738e;
+    font-size: 0.80rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 14px;
+    padding: 0;
+  }
+
+  .fn-atras-btn:hover {
+    color: #0f2346;
+  }
+
+  /* Exito */
+  .fn-exito-tarjeta {
+    text-align: center;
+    padding: 16px 0;
+  }
+
+  .fn-exito-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #ecfdf3;
+    color: #067647;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .fn-resumen-confirmacion {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 0.82rem;
+    color: #3a4b68;
+    margin-bottom: 20px;
+  }
+
+  .fn-resumen-confirmacion ul {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    line-height: 1.5;
+  }
+
+  /* Columna Derecha Modal: Qué va a pasar (Original claro) */
+  .fn-panel {
+    background: #f8fafc;
+    border-left: 1px solid #e2e8f0;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .fn-panel-t {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0 0 20px;
+  }
+
+  .fn-panel-pasos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .fn-panel-pasos li {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: #3a4b68;
+  }
+
+  .fn-panel-pasos .cifra {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #e0edfe;
+    color: #004aad;
+    font-weight: 800;
+    font-size: 0.76rem;
+  }
+
+  .fn-panel-cierre {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+  }
+
+  .fn-panel-cierre-linea {
+    font-weight: 600;
+    color: #3a4b68;
+    font-size: 0.84rem;
+    margin: 0 0 3px;
+  }
+
+  .fn-panel-sin-coste {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0 0 6px;
+  }
+
+  .fn-panel-cierre-sub {
+    font-size: 0.76rem;
+    color: #63738e;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 860px) {
+    .modal-cuerpo-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .fn-panel {
+      border-left: none;
+      border-top: 1px solid #e2e8f0;
+      padding: 24px 20px;
+    }
+
+    .fn-col-izq {
+      padding: 24px 20px;
+    }
+
+    .fn-etapas {
+      display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .modal-cabecera {
+      padding: 14px 16px;
+    }
+
+    .modal-tel {
+      display: none;
+    }
+
+    .fn-dos-botones {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

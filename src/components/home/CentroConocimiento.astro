@@ -1,8 +1,9 @@
 ---
-// Sección 6: "Si vas a firmar algo, entiéndelo antes."
-// Divulgación transparente y educación energética para generar máxima confianza.
+// Sección: "Si vas a firmar algo, entiéndelo antes."
+// Acordeones interactivos de educación energética y transparencia según boceto de Figma
+
 interface GuiaItem {
-  num: string;
+  id: string;
   pregunta: string;
   tema: string;
   descripcion: string;
@@ -11,210 +12,409 @@ interface GuiaItem {
 
 const guias: GuiaItem[] = [
   {
-    num: "01",
+    id: "factura",
     pregunta: "¿Qué estoy pagando de verdad?",
-    tema: "Entender mi factura",
-    descripcion: "Aprende a identificar en qué conceptos se divide tu recibo: peajes, cargos, término de energía y potencia.",
+    tema: "Entender mi factura.",
+    descripcion:
+      "Aprende a identificar en qué conceptos se divide tu recibo: peajes, cargos, término de energía y potencia para no pagar sobrecostes ocultos ni penalizaciones innecesarias.",
     href: "/guias/factura-luz-empresa",
   },
   {
-    num: "02",
+    id: "potencia",
     pregunta: "¿Pago capacidad que no uso?",
     tema: "Potencia contratada",
-    descripcion: "Cómo revisar tus maxímetros para saber si estás regalando dinero a la distribuidora cada mes.",
+    descripcion:
+      "Cómo revisar tus maxímetros y cuartohorarias para saber si tu empresa está pagando por una potencia que nunca llega a demandar a la red.",
     href: "/guias/potencia-contratada",
   },
   {
-    num: "03",
+    id: "precio",
     pregunta: "¿Cuál encaja con mi empresa?",
     tema: "Precio fijo o indexado",
-    descripcion: "Diferencias reales entre la estabilidad del precio fijo y las oportunidades del mercado mayorista OMIE.",
+    descripcion:
+      "Diferencias reales entre la estabilidad presupuestaria de un precio fijo y el ahorro en horas valle de una tarifa indexada al mercado mayorista OMIE.",
     href: "/guias/precio-fijo-o-indexado",
-  },
-  {
-    num: "04",
-    pregunta: "¿Cómo evitar penalizaciones?",
-    tema: "Energía reactiva",
-    descripcion: "Descubre si tu maquinaria o motores generan recargos por reactiva y cuándo es rentable una batería.",
-    href: "/guias/energia-reactiva",
   },
 ];
 ---
 
-<section class="guias-seccion" id="guias">
+<section class="guias-acordeon-seccion" id="guias">
   <div class="contenedor">
-    <div class="seccion-cabecera">
-      <div class="kicker-wrap">
-        <span class="kicker-punto" aria-hidden="true"></span>
-        <span class="kicker-texto">Transparencia y pedagogía</span>
+    <div class="guias-grid-layout">
+      <!-- Columna izquierda: Título principal idéntico al boceto -->
+      <div class="guias-col-tit">
+        <h2 class="guias-tit-principal">
+          SI VAS A FIRMAR ALGO,<br />
+          <span class="guias-tit-cursiva">entiéndelo antes.</span>
+        </h2>
       </div>
-      <h2 class="seccion-titulo">Si vas a firmar algo, entiéndelo antes.</h2>
-      <p class="seccion-subtitulo">
-        Sin tecnicismos oscuros ni letra pequeña. Todo explicado con claridad para que decidas con datos contrastables.
-      </p>
-    </div>
 
-    <div class="guias-grid">
-      {
-        guias.map((g) => (
-          <a href={g.href} class="guia-tarjeta tarjeta-blanca">
-            <div class="guia-top">
-              <span class="guia-badge-num">Guía {g.num}</span>
-              <span class="guia-pregunta">{g.pregunta}</span>
-            </div>
-            <h3 class="guia-tema">{g.tema}</h3>
-            <p class="guia-desc">{g.descripcion}</p>
-            <div class="guia-enlace">
-              <span>Leer guía técnica</span>
-              <span aria-hidden="true">→</span>
-            </div>
+      <!-- Columna derecha: Acordeones que se despliegan + botón CTA -->
+      <div class="guias-col-acordeones">
+        <div class="acordeon-lista" data-acordeon-contenedor>
+          {
+            guias.map((g, idx) => (
+              <div class="acordeon-item" data-acordeon-item>
+                <button
+                  type="button"
+                  class="acordeon-trigger"
+                  data-acordeon-trigger
+                  aria-expanded="false"
+                  aria-controls={`acordeon-panel-${idx}`}
+                  id={`acordeon-header-${idx}`}
+                >
+                  <div class="acordeon-textos">
+                    <span class="acordeon-pregunta">{g.pregunta}</span>
+                    <span class="acordeon-tema">{g.tema}</span>
+                  </div>
+                  <span class="acordeon-icono-wrap" aria-hidden="true">
+                    <svg
+                      class="acordeon-chevron-icon"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </span>
+                </button>
+
+                <div
+                  class="acordeon-panel"
+                  id={`acordeon-panel-${idx}`}
+                  role="region"
+                  aria-labelledby={`acordeon-header-${idx}`}
+                >
+                  <div class="acordeon-inner">
+                    <p class="acordeon-desc">{g.descripcion}</p>
+                    <a href={g.href} class="acordeon-link-guia">
+                      <span>Leer guía completa</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Botón CTA tipo píldora -->
+        <div class="guias-cta-wrap">
+          <a href="/guias" class="btn-todas-guias">
+            <span>Todas las guías</span>
+            <span class="btn-arrow-circle" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
           </a>
-        ))
-      }
-    </div>
-
-    <div class="guias-footer">
-      <a href="/guias" class="boton boton-secundario">
-        Ver todas las guías energéticas
-      </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+  function setupGuiasAcordeon() {
+    const items = document.querySelectorAll<HTMLElement>("[data-acordeon-item]");
+    if (!items.length) return;
+
+    items.forEach((item) => {
+      const trigger = item.querySelector<HTMLButtonElement>("[data-acordeon-trigger]");
+      if (!trigger || trigger.dataset.acordeonReady === "1") return;
+      trigger.dataset.acordeonReady = "1";
+
+      trigger.addEventListener("click", () => {
+        const isOpen = item.classList.contains("abierto");
+        item.classList.toggle("abierto", !isOpen);
+        trigger.setAttribute("aria-expanded", String(!isOpen));
+      });
+    });
+  }
+
+  setupGuiasAcordeon();
+  document.addEventListener("astro:page-load", setupGuiasAcordeon);
+</script>
+
 <style>
-  .guias-seccion {
-    padding: 76px 0 84px;
-    background: #ffffff;
-    border-bottom: 1px solid var(--linea-fina, #e6edf7);
+  /* ==========================================================================
+     SECCIÓN GUÍAS / DIVULGACIÓN CON ACORDEONES (FONDO AZUL OSCURO FIGMA)
+     ========================================================================== */
+  .guias-acordeon-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e; /* Mismo azul corporativo elegante del boceto */
+    padding: clamp(76px, 9vh, 114px) 0;
+    overflow: hidden;
   }
 
-  .seccion-cabecera {
-    text-align: center;
-    max-width: 740px;
-    margin: 0 auto 52px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
+  .contenedor {
+    max-width: 1280px;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(24px, 5vw, 60px);
   }
 
-  .kicker-wrap {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: var(--radio-pill, 999px);
-    background: var(--azul-suave, #edf4fe);
-  }
-
-  .kicker-punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--azul-900, #004aad);
-  }
-
-  .kicker-texto {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--azul-900, #004aad);
-  }
-
-  .seccion-titulo {
-    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.7rem);
-    color: var(--tinta, #0f2346);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  .seccion-subtitulo {
-    font-size: 1.125rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.55;
-  }
-
-  .guias-grid {
+  /* Distribución en 2 columnas: Título a la izquierda, Acordeones a la derecha */
+  .guias-grid-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin-bottom: 40px;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: center;
   }
 
-  .guia-tarjeta {
-    padding: 28px 24px;
-    border-radius: var(--radio-grande, 28px);
-    border: 1.5px solid #dce7f5;
+  /* Columna izquierda: Título */
+  .guias-col-tit {
+    max-width: 520px;
+  }
+
+  .guias-tit-principal {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(2.2rem, 3.8vw, 3.4rem);
+    color: #ffffff;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .guias-tit-cursiva {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #38b6ff;
+    font-size: 1.08em;
+  }
+
+  /* Columna derecha: Acordeones */
+  .guias-col-acordeones {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+    width: 100%;
   }
 
-  .guia-tarjeta:hover {
-    transform: translateY(-3px);
-    border-color: var(--azul-900, #004aad);
-    box-shadow: 0 16px 36px rgba(0, 74, 173, 0.1);
+  .acordeon-lista {
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    width: 100%;
   }
 
-  .guia-top {
+  .acordeon-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    transition: background-color 0.25s ease;
+  }
+
+  .acordeon-item:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  /* Encabezado clicable del acordeón */
+  .acordeon-trigger {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 22px 4px 22px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    cursor: pointer;
+    gap: 20px;
+    font-family: inherit;
+  }
+
+  .acordeon-textos {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
 
-  .guia-badge-num {
-    font-size: 0.72rem;
+  .acordeon-pregunta {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.1rem, 1.35vw, 1.3rem);
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--azul-900, #004aad);
+    color: #19a9f0;
+    line-height: 1.3;
+    transition: color 0.2s ease;
   }
 
-  .guia-pregunta {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--tinta-3, #63738e);
+  .acordeon-trigger:hover .acordeon-pregunta {
+    color: #38b6ff;
   }
 
-  .guia-tema {
-    font-size: 1.3rem;
-    font-weight: 800;
-    color: var(--tinta, #0f2346);
+  .acordeon-tema {
+    font-family: var(--font-cuerpo, sans-serif);
+    font-size: 0.92rem;
+    color: #b5c7de;
+    line-height: 1.4;
   }
 
-  .guia-desc {
-    font-size: 0.88rem;
-    color: var(--tinta-2, #3a4b68);
-    line-height: 1.5;
-    flex-grow: 1;
+  /* Botón circular con icono + que gira a x al abrirse */
+  .acordeon-icono-wrap {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #081d3e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.25s ease,
+                color 0.25s ease;
   }
 
-  .guia-enlace {
+  .acordeon-trigger:hover .acordeon-icono-wrap {
+    transform: translateY(2px) scale(1.06);
+  }
+
+  .acordeon-item.abierto .acordeon-icono-wrap {
+    transform: rotate(180deg);
+    background: #38b6ff;
+    color: #ffffff;
+  }
+
+  .acordeon-item.abierto .acordeon-trigger:hover .acordeon-icono-wrap {
+    transform: rotate(180deg) translateY(2px) scale(1.06);
+  }
+
+  /* Panel desplegable con animación pura CSS moderna (grid 0fr -> 1fr) */
+  .acordeon-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .acordeon-item.abierto .acordeon-panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .acordeon-inner {
+    overflow: hidden;
+    padding-bottom: 24px;
+    padding-right: 20px;
+  }
+
+  .acordeon-desc {
+    font-family: var(--font-cuerpo, sans-serif);
+    font-size: 0.94rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin: 0 0 14px;
+    max-width: 58ch;
+  }
+
+  .acordeon-link-guia {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--azul-900, #004aad);
-    padding-top: 12px;
-    border-top: 1px solid var(--linea-fina, #e6edf7);
+    gap: 8px;
+    color: #38b6ff;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: gap 0.2s ease, color 0.2s ease;
   }
 
-  .guia-tarjeta:hover .guia-enlace {
+  .acordeon-link-guia:hover {
+    gap: 12px;
+    color: #ffffff;
     text-decoration: underline;
   }
 
-  .guias-footer {
-    display: flex;
-    justify-content: center;
+  /* ==========================================================================
+     BOTÓN CTA: TODAS LAS GUÍAS
+     ========================================================================== */
+  .guias-cta-wrap {
+    margin-top: 36px;
   }
 
-  @media (max-width: 640px) {
-    .guias-grid {
+  .btn-todas-guias {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #004aad;
+    color: #ffffff;
+    padding: 9px 12px 9px 24px;
+    border-radius: 9999px;
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(0, 74, 173, 0.4);
+    transition: background-color 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+  }
+
+  .btn-arrow-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #081d3e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease;
+  }
+
+  .btn-todas-guias:hover {
+    background: #003a88;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(0, 74, 173, 0.55), 0 0 16px rgba(56, 182, 255, 0.35);
+  }
+
+  .btn-todas-guias:hover .btn-arrow-circle {
+    transform: translateX(3px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 960px) {
+    .guias-grid-layout {
       grid-template-columns: 1fr;
+      gap: 44px;
+    }
+
+    .guias-col-tit {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .guias-cta-wrap {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .guias-acordeon-seccion {
+      padding: 56px 0;
+    }
+
+    .acordeon-trigger {
+      padding: 18px 0;
+    }
+
+    .acordeon-pregunta {
+      font-size: 1.05rem;
     }
   }
 </style>
