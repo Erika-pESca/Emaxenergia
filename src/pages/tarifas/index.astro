@@ -3,7 +3,7 @@
 // Replicación fiel y modular de la sección oficial de tarifas
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HeroTarifas from "../../components/tarifas/HeroTarifas.astro";
-import CuatroPiezas from "../../components/tarifas/CuatroPiezas.astro";
+import Acordeon from "../../components/tarifas/Acordeon.astro";
 import CasoTarifa from "../../components/tarifas/CasoTarifa.astro";
 import PeajesTarifas from "../../components/tarifas/PeajesTarifas.astro";
 import PartesPrecio from "../../components/tarifas/PartesPrecio.astro";
@@ -20,8 +20,8 @@ import ProximaFactura from "../../components/home/ProximaFactura.astro";
     <!-- 1. Hero con diseño oficial exacto y selector de gasto interactivo -->
     <HeroTarifas />
 
-    <!-- 2. Las cuatro piezas de una tarifa (Estructura, Modalidad, Potencia y Condiciones) -->
-    <CuatroPiezas />
+    <!-- 2. Acordeón interactivo de las cuatro piezas (Estructura, Modalidad, Potencia y Condiciones) -->
+    <Acordeon />
 
     <!-- 3. Caso de ejemplo auditado: Así quedó su tarifa (Obrador de panadería) -->
     <CasoTarifa />
