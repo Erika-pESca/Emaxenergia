@@ -1,8 +1,8 @@
 ---
 // Componente HeroTarifas para la página "Luz para empresas" (/tarifas)
-// Replicación exacta del diseño oficial de marca con fondo_metodo.jpg
+// Replicación exacta del diseño oficial de marca con fondo_tarifas.jpg
 // Tipografía Sora + cursiva Merriweather, píldora cian y tarjeta de cristal interactiva
-import fondoMetodo from "../../imagenes/fondo_metodo.jpg";
+import fondoTarifas from "../../imagenes/fondo_tarifas.jpg";
 
 interface TramoGasto {
   id: string;
@@ -40,10 +40,10 @@ const tramosGasto: TramoGasto[] = [
 ---
 
 <section class="hero-tarifas-seccion" aria-labelledby="h1-tarifas-luz">
-  <!-- Fondo fotográfico fondo_metodo.jpg oficial -->
+  <!-- Fondo fotográfico fondo_tarifas.jpg oficial -->
   <div class="hero-bg" aria-hidden="true">
     <img
-      src={fondoMetodo.src}
+      src={fondoTarifas.src}
       alt=""
       class="hero-bg-img"
       loading="eager"
@@ -315,15 +315,15 @@ const tramosGasto: TramoGasto[] = [
   .hero-tarifas-card-cristal {
     width: 100%;
     max-width: 520px;
-    background: rgba(10, 28, 62, 0.42);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1.5px solid rgba(135, 185, 255, 0.45);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
     border-radius: 28px;
     padding: 34px 30px;
     box-shadow:
-      0 20px 48px rgba(0, 20, 60, 0.32),
-      0 4px 14px rgba(0, 74, 173, 0.15);
+      0 20px 48px rgba(0, 15, 45, 0.2),
+      0 4px 14px rgba(0, 74, 173, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 

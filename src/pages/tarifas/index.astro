@@ -3,6 +3,8 @@
 // Replicación fiel y modular de la sección oficial de tarifas
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HeroTarifas from "../../components/tarifas/HeroTarifas.astro";
+import CuatroPiezas from "../../components/tarifas/CuatroPiezas.astro";
+import CasoTarifa from "../../components/tarifas/CasoTarifa.astro";
 import PeajesTarifas from "../../components/tarifas/PeajesTarifas.astro";
 import PartesPrecio from "../../components/tarifas/PartesPrecio.astro";
 import CompararOfertas from "../../components/tarifas/CompararOfertas.astro";
@@ -11,23 +13,29 @@ import ProximaFactura from "../../components/home/ProximaFactura.astro";
 
 <BaseLayout
   title="Tarifas de luz para empresas: así se construye la tuya | EMAX Energía"
-  description="No tenemos lista de precios: tu tarifa sale de tu consumo real. Conoce los peajes 2.0TD, 3.0TD y 6.1TD, de qué está hecho el precio y cómo comparar cualquier oferta."
+  description="No tenemos lista de precios: tu tarifa sale de tu consumo real. Conoce las cuatro piezas de una tarifa, los peajes 2.0TD, 3.0TD y 6.1TD y cómo comparar ofertas."
   path="/tarifas"
 >
   <div class="tarifas-page-wrapper">
-    <!-- Hero con diseño oficial exacto y selector de gasto interactivo -->
+    <!-- 1. Hero con diseño oficial exacto y selector de gasto interactivo -->
     <HeroTarifas />
 
-    <!-- Estructura de peajes regulados (2.0TD, 3.0TD, 6.1TD) -->
+    <!-- 2. Las cuatro piezas de una tarifa (Estructura, Modalidad, Potencia y Condiciones) -->
+    <CuatroPiezas />
+
+    <!-- 3. Caso de ejemplo auditado: Así quedó su tarifa (Obrador de panadería) -->
+    <CasoTarifa />
+
+    <!-- 4. Estructura de peajes regulados (2.0TD, 3.0TD, 6.1TD) -->
     <PeajesTarifas />
 
-    <!-- Partes del precio y componentes optimizables vs regulados -->
+    <!-- 5. Partes del precio y componentes optimizables vs regulados -->
     <PartesPrecio />
 
-    <!-- Cinco comprobaciones para comparar ofertas -->
+    <!-- 6. Cinco comprobaciones para comparar ofertas -->
     <CompararOfertas />
 
-    <!-- Cierre oficial con formulario de análisis -->
+    <!-- 7. Cierre oficial con formulario de análisis -->
     <ProximaFactura />
   </div>
 </BaseLayout>
