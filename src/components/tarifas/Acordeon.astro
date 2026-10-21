@@ -49,9 +49,9 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
               <!-- Genio -->
               <div class="card-est">
                 <div class="card-est-top">
-                  <span class="circulo-icono-est">
-                    <img src={imgMaxi.src} alt="Genio - Maxi EMAX" />
-                  </span>
+                  <div class="avatar-foto-wrap" aria-hidden="true">
+                    <img src={imgMaxi.src} alt="Genio - Maxi EMAX" class="avatar-foto-circulo" />
+                  </div>
                   <h4 class="card-est-tit">Genio</h4>
                 </div>
                 <p class="card-est-desc">
@@ -76,9 +76,9 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
               <!-- Ingenio -->
               <div class="card-est">
                 <div class="card-est-top">
-                  <span class="circulo-icono-est">
-                    <img src={imgPersonal.src} alt="Ingenio - Personal EMAX" />
-                  </span>
+                  <div class="avatar-foto-wrap" aria-hidden="true">
+                    <img src={imgPersonal.src} alt="Ingenio - Personal EMAX" class="avatar-foto-circulo" />
+                  </div>
                   <h4 class="card-est-tit">Ingenio</h4>
                 </div>
                 <p class="card-est-desc">
@@ -102,9 +102,9 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
               <!-- Deseo -->
               <div class="card-est">
                 <div class="card-est-top">
-                  <span class="circulo-icono-est">
-                    <img src={imgMaxi.src} alt="Deseo - Maxi EMAX" />
-                  </span>
+                  <div class="avatar-foto-wrap" aria-hidden="true">
+                    <img src={imgMaxi.src} alt="Deseo - Maxi EMAX" class="avatar-foto-circulo" />
+                  </div>
                   <h4 class="card-est-tit">Deseo</h4>
                 </div>
                 <p class="card-est-desc">
@@ -167,9 +167,9 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes azul">
-                    <span class="asumes-circulo azul">
-                      <img src={imgConsultor.src} alt="Consultor EMAX" />
-                    </span>
+                    <div class="avatar-foto-wrap mini" aria-hidden="true">
+                      <img src={imgConsultor.src} alt="Consultor EMAX" class="avatar-foto-circulo" />
+                    </div>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
                       <strong class="asumes-valor">Pagar más si el mercado baja.</strong>
@@ -189,9 +189,9 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes naranja">
-                    <span class="asumes-circulo naranja">
-                      <img src={imgPersonal.src} alt="Personal EMAX" />
-                    </span>
+                    <div class="avatar-foto-wrap mini" aria-hidden="true">
+                      <img src={imgPersonal.src} alt="Personal EMAX" class="avatar-foto-circulo" />
+                    </div>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
                       <strong class="asumes-valor">La volatilidad del mercado, hacia arriba y hacia abajo.</strong>
@@ -211,9 +211,9 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes azul">
-                    <span class="asumes-circulo azul">
-                      <img src={imgMaxi.src} alt="Maxi EMAX" />
-                    </span>
+                    <div class="avatar-foto-wrap mini" aria-hidden="true">
+                      <img src={imgMaxi.src} alt="Maxi EMAX" class="avatar-foto-circulo" />
+                    </div>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
                       <strong class="asumes-valor">Que tu consumo real se aparte del previsto.</strong>
@@ -271,27 +271,27 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
             <!-- 3 Tarjetas en Rejilla Superior -->
             <div class="potencia-3cards-grid">
               <div class="card-pot-top">
-                <span class="circulo-icono-pot">
-                  <img src={imgConsultor.src} alt="Consultor técnico EMAX" />
-                </span>
+                <div class="avatar-foto-wrap" aria-hidden="true">
+                  <img src={imgConsultor.src} alt="Consultor técnico EMAX" class="avatar-foto-circulo" />
+                </div>
                 <span class="pot-tag">QUÉ ES</span>
                 <h4 class="pot-tit">Tu potencia contratada</h4>
                 <p class="pot-desc">La potencia que tienes disponible en cada periodo. Se paga cada día, la uses o no.</p>
               </div>
 
               <div class="card-pot-top">
-                <span class="circulo-icono-pot">
-                  <img src={imgMaxi.src} alt="Maxi EMAX" />
-                </span>
+                <div class="avatar-foto-wrap" aria-hidden="true">
+                  <img src={imgMaxi.src} alt="Maxi EMAX" class="avatar-foto-circulo" />
+                </div>
                 <span class="pot-tag">QUÉ SE DECIDE</span>
                 <h4 class="pot-tit">Cuántos kW contratas</h4>
                 <p class="pot-desc">Cuántos kW contratas. El precio de cada kW es regulado; lo que se ajusta es la cantidad, con tus maxímetros de doce meses y con una regla: en 3.0TD y 6.1TD, cada periodo tiene que tener igual o más potencia que el anterior.</p>
               </div>
 
               <div class="card-pot-top">
-                <span class="circulo-icono-pot">
-                  <img src={imgPersonal.src} alt="Equipo EMAX" />
-                </span>
+                <div class="avatar-foto-wrap" aria-hidden="true">
+                  <img src={imgPersonal.src} alt="Equipo EMAX" class="avatar-foto-circulo" />
+                </div>
                 <span class="pot-tag">TRÁMITE</span>
                 <h4 class="pot-tit">¿Cómo se cambia?</h4>
                 <p class="pot-desc">El cambio lo tramita la distribuidora. EMAX gestiona el trámite técnico sin coste para ajustar tus potencias al consumo real.</p>
@@ -324,9 +324,9 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
 
               <div class="pot-ejemplo-der">
                 <div class="pildora-asumes azul ancho-fijo">
-                  <span class="asumes-circulo azul">
-                    <img src={imgPersonal.src} alt="Asesor EMAX" />
-                  </span>
+                  <div class="avatar-foto-wrap mini" aria-hidden="true">
+                    <img src={imgPersonal.src} alt="Asesor EMAX" class="avatar-foto-circulo" />
+                  </div>
                   <p class="asumes-valor-largo">
                     La potencia se paga cada día, independientemente de si la consumes o no.
                   </p>
@@ -696,25 +696,62 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
     gap: 14px;
   }
 
+  /* Avatar circular fiel al diseño de Maxi y Tu Especialista */
+  .avatar-foto-wrap {
+    width: 54px;
+    height: 54px;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    flex-shrink: 0;
+    border: 2.5px solid #38b6ff !important;
+    background: #081329;
+    box-shadow: 0 4px 14px rgba(56, 182, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+
+  .avatar-foto-wrap.mini {
+    width: 42px;
+    height: 42px;
+    border-width: 2px !important;
+    box-shadow: 0 2px 10px rgba(56, 182, 255, 0.3);
+  }
+
+  .avatar-foto-circulo {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    object-position: center top;
+    display: block !important;
+  }
+
   .circulo-icono-est {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: #e2edfa;
-    border: 2px solid #bfdbfe;
-    box-shadow: 0 3px 10px rgba(0, 74, 173, 0.14);
-    overflow: hidden;
+    width: 54px;
+    height: 54px;
+    border-radius: 50% !important;
+    background: #081329;
+    border: 2.5px solid #38b6ff !important;
+    box-shadow: 0 4px 14px rgba(56, 182, 255, 0.4);
+    overflow: hidden !important;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
   .circulo-icono-est img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    object-position: center top;
+    display: block !important;
   }
 
   .card-est-tit {
@@ -1031,27 +1068,30 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
   }
 
   .asumes-circulo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    border-radius: 50% !important;
     flex-shrink: 0;
-    overflow: hidden;
-    border: 2px solid #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    overflow: hidden !important;
+    border: 2px solid #38b6ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #bfdbfe;
+    background: #081329;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
-  .asumes-circulo.azul { background: #93c5fd; }
-  .asumes-circulo.naranja { background: #fdba74; }
+  .asumes-circulo.azul { background: #081329; border-color: #38b6ff; }
+  .asumes-circulo.naranja { background: #081329; border-color: #ff9800; }
 
   .asumes-circulo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    object-position: center top;
+    display: block !important;
   }
 
   .asumes-txts {
@@ -1138,25 +1178,28 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
   }
 
   .circulo-icono-pot {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: #dbeafe;
-    border: 2px solid #bfdbfe;
-    box-shadow: 0 3px 10px rgba(0, 74, 173, 0.14);
-    overflow: hidden;
+    width: 54px;
+    height: 54px;
+    border-radius: 50% !important;
+    background: #081329;
+    border: 2.5px solid #38b6ff !important;
+    box-shadow: 0 4px 14px rgba(56, 182, 255, 0.4);
+    overflow: hidden !important;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 4px;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 
   .circulo-icono-pot img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    object-position: center top;
+    display: block !important;
   }
 
   .pot-tag {
