@@ -34,41 +34,11 @@ const sectoresItems = [
   { href: "/sectores/industria", label: "Industria y fabricación", desc: "Arranque de motores y energía reactiva", id: "industria" },
 ];
 
-const tarifasGrupos = [
-  {
-    titulo: "Empresas",
-    items: [
-      {
-        titulo: "Luz para empresas",
-        desc: "Estructura, modalidad, potencia y condiciones.",
-        href: "/tarifas",
-        id: "luz"
-      },
-      {
-        titulo: "Gas para empresas",
-        desc: "Tu peaje, tu temporada y tu precio.",
-        href: "/gas-natural",
-        id: "gas"
-      }
-    ]
-  },
-  {
-    titulo: "Comunidades y hogares",
-    items: [
-      {
-        titulo: "Comunidades de propietarios",
-        desc: "Luz y gas: ascensor, garaje y calefacción central.",
-        href: "/comunidades-de-propietarios",
-        id: "comunidades"
-      },
-      {
-        titulo: "Hogares",
-        desc: "Luz y gas para hogares.",
-        href: "/particulares",
-        id: "hogares"
-      }
-    ]
-  }
+const tarifasItems = [
+  { href: "/tarifas", label: "Luz para empresas", desc: "Estructura, modalidad, potencia y condiciones", id: "luz" },
+  { href: "/gas-natural", label: "Gas para empresas", desc: "Tu peaje, tu temporada y tu precio", id: "gas" },
+  { href: "/comunidades-de-propietarios", label: "Comunidades de propietarios", desc: "Luz y gas: ascensor, garaje y calefacción central", id: "comunidades" },
+  { href: "/particulares", label: "Hogares", desc: "Luz y gas para hogares y particulares", id: "hogares" },
 ];
 ---
 
@@ -248,27 +218,51 @@ const tarifasGrupos = [
           </button>
 
           <div class="dropdown-popover popover-tarifas popover-animado">
-            {
-              tarifasGrupos.map((grupo, idx) => (
-                <>
-                  {idx > 0 && <div class="tarifas-dropdown-divider" />}
-                  <div class="tarifas-dropdown-seccion">
-                    <span class="tarifas-seccion-tag">{grupo.titulo}</span>
-                    <div class="tarifas-items-lista">
-                      {grupo.items.map((item) => (
-                        <a
-                          href={item.href}
-                          class:list={["tarifas-dropdown-item", { "item-activo": current === item.href }]}
-                        >
-                          <strong class="tarifas-item-tit">{item.titulo}</strong>
-                          <span class="tarifas-item-sub">{item.desc}</span>
-                        </a>
-                      ))}
+            <div class="dropdown-header-tag">Modalidades y suministros</div>
+            <div class="dropdown-cards-grid">
+              {
+                tarifasItems.map((t) => (
+                  <a href={t.href} class:list={["dropdown-card", { "card-activo": current === t.href }]}>
+                    <span class="card-icono-wrap" aria-hidden="true">
+                      {t.id === "luz" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                      )}
+                      {t.id === "gas" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                        </svg>
+                      )}
+                      {t.id === "comunidades" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                          <path d="M9 22v-4h6v4"></path>
+                          <path d="M8 6h.01"></path>
+                          <path d="M16 6h.01"></path>
+                          <path d="M8 10h.01"></path>
+                          <path d="M16 10h.01"></path>
+                        </svg>
+                      )}
+                      {t.id === "hogares" && (
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                      )}
+                    </span>
+                    <div class="card-textos">
+                      <strong class="card-nombre">{t.label}</strong>
+                      <span class="card-desc">{t.desc}</span>
                     </div>
-                  </div>
-                </>
-              ))
-            }
+                    <span class="card-flecha" aria-hidden="true">→</span>
+                  </a>
+                ))
+              }
+            </div>
+            <div class="dropdown-footer-link">
+              <a href="/tarifas">Ver todas las tarifas y comparativa técnica <span aria-hidden="true">→</span></a>
+            </div>
           </div>
         </div>
 
@@ -386,16 +380,8 @@ const tarifasGrupos = [
 
         <div class="movil-grupo-titulo">Tarifas</div>
         {
-          tarifasGrupos.map((g) => (
-            <div class="movil-tarifas-subgrupo">
-              <span class="movil-subgrupo-tag">{g.titulo}</span>
-              {g.items.map((item) => (
-                <a href={item.href} class="movil-sublink">
-                  <strong>{item.titulo}</strong>
-                  <span class="movil-sublink-desc">{item.desc}</span>
-                </a>
-              ))}
-            </div>
+          tarifasItems.map((t) => (
+            <a href={t.href} class="movil-sublink">{t.label}</a>
           ))
         }
 
@@ -821,88 +807,7 @@ const tarifasGrupos = [
   }
 
   .popover-tarifas {
-    width: 330px;
-    padding: 14px 12px;
-    border-radius: 16px;
-    border: 1px solid #e5e9f0;
-    box-shadow: 0 16px 36px rgba(10, 25, 50, 0.12), 0 4px 12px rgba(10, 25, 50, 0.04);
-  }
-
-  .tarifas-dropdown-seccion {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .tarifas-seccion-tag {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #475467;
-    padding: 4px 10px 6px 10px;
-    letter-spacing: -0.01em;
-  }
-
-  .tarifas-items-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .tarifas-dropdown-item {
-    display: flex;
-    flex-direction: column;
-    padding: 9px 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.15s ease;
-  }
-
-  .tarifas-dropdown-item:hover,
-  .tarifas-dropdown-item.item-activo {
-    background: #f0f5fa;
-  }
-
-  .tarifas-item-tit {
-    font-size: 0.94rem;
-    font-weight: 700;
-    color: #0b1a30;
-    line-height: 1.3;
-    margin-bottom: 2px;
-  }
-
-  .tarifas-item-sub {
-    font-size: 0.80rem;
-    color: #55647a;
-    line-height: 1.35;
-    font-weight: 400;
-  }
-
-  .tarifas-dropdown-divider {
-    height: 1px;
-    background: #eef2f6;
-    margin: 8px 6px;
-  }
-
-  .movil-tarifas-subgrupo {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 8px;
-  }
-
-  .movil-subgrupo-tag {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #63738e;
-    padding: 4px 0 2px 8px;
-  }
-
-  .movil-sublink-desc {
-    display: block;
-    font-size: 0.75rem;
-    color: #7a8ba3;
-    font-weight: normal;
+    width: 385px;
   }
 
   .dropdown-header-tag {

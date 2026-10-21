@@ -1,0 +1,227 @@
+---
+// Sección PartesPrecio para la página /tarifas
+// Desglose transparente de componentes del precio: qué se negocia y qué está regulado
+const componentes = [
+  {
+    concepto: "Coste de la energía consumida",
+    quien: "Mercado mayorista (OMIE). La modalidad (fija o indexada) decide cómo te llega.",
+    mover: "Sí: negociamos la fórmula de compra, el fee y las coberturas.",
+    negociable: true
+  },
+  {
+    concepto: "Peajes de acceso (potencia y energía)",
+    quien: "La CNMC (Circular 3/2020).",
+    mover: "No. Regulados por ley, iguales con cualquier comercializadora.",
+    negociable: false
+  },
+  {
+    concepto: "Cargos del sistema eléctrico",
+    quien: "El Ministerio para la Transición Ecológica.",
+    mover: "No. Orden ministerial anual, idénticos para todo el mercado.",
+    negociable: false
+  },
+  {
+    concepto: "Potencia contratada (kW en cada periodo)",
+    quien: "Tu contrato de acceso a la red.",
+    mover: "Sí: se optimiza analizando tus maxímetros para no pagar potencia ociosa.",
+    negociable: true
+  },
+  {
+    concepto: "Impuesto Eléctrico (IEE) e IVA",
+    quien: "Hacienda y legislación tributaria estatal.",
+    mover: "No. Porcentajes fiscales oficiales obligatorios.",
+    negociable: false
+  },
+  {
+    concepto: "Alquiler de equipos de medida / contador",
+    quien: "Distribuidora de zona o propiedad del contador.",
+    mover: "Regulado por el BOE si es de la distribuidora.",
+    negociable: false
+  }
+];
+---
+
+<section class="partes-seccion" id="partes-precio" aria-labelledby="h2-partes">
+  <div class="partes-contenedor">
+    <div class="partes-cabecera">
+      <span class="seccion-tag">Transparencia de costes</span>
+      <h2 class="partes-titulo" id="h2-partes">De qué está hecho el precio de tu factura</h2>
+      <p class="partes-subtitulo">
+        Por eso conviene comparar la oferta entera y no solo el precio del kWh: un kWh barato puede esconder una potencia cara o penalizaciones en peajes.
+      </p>
+    </div>
+
+    <div class="partes-tabla-card">
+      <table class="tabla-partes">
+        <thead>
+          <tr>
+            <th scope="col">Componente de la factura</th>
+            <th scope="col">Quién lo fija</th>
+            <th scope="col">¿Se puede optimizar / negociar?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            componentes.map((c) => (
+              <tr class:list={[{ "fila-negociable": c.negociable }]}>
+                <th scope="row" class="th-concepto">
+                  <span class:list={["punto-estado", c.negociable ? "punto-si" : "punto-no"]} aria-hidden="true"></span>
+                  {c.concepto}
+                </th>
+                <td class="td-quien">{c.quien}</td>
+                <td class="td-mover">
+                  <span class:list={["badge-movible", c.negociable ? "badge-si" : "badge-no"]}>
+                    {c.negociable ? "Optimizable con EMAX" : "Regulado oficial"}
+                  </span>
+                  <p class="desc-mover">{c.mover}</p>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .partes-seccion {
+    padding: clamp(60px, 6vw, 96px) 0;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .partes-contenedor {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+  }
+
+  .partes-cabecera {
+    max-width: 44rem;
+    margin-bottom: 36px;
+  }
+
+  .seccion-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #004aad;
+    margin-bottom: 12px;
+  }
+
+  .partes-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.75rem, 1.45rem + 1vw, 2.4rem);
+    font-weight: 800;
+    color: #0c1c38;
+    line-height: 1.25;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+  }
+
+  .partes-subtitulo {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #4b586d;
+    margin: 0;
+  }
+
+  .partes-tabla-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    overflow-x: auto;
+    box-shadow: 0 10px 30px rgba(15, 35, 70, 0.04);
+  }
+
+  .tabla-partes {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    text-align: left;
+  }
+
+  .tabla-partes th,
+  .tabla-partes td {
+    padding: 16px 20px;
+    border-top: 1px solid #eef2f6;
+    vertical-align: top;
+  }
+
+  .tabla-partes thead th {
+    border-top: 0;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .th-concepto {
+    font-weight: 700;
+    color: #0c1c38;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .punto-estado {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .punto-si {
+    background: #004aad;
+    box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.2);
+  }
+
+  .punto-no {
+    background: #94a3b8;
+  }
+
+  .fila-negociable {
+    background: #f8fbff;
+  }
+
+  .td-quien {
+    color: #4b586d;
+    font-weight: 500;
+  }
+
+  .td-mover {
+    color: #1e293b;
+  }
+
+  .badge-movible {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .badge-si {
+    background: #dbeafe;
+    color: #004aad;
+  }
+
+  .badge-no {
+    background: #f1f5f9;
+    color: #64748b;
+  }
+
+  .desc-mover {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #4b586d;
+    margin: 0;
+  }
+</style>

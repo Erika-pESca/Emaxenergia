@@ -1,0 +1,227 @@
+---
+// Sección CompararOfertas para la página /tarifas
+// Cinco comprobaciones esenciales antes de firmar cualquier contrato eléctrico para empresas
+const comprobaciones = [
+  {
+    num: "1",
+    titulo: "Con tu consumo real anual, no con un kWh suelto",
+    desc: "Exige que te simulen doce meses de factura con tu histórico cuarto-horario real por periodos. Un precio de energía aparentemente bajo no dice cuánto vas a pagar a fin de mes si el término de potencia o el coste de desvíos está inflado."
+  },
+  {
+    num: "2",
+    titulo: "La potencia además de la energía",
+    desc: "Revisa a qué precio te facturan los kW de potencia en cada uno de los periodos (de P1 a P6). Comprueba si aplican el término regulado oficial o si le añaden un sobreprecio comercial oculto."
+  },
+  {
+    num: "3",
+    titulo: "Qué conceptos pueden cambiar durante el contrato",
+    desc: "Pregunta expresamente si el precio pactado incluye todos los conceptos del mercado o si te repercutirán ajustes del PO14.8, pérdidas de red o pagos por capacidad con posterioridad."
+  },
+  {
+    num: "4",
+    titulo: "Permanencia y condiciones de salida",
+    desc: "Si el contrato exige permanencia a 12 o 24 meses, evalúa qué contrapartida real obtienes a cambio. En EMAX trabajamos con contratos claros sin ataduras abusivas."
+  },
+  {
+    num: "5",
+    titulo: "Qué protege realmente una tarifa con techo",
+    desc: "Un precio máximo (techo) protege exclusivamente la componente de energía frente a picos del OMIE. No corrige una potencia sobredimensionada ni excesos por energía reactiva."
+  }
+];
+---
+
+<section class="comparar-seccion" id="comparar" aria-labelledby="h2-comparar">
+  <div class="comparar-contenedor">
+    <div class="comparar-lateral">
+      <span class="seccion-tag">Criterio técnico independiente</span>
+      <h2 class="comparar-titulo" id="h2-comparar">Cómo comparar cualquier oferta. La nuestra también.</h2>
+      <p class="comparar-desc">
+        Cinco comprobaciones indispensables que te sirven aunque decidas no contratar con nosotros. La energía no se elige a ciegas.
+      </p>
+
+      <div class="comparar-cta-caja">
+        <p class="cta-caja-tit">¿Quieres que apliquemos estas comprobaciones a tu factura actual?</p>
+        <a href="#estudio" class="btn-analizar-tarifa" data-abrir-funnel>
+          <span>Analizar mi tarifa sin coste</span>
+          <span class="btn-flecha" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="comparar-lista">
+      {
+        comprobaciones.map((c) => (
+          <div class="comprobacion-card">
+            <span class="card-numero">{c.num}</span>
+            <div class="card-cuerpo">
+              <h3 class="card-tit">{c.titulo}</h3>
+              <p class="card-txt">{c.desc}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparar-seccion {
+    padding: clamp(60px, 6vw, 100px) 0;
+    background: #ffffff;
+    border-bottom: 1px solid #eef2f6;
+  }
+
+  .comparar-contenedor {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: clamp(36px, 5vw, 72px);
+    align-items: start;
+  }
+
+  @media (max-width: 960px) {
+    .comparar-contenedor {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .seccion-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #004aad;
+    margin-bottom: 12px;
+  }
+
+  .comparar-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.75rem, 1.45rem + 1vw, 2.4rem);
+    font-weight: 800;
+    color: #0c1c38;
+    line-height: 1.25;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+  }
+
+  .comparar-desc {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #4b586d;
+    margin: 0 0 32px;
+  }
+
+  .comparar-cta-caja {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 6px 18px rgba(15, 35, 70, 0.04);
+  }
+
+  .cta-caja-tit {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0c1c38;
+    margin: 0 0 16px;
+    line-height: 1.4;
+  }
+
+  .btn-analizar-tarifa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    background: #004aad;
+    color: #ffffff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.25);
+    transition: all 0.2s ease;
+  }
+
+  .btn-analizar-tarifa:hover {
+    background: #003780;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 74, 173, 0.35);
+  }
+
+  .btn-flecha {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-analizar-tarifa:hover .btn-flecha {
+    transform: translateX(4px);
+  }
+
+  .comparar-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .comprobacion-card {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 18px;
+    padding: 22px 24px;
+    background: #f8fafc;
+    border: 1px solid #e8eef6;
+    border-radius: 16px;
+    transition: all 0.25s ease;
+  }
+
+  .comprobacion-card:hover {
+    background: #ffffff;
+    border-color: #bfdbfe;
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.08);
+    transform: translateX(4px);
+  }
+
+  .card-numero {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #eff6ff;
+    border: 1.5px solid #bfdbfe;
+    color: #004aad;
+    font-family: "Sora", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card-tit {
+    font-family: "Sora", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0c1c38;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .card-txt {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: #4b586d;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,207 @@
+---
+// Sección PeajesTarifas para la página /tarifas
+// Detalle técnico de los peajes 2.0TD, 3.0TD y 6.1TD según la CNMC
+---
+
+<section class="peajes-seccion" id="peajes" aria-labelledby="h2-peajes">
+  <div class="peajes-contenedor">
+    <div class="peajes-intro">
+      <span class="seccion-tag">Estructura regulada</span>
+      <h2 class="peajes-titulo" id="h2-peajes">Tu peaje no lo elige la comercializadora. Lo fija tu tensión y tu potencia.</h2>
+      <p class="peajes-desc">
+        El peaje de acceso lo determina la distribuidora de tu zona en función de la tensión a la que te conectas y de los kW que contratas. Es idéntico para cualquier empresa en el territorio español.
+      </p>
+      <div class="peajes-enlace-wrap">
+        <a href="/guias/peaje-3-0td" class="enlace-guia-peaje">
+          <span>El peaje 3.0TD y sus 6 periodos, explicados paso a paso</span>
+          <span class="enlace-flecha" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="peajes-tabla-card">
+      <div class="tabla-scroll">
+        <table class="tabla-peajes">
+          <thead>
+            <tr>
+              <th scope="col">Peaje</th>
+              <th scope="col">Tipo de suministro</th>
+              <th scope="col">Periodos de energía</th>
+              <th scope="col" class="th-cifra">Periodos potencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="peaje-codigo">2.0TD</th>
+              <td>Baja tensión, hasta 15 kW</td>
+              <td>3 periodos: Punta, Llano, Valle</td>
+              <td class="td-cifra">2</td>
+            </tr>
+            <tr class="fila-destacada">
+              <th scope="row" class="peaje-codigo">3.0TD</th>
+              <td>Baja tensión, más de 15 kW (Pymes e industrias)</td>
+              <td>6 periodos: de P1 a P6</td>
+              <td class="td-cifra">6</td>
+            </tr>
+            <tr>
+              <th scope="row" class="peaje-codigo">6.1TD</th>
+              <td>Alta tensión, de 1 a 30 kV</td>
+              <td>6 periodos: de P1 a P6</td>
+              <td class="td-cifra">6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="tabla-fuente">Fuente oficial: Circular 3/2020 de la CNMC (Comisión Nacional de los Mercados y la Competencia).</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .peajes-seccion {
+    padding: clamp(60px, 6vw, 96px) 0;
+    background: #ffffff;
+    border-bottom: 1px solid #eef2f6;
+  }
+
+  .peajes-contenedor {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  @media (max-width: 960px) {
+    .peajes-contenedor {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .seccion-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #004aad;
+    margin-bottom: 12px;
+  }
+
+  .peajes-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.65rem, 1.35rem + 1vw, 2.3rem);
+    font-weight: 800;
+    color: #0c1c38;
+    line-height: 1.25;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+  }
+
+  .peajes-desc {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #4b586d;
+    margin: 0 0 24px;
+  }
+
+  .enlace-guia-peaje {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: #004aad;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 8px 14px;
+    background: #f0f6ff;
+    border-radius: 8px;
+    border: 1px solid #d8e8fc;
+    transition: all 0.2s ease;
+  }
+
+  .enlace-guia-peaje:hover {
+    background: #004aad;
+    color: #ffffff;
+    border-color: #004aad;
+  }
+
+  .enlace-flecha {
+    transition: transform 0.2s ease;
+  }
+
+  .enlace-guia-peaje:hover .enlace-flecha {
+    transform: translateX(4px);
+  }
+
+  .peajes-tabla-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(15, 35, 70, 0.04);
+  }
+
+  .tabla-scroll {
+    overflow-x: auto;
+  }
+
+  .tabla-peajes {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    text-align: left;
+  }
+
+  .tabla-peajes th,
+  .tabla-peajes td {
+    padding: 14px 16px;
+    border-top: 1px solid #e8eef6;
+    vertical-align: middle;
+  }
+
+  .tabla-peajes thead th {
+    border-top: 0;
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    background: #ffffff;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .peaje-codigo {
+    font-family: "Sora", monospace;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #004aad;
+  }
+
+  .fila-destacada {
+    background: #eff6ff;
+  }
+
+  .fila-destacada th,
+  .fila-destacada td {
+    border-top-color: #bfdbfe;
+    border-bottom: 1px solid #bfdbfe;
+    font-weight: 600;
+    color: #0c1c38;
+  }
+
+  .th-cifra,
+  .td-cifra {
+    text-align: center;
+  }
+
+  .tabla-fuente {
+    font-size: 0.78rem;
+    color: #64748b;
+    margin: 16px 4px 0;
+    line-height: 1.4;
+  }
+</style>
