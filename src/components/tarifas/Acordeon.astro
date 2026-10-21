@@ -2,6 +2,9 @@
 // Componente Acordeon: Las cuatro piezas de una tarifa
 // Replicación exacta del diseño oficial (Estructura, Modalidad, Potencia y Condiciones)
 // Fondo gris suave, acordiones ampliados y tipografía de alta legibilidad
+import imgMaxi from "../../imagenes/maxi.jpg";
+import imgPersonal from "../../imagenes/personal.jpg";
+import imgConsultor from "../../imagenes/consultor-emax.jpg";
 ---
 
 <section class="acordeon-seccion" id="acordeon-tarifas" aria-labelledby="h2-acordeon">
@@ -32,10 +35,9 @@
               <span class="trigger-sub">Cómo se reparte el precio a lo largo del día.</span>
             </div>
           </div>
-          <span class="btn-toggle-circulo" aria-hidden="true">
-            <svg class="icono-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19" class="linea-v"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
+          <span class="btn-toggle-circulo" aria-hidden="true" title="Desplegar pieza">
+            <svg class="icono-toggle-flecha" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </span>
         </button>
@@ -47,7 +49,9 @@
               <!-- Genio -->
               <div class="card-est">
                 <div class="card-est-top">
-                  <span class="circulo-icono-est"></span>
+                  <span class="circulo-icono-est">
+                    <img src={imgMaxi.src} alt="Genio - Maxi EMAX" />
+                  </span>
                   <h4 class="card-est-tit">Genio</h4>
                 </div>
                 <p class="card-est-desc">
@@ -72,7 +76,9 @@
               <!-- Ingenio -->
               <div class="card-est">
                 <div class="card-est-top">
-                  <span class="circulo-icono-est"></span>
+                  <span class="circulo-icono-est">
+                    <img src={imgPersonal.src} alt="Ingenio - Personal EMAX" />
+                  </span>
                   <h4 class="card-est-tit">Ingenio</h4>
                 </div>
                 <p class="card-est-desc">
@@ -96,7 +102,9 @@
               <!-- Deseo -->
               <div class="card-est">
                 <div class="card-est-top">
-                  <span class="circulo-icono-est"></span>
+                  <span class="circulo-icono-est">
+                    <img src={imgMaxi.src} alt="Deseo - Maxi EMAX" />
+                  </span>
                   <h4 class="card-est-tit">Deseo</h4>
                 </div>
                 <p class="card-est-desc">
@@ -137,10 +145,9 @@
               <span class="trigger-sub">Cómo se fija el precio: fijo, indexado o Cuota Fija.</span>
             </div>
           </div>
-          <span class="btn-toggle-circulo" aria-hidden="true">
-            <svg class="icono-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19" class="linea-v"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
+          <span class="btn-toggle-circulo" aria-hidden="true" title="Desplegar pieza">
+            <svg class="icono-toggle-flecha" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </span>
         </button>
@@ -160,7 +167,9 @@
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes azul">
-                    <span class="asumes-circulo azul"></span>
+                    <span class="asumes-circulo azul">
+                      <img src={imgConsultor.src} alt="Consultor EMAX" />
+                    </span>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
                       <strong class="asumes-valor">Pagar más si el mercado baja.</strong>
@@ -180,7 +189,9 @@
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes naranja">
-                    <span class="asumes-circulo naranja"></span>
+                    <span class="asumes-circulo naranja">
+                      <img src={imgPersonal.src} alt="Personal EMAX" />
+                    </span>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
                       <strong class="asumes-valor">La volatilidad del mercado, hacia arriba y hacia abajo.</strong>
@@ -189,10 +200,10 @@
                 </div>
               </div>
 
-              <!-- 01 / 03 Cuota fija -->
+              <!-- 03 Cuota fija -->
               <div class="card-mod-fila">
                 <div class="mod-izq">
-                  <span class="badge-mod-num azul">01</span>
+                  <span class="badge-mod-num azul">03</span>
                   <div class="mod-textos">
                     <h4 class="mod-tit">Cuota fija</h4>
                     <p class="mod-desc">Pagas una cuota mensual estable, calculada a partir de tu consumo anual previsto y de las condiciones de la oferta.</p>
@@ -200,7 +211,9 @@
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes azul">
-                    <span class="asumes-circulo azul"></span>
+                    <span class="asumes-circulo azul">
+                      <img src={imgMaxi.src} alt="Maxi EMAX" />
+                    </span>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
                       <strong class="asumes-valor">Que tu consumo real se aparte del previsto.</strong>
@@ -246,10 +259,9 @@
               <span class="trigger-sub">Cuántos kW contratas en cada periodo.</span>
             </div>
           </div>
-          <span class="btn-toggle-circulo" aria-hidden="true">
-            <svg class="icono-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19" class="linea-v"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
+          <span class="btn-toggle-circulo" aria-hidden="true" title="Desplegar pieza">
+            <svg class="icono-toggle-flecha" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </span>
         </button>
@@ -259,21 +271,27 @@
             <!-- 3 Tarjetas en Rejilla Superior -->
             <div class="potencia-3cards-grid">
               <div class="card-pot-top">
-                <span class="circulo-icono-pot"></span>
+                <span class="circulo-icono-pot">
+                  <img src={imgConsultor.src} alt="Consultor técnico EMAX" />
+                </span>
                 <span class="pot-tag">QUÉ ES</span>
                 <h4 class="pot-tit">Tu potencia contratada</h4>
                 <p class="pot-desc">La potencia que tienes disponible en cada periodo. Se paga cada día, la uses o no.</p>
               </div>
 
               <div class="card-pot-top">
-                <span class="circulo-icono-pot"></span>
+                <span class="circulo-icono-pot">
+                  <img src={imgMaxi.src} alt="Maxi EMAX" />
+                </span>
                 <span class="pot-tag">QUÉ SE DECIDE</span>
                 <h4 class="pot-tit">Cuántos kW contratas</h4>
                 <p class="pot-desc">Cuántos kW contratas. El precio de cada kW es regulado; lo que se ajusta es la cantidad, con tus maxímetros de doce meses y con una regla: en 3.0TD y 6.1TD, cada periodo tiene que tener igual o más potencia que el anterior.</p>
               </div>
 
               <div class="card-pot-top">
-                <span class="circulo-icono-pot"></span>
+                <span class="circulo-icono-pot">
+                  <img src={imgPersonal.src} alt="Equipo EMAX" />
+                </span>
                 <span class="pot-tag">TRÁMITE</span>
                 <h4 class="pot-tit">¿Cómo se cambia?</h4>
                 <p class="pot-desc">El cambio lo tramita la distribuidora. EMAX gestiona el trámite técnico sin coste para ajustar tus potencias al consumo real.</p>
@@ -306,7 +324,9 @@
 
               <div class="pot-ejemplo-der">
                 <div class="pildora-asumes azul ancho-fijo">
-                  <span class="asumes-circulo azul"></span>
+                  <span class="asumes-circulo azul">
+                    <img src={imgPersonal.src} alt="Asesor EMAX" />
+                  </span>
                   <p class="asumes-valor-largo">
                     La potencia se paga cada día, independientemente de si la consumes o no.
                   </p>
@@ -341,10 +361,9 @@
               <span class="trigger-sub">Duración, entrada y permanencia.</span>
             </div>
           </div>
-          <span class="btn-toggle-circulo" aria-hidden="true">
-            <svg class="icono-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19" class="linea-v"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
+          <span class="btn-toggle-circulo" aria-hidden="true" title="Desplegar pieza">
+            <svg class="icono-toggle-flecha" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </span>
         </button>
@@ -377,10 +396,10 @@
                 </div>
               </div>
 
-              <!-- 01 / 03 Lo que dice la norma -->
+              <!-- 03 Lo que dice la norma -->
               <div class="card-cond-fila">
                 <div class="cond-fila-izq">
-                  <span class="badge-mod-num cian">01</span>
+                  <span class="badge-mod-num cian">03</span>
                   <div class="cond-textos">
                     <span class="cond-tag cian">LO QUE DICE LA NORMA</span>
                     <h4 class="cond-tit">Cambios durante el contrato</h4>
@@ -610,8 +629,8 @@
   }
 
   .btn-toggle-circulo {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: #0052cc;
     color: #ffffff;
@@ -619,11 +638,22 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: transform 0.25s ease, background-color 0.2s ease;
+    transition: transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 82, 204, 0.25);
   }
 
-  .acordeon-item.abierta .linea-v {
-    display: none;
+  .acordeon-trigger:hover .btn-toggle-circulo {
+    background: #003fa0;
+    transform: scale(1.05);
+  }
+
+  .icono-toggle-flecha {
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* La flecha gira 180° hacia arriba cuando el acordeón está desplegado */
+  .acordeon-item.abierta .icono-toggle-flecha {
+    transform: rotate(180deg);
   }
 
   /* Contenido interior */
@@ -667,11 +697,24 @@
   }
 
   .circulo-icono-est {
-    width: 36px;
-    height: 36px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: #e2edfa;
+    border: 2px solid #bfdbfe;
+    box-shadow: 0 3px 10px rgba(0, 74, 173, 0.14);
+    overflow: hidden;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circulo-icono-est img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .card-est-tit {
@@ -988,14 +1031,28 @@
   }
 
   .asumes-circulo {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     flex-shrink: 0;
+    overflow: hidden;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #bfdbfe;
   }
 
   .asumes-circulo.azul { background: #93c5fd; }
   .asumes-circulo.naranja { background: #fdba74; }
+
+  .asumes-circulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
   .asumes-txts {
     display: flex;
@@ -1081,12 +1138,25 @@
   }
 
   .circulo-icono-pot {
-    width: 36px;
-    height: 36px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: #dbeafe;
+    border: 2px solid #bfdbfe;
+    box-shadow: 0 3px 10px rgba(0, 74, 173, 0.14);
+    overflow: hidden;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 4px;
+  }
+
+  .circulo-icono-pot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .pot-tag {
