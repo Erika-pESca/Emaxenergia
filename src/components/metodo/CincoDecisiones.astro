@@ -252,7 +252,7 @@ const decisiones: Decision[] = [
               {item.numero}
             </div>
 
-            <details class="det-tarjeta" id={item.id} name="decision-acordeon" data-detalle={item.detalleTracking}>
+            <details class="det-tarjeta" id={item.id} data-detalle={item.detalleTracking}>
               <summary class="det-summary">
                 <div class="det-titulares">
                   <h3 class="det-titulo">{item.titulo}</h3>
@@ -265,34 +265,36 @@ const decisiones: Decision[] = [
                 </span>
               </summary>
 
-              <div class="det-panel-cuerpo">
-                <dl class="det-filas-dl">
-                  {
-                    item.filas.map((fila) => (
-                      <div class:list={["det-fila", { "det-fila-dato": fila.esDato, "det-fila-fuente": fila.esFuente }]}>
-                        <dt class="det-dt">{fila.etiqueta}</dt>
-                        <dd class="det-dd" set:html={fila.contenido} />
-                      </div>
-                    ))
-                  }
+              <div class="det-panel-wrapper">
+                <div class="det-panel-cuerpo">
+                  <dl class="det-filas-dl">
+                    {
+                      item.filas.map((fila) => (
+                        <div class:list={["det-fila", { "det-fila-dato": fila.esDato, "det-fila-fuente": fila.esFuente }]}>
+                          <dt class="det-dt">{fila.etiqueta}</dt>
+                          <dd class="det-dd" set:html={fila.contenido} />
+                        </div>
+                      ))
+                    }
 
-                  {
-                    item.enlaces.length > 0 && (
-                      <div class="det-fila det-fila-enlaces">
-                        <dt class="det-dt">Para saber más</dt>
-                        <dd class="det-dd det-tags-enlaces">
-                          {
-                            item.enlaces.map((enlace) => (
-                              <a href={enlace.href} class="enlace-pildora">
-                                {enlace.texto}
-                              </a>
-                            ))
-                          }
-                        </dd>
-                      </div>
-                    )
-                  }
-                </dl>
+                    {
+                      item.enlaces.length > 0 && (
+                        <div class="det-fila det-fila-enlaces">
+                          <dt class="det-dt">Para saber más</dt>
+                          <dd class="det-dd det-tags-enlaces">
+                            {
+                              item.enlaces.map((enlace) => (
+                                <a href={enlace.href} class="enlace-pildora">
+                                  {enlace.texto}
+                                </a>
+                              ))
+                            }
+                          </dd>
+                        </div>
+                      )
+                    }
+                  </dl>
+                </div>
               </div>
             </details>
           </div>
@@ -303,25 +305,53 @@ const decisiones: Decision[] = [
 </section>
 
 <script>
-  // Control interactivo para acordeón exclusivo (solo uno abierto a la vez)
+  // Control interactivo con transiciones suaves para acordeón exclusivo (solo uno abierto a la vez)
   function initAcordeonDecisiones() {
     const acordeon = document.getElementById("acordeon-decisiones");
     if (!acordeon) return;
 
-    const todosDetails = acordeon.querySelectorAll<HTMLDetailsElement>("details");
-    todosDetails.forEach((targetDetail) => {
-      targetDetail.addEventListener("toggle", () => {
-        if (targetDetail.open) {
-          targetDetail.classList.add("det-abierto");
-          // Cerrar los demás acordeones abiertos
-          todosDetails.forEach((otroDetail) => {
-            if (otroDetail !== targetDetail && otroDetail.open) {
-              otroDetail.open = false;
-              otroDetail.classList.remove("det-abierto");
+    const detailsList = acordeon.querySelectorAll<HTMLDetailsElement>("details.det-tarjeta");
+
+    detailsList.forEach((detail) => {
+      const summary = detail.querySelector("summary");
+      if (!summary) return;
+
+      // Cerrar suavemente con animación de colapso
+      const cerrarAcordeon = (d: HTMLDetailsElement) => {
+        if (!d.classList.contains("det-abierto")) return;
+        d.classList.remove("det-abierto");
+        setTimeout(() => {
+          if (!d.classList.contains("det-abierto")) {
+            d.open = false;
+          }
+        }, 360);
+      };
+
+      // Abrir suavemente con animación de despliegue
+      const abrirAcordeon = (d: HTMLDetailsElement) => {
+        d.open = true;
+        // Doble frame para asegurar que el navegador registre el estado inicial 0fr
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            d.classList.add("det-abierto");
+          });
+        });
+      };
+
+      summary.addEventListener("click", (e) => {
+        e.preventDefault();
+        const isOpen = detail.classList.contains("det-abierto");
+
+        if (isOpen) {
+          cerrarAcordeon(detail);
+        } else {
+          // Cerrar suavemente cualquier otro acordeón que esté abierto
+          detailsList.forEach((otro) => {
+            if (otro !== detail && otro.classList.contains("det-abierto")) {
+              cerrarAcordeon(otro);
             }
           });
-        } else {
-          targetDetail.classList.remove("det-abierto");
+          abrirAcordeon(detail);
         }
       });
     });
@@ -589,7 +619,7 @@ const decisiones: Decision[] = [
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 20px;
     overflow: hidden;
-    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(10px);
   }
 
@@ -598,7 +628,7 @@ const decisiones: Decision[] = [
     border-color: rgba(56, 182, 255, 0.4);
   }
 
-  .det-tarjeta[open] {
+  .det-tarjeta.det-abierto {
     background: rgba(14, 38, 70, 0.85);
     border-color: rgba(56, 182, 255, 0.55);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
@@ -655,7 +685,7 @@ const decisiones: Decision[] = [
     justify-content: center;
     flex-shrink: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, color 0.25s ease;
   }
 
   .det-tarjeta:hover .det-toggle-btn {
@@ -663,22 +693,37 @@ const decisiones: Decision[] = [
     color: #ffffff;
   }
 
-  .det-tarjeta[open] .det-toggle-btn {
+  .det-tarjeta.det-abierto .det-toggle-btn {
     transform: rotate(180deg);
     background: #ffffff;
     color: #08172e;
   }
 
-  .det-tarjeta[open]:hover .det-toggle-btn {
+  .det-tarjeta.det-abierto:hover .det-toggle-btn {
     background: #38b6ff;
     color: #ffffff;
   }
 
+  /* Wrapper animado para transición suave y elástica con CSS Grid */
+  .det-panel-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .det-tarjeta.det-abierto .det-panel-wrapper {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
   /* Cuerpo desplegable */
   .det-panel-cuerpo {
-    padding: 0 24px 24px;
+    min-height: 0;
+    overflow: hidden;
+    padding: 14px 24px 24px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    margin-top: 4px;
   }
 
   .det-filas-dl {

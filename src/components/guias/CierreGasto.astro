@@ -1,0 +1,217 @@
+---
+// Componente CierreGasto: Cierre oficial en banda de noche
+// Titular en dos tiempos con acento en cursiva y embudo oscuro data-origen="guias · cierre"
+import TituloAcento from "./TituloAcento.astro";
+
+const tramos = [
+  {
+    id: "menos-300",
+    tramoId: "<300",
+    label: "Menos de 300 €",
+    rango: "menos de 300 € al mes",
+    msg: "Revisaremos los conceptos básicos de tu factura para detectar sobrecostes en potencia o servicios extras.",
+  },
+  {
+    id: "300-1000",
+    tramoId: "300-1000",
+    label: "300 – 1.000 €",
+    rango: "entre 3.600 y 12.000 € al año en luz",
+    msg: "Auditamos tu potencia contratada periodo a periodo y comprobamos si te cobran energía reactiva o penalizaciones.",
+  },
+  {
+    id: "1000-3000",
+    tramoId: "1000-3000",
+    label: "1.000 – 3.000 €",
+    rango: "entre 12.000 y 36.000 € al año",
+    msg: "Un especialista analiza tus curvas cuartohorarias y maxímetros para optimizar tus periodos punta y llano.",
+  },
+  {
+    id: "mas-3000",
+    tramoId: ">3000",
+    label: "Más de 3.000 €",
+    rango: "más de 36.000 € al año en energía",
+    msg: "Auditoría integral de alta tensión (6.1TD) o gran consumidor con estudio pormenorizado de cobertura OMIP.",
+  },
+];
+---
+
+<section
+  class="banda noche cierre seccion--noche"
+  aria-labelledby="h2-cierre-guias"
+  data-oculta-dock
+>
+  <div class="w cierre__grid">
+    <!-- Columna izquierda: Titular en dos tiempos -->
+    <div class="cierre__izq">
+      <TituloAcento
+        tag="h2"
+        id="h2-cierre-guias"
+        principal="Tu próxima factura va a llegar igualmente."
+        acento="La pregunta es si vas a volver a pagarla sin revisarla."
+        claro={false}
+        size="s"
+      />
+    </div>
+
+    <!-- Columna derecha: Embudo oscuro y llamada directa -->
+    <div class="cierre__der">
+      <div
+        class="gasto gasto--osc"
+        role="group"
+        aria-labelledby="gasto-cierre-guias-p"
+        aria-describedby="gasto-cierre-guias-a"
+      >
+        <h3 id="gasto-cierre-guias-p">¿Cuánto paga tu empresa de luz al mes?</h3>
+        <p id="gasto-cierre-guias-a">
+          En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+        </p>
+
+        <ul role="list" class="gasto__o">
+          {
+            tramos.map((t) => (
+              <li>
+                <a
+                  href="/calcular-ahorro"
+                  class="tramo"
+                  data-cta
+                  data-tramo={t.id}
+                  data-origen="guias · cierre"
+                  data-abrir-funnel
+                  data-tramo-id={t.tramoId}
+                  data-tramo-label={t.label}
+                  data-tramo-rango={t.rango}
+                  data-tramo-msg={t.msg}
+                >
+                  {t.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <p class="cierre__tel">
+        ¿Prefieres hablar ya?{" "}
+        <a
+          href="tel:+34933949343"
+          data-contacto="telefono"
+          data-origen="guias · cierre"
+        >
+          Llama al 933 949 343
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cierre {
+    background: var(--noche, #0A1B3F);
+    color: #ffffff;
+    padding-block: 80px;
+  }
+
+  .w {
+    max-width: 1160px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  .cierre__grid {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (min-width: 980px) {
+    .cierre__grid {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      gap: 64px;
+    }
+  }
+
+  .cierre__der {
+    display: grid;
+    gap: 16px;
+  }
+
+  /* Versión oscura del embudo */
+  .gasto--osc {
+    background: var(--noche-2, #16305E);
+    color: #ffffff;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    padding: 28px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .gasto--osc h3 {
+    font-family: var(--f-marca, "Baloo 2", "Poppins", sans-serif);
+    font-size: 1.375rem;
+    line-height: 1.25;
+    font-weight: 600;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  .gasto--osc p {
+    color: var(--sobre-noche, #C9D6EE);
+    font-size: 0.875rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .gasto__o {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gasto--osc .gasto__o a {
+    display: grid;
+    place-items: center;
+    min-height: 58px;
+    padding: 8px 12px;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    color: #ffffff;
+    font-family: var(--f-texto, "Poppins", sans-serif);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .gasto--osc .gasto__o a:hover {
+    background: var(--azul-400, #38B6FF);
+    border-color: var(--azul-400, #38B6FF);
+    color: var(--noche, #0A1B3F);
+  }
+
+  .cierre__tel {
+    color: var(--sobre-noche, #C9D6EE);
+    font-size: 0.9375rem;
+    margin: 0;
+  }
+
+  .cierre__tel a {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gasto--osc .gasto__o a {
+      transition: none;
+    }
+  }
+</style>

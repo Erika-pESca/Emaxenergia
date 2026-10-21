@@ -1,0 +1,30 @@
+/* ==========================================================================
+   EMAX ENERGÍA - TOKENS DE DISEÑO
+   ========================================================================== */
+
+:root {
+  --tinta: #0F2346;
+  --tinta-2: #4A5A75;
+  --tinta-3: #63738e;
+  --papel: #FFFFFF;
+  --suave: #F3F6FB;
+  --azul-900: #004AAD;
+  --azul-900-hover: #003C8C;
+  --azul-700: #5271FF;
+  --azul-600: #1a6ff7;
+  --azul-400: #38B6FF;
+  --resalte: #DDF1FF;
+  --linea: #C9D3E3;
+  --linea-fina: #E6EBF3;
+  --borde-campo: #7B879C;
+  --noche: #0A1B3F;
+  --noche-2: #16305E;
+  --sobre-noche: #C9D6EE;
+  --hero: linear-gradient(115deg, #0A1B3F 0%, #003A8C 55%, #1F63D1 100%);
+  --sombra: 0 1px 2px rgba(10,27,63,.08), 0 12px 32px rgba(10,27,63,.10);
+  --f-marca: 'Baloo 2', 'Poppins', system-ui, sans-serif;
+  --f-texto: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-dato: 'IBM Plex Sans', 'Poppins', system-ui, sans-serif;
+  --f-acento: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --f-codigo: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

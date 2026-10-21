@@ -1,0 +1,85 @@
+---
+// Guía · ¿Es seguro dar el CUPS de tu empresa? Qué se ve con él y qué no
+// Ruta: /guias/cups-y-tus-datos
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-es",
+    "titulo": "Qué es el CUPS y dónde está"
+  },
+  {
+    "id": "sips",
+    "titulo": "Qué es el SIPS"
+  },
+  {
+    "id": "datos",
+    "titulo": "Qué datos hay asociados a tu CUPS"
+  },
+  {
+    "id": "curva",
+    "titulo": "Tu consumo hora a hora: solo con tu permiso"
+  },
+  {
+    "id": "no-se-puede",
+    "titulo": "Lo que no se puede hacer con tu CUPS"
+  },
+  {
+    "id": "controlar",
+    "titulo": "Cómo controlar quién ve tus datos"
+  },
+  {
+    "id": "emax",
+    "titulo": "Qué hacemos en EMAX con tu CUPS [LEGAL: validar entera]"
+  }
+];
+const resumen = [
+  {
+    "dt": "Qué es",
+    "dd": "El código que identifica tu punto de suministro. Está en tu factura."
+  },
+  {
+    "dt": "Qué se consulta con él",
+    "dd": "Datos técnicos y de consumo de tu suministro: el peaje, las potencias y el consumo por periodos de los últimos tres años."
+  },
+  {
+    "dt": "Qué no se ve",
+    "dd": "Tu consumo hora a hora: no está en esa base de datos. Y ninguna comercializadora puede ver los datos que te identifican, como tu nombre o tu dirección, ni qué compañía tienes."
+  },
+  {
+    "dt": "Qué no se puede hacer",
+    "dd": "Cambiarte de compañía sin tu conformidad expresa."
+  },
+  {
+    "dt": "Tus derechos",
+    "dd": "Puedes prohibir por escrito a tu distribuidora que otras comercializadoras accedan a tus datos."
+  }
+];
+const senales = [
+  "No sabes cuál es el CUPS de cada uno de tus suministros.",
+  "Nunca has visto tus maxímetros ni tu consumo por periodos.",
+  "Te han pedido el CUPS para una oferta sin decirte qué datos iban a mirar."
+];
+const cta = {
+  "texto": "Si quieres que miremos los datos de tu suministro, puedes empezar solo con la factura.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar mi factura"
+};
+---
+
+<Guia
+  slug="cups-y-tus-datos"
+  h1="¿Es seguro dar el CUPS de tu empresa? Qué se ve con él y qué no"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="El CUPS es el código de tu punto de suministro. Con él se consultan el peaje, las potencias y el consumo por periodos de los últimos tres años, pero no tu consumo hora a hora ni los datos que te identifican. Darlo no permite cambiarte de compañía: para eso hace falta tu conformidad expresa."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Real Decreto 88/2026, de 11 de febrero, Reglamento general de suministro, comercialización y agregación de energía eléctrica (BOE-A-2026-3212): artículo 6.1, letras j), v), w) e y); artículo 8; artículo 17; anexo I; disposición adicional novena."
+>
+ <h2 id="que-es">Qué es el CUPS y dónde está</h2> <p>El CUPS (código universal del punto de suministro) identifica el lugar donde llega la luz: tu local, tu nave o tu oficina. Empieza por ES y tiene 20 o 22 caracteres, y lo encuentras en la primera página de tu factura, normalmente junto a los datos del suministro.</p> <p>Es del punto de suministro, no de la persona ni de la compañía: si cambias de comercializadora, el CUPS sigue siendo el mismo.</p> <h2 id="sips">Qué es el SIPS</h2> <p>Cada distribuidora (la empresa que gestiona la red eléctrica de tu zona, que no es la que te factura) tiene que mantener una base de datos con todos los puntos de suministro conectados a su red. Se llama SIPS, sistema de información de puntos de suministro, y la regula el artículo 8 del Real Decreto 88/2026.</p> <p>Cuando alguien consulta "los datos de tu CUPS", consulta esa base de datos.</p> <p class="nota">La norma prevé además un punto de acceso único a los datos de consumo de todos los clientes, que gestionará Red Eléctrica como operador del sistema cuando se apruebe la orden ministerial que lo desarrolle (RD 88/2026, disposición adicional novena). <span class="pendiente">[VERIFICAR el estado de la orden el día de publicar]</span></p> <h2 id="datos">Qué datos hay asociados a tu CUPS</h2> <p>El anexo I del RD 88/2026 enumera lo que debe constar en el SIPS. Agrupado:</p> <div class="tabla-guia"><table> <caption class="solo-lector">Datos asociados al CUPS en el SIPS, agrupados</caption> <thead><tr><th scope="col">Grupo</th><th scope="col">Qué incluye</th></tr></thead> <tbody> <tr><th scope="row">Tu suministro</th><td>El CUPS, la distribuidora, la ubicación, el peaje, la tensión, el tipo de contador y si tiene maxímetro</td></tr> <tr><th scope="row">Tu contrato de acceso</th><td>Las potencias contratadas por periodo y la fecha del último cambio</td></tr> <tr><th scope="row">Tu consumo</th><td>El consumo de los tres últimos años, por periodos y por meses, la energía reactiva y la potencia que has llegado a demandar</td></tr> <tr><th scope="row">El titular</th><td>Si es persona física o empresa, el nombre o la denominación social y la dirección</td></tr> <tr><th scope="row">Otros</th><td>Autoconsumo, bono social, si el suministro es esencial y la actividad (CNAE)</td></tr> </tbody> </table></div> <h3>Lo que no está: tu consumo hora a hora</h3> <p>La curva de carga, el registro de tu consumo hora a hora, no figura en el SIPS. El anexo lo dice expresamente: aunque la distribuidora la tenga, no forma parte de esta base de datos.</p> <h3>Lo que una comercializadora no puede ver</h3> <p>Que un dato esté en el SIPS no significa que cualquiera pueda verlo. Ninguna comercializadora puede acceder a los datos que te identifican directamente, como tu nombre o el de tu empresa y tu dirección. Tampoco puede ver qué comercializadora tienes contratada. <span class="fuente">(RD 88/2026, art. 8.5)</span></p> <h3>Quién puede consultarlo</h3> <p>Solo la CNMC y las comercializadoras y agregadores que han presentado su declaración responsable y figuran en el listado de la CNMC (art. 8.3). Quien lo use tiene que firmar un código de conducta y garantizar la confidencialidad de los datos (art. 8.7).</p> <p>Y tú: puedes consultar gratis la información de tus propios puntos de suministro (art. 8.4).</p> <h2 id="curva">Tu consumo hora a hora: solo con tu permiso</h2> <p>Tu curva de carga solo la puede ver la comercializadora con la que tienes contrato. Cualquier otra necesita tu autorización expresa, que recaba la distribuidora. Ese permiso se renueva cada seis meses, y en ese momento la distribuidora te informa de las consultas que se han hecho. <span class="fuente">(RD 88/2026, art. 17)</span></p> <p class="destacado">Por eso, si alguien te dice que con tu CUPS va a ver cómo consume tu empresa hora a hora, no es exacto: con el CUPS se ve el consumo por periodos y meses; la curva, solo si tú lo autorizas.</p> <h2 id="no-se-puede">Lo que no se puede hacer con tu CUPS</h2> <div class="tabla-guia"><table> <caption class="solo-lector">Lo que no se puede hacer con tu CUPS, con su fuente</caption> <thead><tr><th scope="col">Afirmación</th><th scope="col">Qué dice la norma</th><th scope="col">Fuente</th></tr></thead> <tbody><tr><th scope="row">Cambio de compañía</th><td data-label="Qué dice la norma">Para cambiarte de comercializadora hace falta tu conformidad expresa. Tener tu CUPS no basta.</td><td data-label="Fuente" class="fuente">RD 88/2026, art. 6.1.v</td></tr><tr><th scope="row">Contrato</th><td data-label="Qué dice la norma">Para firmar un contrato contigo, la comercializadora tiene que recabar tu consentimiento expreso, después de informarte de las condiciones.</td><td data-label="Fuente" class="fuente">RD 88/2026, art. 6.1.j</td></tr><tr><th scope="row">Trazabilidad</th><td data-label="Qué dice la norma">Si hay un cambio en marcha, tienes derecho a saber en qué punto está y a pedir información por cualquier canal de atención.</td><td data-label="Fuente" class="fuente">RD 88/2026, art. 6.1.w</td></tr></tbody> </table></div> <h2 id="controlar">Cómo controlar quién ve tus datos</h2> <div class="tabla-guia"><table> <caption class="solo-lector">Tus derechos sobre tus datos de suministro, con su fuente</caption> <thead><tr><th scope="col">Derecho</th><th scope="col">Qué puedes hacer</th><th scope="col">Fuente</th></tr></thead> <tbody><tr><th scope="row">Acceder a tus datos</th><td data-label="Qué puedes hacer">Puedes acceder gratis a tus datos de consumo y decidir, de forma expresa, a quién das acceso.</td><td data-label="Fuente" class="fuente">RD 88/2026, art. 6.1.y</td></tr><tr><th scope="row">Prohibir el acceso</th><td data-label="Qué puedes hacer">Puedes prohibir por escrito a tu distribuidora que difunda los datos que señales y que los consulten comercializadoras distintas de la tuya. La distribuidora tiene que dejarlo anotado y guardar copia.</td><td data-label="Fuente" class="fuente">RD 88/2026, art. 8.4</td></tr><tr><th scope="row">La excepción</th><td data-label="Qué puedes hacer">Si hay facturas impagadas, no se puede impedir que se difunda el CUPS y la situación de impago, y te lo tienen que comunicar.</td><td data-label="Fuente" class="fuente">RD 88/2026, art. 8.4</td></tr><tr><th scope="row">Tu curva</th><td data-label="Qué puedes hacer">El permiso para ver tu curva se renueva cada seis meses: si no lo renuevas, se acaba.</td><td data-label="Fuente" class="fuente">RD 88/2026, art. 17</td></tr></tbody> </table></div> <p><b>En la práctica:</b> se hace por escrito a tu distribuidora, que aparece en tu factura.</p> <p><b>Una consecuencia:</b> si prohíbes el acceso, ninguna otra compañía podrá consultar tus datos para hacerte un estudio. Si después quieres uno, basta con la factura.</p> <h2 id="emax">Qué hacemos en EMAX con tu CUPS<span class="pendiente"> [LEGAL: validar entera]</span></h2> <dl class="guia-dl"> <div><dt>Para qué</dt><dd>Lo usamos para consultar los datos técnicos y de consumo de tu suministro y preparar tu diagnóstico.</dd></div> <div><dt>Antes de consultar</dt><dd>Te pedimos que confirmes que eres el titular o que la empresa titular te autoriza.</dd></div> <div><dt>Lo que no hacemos</dt><dd>No te cambiamos de compañía sin tu conformidad expresa. Y no te llamamos si no nos lo has pedido.</dd></div> <div><dt>Si no quieres darlo</dt><dd>No hace falta: podemos empezar con tu factura o con dos datos de tu negocio.</dd></div> <div><dt>Responsable del tratamiento</dt><dd>ENERGYMAX ADVISORY, S.L.U. · <a href="/privacidad">Política de privacidad</a></dd></div> </dl> 
+</Guia>

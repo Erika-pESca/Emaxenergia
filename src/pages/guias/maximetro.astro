@@ -1,0 +1,69 @@
+---
+// Guía · El maxímetro: qué mide y por qué decide tu potencia
+// Ruta: /guias/maximetro
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-mide",
+    "titulo": "Qué mide el maxímetro"
+  },
+  {
+    "id": "donde",
+    "titulo": "Dónde lo ves en tu factura"
+  },
+  {
+    "id": "doce-meses",
+    "titulo": "Por qué hacen falta doce meses"
+  },
+  {
+    "id": "si-supera",
+    "titulo": "Cuando el maxímetro supera tu potencia"
+  }
+];
+const resumen = [
+  {
+    "dt": "Qué mide",
+    "dd": "La potencia más alta de cada periodo, como media de un cuarto de hora. No un pico instantáneo."
+  },
+  {
+    "dt": "Dónde está",
+    "dd": "En tu factura, junto a la potencia contratada de cada periodo, como potencia máxima o demandada."
+  },
+  {
+    "dt": "Para qué sirve",
+    "dd": "Para decidir cuánta potencia contratar, con los últimos doce meses delante."
+  },
+  {
+    "dt": "Si supera lo contratado",
+    "dd": "Aparecen excesos de potencia en tu factura."
+  }
+];
+const senales = [
+  "No sabes en qué parte de tu factura aparece el maxímetro.",
+  "Decidiste tu potencia mirando una sola factura.",
+  "El maxímetro de algún periodo queda muy lejos de lo que tienes contratado."
+];
+const cta = {
+  "texto": "Con tus maxímetros te decimos cuánta potencia usa de verdad tu empresa en cada periodo.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar mi potencia"
+};
+---
+
+<Guia
+  slug="maximetro"
+  h1="El maxímetro: qué mide y por qué decide tu potencia"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="El maxímetro registra la potencia más alta que ha pedido tu empresa en cada periodo, medida como la media de un cuarto de hora: no es un pico instantáneo. Con los maxímetros de los últimos doce meses se decide cuánta potencia contratar en cada periodo. Si alguno supera lo contratado, en tu factura aparecen excesos."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Real Decreto 1110/2007, Reglamento unificado de puntos de medida, art. 7 · Circular 3/2020 de la CNMC, arts. 6.2, 8.9 y 9.4 (redacción de la Circular 1/2025)"
+>
+ <h2 id="que-mide">Qué mide el maxímetro</h2> <p>El maxímetro no registra cada arranque. Mide la potencia media de cada cuarto de hora y se queda con la más alta de cada periodo en el tiempo que cubre tu factura.</p> <p class="destacado">Lo que lo dispara no es un motor que arranca, sino varios equipos trabajando a la vez durante un cuarto de hora.</p> <h2 id="donde">Dónde lo ves en tu factura</h2> <p>Cada compañía ordena la factura a su manera, pero el dato está: para cada periodo, la potencia contratada y la potencia máxima registrada, a veces llamada demandada. Compara las dos columnas, periodo a periodo.</p> <p class="enlaces"><a href="/guias/factura-luz-empresa">Cómo leer la factura de tu empresa</a></p> <h2 id="doce-meses">Por qué hacen falta doce meses</h2> <p>Un mes enseña un mes. Si decides tu potencia con la factura de febrero, no ves el pico de julio. En el ejemplo del obrador, con febrero delante el maxímetro de P2 marcaba 22 kW; con doce meses, 28.</p> <p>Por eso decidimos la potencia de cada periodo con los maxímetros de un año completo y, si nos autorizas, con tu curva de consumo.</p> <h2 id="si-supera">Cuando el maxímetro supera tu potencia</h2> <p>Depende de tu suministro. Con 15 kW o menos, si te pasas, el contador corta y no se cobran excesos. Por encima de 15 kW no corta: se cobran excesos, y salen caros a propósito, para que no compense contratar de menos.</p> <p>Cómo se calculan depende de tu punto de medida: en los de más de 15 kW y hasta 50 kW (tipo 4), con el maxímetro de cada periodo; en los más grandes (tipos 1, 2 y 3), con todas las mediciones de cada cuarto de hora.</p> <p class="enlaces"><a href="/guias/exceso-de-potencia">Exceso de potencia: cómo se factura</a><a href="/guias/potencia-contratada">Potencia contratada: cuánta necesita tu empresa</a></p> 
+</Guia>

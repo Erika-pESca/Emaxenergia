@@ -2,6 +2,7 @@
    EMAX ENERGÍA - SISTEMA DE DISEÑO LUMINOSO, HUMANO Y COMERCIAL
    Basado en la identidad de marca EMAX con enfoque de conversión amigable.
    ========================================================================== */
+@import "./tokens.css";
 
 :root {
   /* Azules corporativos EMAX */

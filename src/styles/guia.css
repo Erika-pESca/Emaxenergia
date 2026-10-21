@@ -1,0 +1,2414 @@
+/* ==========================================================================
+   PLANTILLA DE GUÍAS EMAX ENERGÍA - LENGUAJE VISUAL FIGMA (guia.css)
+   ========================================================================== */
+
+/* Contenedor central universal - Idéntico al hero de guías */
+.w {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 52px);
+  box-sizing: border-box;
+}
+
+.banda {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 1. Barra de progreso de lectura (sticky arriba, 4px) */
+.prog {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 4px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.prog i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--azul-400, #38b6ff);
+  transition: width 0.08s linear;
+}
+
+/* 2. Hero azul con degradado corporativo e integración con cabecera flotante */
+.g-hero {
+  position: relative;
+  z-index: 2;
+  margin-top: -78px;
+  padding-top: calc(78px + 44px);
+  padding-bottom: 110px;
+  background: linear-gradient(115deg, #0A1B3F 0%, #003A8C 55%, #1F63D1 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.banda-contenido {
+  position: relative;
+  z-index: 10;
+}
+
+.g-hero__in {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Kicker idéntico al de guías de home */
+.kicker-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  margin-bottom: 20px;
+  width: fit-content;
+  backdrop-filter: blur(10px);
+}
+
+.kicker-punto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 10px #00d4ff;
+}
+
+.kicker-texto {
+  font-family: "Sora", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.kicker-sep {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.85rem;
+}
+
+.kicker-sub {
+  font-family: "Sora", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #38bdf8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.g-hero h1,
+.g-hero .tit {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(2.2rem, 1.8rem + 1.8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-transform: uppercase;
+  max-width: 28em;
+}
+
+.g-hero h1 em,
+.g-hero .tit em {
+  display: block;
+  text-transform: none;
+  font-family: "Merriweather", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #38bdf8;
+  letter-spacing: -0.01em;
+  margin-top: 6px;
+}
+
+.g-hero .meta {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.g-hero .meta > span {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-family: "Sora", sans-serif;
+  font-weight: 500;
+  color: #e0f2fe;
+  backdrop-filter: blur(6px);
+}
+
+.g-hero .meta .btn-volver-guias,
+.btn-volver-guias {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 18px 6px 8px;
+  background: #ffffff !important;
+  border: 1.5px solid #ffffff !important;
+  border-radius: 9999px;
+  font-size: 0.84rem;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  color: #004aad !important;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 24, 70, 0.25), 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+}
+
+.g-hero .meta .btn-volver-guias span,
+.btn-volver-guias span {
+  color: #004aad !important;
+  font-weight: 700;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-size: inherit;
+  font-family: inherit;
+  backdrop-filter: none !important;
+}
+
+.g-hero .meta .btn-volver-guias .btn-volver-guias__icono,
+.btn-volver-guias__icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50% !important;
+  background: #004aad !important;
+  color: #ffffff !important;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  padding: 0 !important;
+  border: 0 !important;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.g-hero .meta .btn-volver-guias:hover,
+.btn-volver-guias:hover {
+  background: #004aad !important;
+  border-color: #004aad !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 24, 70, 0.4);
+}
+
+.g-hero .meta .btn-volver-guias:hover span,
+.btn-volver-guias:hover span {
+  color: #ffffff !important;
+}
+
+.g-hero .meta .btn-volver-guias:hover .btn-volver-guias__icono,
+.btn-volver-guias:hover .btn-volver-guias__icono {
+  background: #ffffff !important;
+  color: #004aad !important;
+  transform: translateX(-3px);
+}
+
+/* Adorno decorativo de 48 barras al 13% de opacidad */
+.g-hero .orn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  display: grid;
+  grid-template-columns: repeat(48, 1fr);
+  gap: 6px;
+  align-items: end;
+  padding-inline: 12px;
+  opacity: 0.13;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.g-hero .orn span {
+  background: #ffffff;
+  border-radius: 3px 3px 0 0;
+  display: block;
+}
+
+/* 3. "En 30 segundos" (se monta 64px flotando por encima del hero) */
+.res {
+  position: relative;
+  z-index: 15;
+  margin-top: -64px;
+  background: var(--papel, #ffffff);
+  border: 1.5px solid var(--linea, #c9d3e3);
+  border-radius: 20px;
+  box-shadow: 0 16px 36px rgba(10, 27, 63, 0.16);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .res {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+.res__r {
+  padding: clamp(24px, 3vw, 32px);
+  background: var(--resalte, #ddf1ff);
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.res__r b {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--azul-900, #004aad);
+}
+
+.res__r p {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--tinta, #0f2346);
+  margin: 0;
+}
+
+.res dl {
+  padding: 12px clamp(20px, 3vw, 32px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+}
+
+.res dl div {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--linea-fina, #e6ebf3);
+  align-items: start;
+}
+
+.res dl div:first-child {
+  border-top: 0;
+}
+
+.res dl i {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--azul-900, #004aad);
+  color: #ffffff;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 700;
+  font-size: 0.78rem;
+  font-style: normal;
+  margin-top: 2px;
+}
+
+.res dt {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--tinta, #0f2346);
+}
+
+.res dd {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--tinta-2, #4a5a75);
+  margin-top: 3px;
+  margin-left: 0;
+}
+
+/* 4. Layout de lectura (Índice sticky + cuerpo de lectura) */
+.lectura {
+  display: grid;
+  gap: 40px;
+  padding-block: 56px 40px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 1000px) {
+  .lectura {
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 64px;
+  }
+}
+
+/* Índice lateral sticky */
+.ind {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .ind {
+    display: block;
+    position: sticky;
+    top: 96px;
+    align-self: start;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+}
+
+.ind>p {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tinta-2, #4a5a75);
+  margin: 0 0 14px;
+}
+
+.ind ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 2px solid var(--linea, #c9d3e3);
+  display: grid;
+}
+
+.ind a {
+  display: block;
+  padding: 8px 0 8px 16px;
+  margin-left: -2px;
+  border-left: 2px solid transparent;
+  font-size: 0.88rem;
+  color: var(--tinta-2, #4a5a75);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: all 0.16s ease;
+}
+
+.ind a:hover {
+  color: var(--azul-900, #004aad);
+}
+
+.ind a.on {
+  border-left-color: var(--azul-900, #004aad);
+  color: var(--tinta, #0f2346);
+  font-weight: 700;
+  background: transparent;
+}
+
+.ind__t {
+  margin-top: 24px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tinta-2, #4a5a75);
+  font-family: var(--f-texto, "Poppins", sans-serif);
+}
+
+/* Desplegable móvil de índice */
+.ind-m {
+  margin-bottom: 28px;
+  border: 1px solid var(--linea, #c9d3e3);
+  border-radius: 14px;
+  padding: 14px 18px;
+  background: var(--suave, #f3f6fb);
+}
+
+.ind-m summary {
+  cursor: pointer;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  color: var(--tinta, #0f2346);
+  font-size: 0.95rem;
+}
+
+.ind-m ol {
+  margin: 14px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.ind-m a {
+  color: var(--azul-900, #004aad);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+@media (min-width: 1000px) {
+  .ind-m {
+    display: none;
+  }
+}
+
+/* 4. Columna de cuerpo de lectura (46rem) */
+.cuerpo,
+.lect {
+  max-width: 46rem;
+  min-width: 0;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.cuerpo > * + *,
+.lect > * + * {
+  margin-top: 20px;
+}
+
+/* Encabezados de sección con badge (sh & sh__t) */
+.sh {
+  margin-top: 72px !important;
+  display: grid;
+  gap: 12px;
+  scroll-margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--linea, #c9d3e3);
+}
+
+.sh:first-child {
+  margin-top: 0 !important;
+  border-top: 0;
+  padding-top: 0;
+}
+
+.sh__t {
+  justify-self: start;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--resalte, #ddf1ff);
+  color: var(--azul-900, #004aad);
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+
+.sh h2,
+.cuerpo h2 {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--tinta, #0f2346);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.sh h2:first-child,
+.cuerpo h2:first-child {
+  margin-top: 0;
+}
+
+.cuerpo h3 {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: var(--tinta, #0f2346);
+  margin-top: 28px;
+}
+
+.cuerpo p,
+.lect p {
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: var(--tinta-2, #4a5a75);
+}
+
+/* Primer párrafo introductorio de sección (.lede) */
+.lede,
+.cuerpo > .sh:first-child + p,
+.cuerpo > h2:first-child + p {
+  font-size: 1.2rem !important;
+  line-height: 1.65 !important;
+  color: var(--tinta, #0f2346) !important;
+  font-weight: 400;
+}
+
+/* Píldora de norma o fuente (.f) */
+.f,
+.chip-norma,
+span.fuente {
+  display: inline-block;
+  padding: 1px 10px;
+  margin-inline: 2px;
+  border: 1px solid var(--linea, #c9d3e3);
+  border-radius: 999px;
+  background: var(--suave, #f3f6fb);
+  color: var(--tinta-2, #4a5a75);
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+
+/* Cita destacada con gran comilla serif (.cita) */
+.cita,
+.cuerpo .destacado.cita,
+p.destacado {
+  position: relative;
+  padding: 8px 0 8px 56px;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: var(--tinta, #0f2346);
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  margin-block: 28px;
+}
+
+.cita::before,
+p.destacado::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -14px;
+  font-family: var(--f-acento, "Merriweather", Georgia, serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--azul-400, #38b6ff);
+}
+
+/* Tarjetas de cifras clave (.cifras) */
+.cifras {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-block: 24px;
+}
+
+.cifras > div {
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: var(--noche-2, #16305e);
+  color: #ffffff;
+  display: grid;
+  gap: 6px;
+}
+
+.cifras b {
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 700;
+  font-size: clamp(2rem, 1.5rem + 1.8vw, 2.75rem);
+  line-height: 1;
+  color: var(--azul-400, #38b6ff);
+}
+
+.cifras span {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--sobre-noche, #c9d6ee);
+}
+
+/* Tarjetas en cuadrícula (.reglas) */
+.reglas,
+dl.guia-reglas {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-block: 24px;
+}
+
+@media (min-width: 700px) {
+  .reglas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.reglas > div,
+dl.guia-reglas > div {
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--suave, #f3f6fb);
+  border: 1px solid var(--linea-fina, #e6ebf3);
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.reglas b,
+dl.guia-reglas dt {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: var(--tinta, #0f2346);
+}
+
+.reglas span,
+dl.guia-reglas dd {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--tinta-2, #4a5a75);
+}
+
+/* Tarjeta contenedora de ejemplo (.ej) */
+.ej {
+  margin-inline: -4px;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--suave, #f3f6fb);
+  border: 1px solid var(--linea-fina, #e6ebf3);
+  display: grid;
+  gap: 18px;
+  margin-block: 28px;
+}
+
+.ej__t {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ej__t h3 {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--tinta, #0f2346);
+  margin: 0;
+}
+
+.ej__t small {
+  padding: 3px 12px;
+  border: 1px dashed var(--borde-campo, #7b879c);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: var(--tinta-2, #4a5a75);
+  font-weight: 500;
+}
+
+.ej .graf {
+  box-shadow: none;
+  border-color: var(--linea-fina, #e6ebf3);
+  margin: 0;
+}
+
+.ej__d {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--tinta-2, #4a5a75);
+  margin: 0;
+}
+
+.ej__d b {
+  color: var(--tinta, #0f2346);
+}
+
+/* Tarjeta con tabla (.tcard) */
+.tcard {
+  border: 1px solid var(--linea, #c9d3e3);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(10, 27, 63, 0.06);
+  background: var(--papel, #ffffff);
+  margin-block: 24px;
+}
+
+.tcard__c {
+  padding: 12px 18px;
+  background: var(--suave, #f3f6fb);
+  border-bottom: 1px solid var(--linea-fina, #e6ebf3);
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--tinta-2, #4a5a75);
+  margin: 0;
+}
+
+.tcard .tabla,
+.tcard .tabla-guia {
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+}
+
+.tcard table tbody tr:nth-child(even) {
+  background: var(--suave, #f3f6fb);
+}
+
+/* Acordeón de preguntas (.faq) */
+.faq {
+  display: grid;
+  border-top: 1px solid var(--linea, #c9d3e3);
+  margin-block: 24px;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--linea, #c9d3e3);
+}
+
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 4px;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  color: var(--tinta, #0f2346);
+  transition: color 0.15s ease;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "";
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--azul-900, #004aad) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(180deg);
+  background-color: var(--azul-900, #004aad);
+}
+
+.faq summary:hover {
+  color: var(--azul-900, #004aad);
+}
+
+.faq__r {
+  padding: 0 52px 20px 4px;
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--tinta-2, #4a5a75);
+}
+
+/* Callout "Lo que no te diremos" (.no) */
+.no {
+  padding: 24px 28px;
+  border-radius: 16px;
+  background: var(--resalte, #ddf1ff);
+  display: grid;
+  gap: 6px;
+  margin-block: 28px;
+}
+
+.no b {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--azul-900, #004aad);
+}
+
+.no p {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--tinta, #0f2346);
+  margin: 0;
+}
+
+/* Chips de fuentes (.cit) */
+.cit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cit a {
+  padding: 8px 14px;
+  border: 1px solid var(--linea, #c9d3e3);
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: var(--tinta, #0f2346);
+  background: var(--papel, #ffffff);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.cit a:hover {
+  border-color: var(--azul-900, #004aad);
+  color: var(--azul-900, #004aad);
+}
+
+.cuerpo .nota {
+  padding: 14px 18px;
+  background: var(--suave, #f3f6fb);
+  border-left: 3px solid var(--azul-400, #38b6ff);
+  border-radius: 0 10px 10px 0;
+  font-size: 0.92rem;
+  color: var(--tinta, #0f2346);
+}
+
+.cuerpo .destacado {
+  padding: 20px 24px;
+  background: var(--resalte, #ddf1ff);
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: var(--tinta, #0f2346);
+  border-left: 3px solid var(--azul-900, #004aad);
+}
+
+/* Término con definición al pasar el cursor o enfocar con teclado */
+.term {
+  border-bottom: 1.5px dotted var(--azul-900, #004aad);
+  cursor: help;
+  position: relative;
+  display: inline-block;
+  color: var(--tinta, #0f2346);
+  font-weight: 600;
+}
+
+.term:hover::after,
+.term:focus::after {
+  content: attr(data-d);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  width: 280px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--noche, #0a1b3f);
+  color: #ffffff;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  box-shadow: 0 12px 32px rgba(10, 27, 63, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+}
+
+/* Tablas con soporte responsive y apilado en móvil */
+.tabla,
+.tabla-guia {
+  overflow-x: auto;
+  border: 1px solid var(--linea, #c9d3e3);
+  border-radius: 14px;
+  margin-block: 24px;
+  background: var(--papel, #ffffff);
+}
+
+.tabla table,
+.tabla-guia table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 480px;
+}
+
+.tabla th,
+.tabla td,
+.tabla-guia th,
+.tabla-guia td {
+  text-align: left;
+  vertical-align: top;
+  padding: 13px 18px;
+  border-top: 1px solid var(--linea-fina, #e6ebf3);
+}
+
+.tabla thead th,
+.tabla-guia thead th {
+  background: var(--suave, #f3f6fb);
+  border-top: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tinta-2, #4a5a75);
+  font-weight: 700;
+}
+
+.tabla tbody th,
+.tabla-guia tbody th {
+  font-weight: 700;
+  color: var(--tinta, #0f2346);
+}
+
+@media (max-width: 767px) {
+  .tabla-guia thead {
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    overflow: hidden;
+  }
+
+  .tabla-guia tr {
+    gap: 4px;
+    padding: 14px 16px;
+    border-top: 1px solid var(--linea, #c9d3e3);
+    display: grid;
+  }
+
+  .tabla-guia th,
+  .tabla-guia td {
+    border: 0;
+    padding: 0;
+    display: block;
+    width: auto !important;
+  }
+
+  .tabla-guia td[data-label]::before {
+    content: attr(data-label);
+    font-size: 0.75rem;
+    color: var(--tinta-2, #4a5a75);
+    font-weight: 700;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+}
+
+/* Componente DuoCaja (.vs) */
+.vs {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-block: 24px;
+}
+
+@media (min-width: 640px) {
+  .vs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.vs div {
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid var(--linea, #c9d3e3);
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  background: var(--papel, #ffffff);
+}
+
+.vs div:first-child {
+  background: var(--resalte, #ddf1ff);
+  border-color: transparent;
+}
+
+.vs small {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--azul-900, #004aad);
+}
+
+.vs b {
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--tinta, #0f2346);
+}
+
+.vs span {
+  font-size: 0.88rem;
+  color: var(--tinta-2, #4a5a75);
+  line-height: 1.5;
+}
+
+/* Componente GraficoBarras (.graf) */
+.graf {
+  border: 1.5px solid var(--linea, #c9d3e3);
+  border-radius: 18px;
+  padding: 24px;
+  background: var(--papel, #ffffff);
+  box-shadow: 0 8px 24px rgba(10, 27, 63, 0.06);
+  display: grid;
+  gap: 16px;
+  margin-block: 24px;
+}
+
+.graf h3 {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--tinta, #0f2346);
+  margin: 0;
+}
+
+.graf__s {
+  font-size: 0.8125rem;
+  color: var(--tinta-2, #4a5a75);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  align-items: end;
+  height: 190px;
+  position: relative;
+  padding-top: 16px;
+}
+
+.col {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.col .u {
+  width: 62%;
+  background: var(--azul-400, #38b6ff);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+
+.col .u.max {
+  background: var(--azul-900, #004aad);
+}
+
+.col .p {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  border-top: 3px solid var(--tinta, #0f2346);
+  z-index: 2;
+}
+
+.col .p::after {
+  content: attr(data-v);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -24px;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--tinta, #0f2346);
+  background: #ffffff;
+  padding: 1px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--linea-fina, #e6ebf3);
+}
+
+.contratada {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed var(--borde-campo, #7b879c);
+  z-index: 3;
+}
+
+.contratada span {
+  position: absolute;
+  right: 0;
+  top: -22px;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--tinta-2, #4a5a75);
+  background: #ffffff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--linea-fina, #e6ebf3);
+}
+
+.ejep {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  text-align: center;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--tinta, #0f2346);
+}
+
+.ley {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  font-size: 0.78rem;
+  color: var(--tinta-2, #4a5a75);
+}
+
+.ley i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+
+/* 6. "Señales de que esto te pasa a ti" (.sen) */
+.sen {
+  background: var(--suave, #f3f6fb);
+  border-radius: 20px;
+  padding: clamp(24px, 3.5vw, 36px);
+  margin-top: 56px;
+  border: 1px solid var(--linea-fina, #e6ebf3);
+}
+
+.sen h2 {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  color: var(--tinta, #0f2346);
+  margin: 0;
+}
+
+.sen ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: grid;
+  gap: 14px;
+}
+
+.sen li {
+  position: relative;
+  padding-left: 32px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--tinta-2, #4a5a75);
+}
+
+.sen li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--azul-900, #004aad);
+  background: #ffffff;
+}
+
+.sen li::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 9px;
+  width: 8px;
+  height: 4px;
+  border-left: 2.5px solid var(--azul-900, #004aad);
+  border-bottom: 2.5px solid var(--azul-900, #004aad);
+  transform: rotate(-45deg);
+}
+
+/* 7. "Siguiente guía" (.sig) */
+.sig {
+  display: grid;
+  gap: 10px;
+  padding: 28px;
+  border-radius: 20px;
+  background: var(--resalte, #ddf1ff);
+  text-decoration: none;
+  margin-top: 56px;
+  border: 1.5px solid #bfe3fa;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sig:hover {
+  transform: translateY(-2px);
+  border-color: var(--azul-900, #004aad);
+  box-shadow: 0 8px 24px rgba(0, 74, 173, 0.12);
+}
+
+.sig small {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--azul-900, #004aad);
+}
+
+.sig b {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--tinta, #0f2346);
+}
+
+.sig span {
+  color: var(--tinta-2, #4a5a75);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* 8. Banda de noche con CTA (.g-cta) */
+.banda-noche-cta {
+  background: var(--noche, #0a1b3f);
+  color: #ffffff;
+}
+
+.g-cta {
+  padding-block: 72px;
+  display: grid;
+  gap: 24px;
+  justify-items: start;
+}
+
+.g-cta p {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
+  line-height: 1.3;
+  max-width: 26em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.g-cta .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--azul-900, #004aad);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.4);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.g-cta .btn:hover {
+  background: var(--azul-900-hover, #003c8c);
+  transform: translateY(-1px);
+}
+
+.g-cta .btn i {
+  font-style: normal;
+  transition: transform 0.15s ease;
+}
+
+.g-cta .btn:hover i {
+  transform: translateX(3px);
+}
+
+/* "Sigue por aquí" (.rel, .rel-seccion) y Fuentes (.fuentes, .fuentes-box) */
+.rel-seccion {
+  background: var(--suave, #f8fafd);
+  border-top: 1px solid var(--linea-fina, #e6ebf3);
+  padding-block: 64px 80px;
+}
+
+.rel,
+.rel-bloque {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rel-cab {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rel-kicker {
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--azul-900, #004aad);
+}
+
+.rel h2,
+.rel-titulo {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: clamp(1.4rem, 1.2rem + 1vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--tinta, #0f2346);
+  margin: 0;
+}
+
+.rel ul,
+.rel-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.rel ul li,
+.rel-grid li {
+  display: flex;
+  width: 100%;
+}
+
+.rel a,
+.rel-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f4;
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--tinta, #0f2346);
+  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease;
+}
+
+.rel a:hover,
+.rel-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--azul-900, #004aad);
+  box-shadow: 0 10px 28px rgba(0, 74, 173, 0.1);
+  background: #ffffff;
+}
+
+.rel a span:first-child,
+.rel-card__txt {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  color: var(--tinta, #0f2346);
+  transition: color 0.18s ease;
+  flex: 1;
+}
+
+.rel a:hover span:first-child,
+.rel-card:hover .rel-card__txt {
+  color: var(--azul-900, #004aad);
+}
+
+.rel a span:last-child,
+.rel-card__flecha {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ebf3ff;
+  color: var(--azul-900, #004aad);
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              color 0.2s ease;
+}
+
+.rel a:hover span:last-child,
+.rel-card:hover .rel-card__flecha {
+  transform: translateX(4px);
+  background: var(--azul-900, #004aad);
+  color: #ffffff;
+}
+
+/* Caja de fuentes y regulación oficial */
+.fuentes-box {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f4;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(15, 35, 70, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fuentes-box__cab {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--linea-fina, #e6ebf3);
+}
+
+.fuentes-box__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--azul-900, #004aad);
+  background: #ebf3ff;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.fuentes-box__nota {
+  font-size: 0.86rem;
+  color: var(--tinta-3, #63738e);
+  margin: 0;
+}
+
+.fuentes-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.fuente-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--tinta, #0f2346);
+  background: #f8fafd;
+  border: 1px solid #dce5f2;
+  padding: 10px 16px;
+  border-radius: 12px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.fuente-chip::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--azul-900, #004aad);
+  flex-shrink: 0;
+}
+
+.fuentes {
+  padding-block: 24px 64px;
+  font-size: 0.875rem;
+  color: var(--tinta-3, #63738e);
+  display: grid;
+  gap: 6px;
+  border-top: 1px solid var(--linea-fina, #e6ebf3);
+  margin-top: 32px;
+}
+
+.fuentes b {
+  color: var(--tinta, #0f2346);
+}
+
+/* Reglas de accesibilidad y prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .prog i,
+  .sig,
+  .rel a,
+  .g-cta .btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+.solo-lector,
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 9. Clases auxiliares para los cuerpos de las 16 guías */
+.cuerpo .enlaces,
+.enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-top: 18px;
+}
+
+.cuerpo .enlaces a,
+.enlaces a {
+  color: var(--azul-900, #004aad);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cuerpo .enlaces a:hover,
+.enlaces a:hover {
+  color: var(--azul-700, #5271ff);
+}
+
+.etiqueta-ej {
+  margin-left: 8px;
+  background: var(--resalte, #ddf1ff);
+  color: var(--azul-900, #004aad);
+  font-size: 0.75rem;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.guia-reglas,
+.guia-dl {
+  margin: 20px 0 0;
+  max-width: 46rem;
+  display: grid;
+}
+
+.guia-reglas div,
+.guia-dl div {
+  padding: 14px 0;
+  border-top: 1px solid var(--linea-fina, #e6ebf3);
+  display: grid;
+  gap: 4px;
+}
+
+.guia-reglas div:first-child,
+.guia-dl div:first-child {
+  border-top: 1px solid var(--linea, #c9d3e3);
+}
+
+@media (min-width: 768px) {
+
+  .guia-reglas div,
+  .guia-dl div {
+    gap: 16px;
+    grid-template-columns: 14rem minmax(0, 1fr);
+  }
+}
+
+.guia-reglas dt,
+.guia-dl dt {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--tinta, #0f2346);
+}
+
+.guia-reglas dd,
+.guia-dl dd {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--tinta-2, #4a5a75);
+}
+
+.pendiente {
+  color: #d9381e;
+  background: rgba(217, 56, 30, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+}
+
+.cifra {
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   DISEÑO MODERNO DE TARJETAS Y SIDEBAR (ESTILO GUÍA EMAX CAPTURA)
+   ========================================================================== */
+
+.layout-moderno {
+  padding-top: 36px;
+}
+
+@media (min-width: 1000px) {
+  .lectura--moderna {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 300px !important;
+    gap: 48px !important;
+    align-items: start !important;
+    padding-block: 20px 48px !important;
+  }
+
+  .lectura--moderna .cuerpo-col {
+    order: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .lectura--moderna .ind-col {
+    order: 2 !important;
+    position: sticky !important;
+    top: 96px !important;
+    display: block !important;
+    align-self: start !important;
+  }
+}
+
+/* 1. Tarjeta "RESPUESTA RÁPIDA" */
+.card-rapida {
+  background: #EBF3FF;
+  border: 1.5px solid #C4D9FD;
+  border-radius: 22px;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+  box-shadow: 0 4px 16px rgba(0, 74, 173, 0.04);
+}
+
+.card-rapida__tag {
+  display: block;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #004AAD;
+  margin-bottom: 10px;
+}
+
+.card-rapida p {
+  font-size: 1.02rem;
+  line-height: 1.68;
+  color: #0F2346;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* 2. Encabezados de sección en color corporativo #004AAD */
+.lectura--moderna .cuerpo h2,
+.lectura--moderna .sh h2 {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  color: #004AAD;
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+  font-weight: 700;
+  margin-top: 44px;
+  margin-bottom: 16px;
+  letter-spacing: -0.015em;
+  border-top: none !important;
+  padding-top: 0 !important;
+  line-height: 1.25;
+}
+
+.lectura--moderna .sh {
+  margin-top: 44px !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  display: block !important;
+}
+
+/* 3. Tarjetas duales (.vs) estilo captura */
+.lectura--moderna .vs {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-block: 24px;
+}
+
+@media (min-width: 640px) {
+  .lectura--moderna .vs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.lectura--moderna .vs > div {
+  background: #EBF3FF !important;
+  border: 1.5px solid #C4D9FD !important;
+  border-radius: 20px !important;
+  padding: 22px 24px !important;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.04);
+}
+
+.lectura--moderna .vs h3,
+.lectura--moderna .vs b {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #004AAD;
+  margin: 0;
+}
+
+/* Viñetas personalizadas estilo captura */
+.card-bullets,
+.lectura--moderna .card-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.card-bullets li,
+.lectura--moderna .card-bullets li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #0F2346;
+}
+
+.card-bullets li::before,
+.lectura--moderna .card-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  top: -1px;
+  color: #004AAD;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* Lista limpia de empresa */
+.lista-empresa {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 24px;
+  display: grid;
+  gap: 10px;
+}
+
+.lista-empresa li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4A5A75;
+}
+
+.lista-empresa li::before {
+  content: "•";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  color: #004AAD;
+  font-size: 1.3rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* 4. Tarjetas de palancas (.reglas) estilo moderno */
+.lectura--moderna .reglas > div {
+  background: #EBF3FF;
+  border: 1.5px solid #C4D9FD;
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.04);
+}
+
+.lectura--moderna .reglas b {
+  color: #004AAD;
+  font-size: 1.05rem;
+}
+
+.lectura--moderna .reglas a {
+  color: #004AAD;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 5. Sidebar derecha: Tarjeta blanca elevada e índice */
+.ind-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(10, 27, 63, 0.08);
+  border: 1px solid #E6EDF5;
+  padding: 26px 22px;
+}
+
+.ind-card__titulo {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4A5A75;
+  margin: 0 0 16px;
+}
+
+.ind-card__lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.ind-card__lista a {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #4A5A75;
+  text-decoration: none;
+  transition: color 0.15s ease, transform 0.15s ease;
+  font-weight: 500;
+}
+
+.ind-card__lista a:hover,
+.ind-card__lista a.on {
+  color: #004AAD;
+  font-weight: 700;
+}
+
+.ind-card__sub {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #E6EDF5;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4A5A75;
+  margin-bottom: 0;
+}
+
+/* 6. Pastillas flotantes en forma de píldora */
+.pills-relacionadas {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.pill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 20px;
+  background: #FFFFFF;
+  border: 1px solid #E6EDF5;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(10, 27, 63, 0.05);
+  color: #0F2346;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pill-btn:hover {
+  transform: translateY(-2px);
+  border-color: #C4D9FD;
+  color: #004AAD;
+  box-shadow: 0 8px 24px rgba(0, 74, 173, 0.12);
+  background: #F8FAFD;
+}
+
+/* 7. Cuadrícula de puntos clave de "En resumen" */
+.resumen-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 20px;
+}
+
+@media (min-width: 640px) {
+  .resumen-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.resumen-card {
+  background: #FFFFFF;
+  border: 1px solid #C4D9FD;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+
+.resumen-card b {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #004AAD;
+}
+
+.resumen-card span {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #4A5A75;
+}
+
+/* 8. Tarjetas de las Cinco Palancas (.palancas-grid) */
+.palancas-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-block: 28px;
+}
+
+@media (min-width: 680px) {
+  .palancas-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+.palanca-card {
+  background: #EBF3FF;
+  border: 1.5px solid #C4D9FD;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.palanca-card:hover {
+  transform: translateY(-2px);
+  border-color: #004AAD;
+  box-shadow: 0 8px 24px rgba(0, 74, 173, 0.09);
+}
+
+.palanca-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.palanca-num {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #004AAD;
+  color: #FFFFFF;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.palanca-header b {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #004AAD;
+  line-height: 1.25;
+}
+
+.palanca-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #0F2346;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.palanca-enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #004AAD;
+  text-decoration: none;
+  padding-top: 10px;
+  border-top: 1px solid #C4D9FD;
+  margin-top: auto;
+  transition: color 0.15s ease;
+}
+
+.palanca-enlace i {
+  font-style: normal;
+  transition: transform 0.15s ease;
+}
+
+.palanca-enlace:hover {
+  color: #003C8C;
+  text-decoration: underline;
+}
+
+.palanca-enlace:hover i {
+  transform: translateX(3px);
+}
+
+.palanca-enlaces-multi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  padding-top: 10px;
+  border-top: 1px solid #C4D9FD;
+  margin-top: auto;
+}
+
+.palanca-enlaces-multi .palanca-enlace {
+  padding-top: 0;
+  border-top: none;
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   Estilo visual unificado y moderno para todas las guías (.lectura--moderna)
+   ========================================================================== */
+
+/* 1. Tablas modernas (.tabla, .tabla-guia, .tcard) */
+.lectura--moderna .tabla,
+.lectura--moderna .tabla-guia,
+.lectura--moderna .tcard {
+  overflow-x: auto;
+  border: 1.5px solid #E2E8F4 !important;
+  border-radius: 20px !important;
+  margin-block: 28px !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 18px rgba(15, 35, 70, 0.04) !important;
+}
+
+.lectura--moderna .tabla table,
+.lectura--moderna .tabla-guia table,
+.lectura--moderna .tcard table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+  min-width: 480px;
+}
+
+.lectura--moderna .tabla th,
+.lectura--moderna .tabla td,
+.lectura--moderna .tabla-guia th,
+.lectura--moderna .tabla-guia td,
+.lectura--moderna .tcard th,
+.lectura--moderna .tcard td {
+  text-align: left;
+  vertical-align: middle;
+  padding: 14px 20px !important;
+  border-top: 1px solid #EAEFF7 !important;
+  color: #0F2346 !important;
+  line-height: 1.5;
+}
+
+.lectura--moderna .tabla thead th,
+.lectura--moderna .tabla-guia thead th,
+.lectura--moderna .tcard thead th {
+  background: #EBF3FF !important;
+  border-top: 0 !important;
+  border-bottom: 1.5px solid #C4D9FD !important;
+  font-family: var(--f-texto, "Poppins", sans-serif) !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: #004AAD !important;
+  font-weight: 700 !important;
+  padding: 16px 20px !important;
+}
+
+.lectura--moderna .tabla tbody th,
+.lectura--moderna .tabla-guia tbody th {
+  font-weight: 600;
+  color: #004AAD !important;
+}
+
+.lectura--moderna .tabla tbody tr:nth-child(even),
+.lectura--moderna .tabla-guia tbody tr:nth-child(even),
+.lectura--moderna .tcard tbody tr:nth-child(even) {
+  background: #F8FAFD !important;
+}
+
+.lectura--moderna .tabla tbody tr:hover,
+.lectura--moderna .tabla-guia tbody tr:hover,
+.lectura--moderna .tcard tbody tr:hover {
+  background: #F0F6FF !important;
+}
+
+.lectura--moderna .tabla tr.destacada,
+.lectura--moderna .tabla-guia tr.destacada {
+  background: #EBF3FF !important;
+}
+
+.lectura--moderna .tabla tr.destacada th,
+.lectura--moderna .tabla tr.destacada td,
+.lectura--moderna .tabla-guia tr.destacada th,
+.lectura--moderna .tabla-guia tr.destacada td {
+  color: #004AAD !important;
+  font-weight: 700 !important;
+  border-top-color: #C4D9FD !important;
+  border-bottom: 1.5px solid #C4D9FD !important;
+}
+
+/* Pastillas de periodos tarifarios dentro de tablas */
+.periodo {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+.p-P1 { background: #FEE2E2; color: #991B1B; }
+.p-P2 { background: #FFEDD5; color: #9A3412; }
+.p-P3 { background: #FEF3C7; color: #92400E; }
+.p-P4 { background: #E0E7FF; color: #3730A3; }
+.p-P5 { background: #E0F2FE; color: #0369A1; }
+.p-P6 { background: #DCFCE7; color: #166534; }
+
+/* 2. Listas de definición estilo tarjetas (.guia-dl) */
+.lectura--moderna .guia-dl {
+  margin: 24px 0 32px;
+  max-width: 100%;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .lectura--moderna .guia-dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.lectura--moderna .guia-dl > div {
+  background: #EBF3FF;
+  border: 1.5px solid #C4D9FD;
+  border-radius: 18px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.04);
+}
+
+.lectura--moderna .guia-dl dt {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #004AAD;
+}
+
+.lectura--moderna .guia-dl dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #0F2346;
+}
+
+/* 3. Enlaces en píldoras (.enlaces) */
+.lectura--moderna .enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 20px;
+  margin-bottom: 28px;
+}
+
+.lectura--moderna .enlaces a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: #EBF3FF;
+  border: 1.5px solid #C4D9FD;
+  border-radius: 999px;
+  color: #004AAD;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lectura--moderna .enlaces a:hover {
+  background: #004AAD;
+  color: #FFFFFF;
+  border-color: #004AAD;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 74, 173, 0.15);
+}
+
+/* 4. Bloques de ejemplo (.ej) */
+.lectura--moderna .ej {
+  margin-inline: 0;
+  padding: 28px 30px;
+  border-radius: 20px;
+  background: #EBF3FF;
+  border: 1.5px solid #C4D9FD;
+  display: grid;
+  gap: 18px;
+  margin-block: 28px;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.04);
+}
+
+.lectura--moderna .ej__t h3 {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 700;
+  color: #004AAD;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* 5. Acordeones de preguntas (.faq) */
+.lectura--moderna .faq {
+  border-top: 1.5px solid #E2E8F4;
+  margin-block: 28px;
+}
+
+.lectura--moderna .faq details {
+  border-bottom: 1.5px solid #E2E8F4;
+}
+
+.lectura--moderna .faq summary {
+  padding: 18px 4px;
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #004AAD;
+}
+
+.lectura--moderna .faq summary:hover {
+  color: #003C8C;
+}
+
+/* 6. Bloque de Señales (.sen) */
+.lectura--moderna .sen {
+  margin-top: 48px;
+  padding: 28px 32px;
+  border-radius: 20px;
+  background: #EBF3FF;
+  border: 1.5px solid #C4D9FD;
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.04);
+}
+
+.lectura--moderna .sen h2 {
+  color: #004AAD;
+  font-size: 1.25rem;
+  margin: 0 0 16px;
+}
+
+.lectura--moderna .sen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lectura--moderna .sen li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #0F2346;
+}
+
+.lectura--moderna .sen li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  top: -1px;
+  color: #004AAD;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* 7. Tarjeta Siguiente Guía (.sig) */
+.lectura--moderna .sig {
+  display: block;
+  margin-top: 36px;
+  padding: 24px 28px;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F4;
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(15, 35, 70, 0.03);
+  transition: all 0.2s ease;
+}
+
+.lectura--moderna .sig:hover {
+  border-color: #004AAD;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 74, 173, 0.08);
+}
+
+.lectura--moderna .sig small {
+  font-family: var(--f-dato, "IBM Plex Sans", monospace);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #004AAD;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.lectura--moderna .sig b {
+  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0F2346;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.lectura--moderna .sig span {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #4A5A75;
+}

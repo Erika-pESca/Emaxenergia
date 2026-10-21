@@ -1,0 +1,71 @@
+---
+// Componente de Titular en Dos Tiempos según especificación de EMAX
+// Poppins 700 en mayúsculas con text-transform y acento en cursiva serif Merriweather 400
+interface Props {
+  tag?: "h1" | "h2" | "h3";
+  principal: string;
+  acento?: string;
+  claro?: boolean;
+  size?: "normal" | "s";
+  id?: string;
+  class?: string;
+}
+
+const {
+  tag = "h2",
+  principal,
+  acento,
+  claro = false,
+  size = "s",
+  id,
+  class: className = "",
+} = Astro.props;
+
+const Tag = tag;
+---
+
+<Tag
+  id={id}
+  class:list={[
+    "tit",
+    size === "s" && "tit--s",
+    claro && "tit--claro",
+    className,
+  ]}
+>
+  {principal}
+  {acento && <em>{acento}</em>}
+</Tag>
+
+<style>
+  .tit {
+    font-family: var(--f-texto, "Poppins", sans-serif);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+    line-height: 1.08;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .tit em {
+    display: block;
+    text-transform: none;
+    font-family: var(--f-acento, "Merriweather", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.1;
+    color: var(--azul-400, #38b6ff);
+    letter-spacing: 0;
+  }
+
+  .tit--s {
+    font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.25rem);
+  }
+
+  .tit--claro em {
+    color: var(--azul-900, #004aad);
+  }
+</style>

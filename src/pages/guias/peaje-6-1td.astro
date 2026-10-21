@@ -1,0 +1,69 @@
+---
+// Guía · El peaje 6.1TD: qué es y en qué cambia frente a la 3.0TD
+// Ruta: /guias/peaje-6-1td
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-lo-decide",
+    "titulo": "Qué decide que tu suministro sea 6.1TD"
+  },
+  {
+    "id": "comparte",
+    "titulo": "Lo que comparte con la 3.0TD"
+  },
+  {
+    "id": "cambia",
+    "titulo": "Lo que cambia"
+  },
+  {
+    "id": "que-mirar",
+    "titulo": "Qué mirar si eres 6.1TD"
+  }
+];
+const resumen = [
+  {
+    "dt": "Qué lo decide",
+    "dd": "La tensión de tu conexión: más de 1 kV y menos de 30 kV. No la potencia."
+  },
+  {
+    "dt": "Lo que comparte",
+    "dd": "Seis periodos, el mismo calendario y seis potencias, cada una igual o mayor que la anterior."
+  },
+  {
+    "dt": "Lo que cambia",
+    "dd": "Los precios de peajes y cargos, que los fija la regulación cada año."
+  },
+  {
+    "dt": "Lo que no es",
+    "dd": "Un contrato que se elige: pasar a 6.1TD supone cambiar la conexión."
+  }
+];
+const senales = [
+  "Tu factura dice 6.1TD y te comparan con ofertas pensadas para 3.0TD.",
+  "Te proponen pasarte a 6.1TD como si fuera un cambio de contrato.",
+  "Tu nave tiene la misma potencia en los seis periodos desde que se hizo la conexión."
+];
+const cta = {
+  "texto": "Con tu factura te decimos si la potencia de cada periodo encaja con lo que usa tu instalación.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar mi factura"
+};
+---
+
+<Guia
+  slug="peaje-6-1td"
+  h1="El peaje 6.1TD: qué es y en qué cambia frente a la 3.0TD"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="La 6.1TD es el peaje de acceso de los suministros conectados a más de 1 kV y menos de 30 kV. Depende de la tensión de tu conexión, no de tu potencia. Como la 3.0TD, tiene seis periodos y seis potencias, cada una igual o mayor que la anterior. Cambian los precios regulados, no la forma de decidir."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Circular 3/2020 de la CNMC, arts. 6, 7, 8.9, 9.4 y 9.5 (redacción de la Circular 1/2025) · Resolución de peajes de la CNMC y Orden TED/1524/2025 (precios de 2026)"
+>
+ <h2 id="que-lo-decide">Qué decide que tu suministro sea 6.1TD</h2> <p>Tu peaje lo decide la tensión a la que está conectada tu instalación. En baja tensión, con más de 15 kW en algún periodo, es 3.0TD. Conectada a más de 1 kV y menos de 30 kV, es 6.1TD, sin potencia mínima ni máxima.</p> <p class="nota">El límite de 450 kW que todavía se lee en muchas páginas desapareció con la Circular 3/2020. Si alguien te propone "pasarte a 6.1TD", no es una decisión de contrato: cambiar de peaje supone cambiar la conexión.</p> <h2 id="comparte">Lo que comparte con la 3.0TD</h2> <ul> <li><b>Seis periodos</b>, de P1, el más caro, a P6, el más barato, con el mismo calendario de horas, días y temporadas.</li> <li><b>Seis potencias contratadas</b>, una por periodo, y cada una igual o mayor que la anterior. Si tu pico cae en un periodo caro, arrastra a todos los que van detrás.</li> <li><b>Excesos de potencia</b> cuando pides más de lo contratado en un periodo. Se calculan con la medida de cada cuarto de hora.</li> <li><b>Energía reactiva</b>: se paga de P1 a P5 la que pasa del 33 % de la energía activa.</li> </ul> <p class="enlaces"><a href="/guias/peaje-3-0td">El peaje 3.0TD, periodo a periodo</a></p> <h2 id="cambia">Lo que cambia</h2> <p>Los precios del término de potencia y del término de energía de los peajes y los cargos son distintos de los de la 3.0TD. Los fija la regulación cada año y son los mismos con cualquier comercializadora: no se negocian.</p> <p>Lo que sí se decide con tus datos es lo mismo que en la 3.0TD: cuánta potencia contratar en cada periodo, si te compensa corregir la reactiva y cómo compras la energía.</p> <h2 id="que-mirar">Qué mirar si eres 6.1TD</h2> <ul> <li>Si tienes la misma potencia en los seis periodos, o si cada una responde a lo que usa tu instalación en ese periodo.</li> <li>Tus maxímetros o tu curva de los últimos doce meses, periodo a periodo.</li> <li>Si pagas excesos y en qué periodos se repiten.</li> <li>Si pagas reactiva y cuánto al año: con motores y compresores grandes, puede compensar corregirla en la instalación.</li> </ul> <p class="enlaces"><a href="/guias/potencia-contratada">Potencia contratada</a><a href="/guias/energia-reactiva">Energía reactiva</a></p> 
+</Guia>

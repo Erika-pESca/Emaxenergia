@@ -1,0 +1,238 @@
+---
+// Sección: "¿Qué te ha pasado?"
+// Diseño limpio, corporativo y minimalista fiel al formato original de la web
+// Dos columnas ordenadas con la duda del cliente, el enlace a la guía y el chevron
+
+interface ItemPasado {
+  pregunta: string;
+  guia: string;
+  href: string;
+}
+
+const situaciones: ItemPasado[] = [
+  {
+    pregunta: "Quiero pagar menos de luz y no sé por dónde empezar",
+    guia: "Cómo bajar la factura: las cinco palancas, en orden",
+    href: "/guias/bajar-factura-luz-empresa",
+  },
+  {
+    pregunta: "Me ha llegado una carta que cambia el precio",
+    guia: "Qué hacer antes de decidir",
+    href: "/guias/revision-precio-luz-empresa",
+  },
+  {
+    pregunta: "Mi contrato se acaba o se renueva pronto",
+    guia: "Renovación y permanencia: qué revisar antes",
+    href: "/guias/renovacion-contrato-luz-empresa",
+  },
+  {
+    pregunta: "Me ha subido la factura y no sé por qué",
+    guia: "Por qué ha subido la factura de tu empresa",
+    href: "/guias/subida-factura-luz-empresa",
+  },
+  {
+    pregunta: "Me aparecen excesos de potencia",
+    guia: "Exceso de potencia",
+    href: "/guias/exceso-de-potencia",
+  },
+  {
+    pregunta: "Me cobran energía reactiva y no sé qué es",
+    guia: "Energía reactiva",
+    href: "/guias/energia-reactiva",
+  },
+  {
+    pregunta: "No entiendo mi factura",
+    guia: "Cómo leer la factura de luz de tu empresa",
+    href: "/guias/factura-luz-empresa",
+  },
+  {
+    pregunta: "No sé si me sobra o me falta potencia",
+    guia: "Potencia contratada",
+    href: "/guias/potencia-contratada",
+  },
+  {
+    pregunta: "Tengo que elegir entre fijo e indexado",
+    guia: "Precio fijo o indexado",
+    href: "/guias/precio-fijo-o-indexado",
+  },
+  {
+    pregunta: "Me piden el CUPS y no sé si darlo",
+    guia: "Qué se ve con tu CUPS y qué no",
+    href: "/guias/cups-y-tus-datos",
+  },
+  {
+    pregunta: "Mi contrato es indexado y no sé qué es OMIE",
+    guia: "Qué es OMIE y qué papel juega en tu factura",
+    href: "/guias/omie",
+  },
+  {
+    pregunta: "Mi factura dice 6.1TD",
+    guia: "El peaje 6.1TD",
+    href: "/guias/peaje-6-1td",
+  },
+  {
+    pregunta: "No sé qué horas son las baratas",
+    guia: "El peaje 3.0TD, periodo a periodo",
+    href: "/guias/peaje-3-0td",
+  },
+];
+---
+
+<section class="seccion-pasado" aria-labelledby="h2-pasado">
+  <div class="contenedor">
+    <div class="seccion-cabecera">
+      <h2 class="seccion-titulo" id="h2-pasado">
+        ¿QUÉ TE HA PASADO <span class="titulo-cursiva">en tu empresa?</span>
+      </h2>
+    </div>
+
+    <ul role="list" class="gx">
+      {
+        situaciones.map((item) => (
+          <li>
+            <a href={item.href}>
+              <span class="gx__s">{item.pregunta}</span>
+              <span class="gx__g">{item.guia}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN ¿TE HA PASADO ALGO EN TU EMPRESA? - TIPOGRAFÍA CORPORATIVA Y CURSIVA
+     ========================================================================== */
+  .seccion-pasado {
+    padding: clamp(48px, 6vw, 72px) 0;
+    background: #ffffff;
+  }
+
+  .contenedor {
+    max-width: var(--ancho-max, 1200px);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .seccion-cabecera {
+    max-width: 52rem;
+    margin: 0 auto 36px;
+    text-align: center;
+  }
+
+  .seccion-titulo {
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-size: clamp(1.85rem, 1.5rem + 1.8vw, 2.75rem);
+    font-weight: 800;
+    color: var(--tinta, #0f2346);
+    line-height: 1.18;
+    margin: 0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #1a6ff7;
+    letter-spacing: -0.01em;
+    display: inline-block;
+  }
+
+  .seccion-subtitulo {
+    font-family: var(--font-texto, "Inter", sans-serif);
+    font-size: 1.05rem;
+    color: #63738e;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Rejilla de 2 columnas original */
+  .gx {
+    margin: 32px 0 0;
+    gap: 0 48px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+  }
+
+  @media (min-width: 768px) {
+    .gx {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .gx li {
+    border-top: 1px solid var(--linea, #d6e0ee);
+  }
+
+  .gx a {
+    padding: 20px 32px 20px 0;
+    color: var(--tinta, #0f2346);
+    gap: 4px;
+    text-decoration: none;
+    display: grid;
+    position: relative;
+    transition: color 0.15s ease;
+  }
+
+  /* Chevron fino oficial en azul */
+  .gx a::after {
+    content: "";
+    right: 8px;
+    top: 50%;
+    margin-top: -5px;
+    border-top: 2px solid var(--azul-900, #004aad);
+    border-right: 2px solid var(--azul-900, #004aad);
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    transform: rotate(45deg);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s ease;
+  }
+
+  .gx a:hover::after {
+    transform: translateX(4px) rotate(45deg);
+  }
+
+  /* Duda en texto negrita oscuro */
+  .gx__s {
+    font-family: var(--font-texto, "Inter", sans-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--tinta, #0f2346);
+    line-height: 1.35;
+    transition: color 0.15s ease;
+  }
+
+  .gx a:hover .gx__s {
+    color: var(--azul-900, #004aad);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Nombre de la guía en azul corporativo */
+  .gx__g {
+    font-family: var(--font-texto, "Inter", sans-serif);
+    font-size: 0.9375rem;
+    color: var(--azul-900, #004aad);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .gx a {
+      padding: 16px 24px 16px 0;
+    }
+    .gx__s {
+      font-size: 0.98rem;
+    }
+    .gx__g {
+      font-size: 0.88rem;
+    }
+  }
+</style>

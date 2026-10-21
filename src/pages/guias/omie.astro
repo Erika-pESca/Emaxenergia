@@ -1,0 +1,73 @@
+---
+// Guía · Qué es OMIE y qué papel juega en tu factura
+// Ruta: /guias/omie
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-hace",
+    "titulo": "Qué hace OMIE"
+  },
+  {
+    "id": "tu-factura",
+    "titulo": "Cómo llega a tu factura"
+  },
+  {
+    "id": "omip",
+    "titulo": "Y OMIP, ¿qué es?"
+  },
+  {
+    "id": "no-confundas",
+    "titulo": "No lo confundas"
+  },
+  {
+    "id": "que-revisar",
+    "titulo": "Qué revisar si tu contrato es indexado"
+  }
+];
+const resumen = [
+  {
+    "dt": "Qué es",
+    "dd": "El operador del mercado mayorista de electricidad de España y Portugal: el diario y el intradiario."
+  },
+  {
+    "dt": "Su precio",
+    "dd": "Uno por cada cuarto de hora del día siguiente, desde el 1 de octubre de 2025."
+  },
+  {
+    "dt": "En tu factura",
+    "dd": "Es un ingrediente. Después se suman otros costes del sistema, peajes, cargos, impuestos y el margen de tu comercializadora."
+  },
+  {
+    "dt": "Si eres indexado",
+    "dd": "Mira a qué precio de OMIE se refiere tu contrato y con qué fórmula se calcula el tuyo."
+  }
+];
+const senales = [
+  "Tu contrato indexado no dice qué precio de OMIE usa ni cómo se le suman los demás componentes.",
+  "Comparas el precio de OMIE de un día con el kWh que ves en tu factura.",
+  "Te ofrecen un precio fijo sin enseñarte cómo se ha movido el mercado en tus horas."
+];
+const cta = {
+  "texto": "Con tu factura te decimos qué parte de lo que pagas sigue al mercado y cuál no.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar mi factura"
+};
+---
+
+<Guia
+  slug="omie"
+  h1="Qué es OMIE y qué papel juega en tu factura"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="OMIE organiza el mercado mayorista diario e intradiario de electricidad de España y Portugal. Cada día casa las ofertas de compra y venta y publica el precio de cada cuarto de hora del día siguiente. Ese precio es solo un ingrediente de tu factura: después se suman otros costes del sistema, peajes, cargos, impuestos y el margen de tu comercializadora."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="OMIE, nota de prensa de 1 de octubre de 2025: negociación en intervalos de 15 minutos en el mercado diario · Resolución de 28 de febrero de 2025 de la CNMC, reglas de funcionamiento de los mercados diario e intradiario adaptadas a la negociación cuartohoraria (BOE-A-2025-4908)"
+>
+ <h2 id="que-hace">Qué hace OMIE</h2> <p class="destacado">OMIE no vende electricidad a tu empresa. Es la casa de subastas donde se fija el precio mayorista que luego usan las comercializadoras como referencia.</p> <ul> <li>Recoge las ofertas de venta de los productores y las de compra de comercializadoras y grandes consumidores.</li> <li>Las casa en el mercado diario, acoplado con el resto de Europa, y publica un precio para cada cuarto de hora del día siguiente.</li> <li>Gestiona también el mercado intradiario, donde esas posiciones se ajustan más cerca de la hora de entrega.</li> </ul> <p class="nota">Desde la entrega del 1 de octubre de 2025, el mercado diario negocia en periodos de 15 minutos: en un día normal hay 96 precios, no 24. Si comparas datos de antes y de después de esa fecha, compara medias de la misma hora.</p> <h2 id="tu-factura">Cómo llega a tu factura</h2> <p>Depende de la modalidad de tu contrato.</p> <ul> <li><b>Indexado.</b> El precio de tu energía se calcula a partir del precio de OMIE de cada periodo, más los componentes que se pactan en el contrato. Si OMIE sube, tu precio sube; si baja, baja.</li> <li><b>Precio fijo.</b> La comercializadora incorpora su previsión del mercado al calcular tu precio y asume el riesgo de equivocarse. Tú pagas lo pactado aunque OMIE baje.</li> </ul> <p>En los dos casos, los peajes y los cargos no los fija el mercado, sino la regulación.</p> <p class="enlaces"><a href="/guias/precio-fijo-o-indexado">Precio fijo o indexado: cómo decidir</a><a href="/tarifas#modalidad">Las modalidades, por dentro</a></p>  <h2 id="omip">Y OMIP, ¿qué es?</h2> <p>OMIP es el mercado ibérico de futuros de electricidad, con sede en Lisboa. Allí se negocia hoy el precio de la energía para meses, trimestres y años que todavía no han llegado.</p> <ul> <li><b>OMIE</b> fija el precio de mañana. <b>OMIP</b> enseña lo que el mercado espera para los próximos meses y años.</li> <li>Cuando una comercializadora te ofrece un precio fijo para uno o dos años, su previsión del mercado entra en ese precio.</li> <li>Consultar los futuros antes de firmar un precio fijo te dice si lo que te ofrecen está cerca de lo que espera el mercado o lejos.</li> </ul> <h2 id="no-confundas">No lo confundas</h2> <ul> <li>El precio de OMIE no es el precio de tu factura.</li> <li>A ese precio hay que sumar peajes, cargos, impuestos y el margen de comercialización.</li> <li>Un precio de OMIE alto un día concreto no significa que tu factura suba lo mismo ese día.</li> </ul> <h2 id="que-revisar">Qué revisar si tu contrato es indexado</h2> <ul> <li>A qué mercado y a qué fórmula hace referencia exactamente.</li> <li>El histórico de precios de OMIE, antes de comparar ofertas a precio fijo.</li> <li>No compares un solo día con tu precio contratado: compara medias de periodos similares, ponderadas por tu consumo.</li> <li>Si tus horas de consumo coinciden con las horas en que el precio suele ser más bajo o más alto.</li> </ul> 
+</Guia>

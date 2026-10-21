@@ -1,0 +1,1104 @@
+---
+// Componente: CasoRealObrador.astro
+// Ubicación: src/components/metodo/Que recibes/CasoRealObrador.astro
+// Caso real de auditoría con fondo gris del boceto (#dbe2ec) + lema editorial jerarquizado + motor scrollytelling exacto
+---
+
+<section class="caso-obrador-seccion" id="factura-obrador" aria-labelledby="h2-obrador-tit">
+  <div class="contenedor-obrador">
+    <!-- Barra superior: Caso de ejemplo y supuestos técnicos -->
+      <div class="caso-supuestos-bar">
+        <span class="caso-pill-azul">Caso de ejemplo</span>
+        <span class="caso-supuestos-texto">
+          Los peajes, los cargos y los impuestos son los oficiales de 2026.
+        </span>
+        <button type="button" class="btn-supuestos-enlace" data-abrir-funnel data-tramo-msg="Consulta los supuestos técnicos del caso real de panadería.">
+          Ver los supuestos
+        </button>
+      </div>
+
+      <!-- Encabezado editorial del caso -->
+      <header class="caso-header">
+        <h2 id="h2-obrador-tit" class="caso-h2">
+          2.078 € EN FEBRERO. ESTO<br />
+          ES LO QUE HAY <span class="caso-h2-cursiva">detrás.</span>
+        </h2>
+        <p class="caso-bajada">
+          Es la factura de un obrador de panadería con tienda. Hornea de lunes a sábado de 3 a 8 de la mañana, abre la tienda de 8 a 20 y tiene las cámaras encendidas todo el día. Así la leemos.
+        </p>
+      </header>
+
+      <!-- Escenario Scrollytelling en dos columnas: Factura sticky a la izquierda + Pasos fluidos a la derecha -->
+      <div class="caso-escenario">
+        <!-- COLUMNA IZQUIERDA: Factura técnica fija (Sticky) -->
+        <aside class="factura-col">
+          <div class="factura-tarjeta focus" id="factura-sheet-obrador" aria-label="Factura técnica auditada de febrero">
+            <div class="factura-cabecera">
+              <div class="factura-meta-titular">
+                <span><b>Titular:</b> Empresa de ejemplo, S.L.</span>
+                <span class="factura-cups"><b>CUPS:</b> ES0000000000000000XX</span>
+                <span class="factura-fin-cto"><b>Fin contrato:</b> 30-11-2026</span>
+              </div>
+              <span class="factura-cab-peaje">3.0TD · Feb 2026</span>
+            </div>
+
+            <!-- Potencias contratadas de la cabecera -->
+            <div class="factura-tabla-potencias">
+              <span class="pot-mini-tit">Potencias contratadas por periodo (kW)</span>
+              <div class="pot-mini-cols">
+                <span><b>P1</b> 45</span>
+                <span><b>P2</b> 45</span>
+                <span><b>P3</b> 45</span>
+                <span><b>P4</b> 45</span>
+                <span><b>P5</b> 45</span>
+                <span><b>P6</b> 45</span>
+              </div>
+            </div>
+
+            <!-- Maxímetros por periodo -->
+            <div class="factura-maximetros-fila">
+              <span class="pot-mini-tit">Maxímetros por periodo (kW)</span>
+              <div class="maxi-mini-cols">
+                <span><b>P1</b> 22</span>
+                <span><b>P2</b> 22</span>
+                <span><b>P6</b> 40</span>
+              </div>
+            </div>
+
+            <!-- Zona 1: Cuándo consume -->
+            <section class="factura-zona z-consumo on" data-paso="0" data-note="El horno">
+              <h4 class="zona-titulo">
+                <span>Consumo por periodo</span>
+                <span class="zona-sub">10.080 kWh total</span>
+              </h4>
+              <div class="factura-fila">
+                <span class="fila-lbl">P1</span>
+                <span class="fila-barra"><i style="--w: 44.8%;"></i></span>
+                <span class="fila-val">2.600 kWh</span>
+              </div>
+              <div class="factura-fila">
+                <span class="fila-lbl">P2</span>
+                <span class="fila-barra"><i style="--w: 29%;"></i></span>
+                <span class="fila-val">1.680 kWh</span>
+              </div>
+              <div class="factura-fila fila-destacada">
+                <span class="fila-lbl"><b>P6</b></span>
+                <span class="fila-barra barra-cian"><i style="--w: 100%;"></i></span>
+                <span class="fila-val"><b>5.800 kWh</b></span>
+              </div>
+            </section>
+
+            <!-- Zona 2: Potencia -->
+            <section class="factura-zona z-potencia" data-paso="1" data-note="23 kW de más">
+              <h4 class="zona-titulo">
+                <span>Potencia contratada</span>
+                <span class="zona-sub">Contratada vs Real</span>
+              </h4>
+              <div class="factura-fila">
+                <span class="fila-lbl">P1 a P6</span>
+                <span class="fila-barra"><i style="--w: 100%;"></i></span>
+                <span class="fila-val">45 kW</span>
+              </div>
+              <div class="factura-fila fila-destacada">
+                <span class="fila-lbl"><b>Max. P1-P2</b></span>
+                <span class="fila-barra barra-hueco barra-cian"><i style="--w: 48.9%;"></i></span>
+                <span class="fila-val"><b>22 kW</b></span>
+              </div>
+              <div class="factura-fila">
+                <span class="fila-lbl">Max. P6</span>
+                <span class="fila-barra barra-hueco"><i style="--w: 88.9%;"></i></span>
+                <span class="fila-val">40 kW</span>
+              </div>
+            </section>
+
+            <!-- Zona 3: El precio -->
+            <section class="factura-zona z-precio" data-paso="2" data-note="Mismo precio">
+              <h4 class="zona-titulo">
+                <span>Término de energía</span>
+                <span class="zona-sub">Precio único</span>
+              </h4>
+              <div class="factura-fila fila-destacada">
+                <span class="fila-lbl"><b>10.080 kWh × 0,1450 €</b></span>
+                <span class="fila-barra"><i style="--w: 100%;"></i></span>
+                <span class="fila-val"><b>1.461,60 €</b></span>
+              </div>
+            </section>
+
+            <!-- Zona 4: Energía reactiva -->
+            <section class="factura-zona z-reactiva" data-paso="3" data-note="21,34 € evitable">
+              <h4 class="zona-titulo">
+                <span>Energía reactiva</span>
+                <span class="zona-sub">Recargo evitable</span>
+              </h4>
+              <div class="factura-fila">
+                <span class="fila-lbl">P1 + P2</span>
+                <span class="fila-barra barra-alerta"><i style="--w: 100%;"></i></span>
+                <span class="fila-val">21,34 €</span>
+              </div>
+            </section>
+
+            <!-- Totales de la factura -->
+            <div class="factura-totales-caja">
+              <div class="tot-item">
+                <span>Potencia P1-P6 + Impuestos</span>
+                <span>234,60 €</span>
+              </div>
+              <div class="tot-item tot-destacado">
+                <span><b>Total factura febrero</b></span>
+                <span class="tot-val"><b>2.078,10 €</b></span>
+              </div>
+            </div>
+
+            <button type="button" class="btn-factura-tarifa" data-abrir-funnel data-tramo-msg="Quiero ver la tarifa que salió de la auditoría de esta factura.">
+              <span>Ver la tarifa que salió de esta lectura</span>
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3.5 10.5 8 6 12.5"></path>
+              </svg>
+            </button>
+          </div>
+        </aside>
+
+        <!-- COLUMNA DERECHA: Pasos Interactivos con Scrollytelling exacto de Así leemos una factura -->
+        <div class="pasos-col">
+          <div class="pasos-carril" id="pasos-carril-obrador">
+            <!-- Paso 1: Cuándo consume -->
+            <article class="paso-tarjeta on" data-paso-idx="0">
+              <div class="paso-num-header">
+                <span class="paso-circulo-num">1</span>
+                <h3 class="paso-titulo">Cuándo consume</h3>
+              </div>
+
+              <div class="paso-cuerpo-editorial">
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">La factura dice</span>
+                  <p class="dialogo-txt destacada">5.800 de los 10.080 kWh del mes están en P6.</p>
+                </div>
+
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">Para el obrador significa</span>
+                  <p class="dialogo-txt">
+                    P6 son las noches, los fines de semana y los festivos. Aquí es el horno de madrugada, las cámaras y los sábados. Más de la mitad de lo que gasta cae en las horas con los peajes y cargos más bajos.
+                  </p>
+                </div>
+
+                <div class="bloque-dialogo diag-caja">
+                  <span class="dialogo-sub diag-tit">El diagnóstico miraría</span>
+                  <p class="dialogo-txt">
+                    Si pagar por periodos le haría pagar cada kWh con la parte regulada que le corresponde, y no con una media.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Paso 2: La potencia -->
+            <article class="paso-tarjeta" data-paso-idx="1">
+              <div class="paso-num-header">
+                <span class="paso-circulo-num">2</span>
+                <h3 class="paso-titulo">La potencia</h3>
+              </div>
+
+              <div class="paso-cuerpo-editorial">
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">La factura dice</span>
+                  <p class="dialogo-txt destacada">
+                    45 kW contratados en los seis periodos. El maxímetro marca 22 kW de día y 40 kW en P6.
+                  </p>
+                </div>
+
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">Para el obrador significa</span>
+                  <p class="dialogo-txt">
+                    Paga de día una potencia que no usa. Su pico no llega a mediodía: llega de madrugada, cuando arranca el horno.
+                  </p>
+                </div>
+
+                <div class="bloque-dialogo diag-caja">
+                  <span class="dialogo-sub diag-tit">El diagnóstico miraría</span>
+                  <p class="dialogo-txt">
+                    Cuánta potencia necesita en cada periodo, con los maxímetros de los últimos doce meses y no solo los de febrero.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Paso 3: El precio -->
+            <article class="paso-tarjeta" data-paso-idx="2">
+              <div class="paso-num-header">
+                <span class="paso-circulo-num">3</span>
+                <h3 class="paso-titulo">El precio</h3>
+              </div>
+
+              <div class="paso-cuerpo-editorial">
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">La factura dice</span>
+                  <p class="dialogo-txt destacada">Energía a precio único: 0,1450 €/kWh.</p>
+                </div>
+
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">Para el obrador significa</span>
+                  <p class="dialogo-txt">
+                    Paga igual el kWh de las 5 de la mañana que el de las 13. Pero la parte regulada de las 13 es unas 22 veces mayor. Con un precio único, esa diferencia se reparte como una media que no es la suya.
+                  </p>
+                </div>
+
+                <div class="bloque-dialogo diag-caja">
+                  <span class="dialogo-sub diag-tit">El diagnóstico miraría</span>
+                  <p class="dialogo-txt">
+                    Qué estructura de precio encaja con cómo se reparte su consumo.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Paso 4: La reactiva -->
+            <article class="paso-tarjeta" data-paso-idx="3">
+              <div class="paso-num-header">
+                <span class="paso-circulo-num">4</span>
+                <h3 class="paso-titulo">La energía reactiva</h3>
+              </div>
+
+              <div class="paso-cuerpo-editorial">
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">La factura dice</span>
+                  <p class="dialogo-txt destacada">Penalización acumulada en P1 y P2 de 21,34 €.</p>
+                </div>
+
+                <div class="bloque-dialogo">
+                  <span class="dialogo-sub">Para el obrador significa</span>
+                  <p class="dialogo-txt">
+                    Más de 250 € al año tirados por falta de compensación en cámaras frigoríficas.
+                  </p>
+                </div>
+
+                <div class="bloque-dialogo diag-caja">
+                  <span class="dialogo-sub diag-tit">El diagnóstico miraría</span>
+                  <p class="dialogo-txt">
+                    El cálculo de una batería de condensadores para eliminar al 100% este sobrecoste en cada factura futura.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Indicadores para navegación táctil en móvil -->
+          <div class="pasos-dots" role="group" aria-label="Seleccionar paso de la factura">
+            <button class="dot-btn" type="button" aria-label="Paso 1: Consumo" aria-current="true" data-dot-idx="0"></button>
+            <button class="dot-btn" type="button" aria-label="Paso 2: Potencia" aria-current="false" data-dot-idx="1"></button>
+            <button class="dot-btn" type="button" aria-label="Paso 3: Precio" aria-current="false" data-dot-idx="2"></button>
+            <button class="dot-btn" type="button" aria-label="Paso 4: Reactiva" aria-current="false" data-dot-idx="3"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra inferior oficial del boceto -->
+      <footer class="caso-bottom-bar">
+        <span class="bottom-pregunta">¿Hacemos lo mismo con tu factura?</span>
+
+        <button type="button" class="btn-analizar-cta" data-abrir-funnel data-tramo-msg="Analizar mi factura paso a paso como en el caso real.">
+          <span>Analizar mi factura</span>
+          <span class="btn-circulo-arrow" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </span>
+        </button>
+
+        <a href="/metodo#decisiones" class="bottom-enlace-guia">
+          <span>Cómo leer la factura de luz de tu empresa</span>
+        </a>
+      </footer>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN CASO REAL OBRADOR
+     Fondo gris oficial del boceto (#dbe2ec) con jerarquía editorial de alto nivel
+     ========================================================================== */
+  .caso-obrador-seccion {
+    position: relative;
+    padding: clamp(64px, 7vw, 100px) 0 clamp(80px, 9vw, 120px);
+    background-color: #dbe2ec; /* Fondo gris oficial del boceto */
+    color: #0f2346;
+  }
+
+  .contenedor-obrador {
+    width: 100%;
+    max-width: 1220px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
+
+  /* Barra superior de supuestos */
+  .caso-supuestos-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 0.88rem;
+  }
+
+  .caso-pill-azul {
+    background: #004aad;
+    color: #ffffff;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 6px 16px;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.2);
+  }
+
+  .caso-supuestos-texto {
+    color: #334460;
+    font-weight: 500;
+  }
+
+  .btn-supuestos-enlace {
+    all: unset;
+    cursor: pointer;
+    color: #004aad;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+
+  .btn-supuestos-enlace:hover {
+    color: #0f5bd8;
+  }
+
+  /* Encabezado editorial */
+  .caso-header {
+    margin-bottom: 48px;
+  }
+
+  .caso-h2 {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.85rem);
+    font-weight: 800;
+    color: #0f2346;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+
+  .caso-h2-cursiva {
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    color: #0077d4;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .caso-bajada {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: clamp(0.98rem, 0.92rem + 0.3vw, 1.15rem);
+    line-height: 1.6;
+    color: #3a4b68;
+    max-width: 52rem;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     ESCENARIO SCROLLYTELLING: 2 COLUMNAS
+     ========================================================================== */
+  .caso-escenario {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6.2fr);
+    gap: clamp(32px, 5vw, 68px);
+    align-items: start;
+    margin-bottom: 56px;
+  }
+
+  @media (max-width: 960px) {
+    .caso-escenario {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  /* COLUMNA IZQUIERDA: FACTURA STICKY */
+  .factura-col {
+    min-width: 0;
+    align-self: stretch;
+    height: 100%;
+  }
+
+  .factura-tarjeta {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 96px;
+    z-index: 10;
+    background: #ffffff;
+    border: 1.5px solid #c9d6e8;
+    border-radius: 20px;
+    box-shadow: 0 16px 45px rgba(15, 35, 70, 0.12), 0 2px 8px rgba(15, 35, 70, 0.04);
+    padding: clamp(18px, 2vw, 24px);
+    display: grid;
+    gap: 12px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+  }
+
+  .factura-tarjeta::-webkit-scrollbar {
+    display: none;
+  }
+
+  .factura-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #d0ddec;
+    font-size: 0.74rem;
+  }
+
+  .factura-meta-titular {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: #4a5c78;
+  }
+
+  .factura-meta-titular b {
+    color: #0f2346;
+  }
+
+  .factura-cups,
+  .factura-fin-cto {
+    font-size: 0.7rem;
+  }
+
+  .factura-cab-peaje {
+    background: #eef5ff;
+    color: #004aad;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .factura-tabla-potencias,
+  .factura-maximetros-fila {
+    background: #f7faff;
+    border: 1px solid #e1ebf7;
+    border-radius: 8px;
+    padding: 5px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .pot-mini-tit {
+    font-size: 0.66rem;
+    font-weight: 600;
+    color: #637592;
+    text-transform: uppercase;
+  }
+
+  .pot-mini-cols,
+  .maxi-mini-cols {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    font-size: 0.7rem;
+    color: #334460;
+  }
+
+  .maxi-mini-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pot-mini-cols b,
+  .maxi-mini-cols b {
+    color: #004aad;
+  }
+
+  /* ZONAS DE LA FACTURA CON MARCADOR AMARILLO INTERACTIVO */
+  .factura-zona {
+    position: relative;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e2ecf8;
+    box-shadow: 0 0 0 0 transparent;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .factura-tarjeta.focus .factura-zona:not(.on) {
+    opacity: 0.45;
+  }
+
+  .factura-zona.on {
+    opacity: 1 !important;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px #ffc21a, 0 8px 24px -4px rgba(14, 27, 61, 0.16);
+    transform: rotate(-0.35deg) scale(1.015);
+    z-index: 4;
+  }
+
+  .factura-zona.on .fila-barra i {
+    filter: brightness(1.15);
+    box-shadow: 0 0 8px rgba(0, 74, 173, 0.4);
+  }
+
+  .factura-zona.on .fila-val {
+    color: #004aad;
+    font-weight: 800;
+  }
+
+  /* Badge rotado en amarillo marcador oficial */
+  .factura-zona::after {
+    content: attr(data-note);
+    position: absolute;
+    top: -11px;
+    right: 12px;
+    background: #ffc21a;
+    color: #0e1b3d;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 5px;
+    box-shadow: 0 3px 8px rgba(255, 194, 26, 0.4);
+    transform: rotate(2deg);
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .factura-zona.on::after {
+    opacity: 1;
+    transform: rotate(2deg) translateY(0);
+  }
+
+  .zona-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0 0 6px;
+  }
+
+  .zona-sub {
+    font-size: 0.7rem;
+    color: #637592;
+    font-weight: 600;
+  }
+
+  .factura-fila {
+    display: grid;
+    grid-template-columns: 82px minmax(0, 1fr) 72px;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.72rem;
+    margin-bottom: 3px;
+    color: #4a5c78;
+  }
+
+  .fila-destacada {
+    color: #0f2346;
+  }
+
+  .fila-barra {
+    position: relative;
+    height: 7px;
+    background: #e9f0f8;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .fila-barra i {
+    display: block;
+    height: 100%;
+    width: var(--w, 50%);
+    background: #004aad;
+    border-radius: 999px;
+  }
+
+  .barra-cian i {
+    background: #00c2ff;
+  }
+
+  .barra-alerta i {
+    background: #e63946;
+  }
+
+  .barra-hueco {
+    background: #d8e5f5;
+  }
+
+  .fila-val {
+    text-align: right;
+    font-weight: 600;
+  }
+
+  .factura-totales-caja {
+    border-top: 1px dashed #d0ddec;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 0.72rem;
+    color: #4a5c78;
+  }
+
+  .tot-item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tot-destacado {
+    border-top: 1.5px solid #0f2346;
+    padding-top: 5px;
+    color: #0f2346;
+    font-size: 0.84rem;
+  }
+
+  .tot-destacado .tot-val b {
+    color: #004aad;
+    font-size: 1rem;
+  }
+
+  .btn-factura-tarifa {
+    all: unset;
+    cursor: pointer;
+    margin-top: 4px;
+    padding: 9px 12px;
+    background: #004aad;
+    color: #ffffff;
+    border-radius: 10px;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .btn-factura-tarifa:hover {
+    background: #003c8c;
+    transform: translateY(-1px);
+  }
+
+  /* ==========================================================================
+     COLUMNA DERECHA: PASOS SCROLLYTELLING (Exacto al boceto y Así Leemos Factura)
+     Sin cajas blancas pesadas: texto limpio y fluido directamente sobre el fondo gris
+     ========================================================================== */
+  .pasos-col {
+    min-width: 0;
+    position: relative;
+  }
+
+  .pasos-carril {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Línea vertical conectora sutil entre pasos */
+  .pasos-carril::before {
+    content: "";
+    position: absolute;
+    left: 17px;
+    top: 60px;
+    bottom: 120px;
+    width: 2px;
+    background: #c3d2e5;
+    z-index: 1;
+  }
+
+  .paso-tarjeta {
+    min-height: 72vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    padding-block: 3rem;
+    opacity: 0.32;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+
+  .paso-tarjeta.on {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .paso-tarjeta:last-child {
+    min-height: 56vh;
+  }
+
+  .paso-num-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .paso-circulo-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #0f2346;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(0, 194, 255, 0.4);
+    border: 2px solid #ffffff;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .paso-tarjeta.on .paso-circulo-num {
+    transform: scale(1.1);
+    background: #00c2ff;
+  }
+
+  .paso-titulo {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: clamp(1.7rem, 2.5vw, 2.3rem);
+    font-weight: 800;
+    color: #004aad;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+
+  /* Cuerpo editorial directamente sobre el fondo gris del boceto */
+  .paso-cuerpo-editorial {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 50px;
+  }
+
+  .bloque-dialogo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dialogo-sub {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #556885;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .dialogo-txt {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #1f304d;
+    margin: 0;
+  }
+
+  .dialogo-txt.destacada {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f2346;
+  }
+
+  /* Contenedor sutil para el diagnóstico técnico */
+  .diag-caja {
+    margin-top: 6px;
+    padding-left: 14px;
+    border-left: 3px solid #004aad;
+  }
+
+  .diag-tit {
+    color: #004aad;
+    font-weight: 800;
+  }
+
+  .pasos-dots {
+    display: none;
+  }
+
+  /* ==========================================================================
+     BARRA INFERIOR OFICIAL DEL BOCETO
+     ========================================================================== */
+  .caso-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding-top: 36px;
+    border-top: 1.5px solid #c9d6e8;
+  }
+
+  .bottom-pregunta {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f2346;
+  }
+
+  .btn-analizar-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px 12px 24px;
+    background: #004aad;
+    color: #ffffff;
+    border-radius: 999px;
+    border: 0;
+    cursor: pointer;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.94rem;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(0, 74, 173, 0.25);
+    transition: all 0.25s ease;
+  }
+
+  .btn-analizar-cta:hover {
+    background: #003c8c;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 74, 173, 0.35);
+  }
+
+  .btn-circulo-arrow {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-analizar-cta:hover .btn-circulo-arrow {
+    transform: translateX(2px);
+    background: #ffffff;
+  }
+
+  .bottom-enlace-guia {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: #004aad;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .bottom-enlace-guia:hover {
+    color: #0f5bd8;
+  }
+
+  /* Responsive Móvil */
+  @media (max-width: 899px) {
+    .pasos-carril::before {
+      display: none;
+    }
+
+    .factura-tarjeta {
+      position: static;
+      max-height: none;
+    }
+
+    .pasos-carril {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding-bottom: 8px;
+    }
+
+    .pasos-carril::-webkit-scrollbar {
+      display: none;
+    }
+
+    .paso-tarjeta {
+      flex: 0 0 92%;
+      scroll-snap-align: start;
+      min-height: 0;
+      opacity: 1;
+      transform: none;
+      padding-block: 0;
+    }
+
+    .paso-cuerpo-editorial {
+      padding-left: 0;
+    }
+
+    .pasos-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .dot-btn {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      background: none;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .dot-btn::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #cadbed;
+      transition: width 0.2s, background-color 0.2s;
+    }
+
+    .dot-btn[aria-current="true"]::before {
+      width: 26px;
+      background: #004aad;
+    }
+  }
+</style>
+
+<script>
+  // Control interactivo de Scrollytelling fiel a Así leemos una factura
+  (function initScrollytellingObrador() {
+    const pasos = Array.from(document.querySelectorAll<HTMLElement>("#pasos-carril-obrador .paso-tarjeta"));
+    const zonas = Array.from(document.querySelectorAll<HTMLElement>("#factura-sheet-obrador .factura-zona"));
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>(".dot-btn"));
+    const sheet = document.getElementById("factura-sheet-obrador");
+    const carril = document.getElementById("pasos-carril-obrador");
+    const mqMobile = window.matchMedia("(max-width: 899px)");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    sheet?.classList.add("focus");
+
+    let pasoActual = -1;
+
+    function activarPaso(index: number) {
+      if (index === pasoActual || index < 0 || index >= pasos.length) return;
+      pasoActual = index;
+
+      pasos.forEach((p, idx) => {
+        p.classList.toggle("on", idx === index);
+      });
+
+      zonas.forEach((z, idx) => {
+        z.classList.toggle("on", idx === index);
+      });
+
+      dots.forEach((d, idx) => {
+        d.setAttribute("aria-current", idx === index ? "true" : "false");
+      });
+    }
+
+    // Clic directo en las zonas de la factura para saltar a ese paso
+    zonas.forEach((zona, idx) => {
+      zona.style.cursor = "pointer";
+      zona.addEventListener("click", () => {
+        const behavior = prefersReducedMotion ? "auto" : "smooth";
+        if (mqMobile.matches && carril) {
+          carril.scrollTo({ left: pasos[idx].offsetLeft, behavior });
+        } else {
+          pasos[idx].scrollIntoView({ behavior, block: "center" });
+        }
+        activarPaso(idx);
+      });
+    });
+
+    // Clic en las tarjetas
+    pasos.forEach((paso, idx) => {
+      paso.addEventListener("click", () => {
+        activarPaso(idx);
+      });
+    });
+
+    // Detección precisa de scroll en desktop
+    function calcularPasoActivoPorScroll() {
+      if (mqMobile.matches) return;
+      const viewportCenter = window.innerHeight * 0.45;
+      let pasoMasCercano = 0;
+      let menorDistancia = Infinity;
+
+      pasos.forEach((p, idx) => {
+        const rect = p.getBoundingClientRect();
+        const pasoCentro = rect.top + rect.height * 0.4;
+        const distancia = Math.abs(pasoCentro - viewportCenter);
+
+        if (distancia < menorDistancia) {
+          menorDistancia = distancia;
+          pasoMasCercano = idx;
+        }
+      });
+
+      activarPaso(pasoMasCercano);
+    }
+
+    // Escuchador de scroll de ventana
+    window.addEventListener("scroll", calcularPasoActivoPorScroll, { passive: true });
+    calcularPasoActivoPorScroll();
+
+    // Scroll táctil en móvil
+    carril?.addEventListener(
+      "scroll",
+      () => {
+        if (!mqMobile.matches) return;
+        const scrollLeft = carril.scrollLeft;
+        let mejorPaso = 0;
+        let menorDistancia = Infinity;
+
+        if (scrollLeft + carril.clientWidth >= carril.scrollWidth - 6) {
+          mejorPaso = pasos.length - 1;
+        } else {
+          pasos.forEach((p, idx) => {
+            const dist = Math.abs(p.offsetLeft - scrollLeft);
+            if (dist < menorDistancia) {
+              menorDistancia = dist;
+              mejorPaso = idx;
+            }
+          });
+        }
+        activarPaso(mejorPaso);
+      },
+      { passive: true }
+    );
+
+    // Clic en los dots de móvil
+    dots.forEach((dot, idx) => {
+      dot.addEventListener("click", () => {
+        const behavior = prefersReducedMotion ? "auto" : "smooth";
+        if (mqMobile.matches && carril) {
+          carril.scrollTo({ left: pasos[idx].offsetLeft, behavior });
+        } else {
+          pasos[idx].scrollIntoView({ behavior, block: "center" });
+        }
+      });
+    });
+  })();
+</script>

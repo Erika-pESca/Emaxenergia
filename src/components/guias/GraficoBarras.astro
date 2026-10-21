@@ -1,0 +1,126 @@
+---
+// Componente GraficoBarras: visualización accesible de barras con línea de referencia y leyenda
+// Accesible mediante <figure>, <figcaption> y una <table> equivalente oculta para lectores de pantalla
+// Cumple con la regla D-13: Datos fieles de la guía, etiqueta "Ejemplo ilustrativo", sin prometer ahorro.
+
+export interface PeriodoDato {
+  periodo: string;
+  usado: number;
+  propuesta: number;
+  detalleUsado?: string;
+  esMaximo?: boolean;
+}
+
+interface Props {
+  titulo?: string;
+  contratada?: number;
+  unidad?: string;
+  datos?: PeriodoDato[];
+  notaPie?: string;
+  ariaLabel?: string;
+}
+
+const {
+  titulo = "Contratada, usada y propuesta, por periodo",
+  contratada = 45,
+  unidad = "kW",
+  datos = [
+    { periodo: "P1", usado: 24, propuesta: 25 },
+    { periodo: "P2", usado: 28, propuesta: 30, detalleUsado: "tardes de julio" },
+    { periodo: "P3", usado: 24, propuesta: 30 },
+    { periodo: "P4", usado: 28, propuesta: 30 },
+    { periodo: "P5", usado: 22, propuesta: 30 },
+    { periodo: "P6", usado: 40, propuesta: 42, detalleUsado: "el horno, de madrugada", esMaximo: true },
+  ],
+  notaPie = "P3 y P5 suben a 30 kW aunque no los usa: cada periodo tiene que tener igual o más potencia que el anterior.",
+  ariaLabel = "Potencia del obrador por periodo",
+} = Astro.props;
+
+const maxValor = Math.max(
+  contratada,
+  ...datos.map((d) => Math.max(d.usado, d.propuesta))
+);
+
+const contratadaPorcentaje = Math.min(100, Math.max(0, (contratada / maxValor) * 100));
+---
+
+<figure class="graf" style="margin: 20px 0 0" aria-label={ariaLabel}>
+  <figcaption>
+    <h3>{titulo}</h3>
+  </figcaption>
+
+  <div class="bars" aria-hidden="true">
+    <div
+      class="contratada"
+      style={`bottom: calc(${contratadaPorcentaje}% * 0.92)`}
+    >
+      <span>Contratada: {contratada} {unidad}</span>
+    </div>
+
+    {
+      datos.map((item) => {
+        const alturaUso = (item.usado / maxValor) * 100;
+        const posPropuesta = (item.propuesta / maxValor) * 100;
+        const claseU = item.esMaximo ? "u max" : "u";
+
+        return (
+          <div class="col">
+            <div class={claseU} style={`height: ${alturaUso}%`} />
+            <div
+              class="p"
+              style={`bottom: ${posPropuesta}%`}
+              data-v={`${item.propuesta}`}
+            />
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <div class="ejep" aria-hidden="true">
+    {datos.map((d) => <span>{d.periodo}</span>)}
+  </div>
+
+  <div class="ley" aria-hidden="true">
+    <span>
+      <i style="background: var(--azul-400)"></i>
+      Máximo usado en doce meses
+    </span>
+    <span>
+      <i style="background: var(--azul-900)"></i>
+      Periodo con más uso (P6, el horno)
+    </span>
+    <span>
+      <i style="background: var(--tinta)"></i>
+      Propuesta
+    </span>
+  </div>
+
+  {notaPie && <p class="graf__s">{notaPie}</p>}
+
+  <table class="sr-only">
+    <caption>{titulo} - {ariaLabel}</caption>
+    <thead>
+      <tr>
+        <th scope="col">Periodo</th>
+        <th scope="col">Contratada ({unidad})</th>
+        <th scope="col">Máximo usado ({unidad})</th>
+        <th scope="col">Propuesta ({unidad})</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        datos.map((d) => (
+          <tr>
+            <th scope="row">{d.periodo}</th>
+            <td>{contratada} {unidad}</td>
+            <td>
+              {d.usado} {unidad} {d.detalleUsado ? `(${d.detalleUsado})` : ""}
+            </td>
+            <td>{d.propuesta} {unidad}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</figure>

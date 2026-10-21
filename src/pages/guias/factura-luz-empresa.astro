@@ -1,0 +1,86 @@
+---
+// Guía · Cómo leer la factura de luz de tu empresa
+// Ruta: /guias/factura-luz-empresa
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "formato",
+    "titulo": "Por qué ninguna factura de empresa se parece a otra"
+  },
+  {
+    "id": "factura-anotada",
+    "titulo": "Una factura de empresa, anotada"
+  },
+  {
+    "id": "tres-partes",
+    "titulo": "Las tres partes de tu factura"
+  },
+  {
+    "id": "cinco-cosas",
+    "titulo": "Cinco cosas que mirar primero"
+  },
+  {
+    "id": "cuatro-preguntas",
+    "titulo": "Cuatro preguntas para tu factura"
+  },
+  {
+    "id": "impuestos",
+    "titulo": "Los impuestos"
+  },
+  {
+    "id": "lecturas",
+    "titulo": "Lecturas reales y estimadas"
+  },
+  {
+    "id": "otros-peajes",
+    "titulo": "Si tu factura es de 2.0TD o de 6.1TD"
+  }
+];
+const resumen = [
+  {
+    "dt": "No hay formato común",
+    "dd": "Por encima de 15 kW, cada compañía ordena la factura a su manera. Lo que se repite son los conceptos."
+  },
+  {
+    "dt": "Tres partes",
+    "dd": "Lo que pagas se divide en lo que depende de cómo se compra la energía, lo que se ajusta con tus datos y lo que no depende de ninguna compañía."
+  },
+  {
+    "dt": "Cinco cosas",
+    "dd": "Hay cinco cosas que conviene mirar primero: tu potencia, los excesos, la reactiva, tu reparto por periodos y la fecha de fin de tu contrato."
+  },
+  {
+    "dt": "El impuesto",
+    "dd": "Comprueba el tipo de impuesto eléctrico que te aplican."
+  }
+];
+const senales = [
+  "Pagas casi lo mismo en meses de mucha y de poca actividad.",
+  "No sabes en qué periodo consume más tu empresa.",
+  "Tu contrato se renueva solo y nadie lo ha revisado."
+];
+const cta = {
+  "texto": "Con tu factura te decimos exactamente qué conceptos puedes optimizar.",
+  "boton": "Analizar mi factura",
+  "enlace": "/diagnostico",
+  "origen": "guia-factura-luz-empresa · final"
+};
+---
+
+<Guia
+  slug="factura-luz-empresa"
+  h1="Cómo leer la factura de luz de tu empresa"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="La factura de luz de una empresa tiene tres partes: lo que depende de cómo se compra la energía (estructura, modalidad y condiciones), lo que se ajusta con tus datos (la potencia que sobra y la reactiva) y lo que no depende de ninguna compañía (peajes, cargos, impuestos y contador). Saber qué es cada línea dice por dónde empezar."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="RD 88/2026 (BOE-A-2026-3212): art. 6.1.o y disposición adicional octava · Circular 3/2020 de la CNMC: arts. 6, 7 y 9 · Agencia Tributaria: impuesto especial sobre la electricidad · Resolución de peajes de la CNMC para 2026 y Orden TED/1524/2025"
+>
+ <h2 id="formato">Por qué ninguna factura de empresa se parece a otra</h2> <p>Si tu empresa tiene más de 15 kW, tu factura no sigue un formato común. La norma solo prevé un contenido mínimo y un modelo tipo para los suministros pequeños, de hasta 15 kW. Por encima, cada comercializadora ordena y nombra los conceptos a su manera. <span class="fuente">(RD 88/2026, disposición adicional octava)</span></p> <p>Por eso esta guía no te dice dónde mirar, sino qué buscar. La factura de abajo es un ejemplo: la tuya tendrá los mismos conceptos, quizá en otro orden y con otros nombres.</p> <p>Y si algo no lo entiendes, tienes derecho a que tu compañía te lo explique de forma clara, sobre todo si la factura no se basa en tu consumo real. <span class="fuente">(RD 88/2026, art. 6.1.o)</span></p> <h2 id="factura-anotada">Una factura de empresa, anotada</h2> <p>Es la factura de febrero de 2026 de un obrador de panadería con tienda, en 3.0TD: hornea de madrugada, abre la tienda de día y tiene las cámaras encendidas siempre.</p> <div class="supuestos"> <span class="etiqueta-ej">Ejemplo ilustrativo. Los peajes, los cargos y los impuestos son los oficiales de 2026. </span> <details> <summary>Ver los supuestos</summary> <div class="supuestos__capa"> <p class="supuestos__titulo">Sobre este ejemplo</p> <p>Un obrador de panadería con tienda, en la Península, con peaje 3.0TD y un solo suministro. Su consumo, su contrato actual y el precio de la energía son los del ejemplo.</p><p>Son reales los precios regulados de 2026: los peajes (resolución de la CNMC de 18 de diciembre de 2025), los cargos (Orden TED/1524/2025), el precio de la energía reactiva, el impuesto eléctrico al tipo general y el calendario de periodos (Circular 3/2020 de la CNMC). El alquiler del contador es orientativo.</p><p>Por eso las lecturas son de verdad aunque la empresa no lo sea: con otro consumo, los números cambian, pero la forma de leerlos es la misma.</p> </div> </details> </div> <div class="tabla-guia"><table> <caption class="solo-lector">Factura de ejemplo anotada, concepto a concepto</caption> <thead><tr><th scope="col">#</th><th scope="col">Concepto</th><th scope="col">En el ejemplo</th><th scope="col">Qué es</th><th scope="col">Parte</th></tr></thead> <tbody> <tr><th scope="row" class="cifra">1</th><td data-label="Concepto"><b>Datos del suministro</b></td><td data-label="En el ejemplo" class="cifra">3.0TD · 45 kW en los seis periodos · contrato hasta el 30-11-2026</td><td data-label="Qué es">Titular, CUPS, peaje, potencias contratadas por periodo, comercializadora y fecha de fin del contrato.</td><td data-label="Parte">—</td></tr><tr><th scope="row" class="cifra">2</th><td data-label="Concepto"><b>Consumo por periodos</b></td><td data-label="En el ejemplo" class="cifra">P1 2.600 · P2 1.680 · P6 5.800 kWh</td><td data-label="Qué es">Los kWh de cada periodo. Febrero es temporada alta: entre semana hay P1, P2 y P6, y el fin de semana es P6 entero. Mira si la lectura es real o estimada.</td><td data-label="Parte">—</td></tr><tr><th scope="row" class="cifra">3</th><td data-label="Concepto"><b>Término de energía</b></td><td data-label="En el ejemplo" class="cifra">10.080 kWh × 0,1450 € = 1.461,60 €</td><td data-label="Qué es">Lo que pagas por cada kWh. Con un precio único, dentro van también los peajes y cargos de la energía, aunque la factura no los separe: aquí, 246,90 €.</td><td data-label="Parte">Se negocia · y una parte regulada</td></tr><tr><th scope="row" class="cifra">4</th><td data-label="Concepto"><b>Término de potencia</b></td><td data-label="En el ejemplo" class="cifra">149,54 € (P1 70,34 · P2 36,65 · P3 15,47 · P4 13,42 · P5 8,68 · P6 4,98)</td><td data-label="Qué es">kW contratados × precio del kW × días del mes, en cada periodo. Se paga aunque no consumas.</td><td data-label="Parte">Se ajusta con datos (cuántos kW) · regulada (el precio del kW)</td></tr><tr><th scope="row" class="cifra">5</th><td data-label="Concepto"><b>Maxímetros</b></td><td data-label="En el ejemplo" class="cifra">P1 22 · P2 22 · P6 40 kW</td><td data-label="Qué es">La potencia más alta que has usado en cada periodo, medida por cuartos de hora. Si tu factura los muestra, es el dato que dice si te sobra o te falta potencia.</td><td data-label="Parte">Dato para decidir</td></tr><tr><th scope="row" class="cifra">6</th><td data-label="Concepto"><b>Excesos de potencia</b></td><td data-label="En el ejemplo" class="cifra">No hay</td><td data-label="Qué es">Lo que pagas cuando tu pico pasa de lo contratado.</td><td data-label="Parte">Se ajusta con datos</td></tr><tr><th scope="row" class="cifra">7</th><td data-label="Concepto"><b>Energía reactiva</b></td><td data-label="En el ejemplo" class="cifra">P1 12,96 € · P2 8,38 €</td><td data-label="Qué es">Solo se paga la que supera el 33 % de la energía activa, de P1 a P5. La de las cámaras de madrugada, en P6, no se paga.</td><td data-label="Parte">Se ajusta en la instalación</td></tr><tr><th scope="row" class="cifra">8</th><td data-label="Concepto"><b>Impuesto especial sobre la electricidad</b></td><td data-label="En el ejemplo" class="cifra">5,11269632 % sobre 1.632,48 € = 83,46 €</td><td data-label="Qué es">Un porcentaje sobre la potencia, la energía y la reactiva. Sube y baja con ellas.</td><td data-label="Parte">No depende de nadie</td></tr><tr><th scope="row" class="cifra">9</th><td data-label="Concepto"><b>Alquiler del contador</b></td><td data-label="En el ejemplo" class="cifra">1,50 €</td><td data-label="Qué es">Si el contador es de la distribuidora, el precio está regulado.</td><td data-label="Parte">No depende de nadie</td></tr><tr><th scope="row" class="cifra">10</th><td data-label="Concepto"><b>Otros servicios</b></td><td data-label="En el ejemplo" class="cifra">No hay</td><td data-label="Qué es">Servicios adicionales, si los hay. Comprueba que los contrataste.</td><td data-label="Parte">Se negocia</td></tr><tr><th scope="row" class="cifra">11</th><td data-label="Concepto"><b>IVA</b></td><td data-label="En el ejemplo" class="cifra">21 % sobre 1.717,44 € = 360,66 €</td><td data-label="Qué es">Sobre el total.</td><td data-label="Parte">Aparte</td></tr> <tr class="total"><td></td><th scope="row" data-label="Concepto"><b>Total</b></th><td data-label="En el ejemplo" class="cifra"><b>2.078,10 €</b></td><td></td><td></td></tr> </tbody> </table></div> <h2 id="tres-partes">Las tres partes de tu factura</h2> <p>No todo lo que pagas se puede cambiar. En la factura del obrador, de 1.717,44 € antes de IVA:</p> <div class="tabla-guia"><table> <caption class="solo-lector">Las tres partes de la factura del ejemplo</caption> <thead><tr><th scope="col">Parte</th><th scope="col">Qué incluye</th><th scope="col">En el ejemplo</th></tr></thead> <tbody> <tr><th scope="row">Lo que depende de cómo se compra la energía</th><td data-label="Qué incluye">El precio de la energía, sin peajes ni cargos. Incluye el coste del mercado mayorista, que ninguna compañía controla; lo que se decide es cómo se compra: la estructura, la modalidad y las condiciones de tu contrato.</td><td data-label="En el ejemplo" class="cifra">1.214,70 € · 70,7 %</td></tr> <tr><th scope="row">Lo que se ajusta con tus datos</th><td data-label="Qué incluye">La potencia que pagas por encima de la que necesitas y la reactiva, que se corrige en la instalación.</td><td data-label="En el ejemplo" class="cifra">77,67 € · 4,5 %</td></tr> <tr><th scope="row">Lo que no depende de ninguna compañía</th><td data-label="Qué incluye">Los peajes y cargos de la potencia que sí necesitas y de la energía, el impuesto eléctrico y el contador.</td><td data-label="En el ejemplo" class="cifra">425,07 € · 24,8 %</td></tr> </tbody> </table></div> <p class="nota">"La potencia que necesitas" es la que saldría de sus maxímetros de doce meses (25 · 30 · 30 · 30 · 30 · 42 kW). Lo que paga por encima, 56,33 € este mes, es lo que se ajusta.</p> <p class="enlaces"><a href="/tarifas">De qué está hecho el precio</a></p> <h2 id="cinco-cosas">Cinco cosas que mirar primero</h2> <ol class="guia-cinco"> <li><b>Tu potencia contratada frente a tus maxímetros, periodo a periodo</b><span>Es lo que más se paga sin usar. En el ejemplo, 45 kW contratados en P1 y un máximo de 22.</span><p class="enlaces"><a href="/guias/potencia-contratada">Potencia contratada</a></p></li><li><b>Si aparecen excesos, y en qué periodos</b><span>Son la señal de una potencia corta.</span><p class="enlaces"><a href="/guias/exceso-de-potencia">Exceso de potencia</a></p></li><li><b>Si aparece reactiva</b><span>No se arregla cambiando de tarifa: se corrige en la instalación, si compensa.</span><p class="enlaces"><a href="/guias/energia-reactiva">Energía reactiva</a></p></li><li><b>Cómo se reparte tu consumo entre P1 y P6</b><span>Decide qué forma de pagar la energía tiene sentido. En el ejemplo, el 58 % del mes está en P6.</span><p class="enlaces"><a href="/guias/peaje-3-0td">El peaje 3.0TD</a></p></li><li><b>La fecha de fin de tu contrato y tu modalidad actual</b><span>Deciden cuándo y cómo puedes cambiar sin penalización.</span><p class="enlaces"><a href="/guias/precio-fijo-o-indexado">Precio fijo o indexado</a></p></li> <li><b>Si te ha llegado una carta que cambia el precio</b><p class="enlaces"><a href="/guias/revision-precio-luz-empresa">Revisión de precio</a></p></li> </ol> <h2 id="cuatro-preguntas">Cuatro preguntas para tu factura</h2> <ol class="guia-cuatro" role="list"> <li><span class="cifra" aria-hidden="true">1</span>¿Ha subido el consumo o solo el importe?</li><li><span class="cifra" aria-hidden="true">2</span>¿Aparecen excesos de potencia?</li><li><span class="cifra" aria-hidden="true">3</span>¿El precio coincide con el de tu contrato?</li><li><span class="cifra" aria-hidden="true">4</span>¿Pagas servicios que no pediste?</li> </ol> <h2 id="impuestos">Los impuestos</h2> <dl class="guia-dl"> <div><dt>Impuesto especial sobre la electricidad</dt><dd>Se calcula como un porcentaje sobre lo que pagas de potencia, energía y reactiva. El tipo general es del 5,11269632 %, pero en 2026 ha habido rebajas temporales <span class="pendiente">[VERIFICAR: tipo vigente el día de publicar]</span>: comprueba qué tipo aparece en tu factura. Algunos usos industriales tienen una reducción de la base. <span class="fuente">(Agencia Tributaria)</span></dd></div> <div><dt>IVA <span class="pendiente">[LEGAL: validar (31 L6)]</span></dt><dd>Se aplica sobre el total. Para la mayoría de empresas es deducible; el impuesto eléctrico, en cambio, es coste.</dd></div> <div><dt>Por qué importa</dt><dd>El impuesto eléctrico se calcula sobre la potencia y la energía: si ajustas una potencia que te sobra, baja también el impuesto.</dd></div> </dl> <p class="fuente">Datos fiscales revisados el <span class="pendiente">[PENDIENTE: fecha de publicación]</span>.</p> <h2 id="lecturas">Lecturas reales y estimadas</h2> <p>Si la distribuidora no ha podido leer tu contador, la factura puede basarse en una estimación. Lo verás indicado en la factura. Cuando llega la lectura real, la diferencia se regulariza.</p> <p>El histórico de tu suministro, por periodos y por meses, se puede consultar con tu CUPS: es una forma de comprobar si una lectura cuadra.</p> <p class="enlaces"><a href="/guias/cups-y-tus-datos">Qué se ve con tu CUPS y qué no</a></p> <h2 id="otros-peajes">Si tu factura es de 2.0TD o de 6.1TD</h2> <div class="tabla-guia"><table> <caption class="solo-lector">Diferencias de la factura en 2.0TD y 6.1TD</caption> <thead><tr><th scope="col"><span class="solo-lector">Qué</span></th><th scope="col">2.0TD</th><th scope="col">6.1TD</th></tr></thead> <tbody> <tr><th scope="row">A quién corresponde</th><td data-label="2.0TD">Baja tensión, 15 kW o menos</td><td data-label="6.1TD">Entre 1 y 30 kV</td></tr><tr><th scope="row">Periodos de energía</th><td data-label="2.0TD">3: punta, llano y valle</td><td data-label="6.1TD">6, como la 3.0TD</td></tr><tr><th scope="row">Potencias</th><td data-label="2.0TD">2, sin orden obligatorio; con contador sin telegestión, las dos iguales</td><td data-label="6.1TD">6, cada una igual o mayor que la anterior</td></tr><tr><th scope="row">Reactiva</th><td data-label="2.0TD">No se paga</td><td data-label="6.1TD">Sí, como en 3.0TD</td></tr><tr><th scope="row">Si te pasas</th><td data-label="2.0TD">El contador corta; no se cobran excesos</td><td data-label="6.1TD">Excesos medidos por cuartos de hora</td></tr> </tbody> </table></div> <p class="enlaces"><a href="/guias/peaje-3-0td">El peaje 3.0TD</a><a href="/sectores/restaurantes#tu-peaje">Las dos reglas en un restaurante</a></p> 
+</Guia>

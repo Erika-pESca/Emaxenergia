@@ -1,0 +1,31 @@
+---
+// Guía · Glosario de la factura de luz de empresa
+// Ruta: /guias/glosario
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [];
+const resumen = [];
+const senales = [];
+const cta = {
+  "texto": "Si prefieres que te lo expliquemos con tu factura delante, empieza por ahí.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar mi factura"
+};
+---
+
+<Guia
+  slug="glosario"
+  h1="Glosario de la factura de luz de empresa"
+  fechaRevision="7 de octubre de 2026"
+  respuesta=""
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Circular 3/2020 de la CNMC · Real Decreto 88/2026 (BOE-A-2026-3212) · Real Decreto 1110/2007 · OMIE · OMIP"
+>
+ <dl class="glosario"> <div id="cargos"> <dt>Cargos</dt> <dd>Parte regulada de la factura que financia costes del sistema eléctrico. Los fija el Gobierno y son iguales con cualquier comercializadora. <a href="/guias/factura-luz-empresa">Ver la guía</a></dd> </div><div id="comercializadora"> <dt>Comercializadora</dt> <dd>La empresa que te vende la energía y te factura. Es la que cambias al cambiar de compañía.</dd> </div><div id="cups"> <dt>CUPS</dt> <dd>El código único de tu punto de suministro. Empieza por ES, aparece en la factura y no cambia aunque cambies de compañía. <a href="/guias/cups-y-tus-datos">Ver la guía</a></dd> </div><div id="curva-de-carga"> <dt>Curva de carga</dt> <dd>Tu consumo medido cada hora o cada cuarto de hora. Dice a qué horas consumes, no solo cuánto.</dd> </div><div id="distribuidora"> <dt>Distribuidora</dt> <dd>La empresa dueña de las redes de tu zona. Lee tu contador y no cambia aunque cambies de comercializadora.</dd> </div><div id="energia-reactiva"> <dt>Energía reactiva</dt> <dd>La que intercambian con la red motores y compresores sin hacer trabajo útil. Se paga de P1 a P5 la que pasa del 33 % de la activa. <a href="/guias/energia-reactiva">Ver la guía</a></dd> </div><div id="exceso-de-potencia"> <dt>Exceso de potencia</dt> <dd>Lo que pagas cuando pides más potencia de la contratada en un periodo. Por encima de 15 kW, el contador no corta: se cobra. <a href="/guias/exceso-de-potencia">Ver la guía</a></dd> </div><div id="indexado"> <dt>Indexado</dt> <dd>Modalidad en la que el precio de tu energía sigue al mercado, con la fórmula que pacta tu contrato. <a href="/guias/precio-fijo-o-indexado">Ver la guía</a></dd> </div><div id="maximetro"> <dt>Maxímetro</dt> <dd>La potencia más alta que pides en cada periodo, medida como media de un cuarto de hora. <a href="/guias/maximetro">Ver la guía</a></dd> </div><div id="omie"> <dt>OMIE</dt> <dd>El operador del mercado mayorista diario e intradiario de España y Portugal. Fija un precio para cada cuarto de hora del día siguiente. <a href="/guias/omie">Ver la guía</a></dd> </div><div id="omip"> <dt>OMIP</dt> <dd>El mercado ibérico de futuros de electricidad. Enseña lo que el mercado espera para los próximos meses y años. <a href="/guias/omie">Ver la guía</a></dd> </div><div id="peaje-de-acceso"> <dt>Peaje de acceso</dt> <dd>Parte regulada que paga el uso de las redes. 2.0TD hasta 15 kW, 3.0TD en baja tensión con más de 15 kW y 6.1TD entre 1 y 30 kV. <a href="/guias/peaje-3-0td">Ver la guía</a></dd> </div><div id="periodos-p1-a-p6"> <dt>Periodos (P1 a P6)</dt> <dd>Los tramos en que el peaje divide el año según la hora, el día y la temporada. P1 es el más caro y P6 el más barato. <a href="/guias/peaje-3-0td">Ver la guía</a></dd> </div><div id="potencia-contratada"> <dt>Potencia contratada</dt> <dd>La potencia que puedes pedir a la vez en cada periodo. Se paga cada día, la uses o no. <a href="/guias/potencia-contratada">Ver la guía</a></dd> </div><div id="precio-fijo"> <dt>Precio fijo</dt> <dd>Modalidad con el precio de la energía cerrado durante el contrato. Las cláusulas de revisión de precio no se le aplican. <a href="/guias/precio-fijo-o-indexado">Ver la guía</a></dd> </div><div id="pvpc"> <dt>PVPC</dt> <dd>La tarifa regulada para suministros de hasta 10 kW. Solo la ofrecen las comercializadoras de referencia.</dd> </div><div id="sips"> <dt>SIPS</dt> <dd>La base de datos de las distribuidoras con los datos técnicos y el histórico de consumo de cada CUPS. <a href="/guias/cups-y-tus-datos">Ver la guía</a></dd> </div><div id="termino-de-energia"> <dt>Término de energía</dt> <dd>Lo que pagas por los kWh que consumes en cada periodo. <a href="/guias/factura-luz-empresa">Ver la guía</a></dd> </div><div id="termino-de-potencia"> <dt>Término de potencia</dt> <dd>Lo que pagas por la potencia contratada en cada periodo, por día. <a href="/guias/potencia-contratada">Ver la guía</a></dd> </div> </dl> 
+</Guia>

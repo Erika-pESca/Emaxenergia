@@ -1,0 +1,65 @@
+---
+// Guía · Renovación y permanencia del contrato de luz: qué revisar antes
+// Ruta: /guias/renovacion-contrato-luz-empresa
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "al-acabar",
+    "titulo": "Qué pasa cuando tu contrato llega al final"
+  },
+  {
+    "id": "irte-antes",
+    "titulo": "Lo que te cuesta irte antes"
+  },
+  {
+    "id": "antes-de-firmar",
+    "titulo": "Qué revisar antes de renovar o firmar"
+  }
+];
+const resumen = [
+  {
+    "dt": "Al acabar",
+    "dd": "Si tu contrato prevé la prórroga, se renueva solo."
+  },
+  {
+    "dt": "Si cambian las condiciones",
+    "dd": "Aviso por escrito, aparte de la factura y con al menos un mes de antelación."
+  },
+  {
+    "dt": "Si te vas antes",
+    "dd": "Depende de tu contrato. En 2.0TD de personas físicas, la norma lo limita."
+  },
+  {
+    "dt": "Antes de firmar",
+    "dd": "El documento resumen: precio, revisiones, duración y penalizaciones."
+  }
+];
+const senales = [
+  "No sabes en qué fecha acaba tu contrato.",
+  "Te ofrecen renovar por teléfono sin mandarte el documento resumen.",
+  "Tu contrato incluye servicios adicionales y no sabes si llevan permanencia."
+];
+const cta = {
+  "texto": "Con tu contrato y tu última factura te decimos qué te cuesta quedarte y qué te costaría irte.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Revisar mi contrato"
+};
+---
+
+<Guia
+  slug="renovacion-contrato-luz-empresa"
+  h1="Renovación y permanencia del contrato de luz: qué revisar antes"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="Si tu contrato prevé la prórroga, se renueva solo al acabar. Si cambian las condiciones, te lo tienen que avisar por escrito, aparte de la factura y con un mes de antelación. Lo que te cuesta irte antes depende de tu contrato, y en los suministros de hasta 15 kW de personas físicas la norma lo limita."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Real Decreto 88/2026, Reglamento general de suministro, comercialización y agregación de energía eléctrica (BOE-A-2026-3212): art. 6.1.m, art. 28.3 y disposición transitoria octava"
+>
+ <h2 id="al-acabar">Qué pasa cuando tu contrato llega al final</h2> <p>Si tu contrato prevé la prórroga, se renueva solo. Si al renovar cambian el precio u otra condición, te lo tienen que avisar por escrito, aparte de la factura y con al menos un mes de antelación. Ese mes es tu margen para comparar.</p> <p class="enlaces"><a href="/guias/revision-precio-luz-empresa">Te ha llegado una carta que cambia el precio: qué revisar</a></p> <h2 id="irte-antes">Lo que te cuesta irte antes</h2> <div class="tabla-guia"><table> <thead><tr><th scope="col">Tu suministro</th><th scope="col">Qué dice la norma</th><th scope="col">Además</th></tr></thead> <tbody><tr><th scope="row">Hasta 15 kW (2.0TD), persona física</th><td data-label="Qué dice la norma">Sin penalización por irte, salvo con precio fijo antes de la primera prórroga anual. Entonces, como máximo el 5 % de la energía estimada pendiente, y solo si la comercializadora prueba que le causa un daño.</td><td data-label="Además">Los servicios adicionales contratados con el suministro tampoco pueden llevar permanencia.</td></tr><tr><th scope="row">3.0TD y 6.1TD</th><td data-label="Qué dice la norma">Lo que te cuesta irte antes lo fija tu contrato.</td><td data-label="Además">Tiene que aparecer en el documento resumen que te dan antes de firmar. Búscalo ahí, no en la llamada.</td></tr></tbody> </table></div> <p class="nota">Mientras el Ministerio no fije por orden cómo se estima la energía pendiente, se usa el método de estimación que ya se aplica al cambiar de comercializadora.</p> <h2 id="antes-de-firmar">Qué revisar antes de renovar o firmar</h2> <ul> <li><b>La fecha de fin</b> de tu contrato y si se prorroga solo.</li> <li><b>El documento resumen.</b> La comercializadora tiene que dártelo antes de firmar, con el precio, las revisiones previstas, la duración y las penalizaciones.</li> <li><b>Los servicios adicionales</b> que van con el suministro: qué cuestan y si llevan permanencia.</li> <li><b>Si es precio fijo</b>, cuánto dura y qué pasa en la primera prórroga.</li> </ul> <p class="destacado">Apunta la fecha de fin. Un mes antes es el mejor momento para revisar tu contrato con tus datos delante.</p> <p class="enlaces"><a href="/metodo#condiciones">La decisión 5 del método: cuándo y en qué condiciones</a></p> 
+</Guia>

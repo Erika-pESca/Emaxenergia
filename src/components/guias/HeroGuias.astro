@@ -1,0 +1,438 @@
+---
+// Hero Principal del Centro de Guías de Luz para Empresas · EMAX Energía
+// Adaptado con la tipografía, tarjeta y botones exactamente como en El Método
+// Sin migas de pan y con estructura impecable bajo la cabecera flotante
+
+interface TramoGasto {
+  id: string;
+  etiqueta: string;
+  rango: string;
+  msg: string;
+}
+
+const tramos: TramoGasto[] = [
+  {
+    id: "menos-300",
+    etiqueta: "MENOS DE 300€",
+    rango: "menos de 3.600 € al año en luz",
+    msg: "Con este gasto hacemos un estudio sencillo. Lo más cómodo suele ser empezar con los datos básicos de tu factura.",
+  },
+  {
+    id: "300-1000",
+    etiqueta: "300 - 1.000€",
+    rango: "entre 3.600 y 12.000 € al año en luz",
+    msg: "Con este gasto merece la pena mirar tu factura con detalle: la potencia, los periodos y las condiciones.",
+  },
+  {
+    id: "1000-3000",
+    etiqueta: "1.000 - 3.000€",
+    rango: "entre 12.000 y 36.000 € al año en luz",
+    msg: "Con este gasto te atiende un gestor especialista que revisa tu suministro completo y tus maxímetros.",
+  },
+  {
+    id: "mas-3000",
+    etiqueta: "MÁS DE 3.000€",
+    rango: "más de 36.000 € al año en luz",
+    msg: "Con este gasto realizamos una auditoría técnica completa de potencia, reactiva y periodos de alta tensión.",
+  },
+];
+
+// 48 barras decorativas con curva de consumo de empresa (aria-hidden, estático sin animación)
+const hCurva = [30, 26, 24, 24, 26, 34, 48, 62, 76, 90, 96, 92, 84, 70, 62, 64, 70, 82, 92, 88, 74, 56, 42, 34];
+const barras = Array.from({ length: 48 }, (_, i) => {
+  const v = hCurva[i % 24] * (0.9 + 0.1 * Math.sin(i));
+  return Math.min(100, Math.max(10, Math.round(v)));
+});
+---
+
+<header class="hero-guias-seccion" id="hero-guias" aria-labelledby="hero-guias-h1">
+  <!-- Adorno decorativo de 48 barras con curva de consumo (aria-hidden, estático) -->
+  <div class="orn" aria-hidden="true">
+    {barras.map((alt) => (
+      <span style={`height: ${alt}%`} />
+    ))}
+  </div>
+
+  <div class="hero-guias-contenedor">
+    <!-- COLUMNA IZQUIERDA: Tipografía idéntica a Método (blanca con acento cursiva celeste) -->
+    <div class="hero-propuesta">
+      <div class="kicker-wrap">
+        <span class="kicker-punto" aria-hidden="true"></span>
+        <span class="kicker-texto">Guías de luz</span>
+        <span class="kicker-sep" aria-hidden="true">|</span>
+        <span class="kicker-sub">Para empresas</span>
+      </div>
+
+      <h1 id="hero-guias-h1" class="hero-h1">
+        GUÍAS PARA ENTENDER<br />
+        LA LUZ DE <span class="hero-cursiva">tu empresa.</span>
+      </h1>
+
+      <p class="hero-subtitulo">
+        Lo que dice tu factura, por qué pagas lo que pagas y qué se puede cambiar.
+        Con el artículo de la norma en cada afirmación y explicaciones claras para empresas.
+      </p>
+
+      <!-- Franja de garantías de rigor legal y transparencia -->
+      <div class="hero-garantias-franja">
+        <span class="garantia-item">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline>
+          </svg>
+          Circular 3/2020 CNMC
+        </span>
+        <span class="garantia-sep">·</span>
+        <span class="garantia-item">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline>
+          </svg>
+          RD 88/2026
+        </span>
+        <span class="garantia-sep">·</span>
+        <span class="garantia-item">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3.5 8.5 6.5 11.5 12.5 4.5"></polyline>
+          </svg>
+          Sin venta hasta el final
+        </span>
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA: Ficha Glassmórfica con los 4 botones idénticos a Método -->
+    <div class="hero-card-col">
+      <div class="ficha-auditoria">
+        <!-- Cabecera de la ficha -->
+        <header class="ficha-header">
+          <h2 class="ficha-titulo">¿Cuánto paga tu empresa de luz al mes?</h2>
+          <p class="ficha-sub">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+        </header>
+
+        <!-- Selector de 4 tramos de gasto con el estilo oficial de Método -->
+        <div class="ficha-tramos-grid">
+          {
+            tramos.map((item) => (
+              <button
+                type="button"
+                class="ficha-tramo-btn"
+                data-abrir-funnel
+                data-tramo-id={item.id}
+                data-tramo-label={`Estudio para empresa: ${item.etiqueta}`}
+                data-tramo-rango={item.rango}
+                data-tramo-msg={item.msg}
+              >
+                <span class="tramo-txt">{item.etiqueta}</span>
+                <span class="tramo-icono" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* ==========================================================================
+     HERO GUÍAS - ESTRUCTURA PERFECTA Y TIPOGRAFÍA OFICIAL DE MÉTODO
+     ========================================================================== */
+  .hero-guias-seccion {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    min-height: calc(82vh + 78px);
+    display: flex;
+    align-items: center;
+    padding: calc(78px + 52px) 0 72px;
+    background: linear-gradient(115deg, #0A1B3F 0%, #003A8C 55%, #1F63D1 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    overflow: hidden;
+  }
+
+  /* Adorno de 48 barras decorativas al fondo */
+  .orn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40%;
+    display: grid;
+    grid-template-columns: repeat(48, 1fr);
+    gap: 6px;
+    align-items: end;
+    padding-inline: 12px;
+    opacity: 0.13;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .orn span {
+    background: #ffffff;
+    border-radius: 3px 3px 0 0;
+    display: block;
+  }
+
+  .hero-guias-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 60px);
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-guias-seccion {
+      min-height: auto;
+      padding: calc(78px + 36px) 0 56px;
+    }
+
+    .hero-guias-contenedor {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  /* Columna Izquierda: Mensaje y Titular de Gran Impacto */
+  .hero-propuesta {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kicker-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    margin-bottom: 20px;
+    width: fit-content;
+    backdrop-filter: blur(10px);
+  }
+
+  .kicker-punto {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
+  }
+
+  .kicker-texto {
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .kicker-sep {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+  }
+
+  .kicker-sub {
+    font-family: "Sora", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #38bdf8;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .hero-h1 {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2.3rem, 1.9rem + 2vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.12;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+    margin: 0 0 18px;
+    text-transform: uppercase;
+  }
+
+  .hero-cursiva {
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #38bdf8;
+    letter-spacing: -0.01em;
+    display: inline-block;
+  }
+
+  .hero-subtitulo {
+    font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+    line-height: 1.6;
+    color: rgba(240, 248, 255, 0.95);
+    margin: 0 0 24px;
+    max-width: 580px;
+    font-weight: 400;
+  }
+
+  /* Garantías */
+  .hero-garantias-franja {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 0.84rem;
+    color: rgba(240, 248, 255, 0.9);
+  }
+
+  .garantia-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+
+  .garantia-item svg {
+    color: #38bdf8;
+  }
+
+  .garantia-sep {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Columna Derecha: Tarjeta Glassmórfica */
+  .hero-card-col {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-card-col {
+      justify-content: flex-start;
+    }
+  }
+
+  .ficha-auditoria {
+    width: 100%;
+    max-width: 530px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 28px;
+    padding: clamp(28px, 3.4vw, 38px);
+    box-shadow: 0 24px 60px rgba(0, 16, 48, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  }
+
+  .ficha-header {
+    margin-bottom: 22px;
+  }
+
+  .ficha-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.24rem, 1.1rem + 0.4vw, 1.48rem);
+    font-weight: 700;
+    color: #0056d6;
+    line-height: 1.25;
+    margin: 0 0 8px;
+    letter-spacing: -0.015em;
+  }
+
+  .ficha-sub {
+    font-size: 0.94rem;
+    color: #1e293b;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .ficha-tramos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+  }
+
+  @media (max-width: 540px) {
+    .ficha-tramos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .ficha-tramo-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px 17px;
+    background: #004aad;
+    border: 1.5px solid rgba(0, 74, 173, 0.25);
+    border-radius: 12px;
+    color: #ffffff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 6px 16px rgba(0, 25, 75, 0.25);
+    transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .ficha-tramo-btn:hover {
+    background: #005ce6;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 74, 173, 0.4);
+  }
+
+  .tramo-txt {
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .tramo-icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #00d4ff;
+    color: #004aad;
+    flex-shrink: 0;
+    transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+  }
+
+  .ficha-tramo-btn:hover .tramo-icono {
+    transform: translateX(3px);
+    background: #ffffff;
+    color: #004aad;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ficha-tramo-btn,
+    .tramo-icono {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>

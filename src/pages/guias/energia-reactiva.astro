@@ -1,0 +1,85 @@
+---
+// Guía · Energía reactiva: cuándo se paga, cuánto cuesta y cuándo compensa corregirla
+// Ruta: /guias/energia-reactiva
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-es",
+    "titulo": "Qué es la energía reactiva"
+  },
+  {
+    "id": "quien",
+    "titulo": "Quién la paga"
+  },
+  {
+    "id": "precios",
+    "titulo": "Cuándo y cuánto se paga en 2026"
+  },
+  {
+    "id": "capacitiva",
+    "titulo": "La reactiva capacitiva: qué dice la norma y qué se paga hoy"
+  },
+  {
+    "id": "corregir",
+    "titulo": "Cómo se corrige y cuándo compensa"
+  },
+  {
+    "id": "emax",
+    "titulo": "Qué hacemos en EMAX con tu reactiva"
+  }
+];
+const resumen = [
+  {
+    "dt": "Qué es",
+    "dd": "Energía que motores, compresores y otros equipos intercambian con la red sin producir trabajo útil."
+  },
+  {
+    "dt": "Quién no la paga",
+    "dd": "Los suministros de 15 kW o menos."
+  },
+  {
+    "dt": "Cuándo se paga",
+    "dd": "De P1 a P5, nunca en P6, y solo la que pasa del 33 % de la energía activa."
+  },
+  {
+    "dt": "Cuánto, en 2026",
+    "dd": "0,041554 o 0,062332 €/kVArh, según tu factor de potencia."
+  },
+  {
+    "dt": "La capacitiva",
+    "dd": "Existe en la norma, pero en 2026 su precio es cero."
+  },
+  {
+    "dt": "Cómo se corrige",
+    "dd": "En la instalación, no cambiando de tarifa."
+  }
+];
+const senales = [
+  "Tu factura tiene una línea de energía reactiva con importe.",
+  "Tienes motores, compresores, cámaras o climatización grandes.",
+  "Hace años que nadie revisa tu batería de condensadores."
+];
+const cta = {
+  "texto": "Con tu factura te decimos si pagas reactiva, en qué periodos y si compensa corregirla.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar si pago reactiva"
+};
+---
+
+<Guia
+  slug="energia-reactiva"
+  h1="Energía reactiva: cuándo se paga, cuánto cuesta y cuándo compensa corregirla"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="La energía reactiva es la que motores, compresores y cámaras intercambian con la red sin hacer trabajo. Solo se paga en suministros de más de 15 kW, de P1 a P5 y por encima del 33 % de la activa. No se corrige cambiando de tarifa, sino en la instalación, cuando compensa."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Circular 3/2020 de la CNMC, texto consolidado: art. 9.5 y disposición transitoria segunda · Resolución de la CNMC de 18-12-2025 de peajes para 2026, anexo III · RD 88/2026, anexo I"
+>
+ <h2 id="que-es">Qué es la energía reactiva</h2> <p>Los motores, los compresores de las cámaras, la climatización o los transformadores necesitan, para funcionar, una energía que va y viene de la red sin convertirse en trabajo. Esa es la energía reactiva.</p> <p>Si viene de motores y bobinas, es inductiva. Si viene de condensadores o de algunos equipos electrónicos, es capacitiva.</p> <p>La relación entre la energía que trabaja (activa) y la reactiva se mide con el factor de potencia, o coseno de fi (cos φ). Cuanto más cerca de 1, menos reactiva. Para calcularlo en cada periodo se usa la activa y el saldo neto de la reactiva: si ese saldo es positivo, es inductiva; si es negativo, capacitiva. <span class="fuente">(Resolución de peajes de la CNMC para 2026, anexo III.a)</span></p> <h2 id="quien">Quién la paga</h2> <div class="tabla-guia"><table> <caption class="solo-lector">Qué suministros pagan energía reactiva</caption> <thead><tr><th scope="col">Suministro</th><th scope="col">¿Se paga reactiva?</th></tr></thead> <tbody> <tr><th scope="row">Baja tensión con 15 kW o menos (2.0TD)</th><td data-label="¿Se paga reactiva?">No</td></tr> <tr><th scope="row">3.0TD</th><td data-label="¿Se paga reactiva?">La inductiva, de P1 a P5</td></tr> <tr><th scope="row">6.1TD (más de 1 kV)</th><td data-label="¿Se paga reactiva?">La inductiva, de P1 a P5. La capacitiva en P6, hoy a 0 €/kVArh</td></tr> </tbody> </table></div> <p><b>Quién la suele generar:</b> cámaras frigoríficas, compresores, motores de talleres y naves, extracción de cocinas, climatización.</p> <p class="enlaces"><a href="/sectores/supermercados#reactiva">En una tienda de alimentación</a><a href="/sectores/industria">En una nave</a><a href="/sectores/restaurantes#tu-peaje">En un restaurante de 15 kW o menos no se paga</a></p> <h2 id="precios">Cuándo y cuánto se paga en 2026</h2> <p>Solo se paga el exceso: la reactiva que supera el 33 % de la energía activa de cada periodo. Ese 33 % equivale a un factor de potencia de 0,95. <span class="fuente">(Circular 3/2020, art. 9.5)</span></p> <div class="tabla-guia"><table> <caption class="solo-lector">Precio de la energía reactiva en 2026 según el factor de potencia</caption> <thead><tr><th scope="col">Tu factor de potencia en el periodo</th><th scope="col">Periodos</th><th scope="col">Precio 2026</th></tr></thead> <tbody><tr><th scope="row">0,95 o más</th><td data-label="Periodos">P1 a P5</td><td data-label="Precio 2026" class="cifra">0 €/kVArh</td></tr><tr><th scope="row">Entre 0,80 y 0,95</th><td data-label="Periodos">P1 a P5</td><td data-label="Precio 2026" class="cifra">0,041554 €/kVArh</td></tr><tr><th scope="row">Menos de 0,80</th><td data-label="Periodos">P1 a P5</td><td data-label="Precio 2026" class="cifra">0,062332 €/kVArh</td></tr><tr><th scope="row">Cualquiera</th><td data-label="Periodos">P6</td><td data-label="Precio 2026" class="cifra">La inductiva no se paga</td></tr></tbody> </table></div> <p><b>La reactiva de noche:</b> la de las madrugadas, los fines de semana y los festivos nacionales cae en P6, y no se paga.</p> <p class="enlaces"><a href="/guias/peaje-3-0td#periodos">Qué horas son P6</a></p> <p class="fuente">Fuente: Resolución de la CNMC de 18 de diciembre de 2025, de peajes para 2026, anexo III.b · Precios vigentes del 1-1-2026 al 31-12-2026</p> <h3>Un ejemplo: la reactiva del obrador en febrero</h3> <p><span class="etiqueta-ej">Ejemplo ilustrativo · el obrador de la portada · precios de 2026</span></p> <div class="tabla-guia"><table> <caption class="solo-lector">Cálculo de la reactiva del obrador en febrero por periodo</caption> <thead><tr><th scope="col">Periodo</th><th scope="col">Activa</th><th scope="col">Reactiva</th><th scope="col">33 % de la activa</th><th scope="col">Exceso</th><th scope="col">Factor de potencia</th><th scope="col">Pagó</th></tr></thead> <tbody><tr><th scope="row">P1</th><td data-label="Activa" class="cifra">2.600 kWh</td><td data-label="Reactiva" class="cifra">1.170 kVArh</td><td data-label="33 % de la activa" class="cifra">858 kVArh</td><td data-label="Exceso" class="cifra">312 kVArh</td><td data-label="Factor de potencia" class="cifra">0,91</td><td data-label="Pagó" class="cifra">312 × 0,041554 = 12,96 €</td></tr><tr><th scope="row">P2</th><td data-label="Activa" class="cifra">1.680 kWh</td><td data-label="Reactiva" class="cifra">756 kVArh</td><td data-label="33 % de la activa" class="cifra">554,4 kVArh</td><td data-label="Exceso" class="cifra">201,6 kVArh</td><td data-label="Factor de potencia" class="cifra">0,91</td><td data-label="Pagó" class="cifra">201,6 × 0,041554 = 8,38 €</td></tr><tr><th scope="row">P6</th><td data-label="Activa" class="cifra">5.800 kWh</td><td data-label="Reactiva" class="cifra">3.190 kVArh</td><td data-label="33 % de la activa" class="cifra">—</td><td data-label="Exceso" class="cifra">—</td><td data-label="Factor de potencia" class="cifra">—</td><td data-label="Pagó" class="cifra">0 €: en P6 no se paga</td></tr></tbody> </table></div> <p class="destacado">La mayor parte de su reactiva es la de las cámaras de madrugada, y esa no le cuesta nada. Paga 21,34 € al mes por la de las horas de tienda: unos 252 € al año.</p> <h2 id="capacitiva">La reactiva capacitiva: qué dice la norma y qué se paga hoy</h2> <div class="tabla-guia"><table> <caption class="solo-lector">Lo que se lee sobre la reactiva capacitiva frente a lo que dice la norma en 2026</caption> <thead><tr><th scope="col">Lo que has podido leer</th><th scope="col">Lo que dice la norma en 2026</th></tr></thead> <tbody> <tr><th scope="row">"Se cobra a 0,05 €/kVArh"</th><td data-label="Lo que dice la norma en 2026">Era el valor transitorio de la Circular. La resolución de peajes de 2026 lo fija en 0 €/kVArh.</td></tr> <tr><th scope="row">"No existe"</th><td data-label="Lo que dice la norma en 2026">Existe: por encima de 1 kV, en P6, hay que mantener hora a hora un factor de potencia superior a 0,98 capacitivo.</td></tr> <tr><th scope="row">"Te van a penalizar ya"</th><td data-label="Lo que dice la norma en 2026">En 2026, no. La CNMC puede ponerle precio en cualquier resolución anual.</td></tr> </tbody> </table></div> <p><b>Qué la provoca:</b> baterías de condensadores fijas o mal reguladas que siguen conectadas cuando baja la actividad, de noche o el fin de semana.</p> <p><b>Por qué importa aunque hoy no cueste:</b> al corregir la inductiva, una batería sobredimensionada o mal regulada puede generar capacitiva. Hoy es gratis; no tiene por qué seguir siéndolo.</p> <p class="fuente">Fuentes: Circular 3/2020, disposición transitoria segunda · Resolución de peajes 2026, anexo III.c</p> <h2 id="corregir">Cómo se corrige y cuándo compensa</h2> <dl class="guia-dl"> <div><dt>Cómo</dt><dd>En la instalación, normalmente con una batería de condensadores dimensionada y regulada para cómo consume tu empresa. Cambiar de tarifa no la corrige.</dd></div> <div><dt>Qué comprobar</dt><dd>Que la batería sea automática y mida bien, para que no compense de más cuando baja la actividad.</dd></div> <div><dt>Cuándo compensa</dt><dd>Cuando el recargo se repite en P1 a P5 y lo que pagas al año supera lo que cuesta corregirlo. Si aparece de forma puntual, o el importe es pequeño, puede no compensar.</dd></div> <div><dt>"Ya tengo batería y sigue saliendo"</dt><dd>Mira en qué periodos aparece el recargo, si la batería está bien dimensionada y si todos sus escalones siguen funcionando.</dd></div> <div><dt>Quién lo hace</dt><dd>Un instalador o una ingeniería.</dd></div> </dl> <h2 id="emax">Qué hacemos en EMAX con tu reactiva</h2> <p>Leemos tu reactiva periodo a periodo, te decimos en cuáles se paga, cuánto supone al año con los precios vigentes y si compensa corregirla. La corrección la hace un instalador; nosotros te damos el dato para decidir.</p> 
+</Guia>

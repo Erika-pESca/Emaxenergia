@@ -1,0 +1,1059 @@
+---
+// Componente FacturaInteractiva: "Los conceptos de tu factura" (Banda de noche)
+// Diseño interactivo de alta gama inspirado en el flujo de pasos numerados:
+// Columna izquierda: Lista vertical de números 01 a 08 con nombres interactivos
+// Zona central: Escenario con icono temático ilustrado y animado con CSS que se mueve
+// Columna derecha: Tarjeta limpia con título, explicación resumida y botón de acceso directo a la guía
+import TituloAcento from "./TituloAcento.astro";
+
+interface ConceptoFactura {
+  id: string;
+  num: string;
+  nombre: string;
+  sub: string;
+  guia: string;
+  href: string;
+  desc: string;
+  icono: string;
+}
+
+const conceptos: ConceptoFactura[] = [
+  {
+    id: "cups",
+    num: "01",
+    nombre: "Código CUPS",
+    sub: "ES•• •••• •••• ••••",
+    guia: "Qué se ve con tu CUPS y qué no",
+    href: "/guias/cups-y-tus-datos",
+    desc: "El código identificador único de tu punto de suministro. Con él se consultan peajes, potencias y el consumo histórico de 3 años, pero nunca autoriza un cambio de compañía sin tu consentimiento.",
+    icono: "cups",
+  },
+  {
+    id: "potencia",
+    num: "02",
+    nombre: "Potencia contratada",
+    sub: "P1 a P6 · Término fijo kW/día",
+    guia: "Potencia contratada",
+    href: "/guias/potencia-contratada",
+    desc: "Los kW de capacidad máxima que tu empresa tiene asignados. Se pagan todos los días del año, consumas o no. Ajustarla con tus maxímetros reales de 12 meses evita pagar capacidad que no usas.",
+    icono: "potencia",
+  },
+  {
+    id: "maximetro",
+    num: "03",
+    nombre: "El maxímetro",
+    sub: "Medición en cuartos de hora",
+    guia: "El maxímetro",
+    href: "/guias/maximetro",
+    desc: "Registra la potencia más alta demandada por tu maquinaria en periodos de 15 minutos. Es el dato técnico definitivo para saber exactamente cuánta potencia necesitas en cada periodo.",
+    icono: "maximetro",
+  },
+  {
+    id: "excesos",
+    num: "04",
+    nombre: "Excesos de potencia",
+    sub: "Penalización por demanda extra",
+    guia: "Exceso de potencia",
+    href: "/guias/exceso-de-potencia",
+    desc: "Aparecen cuando tu empresa supera la potencia contratada en un cuarto de hora. Si se repiten, casi siempre cuesta menos aumentar el escalón de potencia que seguir asumiendo las multas.",
+    icono: "excesos",
+  },
+  {
+    id: "reactiva",
+    num: "05",
+    nombre: "Energía reactiva",
+    sub: "Desfase inductivo (cos φ < 0.95)",
+    guia: "Energía reactiva",
+    href: "/guias/energia-reactiva",
+    desc: "Generada por transformadores, motores y maquinaria inductiva sin producir trabajo útil. Si supera el 33% de la energía activa se penaliza, pero se elimina instalando una batería de condensadores.",
+    icono: "reactiva",
+  },
+  {
+    id: "peaje",
+    num: "06",
+    nombre: "Peaje de acceso 3.0TD",
+    sub: "Seis periodos horarios (P1 a P6)",
+    guia: "El peaje 3.0TD, periodo a periodo",
+    href: "/guias/peaje-3-0td",
+    desc: "Estructura regulada que divide las horas del año en 6 periodos de precios distintos: desde P1 (el más caro) hasta P6 (el más barato: noches enteras y fines de semana completos).",
+    icono: "peaje",
+  },
+  {
+    id: "energia",
+    num: "07",
+    nombre: "Energía y modalidad",
+    sub: "Precio Fijo vs Indexado a Pool",
+    guia: "Precio fijo o indexado",
+    href: "/guias/precio-fijo-o-indexado",
+    desc: "El coste variable según los kWh consumidos. Puedes elegir un precio fijo pactado para blindar tu presupuesto o modalidad indexada a OMIE para beneficiarte de las horas más baratas.",
+    icono: "energia",
+  },
+  {
+    id: "impuestos",
+    num: "08",
+    nombre: "Impuestos y cargos",
+    sub: "Costes regulados y alquiler",
+    guia: "Cómo leer la factura de luz de tu empresa",
+    href: "/guias/factura-luz-empresa#impuestos",
+    desc: "Incluye el Impuesto Especial sobre la Electricidad, los peajes de transporte, los cargos del sistema eléctrico fijados por el Ministerio, el alquiler del contador y el IVA.",
+    icono: "impuestos",
+  },
+];
+
+const conceptosExtra = [
+  { nombre: "OMIE y OMIP", href: "/guias/omie" },
+  { nombre: "Indexado con techo", href: "/guias/tarifa-indexada-con-techo" },
+  { nombre: "Glosario", href: "/guias/glosario" },
+  { nombre: "Las tres partes", href: "/guias/factura-luz-empresa#tres-partes" },
+  { nombre: "Lecturas", href: "/guias/factura-luz-empresa#lecturas" },
+];
+
+const inicial = conceptos[0]; // CUPS activo por defecto
+---
+
+<section class="banda noche seccion--noche seccion-conceptos" aria-labelledby="h2-conceptos">
+  <div class="w sec">
+    <!-- Cabecera de sección oficial -->
+    <div class="sec__cab">
+      <h2 id="h2-conceptos" class="seccion-titulo-noche">
+        LOS CONCEPTOS
+        <span class="titulo-cursiva-noche">de tu factura</span>
+      </h2>
+      <p class="sec__desc">
+        Pasa el cursor o selecciona cada número para entender qué es cada término, cómo impacta en tu gasto y qué guía lo resuelve.
+      </p>
+    </div>
+
+    <!-- Escenario interactivo en 3 columnas: Números a la izquierda, Icono animado al centro, Información a la derecha -->
+    <div class="stage-conceptos" id="stageConceptos">
+      
+      <!-- Columna 1: Lista vertical interactiva de números 01 a 08 -->
+      <nav class="num-nav" aria-label="Navegador de conceptos de la factura">
+        <ul class="num-lista" role="tablist">
+          {
+            conceptos.map((item, idx) => (
+              <li class="num-item" role="presentation">
+                <button
+                  type="button"
+                  class:list={["num-btn", idx === 0 && "is-active"]}
+                  role="tab"
+                  id={`tab-${item.id}`}
+                  aria-selected={idx === 0 ? "true" : "false"}
+                  aria-controls={`panel-${item.id}`}
+                  data-idx={idx}
+                  data-id={item.id}
+                  data-nombre={item.nombre}
+                  data-sub={item.sub}
+                  data-desc={item.desc}
+                  data-guia={item.guia}
+                  data-href={item.href}
+                  data-num={item.num}
+                  data-icono={item.icono}
+                >
+                  <span class="num-val">{item.num}.</span>
+                  <span class="num-tit">{item.nombre}</span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Columna 2: Zona central con icono visual animado que se mueve con CSS -->
+      <div class="icon-stage" aria-hidden="true">
+        <div class="icon-aura"></div>
+
+        <!-- 01. CUPS: Tarjeta inteligente / Chip con escáner láser animado -->
+        <div class="svg-icon-wrap is-active" data-icon="cups">
+          <svg class="svg-anim anim-cups" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="45" width="150" height="110" rx="20" fill="#0A1E46" stroke="#004AAD" stroke-width="4"></rect>
+            <!-- Chip dorado/cyan -->
+            <rect x="45" y="75" width="38" height="30" rx="6" fill="#00D4FF" fill-opacity="0.25" stroke="#00D4FF" stroke-width="2.5"></rect>
+            <line x1="45" y1="90" x2="83" y2="90" stroke="#00D4FF" stroke-width="2"></line>
+            <line x1="64" y1="75" x2="64" y2="105" stroke="#00D4FF" stroke-width="2"></line>
+            <!-- Líneas de datos -->
+            <line x1="98" y1="80" x2="155" y2="80" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"></line>
+            <line x1="98" y1="95" x2="140" y2="95" stroke="#60A5FA" stroke-width="3.5" stroke-linecap="round"></line>
+            <line x1="45" y1="130" x2="120" y2="130" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"></line>
+            <!-- Escáner láser en movimiento -->
+            <line class="laser-beam" x1="20" y1="55" x2="180" y2="55" stroke="#00D4FF" stroke-width="3" stroke-linecap="round"></line>
+            <!-- Escudo de protección -->
+            <circle cx="150" cy="128" r="16" fill="#004AAD" stroke="#38BDF8" stroke-width="2.5"></circle>
+            <polyline points="144 128 148 132 156 124" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          </svg>
+        </div>
+
+        <!-- 02. Potencia: Manómetro de energía con aguja oscilante y ondas -->
+        <div class="svg-icon-wrap" data-icon="potencia">
+          <svg class="svg-anim anim-potencia" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle class="onda-pulso" cx="100" cy="105" r="72" stroke="#00D4FF" stroke-width="2" stroke-dasharray="6 6" opacity="0.6"></circle>
+            <!-- Arco medidor -->
+            <path d="M 40 135 A 70 70 0 1 1 160 135" stroke="#0A2A66" stroke-width="16" stroke-linecap="round"></path>
+            <path d="M 40 135 A 70 70 0 0 1 140 55" stroke="url(#gradPotencia)" stroke-width="16" stroke-linecap="round"></path>
+            <circle cx="100" cy="105" r="16" fill="#004AAD" stroke="#38BDF8" stroke-width="4"></circle>
+            <!-- Aguja oscilante con animación -->
+            <line class="aguja-rotativa" x1="100" y1="105" x2="135" y2="60" stroke="#00D4FF" stroke-width="5" stroke-linecap="round"></line>
+            <circle cx="100" cy="105" r="6" fill="#FFFFFF"></circle>
+            <defs>
+              <linearGradient id="gradPotencia" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"></stop>
+                <stop offset="100%" stop-color="#00D4FF"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- 03. Maxímetro: Gráfico de barras cuartohorario con bandera pico -->
+        <div class="svg-icon-wrap" data-icon="maximetro">
+          <svg class="svg-anim anim-maximetro" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Eje base -->
+            <line x1="30" y1="155" x2="170" y2="155" stroke="#1E3A8A" stroke-width="4" stroke-linecap="round"></line>
+            <!-- Barras cuartohorarias -->
+            <rect class="bar-1" x="42" y="110" width="18" height="45" rx="5" fill="#1D4ED8"></rect>
+            <rect class="bar-2" x="68" y="90" width="18" height="65" rx="5" fill="#2563EB"></rect>
+            <rect class="bar-3" x="94" y="65" width="18" height="90" rx="5" fill="#38BDF8"></rect>
+            <!-- Barra pico más alta -->
+            <rect class="bar-pico" x="120" y="45" width="20" height="110" rx="6" fill="#00D4FF"></rect>
+            <rect class="bar-4" x="148" y="100" width="18" height="55" rx="5" fill="#1D4ED8"></rect>
+            <!-- Indicador pico animado -->
+            <g class="pico-flag">
+              <circle cx="130" cy="30" r="14" fill="#004AAD" stroke="#38BDF8" stroke-width="3"></circle>
+              <polyline points="126 30 130 26 134 30" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+              <line x1="130" y1="26" x2="130" y2="34" stroke="#00D4FF" stroke-width="2.5" stroke-linecap="round"></line>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 04. Excesos de potencia: Rayo eléctrico dinámico con chispas flotantes -->
+        <div class="svg-icon-wrap" data-icon="excesos">
+          <svg class="svg-anim anim-excesos" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle class="halo-rayo" cx="100" cy="100" r="65" fill="#00D4FF" fill-opacity="0.12"></circle>
+            <!-- Rayo principal animado -->
+            <polygon class="rayo-flotante" points="108 25 58 105 102 105 92 175 148 95 104 95" fill="url(#gradRayo)" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"></polygon>
+            <!-- Chispas que parpadean -->
+            <circle class="chispa-1" cx="48" cy="70" r="4" fill="#00D4FF"></circle>
+            <circle class="chispa-2" cx="155" cy="65" r="5" fill="#38BDF8"></circle>
+            <circle class="chispa-3" cx="145" cy="140" r="4" fill="#60A5FA"></circle>
+            <defs>
+              <linearGradient id="gradRayo" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38BDF8"></stop>
+                <stop offset="60%" stop-color="#00D4FF"></stop>
+                <stop offset="100%" stop-color="#004AAD"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- 05. Energía reactiva: Bobinas inductivas con ondas magnéticas oscilantes -->
+        <div class="svg-icon-wrap" data-icon="reactiva">
+          <svg class="svg-anim anim-reactiva" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Bobinas laterales -->
+            <rect x="30" y="55" width="26" height="90" rx="8" fill="#0A2A66" stroke="#00D4FF" stroke-width="3"></rect>
+            <rect x="144" y="55" width="26" height="90" rx="8" fill="#0A2A66" stroke="#00D4FF" stroke-width="3"></rect>
+            <!-- Bobinados -->
+            <path d="M 43 70 Q 56 80 43 90 Q 56 100 43 110 Q 56 120 43 130" stroke="#38BDF8" stroke-width="3" fill="none"></path>
+            <path d="M 157 70 Q 144 80 157 90 Q 144 100 157 110 Q 144 120 157 130" stroke="#38BDF8" stroke-width="3" fill="none"></path>
+            <!-- Ondas magnéticas que fluyen en loop -->
+            <path class="onda-flujo onda-a" d="M 60 85 Q 100 65 140 85" stroke="#00D4FF" stroke-width="3.5" fill="none" stroke-linecap="round"></path>
+            <path class="onda-flujo onda-b" d="M 60 100 Q 100 120 140 100" stroke="#38BDF8" stroke-width="3.5" fill="none" stroke-linecap="round"></path>
+            <path class="onda-flujo onda-c" d="M 60 115 Q 100 95 140 115" stroke="#60A5FA" stroke-width="3" fill="none" stroke-linecap="round"></path>
+          </svg>
+        </div>
+
+        <!-- 06. Peaje 3.0TD: Esfera horaria de 6 periodos con manecilla giratoria -->
+        <div class="svg-icon-wrap" data-icon="peaje">
+          <svg class="svg-anim anim-peaje" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="75" fill="#0A1E46" stroke="#1D4ED8" stroke-width="4"></circle>
+            <!-- 6 segmentos de periodos (P1 a P6) -->
+            <path d="M 100 100 L 100 30 A 70 70 0 0 1 160 65 Z" fill="#EF4444" fill-opacity="0.5"></path>
+            <path d="M 100 100 L 160 65 A 70 70 0 0 1 160 135 Z" fill="#F59E0B" fill-opacity="0.5"></path>
+            <path d="M 100 100 L 160 135 A 70 70 0 0 1 100 170 Z" fill="#3B82F6" fill-opacity="0.5"></path>
+            <path d="M 100 100 L 100 170 A 70 70 0 0 1 40 135 Z" fill="#10B981" fill-opacity="0.5"></path>
+            <path d="M 100 100 L 40 135 A 70 70 0 0 1 40 65 Z" fill="#06B6D4" fill-opacity="0.5"></path>
+            <path d="M 100 100 L 40 65 A 70 70 0 0 1 100 30 Z" fill="#8B5CF6" fill-opacity="0.5"></path>
+            <!-- Centro y manecilla giratoria -->
+            <circle cx="100" cy="100" r="14" fill="#004AAD" stroke="#FFFFFF" stroke-width="3"></circle>
+            <g class="manecilla-reloj">
+              <line x1="100" y1="100" x2="100" y2="45" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"></line>
+              <circle cx="100" cy="45" r="5" fill="#00D4FF"></circle>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 07. Energía y modalidad: Balanza de precisión basculante con monedas y gráfico -->
+        <div class="svg-icon-wrap" data-icon="energia">
+          <svg class="svg-anim anim-energia" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Base fija -->
+            <line x1="50" y1="165" x2="150" y2="165" stroke="#1D4ED8" stroke-width="6" stroke-linecap="round"></line>
+            <polygon points="100 70 88 165 112 165" fill="#0A2A66" stroke="#1D4ED8" stroke-width="3"></polygon>
+            <circle cx="100" cy="70" r="8" fill="#00D4FF"></circle>
+            <!-- Brazo balanza basculante animado -->
+            <g class="brazo-balanza">
+              <line x1="38" y1="70" x2="162" y2="70" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"></line>
+              <!-- Platillo izquierdo: Fijo (€) -->
+              <line x1="45" y1="70" x2="45" y2="105" stroke="#94A3B8" stroke-width="2"></line>
+              <path d="M 25 105 Q 45 125 65 105 Z" fill="#004AAD" stroke="#00D4FF" stroke-width="2.5"></path>
+              <circle cx="45" cy="98" r="9" fill="#00D4FF"></circle>
+              <!-- Platillo derecho: Indexado (onda) -->
+              <line x1="155" y1="70" x2="155" y2="105" stroke="#94A3B8" stroke-width="2"></line>
+              <path d="M 135 105 Q 155 125 175 105 Z" fill="#004AAD" stroke="#38BDF8" stroke-width="2.5"></path>
+              <polyline points="143 100 150 94 157 102 165 92" stroke="#38BDF8" stroke-width="2.5" fill="none" stroke-linecap="round"></polyline>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 08. Impuestos: Documento analizado con lupa flotante en órbita -->
+        <div class="svg-icon-wrap" data-icon="impuestos">
+          <svg class="svg-anim anim-impuestos" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hoja de factura -->
+            <rect x="45" y="35" width="100" height="130" rx="14" fill="#0A1E46" stroke="#1E3A8A" stroke-width="3.5"></rect>
+            <line x1="62" y1="60" x2="105" y2="60" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"></line>
+            <line x1="62" y1="78" x2="128" y2="78" stroke="#60A5FA" stroke-width="3" stroke-linecap="round"></line>
+            <line x1="62" y1="94" x2="115" y2="94" stroke="#60A5FA" stroke-width="3" stroke-linecap="round"></line>
+            <line x1="62" y1="110" x2="128" y2="110" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round"></line>
+            <line x1="62" y1="135" x2="128" y2="135" stroke="#00D4FF" stroke-width="3.5" stroke-linecap="round"></line>
+            <!-- Lupa flotante animada -->
+            <g class="lupa-orbita">
+              <circle cx="120" cy="100" r="24" fill="#004AAD" fill-opacity="0.7" stroke="#00D4FF" stroke-width="4"></circle>
+              <line x1="137" y1="117" x2="158" y2="138" stroke="#00D4FF" stroke-width="6" stroke-linecap="round"></line>
+              <circle cx="115" cy="95" r="5" fill="#FFFFFF" fill-opacity="0.6"></circle>
+            </g>
+          </svg>
+        </div>
+
+      </div>
+
+      <!-- Columna 3: Tarjeta limpia con explicación y llamada a la acción -->
+      <div class="detail-card-wrap">
+        <article class="detail-card" id="detailCard" aria-live="polite">
+          <header class="detail-header">
+            <span class="detail-kicker" id="detailKicker">CONCEPTO 01 DE 08</span>
+            <span class="detail-sub-tag" id="detailSub">{inicial.sub}</span>
+          </header>
+
+          <h3 class="detail-titulo" id="detailTitulo">{inicial.nombre}</h3>
+
+          <p class="detail-desc" id="detailDesc">{inicial.desc}</p>
+
+          <div class="detail-actions">
+            <a class="detail-cta-btn" id="detailEnlace" href={inicial.href}>
+              <span id="detailGuiaTexto">Leer guía: {inicial.guia}</span>
+              <span class="detail-btn-circulo" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="8" x2="13" y2="8"></line>
+                  <polyline points="8 3 13 8 8 13"></polyline>
+                </svg>
+              </span>
+            </a>
+
+            <!-- Controles de navegación anterior / siguiente -->
+            <div class="nav-arrows" aria-label="Controles de navegación">
+              <button type="button" class="arrow-btn btn-prev" id="btnPrevConcepto" aria-label="Concepto anterior">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="10 13 5 8 10 3"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="arrow-btn btn-next" id="btnNextConcepto" aria-label="Concepto siguiente">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 3 11 8 6 13"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+    <!-- Enlaces adicionales integrados -->
+    <div class="tambien-row">
+      <span class="tambien-label">Otros conceptos clave:</span>
+      <div class="tambien-chips">
+        {
+          conceptosExtra.map((extra) => (
+            <a class="tambien-chip" href={extra.href}>{extra.nombre}</a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Fallback accesible sin JavaScript -->
+    <noscript>
+      <div class="fallback-no-js">
+        <p><strong>Enlaces directos a las guías de cada concepto:</strong></p>
+        <ul>
+          {conceptos.map((c) => (
+            <li><a href={c.href}>{c.num}. {c.nombre}: {c.guia}</a></li>
+          ))}
+        </ul>
+      </div>
+    </noscript>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN CONCEPTOS DE FACTURA - DISEÑO DINÁMICO E INTUITIVO CON ICONOS ANIMADOS
+     ========================================================================== */
+  .seccion-conceptos {
+    background: #0A1B3F;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-block: clamp(64px, 7vw, 100px);
+    overflow: hidden;
+  }
+
+  .w {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 40px);
+  }
+
+  .sec__cab {
+    margin-bottom: clamp(40px, 5vw, 60px);
+    max-width: 760px;
+  }
+
+  .seccion-titulo-noche {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2.1rem, 1.7rem + 2vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva-noche {
+    display: block;
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #38bdf8;
+    letter-spacing: -0.01em;
+    margin-top: 4px;
+  }
+
+  .sec__desc {
+    color: #cbd5e1;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin: 14px 0 0;
+  }
+
+  /* Escenario en 3 Columnas: Anclado arriba para eliminar cualquier movimiento vertical */
+  .stage-conceptos {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .stage-conceptos {
+      grid-template-columns: 240px minmax(0, 1fr) minmax(0, 1.25fr);
+      gap: clamp(28px, 3.5vw, 56px);
+      align-items: start;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Columna 1: Lista vertical de números interactivos (01 a 08)
+     ESTABLE: Altura fija, anclado al inicio, sin movimiento
+     -------------------------------------------------------------------------- */
+  .num-nav {
+    min-width: 0;
+    align-self: start;
+  }
+
+  .num-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  @media (max-width: 899px) {
+    .num-lista {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+
+  .num-item {
+    margin: 0;
+  }
+
+  .num-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 46px;
+    padding: 4px 12px;
+    background: transparent;
+    border: none;
+    border-left: 3px solid transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .num-val {
+    font-family: "Sora", sans-serif;
+    font-size: 1.85rem;
+    font-weight: 800;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.28);
+    letter-spacing: -0.02em;
+    transition: color 0.18s ease, text-shadow 0.18s ease;
+    flex-shrink: 0;
+    min-width: 48px;
+  }
+
+  .num-tit {
+    font-family: "Sora", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.45);
+    transition: color 0.18s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 899px) {
+    .num-btn {
+      width: auto;
+      height: 38px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .num-val {
+      font-size: 1.1rem;
+      min-width: auto;
+    }
+    .num-tit {
+      font-size: 0.85rem;
+    }
+  }
+
+  .num-btn:hover .num-val {
+    color: #38bdf8;
+  }
+
+  .num-btn:hover .num-tit {
+    color: #ffffff;
+  }
+
+  .num-btn.is-active {
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: #00d4ff;
+  }
+
+  .num-btn.is-active .num-val {
+    color: #00d4ff;
+    text-shadow: 0 0 16px rgba(0, 212, 255, 0.45);
+  }
+
+  .num-btn.is-active .num-tit {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  @media (max-width: 899px) {
+    .num-btn.is-active {
+      background: #004aad;
+      border-color: #00d4ff;
+    }
+    .num-btn.is-active .num-val {
+      font-size: 1.15rem;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Columna 2: Zona central con icono SVG animado interactivo
+     -------------------------------------------------------------------------- */
+  .icon-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+  }
+
+  .icon-aura {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.18) 0%, rgba(0, 74, 173, 0.08) 50%, transparent 75%);
+    pointer-events: none;
+    animation: auraPulso 4s infinite ease-in-out;
+  }
+
+  @keyframes auraPulso {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  .svg-icon-wrap {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 240px;
+    aspect-ratio: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  .svg-icon-wrap.is-active {
+    display: flex;
+    animation: fadeInIcon 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeInIcon {
+    from { opacity: 0; transform: scale(0.92) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .svg-anim {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 14px 28px rgba(0, 10, 30, 0.5));
+  }
+
+  /* Animaciones específicas de cada icono para que se muevan con vida */
+  /* 01. CUPS Laser */
+  .laser-beam {
+    animation: laserScan 2.4s infinite ease-in-out;
+  }
+  @keyframes laserScan {
+    0%, 100% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(75px); opacity: 1; filter: drop-shadow(0 0 6px #00d4ff); }
+  }
+
+  /* 02. Potencia Aguja */
+  .aguja-rotativa {
+    transform-origin: 100px 105px;
+    animation: oscilarAguja 2.8s infinite ease-in-out;
+  }
+  @keyframes oscilarAguja {
+    0%, 100% { transform: rotate(-35deg); }
+    50% { transform: rotate(40deg); }
+  }
+  .onda-pulso {
+    transform-origin: 100px 105px;
+    animation: pulsoCirculo 2s infinite ease-out;
+  }
+  @keyframes pulsoCirculo {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    100% { transform: scale(1.12); opacity: 0.1; }
+  }
+
+  /* 03. Maxímetro Pico */
+  .pico-flag {
+    animation: picoRebote 1.8s infinite ease-in-out;
+  }
+  @keyframes picoRebote {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); filter: drop-shadow(0 0 8px #00d4ff); }
+  }
+  .bar-pico {
+    animation: picoPulso 2.2s infinite ease-in-out;
+  }
+  @keyframes picoPulso {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 1; fill: #38bdf8; }
+  }
+
+  /* 04. Excesos Rayo */
+  .rayo-flotante {
+    animation: rayoSalto 2.2s infinite ease-in-out;
+  }
+  @keyframes rayoSalto {
+    0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
+    50% { transform: translateY(-6px) scale(1.04); filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.9)); }
+  }
+  .chispa-1, .chispa-2, .chispa-3 {
+    animation: chispaFlash 1.5s infinite ease-in-out;
+  }
+  .chispa-2 { animation-delay: 0.4s; }
+  .chispa-3 { animation-delay: 0.8s; }
+  @keyframes chispaFlash {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* 05. Reactiva Ondas */
+  .onda-flujo {
+    animation: flujoOnda 2.2s infinite ease-in-out;
+  }
+  .onda-b { animation-delay: 0.35s; }
+  .onda-c { animation-delay: 0.7s; }
+  @keyframes flujoOnda {
+    0%, 100% { transform: scaleY(1); opacity: 0.4; }
+    50% { transform: scaleY(1.3); opacity: 1; }
+  }
+
+  /* 06. Peaje Manecilla */
+  .manecilla-reloj {
+    transform-origin: 100px 100px;
+    animation: girarReloj 8s infinite linear;
+  }
+  @keyframes girarReloj {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* 07. Energía Balanza */
+  .brazo-balanza {
+    transform-origin: 100px 70px;
+    animation: bascularBalanza 3.4s infinite ease-in-out;
+  }
+  @keyframes bascularBalanza {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+  }
+
+  /* 08. Impuestos Lupa */
+  .lupa-orbita {
+    animation: orbitaLupa 3.6s infinite ease-in-out;
+  }
+  @keyframes orbitaLupa {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(8px, -8px); }
+    66% { transform: translate(-6px, 6px); }
+  }
+
+  /* --------------------------------------------------------------------------
+     Columna 3: Tarjeta de detalle explicativa con botón de acceso
+     -------------------------------------------------------------------------- */
+  .detail-card-wrap {
+    min-width: 0;
+  }
+
+  .detail-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.14);
+    border-radius: 24px;
+    padding: clamp(28px, 3.2vw, 40px);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 50px rgba(0, 10, 30, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 330px;
+    align-self: start;
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .detail-kicker {
+    font-family: "Sora", sans-serif;
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: #38bdf8;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .detail-sub-tag {
+    font-family: "Sora", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px 12px;
+    border-radius: 9999px;
+  }
+
+  .detail-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+    line-height: 1.2;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.02em;
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+  }
+
+  .detail-desc {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #cbd5e1;
+    margin: 0 0 10px;
+    font-weight: 400;
+    min-height: 4.8em;
+  }
+
+  .detail-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 10px;
+  }
+
+  .detail-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px 12px 24px;
+    border-radius: 9999px;
+    background: #0056b3;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 16px rgba(0, 86, 179, 0.4);
+    transition: all 0.2s ease;
+  }
+
+  .detail-cta-btn:hover {
+    background: #0066d6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 86, 179, 0.55);
+  }
+
+  .detail-btn-circulo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #00d4ff;
+    color: #004aad;
+    transition: all 0.2s ease;
+  }
+
+  .detail-cta-btn:hover .detail-btn-circulo {
+    background: #ffffff;
+    color: #004aad;
+    transform: translateX(2px);
+  }
+
+  .nav-arrows {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .arrow-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .arrow-btn:hover {
+    background: #004aad;
+    border-color: #00d4ff;
+    color: #ffffff;
+    transform: scale(1.06);
+  }
+
+  /* --------------------------------------------------------------------------
+     Enlaces complementarios al pie
+     -------------------------------------------------------------------------- */
+  .tambien-row {
+    margin-top: clamp(40px, 5vw, 60px);
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .tambien-label {
+    font-family: "Sora", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8;
+  }
+
+  .tambien-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tambien-chip {
+    padding: 6px 14px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .tambien-chip:hover {
+    background: #004aad;
+    color: #ffffff;
+    border-color: #00d4ff;
+  }
+
+  .fallback-no-js {
+    margin-top: 32px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .laser-beam,
+    .aguja-rotativa,
+    .onda-pulso,
+    .pico-flag,
+    .bar-pico,
+    .rayo-flotante,
+    .chispa-1,
+    .chispa-2,
+    .chispa-3,
+    .onda-flujo,
+    .manecilla-reloj,
+    .brazo-balanza,
+    .lupa-orbita,
+    .icon-aura {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Controlador interactivo de conceptos con animación sincronizada
+  function initConceptosFactura() {
+    const stage = document.getElementById("stageConceptos");
+    if (!stage) return;
+
+    const botones = Array.from(stage.querySelectorAll<HTMLButtonElement>("button.num-btn"));
+    const iconWraps = Array.from(stage.querySelectorAll<HTMLElement>(".svg-icon-wrap"));
+
+    const kicker = document.getElementById("detailKicker");
+    const sub = document.getElementById("detailSub");
+    const titulo = document.getElementById("detailTitulo");
+    const desc = document.getElementById("detailDesc");
+    const enlace = document.getElementById("detailEnlace");
+    const guiaTexto = document.getElementById("detailGuiaTexto");
+
+    const btnPrev = document.getElementById("btnPrevConcepto");
+    const btnNext = document.getElementById("btnNextConcepto");
+
+    let activeIndex = 0;
+
+    function activarConcepto(idx: number) {
+      if (idx < 0) idx = botones.length - 1;
+      if (idx >= botones.length) idx = 0;
+
+      const targetBtn = botones[idx];
+      if (!targetBtn) return;
+      if (idx === activeIndex && targetBtn.classList.contains("is-active")) return;
+      activeIndex = idx;
+
+      // Actualizar botones de la lista
+      botones.forEach((b, i) => {
+        const isAct = i === idx;
+        b.classList.toggle("is-active", isAct);
+        b.setAttribute("aria-selected", isAct ? "true" : "false");
+      });
+
+      // Extraer datos
+      const num = targetBtn.dataset.num || "01";
+      const nombre = targetBtn.dataset.nombre || "";
+      const subTxt = targetBtn.dataset.sub || "";
+      const descTxt = targetBtn.dataset.desc || "";
+      const guiaTxt = targetBtn.dataset.guia || "";
+      const href = targetBtn.dataset.href || "#";
+      const icono = targetBtn.dataset.icono || "cups";
+
+      // Actualizar tarjeta de detalle
+      if (kicker) kicker.textContent = `CONCEPTO ${num} DE 08`;
+      if (sub) sub.textContent = subTxt;
+      if (titulo) titulo.textContent = nombre;
+      if (desc) desc.textContent = descTxt;
+      if (guiaTexto) guiaTexto.textContent = `Leer guía: ${guiaTxt}`;
+      if (enlace) enlace.setAttribute("href", href);
+
+      // Actualizar icono animado visible
+      iconWraps.forEach((wrap) => {
+        wrap.classList.toggle("is-active", wrap.dataset.icon === icono);
+      });
+    }
+
+    let hoverTimer: ReturnType<typeof setTimeout> | null = null;
+
+    // Eventos en botones de lista con debounce de 60ms para evitar parpadeos
+    botones.forEach((btn, idx) => {
+      btn.addEventListener("click", () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        activarConcepto(idx);
+      });
+      btn.addEventListener("mouseenter", () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+          activarConcepto(idx);
+        }, 60);
+      });
+      btn.addEventListener("focus", () => {
+        if (hoverTimer) clearTimeout(hoverTimer);
+        activarConcepto(idx);
+      });
+    });
+
+    const listaContainer = stage.querySelector(".num-lista");
+    listaContainer?.addEventListener("mouseleave", () => {
+      if (hoverTimer) clearTimeout(hoverTimer);
+    });
+
+    // Flechas prev / next
+    btnPrev?.addEventListener("click", () => {
+      if (hoverTimer) clearTimeout(hoverTimer);
+      activarConcepto(activeIndex - 1);
+    });
+    btnNext?.addEventListener("click", () => {
+      if (hoverTimer) clearTimeout(hoverTimer);
+      activarConcepto(activeIndex + 1);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initConceptosFactura);
+  } else {
+    initConceptosFactura();
+  }
+
+  document.addEventListener("astro:page-load", initConceptosFactura);
+</script>

@@ -1,0 +1,65 @@
+---
+// Guía · Te ha llegado una carta que cambia tu precio de la luz: qué revisar
+// Ruta: /guias/revision-precio-luz-empresa
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-trae",
+    "titulo": "Qué tiene que traer la carta"
+  },
+  {
+    "id": "precio-fijo",
+    "titulo": "Si tu contrato es a precio fijo"
+  },
+  {
+    "id": "que-revisar",
+    "titulo": "Qué revisar antes de aceptar"
+  }
+];
+const resumen = [
+  {
+    "dt": "Cómo te avisan",
+    "dd": "Por escrito, aparte de la factura y con al menos un mes de antelación."
+  },
+  {
+    "dt": "Qué trae la carta",
+    "dd": "Las fechas, los precios de antes y de después y tu coste anual antes y después."
+  },
+  {
+    "dt": "Si es precio fijo",
+    "dd": "Las cláusulas de revisión no se aplican a los contratos a precio fijo."
+  },
+  {
+    "dt": "Lo primero",
+    "dd": "Comprobar que el consumo anual que usan es el tuyo."
+  }
+];
+const senales = [
+  "La carta llega dentro de la factura, no aparte.",
+  "No trae una tabla con el precio de antes y el de después.",
+  "Tu contrato era a precio fijo y aun así te anuncian una revisión."
+];
+const cta = {
+  "texto": "Con la carta y tu última factura te decimos cuánto te cuesta el cambio y qué puedes hacer.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Revisar mi caso"
+};
+---
+
+<Guia
+  slug="revision-precio-luz-empresa"
+  h1="Te ha llegado una carta que cambia tu precio de la luz: qué revisar"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="Si tu comercializadora cambia el precio durante el contrato, tiene que avisarte por escrito, aparte de la factura y con al menos un mes de antelación. La carta debe traer los precios de antes y de después y tu coste anual antes y después. Si tu contrato es a precio fijo, las cláusulas de revisión no se le aplican."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Real Decreto 88/2026, Reglamento general de suministro, comercialización y agregación de energía eléctrica (BOE-A-2026-3212): art. 6.1, letras m) y n), y disposición transitoria séptima"
+>
+ <h2 id="que-trae">Qué tiene que traer la carta</h2> <p>Mientras el Ministerio no lo regule por orden, el RD 88/2026 dice qué debe mostrar cualquier comunicación de revisión de precios:</p> <ul> <li>La fecha en que te la envían y la fecha desde la que se aplican los nuevos precios.</li> <li>Una tabla con los precios de antes y los de después de la revisión.</li> <li>Tu coste anual antes del cambio y una estimación del coste anual después.</li> <li>El consumo anual y cualquier otro dato que hayan usado para esa estimación.</li> </ul> <p class="nota">Y tiene que llegarte por escrito, aparte de la factura y con al menos un mes de antelación.</p> <h2 id="precio-fijo">Si tu contrato es a precio fijo</h2> <p>El reglamento dice que las cláusulas de revisión no se aplican a los contratos a precio fijo. Si el tuyo lo es y te anuncian una revisión, pide por escrito en qué cláusula se basa.</p> <p>Y si tu contrato prevé revisiones más de una vez al año, tiene que incluir los criterios objetivos con los que se calculan. Búscalos antes de aceptar la nueva cifra.</p> <h2 id="que-revisar">Qué revisar antes de aceptar</h2> <ul> <li><b>El consumo anual que usan.</b> Compáralo con la suma de tus doce últimas facturas. Si no es el tuyo, el coste anual estimado tampoco lo es.</li> <li><b>La diferencia en euros al año</b>, no en céntimos por kWh. Es la cifra con la que decides.</li> <li><b>La fecha de aplicación</b> frente a la duración que le queda a tu contrato.</li> <li><b>Lo que no cambia.</b> Peajes, cargos e impuestos no dependen de tu comercializadora: la revisión solo puede tocar lo suyo.</li> </ul> <p class="destacado">No firmes nada en la misma llamada en la que te explican la carta. Con un mes de margen, hay tiempo para comparar.</p> <p class="enlaces"><a href="/metodo#condiciones">La decisión 5 del método: cuándo y en qué condiciones</a></p> 
+</Guia>

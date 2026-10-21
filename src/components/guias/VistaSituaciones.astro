@@ -1,0 +1,1002 @@
+---
+// Componente VistaSituaciones: "¿Qué le ha pasado a tu empresa?"
+// 13 situaciones reales organizadas en tarjetas interactivas de alta gama
+// Columna izquierda: Filtros rápidos y tarjetas interactivas con icono, categoría y tipografía EMAX
+// Columna derecha: Tarjeta fija sticky en azul noche con diagnóstico inmediato, 3 claves técnicas y CTA
+import TituloAcento from "./TituloAcento.astro";
+
+interface Situacion {
+  id: string;
+  numero: string;
+  categoria: string;
+  grupo: "factura" | "potencia" | "contrato";
+  pregunta: string;
+  guia: string;
+  href: string;
+  respuesta: string;
+  claves: string[];
+  icono: string;
+  tiempo: string;
+  fecha: string;
+}
+
+const situaciones: Situacion[] = [
+  {
+    id: "sit-1",
+    numero: "01",
+    categoria: "Ahorro & Factura",
+    grupo: "factura",
+    pregunta: "Quiero pagar menos de luz y no sé por dónde empezar",
+    guia: "Cómo bajar la factura: las cinco palancas, en orden",
+    href: "/guias/bajar-factura-luz-empresa",
+    respuesta: "Bajar la factura de luz de una empresa no empieza por buscar la tarifa más barata. Empieza por saber cuánta potencia usas, a qué horas consumes y si pagas reactiva o excesos. Con eso se deciden la potencia, la estructura y la modalidad. La eficiencia de los equipos y el precio, al final.",
+    claves: [
+      "1. Ajustar potencias con maxímetros reales de 12 meses",
+      "2. Eliminar recargos evitables por reactiva y excesos",
+      "3. Negociar precio base sólo cuando la estructura esté limpia"
+    ],
+    icono: "chart-down",
+    tiempo: "5 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-2",
+    numero: "02",
+    categoria: "Revisión de precio",
+    grupo: "contrato",
+    pregunta: "Me ha llegado una carta que cambia el precio",
+    guia: "Qué hacer antes de decidir",
+    href: "/guias/revision-precio-luz-empresa",
+    respuesta: "Si tu comercializadora cambia el precio durante el contrato, tiene que avisarte por escrito, aparte de la factura y con al menos un mes de antelación. La carta debe traer los precios de antes y de después y tu coste anual antes y después. Si tu contrato es a precio fijo, las cláusulas de revisión no se le aplican.",
+    claves: [
+      "1. Obligación legal de preaviso de 30 días por escrito",
+      "2. Comparar el impacto anual en euros, no el céntimo/kWh",
+      "3. Comprobar si tienes permanencia antes de aceptar o rechazar"
+    ],
+    icono: "mail",
+    tiempo: "4 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-3",
+    numero: "03",
+    categoria: "Permanencia",
+    grupo: "contrato",
+    pregunta: "Mi contrato se acaba o se renueva pronto",
+    guia: "Renovación y permanencia: qué revisar antes",
+    href: "/guias/renovacion-contrato-luz-empresa",
+    respuesta: "Si tu contrato prevé la prórroga, se renueva solo al acabar. Si cambian las condiciones, te lo tienen que avisar por escrito, aparte de la factura y con un mes de antelación. Lo que te cuesta irte antes depende de tu contrato, y en los suministros de hasta 15 kW de personas físicas la norma lo limita.",
+    claves: [
+      "1. Plazo límite para notificar no renovación sin penalización",
+      "2. Los contratos indexados no deben tener permanencia oculta",
+      "3. Límites legales de penalización en suministros de hasta 15 kW"
+    ],
+    icono: "clock",
+    tiempo: "5 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-4",
+    numero: "04",
+    categoria: "Auditoría",
+    grupo: "factura",
+    pregunta: "Me ha subido la factura y no sé por qué",
+    guia: "Por qué ha subido la factura de tu empresa",
+    href: "/guias/subida-factura-luz-empresa",
+    respuesta: "Si la factura de tu empresa ha subido, la causa está en una de cinco partes: consumes más o en horas más caras, ha cambiado tu precio, pagas excesos o reactiva que antes no pagabas, han cambiado los peajes, los cargos o los impuestos, o la factura regulariza una lectura estimada. Comparar dos facturas línea a línea dice cuál.",
+    claves: [
+      "1. Comprobar si la lectura es real o regularización estimada",
+      "2. Revisar si han entrado penalizaciones de reactiva o maxímetro",
+      "3. Desglosar subida de peajes/cargos oficiales vs margen comercial"
+    ],
+    icono: "trending-up",
+    tiempo: "4 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-5",
+    numero: "05",
+    categoria: "Potencia",
+    grupo: "potencia",
+    pregunta: "Me aparecen excesos de potencia",
+    guia: "Exceso de potencia",
+    href: "/guias/exceso-de-potencia",
+    respuesta: "Un exceso de potencia es lo que pides por encima de lo contratado en un periodo, medido por cuartos de hora. Se paga aparte y está pensado para que no compense contratar de menos. Si se repite, la decisión es revisar la potencia de ese periodo con tus maxímetros de doce meses.",
+    claves: [
+      "1. Se calculan por cuarto de hora, no por la media mensual",
+      "2. La fórmula penaliza fuertemente los picos puntuales",
+      "3. Subir el escalón de potencia suele costar menos que la multa"
+    ],
+    icono: "zap",
+    tiempo: "5 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-6",
+    numero: "06",
+    categoria: "Instalación",
+    grupo: "potencia",
+    pregunta: "Me cobran energía reactiva y no sé qué es",
+    guia: "Energía reactiva",
+    href: "/guias/energia-reactiva",
+    respuesta: "La energía reactiva es la que motores, compresores y cámaras intercambian con la red sin hacer trabajo. Solo se paga en suministros de más de 15 kW, de P1 a P5 y por encima del 33 % de la activa. No se corrige cambiando de tarifa, sino en la instalación, cuando compensa.",
+    claves: [
+      "1. Producida por motores, compresores y maquinaria inductiva",
+      "2. Solo se factura si supera el 33% de la activa (cos φ < 0.95)",
+      "3. Se elimina con una batería de condensadores amortizable"
+    ],
+    icono: "activity",
+    tiempo: "5 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-7",
+    numero: "07",
+    categoria: "Desglose",
+    grupo: "factura",
+    pregunta: "No entiendo mi factura",
+    guia: "Cómo leer la factura de luz de tu empresa",
+    href: "/guias/factura-luz-empresa",
+    respuesta: "La factura de luz de una empresa tiene tres partes: lo que depende de cómo se compra la energía (estructura, modalidad y condiciones), lo que se ajusta con tus datos (la potencia que sobra y la reactiva) y lo que no depende de ninguna compañía (peajes, cargos, impuestos y contador). Saber qué es cada línea dice por dónde empezar.",
+    claves: [
+      "1. Término de potencia (fijo por kW/día) vs Término de energía",
+      "2. Peajes de transporte y distribución vs Cargos del sistema",
+      "3. Servicios adicionales ocultos: mantenimientos no solicitados"
+    ],
+    icono: "file-text",
+    tiempo: "7 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-8",
+    numero: "08",
+    categoria: "Maxímetro",
+    grupo: "potencia",
+    pregunta: "No sé si me sobra o me falta potencia",
+    guia: "Potencia contratada",
+    href: "/guias/potencia-contratada",
+    respuesta: "La potencia contratada son los kW que tu empresa puede usar a la vez, y se paga cada día, la uses o no. Si te sobra, pagas capacidad que no usas; si te falta, aparecen excesos o cortes. La que conviene sale de tus maxímetros de los últimos doce meses, periodo a periodo.",
+    claves: [
+      "1. Curva cuartohoraria del distribuidor: la prueba irrefutable",
+      "2. En tarifas 3.0TD y 6.1TD las potencias deben ser crecientes",
+      "3. Cada kW que sobra cuesta dinero todos los días del año"
+    ],
+    icono: "sliders",
+    tiempo: "6 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-9",
+    numero: "09",
+    categoria: "Modalidad",
+    grupo: "contrato",
+    pregunta: "Tengo que elegir entre fijo e indexado",
+    guia: "Precio fijo o indexado",
+    href: "/guias/precio-fijo-o-indexado",
+    respuesta: "Con precio fijo pagas un precio pactado y asumes pagar más si el mercado baja; con indexado pagas el mercado y asumes su volatilidad; con Cuota Fija repartes el gasto en cuotas iguales. Ninguna es mejor en general: decide cuánto riesgo aguanta tu tesorería y cuánto cambia tu consumo de un mes a otro.",
+    claves: [
+      "1. Fijo: estabilidad total a cambio de prima de riesgo",
+      "2. Indexado: precio pool OMIE más fee de gestión transparente",
+      "3. Cuándo conviene a una empresa según sus turnos y tesorería"
+    ],
+    icono: "scale",
+    tiempo: "5 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-10",
+    numero: "10",
+    categoria: "Seguridad y datos",
+    grupo: "contrato",
+    pregunta: "Me piden el CUPS y no sé si darlo",
+    guia: "Qué se ve con tu CUPS y qué no",
+    href: "/guias/cups-y-tus-datos",
+    respuesta: "El CUPS es el código de tu punto de suministro. Con él se consultan el peaje, las potencias y el consumo por periodos de los últimos tres años, pero no tu consumo hora a hora ni los datos que te identifican. Darlo no permite cambiarte de compañía: para eso hace falta tu conformidad expresa.",
+    claves: [
+      "1. El CUPS es la matrícula identificativa de tu contador",
+      "2. Permite consultar histórico oficial en la distribuidora",
+      "3. Nadie puede cambiarte de compañía sin contrato firmado"
+    ],
+    icono: "shield-check",
+    tiempo: "4 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-11",
+    numero: "11",
+    categoria: "Mercado OMIE",
+    grupo: "contrato",
+    pregunta: "Mi contrato es indexado y no sé qué es OMIE",
+    guia: "Qué es OMIE y qué papel juega en tu factura",
+    href: "/guias/omie",
+    respuesta: "OMIE organiza el mercado mayorista diario e intradiario de electricidad de España y Portugal. Cada día casa las ofertas de compra y venta y publica el precio de cada cuarto de hora del día siguiente. Ese precio es solo un ingrediente de tu factura: después se suman otros costes del sistema, peajes, cargos, impuestos y el margen de tu comercializadora.",
+    claves: [
+      "1. Operador del mercado mayorista ibérico de electricidad",
+      "2. Fija el precio marginalista horario cada día a las 13:00",
+      "3. Pagos por capacidad, pérdidas y desvíos de Red Eléctrica"
+    ],
+    icono: "globe",
+    tiempo: "5 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-12",
+    numero: "12",
+    categoria: "Alta tensión",
+    grupo: "potencia",
+    pregunta: "Mi factura dice 6.1TD",
+    guia: "El peaje 6.1TD",
+    href: "/guias/peaje-6-1td",
+    respuesta: "La 6.1TD es el peaje de acceso de los suministros conectados a más de 1 kV y menos de 30 kV. Depende de la tensión de tu conexión, no de tu potencia. Como la 3.0TD, tiene seis periodos y seis potencias, cada una igual o mayor que la anterior. Cambian los precios regulados, no la forma de decidir.",
+    claves: [
+      "1. Suministros industriales conectados entre 1 kV y 30 kV",
+      "2. Estructura de 6 periodos y 6 potencias crecientes P1 ≤ P6",
+      "3. Optimización de maxímetros con curvas de telemedida"
+    ],
+    icono: "git-commit",
+    tiempo: "5 min",
+    fecha: "7 de octubre de 2026",
+  },
+  {
+    id: "sit-13",
+    numero: "13",
+    categoria: "Horarios 3.0TD",
+    grupo: "potencia",
+    pregunta: "No sé qué horas son las baratas",
+    guia: "El peaje 3.0TD, periodo a periodo",
+    href: "/guias/peaje-3-0td",
+    respuesta: "La 3.0TD es el peaje de acceso de los suministros en baja tensión con más de 15 kW. Divide el año en seis periodos, de P1, el más caro, a P6, el más barato, según la hora, el día y la temporada. Cuánto pagas depende de en qué periodos consumes y de qué potencia contratas en cada uno.",
+    claves: [
+      "1. P1 (Punta), P2 (Llano) y P6 (Valle: noches y festivos enteros)",
+      "2. Cambian de horario según mes del año y temporada oficial",
+      "3. Mover turnos o procesos térmicos a P6 reduce hasta un 60%"
+    ],
+    icono: "clock",
+    tiempo: "6 min",
+    fecha: "7 de octubre de 2026",
+  },
+];
+
+const primera = situaciones[0];
+---
+
+<section class="banda seccion-pasado" aria-labelledby="h2-pasado">
+  <div class="w sec">
+    <!-- Cabecera de sección enriquecida con kicker oficial -->
+    <div class="sec__cab">
+      <h2 id="h2-pasado" class="seccion-titulo">
+        ¿QUÉ LE HA PASADO A <span class="titulo-cursiva">tu empresa?</span>
+      </h2>
+
+      <p class="sec__desc">
+        Pasa el cursor o pulsa sobre la duda que tienes hoy. A la derecha verás el resumen técnico, la norma que te protege y las tres claves para resolverla.
+      </p>
+
+      <!-- Pestañas de filtrado rápido por categoría -->
+      <div class="sit-filtros" role="tablist" aria-label="Filtrar situaciones por temática">
+        <button type="button" class="sit-filtro-btn is-active" data-filtro="todos" role="tab" aria-selected="true">
+          <span>Todas</span>
+          <span class="filtro-count">13</span>
+        </button>
+        <button type="button" class="sit-filtro-btn" data-filtro="factura" role="tab" aria-selected="false">
+          <span>Factura & Ahorro</span>
+          <span class="filtro-count">3</span>
+        </button>
+        <button type="button" class="sit-filtro-btn" data-filtro="potencia" role="tab" aria-selected="false">
+          <span>Potencias & Reactiva</span>
+          <span class="filtro-count">5</span>
+        </button>
+        <button type="button" class="sit-filtro-btn" data-filtro="contrato" role="tab" aria-selected="false">
+          <span>Contratos & Precios</span>
+          <span class="filtro-count">5</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Rejilla de Dos Columnas: Lista de tarjetas enriquecidas + Panel sticky de alta fidelidad -->
+    <div class="pasa">
+      <div class="sit-lista-wrap">
+        <ul class="sit-lista" id="sitSituaciones" role="list">
+          {
+            situaciones.map((item, idx) => (
+              <li class="sit-item" data-grupo={item.grupo}>
+                <a
+                  href={item.href}
+                  data-i={idx}
+                  data-id={item.id}
+                  data-guia={item.guia}
+                  data-respuesta={item.respuesta}
+                  data-tiempo={item.tiempo}
+                  data-fecha={item.fecha}
+                  data-categoria={item.categoria}
+                  data-claves={JSON.stringify(item.claves)}
+                  class:list={["sit-card", idx === 0 && "on"]}
+                >
+                  <div class="sit-card-izq">
+                    <!-- Icono temático distintivo -->
+                    <div class="sit-icon-box" aria-hidden="true">
+                      {item.icono === "chart-down" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                          <polyline points="17 18 23 18 23 12"></polyline>
+                        </svg>
+                      )}
+                      {item.icono === "mail" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                          <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                      )}
+                      {item.icono === "clock" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                      )}
+                      {item.icono === "trending-up" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                          <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                      )}
+                      {item.icono === "zap" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                      )}
+                      {item.icono === "activity" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                      )}
+                      {item.icono === "file-text" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                          <line x1="16" y1="13" x2="8" y2="13"></line>
+                          <line x1="16" y1="17" x2="8" y2="17"></line>
+                          <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                      )}
+                      {item.icono === "sliders" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="4" y1="21" x2="4" y2="14"></line>
+                          <line x1="4" y1="10" x2="4" y2="3"></line>
+                          <line x1="12" y1="21" x2="12" y2="12"></line>
+                          <line x1="12" y1="8" x2="12" y2="3"></line>
+                          <line x1="20" y1="21" x2="20" y2="16"></line>
+                          <line x1="20" y1="12" x2="20" y2="3"></line>
+                          <line x1="1" y1="14" x2="7" y2="14"></line>
+                          <line x1="9" y1="8" x2="15" y2="8"></line>
+                          <line x1="17" y1="16" x2="23" y2="16"></line>
+                        </svg>
+                      )}
+                      {item.icono === "scale" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M16 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"></path>
+                          <path d="M2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1z"></path>
+                          <path d="M7 21h10"></path>
+                          <path d="M12 3v18"></path>
+                          <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
+                        </svg>
+                      )}
+                      {item.icono === "shield-check" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                          <polyline points="9 12 11 14 15 10"></polyline>
+                        </svg>
+                      )}
+                      {item.icono === "globe" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="2" y1="12" x2="22" y2="12"></line>
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                      )}
+                      {item.icono === "git-commit" && (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="4"></circle>
+                          <line x1="1.05" y1="12" x2="7" y2="12"></line>
+                          <line x1="17.01" y1="12" x2="22.96" y2="12"></line>
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+
+                  <div class="sit-card-content">
+                    <div class="sit-card-top">
+                      <span class="sit-num-badge">{item.numero}</span>
+                      <span class="sit-tag">{item.categoria}</span>
+                    </div>
+
+                    <h3 class="sit-pregunta">{item.pregunta}</h3>
+
+                    <div class="sit-card-bottom">
+                      <span class="sit-guia-txt">
+                        <span class="sit-guia-prefijo">Guía recomendada:</span> {item.guia}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="sit-card-der">
+                    <span class="sit-btn-flecha" aria-hidden="true">
+                      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="8" x2="13" y2="8"></line>
+                        <polyline points="8 3 13 8 8 13"></polyline>
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Vista previa fija de la guía (Estilo exacto al diseño de referencia) -->
+      <aside class="vista-panel" id="vistaSituacion" aria-live="polite">
+        <div class="vista-card">
+          <span class="vista-kicker">GUÍA</span>
+
+          <h3 class="vista-titulo" id="vistaTitulo">{primera.guia}</h3>
+
+          <p class="vista-respuesta" id="vistaRespuesta">{primera.respuesta}</p>
+
+          <div class="vista-meta">
+            <span class="meta-chip" id="vistaTiempo">Lectura de {primera.tiempo}</span>
+            <span class="meta-chip" id="vistaFecha">Revisada el {primera.fecha}</span>
+          </div>
+
+          <a class="vista-cta-btn" id="vistaEnlace" href={primera.href}>
+            <span>Leer guía</span>
+            <span class="vista-btn-circulo" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="8" x2="13" y2="8"></line>
+                <polyline points="8 3 13 8 8 13"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN ¿QUÉ LE HA PASADO A TU EMPRESA? - ARQUITECTURA VISUAL ALTA GAMA
+     ========================================================================== */
+  .seccion-pasado {
+    background: #e4e7ec;
+    border-bottom: 1px solid #d0d5dd;
+    padding-block: clamp(60px, 7vw, 96px);
+  }
+
+  .w {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 40px);
+  }
+
+  .sec__cab {
+    margin-bottom: clamp(36px, 4.5vw, 52px);
+  }
+
+  .seccion-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2.1rem, 1.7rem + 2vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #0f2346;
+    letter-spacing: -0.025em;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva {
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #004aad;
+    letter-spacing: -0.01em;
+  }
+
+  .sec__desc {
+    color: #475569;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin: 0 0 28px;
+    max-width: 760px;
+  }
+
+  /* Pestañas de filtrado rápido */
+  .sit-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .sit-filtro-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    font-family: "Sora", sans-serif;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .sit-filtro-btn:hover {
+    border-color: #004aad;
+    color: #004aad;
+    background: #f0f7ff;
+  }
+
+  .sit-filtro-btn.is-active {
+    background: #004aad;
+    border-color: #004aad;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.25);
+  }
+
+  .filtro-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding-inline: 5px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    background: #e2e8f0;
+    color: #475569;
+  }
+
+  .sit-filtro-btn.is-active .filtro-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+  }
+
+  /* Rejilla Dos Columnas */
+  .pasa {
+    display: grid;
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .pasa {
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 40px;
+    }
+  }
+
+  .sit-lista-wrap {
+    min-width: 0;
+  }
+
+  .sit-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sit-item {
+    margin: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .sit-item.is-hidden {
+    display: none;
+  }
+
+  /* Tarjeta interactiva enriquecida */
+  .sit-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 22px;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #0f2346;
+    box-shadow: 0 3px 10px rgba(15, 35, 70, 0.04);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+  }
+
+  .sit-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: transparent;
+    transition: background 0.2s ease;
+  }
+
+  .sit-card:hover,
+  .sit-card.on {
+    background: #ffffff;
+    border-color: #004aad;
+    box-shadow: 0 12px 32px rgba(0, 74, 173, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .sit-card.on::before,
+  .sit-card:hover::before {
+    background: #004aad;
+  }
+
+  /* Icono temático */
+  .sit-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #f0f7ff;
+    border: 1px solid #dbeafe;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .sit-card:hover .sit-icon-box,
+  .sit-card.on .sit-icon-box {
+    background: #004aad;
+    border-color: #004aad;
+    color: #ffffff;
+    transform: scale(1.05);
+  }
+
+  .sit-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .sit-card-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sit-num-badge {
+    font-family: "Sora", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 2px 7px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+  }
+
+  .sit-card.on .sit-num-badge,
+  .sit-card:hover .sit-num-badge {
+    background: #e0edfe;
+    color: #004aad;
+  }
+
+  .sit-tag {
+    font-family: "Sora", sans-serif;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    padding: 2px 8px;
+    border-radius: 9999px;
+  }
+
+  .sit-pregunta {
+    font-family: "Sora", sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.35;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0;
+    transition: color 0.15s ease;
+  }
+
+  .sit-card:hover .sit-pregunta,
+  .sit-card.on .sit-pregunta {
+    color: #004aad;
+  }
+
+  .sit-card-bottom {
+    margin-top: 2px;
+  }
+
+  .sit-guia-txt {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+  .sit-guia-prefijo {
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .sit-card:hover .sit-guia-txt,
+  .sit-card.on .sit-guia-txt {
+    color: #0284c7;
+  }
+
+  .sit-card-der {
+    display: flex;
+    align-items: center;
+  }
+
+  .sit-btn-flecha {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #64748b;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .sit-card:hover .sit-btn-flecha,
+  .sit-card.on .sit-btn-flecha {
+    background: #004aad;
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+
+  /* ==========================================================================
+     Columna Derecha: Tarjeta Fija Vista Previa (Sticky)
+     Estilo idéntico a la referencia del usuario:
+     - Fondo azul marino sólido (#162f55)
+     - Sin cajas complejas ni elementos redundantes
+     - Kicker GUÍA en cyan
+     - Título blanco en Sora 800
+     - Respuesta limpia y resumida
+     - Píldoras de lectura y fecha con borde sutil
+     - Botón píldora con flecha en círculo cyan
+     ========================================================================== */
+  .vista-panel {
+    position: sticky;
+    top: 96px;
+    display: block;
+  }
+
+  @media (max-width: 1023px) {
+    .vista-panel {
+      display: none;
+    }
+  }
+
+  .vista-card {
+    background: #142e54;
+    border-radius: 24px;
+    padding: clamp(32px, 3.6vw, 42px);
+    color: #ffffff;
+    box-shadow: 0 20px 48px rgba(10, 24, 48, 0.24);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .vista-kicker {
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #0099ff;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .vista-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.4rem, 1.25rem + 0.6vw, 1.72rem);
+    line-height: 1.25;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 18px;
+    letter-spacing: -0.015em;
+  }
+
+  .vista-respuesta {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #cbd5e1;
+    margin: 0 0 24px;
+    font-weight: 400;
+  }
+
+  .vista-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .meta-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 18px;
+    border: 1.5px solid rgba(255, 255, 255, 0.22);
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #cbd5e1;
+    background: transparent;
+  }
+
+  .vista-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px 10px 24px;
+    border-radius: 9999px;
+    background: #0056b3;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 14px rgba(0, 86, 179, 0.35);
+    transition: all 0.2s ease;
+  }
+
+  .vista-cta-btn:hover {
+    background: #0066d6;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 86, 179, 0.45);
+  }
+
+  .vista-btn-circulo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #38bdf8;
+    color: #0f2346;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .vista-cta-btn:hover .vista-btn-circulo {
+    background: #ffffff;
+    color: #004aad;
+    transform: translateX(2px);
+  }
+
+  @media (max-width: 640px) {
+    .sit-card {
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 16px 18px;
+    }
+    .sit-card-izq {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sit-card,
+    .sit-btn-flecha,
+    .vista-cta-btn,
+    .vista-btn-circulo,
+    .sit-icon-box {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Actualización reactiva de la tarjeta fija según la situación activa
+  function inicializarVistaSituaciones() {
+    const lista = document.getElementById("sitSituaciones");
+    const tit = document.getElementById("vistaTitulo");
+    const resp = document.getElementById("vistaRespuesta");
+    const tiempo = document.getElementById("vistaTiempo");
+    const fecha = document.getElementById("vistaFecha");
+    const enlace = document.getElementById("vistaEnlace");
+
+    if (!lista || !tit || !resp || !enlace) return;
+
+    const cards = Array.from(lista.querySelectorAll<HTMLAnchorElement>("a.sit-card"));
+
+    function activarSituacion(targetCard: HTMLAnchorElement) {
+      cards.forEach((c) => c.classList.toggle("on", c === targetCard));
+
+      const g = targetCard.dataset.guia || "";
+      const r = targetCard.dataset.respuesta || "";
+      const t = targetCard.dataset.tiempo || "5 min";
+      const f = targetCard.dataset.fecha || "7 de octubre de 2026";
+      const href = targetCard.getAttribute("href") || "#";
+
+      tit!.textContent = g;
+      resp!.textContent = r;
+      if (tiempo) {
+        tiempo.textContent = `Lectura de ${t}`;
+      }
+      if (fecha) {
+        fecha.textContent = `Revisada el ${f}`;
+      }
+      enlace!.setAttribute("href", href);
+    }
+
+
+    lista.addEventListener("mouseover", (e) => {
+      const card = (e.target as HTMLElement).closest<HTMLAnchorElement>("a.sit-card");
+      if (card) activarSituacion(card);
+    });
+
+    lista.addEventListener("focusin", (e) => {
+      const card = (e.target as HTMLElement).closest<HTMLAnchorElement>("a.sit-card");
+      if (card) activarSituacion(card);
+    });
+
+    // Filtros por temática
+    const filtroBtns = Array.from(document.querySelectorAll<HTMLButtonElement>(".sit-filtro-btn"));
+    const items = Array.from(lista.querySelectorAll<HTMLLIElement>(".sit-item"));
+
+    filtroBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filtroBtns.forEach((b) => {
+          b.classList.remove("is-active");
+          b.setAttribute("aria-selected", "false");
+        });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
+
+        const targetFiltro = btn.dataset.filtro || "todos";
+
+        let firstVisibleCard: HTMLAnchorElement | null = null;
+        items.forEach((item) => {
+          const itemGrupo = item.dataset.grupo;
+          if (targetFiltro === "todos" || itemGrupo === targetFiltro) {
+            item.classList.remove("is-hidden");
+            if (!firstVisibleCard) {
+              firstVisibleCard = item.querySelector<HTMLAnchorElement>("a.sit-card");
+            }
+          } else {
+            item.classList.add("is-hidden");
+          }
+        });
+
+        if (firstVisibleCard) {
+          activarSituacion(firstVisibleCard);
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inicializarVistaSituaciones);
+  } else {
+    inicializarVistaSituaciones();
+  }
+  document.addEventListener("astro:page-load", inicializarVistaSituaciones);
+</script>

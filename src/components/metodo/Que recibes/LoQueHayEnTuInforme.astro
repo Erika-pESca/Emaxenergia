@@ -1,0 +1,1457 @@
+---
+// Componente: LoQueHayEnTuInforme.astro
+// Ubicación: src/components/metodo/Que recibes/LoQueHayEnTuInforme.astro
+// Estilo visual de marca EMAX: Luminous, corporate & interactive
+// Mantiene con 100% de fidelidad la estructura y gráficos del prototipo,
+// aplicando el diseño premium, tarjetas pulidas, bordes sutiles y micro-interacciones de la web.
+---
+
+<section class="sec-informe-root" id="lo-que-hay-en-tu-informe" aria-labelledby="h2-lo-que-hay">
+  <div class="informe-par-container">
+    <!-- Columna Izquierda: Introducción e Índice de Bloques -->
+    <div class="informe-intro-col">
+      <p class="informe-kicker">
+        ANALIZAMOS TU SUMINISTRO <span class="kicker-sep" aria-hidden="true">|</span>
+      </p>
+
+      <h2 class="informe-titulo" id="h2-lo-que-hay">
+        LO QUE HAY EN TU<br />
+        <span class="titulo-cursiva">informe</span>
+      </h2>
+
+      <p class="intro-desc">
+        No te ofrecemos una tarifa: te damos una razón para elegirla. Primero, lo que hemos visto en tu suministro. Después, la tarifa que sale de ahí. Cada bloque dice con qué dato está hecho.
+      </p>
+
+      <!-- Lista / Índice interactivo con estilo EMAX -->
+      <ul class="indice-bloques" role="tablist" aria-label="Bloques del informe" id="ind-bloques">
+        <!-- Generado dinámicamente -->
+      </ul>
+
+      <!-- Enlaces oficiales según la base v12.16 -->
+      <div class="informe-acciones">
+        <a href="/metodo#decisiones" class="btn-decisiones-pill">
+          <span class="btn-txt-cyan">Las cinco decisiones</span>
+          <span class="btn-circulo-cyan" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="/tarifas" class="enlace-secundario-tarifa">
+          Cómo se construye una tarifa
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna Derecha: Hoja de Informe EMAX -->
+    <div class="informe-hoja-col">
+      <article class="hoja-informe-card" aria-live="polite">
+        <header class="hoja-top">
+          <div class="hoja-marca-badge">
+            <span class="punto-en-vivo" aria-hidden="true"></span>
+            <span><b>Informe EMAX</b> · Ejemplo auditado</span>
+          </div>
+          <div class="hoja-top-derecha">
+            <div class="hoja-dots-indicador" id="hoja-dots-indicador" aria-label="Progreso de bloques"></div>
+            <span class="hoja-contador-chip" id="hoja-pag-contador">Bloque 1 de 4</span>
+          </div>
+        </header>
+
+        <div class="hoja-cuerpo" id="hoja-contenido-dinamico">
+          <!-- Se inyecta dinámicamente con animación de entrada -->
+        </div>
+
+        <footer class="hoja-pie">
+          <div class="hoja-pie-autor">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="escudo-svg" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+            <span>Revisado por un especialista de EMAX.</span>
+          </div>
+
+          <!-- Controles interactivos de navegación directa entre bloques -->
+          <div class="hoja-nav-controles">
+            <button type="button" class="btn-hoja-nav" id="btn-hoja-ant" aria-label="Bloque anterior">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 3.5 5.5 8 10 12.5"></path>
+              </svg>
+              <span>Anterior</span>
+            </button>
+            <button type="button" class="btn-hoja-nav" id="btn-hoja-sig" aria-label="Siguiente bloque">
+              <span>Siguiente</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3.5 10.5 8 6 12.5"></path>
+              </svg>
+            </button>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Nota oficial del informe según base v12.16 -->
+      <p class="informe-nota-cierre">
+        Si tu contrato actual ya encaja con cómo consume tu empresa, el informe te lo dice en lugar de proponerte otra tarifa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    // 100% de fidelidad con el documento base oficial EMAX Energía v12.16
+    const BLOQUES = [
+      {
+        t: "Cuánto y cuándo consume tu empresa",
+        d: "Tu consumo por periodos y por meses, traducido a las horas de tu negocio: cuánto va a las horas caras y cuánto a las baratas.",
+        dato: ["Tu factura (un mes)", "tu CUPS (el histórico)"],
+        vis: "horas",
+      },
+      {
+        t: "Tu potencia",
+        d: "La potencia que tienes contratada en cada periodo frente a la que usas de verdad. Si te sobra, si te falta y si pagas excesos.",
+        dato: ["Tu factura", "tu CUPS", "tus maxímetros"],
+        vis: "pot",
+      },
+      {
+        t: "Tu energía reactiva",
+        d: "Si la pagas, en qué periodos, cuánto al año y si compensa corregirla.",
+        dato: ["Tu factura", "tu CUPS"],
+        vis: "meses",
+      },
+      {
+        t: "Tu propuesta de tarifa",
+        d: "La tarifa que sale de los tres bloques anteriores: estructura, modalidad, potencias y condiciones.",
+        dato: ["Todo lo anterior"],
+        vis: "suma",
+      },
+    ];
+
+    let bloqueActual = 0;
+
+    // 1. Gráfico de consumo 24 horas con onda y lector integrado
+    function renderHorasVisual() {
+      const alturas = [18, 16, 15, 15, 16, 20, 34, 52, 70, 88, 96, 92, 86, 70, 60, 62, 68, 80, 94, 90, 76, 56, 38, 24];
+
+      let barras = [];
+      for (let i = 0; i < 24; i++) {
+        let col = "var(--azul-400)";
+        let tipoNombre = "Horas baratas";
+
+        if ((i >= 10 && i <= 13) || (i >= 18 && i <= 21)) {
+          col = "var(--tinta)";
+          tipoNombre = "Horas caras";
+        } else if ((i >= 8 && i < 10) || (i > 13 && i < 18) || (i > 21 && i < 24)) {
+          col = "var(--azul-900)";
+          tipoNombre = "Intermedias";
+        }
+
+        const hPct = alturas[i];
+        const horaStr = `${String(i).padStart(2, "0")}:00 h`;
+
+        barras.push(`
+          <span 
+            class="barra-h" 
+            style="--h:${hPct}%; --delay:${i * 20}ms; background:${col};"
+            data-hora="${horaStr}"
+            data-tipo="${tipoNombre}"
+            data-col="${col}"
+            tabindex="0"
+            role="graphics-symbol"
+            aria-label="${horaStr}: ${tipoNombre}"
+          ></span>
+        `);
+      }
+
+      return `
+        <div class="vis-sub-panel vis-horas-panel">
+          <!-- Banda de lectura integrada: NO se desborda ni se corta en esquinas -->
+          <div class="live-strip" id="horas-live-strip">
+            <span class="live-strip-dot" aria-hidden="true"></span>
+            <span class="live-strip-txt" id="horas-live-txt">Pasa el cursor por las horas para ver el tramo</span>
+          </div>
+
+          <div class="horas-chart-stage">
+            <div class="horas" id="horas-barras-grid" role="img" aria-label="Ejemplo de consumo hora a hora de una empresa">
+              ${barras.join("")}
+            </div>
+          </div>
+
+          <div class="eje">
+            <span>0 h</span>
+            <span>6 h</span>
+            <span>12 h</span>
+            <span>18 h</span>
+            <span>24 h</span>
+          </div>
+
+          <div class="leyenda">
+            <span><i style="background:var(--tinta)"></i>Horas caras</span>
+            <span><i style="background:var(--azul-900)"></i>Intermedias</span>
+            <span><i style="background:var(--azul-400)"></i>Baratas</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // 2. Gráfico de potencia contratada vs registrada
+    function renderPotenciaVisual() {
+      const filas = [
+        ["P1", 80, 52, 0, "Potencia contratada holgada"],
+        ["P2", 60, 60, 16, "Exceso registrado en maxímetro"],
+        ["P3", 50, 38, 0, "Potencia contratada ajustada"],
+      ];
+
+      let out = "";
+      filas.forEach((r, idx) => {
+        const pContratada = r[1];
+        const pUsada = r[2];
+        const pExceso = r[3];
+        const anchoPista = (pContratada / 80) * 100;
+        const anchoUso = (pUsada / pContratada) * 100;
+        const anchoEx = pExceso ? (pExceso / pContratada) * 100 : 0;
+
+        out += `
+          <div class="pot__f" data-idx="${idx}">
+            <div class="pot-head-fila">
+              <span class="pot-periodo-tag">${r[0]}</span>
+              <span class="pot-badge-estado ${pExceso ? 'badge-alerta' : 'badge-neutro'}">
+                ${r[4]}
+              </span>
+            </div>
+            <div class="pot__pista" style="width:${anchoPista}%">
+              <div class="pot__uso" style="width:${anchoUso}%" title="Potencia usada: ${pUsada} kW"></div>
+              ${pExceso ? `<div class="pot__ex" style="left:100%;width:${anchoEx}%" title="Exceso: +${pExceso} kW"></div>` : ""}
+            </div>
+          </div>
+        `;
+      });
+
+      return `
+        <div class="vis-sub-panel vis-pot-panel">
+          <div class="pot" role="img" aria-label="Comparativa de potencia contratada frente a potencia registrada">
+            ${out}
+          </div>
+
+          <div class="leyenda">
+            <span><i style="border:1.5px solid var(--borde-campo); background:#fff;"></i>Contratada</span>
+            <span><i style="background:var(--azul-900)"></i>Usada</span>
+            <span><i style="background:var(--tinta)"></i>Exceso</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // 3. Gráfico de reactiva con umbral legal 40%
+    function renderReactivaVisual() {
+      const m = [30, 34, 28, 26, 30, 44, 58, 62, 50, 36, 32, 34];
+      const L = ["E", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
+      const NOMBRES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+      let c2 = "", e = "";
+      m.forEach((v, i) => {
+        const esAlto = v > 40;
+        c2 += `
+          <span 
+            class="mes-col ${esAlto ? "alto" : ""}" 
+            style="--h:${v}%; --delay:${i * 24}ms;" 
+            data-mes="${NOMBRES[i]}"
+            data-tipo="${esAlto ? 'Mes con recargo en factura' : 'Sin coste regulado'}"
+            tabindex="0"
+            role="graphics-symbol"
+            aria-label="${NOMBRES[i]}: ${v}% reactiva"
+          ></span>
+        `;
+        e += `<span>${L[i]}</span>`;
+      });
+
+      return `
+        <div class="vis-sub-panel vis-reactiva-panel">
+          <div class="live-strip" id="reactiva-live-strip">
+            <span class="live-strip-dot" aria-hidden="true"></span>
+            <span class="live-strip-txt" id="reactiva-live-txt">Pasa el cursor por los meses para ver el estado</span>
+          </div>
+
+          <div class="meses-chart-stage">
+            <div class="meses" role="img" aria-label="Ejemplo de energía reactiva mes a mes">
+              <div class="umbral" style="bottom:40%">
+                <b>Umbral legal (40%)</b>
+              </div>
+              ${c2}
+            </div>
+          </div>
+
+          <div class="eje12">${e}</div>
+
+          <div class="leyenda">
+            <span><i style="background:var(--tinta)"></i>Meses con recargo en factura</span>
+            <span><i style="background:var(--azul-400)"></i>Sin coste regulado</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. Propuesta de tarifa estructurada según base
+    function renderSumaVisual() {
+      return `
+        <div class="vis-sub-panel vis-suma-panel">
+          <div class="suma-flow">
+            <div class="suma__in">
+              <div class="chip-in">
+                <span class="dot-in"></span>
+                <span>1. Curva de consumo</span>
+              </div>
+              <div class="chip-in">
+                <span class="dot-in"></span>
+                <span>2. Potencias exactas</span>
+              </div>
+              <div class="chip-in">
+                <span class="dot-in"></span>
+                <span>3. Reactiva resuelta</span>
+              </div>
+            </div>
+
+            <div class="suma-flecha-conector" aria-hidden="true">
+              <svg width="20" height="24" viewBox="0 0 20 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 2v18"></path>
+                <path d="m4 14 6 6 6-6"></path>
+              </svg>
+            </div>
+
+            <div class="suma__res">
+              <div class="res-item">
+                <div class="res-tit">
+                  <b>Estructura</b>
+                </div>
+                <span class="res-desc">Ajustada a las horas de tu negocio</span>
+              </div>
+              <div class="res-item">
+                <div class="res-tit">
+                  <b>Modalidad</b>
+                </div>
+                <span class="res-desc">Precio fijo o indexado según tu preferencia</span>
+              </div>
+              <div class="res-item">
+                <div class="res-tit">
+                  <b>Potencias</b>
+                </div>
+                <span class="res-desc">Ajustadas a lo que usas de verdad</span>
+              </div>
+              <div class="res-item">
+                <div class="res-tit">
+                  <b>Condiciones</b>
+                </div>
+                <span class="res-desc">Transparentes y sin permanencias ocultas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function generarVisual(tipo: string) {
+      if (tipo === "horas") return renderHorasVisual();
+      if (tipo === "pot") return renderPotenciaVisual();
+      if (tipo === "meses") return renderReactivaVisual();
+      return renderSumaVisual();
+    }
+
+    function renderDatosChips(b: (typeof BLOQUES)[0]) {
+      return `
+        <div class="datos">
+          <span class="datos-tit">Con qué dato</span>
+          <div class="chips-wrap">
+            ${b.dato.map((x) => `<span class="chip">${x}</span>`).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    const ind = document.getElementById("ind-bloques");
+    const hoja = document.getElementById("hoja-contenido-dinamico");
+    const pag = document.getElementById("hoja-pag-contador");
+    const dotsContainer = document.getElementById("hoja-dots-indicador");
+    const btnAnt = document.getElementById("btn-hoja-ant") as HTMLButtonElement | null;
+    const btnSig = document.getElementById("btn-hoja-sig") as HTMLButtonElement | null;
+    const btns: HTMLButtonElement[] = [];
+
+    if (!ind || !hoja || !pag) return;
+
+    // Crear dots de progreso en cabecera
+    if (dotsContainer) {
+      dotsContainer.innerHTML = BLOQUES.map((_, i) => `<span class="prog-dot ${i === 0 ? 'activo' : ''}" data-goto="${i}"></span>`).join("");
+      dotsContainer.querySelectorAll(".prog-dot").forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const idx = Number(dot.getAttribute("data-goto"));
+          ver(idx);
+        });
+      });
+    }
+
+    BLOQUES.forEach((b, i) => {
+      const li = document.createElement("li");
+      const bt = document.createElement("button");
+      bt.type = "button";
+      bt.setAttribute("role", "tab");
+      bt.className = "btn-indice-row";
+      bt.innerHTML = `
+        <span class="n" aria-hidden="true">${i + 1}</span>
+        <span class="t">${b.t}</span>
+        <span class="ind-chevron" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3.5 10.5 8 6 12.5"></path>
+          </svg>
+        </span>
+      `;
+
+      bt.addEventListener("click", () => ver(i));
+      bt.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+          e.preventDefault();
+          const j = (i + (e.key === "ArrowDown" ? 1 : BLOQUES.length - 1)) % BLOQUES.length;
+          ver(j);
+          btns[j].focus();
+        }
+      });
+
+      li.appendChild(bt);
+      ind.appendChild(li);
+      btns.push(bt);
+    });
+
+    btnAnt?.addEventListener("click", () => {
+      const previo = (bloqueActual - 1 + BLOQUES.length) % BLOQUES.length;
+      ver(previo);
+    });
+
+    btnSig?.addEventListener("click", () => {
+      const siguiente = (bloqueActual + 1) % BLOQUES.length;
+      ver(siguiente);
+    });
+
+    function attachInteractiveEvents(tipo: string) {
+      if (tipo === "horas") {
+        const strip = hoja.querySelector<HTMLElement>("#horas-live-strip");
+        const stripTxt = hoja.querySelector<HTMLElement>("#horas-live-txt");
+        const stripDot = strip?.querySelector<HTMLElement>(".live-strip-dot");
+        const barras = hoja.querySelectorAll<HTMLElement>(".barra-h");
+
+        barras.forEach((bar) => {
+          bar.addEventListener("mouseenter", () => {
+            const hora = bar.getAttribute("data-hora") || "";
+            const tipo = bar.getAttribute("data-tipo") || "";
+            const col = bar.getAttribute("data-col") || "var(--azul-400)";
+            if (stripTxt && stripDot) {
+              stripTxt.innerHTML = `<b>${hora}</b> · Tramo: <b>${tipo}</b>`;
+              stripDot.style.backgroundColor = col;
+              stripDot.style.transform = "scale(1.2)";
+            }
+          });
+
+          bar.addEventListener("mouseleave", () => {
+            if (stripTxt && stripDot) {
+              stripTxt.textContent = "Pasa el cursor por las horas para ver el tramo";
+              stripDot.style.backgroundColor = "var(--azul-400)";
+              stripDot.style.transform = "scale(1)";
+            }
+          });
+        });
+      }
+
+      if (tipo === "meses") {
+        const strip = hoja.querySelector<HTMLElement>("#reactiva-live-strip");
+        const stripTxt = hoja.querySelector<HTMLElement>("#reactiva-live-txt");
+        const stripDot = strip?.querySelector<HTMLElement>(".live-strip-dot");
+        const cols = hoja.querySelectorAll<HTMLElement>(".mes-col");
+
+        cols.forEach((col) => {
+          col.addEventListener("mouseenter", () => {
+            const mes = col.getAttribute("data-mes") || "";
+            const tipo = col.getAttribute("data-tipo") || "";
+            const esAlto = col.classList.contains("alto");
+            if (stripTxt && stripDot) {
+              stripTxt.innerHTML = `<b>${mes}</b> · <b>${tipo}</b>`;
+              stripDot.style.backgroundColor = esAlto ? "var(--tinta)" : "var(--azul-400)";
+              stripDot.style.transform = "scale(1.2)";
+            }
+          });
+
+          col.addEventListener("mouseleave", () => {
+            if (stripTxt && stripDot) {
+              stripTxt.textContent = "Pasa el cursor por los meses para ver el estado";
+              stripDot.style.backgroundColor = "var(--azul-400)";
+              stripDot.style.transform = "scale(1)";
+            }
+          });
+        });
+      }
+    }
+
+    function ver(i: number) {
+      bloqueActual = i;
+      const b = BLOQUES[i];
+      btns.forEach((x, j) => {
+        x.setAttribute("aria-selected", j === i ? "true" : "false");
+        x.tabIndex = j === i ? 0 : -1;
+      });
+
+      // Actualizar dots
+      const dots = dotsContainer?.querySelectorAll(".prog-dot");
+      dots?.forEach((d, j) => {
+        d.classList.toggle("activo", j === i);
+      });
+
+      pag.textContent = `Bloque ${i + 1} de ${BLOQUES.length}`;
+      hoja.innerHTML = `
+        <div class="pane">
+          <h3>${b.t}</h3>
+          <p class="desc">${b.d}</p>
+          <div class="vis">${generarVisual(b.vis)}</div>
+          ${renderDatosChips(b)}
+        </div>
+      `;
+
+      attachInteractiveEvents(b.vis);
+    }
+
+    ver(0);
+  })();
+</script>
+
+<style>
+  /* ==========================================================================
+     SISTEMA VISUAL EMAX - LO QUE HAY EN TU INFORME
+     ========================================================================== */
+  .sec-informe-root {
+    --tinta: #0f2346;
+    --tinta-2: #3a4b68;
+    --papel: #ffffff;
+    --suave: #f4f8fe;
+    --azul-900: #004aad;
+    --azul-800: #003c8c;
+    --azul-700: #0f5bd8;
+    --azul-400: #00c2ff;
+    --resalte: #eaf3fe;
+    --linea: #dbe5f3;
+    --linea-fina: #eaf1fa;
+    --borde-campo: #7b879c;
+    --sombra-card: 0 18px 45px rgba(0, 74, 173, 0.08), 0 4px 12px rgba(15, 35, 70, 0.03);
+    --sombra-hover: 0 24px 54px rgba(0, 74, 173, 0.12), 0 6px 16px rgba(15, 35, 70, 0.04);
+    --f-marca: "Poppins", "Sora", sans-serif;
+    --f-texto: "Poppins", "Inter", sans-serif;
+    --f-dato: "Poppins", "Sora", sans-serif;
+
+    background: #ffffff;
+    color: var(--tinta);
+    font: 400 1rem/1.6 var(--f-texto);
+    padding-block: 84px 96px;
+    border-bottom: 1px solid var(--linea-fina);
+    position: relative;
+  }
+
+  .informe-par-container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    display: grid;
+    gap: clamp(36px, 4vw, 64px);
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  @media (min-width: 960px) {
+    .informe-par-container {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+  }
+
+  /* ==========================================================================
+     COLUMNA IZQUIERDA: TITULAR + ÍNDICE INTERACTIVO PULIDO
+     ========================================================================== */
+  .informe-intro-col {
+    position: sticky;
+    top: 96px;
+  }
+
+  @media (max-width: 960px) {
+    .informe-intro-col {
+      position: static;
+    }
+  }
+
+  .informe-kicker {
+    font-family: var(--f-marca);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4b6387;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .kicker-sep {
+    color: #00c2ff;
+    font-weight: 300;
+    font-size: 1.1em;
+  }
+
+  .informe-titulo {
+    font-family: var(--f-marca);
+    font-size: clamp(2.1rem, 1.7rem + 1.8vw, 3rem);
+    font-weight: 800;
+    color: var(--tinta);
+    line-height: 1.14;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .titulo-cursiva {
+    font-family: "Playfair Display", "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #00c2ff;
+    letter-spacing: 0;
+    font-size: 1.08em;
+    display: inline-block;
+  }
+
+  .intro-desc {
+    margin-top: 16px;
+    color: var(--tinta-2);
+    font-size: clamp(0.96rem, 0.92rem + 0.2vw, 1.05rem);
+    line-height: 1.65;
+    max-width: 31em;
+  }
+
+  /* Lista de botones del índice */
+  .indice-bloques {
+    list-style: none;
+    padding: 0;
+    margin-top: 32px;
+    display: grid;
+    gap: 8px;
+  }
+
+  :global(.indice-bloques .btn-indice-row) {
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 20px;
+    column-gap: 16px;
+    align-items: center;
+    padding: 14px 16px 14px 14px;
+    background: #ffffff;
+    border: 1px solid var(--linea);
+    border-radius: 14px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.indice-bloques .btn-indice-row:hover) {
+    background: #f7faff;
+    border-color: #bcd7f8;
+    transform: translateX(4px);
+  }
+
+  :global(.indice-bloques .btn-indice-row:focus-visible) {
+    outline: 2px solid var(--azul-900);
+    outline-offset: 2px;
+  }
+
+  :global(.indice-bloques .n) {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #cad9ee;
+    background: #f8fbff;
+    font-family: var(--f-dato);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--tinta-2);
+    transition: all 0.25s ease;
+  }
+
+  :global(.indice-bloques .t) {
+    font-family: var(--f-marca);
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--tinta-2);
+    line-height: 1.35;
+    transition: color 0.2s;
+  }
+
+  :global(.indice-bloques .ind-chevron) {
+    color: #9ab4d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  :global(.indice-bloques .btn-indice-row:hover .t) {
+    color: var(--tinta);
+  }
+
+  :global(.indice-bloques .btn-indice-row:hover .ind-chevron) {
+    color: var(--azul-900);
+    transform: translateX(2px);
+  }
+
+  /* Estado activo seleccionado */
+  :global(.indice-bloques .btn-indice-row[aria-selected="true"]) {
+    background: linear-gradient(90deg, #edf5ff 0%, #f6faff 100%);
+    border-color: #a8cdfc;
+    box-shadow: 0 4px 16px rgba(0, 74, 173, 0.08);
+  }
+
+  :global(.indice-bloques .btn-indice-row[aria-selected="true"] .n) {
+    background: var(--azul-900);
+    border-color: var(--azul-900);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.28);
+  }
+
+  :global(.indice-bloques .btn-indice-row[aria-selected="true"] .t) {
+    color: var(--azul-900);
+    font-weight: 700;
+  }
+
+  :global(.indice-bloques .btn-indice-row[aria-selected="true"] .ind-chevron) {
+    color: var(--azul-900);
+    transform: translateX(3px);
+  }
+
+  /* Enlaces de acción de la columna izquierda */
+  .informe-acciones {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .btn-decisiones-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px 12px 24px;
+    background: #004aad;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0, 74, 173, 0.24);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-decisiones-pill:hover {
+    background: #003c8c;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 74, 173, 0.35);
+  }
+
+  .btn-txt-cyan {
+    font-family: var(--f-marca);
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-circulo-cyan {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-decisiones-pill:hover .btn-circulo-cyan {
+    transform: translateX(2px);
+    background: #ffffff;
+    color: #004aad;
+  }
+
+  /* ==========================================================================
+     COLUMNA DERECHA: TARJETA HOJA DE INFORME EMAX
+     ========================================================================== */
+  .hoja-informe-card {
+    background: var(--papel);
+    border: 1.5px solid #dce7f5;
+    border-radius: 24px;
+    box-shadow: var(--sombra-card);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .hoja-informe-card:hover {
+    box-shadow: var(--sombra-hover);
+    border-color: #bcd7f8;
+  }
+
+  .hoja-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    background: #f8fbff;
+    border-bottom: 1px solid var(--linea-fina);
+    font-size: 0.82rem;
+    color: var(--tinta-2);
+  }
+
+  .hoja-marca-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .punto-en-vivo {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00c2ff;
+    box-shadow: 0 0 8px rgba(0, 194, 255, 0.7);
+  }
+
+  .hoja-top b {
+    font-weight: 700;
+    color: var(--tinta);
+  }
+
+  .hoja-top-derecha {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hoja-dots-indicador {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  :global(.prog-dot) {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #cadbf2;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.prog-dot:hover) {
+    background: #004aad;
+    transform: scale(1.3);
+  }
+
+  :global(.prog-dot.activo) {
+    width: 20px;
+    border-radius: 999px;
+    background: #004aad;
+    box-shadow: 0 2px 6px rgba(0, 74, 173, 0.35);
+  }
+
+  .hoja-contador-chip {
+    font-family: var(--f-dato);
+    font-weight: 700;
+    color: var(--azul-900);
+    background: #eef5ff;
+    border: 1px solid #d4e5ff;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+  }
+
+  .hoja-cuerpo {
+    padding: 30px 32px 28px;
+  }
+
+  @media (max-width: 580px) {
+    .hoja-cuerpo {
+      padding: 24px 18px 20px;
+    }
+    .hoja-top {
+      padding: 14px 18px;
+    }
+  }
+
+  :global(.hoja-cuerpo h3) {
+    font-family: var(--f-marca);
+    font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+    font-weight: 700;
+    color: var(--tinta);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  :global(.hoja-cuerpo .desc) {
+    margin-top: 10px;
+    color: var(--tinta-2);
+    font-size: 0.96rem;
+    line-height: 1.6;
+    max-width: 38em;
+  }
+
+  :global(.vis) {
+    margin-top: 24px;
+    padding: 22px 22px;
+    background: linear-gradient(180deg, #f8faff 0%, #f1f6fc 100%);
+    border: 1px solid #dce8f6;
+    border-radius: 18px;
+    box-shadow: inset 0 1px 3px rgba(0, 74, 173, 0.02);
+  }
+
+  :global(.datos) {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.84rem;
+  }
+
+  :global(.datos-tit) {
+    font-weight: 600;
+    color: var(--tinta);
+  }
+
+  :global(.chips-wrap) {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  :global(.chip) {
+    padding: 4px 14px;
+    border: 1px solid #cddcf0;
+    border-radius: 999px;
+    color: var(--tinta);
+    background: #ffffff;
+    font-family: var(--f-texto);
+    font-weight: 600;
+    font-size: 0.82rem;
+    box-shadow: 0 2px 6px rgba(15, 35, 70, 0.03);
+    transition: all 0.2s ease;
+  }
+
+  :global(.chip:hover) {
+    border-color: #004aad;
+    color: #004aad;
+  }
+
+  .hoja-pie {
+    padding: 16px 28px;
+    background: #fafcff;
+    border-top: 1px solid var(--linea-fina);
+    font-family: var(--f-marca);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--tinta-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hoja-pie-autor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .escudo-svg {
+    color: var(--azul-900);
+    flex-shrink: 0;
+  }
+
+  .hoja-nav-controles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-hoja-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1.5px solid #d4e3f7;
+    color: #004aad;
+    font-family: var(--f-marca);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 74, 173, 0.04);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-hoja-nav:hover {
+    background: #004aad;
+    border-color: #004aad;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.22);
+  }
+
+  :global(.pane) {
+    animation: entraPane 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes entraPane {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ==========================================================================
+     BANDA DE LECTURA INTEGRADA EN VIVO (NO SE DESBORDA NI CORTA EN BORDES)
+     ========================================================================== */
+  :global(.live-strip) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    background: #ffffff;
+    border: 1px solid #dbe6f5;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(0, 74, 173, 0.03);
+    min-height: 38px;
+    box-sizing: border-box;
+  }
+
+  :global(.live-strip-dot) {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--azul-400);
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  :global(.live-strip-txt) {
+    font-family: var(--f-marca);
+    font-size: 0.82rem;
+    color: var(--tinta-2);
+    line-height: 1.3;
+  }
+
+  :global(.live-strip-txt b) {
+    color: var(--tinta);
+  }
+
+  :global(.horas-chart-stage),
+  :global(.meses-chart-stage) {
+    position: relative;
+    width: 100%;
+  }
+
+  .enlace-secundario-tarifa {
+    font-family: var(--f-marca);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--azul-900);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+    padding-left: 6px;
+  }
+
+  .enlace-secundario-tarifa:hover {
+    color: var(--azul-800);
+  }
+
+  .informe-nota-cierre {
+    margin-top: 20px;
+    font-family: var(--f-texto);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--tinta-2);
+    font-style: italic;
+    padding-inline: 4px;
+  }
+
+  /* ==========================================================================
+     GRÁFICOS OFICIALES ANIMADOS
+     ========================================================================== */
+  :global(.leyenda) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--tinta-2);
+    font-family: var(--f-texto);
+  }
+
+  :global(.leyenda i) {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: -1px;
+  }
+
+  /* 1. Gráfico Horas con Onda Dinámica */
+  :global(.horas) {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    gap: 3.5px;
+    align-items: end;
+    height: 130px;
+  }
+
+  @keyframes barraOndaSubida {
+    from {
+      transform: scaleY(0);
+      opacity: 0.2;
+    }
+    to {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  :global(.barra-h) {
+    height: var(--h);
+    border-radius: 3px 3px 0 0;
+    transform-origin: bottom;
+    animation: barraOndaSubida 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: var(--delay);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s, box-shadow 0.2s;
+  }
+
+  :global(.barra-h:hover),
+  :global(.barra-h:focus) {
+    transform: scaleY(1.08) scaleX(1.15);
+    filter: brightness(1.22);
+    box-shadow: 0 -4px 12px rgba(0, 194, 255, 0.6);
+    z-index: 5;
+    outline: none;
+  }
+
+  :global(.eje) {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-family: var(--f-dato);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--tinta-2);
+  }
+
+  /* 2. Gráfico Potencia */
+  :global(.pot) {
+    display: grid;
+    gap: 14px;
+  }
+
+  :global(.pot__f) {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: #ffffff;
+    border: 1px solid #dbe6f5;
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-shadow: 0 1px 4px rgba(0, 74, 173, 0.03);
+    transition: all 0.2s ease;
+  }
+
+  :global(.pot__f:hover) {
+    border-color: #bcd7f8;
+    box-shadow: 0 3px 10px rgba(0, 74, 173, 0.08);
+  }
+
+  :global(.pot-head-fila) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :global(.pot-periodo-tag) {
+    font-family: var(--f-marca);
+    font-weight: 800;
+    font-size: 0.88rem;
+    color: var(--azul-900);
+  }
+
+  :global(.pot-badge-estado) {
+    font-family: var(--f-marca);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 999px;
+  }
+
+  :global(.pot-badge-estado small) {
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  :global(.badge-alerta) {
+    background: #fef3f2;
+    color: #b42318;
+    border: 1px solid #fecdca;
+  }
+
+  :global(.badge-exito) {
+    background: #ecfdf3;
+    color: #027a48;
+    border: 1px solid #a6f4c5;
+  }
+
+  :global(.badge-neutro) {
+    background: #f2f4f7;
+    color: #344054;
+    border: 1px solid #eaecf0;
+  }
+
+  :global(.pot__pista) {
+    position: relative;
+    height: 18px;
+    border: 1.5px solid #8ca2bf;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.pot__uso) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--azul-900);
+    border-radius: 4px 0 0 4px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.pot__ex) {
+    position: absolute;
+    top: -1.5px;
+    bottom: -1.5px;
+    background: var(--tinta);
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 0 6px rgba(15, 35, 70, 0.25);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  :global(.pot-metricas-mini) {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.74rem;
+    color: #556f91;
+    margin-top: 2px;
+  }
+
+  :global(.pot-metricas-mini b) {
+    color: var(--tinta);
+  }
+
+  :global(.txt-rojo) {
+    color: #d92d20;
+    font-weight: 700;
+  }
+
+  /* 3. Gráfico Meses Reactiva */
+  :global(.meses) {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 6px;
+    align-items: end;
+    height: 130px;
+  }
+
+  :global(.mes-col) {
+    height: var(--h);
+    border-radius: 4px 4px 0 0;
+    background: var(--azul-400);
+    transform-origin: bottom;
+    animation: barraOndaSubida 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: var(--delay);
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s;
+  }
+
+  :global(.mes-col:hover),
+  :global(.mes-col:focus) {
+    transform: scaleY(1.08);
+    filter: brightness(1.25);
+    box-shadow: 0 -4px 10px rgba(0, 194, 255, 0.5);
+    z-index: 5;
+    outline: none;
+  }
+
+  :global(.mes-col.alto) {
+    background: var(--tinta);
+  }
+
+  :global(.umbral) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 38%;
+    border-top: 2px dashed #00c2ff;
+  }
+
+  :global(.umbral b) {
+    position: absolute;
+    right: 0;
+    top: -22px;
+    font-family: var(--f-marca);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--azul-900);
+    background: #eef5ff;
+    padding: 1px 6px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 74, 173, 0.08);
+  }
+
+  :global(.eje12) {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 6px;
+    margin-top: 8px;
+    text-align: center;
+    font-family: var(--f-dato);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--tinta-2);
+  }
+
+  /* 4. Gráfico Suma Propuesta */
+  :global(.suma-flow) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  :global(.suma__in) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  :global(.chip-in.pulse-in) {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1.5px solid #bcd7f8;
+    border-radius: 999px;
+    background: #ffffff;
+    font-family: var(--f-marca);
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #004aad;
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.06);
+    transition: all 0.2s ease;
+  }
+
+  :global(.chip-in.pulse-in:hover) {
+    transform: translateY(-2px);
+    border-color: #004aad;
+    box-shadow: 0 6px 16px rgba(0, 74, 173, 0.15);
+  }
+
+  :global(.dot-in) {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00c2ff;
+    box-shadow: 0 0 6px rgba(0, 194, 255, 0.8);
+  }
+
+  :global(.suma-flecha-conector) {
+    color: #004aad;
+    animation: bounceArrowAnim 1.5s infinite;
+  }
+
+  @keyframes bounceArrowAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+  }
+
+  :global(.suma__res) {
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 2px solid #004aad;
+    border-radius: 16px;
+    padding: 10px 20px;
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.08);
+  }
+
+  :global(.res-item) {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 0;
+    border-top: 1px solid var(--linea-fina);
+  }
+
+  :global(.res-item:first-child) {
+    border-top: 0;
+  }
+
+  :global(.res-tit) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :global(.res-tit b) {
+    font-family: var(--f-marca);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--tinta);
+  }
+
+  :global(.res-tag) {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #eef5ff;
+    color: #004aad;
+    border: 1px solid #d0e2fa;
+  }
+
+  .res-desc {
+    font-family: var(--f-texto);
+    font-size: 0.80rem;
+    color: var(--tinta-2);
+  }
+</style>
+

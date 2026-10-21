@@ -1,0 +1,23 @@
+---
+// Componente Termino: palabra con subrayado punteado y definición al pasar el cursor o al enfocar
+// La definición proviene de la fuente única src/data/glosario.ts
+// Accesible mediante teclado (tabindex="0") y lectores de pantalla
+
+import { getDefinicion } from "../../data/glosario";
+
+interface Props {
+  t?: string;       // Clave o término en el glosario
+  d?: string;       // Definición manual opcional
+  class?: string;
+}
+
+const { t, d, class: className = "" } = Astro.props;
+const definicion = d || (t ? getDefinicion(t) : "");
+---
+
+<span
+  class={`term ${className}`.trim()}
+  tabindex="0"
+  data-d={definicion}
+  aria-label={definicion ? `${definicion}` : undefined}
+><slot /></span>

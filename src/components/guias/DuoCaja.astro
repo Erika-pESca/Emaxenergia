@@ -1,0 +1,41 @@
+---
+// Componente DuoCaja: Dos cajas comparativas en cuadrícula (ej. "Potencia frente a energía")
+// Estilos correspondientes a .vs en guia.css
+
+interface Caja {
+  etiqueta: string;
+  titulo: string;
+  descripcion: string;
+}
+
+interface Props {
+  izq?: Caja;
+  der?: Caja;
+}
+
+const {
+  izq = {
+    etiqueta: "Potencia (kW)",
+    titulo: "Capacidad",
+    descripcion: "Se paga todos los días. No baja, aunque cierres en agosto.",
+  },
+  der = {
+    etiqueta: "Energía (kWh)",
+    titulo: "Consumo",
+    descripcion: "Se paga por uso. Baja si produces menos.",
+  },
+} = Astro.props;
+---
+
+<div class="vs" role="region" aria-label="Comparativa conceptual">
+  <div>
+    <small>{izq.etiqueta}</small>
+    <b>{izq.titulo}</b>
+    <span>{izq.descripcion}</span>
+  </div>
+  <div>
+    <small>{der.etiqueta}</small>
+    <b>{der.titulo}</b>
+    <span>{der.descripcion}</span>
+  </div>
+</div>

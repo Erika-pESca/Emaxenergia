@@ -1,0 +1,65 @@
+---
+// Guía · Tarifa indexada con techo: qué protege y qué no
+// Ruta: /guias/tarifa-indexada-con-techo
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "como-funciona",
+    "titulo": "Cómo funciona"
+  },
+  {
+    "id": "que-protege",
+    "titulo": "Qué protege y qué no"
+  },
+  {
+    "id": "preguntas",
+    "titulo": "Cuatro preguntas antes de firmar"
+  }
+];
+const resumen = [
+  {
+    "dt": "Cómo funciona",
+    "dd": "Pagas el mercado, con un máximo pactado para el precio de la energía."
+  },
+  {
+    "dt": "Qué protege",
+    "dd": "Las subidas fuertes del mercado, solo en la parte de la energía."
+  },
+  {
+    "dt": "Qué no protege",
+    "dd": "Peajes, cargos, impuestos, potencia, excesos ni reactiva."
+  },
+  {
+    "dt": "Qué cuesta",
+    "dd": "La protección tiene un precio. Pregunta cuál y cómo se cobra."
+  }
+];
+const senales = [
+  "Te presentan el techo como si fuera gratis.",
+  "No sabes si el techo se aplica a cada periodo o a la media del mes.",
+  "Te la ofrecen sin enseñarte cómo habría salido con tu consumo del año pasado."
+];
+const cta = {
+  "texto": "Con tu consumo te decimos qué modalidad te protege de lo que de verdad te preocupa.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar mi caso"
+};
+---
+
+<Guia
+  slug="tarifa-indexada-con-techo"
+  h1="Tarifa indexada con techo: qué protege y qué no"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="Una tarifa indexada con techo sigue el precio del mercado, pero con un máximo pactado para el precio de la energía. Si el mercado sube por encima, pagas el techo; si baja, lo notas. La protección tiene un coste, y conviene saber cuál. Y solo cubre la energía: peajes, cargos e impuestos no cambian."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Real Decreto 88/2026 (BOE-A-2026-3212), art. 6.1: información precontractual y criterios de revisión · OMIE, precios del mercado diario"
+>
+ <h2 id="como-funciona">Cómo funciona</h2> <p>El precio de tu energía se calcula a partir del mercado, como en cualquier indexado. La diferencia es un máximo: si el mercado pasa de ese nivel, pagas el techo y no más.</p> <p>Es una protección, y como cualquier protección tiene un coste. Puede ir dentro del precio que pagas o como un término aparte, pero existe.</p> <h2 id="que-protege">Qué protege y qué no</h2> <ul> <li><b>Protege</b> la parte de la energía frente a subidas fuertes del mercado.</li> <li><b>No protege</b> los peajes, los cargos ni los impuestos: los fija la regulación y son iguales con cualquier modalidad.</li> <li><b>Tampoco</b> lo que depende de ti: la potencia contratada, los excesos o la reactiva.</li> </ul> <p class="enlaces"><a href="/guias/omie">Qué es OMIE y cómo llega a tu factura</a></p> <h2 id="preguntas">Cuatro preguntas antes de firmar</h2> <ul> <li><b>¿Dónde está el techo?</b> El nivel exacto y si es el mismo en todos los periodos.</li> <li><b>¿A qué se aplica?</b> No es lo mismo un máximo para cada periodo que para la media del mes.</li> <li><b>¿Cuánto cuesta y cómo se cobra?</b> Dentro del precio o en un término aparte.</li> <li><b>¿Cuánto dura?</b> Si el techo cubre todo el contrato y qué pasa al renovar.</li> </ul> <p class="destacado">La prueba más útil es pedir cómo habría salido con tu consumo del año pasado: con techo, sin techo y a precio fijo.</p> <p class="enlaces"><a href="/guias/precio-fijo-o-indexado">Precio fijo o indexado: cómo decidir</a><a href="/metodo#riesgo">La decisión 4 del método: cuánto riesgo asumes</a></p> 
+</Guia>

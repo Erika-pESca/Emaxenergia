@@ -1,0 +1,291 @@
+---
+// Sección "Todas las guías, por tema" - Catálogo completo y ordenado
+// Presenta las 16 guías organizadas en bloques temáticos claros
+import { guiasData, temasGuias } from "../../data/guiasData";
+
+// Obtenemos los objetos completos de cada guía según sus slugs
+const temasConGuias = temasGuias.map((tema) => ({
+  ...tema,
+  guias: tema.slugs
+    .map((slug) => guiasData.find((g) => g.slug === slug))
+    .filter((g): g is NonNullable<typeof g> => Boolean(g)),
+}));
+---
+
+<section class="seccion-catalogo" id="catalogo" aria-labelledby="tit-catalogo">
+  <div class="contenedor-catalogo">
+    <div class="cabecera-catalogo">
+      <div class="kicker-catalogo">Biblioteca completa</div>
+      <h2 id="tit-catalogo" class="tit-catalogo">
+        TODAS LAS GUÍAS,<br />
+        <span class="tit-cursiva">organizadas por tema.</span>
+      </h2>
+      <p class="desc-catalogo">
+        Un manual vivo y abierto para responsables de empresa. 16 artículos técnicos
+        detallados para consultar en cualquier momento de duda.
+      </p>
+    </div>
+
+    <!-- Bloques temáticos -->
+    <div class="temas-lista">
+      {
+        temasConGuias.map((t, idx) => (
+          <div class="bloque-tema">
+            <div class="tema-cabecera">
+              <div class="tema-numero-badge">0{idx + 1}</div>
+              <div>
+                <h3 class="tema-titulo">{t.titulo}</h3>
+                <p class="tema-desc">{t.descripcion}</p>
+              </div>
+            </div>
+
+            <div class="tema-guias-grid">
+              {t.guias.map((g) => (
+                <a href={g.href} class="tarjeta-guia-tema">
+                  <div class="guia-tema-meta">
+                    <span class="guia-tiempo-tag">{g.tiempoLectura}</span>
+                    <span class="guia-norma-tag">{g.normativa}</span>
+                  </div>
+
+                  <h4 class="guia-tema-h4">{g.titulo}</h4>
+                  
+                  <p class="guia-tema-snippet">{g.descripcion}</p>
+
+                  <div class="guia-tema-pie">
+                    <span class="guia-tema-leer">Leer guía completa</span>
+                    <span class="guia-tema-icono" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .seccion-catalogo {
+    padding: 80px 0 96px;
+    background-color: var(--papel);
+  }
+
+  .contenedor-catalogo {
+    max-width: var(--ancho-max, 1200px);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .cabecera-catalogo {
+    max-width: 620px;
+    margin-bottom: 56px;
+  }
+
+  .kicker-catalogo {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--azul-900);
+    margin-bottom: 12px;
+  }
+
+  .tit-catalogo {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem);
+    font-weight: 700;
+    color: var(--tinta);
+    line-height: 1.2;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+  }
+
+  .tit-cursiva {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--azul-900);
+  }
+
+  .desc-catalogo {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--tinta-2);
+    margin: 0;
+  }
+
+  /* Lista de bloques temáticos */
+  .temas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .bloque-tema {
+    padding-top: 36px;
+    border-top: 2px solid var(--linea);
+  }
+
+  .tema-cabecera {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .tema-numero-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--azul-suave);
+    color: var(--azul-900);
+    font-family: var(--font-display, "Sora", sans-serif);
+    font-weight: 700;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tema-titulo {
+    font-family: var(--font-titulos, "Merriweather", Georgia, serif);
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--tinta);
+    margin: 0 0 4px;
+  }
+
+  .tema-desc {
+    font-size: 0.875rem;
+    color: var(--tinta-3);
+    margin: 0;
+  }
+
+  /* Grid de guías dentro del tema */
+  .tema-guias-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .tema-guias-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .tema-guias-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+
+  /* Tarjeta individual de guía */
+  .tarjeta-guia-tema {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-md, 14px);
+    text-decoration: none;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 6px rgba(15, 35, 70, 0.02);
+  }
+
+  .tarjeta-guia-tema:hover {
+    border-color: var(--azul-700);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 74, 173, 0.08);
+  }
+
+  .guia-tema-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .guia-tiempo-tag {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--tinta-3);
+    background: var(--fondo);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .guia-norma-tag {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--azul-900);
+    background: rgba(0, 74, 173, 0.05);
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+  }
+
+  .guia-tema-h4 {
+    font-family: var(--font-texto);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--tinta);
+    margin: 0 0 10px;
+  }
+
+  .tarjeta-guia-tema:hover .guia-tema-h4 {
+    color: var(--azul-900);
+  }
+
+  .guia-tema-snippet {
+    font-size: 0.84375rem;
+    color: var(--tinta-2);
+    line-height: 1.55;
+    margin: 0 0 20px;
+    flex-grow: 1;
+  }
+
+  .guia-tema-pie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--linea-fina);
+  }
+
+  .guia-tema-leer {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--azul-900);
+  }
+
+  .guia-tema-icono {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--azul-suave);
+    color: var(--azul-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .tarjeta-guia-tema:hover .guia-tema-icono {
+    background: var(--azul-900);
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+</style>

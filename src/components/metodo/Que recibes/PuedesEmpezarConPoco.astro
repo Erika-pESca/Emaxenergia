@@ -1,0 +1,440 @@
+---
+// Componente: PuedesEmpezarConPoco.astro
+// Ubicación: src/components/metodo/Que recibes/PuedesEmpezarConPoco.astro
+// Diseño exacto al boceto del usuario: Título y bajada arriba + Tabla transparente con líneas cian + Fondo azul corporativo (#08172e)
+---
+
+<section class="empezar-seccion-azul" id="empezar-con-poco" aria-labelledby="empezar-tit">
+  <div class="contenedor-empezar">
+    <!-- Encabezado arriba: Título y Bajada editorial -->
+    <header class="empezar-header">
+      <h2 id="empezar-tit" class="empezar-h2">
+        PUEDES <span class="empezar-cursiva">empezar</span> CON POCO
+      </h2>
+      <p class="empezar-bajada">
+        No necesitas preparar nada. Cuanto más nos das, más vemos. Pero con poco ya se puede saber si merece la pena mirar.
+      </p>
+    </header>
+
+    <!-- Tabla comparativa transparente con barras cian de marca -->
+    <div class="empezar-tabla-wrap">
+      <table class="empezar-tabla" role="table">
+        <thead>
+          <tr>
+            <th scope="col" class="th-si-nos-das">Si nos das</th>
+            <th scope="col" class="th-podemos-ver">Podemos ver</th>
+            <th scope="col" class="th-no-podemos">No podemos ver</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Fila 1: Solo lo que pagas al mes -->
+          <tr class="fila-tabla">
+            <td class="td-nombre">
+              <span class="barra-cian-acento" aria-hidden="true"></span>
+              <strong class="item-titulo">Solo lo que pagas al mes</strong>
+            </td>
+            <td class="td-podemos-ver" data-label="Podemos ver">
+              <p class="td-texto">El orden de magnitud y si merece la pena analizar.</p>
+            </td>
+            <td class="td-no-podemos" data-label="No podemos ver">
+              <p class="td-texto">Nada de cómo consume tu empresa.</p>
+            </td>
+          </tr>
+
+          <!-- Fila 2: Tu factura -->
+          <tr class="fila-tabla">
+            <td class="td-nombre">
+              <span class="barra-cian-acento" aria-hidden="true"></span>
+              <strong class="item-titulo">Tu factura</strong>
+            </td>
+            <td class="td-podemos-ver" data-label="Podemos ver">
+              <p class="td-texto">
+                Los cuatro bloques con un mes: tu consumo por periodos, tu potencia y, si tu factura los muestra, tus maxímetros, y tu reactiva.
+              </p>
+            </td>
+            <td class="td-no-podemos" data-label="No podemos ver">
+              <p class="td-texto">
+                Cómo cambian a lo largo del año. Una potencia que solo falta en verano, por ejemplo.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Fila 3: Tu CUPS -->
+          <tr class="fila-tabla">
+            <td class="td-nombre">
+              <span class="barra-cian-acento barra-larga" aria-hidden="true"></span>
+              <strong class="item-titulo">Tu CUPS</strong>
+            </td>
+            <td class="td-podemos-ver" data-label="Podemos ver">
+              <p class="td-texto">
+                Tu consumo por periodos y meses, y tus potencias.
+              </p>
+            </td>
+            <td class="td-no-podemos" data-label="No podemos ver">
+              <p class="td-texto">
+                Tu consumo hora a hora. Tu nombre o tu dirección: ninguna comercializadora puede verlos.
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pie inferior: Garantía legal RD 88/2026, enlace y botón de acción -->
+    <footer class="empezar-pie">
+      <div class="pie-legal-bloque">
+        <p class="pie-legal-texto">
+          <strong>Lo que no hacemos con ningún dato:</strong> cambiarte de compañía sin tu conformidad expresa (RD 88/2026, art. 6.1.v). Llamarte si no lo has pedido.
+        </p>
+
+        <a href="/metodo#decisiones" class="pie-enlace-cups">
+          Qué se ve con tu CUPS y qué no
+        </a>
+      </div>
+
+      <div class="pie-accion-wrap">
+        <button
+          type="button"
+          class="btn-empezar-cta"
+          data-abrir-funnel
+          data-tramo-msg="Quiero analizar el suministro eléctrico de mi empresa."
+        >
+          <span>Analizar mi suministro</span>
+          <span class="btn-circulo-icono" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN PUEDES EMPEZAR CON POCO
+     Fondo azul oscuro oficial (#08172e), título arriba y tabla comparativa limpia
+     ========================================================================== */
+  .empezar-seccion-azul {
+    background-color: #08172e;
+    background-image: radial-gradient(circle at 12% 18%, rgba(26, 111, 247, 0.15) 0%, transparent 45%),
+                      radial-gradient(circle at 88% 82%, rgba(0, 194, 255, 0.1) 0%, transparent 40%);
+    padding: clamp(72px, 8vw, 108px) 0 clamp(80px, 9vw, 120px);
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contenedor-empezar {
+    width: 100%;
+    max-width: 1220px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
+
+  /* Encabezado editorial superior */
+  .empezar-header {
+    margin-bottom: clamp(36px, 4.5vw, 52px);
+    max-width: 58rem;
+  }
+
+  .empezar-h2 {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: clamp(2.1rem, 1.7rem + 1.8vw, 3.2rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+  }
+
+  .empezar-cursiva {
+    font-family: "Playfair Display", "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 600;
+    color: #38b6ff;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .empezar-bajada {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+    line-height: 1.6;
+    color: #a5b8d0;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     TABLA COMPARATIVA EXACTA AL BOCETO
+     ========================================================================== */
+  .empezar-tabla-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: clamp(36px, 4vw, 48px);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .empezar-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 680px;
+  }
+
+  /* Cabecera de la tabla */
+  .empezar-tabla thead th {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: clamp(1.02rem, 0.96rem + 0.25vw, 1.18rem);
+    font-weight: 700;
+    color: #ffffff;
+    padding: 18px 24px 20px 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.22);
+    letter-spacing: -0.01em;
+  }
+
+  .th-si-nos-das {
+    width: 25%;
+  }
+
+  .th-podemos-ver {
+    width: 40%;
+  }
+
+  .th-no-podemos {
+    width: 35%;
+    padding-right: 0 !important;
+  }
+
+  /* Filas de la tabla */
+  .fila-tabla {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+  }
+
+  .fila-tabla:hover {
+    background-color: rgba(255, 255, 255, 0.025);
+  }
+
+  .empezar-tabla tbody td {
+    padding: 26px 24px 26px 0;
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+
+  /* Columna 1: Nombre del nivel con barra cian superior */
+  .td-nombre {
+    padding-right: 32px !important;
+  }
+
+  .barra-cian-acento {
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: #00c2ff;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    box-shadow: 0 0 10px rgba(0, 194, 255, 0.45);
+  }
+
+  .barra-cian-acento.barra-larga {
+    width: 68px;
+  }
+
+  .item-titulo {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: block;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  /* Columnas 2 y 3: Textos explicativos */
+  .td-texto {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .td-podemos-ver .td-texto {
+    color: #e2e8f0;
+  }
+
+  .td-no-podemos .td-texto {
+    color: #9cb2ce;
+  }
+
+  /* ==========================================================================
+     PIE INFERIOR: LEGAL, ENLACE Y BOTÓN DE ACCIÓN
+     ========================================================================== */
+  .empezar-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-top: 12px;
+  }
+
+  .pie-legal-bloque {
+    max-width: 48rem;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pie-legal-texto {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #9cb2ce;
+    margin: 0;
+  }
+
+  .pie-legal-texto strong {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .pie-enlace-cups {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #38b6ff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.15s ease;
+    align-self: flex-start;
+  }
+
+  .pie-enlace-cups:hover {
+    color: #60c5ff;
+  }
+
+  .pie-accion-wrap {
+    flex-shrink: 0;
+  }
+
+  .btn-empezar-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px 10px 24px;
+    background: #0070e0;
+    color: #ffffff;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 112, 224, 0.4);
+    transition: all 0.25s ease;
+  }
+
+  .btn-empezar-cta:hover {
+    background: #0080ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(0, 112, 224, 0.55);
+  }
+
+  .btn-circulo-icono {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #0056b3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-empezar-cta:hover .btn-circulo-icono {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE EN MÓVIL
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .empezar-tabla-wrap {
+      overflow-x: visible;
+    }
+
+    .empezar-tabla {
+      display: block;
+      min-width: 0;
+    }
+
+    .empezar-tabla thead {
+      display: none;
+    }
+
+    .empezar-tabla tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .fila-tabla {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+    }
+
+    .empezar-tabla tbody td {
+      padding: 0 !important;
+      border: none !important;
+    }
+
+    .td-podemos-ver,
+    .td-no-podemos {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .td-podemos-ver::before {
+      content: "PODEMOS VER";
+      font-family: "Poppins", "Sora", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #34d399;
+      letter-spacing: 0.05em;
+    }
+
+    .td-no-podemos::before {
+      content: "NO PODEMOS VER";
+      font-family: "Poppins", "Sora", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #8da4be;
+      letter-spacing: 0.05em;
+    }
+
+    .empezar-pie {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .btn-empezar-cta {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>

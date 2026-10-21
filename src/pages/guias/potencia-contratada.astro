@@ -1,0 +1,316 @@
+---
+// Guía · Potencia contratada
+// Ruta: /guias/potencia-contratada
+// Layout: Guia.astro con estilos oficiales guia.css
+// Piloto: GraficoBarras, DuoCaja y Termino integrados con datos oficiales de la guía
+
+import Guia from "../../layouts/Guia.astro";
+import DuoCaja from "../../components/guias/DuoCaja.astro";
+import GraficoBarras from "../../components/guias/GraficoBarras.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  { id: "que-es", titulo: "Qué es la potencia contratada y por qué la pagas aunque no consumas" },
+  { id: "modelos", titulo: "Dos modelos: 2.0TD y 3.0TD" },
+  { id: "cuanta", titulo: "Cuánta potencia necesitas" },
+  { id: "excesos", titulo: "¿Y si contrato menos y pago los excesos?" },
+  { id: "cambiar", titulo: "Cambiar la potencia: cuándo, cuánto cuesta y cuánto tarda" },
+  { id: "temporadas", titulo: "¿Y por temporadas?" },
+  { id: "emax", titulo: "Qué hacemos en EMAX con tu potencia" },
+];
+
+const resumen = [
+  { dt: "Se paga siempre", dd: "La potencia contratada se paga cada día, la uses o no." },
+  { dt: "Dos modelos", dd: "En 2.0TD hay dos potencias; en 3.0TD, seis, y ninguna puede ser menor que la del periodo anterior." },
+  { dt: "Se decide con datos", dd: "La que importa es la que tu empresa ha usado de verdad en cada periodo, no la suma de las placas de tus equipos." },
+  { dt: "Contratar de menos no compensa", dd: "El precio del exceso está pensado para que no salga a cuenta." },
+  { dt: "Cambiarla tiene reglas", dd: "Doce meses entre cambios, costes y plazos." },
+  { dt: "Por temporadas, todavía no", dd: "La norma lo prevé, pero aún no se puede usar." },
+];
+
+const senales = [
+  "Tu potencia es la misma desde hace años.",
+  "Tus maxímetros de P1 y P2 quedan muy por debajo de lo contratado casi todo el año.",
+  "Has cambiado maquinaria, horarios o turnos y nadie ha revisado tu potencia.",
+];
+
+const datosObrador = [
+  { periodo: "P1", usado: 24, propuesta: 25 },
+  { periodo: "P2", usado: 28, propuesta: 30, detalleUsado: "tardes de julio" },
+  { periodo: "P3", usado: 24, propuesta: 30 },
+  { periodo: "P4", usado: 28, propuesta: 30 },
+  { periodo: "P5", usado: 22, propuesta: 30 },
+  { periodo: "P6", usado: 40, propuesta: 42, detalleUsado: "el horno, de madrugada", esMaximo: true },
+];
+---
+
+<Guia
+  slug="potencia-contratada"
+  title="Potencia contratada: cuánta necesita tu empresa · EMAX Energía"
+  description="La potencia se paga cada día aunque no la uses. Cuánta necesita tu empresa en cada periodo, qué pasa si contratas de menos y cómo se cambia."
+  titularPrincipal="POTENCIA CONTRATADA: CUÁNTA NECESITA TU EMPRESA"
+  titularAcento="y cómo cambiarla"
+  tema="Potencia"
+  fechaRevision="7 de octubre de 2026"
+  tiempoLectura="6 min"
+  respuesta="La potencia contratada son los kW que tu empresa puede usar a la vez, y se paga cada día, la uses o no. Si te sobra, pagas capacidad que no usas; si te falta, aparecen excesos o cortes. La que conviene sale de tus maxímetros de los últimos doce meses, periodo a periodo."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={{
+    texto: "Con tu factura te decimos cuánta potencia usas de verdad en cada periodo.",
+    boton: "Comprobar mi potencia",
+    enlace: "/diagnostico",
+    origen: "guia-potencia · final",
+  }}
+  fuentes="Circular 3/2020 de la CNMC: arts. 6.2, 7.4, 8.9, 9.2 y 9.4 · RD 88/2026: anexo I y disposición final novena"
+  notaFuentes="Se revisa al caducar la ventana del RD-ley (31-12-2026) y cuando la CNMC publique los precios de la modificación temporal."
+>
+  <h2 id="que-es">Qué es la potencia contratada y por qué la pagas aunque no consumas</h2>
+  <p>
+    La potencia contratada es la que tienes disponible en cada periodo: cuántos kW puede pedir tu empresa a la vez. Se factura por días: kW contratados × precio del kW × días del periodo de facturación. Por eso la pagas igual un domingo con la persiana bajada que un lunes a pleno rendimiento. <span class="fuente">(Circular 3/2020, art. 9.2)</span>
+  </p>
+  <p>
+    El precio de cada kW está regulado: son peajes y cargos, los mismos con cualquier compañía. Lo que decides tú es cuántos kW contratas en cada periodo.
+  </p>
+
+  <!-- Componente DuoCaja: Capacidad frente a Consumo -->
+  <DuoCaja
+    izq={{
+      etiqueta: "Potencia (kW)",
+      titulo: "Capacidad",
+      descripcion: "Se paga todos los días. No baja, aunque cierres en agosto.",
+    }}
+    der={{
+      etiqueta: "Energía (kWh)",
+      titulo: "Consumo",
+      descripcion: "Se paga por uso. Baja si produces menos.",
+    }}
+  />
+
+  <p class="enlaces">
+    <a href="/guias/factura-luz-empresa#tres-partes">Las tres partes de tu factura</a>
+  </p>
+
+  <h2 id="modelos">Dos modelos: 2.0TD y 3.0TD</h2>
+  <div class="tabla-guia">
+    <table>
+      <caption class="solo-lector">Potencia en 2.0TD frente a 3.0TD y 6.1TD</caption>
+      <thead>
+        <tr>
+          <th scope="col"><span class="solo-lector">Qué</span></th>
+          <th scope="col">2.0TD (15 kW o menos)</th>
+          <th scope="col">3.0TD y 6.1TD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Cuántas potencias</th>
+          <td data-label="2.0TD">Dos: una para punta y llano, otra para valle</td>
+          <td data-label="3.0TD y 6.1TD">Seis, de P1 a P6</td>
+        </tr>
+        <tr>
+          <th scope="row">Orden</th>
+          <td data-label="2.0TD">Libres, hasta 15 kW. Con contador sin telegestión, las dos iguales</td>
+          <td data-label="3.0TD y 6.1TD">Cada una igual o mayor que la anterior</td>
+        </tr>
+        <tr>
+          <th scope="row">El fin de semana</th>
+          <td data-label="2.0TD">Es valle, también para la potencia</td>
+          <td data-label="3.0TD y 6.1TD">Es P6</td>
+        </tr>
+        <tr>
+          <th scope="row">Si te pasas</th>
+          <td data-label="2.0TD">El contador corta. No se cobran excesos, salvo suministros que no se pueden interrumpir</td>
+          <td data-label="3.0TD y 6.1TD">Se cobran excesos</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="fuente">Fuentes: Circular 3/2020, arts. 6.2, 7.4 y 9.4</p>
+
+  <p class="enlaces">
+    <a href="/guias/peaje-3-0td#potencia">El peaje 3.0TD</a>
+    <a href="/sectores/restaurantes#tu-peaje">El caso del domingo en un restaurante</a>
+  </p>
+
+  <h2 id="cuanta">Cuánta potencia necesitas</h2>
+  <p>
+    La potencia que importa es la que tu empresa ha llegado a pedir en cada periodo, medida como la media de cada cuarto de hora: es lo que registra tu <Termino t="maximetro">maxímetro</Termino>. No la suma de la potencia de tus equipos, porque casi nunca funcionan todos a la vez.
+  </p>
+  <p class="destacado">
+    El histórico de tu maxímetro es la base de la decisión. Sin ese dato, ajustar la potencia es adivinar.
+  </p>
+
+  <dl class="guia-reglas">
+    <div>
+      <dt>Doce meses como mínimo</dt>
+      <dd>Un mes no basta: el pico puede llegar en verano o en una campaña. Los datos de tu suministro guardan hasta tres años de potencia demandada por periodos y meses.</dd>
+    </div>
+    <div>
+      <dt>La regla del orden</dt>
+      <dd>En 3.0TD, si tu pico está en un periodo caro, arrastra a todos los siguientes. Si está de madrugada, se queda en P6, el periodo con el kW más barato.</dd>
+    </div>
+    <div>
+      <dt>El límite de tu instalación</dt>
+      <dd>No puedes contratar más de lo que permite tu instalación: la potencia máxima de tu boletín o de tu acta de puesta en marcha, que también consta en los datos de tu suministro.</dd>
+    </div>
+  </dl>
+
+  <h3>Un ejemplo: el obrador</h3>
+  <p>
+    El mismo obrador de panadería de la portada: tienda de día, horno de madrugada. Tenía 45 kW en los seis periodos. <span class="etiqueta-ej">Ejemplo ilustrativo</span>
+  </p>
+
+  <!-- Gráfico de barras piloto (datos fieles de la guía) -->
+  <GraficoBarras
+    titulo="Contratada, usada y propuesta, por periodo"
+    contratada={45}
+    unidad="kW"
+    datos={datosObrador}
+    notaPie="P3 y P5 suben a 30 kW aunque no los usa: cada periodo tiene que tener igual o más potencia que el anterior."
+    ariaLabel="Potencia del obrador por periodo"
+  />
+
+  <div class="tabla-guia" style="margin-top: 24px;">
+    <table>
+      <caption class="solo-lector">Potencia del obrador por periodo: contratada, máximo usado en doce meses y propuesta</caption>
+      <thead>
+        <tr>
+          <th scope="col">Periodo</th>
+          <th scope="col">Contratada</th>
+          <th scope="col">Lo máximo que usó en doce meses</th>
+          <th scope="col">Propuesta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">P1</th>
+          <td data-label="Contratada" class="cifra">45 kW</td>
+          <td data-label="Lo máximo que usó en doce meses" class="cifra">24 kW</td>
+          <td data-label="Propuesta" class="cifra"><b>25 kW</b></td>
+        </tr>
+        <tr>
+          <th scope="row">P2</th>
+          <td data-label="Contratada" class="cifra">45 kW</td>
+          <td data-label="Lo máximo que usó en doce meses" class="cifra">28 kW (tardes de julio)</td>
+          <td data-label="Propuesta" class="cifra"><b>30 kW</b></td>
+        </tr>
+        <tr>
+          <th scope="row">P3</th>
+          <td data-label="Contratada" class="cifra">45 kW</td>
+          <td data-label="Lo máximo que usó en doce meses" class="cifra">24 kW</td>
+          <td data-label="Propuesta" class="cifra"><b>30 kW</b></td>
+        </tr>
+        <tr>
+          <th scope="row">P4</th>
+          <td data-label="Contratada" class="cifra">45 kW</td>
+          <td data-label="Lo máximo que usó en doce meses" class="cifra">28 kW</td>
+          <td data-label="Propuesta" class="cifra"><b>30 kW</b></td>
+        </tr>
+        <tr>
+          <th scope="row">P5</th>
+          <td data-label="Contratada" class="cifra">45 kW</td>
+          <td data-label="Lo máximo que usó en doce meses" class="cifra">22 kW</td>
+          <td data-label="Propuesta" class="cifra"><b>30 kW</b></td>
+        </tr>
+        <tr>
+          <th scope="row">P6</th>
+          <td data-label="Contratada" class="cifra">45 kW</td>
+          <td data-label="Lo máximo que usó en doce meses" class="cifra">40 kW (el horno, de madrugada)</td>
+          <td data-label="Propuesta" class="cifra"><b>42 kW</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="destacado">
+    P3 y P5 suben a 30 kW aunque no los usa: cada periodo tiene que tener igual o más potencia que el anterior. Y P6 es el que más necesita, pero también el kW más barato. Con febrero delante, el maxímetro de P2 marcaba 22 kW; con doce meses, 28. Por eso un mes no basta.
+  </p>
+
+  <h2 id="excesos">¿Y si contrato menos y pago los excesos?</h2>
+  <p>
+    No compensa, y no por casualidad. El precio del exceso de potencia se calcula para que no salga a cuenta contratar menos de lo que usas. <span class="fuente">(Circular 3/2020, art. 8.9)</span>
+  </p>
+  <p>
+    Cómo se mide depende de tu contador: con maxímetro, el máximo de cada cuarto de hora en cada periodo; en los puntos más grandes, con todas las mediciones cuartohorarias. <span class="fuente">(art. 9.4)</span>
+  </p>
+  <p class="enlaces">
+    <a href="/guias/exceso-de-potencia">Exceso de potencia: cómo se calcula</a>
+  </p>
+
+  <h2 id="cambiar">Cambiar la potencia: cuándo, cuánto cuesta y cuánto tarda</h2>
+  <p class="fuente">
+    <span class="pendiente">[PENDIENTE: fecha de revisión]</span>
+    <span class="pendiente">[VERIFICAR: RD 88/2026, art. 38; esta tabla no se publica hasta verificarlo]</span>
+  </p>
+  <div class="tabla-guia">
+    <table>
+      <caption class="solo-lector">Cambiar la potencia: preguntas, respuestas y fuente</caption>
+      <thead>
+        <tr>
+          <th scope="col">Pregunta</th>
+          <th scope="col">Respuesta</th>
+          <th scope="col">Fuente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">¿Cada cuánto puedo cambiarla?</th>
+          <td data-label="Respuesta">Tu distribuidora puede negarse si no han pasado doce meses desde tu último cambio voluntario, salvo que cambies de estructura tarifaria.</td>
+          <td data-label="Fuente" class="fuente">RD 88/2026, art. 38.3</td>
+        </tr>
+        <tr>
+          <th scope="row">¿Cuánto cuesta bajarla?</th>
+          <td data-label="Respuesta">Nada más que lo regulado en el régimen de acometidas.</td>
+          <td data-label="Fuente" class="fuente">RD 88/2026, art. 38.2</td>
+        </tr>
+        <tr>
+          <th scope="row">¿Cuánto cuesta subirla?</th>
+          <td data-label="Respuesta">Los derechos regulados: acceso, enganche y, si superas los derechos de extensión que tienes, extensión.</td>
+          <td data-label="Fuente" class="fuente">Régimen de acometidas</td>
+        </tr>
+        <tr>
+          <th scope="row">Si la bajo, ¿puedo volver a subirla?</th>
+          <td data-label="Respuesta">Sí. Mientras conserves tus derechos de extensión, no pagas extensión hasta la potencia que tenías. Esos derechos tienen fecha de caducidad, y la fecha consta en los datos de tu suministro.</td>
+          <td data-label="Fuente" class="fuente">RD 88/2026, anexo I</td>
+        </tr>
+        <tr>
+          <th scope="row">¿Cuánto tarda?</th>
+          <td data-label="Respuesta">72 horas. Si hay que actuar en tu instalación o en el contador, cinco días hábiles en baja tensión y diez en alta.</td>
+          <td data-label="Fuente" class="fuente">RD 88/2026, art. 38.6</td>
+        </tr>
+        <tr>
+          <th scope="row">¿Hay alguna comprobación?</th>
+          <td data-label="Respuesta">En baja tensión, si tu contrato tiene más de veinte años y subes potencia, se verifica tu instalación.</td>
+          <td data-label="Fuente" class="fuente">RD 88/2026, art. 38.7</td>
+        </tr>
+        <tr>
+          <th scope="row">¿Quién lo tramita?</th>
+          <td data-label="Respuesta">El cambio se hace sobre tu contrato de acceso con la distribuidora, normalmente a través de tu comercializadora. <span class="pendiente">[PENDIENTE: cómo lo gestiona EMAX (31 O5)]</span></td>
+          <td data-label="Fuente" class="fuente">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="destacado">
+    <b>Lo que no te diremos:</b> "Cámbiala cuando quieras." Tiene reglas, y bajarla a ojo puede salirte más caro en excesos de lo que ahorras.
+  </p>
+
+  <h2 id="temporadas">¿Y por temporadas?</h2>
+  <p>
+    La norma prevé que puedas tener una potencia distinta por trimestres, meses, días u horas, dentro de tus derechos de extensión. Pero todavía no se puede usar: empezará a aplicarse cuando la CNMC fije los precios de esas potencias temporales. <span class="fuente">(RD 88/2026, disposición final novena)</span> <span class="pendiente">[VERIFICAR el estado en la CNMC el día de publicar]</span>
+  </p>
+  <p>Cuando se pueda, tendrá su propia guía.</p>
+  <p class="enlaces">
+    <a href="/sectores/hoteles#potencia-hoy">El caso de un hotel</a>
+  </p>
+
+  <h2 id="emax">Qué hacemos en EMAX con tu potencia</h2>
+  <p>
+    Antes de proponerte nada, leemos la potencia que tu empresa ha usado en cada periodo, con doce meses delante. Te decimos si compensa cambiarla, cuándo, y qué supondría volver atrás. Y si no hay datos suficientes, no la tocamos.
+  </p>
+  <p class="enlaces">
+    <a href="/metodo#potencia">La decisión 1 del método</a>
+  </p>
+</Guia>

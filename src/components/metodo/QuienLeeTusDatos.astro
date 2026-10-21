@@ -147,7 +147,7 @@ const tarjetas: TarjetaData[] = [
     }
   }
 
-  /* Tarjeta base */
+  /* Tarjeta base con el mismo borde sutil de las tarjetas del sitio */
   .tarjeta-quien {
     position: relative;
     height: 540px;
@@ -157,8 +157,8 @@ const tarjetas: TarjetaData[] = [
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    box-shadow: 0 12px 30px rgba(15, 35, 70, 0.09);
-    border: 3px solid transparent;
+    box-shadow: 0 8px 24px rgba(15, 35, 70, 0.08);
+    border: 1.5px solid var(--linea, #d6e0ee);
     cursor: pointer;
     transition:
       transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -170,23 +170,23 @@ const tarjetas: TarjetaData[] = [
 
   /* Efecto de foco: atenuar sutilmente las hermanas para que la activa resalte */
   .tarjetas-grid:hover .tarjeta-quien:not(:hover) {
-    opacity: 0.88;
+    opacity: 0.9;
     transform: scale(0.985);
   }
 
-  /* Hover de la tarjeta activa: SE HACE MÁS GRANDE Y GORDITA RESALTANDO */
+  /* Hover de la tarjeta activa: se eleva y aparece una línea azul brillante a los alrededores */
   .tarjeta-quien:hover {
     transform: scale(1.05) translateY(-8px);
-    border-color: #00c2ff;
+    border-color: #38b6ff;
     box-shadow:
-      0 26px 54px rgba(0, 112, 224, 0.28),
-      0 0 0 4px #00c2ff,
-      0 0 32px rgba(0, 194, 255, 0.45);
+      0 22px 48px rgba(15, 35, 70, 0.16),
+      0 0 0 2px #38b6ff,
+      0 0 22px rgba(56, 182, 255, 0.55);
     z-index: 5;
     opacity: 1 !important;
   }
 
-  /* Contenedor de la fotografía */
+  /* Contenedor de la fotografía con zoom al hover */
   .tarjeta-img-wrap {
     position: absolute;
     inset: 0;
@@ -200,11 +200,12 @@ const tarjetas: TarjetaData[] = [
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Al pasar el cursor: SE AGRANDA LA IMAGEN */
   .tarjeta-quien:hover .tarjeta-foto {
-    transform: scale(1.07);
+    transform: scale(1.12);
   }
 
   /* Gradiente para asegurar legibilidad */
@@ -213,55 +214,84 @@ const tarjetas: TarjetaData[] = [
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(8, 23, 46, 0.08) 0%,
-      rgba(8, 23, 46, 0.28) 45%,
-      rgba(8, 23, 46, 0.88) 85%,
+      rgba(8, 23, 46, 0.05) 0%,
+      rgba(8, 23, 46, 0.25) 45%,
+      rgba(8, 23, 46, 0.86) 82%,
       rgba(8, 23, 46, 0.98) 100%
     );
     pointer-events: none;
   }
 
-  /* Caja inferior de información con esquinas superiores redondeadas */
+  /* Caja inferior de información:
+     - En reposo es compacta para lucir la imagen
+     - Al pasar el cursor SE HACE MÁS GRANDE hacia arriba revelando la tipografía ampliada */
   .tarjeta-info-caja {
     position: relative;
     z-index: 2;
-    background: rgba(14, 34, 64, 0.86);
+    background: rgba(14, 34, 64, 0.84);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-radius: 20px 20px 0 0;
+    border-radius: 22px 22px 0 0;
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-bottom: none;
-    padding: 24px 22px 28px;
+    padding: 16px 20px 20px;
     margin: 0;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition:
+      padding 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.35s ease,
+      border-color 0.35s ease,
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Al pasar el cursor: SE HACE MÁS GRANDE LA PARTE DE LA INFORMACIÓN */
   .tarjeta-quien:hover .tarjeta-info-caja {
-    background: rgba(12, 30, 58, 0.94);
-    border-color: rgba(56, 182, 255, 0.4);
+    background: rgba(10, 26, 52, 0.96);
+    border-color: rgba(255, 255, 255, 0.24);
+    padding: 28px 24px 32px;
+    transform: translateY(-4px);
   }
 
+  /* Título de la tarjeta: crece y brilla en cian al hover */
   .tarjeta-titulo {
     font-family: "Sora", sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: #00c2ff;
     line-height: 1.2;
-    margin: 0 0 10px;
+    margin: 0 0 6px;
     letter-spacing: -0.015em;
-    transition: text-shadow 0.3s ease;
+    transition:
+      font-size 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.3s ease,
+      margin-bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      text-shadow 0.35s ease;
   }
 
   .tarjeta-quien:hover .tarjeta-titulo {
-    text-shadow: 0 0 18px rgba(0, 194, 255, 0.6);
+    font-size: 1.65rem;
+    color: #00d4ff;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.7);
   }
 
+  /* Descripción: en hover se amplía y resalta en blanco de alto contraste como en la captura */
   .tarjeta-desc {
     font-family: "Inter", sans-serif;
-    font-size: 0.92rem;
-    color: #e2eaf5;
-    line-height: 1.5;
+    font-size: 0.86rem;
+    color: rgba(226, 234, 245, 0.85);
+    line-height: 1.46;
     margin: 0;
+    transition:
+      font-size 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.35s ease,
+      line-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tarjeta-quien:hover .tarjeta-desc {
+    font-size: 1rem;
+    line-height: 1.58;
+    color: #ffffff;
+    font-weight: 500;
   }
 
   /* ==========================================================================

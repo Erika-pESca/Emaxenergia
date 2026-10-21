@@ -1,0 +1,85 @@
+---
+// Guía · Exceso de potencia: qué es, cómo se factura y qué hacer
+// Ruta: /guias/exceso-de-potencia
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-es",
+    "titulo": "Qué es un exceso de potencia"
+  },
+  {
+    "id": "tipo",
+    "titulo": "Primero, tu tipo de punto de medida"
+  },
+  {
+    "id": "factura",
+    "titulo": "Cómo se factura desde el 1 de abril de 2025"
+  },
+  {
+    "id": "circular-2025",
+    "titulo": "¿La Circular 1/2025 abarató o encareció los excesos?"
+  },
+  {
+    "id": "compensa",
+    "titulo": "¿Compensa pagar excesos en lugar de subir la potencia?"
+  },
+  {
+    "id": "que-hacer",
+    "titulo": "Qué hacer si tienes excesos"
+  },
+  {
+    "id": "emax",
+    "titulo": "Qué hacemos en EMAX con tus excesos"
+  }
+];
+const resumen = [
+  {
+    "dt": "Qué es",
+    "dd": "Un exceso es la potencia que pides por encima de la que tienes contratada en un periodo."
+  },
+  {
+    "dt": "Depende de tu contador",
+    "dd": "Cómo se mide y se factura depende de tu tipo de punto de medida."
+  },
+  {
+    "dt": "Desde abril de 2025",
+    "dd": "Cada periodo tiene su propio precio de exceso: más caro en las horas de más demanda."
+  },
+  {
+    "dt": "Ni sube ni baja para todos",
+    "dd": "La CNMC estimó una rebaja media, pero el cambio no fue igual para todos."
+  },
+  {
+    "dt": "No compensa",
+    "dd": "Contratar de menos para pagar excesos no sale a cuenta: está diseñado así."
+  }
+];
+const senales = [
+  "En tu factura aparece un término de excesos de potencia.",
+  "Algún maxímetro supera tu potencia contratada.",
+  "Te bajaron la potencia para ahorrar y desde entonces aparecen excesos."
+];
+const cta = {
+  "texto": "Con tu factura y tus maxímetros te decimos si tus excesos se repiten y qué potencia los evita.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar si tengo excesos"
+};
+---
+
+<Guia
+  slug="exceso-de-potencia"
+  h1="Exceso de potencia: qué es, cómo se factura y qué hacer"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="Un exceso de potencia es lo que pides por encima de lo contratado en un periodo, medido por cuartos de hora. Se paga aparte y está pensado para que no compense contratar de menos. Si se repite, la decisión es revisar la potencia de ese periodo con tus maxímetros de doce meses."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Circular 3/2020 de la CNMC, texto consolidado: arts. 8.9 y 9.4 · Circular 1/2025 (BOE-A-2025-2044) · RD 88/2026, anexo I"
+>
+ <h2 id="que-es">Qué es un exceso de potencia</h2> <p>Tienes un exceso cuando, durante un cuarto de hora, tu empresa pide más potencia de la que tiene contratada en ese periodo. No cuenta un arranque de unos segundos, sino la media de ese cuarto de hora.</p> <p>Suele aparecer cuando coinciden varias cosas: máquinas que arrancan a la vez, un equipo nuevo, un turno más, una ola de calor con toda la climatización encendida.</p> <h2 id="tipo">Primero, tu tipo de punto de medida</h2> <p>Cada suministro tiene un tipo de punto de medida, del 1 al 5, según su potencia y su tensión. Es lo primero que hay que saber, porque decide cómo se controla tu potencia y si te cobran excesos.</p> <div class="tabla-guia"><table> <caption class="solo-lector">Tipos de punto de medida y cómo se controlan los excesos</caption> <thead><tr><th scope="col">Tipo</th><th scope="col">Suministros</th><th scope="col">Cómo se controla la potencia</th><th scope="col">¿Se cobran excesos?</th></tr></thead> <tbody> <tr><th scope="row">5</th><td data-label="Suministros">Los pequeños, en 2.0TD</td><td data-label="Cómo se controla la potencia">El contador corta si te pasas</td><td data-label="¿Se cobran excesos?">No, salvo suministros que no se pueden interrumpir</td></tr> <tr><th scope="row">4</th><td data-label="Suministros">Intermedios, en 3.0TD</td><td data-label="Cómo se controla la potencia">Maxímetro: registra el máximo de cada cuarto de hora en cada periodo</td><td data-label="¿Se cobran excesos?">Sí</td></tr> <tr><th scope="row">1, 2 y 3</th><td data-label="Suministros">Los de más potencia, en 3.0TD y 6.1TD</td><td data-label="Cómo se controla la potencia">Se registra cada cuarto de hora</td><td data-label="¿Se cobran excesos?">Sí</td></tr> </tbody> </table></div> <p><b>Dónde verlo:</b> algunas facturas lo indican. Si la tuya no, consta en los datos de tu suministro, que se consultan con tu CUPS.</p> <p class="enlaces"><a href="/guias/cups-y-tus-datos">Qué se ve con tu CUPS y qué no</a></p> <p class="fuente">Fuente: Circular 3/2020 de la CNMC, art. 9.4.a · RD 88/2026, anexo I</p> <h2 id="factura">Cómo se factura desde el 1 de abril de 2025</h2> <div class="tabla-guia"><table> <caption class="solo-lector">Cómo se calcula el exceso según el tipo de punto de medida</caption> <thead><tr><th scope="col">Tipo</th><th scope="col">Cómo se calcula</th></tr></thead> <tbody> <tr><th scope="row">4 y 5</th><td data-label="Cómo se calcula">Por cada kW que el máximo del periodo pasa de tu potencia contratada, se paga un precio por kW y por día del periodo de facturación. Ese precio es distinto en cada periodo.</td></tr> <tr><th scope="row">1, 2 y 3</th><td data-label="Cómo se calcula">Se tienen en cuenta todos los cuartos de hora en que tu demanda pasa de la contratada, con un precio por kW distinto en cada periodo.</td></tr> </tbody> </table></div> <p><b>Un detalle:</b> si tu factura abarca dos temporadas, o un cambio de precios, el exceso se reparte por días.</p> <p class="fuente">Fuente: Circular 3/2020 de la CNMC, art. 9.4.b, en la redacción de la Circular 1/2025</p> <h2 id="circular-2025">¿La Circular 1/2025 abarató o encareció los excesos?</h2> <p>Habrás leído las dos cosas. Las dos son parcialmente ciertas, porque hablan de cosas distintas.</p> <div class="tabla-guia"><table> <caption class="solo-lector">Lo que se lee sobre la Circular 1/2025 frente a lo que pasa realmente</caption> <thead><tr><th scope="col">Lo que has podido leer</th><th scope="col">Lo que pasa realmente</th></tr></thead> <tbody> <tr><th scope="row">"Los excesos bajan"</th><td data-label="Lo que pasa realmente">La CNMC estimó una reducción media. Es una media, no una rebaja para cada suministro.</td></tr> <tr><th scope="row">"Los excesos suben"</th><td data-label="Lo que pasa realmente">Ahora el precio depende del periodo: un exceso en las horas de más demanda cuesta más que uno en las de menos.</td></tr> <tr><th scope="row">"Se cobra la diferencia entre el 85 % y el 105 %" o "el doble de la diferencia"</th><td data-label="Lo que pasa realmente">Son reglas de regímenes anteriores. No describen el cálculo de hoy.</td></tr> </tbody> </table></div> <p class="destacado">Lo que te importa no es la media, sino tu tipo de punto de medida y en qué periodos tienes los excesos.</p> <h2 id="compensa">¿Compensa pagar excesos en lugar de subir la potencia?</h2> <p>No, y está hecho a propósito. El precio del exceso se calcula para que no compense contratar menos de lo que usas. <span class="fuente">(Circular 3/2020, art. 8.9)</span></p> <p class="enlaces"><a href="/guias/potencia-contratada#cuanta">Cuánta potencia necesitas</a></p> <h2 id="que-hacer">Qué hacer si tienes excesos</h2> <ol class="guia-pasos"><li>Mira en qué periodos aparecen y si se repiten o fueron puntuales. Un exceso en un mes de calor no es lo mismo que uno cada mes.</li><li>Comprueba tu potencia contratada en esos periodos. En 3.0TD, subir uno puede obligarte a subir los siguientes, porque ninguno puede tener menos que el anterior.</li><li>Identifica qué los provoca: arranques a la vez, un equipo nuevo, un turno. Cambiar eso es una decisión de tu operación, no de tu tarifa.</li><li>Si hay que subir potencia, mira cuándo se puede y qué cuesta.</li></ol> <p class="enlaces"><a href="/guias/potencia-contratada#cambiar">Cuándo se puede cambiar la potencia y qué cuesta</a></p> <h2 id="emax">Qué hacemos en EMAX con tus excesos</h2> <p>Leemos la potencia que tu empresa ha usado en cada periodo, con doce meses delante, y te decimos si compensa ajustar la potencia, en qué periodos y qué supone. Si lo que provoca el exceso es cómo trabajas, te lo decimos, pero no te diremos cómo trabajar.</p> 
+</Guia>

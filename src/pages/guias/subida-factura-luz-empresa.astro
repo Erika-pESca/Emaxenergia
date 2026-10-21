@@ -1,0 +1,65 @@
+---
+// Guía · ¿Por qué ha subido la factura de luz de tu empresa?
+// Ruta: /guias/subida-factura-luz-empresa
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "compara",
+    "titulo": "Primero, compara lo comparable"
+  },
+  {
+    "id": "causas",
+    "titulo": "Las cinco causas, y dónde se ven"
+  },
+  {
+    "id": "carta",
+    "titulo": "Si te ha llegado una carta"
+  },
+  {
+    "id": "que-hacer",
+    "titulo": "Qué hacer después"
+  }
+];
+const resumen = [
+  {
+    "dt": "Primero",
+    "dd": "Compara lo comparable: el mismo mes del año pasado, los mismos días y lecturas reales."
+  },
+  {
+    "dt": "Las causas",
+    "dd": "Tu consumo, tu precio, los excesos y la reactiva, la parte regulada o una lectura estimada."
+  },
+  {
+    "dt": "Si te llegó una carta",
+    "dd": "Un cambio de condiciones tiene que avisarse por escrito, aparte de la factura y con al menos un mes de antelación."
+  }
+];
+const senales = [
+  "La factura ha subido y tu actividad es la misma.",
+  "Te ha llegado una carta de tu comercializadora que no has leído entera.",
+  "En alguna factura reciente aparece una lectura estimada."
+];
+const cta = {
+  "texto": "Con tu última factura y la del mismo mes del año pasado te decimos qué ha cambiado.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar mi factura"
+};
+---
+
+<Guia
+  slug="subida-factura-luz-empresa"
+  h1="¿Por qué ha subido la factura de luz de tu empresa?"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="Si la factura de tu empresa ha subido, la causa está en una de cinco partes: consumes más o en horas más caras, ha cambiado tu precio, pagas excesos o reactiva que antes no pagabas, han cambiado los peajes, los cargos o los impuestos, o la factura regulariza una lectura estimada. Comparar dos facturas línea a línea dice cuál."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Real Decreto 88/2026, art. 6.1.m (aviso de cambios de condiciones) · Circular 3/2020 de la CNMC, arts. 6, 7, 9.4 y 9.5 · Resolución de peajes de la CNMC y Orden TED/1524/2025 (precios de 2026)"
+>
+ <h2 id="compara">Primero, compara lo comparable</h2> <ul> <li>El mismo mes del año pasado, no el mes anterior: el calendario eléctrico y tu actividad cambian con la temporada.</li> <li>Los mismos días facturados.</li> <li>Lecturas reales en las dos facturas. Si una es estimada, la diferencia puede ser solo una regularización.</li> </ul> <h2 id="causas">Las cinco causas, y dónde se ven</h2> <div class="tabla-guia"><table> <thead><tr><th scope="col">Qué ha cambiado</th><th scope="col">Dónde mirarlo en la factura</th><th scope="col">Qué significa</th></tr></thead> <tbody><tr><th scope="row">Tu consumo</th><td data-label="Dónde mirarlo">Los kWh de cada periodo frente al mismo mes del año pasado</td><td data-label="Qué significa">Si consumes lo mismo pero en horas más caras, también sube. Se ve en el reparto por periodos.</td></tr><tr><th scope="row">Tu precio</th><td data-label="Dónde mirarlo">El precio de la energía de cada periodo y, si eres indexado, la referencia del mercado</td><td data-label="Qué significa">Una renovación, el fin de un precio fijo o un indexado con el mercado al alza. Tu contrato dice cuál.</td></tr><tr><th scope="row">Excesos y reactiva</th><td data-label="Dónde mirarlo">Las líneas de excesos de potencia y de energía reactiva</td><td data-label="Qué significa">Si antes no estaban, algo ha cambiado en tu operación: un equipo nuevo, un turno, arranques a la vez.</td></tr><tr><th scope="row">Peajes, cargos e impuestos</th><td data-label="Dónde mirarlo">Los términos regulados y los impuestos</td><td data-label="Qué significa">Los fija la regulación y son iguales con cualquier compañía. Cambian con el año o cuando cambia la norma.</td></tr><tr><th scope="row">Lecturas</th><td data-label="Dónde mirarlo">Si la lectura es real o estimada, y los días facturados</td><td data-label="Qué significa">Una factura con lectura estimada se regulariza después. Y una factura de más días pesa más.</td></tr></tbody> </table></div> <h2 id="carta">Si te ha llegado una carta</h2> <p>Si tu comercializadora quiere cambiar alguna condición durante el contrato, tiene que avisarte por escrito, aparte de la factura y con al menos un mes de antelación. Léela entera: ahí está qué cambia y desde cuándo.</p> <p class="enlaces"><a href="/metodo#condiciones">La decisión 5 del método: cuándo y en qué condiciones</a></p> <h2 id="que-hacer">Qué hacer después</h2> <p>Si lo que ha subido es el precio, se puede revisar cómo compras la energía. Si son excesos o reactiva, cambiar de compañía no lo arregla: se corrige con la potencia o en la instalación. Y si es la parte regulada, ninguna compañía la puede bajar.</p> <p class="enlaces"><a href="/guias/bajar-factura-luz-empresa">Cómo bajar la factura: las cinco palancas, en orden</a></p> 
+</Guia>

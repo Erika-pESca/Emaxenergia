@@ -1,0 +1,158 @@
+---
+// Componente ComoEstanHechas: "Cómo están hechas"
+// Tres tarjetas en --suave con sellos de ejemplo y estándar editorial de rigor legal
+import TituloAcento from "./TituloAcento.astro";
+
+const REVISADA = "7 de octubre de 2026";
+
+const items = [
+  {
+    sello: "Circular 3/2020 · art. 9.2",
+    titulo: "Norma",
+    texto: "Cada afirmación sobre la norma lleva el artículo que lo dice: la Circular 3/2020 de la CNMC, el RD 88/2026, la resolución de peajes del año.",
+  },
+  {
+    sello: `Revisada el ${REVISADA}`,
+    titulo: "Fecha",
+    texto: "Cada guía dice cuándo se revisó. Las que tienen precios o plazos que caducan se revisan cuando cambian.",
+  },
+  {
+    sello: "Sin venta hasta el final",
+    titulo: "Lo que no hacemos",
+    texto: "No te vendemos nada hasta el final de cada guía, y solo si quieres que la miremos contigo.",
+  },
+];
+---
+
+<section class="banda seccion-hechas" aria-labelledby="h2-hechas">
+  <div class="w sec">
+    <div class="sec__cab">
+      <h2 id="h2-hechas" class="seccion-titulo-noche">
+        CÓMO ESTÁN <span class="titulo-cursiva-noche">hechas.</span>
+      </h2>
+    </div>
+
+    <div class="hechas">
+      {
+        items.map((it) => (
+          <div class="hecha">
+            <span class="sello">{it.sello}</span>
+            <h3>{it.titulo}</h3>
+            <p>{it.texto}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN CÓMO ESTÁN HECHAS - BANDA NOCHE OFICIAL EMAX (#0A1B3F)
+     ========================================================================== */
+  .seccion-hechas {
+    background: #0A1B3F;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .w {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 40px);
+  }
+
+  .sec {
+    padding-block: clamp(64px, 7vw, 96px);
+  }
+
+  .sec__cab {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: clamp(32px, 4vw, 48px);
+  }
+
+  .seccion-titulo-noche {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2.1rem, 1.7rem + 2vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #ffffff;
+    letter-spacing: -0.025em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva-noche {
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #38bdf8;
+    letter-spacing: -0.01em;
+  }
+
+  .hechas {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (min-width: 900px) {
+    .hechas {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .hecha {
+    padding: clamp(28px, 3vw, 36px);
+    border-radius: 24px;
+    background: #16305E;
+    display: grid;
+    gap: 16px;
+    align-content: start;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 10px 30px rgba(0, 10, 30, 0.25);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hecha:hover {
+    transform: translateY(-4px);
+    border-color: #38bdf8;
+    box-shadow: 0 16px 40px rgba(0, 10, 30, 0.4), 0 0 20px rgba(56, 189, 248, 0.15);
+  }
+
+  .sello {
+    justify-self: start;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    font-family: "Sora", monospace, sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.02em;
+  }
+
+  .hecha h3 {
+    font-family: "Sora", sans-serif;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+
+  .hecha p {
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: #C9D6EE;
+    margin: 0;
+  }
+</style>

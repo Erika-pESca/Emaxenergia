@@ -1,0 +1,62 @@
+---
+// Guía · Cómo bajar la factura de luz de tu empresa
+// Ruta: /guias/bajar-factura-luz-empresa
+// Layout: Guia.astro con estilos oficiales guia.css y texto 100% fiel al documento original
+
+import Guia from "../../layouts/Guia.astro";
+import GuiaBajarFactura from "../../components/guias/GuiaBajarFactura.astro";
+
+const secciones = [
+  { id: "orden", titulo: "Por qué el orden importa" },
+  { id: "palancas", titulo: "Las cinco palancas, en orden" },
+  { id: "ejemplo", titulo: "Un ejemplo" },
+  { id: "emax", titulo: "Qué hacemos en EMAX" },
+];
+
+const resumen = [
+  { dt: "No empieza por el precio", dd: "El kWh es lo primero que se mira y lo último que conviene decidir." },
+  { dt: "Cinco palancas", dd: "Potencia, excesos y reactiva, horarios, modalidad y eficiencia, en ese orden." },
+  { dt: "Con datos", dd: "Cada palanca se decide con tu factura, tus maxímetros y tu consumo por periodos." },
+];
+
+const senales = [
+  "Has cambiado de compañía y la factura apenas se ha movido.",
+  "Nunca has mirado tu potencia, tus excesos ni tu reactiva antes de pedir una oferta.",
+  "Te han ofrecido un descuento en el kWh sin preguntarte a qué horas consumes.",
+];
+
+const relacionadas = [
+  { titulo: "Cómo leer la factura", href: "/guias/factura-luz-empresa" },
+  { titulo: "Potencia contratada", href: "/guias/potencia-contratada" },
+  { titulo: "Precio fijo o indexado", href: "/guias/precio-fijo-o-indexado" },
+  { titulo: "Un servicio de restaurante, leído en la factura", href: "/sectores/restaurantes" },
+  { titulo: "Qué incluye el análisis de tu factura", href: "/diagnostico" },
+];
+---
+
+<Guia
+  slug="bajar-factura-luz-empresa"
+  title="Cómo bajar la factura de luz de tu empresa: por dónde empezar · EMAX Energía"
+  description="Bajar la factura de luz de una empresa no empieza por el kWh. Las cinco palancas, en orden: potencia, excesos y reactiva, horarios, modalidad y eficiencia."
+  titularPrincipal="Cómo bajar la factura de luz de tu empresa"
+  titularAcento="por dónde empezar"
+  tema="Tu factura"
+  fechaRevision="7 de octubre de 2026"
+  tiempoLectura="5 min"
+  respuesta="Bajar la factura de luz de una empresa no empieza por buscar la tarifa más barata. Empieza por saber cuánta potencia usas, a qué horas consumes y si pagas reactiva o excesos. Con eso se deciden la potencia, la estructura y la modalidad. La eficiencia de los equipos y el precio, al final."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  relacionadas={relacionadas}
+  cta={{
+    texto: "Con tu factura te decimos por cuál de las cinco palancas empezar.",
+    boton: "Comprobar mi factura",
+    enlace: "/diagnostico",
+    origen: "guia-bajar · final",
+  }}
+  fuentes="Circular 3/2020 de la CNMC: arts. 6, 7, 9.2, 9.4 y 9.5 · Resolución de peajes de la CNMC para 2026 y Orden TED/1524/2025"
+  notaFuentes="Se revisa con cada resolución anual de peajes."
+  estiloModerno={true}
+>
+  <GuiaBajarFactura />
+</Guia>

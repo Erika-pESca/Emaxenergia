@@ -1,0 +1,343 @@
+---
+// Componente HeroQueRecibes de la sección "Qué recibes" (Diagnóstico)
+// Diseño exacto del boceto con la imagen de fondo oficial fondo_metodo.jpg
+// Tipografía Sora + cursiva Merriweather y tarjeta de cristal interactiva conectada al modal de consulta
+import fondoMetodo from "../../../imagenes/fondo_metodo.jpg";
+
+interface TramoGasto {
+  id: string;
+  etiqueta: string;
+  rango: string;
+  msg: string;
+}
+
+const tramosGasto: TramoGasto[] = [
+  {
+    id: "<300",
+    etiqueta: "MENOS DE 300€",
+    rango: "menos de 300 € al mes",
+    msg: "Construimos una propuesta técnica con el término de potencia ajustado al milímetro para que no pagues de más.",
+  },
+  {
+    id: "300-1000",
+    etiqueta: "300 - 1.000€",
+    rango: "entre 3.600 y 12.000 € al año en luz",
+    msg: "Analizamos tu curva horaria y optimizamos tus potencias para maximizar tu ahorro mensual.",
+  },
+  {
+    id: "1000-3000",
+    etiqueta: "1.000 - 3.000€",
+    rango: "entre 12.000 y 36.000 € al año",
+    msg: "Auditoría exhaustiva de cuartohorarias, penalizaciones de reactiva y oportunidad en mercado indexado vs fijo.",
+  },
+  {
+    id: ">3000",
+    etiqueta: "Más de 3.000€",
+    rango: "más de 36.000 € al año en energía",
+    msg: "Un consultor senior de EMAX revisa tus peajes, maxímetros y coberturas OMIE de forma personalizada.",
+  },
+];
+---
+
+<section class="hero-qr-seccion" aria-labelledby="h1-que-recibes">
+  <!-- Fondo fotográfico fondo_metodo.jpg oficial -->
+  <div class="hero-bg" aria-hidden="true">
+    <img
+      src={fondoMetodo.src}
+      alt=""
+      class="hero-bg-img"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="hero-qr-contenedor">
+    <!-- Columna Izquierda: Mensaje principal y propuesta de valor -->
+    <div class="hero-qr-col-izq">
+      <p class="hero-qr-kicker">
+        TARIFAS DE LUZ PARA EMPRESAS <span class="kicker-sep" aria-hidden="true">|</span>
+      </p>
+
+      <h1 class="hero-qr-titulo" id="h1-que-recibes">
+        TU TARIFA DE LUZ NO<br />
+        ESTÁ EN UNA <span class="titulo-cursiva">lista de<br />precios.</span>
+      </h1>
+
+      <p class="hero-qr-desc">
+        Lo que hemos visto en tu suministro y la tarifa que sale de ahí, explicado por una persona. El informe es tuyo, decidas lo que decidas.
+      </p>
+    </div>
+
+    <!-- Columna Derecha: Tarjeta de cristal interactiva con los 4 tramos de gasto -->
+    <div class="hero-qr-col-der">
+      <div class="hero-qr-card-cristal">
+        <h2 class="qr-card-titulo">¿Cuánto paga tu empresa de luz al mes?</h2>
+        <p class="qr-card-subtitulo">
+          En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+        </p>
+
+        <!-- Rejilla 2x2 de botones de gasto con círculo cian y chevron -->
+        <div class="qr-tramos-grid">
+          {
+            tramosGasto.map((t) => (
+              <button
+                type="button"
+                class="btn-tramo-qr"
+                data-abrir-funnel
+                data-tramo-id={t.id}
+                data-tramo-label={t.etiqueta}
+                data-tramo-rango={t.rango}
+                data-tramo-msg={t.msg}
+              >
+                <span class="btn-txt">{t.etiqueta}</span>
+                <span class="btn-circulo" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 3.5 10.5 8 6 12.5"></path>
+                  </svg>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+
+        <p class="qr-card-nota">
+          Tú eliges cómo empezamos: con tu factura, con tu CUPS o con dos datos de tu negocio. El análisis no tiene coste.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO QUÉ RECIBES - FONDO fondo_metodo.jpg Y DISEÑO OFICIAL DE MARCA
+     ========================================================================== */
+  .hero-qr-seccion {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    min-height: calc(84vh + 78px);
+    display: flex;
+    align-items: center;
+    padding: calc(78px + 48px) 0 72px;
+    background-color: #004aad;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-qr-contenedor {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 56px);
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-qr-layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  /* ==========================================================================
+     COLUMNA IZQUIERDA
+     ========================================================================== */
+  .hero-qr-col-izq {
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero-qr-kicker {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .kicker-sep {
+    color: #00c2ff;
+    font-weight: 300;
+    font-size: 1.1em;
+    margin-left: 2px;
+  }
+
+  .hero-qr-titulo {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: clamp(2.25rem, 1.75rem + 2.1vw, 3.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.14;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva {
+    font-family: "Playfair Display", "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #00c2ff;
+    letter-spacing: 0;
+    font-size: 1.08em;
+  }
+
+  .hero-qr-desc {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: clamp(0.98rem, 0.92rem + 0.35vw, 1.12rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 400;
+    margin: 4px 0 0;
+    max-width: 33rem;
+  }
+
+  /* ==========================================================================
+     COLUMNA DERECHA: TARJETA DE CRISTAL INTERACTIVA
+     ========================================================================== */
+  .hero-qr-col-der {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-qr-col-der {
+      justify-content: stretch;
+    }
+  }
+
+  .hero-qr-card-cristal {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1.5px solid rgba(135, 185, 255, 0.6);
+    border-radius: 28px;
+    padding: 34px 30px;
+    box-shadow:
+      0 18px 45px rgba(0, 74, 173, 0.12),
+      0 4px 12px rgba(15, 35, 70, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .qr-card-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #004aad;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+  }
+
+  .qr-card-subtitulo {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #3a4b68;
+    margin: 0 0 24px;
+  }
+
+  /* Rejilla 2x2 */
+  .qr-tramos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 540px) {
+    .qr-tramos-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+
+  .btn-tramo-qr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 14px 13px 18px;
+    background: #004aad;
+    color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    font-family: "Sora", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.22);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-tramo-qr:hover {
+    background: #003c8c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 74, 173, 0.35);
+  }
+
+  .btn-txt {
+    letter-spacing: 0.02em;
+  }
+
+  .btn-circulo {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-tramo-qr:hover .btn-circulo {
+    transform: translateX(2px);
+    background: #ffffff;
+    color: #004aad;
+  }
+
+  .qr-card-nota {
+    font-family: "Inter", sans-serif;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    color: #3a4b68;
+    font-weight: 500;
+    margin: 22px 0 0;
+    padding-top: 0;
+    border-top: none;
+  }
+</style>

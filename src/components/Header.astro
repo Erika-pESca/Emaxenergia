@@ -15,15 +15,12 @@ const metodoItems = [
   {
     href: "/metodo",
     label: "El método",
-    badge: "3 etapas",
     desc: "Diagnóstico, tres etapas y cinco decisiones antes de elegir tarifa",
     id: "metodo"
   },
   {
     href: "/diagnostico",
     label: "Qué recibes",
-    badge: "Informe 0 €",
-    badgeType: "verde",
     desc: "Tu estudio de consumo, maxímetros y reactiva bloque a bloque",
     id: "diagnostico"
   }
@@ -38,9 +35,9 @@ const sectoresItems = [
 ];
 
 const tarifasItems = [
-  { href: "/tarifas", label: "Luz para Empresas", desc: "Peajes 2.0TD, 3.0TD y 6.XTD optimizados", badge: "Más contratada", id: "luz" },
-  { href: "/gas-natural", label: "Gas para Empresas", desc: "Suministro RL para negocios e industria", badge: "Ahorro RL", id: "gas" },
-  { href: "/varios-suministros", label: "Múltiples Suministros", desc: "Unificación de facturación multisede", badge: "Multisede", id: "multisede" },
+  { href: "/tarifas", label: "Luz para Empresas", desc: "Peajes 2.0TD, 3.0TD y 6.XTD optimizados", id: "luz" },
+  { href: "/gas-natural", label: "Gas para Empresas", desc: "Suministro RL para negocios e industria", id: "gas" },
+  { href: "/varios-suministros", label: "Múltiples Suministros", desc: "Unificación de facturación multisede", id: "multisede" },
 ];
 ---
 
@@ -107,10 +104,7 @@ const tarifasItems = [
                       )}
                     </span>
                     <div class="card-textos">
-                      <div class="card-head-fila">
-                        <strong class="card-nombre">{m.label}</strong>
-                        <span class:list={["card-badge-mini", { "badge-verde": m.badgeType === "verde" }]}>{m.badge}</span>
-                      </div>
+                      <strong class="card-nombre">{m.label}</strong>
                       <span class="card-desc">{m.desc}</span>
                     </div>
                     <span class="card-flecha" aria-hidden="true">→</span>
@@ -247,10 +241,7 @@ const tarifasItems = [
                       )}
                     </span>
                     <div class="card-textos">
-                      <div class="card-head-fila">
-                        <strong class="card-nombre">{t.label}</strong>
-                        <span class="card-badge-mini">{t.badge}</span>
-                      </div>
+                      <strong class="card-nombre">{t.label}</strong>
                       <span class="card-desc">{t.desc}</span>
                     </div>
                     <span class="card-flecha" aria-hidden="true">→</span>
@@ -760,21 +751,9 @@ const tarifasItems = [
     align-items: center;
   }
 
-  /* Puente invisible hacia abajo para mantener el hover continuo sin saltos */
-  .nav-dropdown::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    height: 20px;
-    background: transparent;
-    pointer-events: auto;
-  }
-
   .popover-animado {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%) translateY(6px) scale(0.98);
     background: #ffffff;
@@ -792,10 +771,10 @@ const tarifasItems = [
   .popover-animado::before {
     content: "";
     position: absolute;
-    top: -20px;
+    top: -16px;
     left: 0;
     right: 0;
-    height: 20px;
+    height: 16px;
     background: transparent;
   }
 
@@ -809,15 +788,15 @@ const tarifasItems = [
 
   /* Anchos armónicos y perfectamente centrados bajo el menú central */
   .popover-metodo {
-    width: 395px;
+    width: 385px;
   }
 
   .popover-sectores {
-    width: 390px;
+    width: 385px;
   }
 
   .popover-tarifas {
-    width: 405px;
+    width: 385px;
   }
 
   .dropdown-header-tag {
@@ -883,18 +862,11 @@ const tarifasItems = [
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-  }
-
-  .card-head-fila {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
+    gap: 3px;
   }
 
   .card-nombre {
-    font-size: 0.90rem;
+    font-size: 0.92rem;
     font-weight: 700;
     color: var(--tinta, #0f2346);
     white-space: nowrap;

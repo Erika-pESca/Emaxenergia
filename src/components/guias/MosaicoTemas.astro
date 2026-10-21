@@ -1,0 +1,690 @@
+---
+// Componente MosaicoTemas: "Todas las guías, por tema"
+// Filtro interactivo por tema y rejilla bento con mini gráficos
+// Botones de filtro 100% funcionales con classList .is-hidden y soporte astro:page-load
+// Énfasis claro en cada enlace con botón 'Leer guía' y flecha animada
+import TituloAcento from "./TituloAcento.astro";
+
+interface GuiaTemaItem {
+  titulo: string;
+  linea: string;
+  href: string;
+}
+
+interface TemaBloque {
+  id: string;
+  nombre: string;
+  claseColumna: string;
+  tipoGrafico: "barras" | "pot" | "meses" | "lin" | "dat";
+  guias: GuiaTemaItem[];
+}
+
+const temas: TemaBloque[] = [
+  {
+    id: "tu-factura",
+    nombre: "Tu factura",
+    claseColumna: "t1",
+    tipoGrafico: "barras",
+    guias: [
+      {
+        titulo: "Cómo bajar la factura de luz de tu empresa",
+        linea: "Por dónde empezar: las cinco palancas, en orden.",
+        href: "/guias/bajar-factura-luz-empresa",
+      },
+      {
+        titulo: "Cómo leer la factura de luz de tu empresa",
+        linea: "Cada concepto, en una factura de ejemplo anotada, y qué se puede cambiar.",
+        href: "/guias/factura-luz-empresa",
+      },
+      {
+        titulo: "El peaje 3.0TD, periodo a periodo",
+        linea: "Qué hora es cada periodo, qué festivos cuentan de verdad y la regla de las potencias.",
+        href: "/guias/peaje-3-0td",
+      },
+    ],
+  },
+  {
+    id: "potencia",
+    nombre: "Potencia",
+    claseColumna: "t2",
+    tipoGrafico: "pot",
+    guias: [
+      {
+        titulo: "Potencia contratada",
+        linea: "Cuánta necesita tu empresa y cuándo, cómo y por cuánto se cambia.",
+        href: "/guias/potencia-contratada",
+      },
+      {
+        titulo: "Exceso de potencia",
+        linea: "Cómo se mide y se factura según tu contador, y qué cambió en 2025.",
+        href: "/guias/exceso-de-potencia",
+      },
+    ],
+  },
+  {
+    id: "tu-instalacion",
+    nombre: "Tu instalación",
+    claseColumna: "t3",
+    tipoGrafico: "meses",
+    guias: [
+      {
+        titulo: "Energía reactiva",
+        linea: "Cuándo se paga, a qué precio en 2026 y cuándo compensa corregirla.",
+        href: "/guias/energia-reactiva",
+      },
+    ],
+  },
+  {
+    id: "tu-contrato",
+    nombre: "Tu contrato",
+    claseColumna: "t4",
+    tipoGrafico: "lin",
+    guias: [
+      {
+        titulo: "Precio fijo o indexado",
+        linea: "Cuatro preguntas para decidir sin adivinar el mercado.",
+        href: "/guias/precio-fijo-o-indexado",
+      },
+      {
+        titulo: "Carta de revisión de precio",
+        linea: "Qué te tienen que avisar y qué mirar antes de decidir.",
+        href: "/guias/revision-precio-luz-empresa",
+      },
+    ],
+  },
+  {
+    id: "tus-datos",
+    nombre: "Tus datos",
+    claseColumna: "t5",
+    tipoGrafico: "dat",
+    guias: [
+      {
+        titulo: "Qué se ve con tu CUPS y qué no",
+        linea: "Qué se consulta, qué no puede ver nadie y cómo limitar el acceso.",
+        href: "/guias/cups-y-tus-datos",
+      },
+    ],
+  },
+];
+
+// Valores para mini gráfico de barras de consumo (20 barras con picos)
+const alturasBarras = [30, 26, 24, 28, 36, 52, 70, 88, 96, 84, 66, 60, 64, 72, 86, 92, 80, 60, 44, 34];
+
+// Valores para mini gráfico de 12 meses
+const alturasMeses = [30, 34, 28, 26, 30, 44, 58, 62, 50, 36, 32, 34];
+---
+
+<section class="banda suave seccion-mosaico" aria-labelledby="h2-temas">
+  <div class="w sec">
+    <!-- Cabecera de sección oficial con estilo EMAX de dos tiempos -->
+    <div class="sec__cab">
+      <h2 id="h2-temas" class="seccion-titulo">
+        TODAS LAS GUÍAS, <span class="titulo-cursiva">por tema.</span>
+      </h2>
+    </div>
+
+    <!-- Filtro interactivo 100% funcional por tema -->
+    <div class="filtro" id="filtroTemas" role="tablist" aria-label="Filtrar por tema">
+      <button type="button" class="filtro-btn is-active" aria-selected="true" data-filtro="todos">
+        <span>Todas</span>
+      </button>
+      {
+        temas.map((t) => (
+          <button type="button" class="filtro-btn" aria-selected="false" data-filtro={t.id}>
+            <span>{t.nombre}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Rejilla Bento interactiva -->
+    <div class="bento" id="bentoTemas">
+      {
+        temas.map((t) => (
+          <section class:list={["tema", t.claseColumna]} data-tema-id={t.id} id={`tema-${t.id}`}>
+            <div class="tema__cab">
+              <h3 class="tema-tit">{t.nombre}</h3>
+              <span class="tema__n">
+                {t.guias.length} {t.guias.length === 1 ? "guía" : "guías"}
+              </span>
+            </div>
+
+            {/* Mini gráfico decorativo hecho con divs y CSS / SVG */}
+            {t.tipoGrafico === "barras" && (
+              <div class="viz" aria-hidden="true">
+                {alturasBarras.map((v, i) => {
+                  const esPico = (i > 6 && i < 10) || (i > 13 && i < 17);
+                  return (
+                    <span
+                      class={esPico ? "k" : ""}
+                      style={`height: ${v}%`}
+                    />
+                  );
+                })}
+              </div>
+            )}
+
+            {t.tipoGrafico === "pot" && (
+              <div class="viz viz--pot" aria-hidden="true">
+                <div style="--u: 62%" />
+                <div style="--u: 86%" />
+                <div style="--u: 48%" />
+              </div>
+            )}
+
+            {t.tipoGrafico === "meses" && (
+              <div class="viz" aria-hidden="true">
+                {alturasMeses.map((v) => (
+                  <span
+                    class={v > 40 ? "k" : ""}
+                    style={`height: ${v}%`}
+                  />
+                ))}
+              </div>
+            )}
+
+            {t.tipoGrafico === "lin" && (
+              <div class="viz viz--lin" aria-hidden="true">
+                <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                  <path
+                    d="M0 34H200"
+                    stroke="#004AAD"
+                    stroke-width="3"
+                    fill="none"
+                  />
+                  <path
+                    d="M0 40L25 28L50 44L75 20L100 36L125 14L150 38L175 22L200 30"
+                    stroke="#38BDF8"
+                    stroke-width="3"
+                    fill="none"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
+
+            {t.tipoGrafico === "dat" && (
+              <div class="viz viz--dat" aria-hidden="true">
+                <span>CUPS</span>
+              </div>
+            )}
+
+            {/* Lista accesible con énfasis visual en 'Leer guía' */}
+            <ul role="list" class="tema-lista">
+              {t.guias.map((g) => (
+                <li class="tema-guia-item">
+                  <a href={g.href} class="tema-guia-link">
+                    <div class="tema-guia-info">
+                      <b class="tema-guia-tit">{g.titulo}</b>
+                      <span class="tema-guia-sub">{g.linea}</span>
+                    </div>
+                    <span class="tema-guia-action">
+                      <span class="btn-leer-txt">Leer guía</span>
+                      <span class="btn-leer-circle" aria-hidden="true">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="3" y1="8" x2="13" y2="8"></line>
+                          <polyline points="8 3 13 8 8 13"></polyline>
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN TODAS LAS GUÍAS POR TEMA - ARQUITECTURA VISUAL ALTA GAMA
+     ========================================================================== */
+  .seccion-mosaico {
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding-block: clamp(64px, 7vw, 100px);
+  }
+
+  .w {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 40px);
+  }
+
+  .sec__cab {
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+
+  .seccion-titulo {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2.1rem, 1.7rem + 2vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #0f2346;
+    letter-spacing: -0.025em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva {
+    font-family: "Merriweather", Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #004aad;
+    letter-spacing: -0.01em;
+  }
+
+  .sec__desc {
+    color: #475569;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* --------------------------------------------------------------------------
+     Filtro interactivo de temas
+     -------------------------------------------------------------------------- */
+  .filtro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .filtro-btn {
+    cursor: pointer;
+    padding: 9px 20px;
+    border-radius: 9999px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #334155;
+    transition: all 0.2s ease;
+  }
+
+  .filtro-btn:hover {
+    border-color: #004aad;
+    color: #004aad;
+    background: #f0f7ff;
+  }
+
+  .filtro-btn.is-active {
+    background: #004aad;
+    border-color: #004aad;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.28);
+  }
+
+  /* --------------------------------------------------------------------------
+     Rejilla Bento
+     -------------------------------------------------------------------------- */
+  .bento {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: minmax(0, 1fr);
+    transition: all 0.25s ease;
+  }
+
+  @media (min-width: 860px) {
+    .bento {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .t1 {
+      grid-column: span 4;
+    }
+    .t2 {
+      grid-column: span 2;
+    }
+    .t3 {
+      grid-column: span 2;
+    }
+    .t4 {
+      grid-column: span 2;
+    }
+    .t5 {
+      grid-column: span 2;
+    }
+  }
+
+  .bento.bento--filtrado {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .bento.bento--filtrado .tema {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-column: 1 / -1 !important;
+  }
+
+  .bento--filtrado .viz {
+    height: clamp(96px, 10vw, 120px);
+    padding: 14px 18px;
+    gap: 6px;
+  }
+
+  .bento--filtrado .viz span {
+    border-radius: 4px 4px 0 0;
+  }
+
+  .bento--filtrado .viz--pot {
+    gap: 12px;
+  }
+
+  .bento--filtrado .viz--pot div {
+    height: 14px;
+  }
+
+  .bento--filtrado .tema-guia-link {
+    padding: 16px 14px;
+    margin-inline: -14px;
+  }
+
+  .bento--filtrado .tema-guia-tit {
+    font-size: 1.02rem;
+  }
+
+  .bento--filtrado .tema-guia-sub {
+    font-size: 0.88rem;
+  }
+
+  /* Tarjeta de tema */
+  .tema {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 24px;
+    padding: clamp(24px, 2.5vw, 32px);
+    display: grid;
+    gap: 18px;
+    align-content: start;
+    min-width: 0;
+    box-shadow: 0 4px 14px rgba(15, 35, 70, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .tema:hover {
+    border-color: #004aad;
+    box-shadow: 0 14px 36px rgba(0, 74, 173, 0.1);
+  }
+
+  .tema.is-hidden {
+    display: none !important;
+  }
+
+  .tema__cab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tema-tit {
+    font-family: "Sora", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f2346;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+
+  .tema__n {
+    font-family: "Sora", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #0284c7;
+    background: #e0f2fe;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  /* --------------------------------------------------------------------------
+     Mini Gráficos Visuales
+     -------------------------------------------------------------------------- */
+  .viz {
+    height: 84px;
+    border-radius: 14px;
+    background: #f1f5f9;
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .t1 .viz {
+    height: 96px;
+  }
+
+  .viz span {
+    flex: 1;
+    border-radius: 3px 3px 0 0;
+    background: #38bdf8;
+  }
+
+  .viz .k {
+    background: #004aad;
+  }
+
+  .viz--pot {
+    display: grid;
+    align-content: center;
+    gap: 9px;
+  }
+
+  .viz--pot div {
+    position: relative;
+    height: 12px;
+    border: 1.5px solid #94a3b8;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .viz--pot div::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--u);
+    background: #004aad;
+    border-radius: 2px;
+  }
+
+  .viz--lin {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .viz--lin svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .viz--dat {
+    display: grid;
+    place-items: center;
+  }
+
+  .viz--dat span {
+    all: unset;
+    font-family: "Sora", monospace;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.12em;
+    background: #e2e8f0;
+    padding: 4px 14px;
+    border-radius: 8px;
+  }
+
+  /* --------------------------------------------------------------------------
+     Lista de Guías con Botón 'Leer guía'
+     -------------------------------------------------------------------------- */
+  .tema-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tema-guia-item {
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .tema-guia-item:first-child {
+    border-top: none;
+  }
+
+  .tema-guia-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 12px;
+    margin-inline: -12px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.18s ease;
+  }
+
+  .tema-guia-link:hover {
+    background: #f0f7ff;
+  }
+
+  .tema-guia-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .tema-guia-tit {
+    font-family: "Sora", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f2346;
+    line-height: 1.35;
+    transition: color 0.15s ease;
+  }
+
+  .tema-guia-link:hover .tema-guia-tit {
+    color: #004aad;
+  }
+
+  .tema-guia-sub {
+    font-size: 0.84rem;
+    color: #64748b;
+    line-height: 1.4;
+  }
+
+  /* Énfasis 'Leer guía' */
+  .tema-guia-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 6px 14px;
+    background: #f0f7ff;
+    border: 1px solid #cce0fc;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-leer-txt {
+    font-family: "Sora", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #004aad;
+    transition: color 0.15s ease;
+  }
+
+  .btn-leer-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #004aad;
+    transition: transform 0.2s ease, color 0.15s ease;
+  }
+
+  .tema-guia-link:hover .tema-guia-action {
+    background: #004aad;
+    border-color: #004aad;
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.25);
+  }
+
+  .tema-guia-link:hover .btn-leer-txt {
+    color: #ffffff;
+  }
+
+  .tema-guia-link:hover .btn-leer-circle {
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tema,
+    .filtro-btn,
+    .tema-guia-link,
+    .tema-guia-action,
+    .btn-leer-circle {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script is:inline>
+  function setupFiltroTemas() {
+    var filtro = document.getElementById("filtroTemas");
+    var bento = document.getElementById("bentoTemas");
+    if (!filtro || !bento) return;
+
+    filtro.onclick = function (e) {
+      var boton = e.target.closest(".filtro-btn");
+      if (!boton) return;
+
+      var targetFiltro = boton.getAttribute("data-filtro") || "todos";
+
+      // Actualizar estado activo en botones
+      var botones = filtro.querySelectorAll(".filtro-btn");
+      botones.forEach(function (b) {
+        var activo = b === boton;
+        b.classList.toggle("is-active", activo);
+        b.setAttribute("aria-selected", activo ? "true" : "false");
+      });
+
+      // Filtrar tarjetas
+      var secciones = bento.querySelectorAll(".tema");
+      secciones.forEach(function (sec) {
+        var temaId = sec.getAttribute("data-tema-id");
+        var coincide = targetFiltro === "todos" || temaId === targetFiltro;
+        sec.classList.toggle("is-hidden", !coincide);
+      });
+
+      // Ajustar layout si hay filtro activo
+      if (targetFiltro !== "todos") {
+        bento.classList.add("bento--filtrado");
+      } else {
+        bento.classList.remove("bento--filtrado");
+      }
+    };
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupFiltroTemas);
+  } else {
+    setupFiltroTemas();
+  }
+
+  document.addEventListener("astro:page-load", setupFiltroTemas);
+</script>

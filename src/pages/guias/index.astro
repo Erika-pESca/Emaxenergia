@@ -1,0 +1,36 @@
+---
+// Índice del Centro de Guías de Luz para Empresas · EMAX Energía
+// Ruta: /guias
+// Rediseñado con el lenguaje visual de Figma: hero azul, bandas de noche, tarjetas redondeadas, titular en mayúsculas con acento en cursiva
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroGuias from "../../components/guias/HeroGuias.astro";
+import VistaSituaciones from "../../components/guias/VistaSituaciones.astro";
+import FacturaInteractiva from "../../components/guias/FacturaInteractiva.astro";
+import MosaicoTemas from "../../components/guias/MosaicoTemas.astro";
+import ComoEstanHechas from "../../components/guias/ComoEstanHechas.astro";
+import ProximaFactura from "../../components/home/ProximaFactura.astro";
+---
+
+<BaseLayout
+  title="Guías de luz para empresas · EMAX Energía"
+  description="Guías para entender la luz de tu empresa: la factura, el peaje 3.0TD, la potencia, los excesos, la reactiva, el contrato y tus datos. Con la norma enlazada."
+  path="/guias"
+>
+  <!-- 1. Hero con degradado azul, migas, titular con acento en cursiva y embudo PreguntaGasto -->
+  <HeroGuias />
+
+  <!-- 2. "¿Qué te ha pasado?": 13 situaciones con vista previa lateral fija -->
+  <VistaSituaciones />
+
+  <!-- 3. "Los conceptos de tu factura": Papel de factura interactivo con puntos numerados (Banda de noche 1) -->
+  <FacturaInteractiva />
+
+  <!-- 4. "Todas las guías, por tema": Filtro por tema con aria-pressed y mosaico Bento con mini gráficos -->
+  <MosaicoTemas />
+
+  <!-- 5. "Cómo están hechas": Tres tarjetas sobre fondo azul corporativo -->
+  <ComoEstanHechas />
+
+  <!-- 6. Formulario de cierre unificado (idéntico al de todas las páginas) -->
+  <ProximaFactura />
+</BaseLayout>

@@ -1,0 +1,89 @@
+---
+// Guía · El peaje 3.0TD, periodo a periodo
+// Ruta: /guias/peaje-3-0td
+// Layout: Guia.astro con estilos oficiales guia.css
+
+import Guia from "../../layouts/Guia.astro";
+import Termino from "../../components/guias/Termino.astro";
+
+const secciones = [
+  {
+    "id": "que-es",
+    "titulo": "Qué es la 3.0TD y quién la tiene"
+  },
+  {
+    "id": "temporadas",
+    "titulo": "Las temporadas eléctricas"
+  },
+  {
+    "id": "festivos",
+    "titulo": "Los tipos de día y los festivos que cuentan"
+  },
+  {
+    "id": "periodos",
+    "titulo": "Qué periodo es cada hora"
+  },
+  {
+    "id": "casos",
+    "titulo": "Tres casos que suelen confundirse"
+  },
+  {
+    "id": "potencia",
+    "titulo": "La potencia por periodo"
+  },
+  {
+    "id": "mas",
+    "titulo": "Qué más se factura con la 3.0TD"
+  }
+];
+const resumen = [
+  {
+    "dt": "Qué es",
+    "dd": "El peaje de acceso de los suministros en baja tensión con más de 15 kW en algún periodo."
+  },
+  {
+    "dt": "No se elige",
+    "dd": "Lo decide tu conexión, lo fija la CNMC y es el mismo con cualquier compañía."
+  },
+  {
+    "dt": "Seis periodos",
+    "dd": "De P1, el más caro, a P6, el más barato."
+  },
+  {
+    "dt": "P6",
+    "dd": "Siempre de 0:00 a 8:00 en laborables, y todo el día en sábados, domingos, festivos nacionales y el 6 de enero."
+  },
+  {
+    "dt": "Lo demás",
+    "dd": "Depende de la temporada y de la zona donde está tu suministro."
+  },
+  {
+    "dt": "La potencia",
+    "dd": "Cada periodo tiene que tener igual o más potencia contratada que el anterior."
+  }
+];
+const senales = [
+  "Tienes la misma potencia contratada en los seis periodos.",
+  "Nunca has cruzado tus horarios con el calendario de periodos.",
+  "Tu factura muestra P1 a P6 y nadie te ha explicado qué es cada uno."
+];
+const cta = {
+  "texto": "Antes de proponerte nada, leemos en qué periodos consume tu empresa y qué potencia usa en cada uno.",
+  "enlace": "/calcular-ahorro",
+  "boton": "Comprobar en qué periodos consumo"
+};
+---
+
+<Guia
+  slug="peaje-3-0td"
+  h1="El peaje 3.0TD, periodo a periodo"
+  fechaRevision="7 de octubre de 2026"
+  respuesta="La 3.0TD es el peaje de acceso de los suministros en baja tensión con más de 15 kW. Divide el año en seis periodos, de P1, el más caro, a P6, el más barato, según la hora, el día y la temporada. Cuánto pagas depende de en qué periodos consumes y de qué potencia contratas en cada uno."
+  resumen={resumen}
+  secciones={secciones}
+  senales={senales}
+  cta={cta}
+  fuentes="Circular 3/2020 de la CNMC, texto consolidado (BOE-A-2020-1066): arts. 6.2, 7.2, 9.2, 9.4 y 9.5 · Circular 1/2025 · Resolución de peajes de la CNMC para 2026 · Orden TED/1524/2025"
+>
+ <h2 id="que-es">Qué es la 3.0TD y quién la tiene</h2> <p>La 3.0TD es el peaje de acceso que pagan los suministros conectados en baja tensión (hasta 1 kV) que tienen más de 15 kW contratados en alguno de sus periodos. Tiene seis términos de potencia y seis de energía. <span class="fuente">(Circular 3/2020, art. 6.2.b)</span></p> <p>Lo ves en tu factura, normalmente junto a los datos del suministro, como "peaje", "tarifa de acceso" o "ATR".</p> <div class="tabla-guia"><table> <caption class="solo-lector">Peajes de acceso y sus periodos</caption> <thead><tr><th scope="col">Peaje</th><th scope="col">A quién corresponde</th><th scope="col">Periodos de energía</th><th scope="col">Periodos de potencia</th></tr></thead> <tbody> <tr><th scope="row">2.0TD</th><td data-label="A quién corresponde">Baja tensión, 15 kW o menos en todos los periodos</td><td data-label="Periodos de energía">3: punta, llano y valle</td><td data-label="Periodos de potencia">2</td></tr> <tr class="destacada"><th scope="row">3.0TD</th><td data-label="A quién corresponde"><b>Baja tensión, más de 15 kW en algún periodo</b></td><td data-label="Periodos de energía"><b>6: P1 a P6</b></td><td data-label="Periodos de potencia"><b>6</b></td></tr> <tr><th scope="row">6.1TD</th><td data-label="A quién corresponde">Más de 1 kV y menos de 30 kV, sin potencia mínima ni máxima</td><td data-label="Periodos de energía">6</td><td data-label="Periodos de potencia">6</td></tr> </tbody> </table></div> <p class="destacado"><b>El peaje no se elige. Tu tarifa, sí se construye.</b> El peaje lo decide tu conexión; todo lo demás se decide con tus datos.</p> <p class="enlaces"><a href="/tarifas">De qué está hecho el precio</a><a href="/sectores/industria#peaje">Por qué la 6.1TD depende de la tensión y no de la potencia</a></p> <h2 id="temporadas">Las temporadas eléctricas</h2> <p>El año eléctrico no tiene cuatro estaciones: tiene cuatro temporadas, y no coinciden con las del calendario ni con las turísticas. <span class="fuente">(Circular 3/2020, art. 7.2.a)</span></p> <div class="tabla-guia"><table> <caption class="solo-lector">Temporadas eléctricas en la Península</caption> <thead><tr><th scope="col">Temporada (Península)</th><th scope="col">Meses</th></tr></thead> <tbody> <tr><th scope="row">Alta</th><td data-label="Meses">Enero, febrero, julio y diciembre</td></tr> <tr><th scope="row">Media alta</th><td data-label="Meses">Marzo y noviembre</td></tr> <tr><th scope="row">Media</th><td data-label="Meses">Junio, agosto y septiembre</td></tr> <tr><th scope="row">Baja</th><td data-label="Meses">Abril, mayo y octubre</td></tr> </tbody> </table></div> <p><b>Otras zonas:</b> Baleares, Canarias, Ceuta y Melilla tienen su propio calendario. En Baleares, la temporada alta va de junio a septiembre; en Canarias, de julio a octubre.</p> <p><b>Un caso:</b> en la Península, julio es temporada alta y agosto, media. Un hotel lleno en los dos meses no paga igual su potencia de julio que la de agosto.</p> <p class="enlaces"><a href="/sectores/hoteles">El caso de los hoteles</a></p> <h2 id="festivos">Los tipos de día y los festivos que cuentan</h2> <p>Cada día del año es de un tipo. Los laborables de cada temporada son los tipos A, B, B1 y C. El tipo D son los sábados, los domingos, los festivos y el 6 de enero, y en tipo D todas las horas son P6. <span class="fuente">(Circular 3/2020, art. 7.2.b)</span></p> <h3>Qué festivos son P6 y cuáles no</h3> <p>Solo cuentan los festivos nacionales del calendario oficial de cada año, más el 6 de enero. Y no todos: quedan fuera los sustituibles y los que no tienen fecha fija.</p> <div class="tabla-guia"><table> <caption class="solo-lector">Qué festivos son P6 todo el día</caption> <thead><tr><th scope="col">Caso</th><th scope="col">¿Es P6 todo el día?</th></tr></thead> <tbody> <tr><th scope="row">Un festivo nacional de fecha fija (1 de mayo, 12 de octubre, 25 de diciembre…)</th><td data-label="¿Es P6 todo el día?">Sí</td></tr> <tr><th scope="row">El 6 de enero</th><td data-label="¿Es P6 todo el día?">Sí</td></tr> <tr><th scope="row">El Viernes Santo</th><td data-label="¿Es P6 todo el día?"><b>No</b>: no tiene fecha fija. Es un laborable de su temporada</td></tr> <tr><th scope="row">El festivo de tu comunidad autónoma o de tu municipio</th><td data-label="¿Es P6 todo el día?"><b>No</b>: es un laborable</td></tr> <tr><th scope="row">Un festivo nacional que una comunidad sustituye por otro día</th><td data-label="¿Es P6 todo el día?"><b>No</b></td></tr> </tbody> </table></div> <p class="nota">Para las fechas de cada año, consulta el calendario laboral oficial. Esta guía no las lista si no están verificadas para ese año.</p> <h2 id="periodos">Qué periodo es cada hora</h2> <p>En un día laborable de la Península, el periodo depende de la hora y de la temporada. <span class="fuente">(Circular 3/2020, art. 7.2.c)</span></p> <div class="tabla-guia"><table class="tabla-periodos"> <caption class="solo-lector">Periodo de cada hora en un laborable de la Península, por temporada</caption> <thead><tr><th scope="col">Hora (laborables)</th><th scope="col">Alta</th><th scope="col">Media alta</th><th scope="col">Media</th><th scope="col">Baja</th></tr></thead> <tbody> <tr><th scope="row">0:00 a 8:00</th><td data-label="Alta" class="periodo p-P6">P6</td><td data-label="Media alta" class="periodo p-P6">P6</td><td data-label="Media" class="periodo p-P6">P6</td><td data-label="Baja" class="periodo p-P6">P6</td></tr><tr><th scope="row">8:00 a 9:00</th><td data-label="Alta" class="periodo p-P2">P2</td><td data-label="Media alta" class="periodo p-P3">P3</td><td data-label="Media" class="periodo p-P4">P4</td><td data-label="Baja" class="periodo p-P5">P5</td></tr><tr><th scope="row">9:00 a 14:00</th><td data-label="Alta" class="periodo p-P1">P1</td><td data-label="Media alta" class="periodo p-P2">P2</td><td data-label="Media" class="periodo p-P3">P3</td><td data-label="Baja" class="periodo p-P4">P4</td></tr><tr><th scope="row">14:00 a 18:00</th><td data-label="Alta" class="periodo p-P2">P2</td><td data-label="Media alta" class="periodo p-P3">P3</td><td data-label="Media" class="periodo p-P4">P4</td><td data-label="Baja" class="periodo p-P5">P5</td></tr><tr><th scope="row">18:00 a 22:00</th><td data-label="Alta" class="periodo p-P1">P1</td><td data-label="Media alta" class="periodo p-P2">P2</td><td data-label="Media" class="periodo p-P3">P3</td><td data-label="Baja" class="periodo p-P4">P4</td></tr><tr><th scope="row">22:00 a 24:00</th><td data-label="Alta" class="periodo p-P2">P2</td><td data-label="Media alta" class="periodo p-P3">P3</td><td data-label="Media" class="periodo p-P4">P4</td><td data-label="Baja" class="periodo p-P5">P5</td></tr> <tr><th scope="row">Tipo D (sábados, domingos, festivos nacionales y 6 de enero)</th><td colspan="4" data-label="Todas las temporadas" class="periodo p-P6"><b>P6 todo el día</b></td></tr> </tbody> </table></div> <p><b>Cómo leerla:</b> cada temporada tiene dos periodos de día: uno "de punta" (de 9 a 14 y de 18 a 22) y uno "de llano" (de 8 a 9, de 14 a 18 y de 22 a 24). En temporada alta son P1 y P2; en baja, P4 y P5.</p> <p><b>Baleares y Canarias:</b> la punta va de 10:00 a 15:00 y de 18:00 a 22:00, y el llano de 8:00 a 10:00, de 15:00 a 18:00 y de 22:00 a 24:00. El reparto de periodos por temporada también cambia.</p> <h3>¿Qué periodo es?</h3> <form class="consultor" data-herramienta data-consultor novalidate> <label for="c-zona">Zona</label> <select id="c-zona" name="zona"><option value="peninsula">Península</option></select> <label for="c-fecha">Fecha</label> <input id="c-fecha" name="fecha" type="date" min="2026-01-01" max="2026-12-31" value="2026-05-12"> <label for="c-hora">Hora</label> <select id="c-hora" name="hora"><option value="0">0:00</option><option value="1">1:00</option><option value="2">2:00</option><option value="3">3:00</option><option value="4">4:00</option><option value="5">5:00</option><option value="6">6:00</option><option value="7">7:00</option><option value="8">8:00</option><option value="9">9:00</option><option value="10">10:00</option><option value="11">11:00</option><option value="12">12:00</option><option value="13">13:00</option><option value="14">14:00</option><option value="15">15:00</option><option value="16">16:00</option><option value="17">17:00</option><option value="18">18:00</option><option value="19">19:00</option><option value="20">20:00</option><option value="21">21:00</option><option value="22">22:00</option><option value="23" selected>23:00</option></select> <button type="submit" class="boton boton--principal">Ver el periodo</button> <output class="consultor__res" for="c-fecha c-hora c-zona" aria-live="polite" data-res></output> <p class="consultor__aviso">De momento, solo la Península. Si la fecha es un festivo nacional de fecha fija, es P6 todo el día: compruébalo en el calendario laboral oficial. Los periodos se aplican sobre la hora oficial. <span class="pendiente">[PENDIENTE: tabla de Baleares, Canarias, Ceuta y Melilla (art. 7.2.a) y festivos verificados por año]</span></p> </form> <h2 id="casos">Tres casos que suelen confundirse</h2> <div class="tabla-guia"><table> <caption class="solo-lector">Tres casos que suelen confundirse con los periodos</caption> <thead><tr><th scope="col">Caso</th><th scope="col">Lo que pasa</th></tr></thead> <tbody> <tr><th scope="row">Un turno de 22:00 a 6:00 un laborable</th><td data-label="Lo que pasa">De 22:00 a 24:00 no es P6: es llano. Solo de 0:00 a 6:00 es P6. <a href="/sectores/logistica-frio">Logística y frío</a></td></tr> <tr><th scope="row">Un hotel de costa en agosto, en la Península</th><td data-label="Lo que pasa">Agosto es temporada media. Julio es alta. <a href="/sectores/hoteles">Hoteles</a></td></tr> <tr><th scope="row">Un restaurante abierto el domingo, en 2.0TD</th><td data-label="Lo que pasa">El domingo es valle también para la potencia: la de valle tiene que cubrir el servicio. <a href="/sectores/restaurantes#tu-peaje">Restaurantes</a></td></tr> </tbody> </table></div> <h2 id="potencia">La potencia por periodo</h2> <p>En 3.0TD contratas seis potencias, una por periodo, y cada una tiene que ser igual o mayor que la del periodo anterior: P1 ≤ P2 ≤ P3 ≤ P4 ≤ P5 ≤ P6. <span class="fuente">(Circular 3/2020, art. 6.2.b)</span></p> <dl class="guia-dl"> <div><dt>P6 es la mayor</dt><dd>P6 puede, y a menudo tiene que, llevar la potencia más alta. Y es el periodo con el kW más barato.</dd></div> <div><dt>El pico en P1 arrastra</dt><dd>Si tu pico está en P1, todos los demás periodos tienen que llevar al menos esa potencia. Si está de madrugada, se queda en P6.</dd></div> <div><dt>Se paga aunque no consumas</dt><dd>La potencia de cada periodo se paga por días, la uses o no. Por eso pagas potencia de P6 aunque de noche consumas poco. <span class="fuente">(art. 9.2)</span></dd></div> <div><dt>Si te pasas</dt><dd>Con maxímetro (tipo 4), se mide el máximo de cada cuarto de hora en cada periodo; en los puntos más grandes (tipos 1 a 3), con mediciones cuartohorarias. Lo que pasa de lo contratado se paga como exceso. <span class="fuente">(art. 9.4)</span></dd></div>  </dl> <p class="enlaces"><a href="/guias/potencia-contratada">Potencia contratada: cuánta necesitas</a><a href="/guias/exceso-de-potencia">Exceso de potencia</a></p> <h2 id="mas">Qué más se factura con la 3.0TD</h2> <dl class="guia-dl"> <div><dt>Energía</dt><dd>Cada kWh paga peajes y cargos según su periodo. En 2026, la parte regulada del kWh en P1 es unas 22 veces la de P6.</dd></div> <div><dt>Reactiva</dt><dd>Se paga en P1 a P5, nunca en P6, y solo la que supera el 33 % de la energía activa del periodo. <span class="fuente">(art. 9.5)</span> <a href="/guias/energia-reactiva">Energía reactiva</a></dd></div> <div><dt>Quién fija los precios</dt><dd>Los peajes, la CNMC, cada año por resolución; los cargos, el Ministerio, por orden. Son los mismos con cualquier comercializadora.</dd></div> </dl> <p class="enlaces"><a href="/metodo#decisiones">Las cinco decisiones</a></p> 
+</Guia>

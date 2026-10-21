@@ -1,0 +1,477 @@
+---
+// Plantilla de Guías de EMAX Energía (Guia.astro)
+// Lenguaje visual Figma + Recursos avanzados de lectura:
+// 1. Barra de progreso sticky (4px, --azul-400)
+// 2. Hero azul con degradado (--hero), titular en mayúsculas/acento y 48 barras decorativas
+// 3. "En 30 segundos" montado -72px sobre el hero (2 partes: respuesta y dl numerado)
+// 4. Layout de lectura con índice lateral sticky e IntersectionObserver
+// 5. Señales de que esto te pasa a ti
+// 6. Siguiente guía calculada automáticamente
+// 7. Banda de noche con CTA (única en la página) + Sigue por aquí + Fuentes
+// 8. Script único comentado de ~40 líneas
+
+import BaseLayout from "./BaseLayout.astro";
+import { guiasData, getSiguienteGuia, filtrarEnlazables } from "../data/guiasData";
+import "../styles/guia.css";
+
+export interface ResumenItem {
+  dt?: string;
+  dd?: string;
+  titulo?: string;
+  texto?: string;
+}
+
+export interface CtaGuia {
+  texto: string;
+  boton: string;
+  enlace: string;
+  origen?: string;
+}
+
+export interface SeccionIndice {
+  id: string;
+  titulo: string;
+}
+
+interface Props {
+  slug?: string;
+  title?: string;
+  description?: string;
+  h1?: string;
+  titularPrincipal?: string;
+  titularAcento?: string;
+  tema?: string;
+  fechaRevision?: string;
+  tiempoLectura?: string;
+  normativa?: string;
+  respuesta?: string;
+  resumen?: ResumenItem[] | [string, string][];
+  secciones?: SeccionIndice[];
+  senales?: string[];
+  siguienteGuia?: {
+    titulo: string;
+    descripcion: string;
+    href: string;
+  };
+  cta?: CtaGuia;
+  contraste?: boolean | string;
+  fuentes?: string;
+  notaFuentes?: string;
+  relacionadas?: Array<{ titulo: string; href: string }>;
+  datos?: any;
+  estiloModerno?: boolean;
+}
+
+const p = Astro.props;
+const d = p.datos || {};
+
+const slugFinal = p.slug || d.slug || "potencia-contratada";
+const esModerno = p.estiloModerno ?? true;
+const infoGuia = guiasData.find((g) => g.slug === slugFinal) || guiasData[0];
+
+const titleSeo = p.title || d.titulo || `${infoGuia.titulo} · EMAX Energía`;
+const descSeo = p.description || d.descripcion || infoGuia.descripcion;
+
+let titPrincipal = p.titularPrincipal || d.titularPrincipal;
+let titAcento = p.titularAcento || d.titularAcento;
+
+if (!titPrincipal) {
+  const h1Raw = p.h1 || d.h1 || infoGuia.h1 || infoGuia.titulo;
+  if (h1Raw.includes(":") && !titAcento) {
+    const partes = h1Raw.split(":");
+    titPrincipal = partes[0].trim();
+    titAcento = partes.slice(1).join(":").trim();
+  } else {
+    titPrincipal = h1Raw;
+  }
+}
+
+const temaFinal = p.tema || d.tema || infoGuia.tema;
+const fechaRevisionFinal = p.fechaRevision || d.fechaRevision || infoGuia.fechaRevision || "7 de octubre de 2026";
+const tiempoLecturaFinal = p.tiempoLectura || d.tiempoLectura || infoGuia.tiempoLectura || "6 min";
+
+const baseH = [30, 26, 24, 24, 26, 34, 48, 62, 76, 90, 96, 92, 84, 70, 62, 64, 70, 82, 92, 88, 74, 56, 42, 34];
+const barras = Array.from({ length: 48 }, (_, i) =>
+  Math.round(baseH[i % 24] * (0.9 + 0.1 * Math.sin(i)))
+);
+
+const respuestaFinal =
+  p.respuesta ||
+  d.respuesta ||
+  "La potencia contratada son los kW que tu empresa puede usar a la vez, y se paga cada día, la uses o no. Si te sobra, pagas capacidad que no usas; si te falta, aparecen excesos o cortes.";
+
+const resumenRaw = p.resumen || d.resumen || [
+  { dt: "Se paga siempre", dd: "La potencia contratada se paga cada día, la uses o no." },
+  { dt: "Se decide con datos", dd: "La que importa es la que tu empresa ha usado de verdad en cada periodo, no la suma de las placas de tus equipos." },
+  { dt: "Contratar de menos no compensa", dd: "El precio del exceso está pensado para que no salga a cuenta." },
+];
+
+const resumenFinal: Array<{ dt: string; dd: string }> = resumenRaw.map((it: any) => {
+  if (Array.isArray(it)) return { dt: it[0], dd: it[1] };
+  return { dt: it.dt || it.titulo || "", dd: it.dd || it.texto || "" };
+});
+
+const resumenCab = (p as any).resumenTitulo || "En 30 segundos";
+
+const seccionesFinal: SeccionIndice[] = p.secciones || d.secciones || [];
+
+const senalesFinal: string[] =
+  p.senales ||
+  d.senales || [
+    "Tu potencia es la misma desde hace años.",
+    "Tus maxímetros de P1 y P2 quedan muy por debajo de lo contratado casi todo el año.",
+    "Has cambiado maquinaria, horarios o turnos y nadie ha revisado tu potencia.",
+  ];
+
+function calcSiguienteGuia(slug: string) {
+  if (typeof getSiguienteGuia === "function") {
+    try {
+      const res = getSiguienteGuia(slug);
+      if (res && res.titulo) return res;
+    } catch (_) {}
+  }
+  const idx = guiasData.findIndex((g) => g.slug === slug);
+  if (idx !== -1 && idx < guiasData.length - 1) {
+    return guiasData[idx + 1];
+  }
+  return guiasData[0] || { titulo: "Siguiente guía", descripcion: "", href: "/guias" };
+}
+
+function calcRelacionadas(slug: string, limite = 3) {
+  if (typeof filtrarEnlazables === "function") {
+    try {
+      const res = filtrarEnlazables(slug, limite);
+      if (Array.isArray(res) && res.length > 0) return res;
+    } catch (_) {}
+  }
+  return guiasData
+    .filter((g) => g.slug !== slug)
+    .slice(0, limite)
+    .map((g) => ({ titulo: g.titulo, href: g.href }));
+}
+
+const siguienteCalculada = calcSiguienteGuia(slugFinal);
+const siguienteFinal = p.siguienteGuia || d.siguienteGuia || {
+  titulo: siguienteCalculada.titulo,
+  descripcion: siguienteCalculada.descripcion,
+  href: siguienteCalculada.href,
+};
+
+const ctaFinal: CtaGuia = p.cta || d.cta || {
+  texto: "Con tu factura te decimos cuánta potencia usas de verdad en cada periodo.",
+  boton: "Comprobar mi potencia",
+  enlace: "/diagnostico",
+  origen: `guia-${slugFinal} · final`,
+};
+
+const relacionadasFinal = p.relacionadas || d.relacionadas || [
+  ...calcRelacionadas(slugFinal, 3),
+  { titulo: "Qué incluye el análisis de tu factura", href: "/diagnostico" },
+];
+
+const fuentesFinal =
+  p.fuentes ||
+  d.fuentes ||
+  "Circular 3/2020 de la CNMC: arts. 6.2, 7.4, 8.9, 9.2 y 9.4 · RD 88/2026: anexo I y disposición final novena";
+const notaFuentes = p.notaFuentes || d.notaFuentes;
+
+const fuentesLista = typeof fuentesFinal === "string"
+  ? fuentesFinal.split(" · ").map((s: string) => s.trim()).filter(Boolean)
+  : [fuentesFinal];
+
+const schemaArticle = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": `${titPrincipal}${titAcento ? `: ${titAcento}` : ""}`,
+  "dateModified": "2026-10-07",
+  "inLanguage": "es",
+  "publisher": {
+    "@type": "Organization",
+    "name": "EMAX Energía",
+    "url": "https://emaxenergia.com/",
+  },
+  "mainEntityOfPage": `https://emaxenergia.com/guias/${slugFinal}`,
+  "author": {
+    "@type": "Organization",
+    "name": "EMAX Energía",
+    "url": "https://emaxenergia.com/",
+  },
+});
+---
+
+<BaseLayout title={titleSeo} description={descSeo} path={`/guias/${slugFinal}`}>
+  <!-- 1. Barra de progreso de lectura (4px sticky arriba) -->
+  <div class="prog" aria-hidden="true"><i id="prog"></i></div>
+
+  <!-- 2. Hero azul con degradado corporativo y ornamento decorativo (idéntico a guías home) -->
+  <header class="banda g-hero">
+    <div class="orn" aria-hidden="true">
+      {barras.map((h) => <span style={`height: ${h}%`} />)}
+    </div>
+    <div class="w">
+      <div class="g-hero__in">
+        <div class="kicker-wrap">
+          <span class="kicker-punto" aria-hidden="true"></span>
+          <span class="kicker-texto">Guía práctica</span>
+          <span class="kicker-sep" aria-hidden="true">|</span>
+          <span class="kicker-sub">{temaFinal}</span>
+        </div>
+        <h1 class="tit">
+          {titPrincipal}
+          {titAcento && <em>{titAcento}</em>}
+        </h1>
+        <div class="meta">
+          <span>Lectura de {tiempoLecturaFinal}</span>
+          <span>Revisada el {fechaRevisionFinal}</span>
+          <span>Tema: {temaFinal}</span>
+          <a href="/guias" class="btn-volver-guias" title="Volver al índice de todas las guías">
+            <span class="btn-volver-guias__icono" aria-hidden="true">←</span>
+            <span>Volver a todas las guías</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3 & 4. "En 30 segundos" + Contenido de lectura con índice lateral -->
+  <div class={`banda banda-contenido ${esModerno ? "layout-moderno" : ""}`}>
+    <div class="w">
+      <!-- Tarjeta "En 30 segundos" con su borde y diseño original para todas las guías -->
+      {
+        resumenFinal && resumenFinal.length > 0 && (
+          <aside class="res" aria-labelledby="res-t">
+            <div class="res__r">
+              <b id="res-t">{resumenCab}</b>
+              <p>{respuestaFinal}</p>
+            </div>
+            <dl>
+              {resumenFinal.map((item, idx) => (
+                <div>
+                  <i>{idx + 1}</i>
+                  <span>
+                    <dt>{item.dt}</dt>
+                    <dd>{item.dd}</dd>
+                  </span>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        )
+      }
+
+      <!-- Layout de lectura -->
+      <div class={`lectura ${esModerno ? "lectura--moderna" : ""}`}>
+        {
+          !esModerno && (
+            <nav class="ind" aria-label="En esta guía">
+              <p>En esta guía</p>
+              <ol id="ind">
+                {seccionesFinal.map((sec) => (
+                  <li>
+                    <a href={`#${sec.id}`}>{sec.titulo}</a>
+                  </li>
+                ))}
+              </ol>
+              <p class="ind__t">Lectura de {tiempoLecturaFinal}</p>
+            </nav>
+          )
+        }
+
+        <div class="cuerpo-col" style="min-width: 0;">
+          <!-- Desplegable de índice para pantallas móviles -->
+          <details class="ind-m">
+            <summary>En esta guía</summary>
+            <ol id="indm">
+              {
+                seccionesFinal.map((sec) => (
+                  <li>
+                    <a href={`#${sec.id}`}>{sec.titulo}</a>
+                  </li>
+                ))
+              }
+            </ol>
+          </details>
+
+          <!-- Columna de cuerpo de lectura -->
+          <article class="cuerpo" id="cuerpo">
+            <slot />
+          </article>
+
+          <!-- 6. Señales de que esto te pasa a ti -->
+          {
+            senalesFinal && senalesFinal.length > 0 && (
+              <section class="sen" aria-labelledby="sen-t">
+                <h2 id="sen-t">Señales de que esto te pasa a ti</h2>
+                <ul>
+                  {senalesFinal.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
+
+          <!-- 7. Siguiente guía -->
+          <a class="sig" href={siguienteFinal.href}>
+            <small>Siguiente guía</small>
+            <b>{siguienteFinal.titulo}</b>
+            <span>{siguienteFinal.descripcion}</span>
+          </a>
+        </div>
+
+        {
+          esModerno && (
+            <aside class="ind-col ind" aria-label="En esta guía">
+              <div class="ind-card">
+                <p class="ind-card__titulo">En esta guía</p>
+                <ul class="ind-card__lista" id="ind">
+                  {seccionesFinal.map((sec) => (
+                    <li>
+                      <a href={`#${sec.id}`}>• {sec.titulo}</a>
+                    </li>
+                  ))}
+                </ul>
+                <p class="ind-card__sub">Sigue por aquí</p>
+              </div>
+
+              <div class="pills-relacionadas">
+                {
+                  relacionadasFinal &&
+                    relacionadasFinal.map((r) => (
+                      <a href={r.href} class="pill-btn">
+                        {r.titulo}
+                      </a>
+                    ))
+                }
+              </div>
+            </aside>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Cierre o contraste opcional si la guía lo trae -->
+  <slot name="contraste" />
+
+  <!-- 8. Banda de noche con CTA en grande (única banda de noche en la guía) -->
+  <div class="banda banda-noche-cta noche">
+    <div class="w g-cta">
+      <p>{ctaFinal.texto}</p>
+      <a
+        class="btn"
+        href={ctaFinal.enlace}
+        data-cta
+        data-origen={ctaFinal.origen}
+      >
+        {ctaFinal.boton} <i>→</i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Sigue por aquí y Fuentes de la guía (Diseño mejorado, balanceado y sin huecos vacíos) -->
+  <section class="banda rel-seccion" aria-labelledby="rel-titulo">
+    <div class="w">
+      <nav class="rel-bloque" aria-label="Sigue por aquí">
+        <div class="rel-cab">
+          <span class="rel-kicker">CONTINÚA LEYENDO</span>
+          <h2 id="rel-titulo" class="rel-titulo">Sigue por aquí</h2>
+        </div>
+
+        <ul class="rel-grid">
+          {
+            relacionadasFinal.map((r) => (
+              <li>
+                <a href={r.href} class="rel-card">
+                  <span class="rel-card__txt">{r.titulo}</span>
+                  <span class="rel-card__flecha" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <footer class="fuentes-box">
+        <div class="fuentes-box__cab">
+          <span class="fuentes-box__tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            FUENTES Y REGULACIÓN OFICIAL
+          </span>
+          {notaFuentes && <p class="fuentes-box__nota">{notaFuentes}</p>}
+        </div>
+
+        <div class="fuentes-chips">
+          {
+            fuentesLista.map((f) => (
+              <span class="fuente-chip">{f}</span>
+            ))
+          }
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <!-- Script único comentado (~40 líneas): progreso de scroll y sección activa del índice -->
+  <script is:inline>
+    (function () {
+      var prog = document.getElementById('prog');
+      var cuerpo = document.getElementById('cuerpo');
+      var ind = document.getElementById('ind');
+      var indm = document.getElementById('indm');
+      if (!cuerpo) return;
+
+      // 1. Si el índice no vino prerenderizado, generar los enlaces desde los h2 del cuerpo
+      var h2s = cuerpo.querySelectorAll('h2');
+      if (ind && ind.children.length === 0) {
+        h2s.forEach(function (h2, i) {
+          if (!h2.id) h2.id = 'sec-' + (i + 1);
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.href = '#' + h2.id;
+          a.textContent = h2.textContent;
+          li.appendChild(a);
+          ind.appendChild(li);
+          if (indm) indm.appendChild(li.cloneNode(true));
+        });
+      }
+
+      // 2. Resaltar sección activa en el índice mediante IntersectionObserver
+      var enlaces = ind ? Array.from(ind.querySelectorAll('a')) : [];
+      if (enlaces.length > 0) {
+        if (!enlaces.some(function (a) { return a.classList.contains('on'); })) {
+          enlaces[0].classList.add('on');
+        }
+        if ('IntersectionObserver' in window) {
+          var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                enlaces.forEach(function (a) {
+                  a.classList.toggle('on', a.getAttribute('href') === '#' + entry.target.id);
+                });
+              }
+            });
+          }, { rootMargin: '0px 0px -70% 0px' });
+          var targets = cuerpo.querySelectorAll('.sh[id], h2[id]');
+          targets.forEach(function (el) { obs.observe(el); });
+        }
+      }
+
+      // 3. Barra de progreso proporcional al scroll del artículo
+      function actualizarProgreso() {
+        if (!prog) return;
+        var r = cuerpo.getBoundingClientRect();
+        var altura = r.height - window.innerHeight * 0.5;
+        var porcentaje = Math.max(0, Math.min(100, (-r.top + window.innerHeight * 0.3) / altura * 100));
+        prog.style.width = porcentaje + '%';
+      }
+      window.addEventListener('scroll', actualizarProgreso, { passive: true });
+      actualizarProgreso();
+    })();
+  </script>
+
+  <!-- Marcado estructurado JSON-LD de Article -->
+  <script type="application/ld+json" set:html={schemaArticle} />
+</BaseLayout>
