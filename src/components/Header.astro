@@ -27,11 +27,11 @@ const metodoItems = [
 ];
 
 const sectoresItems = [
-  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Turnos partidos en horas punta caras", id: "restaurantes" },
-  { href: "/sectores/hoteles", label: "Hoteles y alojamientos", desc: "Estacionalidad y potencia ociosa en invierno", id: "hoteles" },
-  { href: "/sectores/supermercados", label: "Supermercados y tiendas", desc: "Consumo continuo de cámaras frigoríficas", id: "supermercados" },
-  { href: "/sectores/logistica-frio", label: "Logística y frío industrial", desc: "Ajuste de peajes en ciclos 24/7", id: "frio" },
-  { href: "/sectores/industria", label: "Industria y fabricación", desc: "Arranque de motores y energía reactiva", id: "industria" },
+  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Los dos servicios caen en las horas caras.", id: "restaurantes" },
+  { href: "/sectores/hoteles", label: "Hoteles", desc: "En febrero sigues pagando la potencia de agosto.", id: "hoteles" },
+  { href: "/sectores/supermercados", label: "Supermercados y alimentación", desc: "El frío pesa más que los picos.", id: "supermercados" },
+  { href: "/sectores/logistica-frio", label: "Logística y frío", desc: "Trabajar de noche no es lo mismo que consumir en P6.", id: "frio" },
+  { href: "/sectores/industria", label: "Industria", desc: "Un turno más cambia la factura.", id: "industria" },
 ];
 
 const tarifasItems = [
@@ -196,8 +196,14 @@ const tarifasItems = [
                 ))
               }
             </div>
-            <div class="dropdown-footer-link">
-              <a href="/sectores">Ver todos los sectores empresariales <span aria-hidden="true">→</span></a>
+            <!-- Separador y enlaces inferiores fieles al boceto del usuario -->
+            <div class="dropdown-sectores-inferior">
+              <div class="dropdown-sep-line"></div>
+              <a href="/varios-suministros" class="dropdown-link-varios">Varios suministros</a>
+              <a href="/sectores" class:list={["dropdown-btn-todos-sectores", { "todos-activo": current === "/sectores" }]}>
+                <span>Todos los sectores</span>
+                <span class="todos-flecha-icon" aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
         </div>
@@ -948,6 +954,70 @@ const tarifasItems = [
 
   .dropdown-footer-link a:hover {
     background: #f0f6ff;
+    transform: translateX(3px);
+  }
+
+  /* --------------------------------------------------------
+     ESTILOS ESPECÍFICOS SECTORES INFERIOR (Fiel a boceto)
+     -------------------------------------------------------- */
+  .dropdown-sectores-inferior {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dropdown-sep-line {
+    height: 1px;
+    background: #e6eef8;
+    margin: 4px 6px 6px;
+  }
+
+  .dropdown-link-varios {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1e293b;
+    text-decoration: none;
+    transition: background-color 0.18s ease, color 0.18s ease;
+  }
+
+  .dropdown-link-varios:hover {
+    background: #f1f5f9;
+    color: #004aad;
+  }
+
+  /* Cápsula celeste resaltada "Todos los sectores" idéntica al boceto */
+  .dropdown-btn-todos-sectores {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: #e0f2fe;
+    color: #0284c7;
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  }
+
+  .dropdown-btn-todos-sectores:hover,
+  .dropdown-btn-todos-sectores.todos-activo {
+    background: #bae6fd;
+    color: #0369a1;
+  }
+
+  .todos-flecha-icon {
+    font-size: 1rem;
+    font-weight: 800;
+    transition: transform 0.2s ease;
+  }
+
+  .dropdown-btn-todos-sectores:hover .todos-flecha-icon {
     transform: translateX(3px);
   }
 

@@ -1,0 +1,519 @@
+---
+// Componente: ReactivaCamaras.astro
+// Sección de Supermercados: "LA REACTIVA DE TUS CÁMARAS tiene hora"
+// Comparativa entre "Lo que dice la norma" vs "Lo que significa en tu tienda"
+// Cita sobre condensadores y botones de acción (Funnel modal y Guía de reactiva)
+
+interface FilaReactiva {
+  norma: string;
+  tienda: string;
+}
+
+const filasReactiva: FilaReactiva[] = [
+  {
+    norma: "No se factura en baja tensión con 15 kW o menos.",
+    tienda: "Si tu tienda es pequeña y está en 2.0TD, este recargo no te afecta.",
+  },
+  {
+    norma: "Se factura de P1 a P5, no en P6.",
+    tienda:
+      "La reactiva de las cámaras de noche, en fin de semana y en festivo no se paga. La de las horas de apertura, sí.",
+  },
+  {
+    norma:
+      "Solo se paga el exceso por encima del 33 % de la energía activa del periodo.",
+    tienda: "No pagas por tener reactiva, sino por pasar de ese umbral.",
+  },
+  {
+    norma:
+      "Se corrige en la instalación, normalmente con una batería de condensadores.",
+    tienda:
+      "Es una obra en tu tienda, no un cambio de tarifa. Te decimos si compensa con lo que pagas al año delante.",
+  },
+];
+---
+
+<section
+  class="reactiva-camaras-seccion"
+  id="reactiva-supermercados"
+  aria-labelledby="reactiva-camaras-tit"
+>
+  <div class="reactiva-contenedor">
+    <!-- Encabezado de la Sección -->
+    <div class="reactiva-header">
+      <h2 class="reactiva-titulo" id="reactiva-camaras-tit">
+        LA REACTIVA DE TUS CÁMARAS <span class="tit-cursiva">tiene hora</span>
+      </h2>
+      <p class="reactiva-subtitulo">
+        Los compresores del frío generan energía reactiva. No toda se paga, y la que se paga tiene hora.
+      </p>
+    </div>
+
+    <!-- Rejilla Comparativa de 2 Tarjetas -->
+    <div class="comparativa-reactiva-grid">
+      <!-- Tarjeta 1: Lo que dice la norma (Fondo Blanco) -->
+      <article class="tarjeta-reactiva tarjeta-norma" aria-label="Lo que dice la norma">
+        <div class="tarjeta-header-pill">
+          <span class="pill-badge pill-azul">Lo que dice la norma</span>
+        </div>
+
+        <div class="tarjeta-filas-lista">
+          {
+            filasReactiva.map((fila) => (
+              <div class="fila-reactiva-item">
+                <p class="fila-texto">{fila.norma}</p>
+              </div>
+            ))
+          }
+        </div>
+      </article>
+
+      <!-- Tarjeta 2: Lo que significa en tu tienda (Fondo Azul) -->
+      <article class="tarjeta-reactiva tarjeta-tienda" aria-label="Lo que significa en tu tienda">
+        <div class="tarjeta-header-pill">
+          <span class="pill-badge pill-blanca">Lo que significa en tu tienda</span>
+        </div>
+
+        <div class="tarjeta-filas-lista">
+          {
+            filasReactiva.map((fila) => (
+              <div class="fila-reactiva-item">
+                <p class="fila-texto">{fila.tienda}</p>
+              </div>
+            ))
+          }
+        </div>
+      </article>
+    </div>
+
+    <!-- Bloque de Cita: "Ya puse condensadores..." -->
+    <div class="reactiva-cita-bloque">
+      <div class="cita-icono-cuadro" aria-hidden="true">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0052cc"
+          stroke-width="2.3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2 0 4 1.75 6 5 8" />
+          <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2 0 4 1.75 6 5 8" />
+        </svg>
+      </div>
+
+      <div class="cita-textos-col">
+        <p class="cita-frase-destacada">
+          "Ya puse condensadores y me sigue saliendo."
+        </p>
+        <p class="cita-explicacion">
+          Una batería tiene que estar dimensionada y regulada para tu patrón real. Lo primero es ver en qué periodos sigue apareciendo el recargo.
+        </p>
+      </div>
+    </div>
+
+    <!-- Botones de Acción / Navegación -->
+    <div class="reactiva-botones-fila">
+      <!-- Botón 1: Modal Funnel EMAX -->
+      <button
+        type="button"
+        class="btn-reactiva-accion btn-azul-modal"
+        data-abrir-funnel
+        data-tramo-id="reactiva-tienda"
+        data-tramo-label="Analizar mi tienda"
+        data-tramo-msg="Hola, quiero que revisen el recargo de energía reactiva y frío en mi tienda o supermercado."
+        aria-label="Abrir formulario para analizar mi tienda"
+      >
+        <span>Analizar mi tienda</span>
+        <span class="circulo-flecha-cyan" aria-hidden="true">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#003882"
+            stroke-width="3.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </button>
+
+      <!-- Botón 2: Enlace a Guía de Reactiva -->
+      <a
+        href="/guias/energia-reactiva"
+        class="btn-reactiva-accion btn-cyan-guia"
+        aria-label="Ir a la guía técnica sobre energía reactiva: qué es y cuándo se paga"
+      >
+        <span>Energía reactiva: qué es y cuándo se paga</span>
+        <span class="circulo-flecha-azul" aria-hidden="true">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#00c2ff"
+            stroke-width="3.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: LA REACTIVA DE TUS CÁMARAS TIENE HORA (SUPERMERCADOS)
+     ========================================================================== */
+  .reactiva-camaras-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7.5vw, 110px) 0 clamp(75px, 8.5vw, 120px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .reactiva-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .reactiva-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(38px, 4.5vw, 54px);
+    max-width: 900px;
+  }
+
+  .reactiva-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #00c2ff;
+  }
+
+  .reactiva-subtitulo {
+    font-size: clamp(0.96rem, 0.92rem + 0.2vw, 1.05rem);
+    line-height: 1.62;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+  }
+
+  /* ==========================================================================
+     REJILLA DE LAS 2 TARJETAS
+     ========================================================================== */
+  .comparativa-reactiva-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 3.2vw, 36px);
+    align-items: stretch;
+    margin-bottom: clamp(36px, 4.5vw, 48px);
+  }
+
+  /* Tarjeta base */
+  .tarjeta-reactiva {
+    display: flex;
+    flex-direction: column;
+    border-radius: 26px;
+    padding: clamp(28px, 3.5vw, 38px) clamp(24px, 3.2vw, 36px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-sizing: border-box;
+  }
+
+  .tarjeta-reactiva:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 44px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Tarjeta 1: Norma (Fondo Blanco) */
+  .tarjeta-norma {
+    background: #ffffff;
+    color: #081d3e;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Tarjeta 2: Tienda (Fondo Azul) */
+  .tarjeta-tienda {
+    background: #0052cc;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  /* Cabecera con Píldora */
+  .tarjeta-header-pill {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 26px;
+  }
+
+  .pill-badge {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 9px 28px;
+    border-radius: 9999px;
+    text-align: center;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  }
+
+  .pill-azul {
+    background: #0052cc;
+    color: #ffffff;
+  }
+
+  .pill-blanca {
+    background: #ffffff;
+    color: #0052cc;
+  }
+
+  /* Filas de Contenido */
+  .tarjeta-filas-lista {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .fila-reactiva-item {
+    display: flex;
+    align-items: center;
+    min-height: 72px;
+    padding: 16px 0;
+    box-sizing: border-box;
+  }
+
+  .tarjeta-norma .fila-reactiva-item {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .tarjeta-norma .fila-reactiva-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .tarjeta-tienda .fila-reactiva-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .tarjeta-tienda .fila-reactiva-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .fila-texto {
+    font-size: clamp(0.92rem, 0.88rem + 0.18vw, 0.98rem);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .tarjeta-norma .fila-texto {
+    color: #1e293b;
+    font-weight: 500;
+  }
+
+  .tarjeta-tienda .fila-texto {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  /* ==========================================================================
+     BLOQUE DE CITA
+     ========================================================================== */
+  .reactiva-cita-bloque {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: clamp(32px, 4vw, 44px);
+    max-width: 900px;
+  }
+
+  .cita-icono-cuadro {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 2px;
+  }
+
+  .cita-textos-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cita-frase-destacada {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.05rem, 1rem + 0.25vw, 1.2rem);
+    font-weight: 700;
+    color: #00c2ff;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .cita-explicacion {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     BOTONES DE ACCIÓN INFERIORES
+     ========================================================================== */
+  .reactiva-botones-fila {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .btn-reactiva-accion {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 10px 18px 10px 24px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  /* Botón 1: Azul Modal */
+  .btn-azul-modal {
+    background: #0052cc;
+    color: #00c2ff;
+    box-shadow: 0 6px 18px rgba(0, 82, 204, 0.35);
+  }
+
+  .btn-azul-modal:hover {
+    background: #0046b0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 82, 204, 0.5);
+  }
+
+  .circulo-flecha-cyan {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-azul-modal:hover .circulo-flecha-cyan {
+    transform: translateX(2px);
+  }
+
+  /* Botón 2: Cyan Guía */
+  .btn-cyan-guia {
+    background: #00c2ff;
+    color: #003882;
+    box-shadow: 0 6px 18px rgba(0, 194, 255, 0.3);
+  }
+
+  .btn-cyan-guia:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 194, 255, 0.45);
+  }
+
+  .circulo-flecha-azul {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-cyan-guia:hover .circulo-flecha-azul {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 900px) {
+    .comparativa-reactiva-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .fila-reactiva-item {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .reactiva-camaras-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .reactiva-titulo {
+      font-size: 1.85rem;
+    }
+
+    .tarjeta-reactiva {
+      padding: 24px 20px;
+    }
+
+    .pill-badge {
+      font-size: 0.88rem;
+      padding: 8px 20px;
+    }
+
+    .btn-reactiva-accion {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>

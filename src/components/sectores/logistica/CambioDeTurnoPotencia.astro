@@ -1,0 +1,518 @@
+---
+// Componente: CambioDeTurnoPotencia.astro
+// Sección de Logística y Frío: "EL CAMBIO DE TURNO marca tu potencia"
+// 4 tarjetas de análisis de potencia en naves y almacenes:
+// 01. El momento
+// 02. Dónde cae
+// 03. Cómo se mide
+// 04. Lo que no te diremos
+// Botón CTA para el modal y píldoras a guías de Potencia contratada y Exceso de potencia
+
+interface TarjetaTurno {
+  numero: string;
+  titulo: string;
+  icono: "momento" | "donde" | "mide" | "nodiremos";
+  texto: string;
+}
+
+const tarjetas: TarjetaTurno[] = [
+  {
+    numero: "01",
+    titulo: "El momento",
+    icono: "momento",
+    texto:
+      "Al cambiar de turno suelen coincidir la carga de las carretillas, la iluminación de toda la nave y los muelles. Es cuando suele aparecer el pico.",
+  },
+  {
+    numero: "02",
+    titulo: "Dónde cae",
+    icono: "donde",
+    texto:
+      "Si ese pico cae en un periodo caro, como cada periodo tiene que tener igual o más potencia que el anterior, arrastra la potencia de todos los siguientes. Si cae en P6, se queda en el periodo más barato.",
+  },
+  {
+    numero: "03",
+    titulo: "Cómo se mide",
+    icono: "mide",
+    texto:
+      "No cuenta cada arranque: cuenta la media de cada cuarto de hora. En los contadores de los puntos más grandes, los excesos se calculan también por cuartos de hora.",
+  },
+  {
+    numero: "04",
+    titulo: "Lo que no te diremos",
+    icono: "nodiremos",
+    texto:
+      "No te vamos a decir que muevas la carga de las carretillas a otra hora. Eso lo decide tu operación. Te decimos qué supone cada patrón en tu factura.",
+  },
+];
+---
+
+<section
+  class="cambio-turno-seccion"
+  id="cambio-turno-potencia"
+  aria-labelledby="cambio-turno-tit"
+>
+  <div class="cambio-turno-contenedor">
+    <!-- Encabezado -->
+    <div class="cambio-turno-header">
+      <h2 class="cambio-turno-titulo" id="cambio-turno-tit">
+        EL CAMBIO DE TURNO <span class="tit-cursiva">marca tu potencia</span>
+      </h2>
+    </div>
+
+    <!-- Rejilla de las 4 Tarjetas -->
+    <div class="cambio-turno-grid">
+      {
+        tarjetas.map((t) => (
+          <article class="turno-card">
+            <!-- Insignia superior con círculos solapados: azul con icono + cian con número -->
+            <div class="turno-badge-wrap" aria-hidden="true">
+              <div class="badge-circulo-azul">
+                {t.icono === "momento" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                )}
+
+                {t.icono === "donde" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                  </svg>
+                )}
+
+                {t.icono === "mide" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                  </svg>
+                )}
+
+                {t.icono === "nodiremos" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                )}
+              </div>
+
+              <!-- Círculo cian inferior con el número -->
+              <div class="badge-circulo-cyan">
+                <span class="badge-num">{t.numero}</span>
+              </div>
+            </div>
+
+            <!-- Contenido de la tarjeta -->
+            <h3 class="turno-card-tit">{t.titulo}</h3>
+            <p class="turno-card-desc">{t.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Botones de Acción / Navegación Inferiores -->
+    <div class="cambio-turno-acciones">
+      <!-- Fila 1: Botón Azul Modal -->
+      <button
+        type="button"
+        class="btn-analizar-nave"
+        data-abrir-funnel
+        data-tramo-id="potencia-logistica"
+        data-tramo-label="Analizar mi nave"
+        data-tramo-msg="Hola, quiero que revisen la potencia y los picos de cambio de turno de mi nave logística o almacén."
+        aria-label="Abrir formulario para analizar mi nave"
+      >
+        <span>Analizar mi nave</span>
+        <span class="circulo-flecha-cyan" aria-hidden="true">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#003882"
+            stroke-width="3.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </button>
+
+      <!-- Fila 2: Píldoras de Guías Técnicas -->
+      <div class="pildoras-fila">
+        <a
+          href="/guias/potencia-contratada"
+          class="pildora-guia-turno"
+          aria-label="Ir a la guía sobre potencia contratada"
+        >
+          <span>Potencia contratada</span>
+          <span class="circulo-flecha-azul" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#00c2ff"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+
+        <a
+          href="/guias/exceso-de-potencia"
+          class="pildora-guia-turno"
+          aria-label="Ir a la guía sobre exceso de potencia"
+        >
+          <span>Exceso de potencia</span>
+          <span class="circulo-flecha-azul" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#00c2ff"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: EL CAMBIO DE TURNO MARCA TU POTENCIA (LOGÍSTICA Y FRÍO)
+     ========================================================================== */
+  .cambio-turno-seccion {
+    position: relative;
+    width: 100%;
+    background: #f4f6f9;
+    color: #081d3e;
+    padding: clamp(65px, 7.5vw, 110px) 0 clamp(75px, 8.5vw, 120px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .cambio-turno-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .cambio-turno-header {
+    margin-bottom: clamp(38px, 4.5vw, 54px);
+    max-width: 900px;
+  }
+
+  .cambio-turno-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #0052cc;
+  }
+
+  /* Rejilla 4 Tarjetas */
+  .cambio-turno-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2.2vw, 28px);
+    align-items: stretch;
+    margin-bottom: clamp(38px, 4.5vw, 52px);
+  }
+
+  /* Tarjeta Individual Gris Neutral (como en el boceto) */
+  .turno-card {
+    background: #9fa7b5;
+    border-radius: 24px;
+    padding: 34px 22px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(8, 29, 62, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .turno-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(8, 29, 62, 0.16);
+    background: #949dae;
+  }
+
+  /* Insignia Circular Solapada */
+  .turno-badge-wrap {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin: -10px auto 18px auto;
+  }
+
+  .badge-circulo-azul {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0, 74, 173, 0.4);
+  }
+
+  .badge-circulo-cyan {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 194, 255, 0.5);
+    border: 2px solid #9fa7b5;
+    transition: border-color 0.25s ease;
+  }
+
+  .turno-card:hover .badge-circulo-cyan {
+    border-color: #949dae;
+  }
+
+  .badge-num {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1;
+  }
+
+  /* Textos de la Tarjeta */
+  .turno-card-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .turno-card-desc {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.88rem;
+    line-height: 1.58;
+    color: #f1f5f9;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ==========================================================================
+     BOTONES DE ACCIÓN INFERIORES
+     ========================================================================== */
+  .cambio-turno-acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  /* Botón 1: Azul Modal */
+  .btn-analizar-nave {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #0052cc;
+    color: #00c2ff;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 10px 18px 10px 24px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 82, 204, 0.28);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .btn-analizar-nave:hover {
+    background: #0046b0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 82, 204, 0.45);
+  }
+
+  .circulo-flecha-cyan {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-analizar-nave:hover .circulo-flecha-cyan {
+    transform: translateX(2px);
+  }
+
+  /* Fila 2: Píldoras de Guías */
+  .pildoras-fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pildora-guia-turno {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 10px 16px 10px 22px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 194, 255, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .pildora-guia-turno:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 194, 255, 0.4);
+  }
+
+  .circulo-flecha-azul {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .pildora-guia-turno:hover .circulo-flecha-azul {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1080px) {
+    .cambio-turno-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cambio-turno-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .cambio-turno-titulo {
+      font-size: 1.85rem;
+    }
+
+    .cambio-turno-grid {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .turno-card {
+      padding: 28px 20px 24px;
+    }
+
+    .btn-analizar-nave,
+    .pildora-guia-turno {
+      width: 100%;
+      justify-content: space-between;
+      white-space: normal;
+    }
+
+    .pildoras-fila {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+</style>

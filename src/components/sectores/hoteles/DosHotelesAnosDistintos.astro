@@ -1,0 +1,511 @@
+---
+// Componente: DosHotelesAnosDistintos.astro
+// Sección de Hoteles: "DOS HOTELES CON AÑOS DISTINTOS | TU HOTEL puede estar al 60 %. Tu término de potencia, no."
+// Comparativa entre "Hotel de costa" vs "Hotel urbano"
+
+import imgHotelCosta from "../../../imagenes/hotel_costa.jpg";
+import imgHotelUrbano from "../../../imagenes/hotel_urbano.jpg";
+
+interface FilaHotel {
+  titulo: string;
+  icono: "ano" | "potencia" | "consume" | "modalidad";
+  textoCosta: string;
+  textoUrbano: string;
+}
+
+const caracteristicas: FilaHotel[] = [
+  {
+    titulo: "Su año",
+    icono: "ano",
+    textoCosta:
+      "Abre de abril a octubre. Lleno en julio y agosto, con climatización y piscina. De noviembre a marzo, cerrado.",
+    textoUrbano:
+      "Lleno todo el año, más entre semana que el fin de semana. Climatización en invierno y en verano.",
+  },
+  {
+    titulo: "Su potencia",
+    icono: "potencia",
+    textoCosta:
+      "Su pico es una tarde de julio, en P2, y arrastra a todos los periodos siguientes. Cerrado en invierno, la sigue pagando cada día. Bajarla en noviembre y subirla en abril son dos cambios en menos de doce meses: la distribuidora puede negar el segundo, y volver a subir puede tener costes. Se decide la potencia del año entera, con el pico de julio delante.",
+    textoUrbano:
+      "Su pico es parecido todo el año. Se ajusta una vez, con doce meses de maxímetros.",
+  },
+  {
+    titulo: "Cuándo consume",
+    icono: "consume",
+    textoCosta: "Casi todo en siete meses, mucho de día.",
+    textoUrbano: "Todo el año, con fines de semana más tranquilos.",
+  },
+  {
+    titulo: "Su modalidad",
+    icono: "modalidad",
+    textoCosta:
+      "Su consumo cambia muchísimo de un mes a otro: una cuota mensual estable pierde sentido. Fijo o indexado, según lo que aguante su tesorería en los meses sin ingresos.",
+    textoUrbano:
+      "Su consumo es estable de un mes a otro: puede plantearse precio fijo o una cuota mensual.",
+  },
+];
+---
+
+<section
+  class="dos-hoteles-seccion"
+  id="dos-hoteles-comparativa"
+  aria-labelledby="dos-hoteles-tit"
+>
+  <div class="dos-hoteles-contenedor">
+    <!-- Encabezado de la Sección -->
+    <div class="dos-hoteles-header">
+      <div class="etiqueta-kicker">
+        <span>DOS HOTELES CON AÑOS DISTINTOS</span>
+        <span class="separador-barra" aria-hidden="true">|</span>
+      </div>
+
+      <h2 class="dos-hoteles-titulo" id="dos-hoteles-tit">
+        TU HOTEL <span class="tit-cursiva">puede estar al 60 %.</span>
+      </h2>
+
+      <p class="dos-hoteles-bajada-potencia">
+        Tu término de potencia, no.
+      </p>
+
+      <p class="dos-hoteles-subtitulo">
+        Una tarifa "para hoteles" daría por hecho cómo es la temporada del hotel medio. Estos dos no tienen la misma temporada.
+      </p>
+    </div>
+
+    <!-- Rejilla Comparativa de los 2 Hoteles -->
+    <div class="comparativa-hoteles-grid">
+      <!-- 1. HOTEL DE COSTA -->
+      <article class="tarjeta-hotel" aria-label="Análisis del Hotel de costa">
+        <div class="tarjeta-media">
+          <img
+            src={imgHotelCosta.src}
+            alt="Terraza exterior con vistas al mar de un hotel de costa en verano"
+            class="tarjeta-foto"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="badge-hotel badge-costa">Hotel de costa</div>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <ul class="filas-stack" role="list">
+            {
+              caracteristicas.map((c) => (
+                <li class="fila-detalle">
+                  <div class="circulo-icono-azul" aria-hidden="true">
+                    {c.icono === "ano" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    )}
+                    {c.icono === "potencia" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                      </svg>
+                    )}
+                    {c.icono === "consume" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    )}
+                    {c.icono === "modalidad" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <line x1="12" y1="1" x2="12" y2="23" />
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      </svg>
+                    )}
+                  </div>
+                  <div class="fila-textos">
+                    <h3 class="fila-titulo">{c.titulo}</h3>
+                    <p class="fila-desc">{c.textoCosta}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </article>
+
+      <!-- 2. HOTEL URBANO -->
+      <article class="tarjeta-hotel" aria-label="Análisis del Hotel urbano">
+        <div class="tarjeta-media">
+          <img
+            src={imgHotelUrbano.src}
+            alt="Lobby moderno de un hotel urbano con ventanales hacia los rascacielos"
+            class="tarjeta-foto"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="badge-hotel badge-urbano">Hotel urbano</div>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <ul class="filas-stack" role="list">
+            {
+              caracteristicas.map((c) => (
+                <li class="fila-detalle">
+                  <div class="circulo-icono-azul" aria-hidden="true">
+                    {c.icono === "ano" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    )}
+                    {c.icono === "potencia" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                      </svg>
+                    )}
+                    {c.icono === "consume" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    )}
+                    {c.icono === "modalidad" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <line x1="12" y1="1" x2="12" y2="23" />
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      </svg>
+                    )}
+                  </div>
+                  <div class="fila-textos">
+                    <h3 class="fila-titulo">{c.titulo}</h3>
+                    <p class="fila-desc">{c.textoUrbano}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: DOS HOTELES CON AÑOS DISTINTOS
+     ========================================================================== */
+  .dos-hoteles-seccion {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    color: #081d3e;
+    padding: clamp(65px, 7vw, 105px) 0 clamp(75px, 8vw, 115px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .dos-hoteles-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
+
+  /* Encabezado */
+  .dos-hoteles-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(38px, 4.5vw, 54px);
+    max-width: 860px;
+  }
+
+  .etiqueta-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .separador-barra {
+    color: #0052cc;
+    font-weight: 800;
+  }
+
+  .dos-hoteles-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1.15;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #0052cc;
+  }
+
+  .dos-hoteles-bajada-potencia {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.3rem);
+    font-weight: 700;
+    color: #0052cc;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+  }
+
+  .dos-hoteles-subtitulo {
+    font-size: clamp(0.96rem, 0.92rem + 0.2vw, 1.05rem);
+    line-height: 1.62;
+    color: #475569;
+    margin: 0;
+    max-width: 780px;
+  }
+
+  /* Rejilla de los 2 Hoteles */
+  .comparativa-hoteles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 3.2vw, 38px);
+    align-items: stretch;
+  }
+
+  /* Tarjeta Individual */
+  .tarjeta-hotel {
+    display: flex;
+    flex-direction: column;
+    background: #f1f5f9;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(8, 29, 62, 0.08);
+    border: 1px solid rgba(8, 29, 62, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .tarjeta-hotel:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 42px rgba(8, 29, 62, 0.14);
+  }
+
+  /* Parte superior: Foto + Badge */
+  .tarjeta-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9.5;
+    overflow: hidden;
+    background: #001f4d;
+  }
+
+  .tarjeta-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.02);
+    transition: transform 0.4s ease;
+  }
+
+  .tarjeta-hotel:hover .tarjeta-foto {
+    transform: scale(1.05);
+  }
+
+  .badge-hotel {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0052cc;
+    color: #ffffff;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 8px 26px;
+    border-radius: 9999px;
+    box-shadow: 0 6px 18px rgba(0, 82, 204, 0.45);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .badge-urbano {
+    background: #0060e6;
+  }
+
+  /* Cuerpo inferior blanco con filas */
+  .tarjeta-cuerpo {
+    padding: 26px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: #f1f5f9;
+  }
+
+  .filas-stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fila-detalle {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e8f0;
+    box-sizing: border-box;
+  }
+
+  .fila-detalle:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .circulo-icono-azul {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    box-shadow: 0 3px 8px rgba(0, 74, 173, 0.25);
+  }
+
+  .fila-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+  }
+
+  .fila-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #004aad;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .fila-desc {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 960px) {
+    .comparativa-hoteles-grid {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .dos-hoteles-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .dos-hoteles-titulo {
+      font-size: 1.85rem;
+    }
+
+    .tarjeta-cuerpo {
+      padding: 20px 18px;
+    }
+  }
+</style>

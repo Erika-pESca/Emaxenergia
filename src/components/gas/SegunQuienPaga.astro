@@ -1,0 +1,434 @@
+---
+// Componente: SegunQuienPaga.astro
+// Sección: "ÁREAS DE ANÁLISIS | SEGÚN QUIÉN paga la factura"
+// 3 Tarjetas con imágenes de referencia, corte superior, badge circular temático,
+// bloque azul corporativo con textos explicativos y botones píldora cian.
+
+import imgEmpresas from "../../imagenes/gas_empresas.jpg";
+import imgComunidades from "../../imagenes/gas_comunidades.jpg";
+import imgHogares from "../../imagenes/gas_hogares.jpg";
+
+const areas = [
+  {
+    id: "empresa",
+    titulo: "Empresas",
+    img: imgEmpresas,
+    alt: "Cocina y suministro de gas natural profesional en empresa hostelera",
+    icono: "empresa",
+    desc: "Tu peaje depende de cuánto consumes al año, y el precio puede ser fijo o ligado al mercado del gas. Si el gas va a un proceso o a una cocina, consume casi igual todo el año; si va a calefacción, se concentra en invierno.",
+    btnTexto: "Analizar el gas de mi empresa",
+    btnHref: "#estudio"
+  },
+  {
+    id: "comunidad",
+    titulo: "Comunidades de propietarios",
+    img: imgComunidades,
+    alt: "Edificio residencial comunitario con calefacción central y caldera de gas",
+    icono: "comunidad",
+    desc: "Con calefacción central o agua caliente común, lo primero es saber si podéis acogeros a la tarifa regulada y qué os cuesta frente al mercado libre.",
+    btnTexto: "Analizar el gas de la comunidad",
+    btnHref: "/comunidades-de-propietarios"
+  },
+  {
+    id: "hogares",
+    titulo: "Hogares",
+    img: imgHogares,
+    alt: "Vivienda familiar con cocina de gas natural y calefacción por radiadores",
+    icono: "hogar",
+    desc: "Si consumes hasta 50.000 kWh al año puedes estar en la tarifa regulada (TUR). Te decimos si te compensa seguir en ella o pasar al mercado libre.",
+    btnTexto: "Revisar el gas de mi casa",
+    btnHref: "/particulares"
+  }
+];
+---
+
+<section class="segun-quien-seccion" id="areas-gas" aria-labelledby="h2-segun-quien">
+  <div class="segun-quien-contenedor">
+    <!-- Encabezado de la Sección -->
+    <header class="segun-quien-header">
+      <p class="segun-quien-kicker">
+        ÁREAS DE ANÁLISIS <span class="kicker-cursor" aria-hidden="true">|</span>
+      </p>
+
+      <h2 class="segun-quien-titulo" id="h2-segun-quien">
+        SEGÚN QUIÉN <span class="titulo-cursiva-azul">paga la factura</span>
+      </h2>
+
+      <p class="segun-quien-subtitulo">
+        Cada caso es distinto. Te explicamos qué debes tener en cuenta y te ayudamos a encontrar la mejor opción para tu tarifa de gas.
+      </p>
+    </header>
+
+    <!-- Rejilla de 3 Columnas -->
+    <div class="areas-gas-grid">
+      {
+        areas.map((area) => (
+          <div class="area-gas-col">
+            <!-- Tarjeta Superior con Imagen y Bloque Azul -->
+            <article class="area-gas-card">
+              <!-- Contenedor de la Imagen de Referencia -->
+              <div class="card-img-wrap">
+                <img
+                  src={area.img.src}
+                  alt={area.alt}
+                  class="card-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <!-- Curva inclinada orgánica idéntica al boceto -->
+                <svg class="card-curva-svg" viewBox="0 0 400 48" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0,38 C140,28 280,14 360,6 C385,3 398,1 400,0 L400,48 L0,48 Z" fill="#004aad"></path>
+                </svg>
+              </div>
+
+              <!-- Bloque Azul Inferior con Corte y Badge Circular -->
+              <div class="card-cuerpo-azul">
+                <div class="card-area-cabecera">
+                  <h3 class="card-area-tit">{area.titulo}</h3>
+                  <!-- Badge circular con icono temático SVG -->
+                  <div class="card-badge-circulo" aria-hidden="true">
+                    {area.icono === "empresa" && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                      </svg>
+                    )}
+                    {area.icono === "comunidad" && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 21h18"></path>
+                        <path d="M19 21v-8a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v8"></path>
+                        <path d="M9 21v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"></path>
+                        <path d="M10 9l4-4 4 4"></path>
+                      </svg>
+                    )}
+                    {area.icono === "hogar" && (
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                      </svg>
+                    )}
+                  </div>
+                </div>
+
+                <p class="card-area-desc">{area.desc}</p>
+              </div>
+            </article>
+
+            <!-- Botón Píldora Cian Centrado Debajo de Cada Tarjeta -->
+            <div class="area-btn-wrap">
+              <a
+                href={area.btnHref}
+                class="btn-area-pildora"
+                data-abrir-funnel={area.btnHref === "#estudio" ? true : undefined}
+                data-tipo-gas={area.id}
+              >
+                <span>{area.btnTexto}</span>
+                <span class="btn-circulo-flecha" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 3.5 10.5 8 6 12.5"></path>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: SEGÚN QUIÉN PAGA LA FACTURA
+     ========================================================================== */
+  .segun-quien-seccion {
+    padding: clamp(64px, 7vw, 104px) 0;
+    background: #ffffff;
+    width: 100%;
+    position: relative;
+  }
+
+  .segun-quien-contenedor {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+  }
+
+  /* Encabezado */
+  .segun-quien-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(36px, 4vw, 52px);
+  }
+
+  .segun-quien-kicker {
+    font-family: "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .kicker-cursor {
+    color: #0052cc;
+    font-weight: 400;
+    font-size: 1.15em;
+    margin-left: 2px;
+  }
+
+  .segun-quien-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.8rem + 1.2vw, 2.85rem);
+    font-weight: 800;
+    color: #0c192c;
+    line-height: 1.18;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva-azul {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #4f8df9;
+    letter-spacing: 0;
+    display: inline;
+  }
+
+  .segun-quien-subtitulo {
+    font-size: 1.05rem;
+    line-height: 1.62;
+    color: #334155;
+    margin: 0;
+    max-width: 760px;
+  }
+
+  /* Rejilla de 3 Columnas */
+  .areas-gas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
+    align-items: stretch;
+  }
+
+  @media (max-width: 1080px) {
+    .areas-gas-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      max-width: 580px;
+      margin-inline: auto;
+    }
+  }
+
+  /* Columna individual con tarjeta + botón debajo */
+  .area-gas-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Tarjeta contenedor con flex vertical completo */
+  .area-gas-card {
+    width: 100%;
+    background: #004aad;
+    border-radius: 32px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-shadow: 0 14px 36px rgba(0, 74, 173, 0.12);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+    isolation: isolate;
+    transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+
+  .area-gas-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 50px rgba(0, 74, 173, 0.22);
+  }
+
+  /* Imagen de referencia superior con divisor curvo */
+  .card-img-wrap {
+    width: 100%;
+    height: 230px;
+    position: relative;
+    overflow: hidden;
+    background: #004aad;
+    transform: translateZ(0);
+  }
+
+  .card-curva-svg {
+    position: absolute;
+    bottom: -2px;
+    left: -1px;
+    right: -1px;
+    width: calc(100% + 2px);
+    height: 50px;
+    display: block;
+    pointer-events: none;
+    z-index: 2;
+    shape-rendering: geometricPrecision;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .area-gas-card:hover .card-img {
+    transform: scale(1.05);
+  }
+
+  /* Bloque azul inferior */
+  .card-cuerpo-azul {
+    background: #004aad;
+    padding: 22px 26px 30px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-grow: 1;
+    margin-top: -1px;
+    z-index: 2;
+  }
+
+  /* Cabecera que agrupa título y badge circular con espacio protegido */
+  .card-area-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+    min-height: 56px;
+  }
+
+  .card-area-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.22rem, 1.05rem + 0.4vw, 1.42rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.24;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Badge circular en la cabecera */
+  .card-badge-circulo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 30, 80, 0.15);
+    flex-shrink: 0;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+
+  .area-gas-card:hover .card-badge-circulo {
+    transform: scale(1.06);
+    background: #ffffff;
+  }
+
+  .card-area-desc {
+    font-size: 0.94rem;
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.94);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  /* Botón Píldora inferior */
+  .area-btn-wrap {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .btn-area-pildora {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
+    font-weight: 800;
+    padding: 8px 10px 8px 20px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 194, 255, 0.32);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 100%;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .btn-area-pildora:hover {
+    background: #2ed1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 194, 255, 0.45);
+  }
+
+  .btn-circulo-flecha {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #0083a8;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .btn-area-pildora:hover .btn-circulo-flecha {
+    transform: translateX(3px);
+    background: #006b8a;
+  }
+
+  @media (max-width: 640px) {
+    .btn-area-pildora {
+      font-size: 0.82rem;
+      padding: 8px 8px 8px 16px;
+      white-space: normal;
+    }
+    .card-cuerpo-azul {
+      padding: 20px 18px 26px;
+    }
+    .card-area-cabecera {
+      gap: 12px;
+      min-height: auto;
+    }
+    .card-badge-circulo {
+      width: 46px;
+      height: 46px;
+    }
+    .card-area-tit {
+      font-size: 1.2rem;
+    }
+  }
+</style>

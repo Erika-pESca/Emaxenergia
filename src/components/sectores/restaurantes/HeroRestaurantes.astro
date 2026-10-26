@@ -1,0 +1,400 @@
+---
+// Componente: HeroRestaurantes.astro
+// Hero oficial para la página: /sectores/restaurantes ("Luz para restaurantes y hostelería")
+// Fondo fotográfico de servicio activo a las dos de la tarde + degradado azul corporativo + tarjeta glassmorphic interactiva.
+
+import restauranteImg from "../../../imagenes/restaurante_servicio_hero.jpg";
+
+const tramosLuz = [
+  {
+    id: "300",
+    label: "MENOS DE 300€",
+    valor: "<300",
+    rango: "menos de 300 € al mes",
+    msg: "Revisaremos tu factura de restaurante u hostelería para detectar si tu potencia de cocina o climatización está sobredimensionada.",
+  },
+  {
+    id: "1000",
+    label: "300 – 1.000€",
+    valor: "300-1000",
+    rango: "entre 300 y 1.000 € al mes",
+    msg: "Auditamos tu potencia en P1-P6 durante el servicio de comidas y cenas, evitando penalizaciones de maxímetro y recargos innecesarios.",
+  },
+  {
+    id: "3000",
+    label: "1.000 – 3.000€",
+    valor: "1000-3000",
+    rango: "entre 1.000 y 3.000 € al mes",
+    msg: "Estudiamos la curva de cuartohorarias del servicio de mediodía (planchas, freidoras, extracción) y optimizamos tu peaje 3.0TD.",
+  },
+  {
+    id: "mas3000",
+    label: "Más de 3.000€",
+    valor: ">3000",
+    rango: "más de 3.000 € al mes",
+    msg: "Consultoría especializada para grupos de restauración, hoteles y grandes comedores: coberturas OMIP y negociación a medida.",
+  },
+];
+---
+
+<section class="restaurantes-hero-root">
+  <!-- Fondo fotográfico con el restaurante en pleno servicio de mediodía y degradado azul oficial -->
+  <div class="restaurantes-hero-bg">
+    <img
+      src={restauranteImg.src}
+      alt="Restaurante y cocina en pleno servicio de comidas de mediodía"
+      class="hero-bg-img"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-bg-gradient"></div>
+  </div>
+
+  <div class="restaurantes-hero-contenedor">
+    <div class="restaurantes-hero-grid">
+      <!-- Columna Izquierda: Titulares y propuesta técnica -->
+      <div class="restaurantes-hero-textos">
+        <div class="restaurantes-kicker">
+          <span>LUZ PARA RESTAURANTES Y HOSTELERÍA</span>
+          <span class="restaurantes-kicker-bar" aria-hidden="true">|</span>
+        </div>
+
+        <h1 class="restaurantes-h1">
+          <span class="h1-cursiva-cyan">Lo que pasa</span> EN TU FACTURA A LAS DOS DE LA TARDE
+        </h1>
+
+        <p class="restaurantes-subtitulo">
+          En pleno servicio, planchas, freidoras y extracción marcan tu potencia. Leemos tu factura con las reglas de tu peaje.
+        </p>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta Glassmorphic con selector de tramos conectado al formulario modal -->
+      <div class="restaurantes-hero-card-col">
+        <div class="hero-card-glass">
+          <h2 class="card-pregunta-tit">¿Cuánto paga tu empresa de luz al mes?</h2>
+          <p class="card-pregunta-sub">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+
+          <!-- Rejilla 2x2 de botones de tramo -->
+          <div class="card-tramos-grid" role="group" aria-label="Selección de tramo mensual de luz">
+            {
+              tramosLuz.map((t) => (
+                <button
+                  type="button"
+                  class="btn-tramo-azul"
+                  data-abrir-funnel
+                  data-tramo-id={t.valor}
+                  data-tramo-label={t.label}
+                  data-tramo-rango={t.rango}
+                  data-tramo-msg={t.msg}
+                  aria-label={`Seleccionar tramo ${t.label} para abrir estudio energético`}
+                >
+                  <span class="tramo-txt">{t.label}</span>
+                  <span class="tramo-flecha" aria-hidden="true">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#003580"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
+          <!-- Pie de tarjeta -->
+          <p class="card-nota-pie">
+            Tú eliges cómo empezamos: con tu factura, con tu CUPS o con dos datos de tu negocio. El análisis no tiene coste.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO RESTAURANTES Y HOSTELERÍA: FONDO FOTOGRÁFICO + CRISTALISMO + AZUL EMAX
+     ========================================================================== */
+  .restaurantes-hero-root {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    min-height: calc(88vh + 78px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #004aad;
+    overflow: hidden;
+    padding-top: calc(78px + clamp(36px, 5vh, 52px));
+    padding-bottom: clamp(48px, 6vh, 72px);
+    box-sizing: border-box;
+  }
+
+  /* Fondo con fotografía y degradado de fusión a la izquierda */
+  .restaurantes-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 36%;
+    display: block;
+  }
+
+  /* Gradiente oficial: Azul sólido y vibrante a la izquierda para garantizar máxima
+     legibilidad y contraste de los textos, fusionándose hacia la derecha con el ambiente del restaurante */
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      rgba(0, 74, 173, 0.96) 32%,
+      rgba(0, 74, 173, 0.78) 55%,
+      rgba(0, 74, 173, 0.42) 78%,
+      rgba(4, 30, 74, 0.58) 100%
+    );
+  }
+
+  /* Contenedor principal */
+  .restaurantes-hero-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+    box-sizing: border-box;
+  }
+
+  /* Grid 2 Columnas */
+  .restaurantes-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 68px);
+    align-items: center;
+  }
+
+  /* Textos izquierda */
+  .restaurantes-hero-textos {
+    display: flex;
+    flex-direction: column;
+    max-width: 620px;
+  }
+
+  .restaurantes-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #38b6ff;
+    margin-bottom: 14px;
+  }
+
+  .restaurantes-kicker-bar {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .restaurantes-h1 {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.3rem, 2rem + 1.8vw, 3.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.12;
+    margin: 0 0 20px;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .h1-cursiva-cyan {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    color: #38b6ff;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .restaurantes-subtitulo {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    max-width: 540px;
+  }
+
+  /* Tarjeta Glassmorphic derecha */
+  .restaurantes-hero-card-col {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .hero-card-glass {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.32);
+    border-radius: 28px;
+    padding: clamp(26px, 3.2vw, 38px);
+    box-shadow: 0 20px 50px rgba(0, 24, 70, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+  }
+
+  .card-pregunta-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.48rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .card-pregunta-sub {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 6px;
+  }
+
+  /* Rejilla 2x2 de botones */
+  .card-tramos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .card-tramos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .btn-tramo-azul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 16px;
+    background: #003a88;
+    color: #ffffff;
+    border: 1px solid rgba(56, 182, 255, 0.35);
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+    outline: none;
+  }
+
+  .btn-tramo-azul:hover {
+    background: #004fb8;
+    border-color: #38b6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 58, 136, 0.4);
+  }
+
+  .btn-tramo-azul:active {
+    transform: translateY(0);
+  }
+
+  .tramo-txt {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  /* Círculo cian con icono chevron */
+  .tramo-flecha {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #003580;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 194, 255, 0.35);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover .tramo-flecha {
+    transform: scale(1.08) translateX(1px);
+    background: #33d1ff;
+  }
+
+  .card-nota-pie {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 4px 0 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .restaurantes-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .restaurantes-hero-textos {
+      max-width: 100%;
+    }
+
+    .restaurantes-hero-card-col {
+      justify-content: flex-start;
+    }
+
+    .hero-card-glass {
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .restaurantes-hero-root {
+      min-height: auto;
+      padding-top: calc(78px + 28px);
+      padding-bottom: 48px;
+    }
+
+    .restaurantes-h1 {
+      font-size: 2.1rem;
+    }
+
+    .hero-card-glass {
+      padding: 22px 18px;
+      border-radius: 20px;
+    }
+  }
+</style>

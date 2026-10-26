@@ -4,7 +4,6 @@
 // Fondo gris suave, acordiones ampliados y tipografía de alta legibilidad
 import imgMaxi from "../../imagenes/maxi.jpg";
 import imgPersonal from "../../imagenes/personal.jpg";
-import imgConsultor from "../../imagenes/consultor-emax.jpg";
 ---
 
 <section class="acordeon-seccion" id="acordeon-tarifas" aria-labelledby="h2-acordeon">
@@ -167,8 +166,12 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes azul">
-                    <div class="avatar-foto-wrap mini" aria-hidden="true">
-                      <img src={imgConsultor.src} alt="Consultor EMAX" class="avatar-foto-circulo" />
+                    <div class="icono-asumes-wrap azul" aria-hidden="true">
+                      <!-- Candado: precio cerrado y protegido de fluctuaciones -->
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                      </svg>
                     </div>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
@@ -189,8 +192,12 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes naranja">
-                    <div class="avatar-foto-wrap mini" aria-hidden="true">
-                      <img src={imgPersonal.src} alt="Personal EMAX" class="avatar-foto-circulo" />
+                    <div class="icono-asumes-wrap naranja" aria-hidden="true">
+                      <!-- Gráfica de volatilidad y oscilación del mercado OMIE -->
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                        <polyline points="16 7 22 7 22 13"></polyline>
+                      </svg>
                     </div>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
@@ -211,8 +218,14 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
                 </div>
                 <div class="mod-der">
                   <div class="pildora-asumes azul">
-                    <div class="avatar-foto-wrap mini" aria-hidden="true">
-                      <img src={imgMaxi.src} alt="Maxi EMAX" class="avatar-foto-circulo" />
+                    <div class="icono-asumes-wrap azul" aria-hidden="true">
+                      <!-- Calendario mensual recurrente para cuota regular -->
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                      </svg>
                     </div>
                     <div class="asumes-txts">
                       <span class="asumes-tag">LO QUE ASUMES</span>
@@ -271,8 +284,11 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
             <!-- 3 Tarjetas en Rejilla Superior -->
             <div class="potencia-3cards-grid">
               <div class="card-pot-top">
-                <div class="avatar-foto-wrap" aria-hidden="true">
-                  <img src={imgConsultor.src} alt="Consultor técnico EMAX" class="avatar-foto-circulo" />
+                <div class="circulo-icono-pot" aria-hidden="true">
+                  <!-- Rayo: Potencia eléctrica contratada en kW -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
                 </div>
                 <span class="pot-tag">QUÉ ES</span>
                 <h4 class="pot-tit">Tu potencia contratada</h4>
@@ -280,8 +296,19 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
               </div>
 
               <div class="card-pot-top">
-                <div class="avatar-foto-wrap" aria-hidden="true">
-                  <img src={imgMaxi.src} alt="Maxi EMAX" class="avatar-foto-circulo" />
+                <div class="circulo-icono-pot" aria-hidden="true">
+                  <!-- Reguladores / Sliders: Ajuste de kW por cada periodo -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                    <line x1="1" y1="14" x2="7" y2="14"></line>
+                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                  </svg>
                 </div>
                 <span class="pot-tag">QUÉ SE DECIDE</span>
                 <h4 class="pot-tit">Cuántos kW contratas</h4>
@@ -289,8 +316,13 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
               </div>
 
               <div class="card-pot-top">
-                <div class="avatar-foto-wrap" aria-hidden="true">
-                  <img src={imgPersonal.src} alt="Equipo EMAX" class="avatar-foto-circulo" />
+                <div class="circulo-icono-pot" aria-hidden="true">
+                  <!-- Portapapeles con verificación: Trámite administrativo y técnico ante la distribuidora -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <path d="m9 14 2 2 4-4"></path>
+                  </svg>
                 </div>
                 <span class="pot-tag">TRÁMITE</span>
                 <h4 class="pot-tit">¿Cómo se cambia?</h4>
@@ -324,8 +356,14 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
 
               <div class="pot-ejemplo-der">
                 <div class="pildora-asumes azul ancho-fijo">
-                  <div class="avatar-foto-wrap mini" aria-hidden="true">
-                    <img src={imgPersonal.src} alt="Asesor EMAX" class="avatar-foto-circulo" />
+                  <div class="icono-pot-info-wrap" aria-hidden="true">
+                    <!-- Calendario: Se paga cada día -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
                   </div>
                   <p class="asumes-valor-largo">
                     La potencia se paga cada día, independientemente de si la consumes o no.
@@ -511,7 +549,7 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
   }
 
   .acordeon-titulo {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: clamp(2.3rem, 1.8rem + 1.8vw, 3.4rem);
     font-weight: 800;
     color: #0c192c;
@@ -522,7 +560,7 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
   }
 
   .cursiva-azul {
-    font-family: "Playfair Display", "Merriweather", Georgia, serif;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
     color: #0052cc;
@@ -610,7 +648,7 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
   }
 
   .trigger-nombre {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: 1.35rem;
     font-weight: 800;
     color: #0c192c;
@@ -755,7 +793,7 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
   }
 
   .card-est-tit {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: 1.45rem;
     font-weight: 800;
     color: #004aad;
@@ -1178,28 +1216,40 @@ import imgConsultor from "../../imagenes/consultor-emax.jpg";
   }
 
   .circulo-icono-pot {
-    width: 54px;
-    height: 54px;
-    border-radius: 50% !important;
-    background: #081329;
-    border: 2.5px solid #38b6ff !important;
-    box-shadow: 0 4px 14px rgba(56, 182, 255, 0.4);
-    overflow: hidden !important;
-    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #eef6ff;
+    border: 1.5px solid #d0e4ff;
+    color: #0052cc;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     margin-bottom: 4px;
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(0, 82, 204, 0.08);
   }
 
-  .circulo-icono-pot img {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
-    object-position: center top;
-    display: block !important;
+  .card-pot-top:hover .circulo-icono-pot {
+    background: #0052cc;
+    border-color: #0052cc;
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 18px rgba(0, 82, 204, 0.25);
+  }
+
+  .icono-pot-info-wrap {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #0052cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 82, 204, 0.12);
   }
 
   .pot-tag {

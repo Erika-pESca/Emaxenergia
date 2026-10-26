@@ -1,0 +1,287 @@
+---
+// Componente: Peaje61tdNoDependePotencia.astro
+// Sección Banner de Industria: "La 6.1TD no depende DE TU POTENCIA"
+// Aclaración técnica sobre tensión vs potencia (Circular 3/2020)
+// Degradado horizontal fluido azul eléctrico corporativo que funde a blanco
+---
+
+<section
+  class="peaje-61td-seccion"
+  id="peaje-61td"
+  aria-labelledby="peaje-61td-tit"
+>
+  <div class="peaje-61td-contenedor">
+    <div class="peaje-61td-content">
+      <h2 class="peaje-61td-titulo" id="peaje-61td-tit">
+        <span class="tit-cursiva">La 6.1TD no depende</span>
+        <span class="tit-mayus">DE TU POTENCIA</span>
+      </h2>
+
+      <p class="peaje-61td-texto">
+        Tu peaje lo decide la tensión a la que está conectada tu nave. En baja tensión, con más de 15 kW en algún periodo, es 3.0TD. Conectada a más de 1 kV y menos de 30 kV, es 6.1TD, sin potencia mínima ni máxima. El límite de 450 kW que todavía se lee en muchas páginas desapareció con la Circular 3/2020.
+      </p>
+
+      <!-- Cuadro de aclaración técnica -->
+      <div class="aclaracion-conexion-cuadro">
+        <div class="aclaracion-icono-wrap" aria-hidden="true">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#0052cc"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+        </div>
+        <p class="aclaracion-texto">
+          Si alguien te propone "pasarte a 6.1TD", no es una decisión de contrato: cambiar de peaje supone cambiar la conexión de tu nave.
+        </p>
+      </div>
+
+      <!-- Fila de Píldoras de Guías Técnicas -->
+      <div class="peaje-61td-pildoras">
+        <a
+          href="/guias/peaje-3-0td"
+          class="pildora-cyan-banner"
+          aria-label="Ir a la guía: Qué peaje tienes: 2.0TD, 3.0TD o 6.1TD"
+        >
+          <span>Qué peaje tienes: 2.0TD, 3.0TD o 6.1TD</span>
+          <span class="circulo-flecha-azul" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#00c2ff"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+
+        <a
+          href="/guias/peaje-6-1td"
+          class="pildora-cyan-banner"
+          aria-label="Ir a la guía: El peaje 6.1TD, explicado"
+        >
+          <span>El peaje 6.1TD, explicado</span>
+          <span class="circulo-flecha-azul" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#00c2ff"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN BANNER: LA 6.1TD NO DEPENDE DE TU POTENCIA (INDUSTRIA)
+     ========================================================================== */
+  .peaje-61td-seccion {
+    position: relative;
+    width: 100%;
+    /* Degradado fluido desde azul eléctrico corporativo que ilumina y funde a blanco a la derecha */
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      #0059d6 28%,
+      #006ef0 48%,
+      #5ca2fc 68%,
+      #bcd9ff 86%,
+      #f0f6ff 95%,
+      #ffffff 100%
+    );
+    color: #ffffff;
+    padding: clamp(65px, 7.5vw, 105px) 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .peaje-61td-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .peaje-61td-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 590px;
+    width: 100%;
+  }
+
+  .peaje-61td-titulo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 0 16px 0;
+    line-height: 1.15;
+  }
+
+  .tit-cursiva {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 1.9rem + 1.1vw, 2.85rem);
+    color: #00c2ff;
+    letter-spacing: -0.01em;
+  }
+
+  .tit-mayus {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.8rem + 1vw, 2.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .peaje-61td-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.92rem, 0.88rem + 0.18vw, 1rem);
+    line-height: 1.62;
+    color: #ffffff;
+    margin: 0 0 22px 0;
+    font-weight: 400;
+  }
+
+  /* Fila de Aclaración con icono cuadrado celeste */
+  .aclaracion-conexion-cuadro {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: clamp(26px, 3.2vw, 36px);
+    box-sizing: border-box;
+  }
+
+  .aclaracion-icono-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #c7e8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .aclaracion-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.85rem, 0.82rem + 0.15vw, 0.92rem);
+    line-height: 1.5;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 400;
+    max-width: 520px;
+  }
+
+  /* Píldoras */
+  .peaje-61td-pildoras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pildora-cyan-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 10px 16px 10px 20px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 194, 255, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .pildora-cyan-banner:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 194, 255, 0.5);
+  }
+
+  .circulo-flecha-azul {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .pildora-cyan-banner:hover .circulo-flecha-azul {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 900px) {
+    .pildora-cyan-banner {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .peaje-61td-seccion {
+      background: linear-gradient(
+        135deg,
+        #004aad 0%,
+        #0059d6 45%,
+        #3b8dfa 75%,
+        #b8d8ff 100%
+      );
+      padding: 55px 0 65px;
+    }
+
+    .peaje-61td-content {
+      max-width: 100%;
+    }
+
+    .pildora-cyan-banner {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .peaje-61td-pildoras {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+</style>

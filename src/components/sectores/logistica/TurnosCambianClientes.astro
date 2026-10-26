@@ -1,0 +1,273 @@
+---
+// Componente: TurnosCambianClientes.astro
+// Sección Banner de Logística y Frío: "Si tus turnos cambian CON TUS CLIENTES"
+// Degradado horizontal fluido azul eléctrico corporativo que se desvanece a blanco
+// Píldoras de enlaces técnicos y botón modal para multisede/varias naves
+---
+
+<section
+  class="turnos-clientes-seccion"
+  id="turnos-con-clientes"
+  aria-labelledby="turnos-clientes-tit"
+>
+  <div class="turnos-clientes-contenedor">
+    <div class="turnos-clientes-content">
+      <h2 class="turnos-clientes-titulo" id="turnos-clientes-tit">
+        <span class="tit-cursiva">Si tus turnos cambian</span>
+        <span class="tit-mayus">CON TUS CLIENTES</span>
+      </h2>
+
+      <p class="turnos-clientes-texto">
+        La modalidad no se decide por lo que se espera del mercado, sino por cuánto cambia tu consumo de un mes a otro y qué riesgo puede asumir tu empresa: pagar más si el mercado baja (precio fijo), la volatilidad (indexado) o que tu consumo se aparte del previsto (Cuota Fija).
+      </p>
+
+      <div class="turnos-clientes-pildoras">
+        <!-- Fila 1: 2 Píldoras de Guía y Método -->
+        <div class="pildoras-fila">
+          <a
+            href="/guias/precio-fijo-o-indexado"
+            class="pildora-cyan-banner"
+            aria-label="Ir a la guía de precio fijo o indexado: cómo decidir"
+          >
+            <span>Precio fijo o indexado: cómo decidir</span>
+            <span class="circulo-flecha-azul" aria-hidden="true">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00c2ff"
+                stroke-width="3.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+
+          <a
+            href="/metodo#decisiones"
+            class="pildora-cyan-banner"
+            aria-label="Ver la decisión 4 del método EMAX"
+          >
+            <span>La decisión 4 del método</span>
+            <span class="circulo-flecha-azul" aria-hidden="true">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00c2ff"
+                stroke-width="3.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <!-- Fila 2: Modal Varias Naves -->
+        <div class="pildoras-fila">
+          <button
+            type="button"
+            class="pildora-cyan-banner btn-pildora-modal"
+            data-abrir-funnel
+            data-tramo-id="varias-naves"
+            data-tramo-label="¿Tienes varias naves?"
+            data-tramo-msg="Tengo varias naves o plataformas logísticas y quiero optimizar la energía de toda la operativa."
+            aria-label="Abrir formulario para consultar varias naves"
+          >
+            <span>¿Tienes varias naves?</span>
+            <span class="circulo-flecha-azul" aria-hidden="true">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00c2ff"
+                stroke-width="3.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN BANNER: SI TUS TURNOS CAMBIAN CON TUS CLIENTES (LOGÍSTICA Y FRÍO)
+     ========================================================================== */
+  .turnos-clientes-seccion {
+    position: relative;
+    width: 100%;
+    /* Degradado fluido desde azul eléctrico corporativo que ilumina y funde a blanco a la derecha */
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      #0059d6 28%,
+      #006ef0 48%,
+      #5ca2fc 68%,
+      #bcd9ff 86%,
+      #f0f6ff 95%,
+      #ffffff 100%
+    );
+    color: #ffffff;
+    padding: clamp(65px, 7.5vw, 105px) 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .turnos-clientes-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .turnos-clientes-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 580px;
+    width: 100%;
+  }
+
+  .turnos-clientes-titulo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 0 16px 0;
+    line-height: 1.15;
+  }
+
+  .tit-cursiva {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 1.9rem + 1.1vw, 2.85rem);
+    color: #00c2ff;
+    letter-spacing: -0.01em;
+  }
+
+  .tit-mayus {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.8rem + 1vw, 2.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .turnos-clientes-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.94rem, 0.9rem + 0.2vw, 1.02rem);
+    line-height: 1.62;
+    color: #ffffff;
+    margin: 0 0 clamp(28px, 3.5vw, 38px) 0;
+    font-weight: 400;
+  }
+
+  /* Píldoras */
+  .turnos-clientes-pildoras {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pildoras-fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pildora-cyan-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 10px 16px 10px 20px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 194, 255, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .btn-pildora-modal {
+    border: none;
+    cursor: pointer;
+  }
+
+  .pildora-cyan-banner:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 194, 255, 0.5);
+  }
+
+  .circulo-flecha-azul {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .pildora-cyan-banner:hover .circulo-flecha-azul {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 900px) {
+    .pildora-cyan-banner {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .turnos-clientes-seccion {
+      background: linear-gradient(
+        135deg,
+        #004aad 0%,
+        #0059d6 45%,
+        #3b8dfa 75%,
+        #b8d8ff 100%
+      );
+      padding: 55px 0 65px;
+    }
+
+    .turnos-clientes-content {
+      max-width: 100%;
+    }
+
+    .pildora-cyan-banner {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .pildoras-fila {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+// Página: Todos los Sectores (/sectores)
+// Vista principal de sectores empresariales
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroSectores from "../../components/sectores/HeroSectores.astro";
+import CincoSectoresCards from "../../components/sectores/CincoSectoresCards.astro";
+import DosRestaurantesComparativa from "../../components/sectores/DosRestaurantesComparativa.astro";
+import SiTuNegocioNoEsta from "../../components/sectores/SiTuNegocioNoEsta.astro";
+import CierreSectoresGasto from "../../components/sectores/CierreSectoresGasto.astro";
+---
+
+<BaseLayout
+  title="Sectores empresariales: el sector no decide tu tarifa, tu consumo sí | EMAX Energía"
+  description="Lo que sí hace el sector es decirnos qué mirar primero: el frío que no para, la temporada, los turnos, el servicio de mediodía. Busca el tuyo."
+  path="/sectores"
+>
+  <div class="sectores-page-wrapper">
+    <!-- 1. Hero con imagen del chef en cocina y tarjeta de cálculo de consumo -->
+    <HeroSectores />
+
+    <!-- 2. Rejilla oficial de 8 tarjetas de sectores leídos por cómo consumen -->
+    <CincoSectoresCards />
+
+    <!-- 3. Comparativa ilustrativa: Dos restaurantes del mismo tamaño -->
+    <DosRestaurantesComparativa />
+
+    <!-- 4. Si tu negocio no está en la lista (acordeón interactivo + taller mecánico) -->
+    <SiTuNegocioNoEsta />
+
+    <!-- 5. Cierre final con selector de tramo y formulario integrado -->
+    <CierreSectoresGasto />
+  </div>
+</BaseLayout>
+
+<style>
+  .sectores-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

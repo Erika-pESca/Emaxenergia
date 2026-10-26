@@ -1,0 +1,639 @@
+---
+// Componente: ExcesosYReactivaNave.astro
+// Sección de Industria: "EXCESOS Y REACTIVA en la nave"
+// Comparativa entre "Concepto", "En tu nave" y "Lo que dice la norma"
+// Aclaración sobre ajuste de potencia a ciegas y botones de acción + guías
+---
+
+<section
+  class="excesos-reactiva-seccion"
+  id="excesos-reactiva"
+  aria-labelledby="excesos-reactiva-tit"
+>
+  <div class="excesos-contenedor">
+    <!-- Encabezado de la Sección -->
+    <div class="excesos-header">
+      <h2 class="excesos-titulo" id="excesos-reactiva-tit">
+        EXCESOS Y REACTIVA <span class="tit-cursiva">en la nave</span>
+      </h2>
+    </div>
+
+    <!-- Tres tarjetas superpuestas: Concepto / En tu nave / Lo que dice la norma -->
+    <div class="comparativa-tabla-wrap">
+      <!-- Columna 1: Concepto (píldora flotante + tarjeta blanca más baja) -->
+      <div class="col-concepto">
+        <span class="pill-badge pill-concepto">Concepto</span>
+
+        <div class="tarjeta-concepto">
+          <div class="filas-concepto-lista">
+            <!-- Fila 1: Excesos de potencia -->
+            <div class="fila-concepto-item">
+              <div class="concepto-icono-circulo" aria-hidden="true">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#0052cc"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+              </div>
+              <span class="concepto-nombre">Excesos de potencia</span>
+            </div>
+
+            <!-- Fila 2: Energía reactiva -->
+            <div class="fila-concepto-item">
+              <div class="concepto-icono-circulo" aria-hidden="true">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#0052cc"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M8 12a4 4 0 0 1 8 0" />
+                  <path d="M12 8v4" />
+                </svg>
+              </div>
+              <span class="concepto-nombre">Energía reactiva</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna 2: En tu nave (tarjeta blanca alta, al frente) -->
+      <div class="tarjeta-nave">
+        <span class="pill-badge pill-azul-nave">En tu nave</span>
+
+        <div class="filas-lista">
+          <!-- Fila 1 -->
+          <div class="fila-item">
+            <p class="nave-texto">
+              Arranques simultáneos, compresores, hornos que coinciden.
+            </p>
+          </div>
+
+          <!-- Fila 2 -->
+          <div class="fila-item">
+            <p class="nave-texto">
+              Motores, compresores y equipos de carga inductiva.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna 3: Lo que dice la norma (tarjeta azul) -->
+      <div class="tarjeta-norma">
+        <span class="pill-badge pill-blanca-norma">Lo que dice la norma</span>
+
+        <div class="filas-lista">
+          <!-- Fila 1 -->
+          <div class="fila-item">
+            <p class="norma-texto">
+              En los contadores de los puntos más grandes (tipos 1, 2 y 3) se calculan por cuartos de hora; en tipo 4, con el maxímetro de cada periodo. El precio del exceso está pensado para que no compense.
+            </p>
+          </div>
+
+          <!-- Fila 2 -->
+          <div class="fila-item">
+            <p class="norma-texto">
+              Se paga de P1 a P5 la que pasa del 33 % de la energía activa. Se corrige en la instalación, normalmente con una batería de condensadores.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fila de Aclaración con icono celeste -->
+    <div class="excesos-aclaracion-fila">
+      <div class="aclaracion-cuadro-icono" aria-hidden="true">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#003882"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 9v4" />
+          <path d="M12 17h.01" />
+          <rect x="3" y="3" width="18" height="18" rx="4" />
+        </svg>
+      </div>
+
+      <p class="aclaracion-frase">
+        Bajar la potencia sin mirar la que usas en cada periodo puede costarte más en excesos de lo que ahorras en potencia. Por eso la decidimos con tus datos, no a ojo.
+      </p>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="excesos-acciones-wrap">
+      <!-- Botón Principal: Modal Funnel EMAX -->
+      <div class="fila-btn-modal">
+        <button
+          type="button"
+          class="btn-analizar-nave"
+          data-abrir-funnel
+          data-tramo-id="excesos-reactiva-nave"
+          data-tramo-label="Analizar mi nave"
+          data-tramo-msg="Hola, quiero que revisen los excesos de potencia y energía reactiva de mi nave industrial."
+          aria-label="Abrir formulario para analizar mi nave"
+        >
+          <span>Analizar mi nave</span>
+          <span class="circulo-flecha-cyan" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#003882"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- Fila de Píldoras de Guías Técnicas -->
+      <div class="fila-pildoras-guias">
+        <a
+          href="/guias/exceso-de-potencia"
+          class="pildora-guia-cyan"
+          aria-label="Ir a la guía sobre exceso de potencia"
+        >
+          <span>Exceso de potencia</span>
+          <span class="circulo-flecha-azul" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#00c2ff"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+
+        <a
+          href="/guias/energia-reactiva"
+          class="pildora-guia-cyan"
+          aria-label="Ir a la guía sobre energía reactiva"
+        >
+          <span>Energía reactiva</span>
+          <span class="circulo-flecha-azul" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#00c2ff"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+
+        <a
+          href="/guias/potencia-contratada"
+          class="pildora-guia-cyan"
+          aria-label="Ir a la guía sobre potencia contratada"
+        >
+          <span>Potencia contratada</span>
+          <span class="circulo-flecha-azul" aria-hidden="true">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#00c2ff"
+              stroke-width="3.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: EXCESOS Y REACTIVA EN LA NAVE (INDUSTRIA)
+     ========================================================================== */
+  .excesos-reactiva-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7.5vw, 110px) 0 clamp(75px, 8.5vw, 120px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .excesos-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .excesos-header {
+    margin-bottom: clamp(34px, 4vw, 46px);
+  }
+
+  .excesos-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #00c2ff;
+  }
+
+  /* ==========================================================================
+     TRES TARJETAS SUPERPUESTAS (como en el boceto)
+     ========================================================================== */
+  .comparativa-tabla-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: clamp(32px, 4vw, 44px);
+  }
+
+  /* Columna 1: Concepto (píldora arriba + tarjeta blanca más baja, detrás) */
+  .col-concepto {
+    flex: 0 0 27%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+    margin-top: -38px;
+  }
+
+  .pill-concepto {
+    background: #0047ba;
+    color: #ffffff;
+    margin-left: 12px;
+    padding: 8px 22px;
+  }
+
+  .tarjeta-concepto {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 22px 0 0 22px;
+    padding: 4px 34px 4px 14px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+  }
+
+  .filas-concepto-lista {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fila-concepto-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    box-sizing: border-box;
+  }
+
+  .fila-concepto-item + .fila-concepto-item {
+    border-top: 1px solid #e8eef5;
+  }
+
+  .concepto-icono-circulo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #c9dcfb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .concepto-nombre {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+    font-weight: 700;
+    color: #0047ba;
+    letter-spacing: 0.01em;
+  }
+
+  /* Columna 2: En tu nave (blanca, alta, al frente) */
+  .tarjeta-nave {
+    flex: 0 0 34%;
+    position: relative;
+    z-index: 3;
+    margin-left: -22px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 14px 14px 26px;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+    box-sizing: border-box;
+  }
+
+  /* Columna 3: Lo que dice la norma (azul) */
+  .tarjeta-norma {
+    flex: 1 1 auto;
+    position: relative;
+    z-index: 2;
+    margin-left: 4px;
+    background: #0047ba;
+    border-radius: 24px;
+    padding: 14px 14px 22px;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+    box-sizing: border-box;
+  }
+
+  .filas-lista {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 6px 6px 0;
+  }
+
+  .fila-item {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 0;
+    box-sizing: border-box;
+  }
+
+  .tarjeta-nave .fila-item + .fila-item {
+    border-top: 1px solid #e2e8f0;
+    align-items: center;
+  }
+
+  .tarjeta-norma .fila-item + .fila-item {
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .nave-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.84rem, 0.8rem + 0.15vw, 0.9rem);
+    line-height: 1.6;
+    color: #1e293b;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .norma-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.82rem, 0.78rem + 0.15vw, 0.88rem);
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* Píldoras de cabecera */
+  .pill-badge {
+    display: block;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(0.92rem, 0.88rem + 0.2vw, 1.02rem);
+    font-weight: 600;
+    padding: 9px 24px;
+    border-radius: 9999px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .pill-azul-nave {
+    background: #0047ba;
+    color: #ffffff;
+    width: 100%;
+  }
+
+  .pill-blanca-norma {
+    background: #eaf3ff;
+    color: #0047ba;
+    width: 100%;
+  }
+
+  /* ==========================================================================
+     ACLARACIÓN CON ICONO CELESTE
+     ========================================================================== */
+  .excesos-aclaracion-fila {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: clamp(28px, 3.5vw, 38px);
+    max-width: 980px;
+  }
+
+  .aclaracion-cuadro-icono {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #c7e8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .aclaracion-frase {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.88rem, 0.85rem + 0.15vw, 0.94rem);
+    line-height: 1.55;
+    color: #e2e8f0;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ==========================================================================
+     BOTONES DE ACCIÓN
+     ========================================================================== */
+  .excesos-acciones-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  /* Botón 1: Modal Funnel */
+  .btn-analizar-nave {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: #0052cc;
+    color: #00c2ff;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 10px 18px 10px 24px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 82, 204, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .btn-analizar-nave:hover {
+    background: #0046b0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 82, 204, 0.5);
+  }
+
+  .circulo-flecha-cyan {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-analizar-nave:hover .circulo-flecha-cyan {
+    transform: translateX(2px);
+  }
+
+  /* Fila de Píldoras de Guías */
+  .fila-pildoras-guias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pildora-guia-cyan {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 9px 16px 9px 20px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 194, 255, 0.3);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .pildora-guia-cyan:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 194, 255, 0.45);
+  }
+
+  .circulo-flecha-azul {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .pildora-guia-cyan:hover .circulo-flecha-azul {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 980px) {
+    .comparativa-tabla-wrap {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    .col-concepto,
+    .tarjeta-nave,
+    .tarjeta-norma {
+      flex: 1 1 auto;
+      margin: 0;
+      min-height: 0;
+    }
+
+    .tarjeta-concepto {
+      border-radius: 22px;
+      padding: 4px 18px;
+    }
+
+    .pill-concepto {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .pill-badge {
+      white-space: normal;
+    }
+
+    .pildora-guia-cyan {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .btn-analizar-nave {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>

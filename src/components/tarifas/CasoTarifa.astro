@@ -1,26 +1,31 @@
 ---
 // Componente CasoTarifa para la página /tarifas
-// Muestra el caso de auditoría real del obrador de panadería: "Así quedó su tarifa"
+// Muestra el caso de auditoría real del obrador de panadería: "ASÍ QUEDÓ SU TARIFA"
+// Diseño de alta fidelidad según la maqueta oficial: tarjeta gris sobre fondo azul marino profundo
 const filasCaso = [
   {
+    num: "1",
     pieza: "Estructura",
     valor: "Genio · seis periodos",
-    porque: "El 56 % de su consumo del año cae en P6 (periodo nocturno más barato)."
+    porque: "El 56 % de su consumo del año cae en P6."
   },
   {
+    num: "2",
     pieza: "Modalidad",
     valor: "Precio fijo · 12 meses",
-    porque: "Márgenes estrechos y consumo estable y predecible de un mes a otro."
+    porque: "Márgenes estrechos y consumo estable de un mes a otro."
   },
   {
+    num: "3",
     pieza: "Potencia",
     valor: "25 · 30 · 30 · 30 · 30 · 42 kW",
-    porque: "Maxímetros de doce meses con margen técnico. P3 y P5 suben a 30 kW porque cada periodo necesita igual o más potencia que el anterior por normativa."
+    porque: "Maxímetros de doce meses, con margen. P3 y P5 suben a 30 kW porque cada periodo necesita igual o más potencia que el anterior."
   },
   {
+    num: "4",
     pieza: "Condiciones",
     valor: "Entrada el 1-12-2026",
-    porque: "Al terminar su contrato actual, para no pagar penalización por permanencia."
+    porque: "Al terminar su contrato actual, para no pagar penalización."
   }
 ];
 ---
@@ -28,61 +33,59 @@ const filasCaso = [
 <section class="caso-obrador-seccion" id="caso-obrador" aria-labelledby="h2-quedo">
   <div class="caso-contenedor">
     <article class="caso-card">
-      <!-- Banda superior informativa -->
+      <!-- Banda superior informativa (blanca) -->
       <header class="caso-banda">
-        <span class="caso-etiqueta">
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16">
-            <path d="M1.8 4.2a1 1 0 0 1 1-1h3.4l1.4 1.6h5.6a1 1 0 0 1 1 1v6.9a1 1 0 0 1-1 1H2.8a1 1 0 0 1-1-1Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path>
-          </svg>
-          Caso de ejemplo
-        </span>
+        <span class="caso-etiqueta">Caso de ejemplo</span>
         <span class="caso-supuestos-txt">
           Los peajes, los cargos y los impuestos son los oficiales de 2026.
+          <a href="/guias/factura-luz-empresa#supuestos" class="link-supuestos">Ver los supuestos</a>
         </span>
       </header>
 
-      <!-- Cuerpo del caso -->
+      <!-- Cuerpo del caso (gris suave) -->
       <div class="caso-cuerpo">
         <h2 class="caso-titulo" id="h2-quedo">ASÍ QUEDÓ SU TARIFA</h2>
         <p class="caso-entradilla">
-          Un obrador de panadería con tienda: 2.078 € en febrero. Esto es lo que salió de leer sus doce meses de datos de consumo.
+          Un obrador de panadería con tienda: 2.078 € en febrero. Esto es lo que salió de leer sus doce meses de datos.
         </p>
 
+        <!-- 4 Filas de la tarifa auditada con badges numéricos cian -->
         <div class="quedo-filas-lista">
           {
             filasCaso.map((f) => (
               <div class="quedo-fila">
-                <dt class="quedo-pieza">{f.pieza}</dt>
-                <dd class="quedo-detalle">
-                  <strong class="quedo-valor">{f.valor}</strong>
-                  <span class="quedo-porque">{f.porque}</span>
-                </dd>
+                <span class="quedo-num-badge" aria-hidden="true">{f.num}</span>
+                <div class="quedo-info">
+                  <h3 class="quedo-pieza-tit">{f.pieza}</h3>
+                  <p class="quedo-valor">{f.valor}</p>
+                  <p class="quedo-porque">{f.porque}</p>
+                </div>
               </div>
             ))
           }
         </div>
 
         <p class="quedo-nota">
-          Es un ejemplo. Tu tarifa sale de tu consumo real, construida con las mismas cuatro piezas.
+          Es un ejemplo. Tu tarifa sale de tu consumo, con las mismas cuatro piezas.
         </p>
 
-        <div class="caso-enlace-diag">
-          <a href="/diagnostico#factura-obrador" class="link-diag-obrador">
+        <!-- Botón Píldora inferior -->
+        <div class="caso-btn-wrap">
+          <a href="/guias/factura-luz-empresa" class="btn-metodo-pill">
             <span>Ver cómo leímos su factura, línea a línea</span>
-            <span class="link-flecha" aria-hidden="true">→</span>
+            <span class="pill-circulo-flecha" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3.5 10.5 8 6 12.5"></path>
+              </svg>
+            </span>
           </a>
         </div>
       </div>
 
-      <!-- Pie del caso con CTA directo -->
+      <!-- Pie del caso (blanco) -->
       <footer class="caso-pie">
-        <p class="caso-pregunta">¿Hacemos lo mismo con tu factura?</p>
-        <div class="caso-acciones">
-          <a href="#estudio" class="btn-analizar-caso" data-abrir-funnel>
-            <span>Analizar mi factura</span>
-            <span class="btn-flecha" aria-hidden="true">→</span>
-          </a>
-        </div>
+        <span class="caso-pregunta">¿Hacemos lo mismo con tu factura?</span>
+        <a href="/guias/factura-luz-empresa" class="link-guia-factura">Cómo leer la factura de luz de tu empresa</a>
       </footer>
     </article>
   </div>
@@ -90,182 +93,228 @@ const filasCaso = [
 
 <style>
   .caso-obrador-seccion {
-    padding: clamp(48px, 6vw, 84px) 0;
-    background: #ffffff;
-    border-bottom: 1px solid #eef2f6;
+    padding: clamp(64px, 7vw, 104px) 0;
+    background: #081d3e;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
   }
 
   .caso-contenedor {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1400px;
     margin-inline: auto;
-    padding-inline: clamp(20px, 4vw, 44px);
+    padding-inline: clamp(20px, 3.5vw, 48px);
   }
 
   .caso-card {
-    background: #f8fafc;
-    border: 1.5px solid #dbeafe;
-    border-radius: 24px;
+    background: #e2e8f0;
+    border-radius: 28px;
     overflow: hidden;
-    box-shadow: 0 12px 36px rgba(0, 74, 173, 0.08);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
+  /* Banda superior informativa */
   .caso-banda {
+    background: #ffffff;
+    padding: 18px clamp(24px, 4vw, 64px);
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 14px;
-    padding: 16px 28px;
-    background: #eff6ff;
-    border-bottom: 1px solid #bfdbfe;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+    border-bottom: 1px solid #cbd5e1;
   }
 
   .caso-etiqueta {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: #004aad;
+    background: #0052cc;
     color: #ffffff;
-    padding: 5px 12px;
+    padding: 6px 16px;
     border-radius: 999px;
     font-family: "Sora", sans-serif;
-    font-size: 0.80rem;
+    font-size: 0.85rem;
     font-weight: 700;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
   }
 
   .caso-supuestos-txt {
-    font-size: 0.86rem;
+    font-size: 0.90rem;
     color: #475569;
     font-weight: 500;
   }
 
-  .caso-cuerpo {
-    padding: 36px 32px;
+  .link-supuestos {
+    color: #0c192c;
+    font-weight: 800;
+    text-decoration: none;
+    margin-left: 6px;
+    transition: color 0.2s ease;
   }
 
-  @media (max-width: 768px) {
+  .link-supuestos:hover {
+    color: #0052cc;
+    text-decoration: underline;
+  }
+
+  /* Cuerpo del caso */
+  .caso-cuerpo {
+    padding: clamp(40px, 4.5vw, 62px) clamp(24px, 4vw, 64px);
+  }
+
+  @media (max-width: 640px) {
     .caso-cuerpo {
-      padding: 24px 20px;
+      padding: 28px 20px 24px;
     }
   }
 
   .caso-titulo {
-    font-family: "Sora", sans-serif;
-    font-size: clamp(1.6rem, 1.35rem + 1vw, 2.2rem);
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.75rem, 2.3vw, 2.3rem);
     font-weight: 800;
-    color: #0c1c38;
+    color: #0c192c;
     margin: 0 0 12px;
     letter-spacing: -0.015em;
+    text-transform: uppercase;
   }
 
   .caso-entradilla {
+    font-family: "Sora", sans-serif;
     font-size: 1.05rem;
+    font-weight: 700;
     line-height: 1.6;
-    color: #475569;
+    color: #0052cc;
     margin: 0 0 28px;
   }
 
+  /* Filas de la tarifa */
   .quedo-filas-lista {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid #e2e8f0;
-    margin-bottom: 20px;
+    border-top: 1px solid #cbd5e1;
+    margin-bottom: 26px;
   }
 
   .quedo-fila {
-    display: grid;
-    grid-template-columns: 140px minmax(0, 1fr);
+    display: flex;
+    align-items: flex-start;
     gap: 20px;
-    padding: 16px 0;
-    border-bottom: 1px solid #eef2f6;
-    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid #cbd5e1;
   }
 
-  @media (max-width: 680px) {
-    .quedo-fila {
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
-  }
-
-  .quedo-pieza {
+  .quedo-num-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #0c192c;
     font-family: "Sora", sans-serif;
-    font-size: 0.88rem;
+    font-size: 1.12rem;
     font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 194, 255, 0.4);
+    margin-top: 2px;
   }
 
-  .quedo-detalle {
-    margin: 0;
+  .quedo-info {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    width: 100%;
+  }
+
+  .quedo-pieza-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.12rem;
+    font-weight: 800;
+    color: #0052cc;
+    margin: 0;
   }
 
   .quedo-valor {
-    font-family: "Sora", sans-serif;
-    font-size: 1.05rem;
-    font-weight: 800;
-    color: #004aad;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
   }
 
   .quedo-porque {
-    font-size: 0.90rem;
-    line-height: 1.5;
+    font-size: 0.94rem;
+    line-height: 1.6;
     color: #475569;
+    margin: 0;
   }
 
   .quedo-nota {
-    font-size: 0.86rem;
-    color: #64748b;
-    font-style: italic;
-    margin: 0 0 20px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #0052cc;
+    margin: 0 0 24px;
   }
 
-  .caso-enlace-diag {
-    margin-top: 10px;
+  /* Botón Píldora inferior */
+  .caso-btn-wrap {
+    margin-top: 4px;
   }
 
-  .link-diag-obrador {
+  .btn-metodo-pill {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 14px;
+    background: #0052cc;
+    color: #ffffff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.92rem;
     font-weight: 700;
-    color: #004aad;
+    padding: 10px 14px 10px 22px;
+    border-radius: 999px;
     text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
+    box-shadow: 0 4px 18px rgba(0, 82, 204, 0.35);
+    transition: all 0.2s ease;
   }
 
-  .link-diag-obrador:hover {
-    color: #003680;
-    text-decoration: underline;
+  .btn-metodo-pill:hover {
+    background: #003fa0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 82, 204, 0.45);
   }
 
-  .link-flecha {
-    transition: transform 0.2s ease;
-  }
-
-  .link-diag-obrador:hover .link-flecha {
-    transform: translateX(4px);
-  }
-
-  .caso-pie {
-    padding: 24px 32px;
-    background: #eff6ff;
-    border-top: 1px solid #bfdbfe;
+  .pill-circulo-flecha {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #0052cc;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Pie del caso */
+  .caso-pie {
+    background: #ffffff;
+    padding: 20px clamp(24px, 4.5vw, 60px);
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+    border-top: 1px solid #cbd5e1;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     .caso-pie {
-      padding: 20px;
+      padding: 16px 20px;
       flex-direction: column;
       align-items: flex-start;
     }
@@ -273,39 +322,23 @@ const filasCaso = [
 
   .caso-pregunta {
     font-family: "Sora", sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     font-weight: 800;
-    color: #0c1c38;
+    color: #0c192c;
     margin: 0;
   }
 
-  .btn-analizar-caso {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #004aad;
-    color: #ffffff;
+  .link-guia-factura {
     font-family: "Sora", sans-serif;
     font-size: 0.92rem;
     font-weight: 700;
-    padding: 12px 24px;
-    border-radius: 999px;
+    color: #0052cc;
     text-decoration: none;
-    box-shadow: 0 4px 16px rgba(0, 74, 173, 0.25);
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
   }
 
-  .btn-analizar-caso:hover {
-    background: #003680;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(0, 74, 173, 0.35);
-  }
-
-  .btn-flecha {
-    transition: transform 0.2s ease;
-  }
-
-  .btn-analizar-caso:hover .btn-flecha {
-    transform: translateX(4px);
+  .link-guia-factura:hover {
+    color: #003fa0;
+    text-decoration: underline;
   }
 </style>

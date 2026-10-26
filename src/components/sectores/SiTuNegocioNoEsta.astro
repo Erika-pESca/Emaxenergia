@@ -1,0 +1,761 @@
+---
+// Componente: SiTuNegocioNoEsta.astro
+// Sección: "TU NEGOCIO | SI TU NEGOCIO no está en la lista"
+// Acordeón interactivo con 4 actividades empresariales y fotografía dinámica asociada a cada actividad.
+// Tipografías oficiales: Poppins para títulos y Literata cursiva para acento.
+
+import imgTalleres from "../../imagenes/talleres mecanicos.png";
+import imgClinicas from "../../imagenes/clinicas.png";
+import imgOficinas from "../../imagenes/oficinas y comercios.png";
+import imgOtros from "../../imagenes/consultor-emax.jpg";
+
+interface SubBloque {
+  subtitulo: string;
+  texto: string;
+}
+
+interface NegocioItem {
+  id: string;
+  titulo: string;
+  resumen: string;
+  img: ImageMetadata;
+  alt: string;
+  bloques: SubBloque[];
+  botones: { texto: string; href: string }[];
+}
+
+const negocios: NegocioItem[] = [
+  {
+    id: "talleres",
+    titulo: "Talleres mecánicos y de chapa",
+    resumen: "Motores que arrancan y paran todo el día: reactiva y picos de potencia.",
+    img: imgTalleres,
+    alt: "Mecánico trabajando en el motor de un vehículo en taller de automoción",
+    bloques: [
+      {
+        subtitulo: "Qué suele pesar",
+        texto: "Compresores, elevadores y soldadura: motores que arrancan y paran durante todo el día. Si tu taller pasa de 15 kW, esos motores generan energía reactiva, y se paga la que supera el umbral."
+      },
+      {
+        subtitulo: "Un matiz que importa",
+        texto: "El maxímetro no registra cada arranque: mide la potencia media de cada cuarto de hora. Lo que te dispara no es un motor que arranca, sino varias máquinas trabajando a la vez durante un cuarto de hora. Con 15 kW o menos, en cambio, si te pasas, el contador corta."
+      },
+      {
+        subtitulo: "Qué miraría el diagnóstico",
+        texto: "Si pagas reactiva y cuánto al año; la potencia que de verdad usas cuando coinciden las máquinas; tu peaje."
+      }
+    ],
+    botones: [
+      { texto: "Energía reactiva", href: "/guias/energia-reactiva" },
+      { texto: "Exceso de potencia", href: "/guias/exceso-de-potencia" }
+    ]
+  },
+  {
+    id: "clinicas",
+    titulo: "Clínicas y centros de salud",
+    resumen: "Climatización y horario amplio: parte del consumo cae en la punta de la tarde.",
+    img: imgClinicas,
+    alt: "Doctora en consulta de clínica médica y centro de salud con climatización continua",
+    bloques: [
+      {
+        subtitulo: "Qué suele pesar",
+        texto: "La climatización, que tiene que mantenerse en consultas y salas de espera, y un horario amplio de mañana y tarde. Si abres hasta las 21:00, una parte de tu consumo cae en las horas de punta de la tarde."
+      },
+      {
+        subtitulo: "Qué miraría el diagnóstico",
+        texto: "Cómo se reparte tu consumo entre mañana y tarde; si tu potencia corresponde a tu climatización o a una ampliación que ya no tienes; tu peaje y tu horario."
+      }
+    ],
+    botones: [
+      { texto: "Potencia contratada", href: "/guias/potencia-contratada" }
+    ]
+  },
+  {
+    id: "oficinas",
+    titulo: "Oficinas y comercios",
+    resumen: "La oficina se vacía a las ocho; la potencia se sigue pagando. Si el teletrabajo cambió tu ocupación, revisa también tu potencia.",
+    img: imgOficinas,
+    alt: "Equipo trabajando en oficina moderna con puestos y salas de reunión",
+    bloques: [
+      {
+        subtitulo: "Qué suele pesar",
+        texto: "Un consumo de diez a ocho semanas, sin grandes sorpresas. Por eso, lo que pesa no suele ser cómo se reparte el precio a lo largo del día, sino una potencia que nadie ha revisado desde que se abrió o un contrato que se renueva solo."
+      },
+      {
+        subtitulo: "Qué miraría el diagnóstico",
+        texto: "Tu potencia contratada frente a la que usas; la fecha de fin de tu contrato o si tiene permanencia."
+      }
+    ],
+    botones: [
+      { texto: "Potencia contratada", href: "/guias/potencia-contratada" }
+    ]
+  },
+  {
+    id: "otros",
+    titulo: "¿No aparece tu actividad?",
+    resumen: "El método es el mismo: lo que cuenta es cuándo consume tu negocio, no a qué se dedica.",
+    img: imgOtros,
+    alt: "Consultor de EMAX Energía con informe de auditoría energética personalizada",
+    bloques: [
+      {
+        subtitulo: "Qué miraría el diagnóstico",
+        texto: "Tu peaje y tu potencia en cada periodo; a qué horas consumes y si pagas excesos o reactiva. Es lo mismo que miramos en cualquier sector, sin dar por hecho cómo consume el tuyo."
+      }
+    ],
+    botones: [
+      { texto: "Cómo trabajamos", href: "/metodo" },
+      { texto: "Qué incluye tu informe", href: "/diagnostico" }
+    ]
+  }
+];
+---
+
+<section class="no-esta-seccion" id="no-esta-en-la-lista" aria-labelledby="h2-no-esta">
+  <div class="no-esta-contenedor">
+    <div class="no-esta-layout">
+      <!-- Columna Izquierda: Encabezado + 4 Píldoras -->
+      <div class="no-esta-info-col">
+        <header class="no-esta-header">
+          <div class="etiqueta-negocio">
+            <span>TU NEGOCIO</span>
+            <span class="separador-barra" aria-hidden="true">|</span>
+          </div>
+          <h2 class="no-esta-titulo" id="h2-no-esta">
+            SI TU NEGOCIO <span class="titulo-cursiva-no-esta">no está</span><br />
+            <span class="titulo-cursiva-no-esta">en la lista</span>
+          </h2>
+          <p class="no-esta-subtitulo">
+            Estos tienen su propia forma de consumir. Esto es lo que<br class="salto-sub" />
+            miramos primero en cada uno.
+          </p>
+        </header>
+
+        <!-- Acordeón de 4 filas -->
+        <div class="acordeon-columna" role="region" aria-label="Sectores empresariales adicionales">
+          {
+            negocios.map((item) => (
+              <div class="acordeon-fila" data-acordeon-item data-sector-id={item.id}>
+                <!-- Fila Cabecera / Botón interactivo -->
+                <button
+                  type="button"
+                  class="acordeon-trigger"
+                  id={`btn-negocio-${item.id}`}
+                  aria-expanded="false"
+                  aria-controls={`panel-negocio-${item.id}`}
+                >
+                  <!-- Círculo Azul con Icono Relacionado al Sector -->
+                  <div class="circulo-icono-azul" aria-hidden="true">
+                    {item.id === "talleres" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                      </svg>
+                    )}
+                    {item.id === "clinicas" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                      </svg>
+                    )}
+                    {item.id === "oficinas" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                        <path d="M9 22v-4h6v4"></path>
+                        <line x1="8" y1="6" x2="8.01" y2="6"></line>
+                        <line x1="16" y1="6" x2="16.01" y2="6"></line>
+                        <line x1="8" y1="10" x2="8.01" y2="10"></line>
+                        <line x1="16" y1="10" x2="16.01" y2="10"></line>
+                        <line x1="8" y1="14" x2="8.01" y2="14"></line>
+                        <line x1="16" y1="14" x2="16.01" y2="14"></line>
+                      </svg>
+                    )}
+                    {item.id === "otros" && (
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                      </svg>
+                    )}
+                  </div>
+
+                  <!-- Cápsula / Píldora de cabecera -->
+                  <div class="capsula-acordeon">
+                    <div class="capsula-textos">
+                      <h3 class="capsula-titulo">{item.titulo}</h3>
+                      <p class="capsula-resumen">{item.resumen}</p>
+                    </div>
+                    <!-- Botón circular con flecha de despliegue -->
+                    <div class="boton-flecha-acordeon" aria-hidden="true">
+                      <svg class="icono-svg-flecha" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+
+                <!-- Panel Desplegable con Contenido Detallado -->
+                <div
+                  class="acordeon-contenido"
+                  id={`panel-negocio-${item.id}`}
+                  role="region"
+                  aria-labelledby={`btn-negocio-${item.id}`}
+                >
+                  <div class="acordeon-overflow-wrapper">
+                    <div class="acordeon-desplegable-caja">
+                      <!-- Bloques interiores -->
+                      <div class="desplegable-bloques">
+                        {item.bloques.map((b) => (
+                          <div class="desplegable-item">
+                            <div class="item-punto-azul" aria-hidden="true"></div>
+                            <div class="item-textos">
+                              <h4 class="item-subtitulo">{b.subtitulo}</h4>
+                              <p class="item-cuerpo">{b.texto}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <!-- Botones Guías / Enlaces -->
+                      {item.botones && item.botones.length > 0 && (
+                        <div class="desplegable-acciones">
+                          {item.botones.map((btn) => (
+                            <a href={btn.href} class="boton-guia-pildora">
+                              <span>{btn.texto}</span>
+                              <span class="pildora-flecha" aria-hidden="true">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                  <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                              </span>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta Fotográfica Dinámica con Transición Suave (Crossfade) -->
+      <div class="no-esta-media-col">
+        <div class="mecanico-card" id="contenedor-foto-sectores">
+          {
+            negocios.map((item, index) => (
+              <img
+                src={item.img.src}
+                alt={item.alt}
+                class={`sector-dinamico-img ${index === 0 ? "is-active" : ""}`}
+                data-sector-img={item.id}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: SI TU NEGOCIO NO ESTÁ EN LA LISTA
+     ========================================================================== */
+  .no-esta-seccion {
+    padding: clamp(56px, 6.5vw, 96px) 0;
+    background: #ffffff;
+    color: #081d3e;
+    width: 100%;
+    position: relative;
+  }
+
+  .no-esta-contenedor {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+  }
+
+  /* Layout 2 Columnas alineado al boceto de Figma */
+  .no-esta-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(32px, 4.5vw, 56px);
+    align-items: flex-start;
+  }
+
+  /* Columna izquierda de textos y píldoras */
+  .no-esta-info-col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Encabezado */
+  .no-esta-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(28px, 3.2vw, 38px);
+  }
+
+  .etiqueta-negocio {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .separador-barra {
+    color: #0066ff;
+    font-weight: 800;
+    font-size: 0.95rem;
+  }
+
+  .no-esta-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.8rem + 1.2vw, 2.85rem);
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva-no-esta {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #2563eb;
+    letter-spacing: 0;
+    display: inline;
+  }
+
+  .no-esta-subtitulo {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: #475569;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .salto-sub {
+      display: none;
+    }
+  }
+
+  /* ==========================================================================
+     ACORDEÓN DE PÍLDORAS
+     ========================================================================== */
+  .acordeon-columna {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .acordeon-fila {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Botón disparador */
+  .acordeon-trigger {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    outline: none;
+  }
+
+  /* Círculo azul oficial con icono alusivo */
+  .circulo-icono-azul {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #0066ff;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+
+  .acordeon-trigger:hover .circulo-icono-azul {
+    transform: scale(1.06);
+    background: #0052cc;
+  }
+
+  /* Cápsula / Píldora de cabecera */
+  .capsula-acordeon {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: #ebf4ff;
+    border: 1.5px solid #cce3fd;
+    border-radius: 9999px;
+    padding: 13px 18px 13px 24px;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.04);
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .acordeon-trigger:hover .capsula-acordeon,
+  .acordeon-fila.is-open .capsula-acordeon {
+    background: #e1efff;
+    border-color: #b3d7ff;
+    box-shadow: 0 4px 16px rgba(0, 102, 255, 0.12);
+  }
+
+  .capsula-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .capsula-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #0066cc;
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .capsula-resumen {
+    font-size: 0.82rem;
+    color: #475569;
+    margin: 2px 0 0;
+    line-height: 1.4;
+  }
+
+  /* Botón circular con flecha de despliegue */
+  .boton-flecha-acordeon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #0066ff;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(0, 102, 255, 0.25);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+  }
+
+  .icono-svg-flecha {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .acordeon-fila.is-open .boton-flecha-acordeon {
+    background: #081d3e;
+  }
+
+  .acordeon-fila.is-open .icono-svg-flecha {
+    transform: rotate(180deg);
+  }
+
+  /* ==========================================================================
+     PANEL DESPLEGABLE INTERIOR
+     ========================================================================== */
+  .acordeon-contenido {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.25, 1, 0.35, 1);
+  }
+
+  .acordeon-fila.is-open .acordeon-contenido {
+    grid-template-rows: 1fr;
+  }
+
+  .acordeon-overflow-wrapper {
+    min-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.45s ease, opacity 0.35s ease 0.08s;
+  }
+
+  .acordeon-fila.is-open .acordeon-overflow-wrapper {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .acordeon-desplegable-caja {
+    margin-top: 10px;
+    margin-bottom: 6px;
+    margin-left: 50px;
+    background: #f4f9ff;
+    border: 1.5px solid #d4e8fc;
+    border-radius: 20px;
+    padding: clamp(20px, 2.5vw, 26px);
+    box-shadow: 0 10px 28px rgba(0, 102, 204, 0.08);
+  }
+
+  .desplegable-bloques {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .desplegable-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .item-punto-azul {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #0066ff;
+    flex-shrink: 0;
+    margin-top: 4px;
+    box-shadow: 0 2px 6px rgba(0, 102, 255, 0.28);
+  }
+
+  .item-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .item-subtitulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #0066cc;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .item-cuerpo {
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+  }
+
+  /* Botones de acción inferiores */
+  .desplegable-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #ddecff;
+  }
+
+  .boton-guia-pildora {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #0066ff;
+    color: #ffffff;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.84rem;
+    font-weight: 700;
+    padding: 7px 10px 7px 18px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 102, 255, 0.25);
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .boton-guia-pildora:hover {
+    background: #0052cc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 102, 255, 0.38);
+  }
+
+  .pildora-flecha {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ==========================================================================
+     FOTOGRAFÍA DERECHA DINÁMICA CON TRANSICIÓN SUAVE (CROSSFADE)
+     ========================================================================== */
+  .no-esta-media-col {
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: clamp(20px, 3vw, 40px);
+  }
+
+  .mecanico-card {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    height: clamp(440px, 40vw, 530px);
+    border-radius: 28px;
+    overflow: hidden;
+    background: #eaf3ff;
+    box-shadow: 0 20px 48px rgba(8, 29, 62, 0.14);
+    border: 1.5px solid #ddecff;
+  }
+
+  /* Capas de imágenes con transición cinematográfica de fundido cruzado */
+  .sector-dinamico-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.035);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.65s ease,
+                transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sector-dinamico-img.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 1;
+    pointer-events: auto;
+  }
+
+  /* Encuadres óptimos para formato vertical */
+  .sector-dinamico-img[data-sector-img="talleres"] {
+    object-position: 45% center;
+  }
+
+  .sector-dinamico-img[data-sector-img="clinicas"] {
+    object-position: 42% 20%;
+  }
+
+  .sector-dinamico-img[data-sector-img="oficinas"] {
+    object-position: 50% 25%;
+  }
+
+  .sector-dinamico-img[data-sector-img="otros"] {
+    object-position: 50% 15%;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 980px) {
+    .no-esta-layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .no-esta-media-col {
+      position: static;
+      margin-top: 0;
+      justify-content: center;
+      order: 2;
+    }
+
+    .mecanico-card {
+      max-width: 100%;
+      height: 380px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .acordeon-trigger {
+      gap: 10px;
+    }
+
+    .circulo-icono-azul {
+      width: 32px;
+      height: 32px;
+    }
+
+    .capsula-acordeon {
+      padding: 12px 14px;
+    }
+
+    .acordeon-desplegable-caja {
+      margin-left: 0;
+      margin-top: 10px;
+      padding: 16px 14px;
+    }
+  }
+</style>
+
+<script is:inline>
+  function setupNoEstaAcordeon() {
+    const rows = document.querySelectorAll("[data-acordeon-item]");
+    const sectorImages = document.querySelectorAll("[data-sector-img]");
+
+    function activarImagen(sectorId) {
+      sectorImages.forEach((img) => {
+        if (img.getAttribute("data-sector-img") === sectorId) {
+          img.classList.add("is-active");
+        } else {
+          img.classList.remove("is-active");
+        }
+      });
+    }
+
+    rows.forEach((row) => {
+      const trigger = row.querySelector(".acordeon-trigger");
+      const sectorId = row.getAttribute("data-sector-id");
+      if (!trigger) return;
+
+      trigger.addEventListener("click", () => {
+        const isOpen = row.classList.contains("is-open");
+
+        // Cerrar los demás acordeones para mantener orden visual limpio
+        rows.forEach((r) => {
+          r.classList.remove("is-open");
+          const t = r.querySelector(".acordeon-trigger");
+          if (t) t.setAttribute("aria-expanded", "false");
+        });
+
+        // Toggle del actual
+        if (!isOpen) {
+          row.classList.add("is-open");
+          trigger.setAttribute("aria-expanded", "true");
+          if (sectorId) {
+            activarImagen(sectorId);
+          }
+        } else {
+          // Si se cierra el actual, volver suavemente a la imagen principal (talleres)
+          activarImagen("talleres");
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupNoEstaAcordeon);
+  } else {
+    setupNoEstaAcordeon();
+  }
+  document.addEventListener("astro:page-load", setupNoEstaAcordeon);
+</script>

@@ -1,0 +1,41 @@
+---
+// Página: Sector Industria y Fabricación (/sectores/industria)
+// "UN TURNO MÁS cambia la factura."
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroIndustria from "../../components/sectores/industria/HeroIndustria.astro";
+import PorQueNoDaIgualTurno from "../../components/sectores/industria/PorQueNoDaIgualTurno.astro";
+import DosNavesMismaPotencia from "../../components/sectores/industria/DosNavesMismaPotencia.astro";
+import Peaje61tdNoDependePotencia from "../../components/sectores/industria/Peaje61tdNoDependePotencia.astro";
+import ExcesosYReactivaNave from "../../components/sectores/industria/ExcesosYReactivaNave.astro";
+---
+
+<BaseLayout
+  title="Luz para industria: un turno más cambia la factura | EMAX Energía"
+  description="En una nave, a qué hora arrancan las máquinas pesa tanto como cuánto consumen. Leemos tus turnos, tu potencia y tus excesos con tus datos."
+  path="/sectores/industria"
+>
+  <div class="industria-page-wrapper">
+    <!-- 1. Hero oficial con fotografía de planta industrial y tarjeta glassmorphic interactiva -->
+    <HeroIndustria />
+
+    <!-- 2. "POR QUÉ NO DA IGUAL a qué hora trabajas" (4 tarjetas de turnos, arrastre y picos) -->
+    <PorQueNoDaIgualTurno />
+
+    <!-- 3. "DOS NAVES CON LA MISMA POTENCIA MÁXIMA" (Comparativa Nave A vs Nave B) -->
+    <DosNavesMismaPotencia />
+
+    <!-- 4. "La 6.1TD no depende DE TU POTENCIA" (Banner explicativo de peaje y tensión) -->
+    <Peaje61tdNoDependePotencia />
+
+    <!-- 5. "EXCESOS Y REACTIVA en la nave" (Comparativa Concepto vs Nave vs Norma) -->
+    <ExcesosYReactivaNave />
+  </div>
+</BaseLayout>
+
+<style>
+  .industria-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

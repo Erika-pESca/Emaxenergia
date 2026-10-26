@@ -1,0 +1,405 @@
+---
+// Componente: HeroSupermercados.astro
+// Hero oficial para la página: /sectores/supermercados ("Luz para supermercados y tiendas de alimentación")
+// Fondo fotográfico de supermercado + cámaras de frío + degradado azul corporativo + tarjeta glassmorphic interactiva.
+
+import supermercadoImg from "../../../imagenes/sector_supermercado.jpg";
+
+const tramosLuz = [
+  {
+    id: "300",
+    label: "MENOS DE 300€",
+    valor: "<300",
+    rango: "menos de 300 € al mes",
+    msg: "Estudio para pequeña tienda de alimentación, ultramarinos o comercio de barrio.",
+  },
+  {
+    id: "1000",
+    label: "300 – 1.000€",
+    valor: "300-1000",
+    rango: "entre 300 y 1.000 € al mes",
+    msg: "Optimización de frío comercial y potencia para autoservicio o frutería de tamaño medio.",
+  },
+  {
+    id: "3000",
+    label: "1.000 – 3.000€",
+    valor: "1000-3000",
+    rango: "entre 1.000 y 3.000 € al mes",
+    msg: "Auditoría de murales de refrigeración, energía reactiva y peajes 3.0TD para supermercado.",
+  },
+  {
+    id: "mas3000",
+    label: "Más de 3.000€",
+    valor: ">3000",
+    rango: "más de 3.000 € al mes",
+    msg: "Consultoría integral y multipunto para cadenas de supermercados, hipermercados y distribución alimentaria.",
+  },
+];
+---
+
+<section class="supermercados-hero-root">
+  <!-- Fondo con fotografía de supermercado y degradado de fusión a la izquierda -->
+  <div class="supermercados-hero-bg">
+    <img
+      src={supermercadoImg.src}
+      alt="Pasillos de refrigeración y murales de frío en supermercado"
+      class="hero-bg-img"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-bg-gradient"></div>
+  </div>
+
+  <div class="supermercados-hero-contenedor">
+    <div class="supermercados-hero-grid">
+      <!-- Columna Izquierda: Titulares y propuesta técnica -->
+      <div class="supermercados-hero-textos">
+        <div class="supermercados-kicker">
+          <span>LUZ PARA SUPERMERCADOS Y TIENDAS DE ALIMENTACIÓN</span>
+          <span class="supermercados-kicker-bar" aria-hidden="true">|</span>
+        </div>
+
+        <h1 class="supermercados-h1">
+          <span class="h1-cursiva-cyan">El frío no se apaga.</span>
+          <span class="h1-bloque-mayus">PERO NO CUESTA LO MISMO A TODAS HORAS.</span>
+        </h1>
+
+        <p class="supermercados-subtitulo">
+          Cámaras y murales trabajan día y noche; en horario comercial se suma la sala. Leemos tu frío, tu potencia y tu reactiva, periodo a periodo.
+        </p>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta Glassmorphic con selector de tramos conectado al formulario modal -->
+      <div class="supermercados-hero-card-col">
+        <div class="hero-card-glass">
+          <h2 class="card-pregunta-tit">¿Cuánto paga tu empresa de luz al mes?</h2>
+          <p class="card-pregunta-sub">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+
+          <!-- Rejilla 2x2 de botones de tramo -->
+          <div class="card-tramos-grid" role="group" aria-label="Selección de tramo mensual de luz">
+            {
+              tramosLuz.map((t) => (
+                <button
+                  type="button"
+                  class="btn-tramo-azul"
+                  data-abrir-funnel
+                  data-tramo-id={t.valor}
+                  data-tramo-label={t.label}
+                  data-tramo-rango={t.rango}
+                  data-tramo-msg={t.msg}
+                  aria-label={`Seleccionar tramo ${t.label} para abrir estudio energético`}
+                >
+                  <span class="tramo-txt">{t.label}</span>
+                  <span class="tramo-flecha" aria-hidden="true">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#003580"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
+          <!-- Pie de tarjeta -->
+          <p class="card-nota-pie">
+            Tú eliges cómo empezamos: con tu factura, con tu CUPS o con dos datos de tu negocio. El análisis no tiene coste.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO SUPERMERCADOS: FONDO FOTOGRÁFICO + CRISTALISMO + AZUL EMAX
+     ========================================================================== */
+  .supermercados-hero-root {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    min-height: calc(88vh + 78px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #004aad;
+    overflow: hidden;
+    padding-top: calc(78px + clamp(36px, 5vh, 52px));
+    padding-bottom: clamp(48px, 6vh, 72px);
+    box-sizing: border-box;
+  }
+
+  /* Fondo con fotografía y degradado de fusión a la izquierda */
+  .supermercados-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
+  }
+
+  /* Gradiente oficial: Azul sólido a la izquierda para contraste y legibilidad */
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      rgba(0, 74, 173, 0.96) 32%,
+      rgba(0, 74, 173, 0.78) 55%,
+      rgba(0, 74, 173, 0.42) 78%,
+      rgba(4, 30, 74, 0.58) 100%
+    );
+  }
+
+  /* Contenedor principal */
+  .supermercados-hero-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+    box-sizing: border-box;
+  }
+
+  /* Grid 2 Columnas */
+  .supermercados-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 68px);
+    align-items: center;
+  }
+
+  /* Textos izquierda */
+  .supermercados-hero-textos {
+    display: flex;
+    flex-direction: column;
+    max-width: 620px;
+  }
+
+  .supermercados-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #38b6ff;
+    margin-bottom: 14px;
+  }
+
+  .supermercados-kicker-bar {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .supermercados-h1 {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.3rem, 2rem + 1.8vw, 3.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.14;
+    margin: 0 0 20px;
+    letter-spacing: -0.015em;
+  }
+
+  .h1-cursiva-cyan {
+    display: block;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    color: #38b6ff;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 6px;
+  }
+
+  .h1-bloque-mayus {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .supermercados-subtitulo {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    max-width: 540px;
+  }
+
+  /* Tarjeta Glassmorphic derecha */
+  .supermercados-hero-card-col {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .hero-card-glass {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.32);
+    border-radius: 28px;
+    padding: clamp(26px, 3.2vw, 38px);
+    box-shadow: 0 20px 50px rgba(0, 24, 70, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+  }
+
+  .card-pregunta-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.48rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .card-pregunta-sub {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 6px;
+  }
+
+  /* Rejilla 2x2 de botones */
+  .card-tramos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .card-tramos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .btn-tramo-azul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 16px;
+    background: #003a88;
+    color: #ffffff;
+    border: 1px solid rgba(56, 182, 255, 0.35);
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+    outline: none;
+  }
+
+  .btn-tramo-azul:hover {
+    background: #004fb8;
+    border-color: #38b6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 58, 136, 0.4);
+  }
+
+  .btn-tramo-azul:active {
+    transform: translateY(0);
+  }
+
+  .tramo-txt {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  /* Círculo cian con icono chevron en azul oscuro */
+  .tramo-flecha {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #003580;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 194, 255, 0.35);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover .tramo-flecha {
+    transform: scale(1.08) translateX(1px);
+    background: #33d1ff;
+  }
+
+  .card-nota-pie {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 4px 0 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .supermercados-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .supermercados-hero-textos {
+      max-width: 100%;
+    }
+
+    .supermercados-hero-card-col {
+      justify-content: flex-start;
+    }
+
+    .hero-card-glass {
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .supermercados-hero-root {
+      min-height: auto;
+      padding-top: calc(78px + 28px);
+      padding-bottom: 48px;
+    }
+
+    .supermercados-h1 {
+      font-size: 2.1rem;
+    }
+
+    .hero-card-glass {
+      padding: 22px 18px;
+      border-radius: 20px;
+    }
+  }
+</style>

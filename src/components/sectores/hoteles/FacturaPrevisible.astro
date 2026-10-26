@@ -1,0 +1,266 @@
+---
+// Componente: FacturaPrevisible.astro
+// Sección Banner de Hoteles: "Ocupación variable, FACTURA PREVISIBLE"
+// Fondo degradado de azul corporativo a blanco, con explicación de modalidades y píldoras interactivas.
+---
+
+<section
+  class="factura-previsible-seccion"
+  id="factura-previsible"
+  aria-labelledby="factura-previsible-tit"
+>
+  <div class="factura-previsible-contenedor">
+    <div class="factura-previsible-content">
+      <!-- Título con cursiva en Literata y mayúsculas en Poppins -->
+      <h2 class="factura-previsible-titulo" id="factura-previsible-tit">
+        <span class="tit-cursiva">Ocupación variable,</span>
+        <span class="tit-mayus">FACTURA PREVISIBLE</span>
+      </h2>
+
+      <!-- Párrafo explicativo -->
+      <p class="factura-previsible-texto">
+        La modalidad no se decide por lo que se espera del mercado, sino por cuánto cambia tu consumo de un mes a otro y qué riesgo puede asumir tu hotel. Con precio fijo, asumes pagar más si el mercado baja. Con indexado, la volatilidad. Con Cuota Fija, que tu consumo real se aparte del previsto. Y en un hotel, lo que mueve el consumo es la ocupación.
+      </p>
+
+      <!-- Grupo de 5 Píldoras en 3 filas -->
+      <div class="factura-pildoras-wrap" role="navigation" aria-label="Guías y recursos de modalidad para hoteles">
+        <!-- Fila 1 -->
+        <div class="pildoras-fila">
+          <a href="/guias/precio-fijo-o-indexado" class="pildora-hotel">
+            <span>Precio fijo o indexado: cómo decidir</span>
+            <span class="pildora-circulo-flecha" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+
+          <a href="/metodo" class="pildora-hotel">
+            <span>La decisión 4 del método</span>
+            <span class="pildora-circulo-flecha" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <!-- Fila 2 -->
+        <div class="pildoras-fila">
+          <a href="/tarifas" class="pildora-hotel">
+            <span>Las modalidades, por dentro</span>
+            <span class="pildora-circulo-flecha" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+
+          <button
+            type="button"
+            class="pildora-hotel btn-pildora"
+            data-abrir-funnel
+            data-tramo-id="hotel-cadena-multisede"
+            data-tramo-label="¿Tienes varios hoteles?"
+            data-tramo-msg="Tengo varios hoteles o alojamientos turísticos y quiero optimizar la energía de toda la cadena."
+            aria-label="Abrir formulario para cadenas o múltiples hoteles"
+          >
+            <span>¿Tienes varios hoteles?</span>
+            <span class="pildora-circulo-flecha" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </button>
+        </div>
+
+        <!-- Fila 3 -->
+        <div class="pildoras-fila">
+          <a href="/gas-natural" class="pildora-hotel">
+            <span>¿También tienes gas? Lo revisamos en el mismo estudio</span>
+            <span class="pildora-circulo-flecha" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN BANNER: OCUPACIÓN VARIABLE, FACTURA PREVISIBLE (HOTELES)
+     ========================================================================== */
+  .factura-previsible-seccion {
+    position: relative;
+    width: 100%;
+    /* Degradado horizontal de azul corporativo intenso que transita a celeste y funde a blanco */
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      #0059d6 28%,
+      #006ef0 44%,
+      #5ca2fc 66%,
+      #bcd9ff 84%,
+      #f0f6ff 95%,
+      #ffffff 100%
+    );
+    color: #ffffff;
+    padding: clamp(65px, 7vw, 105px) 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .factura-previsible-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .factura-previsible-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 660px;
+    width: 100%;
+  }
+
+  /* Título */
+  .factura-previsible-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    margin: 0 0 16px 0;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  .tit-cursiva {
+    display: block;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    text-transform: none;
+    letter-spacing: 0;
+    color: #38b6ff;
+    margin-bottom: 4px;
+  }
+
+  .tit-mayus {
+    display: block;
+    font-size: clamp(2rem, 1.8rem + 1.1vw, 2.85rem);
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  /* Texto descriptivo */
+  .factura-previsible-texto {
+    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+    line-height: 1.68;
+    color: #ffffff;
+    margin: 0 0 28px 0;
+    text-shadow: 0 1px 3px rgba(0, 40, 100, 0.25);
+  }
+
+  /* ==========================================================================
+     PÍLDORAS CIAN EN 3 FILAS
+     ========================================================================== */
+  .factura-pildoras-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pildoras-fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pildora-hotel {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 10px 16px 10px 20px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 194, 255, 0.3);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .btn-pildora {
+    border: none;
+    cursor: pointer;
+  }
+
+  .pildora-hotel:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 194, 255, 0.45);
+  }
+
+  .pildora-circulo-flecha {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .pildora-hotel:hover .pildora-circulo-flecha {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 900px) {
+    .pildora-hotel {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .factura-previsible-seccion {
+      background: linear-gradient(
+        135deg,
+        #004aad 0%,
+        #0059d6 45%,
+        #3b8dfa 75%,
+        #b8d8ff 100%
+      );
+      padding: 55px 0 65px;
+    }
+
+    .factura-previsible-content {
+      max-width: 100%;
+    }
+
+    .pildora-hotel {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .pildoras-fila {
+      width: 100%;
+    }
+  }
+</style>

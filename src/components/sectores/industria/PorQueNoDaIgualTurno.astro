@@ -1,0 +1,338 @@
+---
+// Componente: PorQueNoDaIgualTurno.astro
+// Sección de Industria: "POR QUÉ NO DA IGUAL a qué hora trabajas"
+// 4 tarjetas sobre turnos productivos, arrastre de potencia y arranque de maquinaria:
+// 01. El turno
+// 02. El pico
+// 03. El arranque
+// 04. Lo que no te diremos
+
+interface TarjetaTurnoIndustria {
+  numero: string;
+  titulo: string;
+  icono: "turno" | "pico" | "arranque" | "nodiremos";
+  texto: string;
+}
+
+const tarjetas: TarjetaTurnoIndustria[] = [
+  {
+    numero: "01",
+    titulo: "El turno",
+    icono: "turno",
+    texto:
+      "Un turno de tarde o de noche mueve tu consumo a otros periodos, y los periodos no cuestan lo mismo. Los fines de semana y los festivos nacionales son P6 todo el día.",
+  },
+  {
+    numero: "02",
+    titulo: "El pico",
+    icono: "pico",
+    texto:
+      "Tu pico de potencia no da igual a qué hora llegue. Cada periodo tiene que tener igual o más potencia que el anterior: si el pico está en P1, arrastra a los otros cinco. Si está de noche, se queda en P6. Y en 3.0TD, el kW de P1 cuesta unas 14 veces el de P6.",
+  },
+  {
+    numero: "03",
+    titulo: "El arranque",
+    icono: "arranque",
+    texto:
+      "Lo que marca el pico no es una máquina que arranca, sino varias trabajando a la vez durante un cuarto de hora. Es la media de cada cuarto de hora lo que se mide.",
+  },
+  {
+    numero: "04",
+    titulo: "Lo que no te diremos",
+    icono: "nodiremos",
+    texto:
+      "No te vamos a decir que cambies tus turnos. Los decide tu producción. Lo que sí hacemos es decirte qué supone cada patrón en tu factura, con tus datos.",
+  },
+];
+---
+
+<section
+  class="no-da-igual-seccion"
+  id="por-que-no-da-igual"
+  aria-labelledby="no-da-igual-tit"
+>
+  <div class="no-da-igual-contenedor">
+    <!-- Encabezado -->
+    <div class="no-da-igual-header">
+      <h2 class="no-da-igual-titulo" id="no-da-igual-tit">
+        POR QUÉ NO DA IGUAL <span class="tit-cursiva">a qué hora trabajas</span>
+      </h2>
+      <p class="no-da-igual-subtitulo">
+        Cada turno multiplica una decisión de potencia. Cada máquina, también.
+      </p>
+    </div>
+
+    <!-- Rejilla de las 4 Tarjetas -->
+    <div class="no-da-igual-grid">
+      {
+        tarjetas.map((t) => (
+          <article class="industria-turno-card">
+            <!-- Insignia superior con círculos solapados: azul con icono + cian con número -->
+            <div class="turno-badge-wrap" aria-hidden="true">
+              <div class="badge-circulo-azul">
+                {t.icono === "turno" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                )}
+
+                {t.icono === "pico" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                    <polyline points="17 6 23 6 23 12" />
+                  </svg>
+                )}
+
+                {t.icono === "arranque" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
+                    <line x1="12" y1="2" x2="12" y2="12" />
+                  </svg>
+                )}
+
+                {t.icono === "nodiremos" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                )}
+              </div>
+
+              <!-- Círculo cian inferior con el número -->
+              <div class="badge-circulo-cyan">
+                <span class="badge-num">{t.numero}</span>
+              </div>
+            </div>
+
+            <!-- Contenido de la tarjeta -->
+            <h3 class="industria-card-tit">{t.titulo}</h3>
+            <p class="industria-card-desc">{t.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: POR QUÉ NO DA IGUAL A QUÉ HORA TRABAJAS (INDUSTRIA)
+     ========================================================================== */
+  .no-da-igual-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7.5vw, 110px) 0 clamp(75px, 8.5vw, 120px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .no-da-igual-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .no-da-igual-header {
+    margin-bottom: clamp(38px, 4.5vw, 54px);
+    max-width: 900px;
+  }
+
+  .no-da-igual-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #00c2ff;
+  }
+
+  .no-da-igual-subtitulo {
+    font-size: clamp(0.96rem, 0.92rem + 0.2vw, 1.05rem);
+    line-height: 1.62;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+  }
+
+  /* Rejilla 4 Tarjetas */
+  .no-da-igual-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2.2vw, 28px);
+    align-items: stretch;
+  }
+
+  /* Tarjeta Oscura con Borde Suave */
+  .industria-turno-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 24px;
+    padding: 34px 22px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .industria-turno-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 46px rgba(0, 0, 0, 0.38);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(0, 194, 255, 0.4);
+  }
+
+  /* Insignia Circular Solapada */
+  .turno-badge-wrap {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin: -10px auto 18px auto;
+  }
+
+  .badge-circulo-azul {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0, 74, 173, 0.5);
+  }
+
+  .badge-circulo-cyan {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 194, 255, 0.5);
+    border: 2px solid #081d3e;
+  }
+
+  .badge-num {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1;
+  }
+
+  /* Textos de la Tarjeta */
+  .industria-card-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .industria-card-desc {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.88rem;
+    line-height: 1.58;
+    color: #cbd5e1;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1080px) {
+    .no-da-igual-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .no-da-igual-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .no-da-igual-titulo {
+      font-size: 1.85rem;
+    }
+
+    .no-da-igual-grid {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .industria-turno-card {
+      padding: 28px 20px 24px;
+    }
+  }
+</style>

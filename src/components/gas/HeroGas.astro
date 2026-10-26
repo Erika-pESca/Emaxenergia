@@ -1,0 +1,476 @@
+---
+// Componente: HeroGas.astro
+// Sección Hero oficial de la página Gas Natural para Empresas, Comunidades y Hogares
+import fondoTarifas from "../../imagenes/fondo_tarifas.jpg";
+---
+
+<section class="hero-gas-seccion" aria-labelledby="h1-gas-natural">
+  <!-- Fondo fotográfico fondo_tarifas.jpg oficial -->
+  <div class="hero-gas-fondo" aria-hidden="true">
+    <img
+      src={fondoTarifas.src}
+      alt=""
+      class="hero-bg-img"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="hero-gas-contenedor">
+    <!-- Rejilla Principal en 2 Columnas -->
+    <div class="hero-gas-grid">
+      <!-- Columna Izquierda: Mensaje y propuesta de valor -->
+      <div class="hero-gas-col-izq">
+        <p class="gas-kicker">
+          GAS NATURAL · EMPRESAS, COMUNIDADES Y HOGARES <span class="kicker-cursor" aria-hidden="true">|</span>
+        </p>
+
+        <h1 class="gas-hero-titulo" id="h1-gas-natural">
+          TU <span class="titulo-cursiva-gas">factura de gas</span><br />
+          TAMBIÉN SE LEE ANTES<br />
+          DE CAMBIARLA.
+        </h1>
+
+        <p class="gas-hero-desc">
+          Tu peaje, tu consumo del año, tu precio y si te corresponde la tarifa regulada. Si tienes luz y gas, los revisamos en el mismo estudio.
+        </p>
+
+        <!-- Píldora interactiva cian -->
+        <div class="gas-pildora-wrap">
+          <a href="/comunidades-de-propietarios" class="btn-gas-pildora">
+            <span>¿Comunidad de vecinos o vivienda? Empieza aquí</span>
+            <span class="btn-pildora-circulo" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3.5 10.5 8 6 12.5"></path>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta "¿Para quién es el gas?" -->
+      <div class="hero-gas-col-der">
+        <div class="gas-hero-card">
+          <span class="card-etiqueta-tag">EMPIEZA AQUÍ · SIN COSTE</span>
+          <h2 class="gas-card-titulo">¿Para quién es el gas?</h2>
+
+          <div class="gas-opciones-lista">
+            <!-- Opción 1: PARA MI EMPRESA -->
+            <button
+              type="button"
+              class="btn-gas-opcion"
+              data-abrir-funnel
+              data-segmento="empresa"
+              aria-label="Contratar gas para mi empresa"
+            >
+              <div class="opcion-circulo-icono" aria-hidden="true">
+                <!-- Icono Local / Empresa / Nave -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </div>
+              <div class="opcion-textos">
+                <span class="opcion-tit">PARA MI EMPRESA</span>
+                <span class="opcion-sub">Local, nave, hotel, restaurante u oficina.</span>
+              </div>
+            </button>
+
+            <!-- Opción 2: PARA UNA COMUNIDAD -->
+            <button
+              type="button"
+              class="btn-gas-opcion"
+              data-abrir-funnel
+              data-segmento="comunidad"
+              aria-label="Contratar gas para una comunidad de propietarios"
+            >
+              <div class="opcion-circulo-icono" aria-hidden="true">
+                <!-- Icono Bloque de Edificios / Comunidad -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 21h18"></path>
+                  <path d="M19 21v-8a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v8"></path>
+                  <path d="M9 21v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4"></path>
+                  <path d="M10 9l4-4 4 4"></path>
+                </svg>
+              </div>
+              <div class="opcion-textos">
+                <span class="opcion-tit">PARA UNA COMUNIDAD</span>
+                <span class="opcion-sub">Calefacción central, agua caliente o la caldera común.</span>
+              </div>
+            </button>
+
+            <!-- Opción 3: PARA MI CASA -->
+            <button
+              type="button"
+              class="btn-gas-opcion"
+              data-abrir-funnel
+              data-segmento="hogar"
+              aria-label="Contratar gas para mi casa o vivienda"
+            >
+              <div class="opcion-circulo-icono" aria-hidden="true">
+                <!-- Icono Casa / Hogar -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <div class="opcion-textos">
+                <span class="opcion-tit">PARA MI CASA</span>
+                <span class="opcion-sub">Cocina, agua caliente o calefacción.</span>
+              </div>
+            </button>
+          </div>
+
+          <p class="gas-card-pie-nota">
+            Después te preguntamos cuánto pagas, con importes de tu caso.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cintillo inferior continuo de lectura -->
+  <div class="gas-hero-cintillo">
+    <div class="cintillo-contenedor">
+      <span class="cintillo-label">LEEMOS:</span>
+      <span class="cintillo-items">PEAJE · CONSUMO DEL AÑO · TEMPORADA · PRECIO · TARIFA REGULADA</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO GAS NATURAL - DISEÑO OFICIAL FIGMA
+     ========================================================================== */
+  .hero-gas-seccion {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    min-height: calc(88vh + 78px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: calc(78px + 24px);
+    background: #004aad;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    overflow: hidden;
+    color: #ffffff;
+  }
+
+  /* Fondo fotográfico oficial fondo_tarifas.jpg */
+  .hero-gas-fondo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-gas-contenedor {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    margin-block: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+
+  /* Rejilla de 2 columnas */
+  .hero-gas-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 68px);
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-gas-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  /* ==========================================================================
+     COLUMNA IZQUIERDA
+     ========================================================================== */
+  .hero-gas-col-izq {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .gas-kicker {
+    font-family: "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.82);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .kicker-cursor {
+    color: #00c2ff;
+    font-weight: 400;
+    font-size: 1.2em;
+    margin-left: 2px;
+  }
+
+  .gas-hero-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.2rem, 1.8rem + 2.1vw, 3.35rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva-gas {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #00c2ff;
+    letter-spacing: 0;
+    display: inline;
+  }
+
+  .gas-hero-desc {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.88);
+    margin: 4px 0 10px;
+    max-width: 540px;
+  }
+
+  /* Píldora cian */
+  .gas-pildora-wrap {
+    margin-top: 6px;
+  }
+
+  .btn-gas-pildora {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: "Sora", sans-serif;
+    font-size: 0.90rem;
+    font-weight: 800;
+    padding: 8px 10px 8px 22px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(0, 194, 255, 0.35);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-gas-pildora:hover {
+    background: #2ed1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 194, 255, 0.45);
+  }
+
+  .btn-pildora-circulo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #0083a8;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .btn-gas-pildora:hover .btn-pildora-circulo {
+    transform: translateX(3px);
+    background: #006b8a;
+  }
+
+  /* ==========================================================================
+     COLUMNA DERECHA - TARJETA FIGMA
+     ========================================================================== */
+  .hero-gas-col-der {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+
+  .gas-hero-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    border-radius: 28px;
+    padding: clamp(28px, 3.5vw, 36px);
+    width: 100%;
+    max-width: 520px;
+    box-shadow:
+      0 20px 48px rgba(0, 15, 45, 0.25),
+      0 4px 14px rgba(0, 74, 173, 0.15);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-etiqueta-tag {
+    font-family: "Sora", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: #00c2ff;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gas-card-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.45rem, 1.3rem + 0.4vw, 1.85rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: -6px 0 4px;
+    line-height: 1.25;
+  }
+
+  .gas-opciones-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* Botones de opción azul corporativo dentro de la tarjeta de cristal */
+  .btn-gas-opcion {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #004aad;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    padding: 14px 18px;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.25);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+  }
+
+  .btn-gas-opcion:hover {
+    background: #005ce6;
+    border-color: #00c2ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.45);
+  }
+
+  .opcion-circulo-icono {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .btn-gas-opcion:hover .opcion-circulo-icono {
+    transform: scale(1.05);
+    background: #ffffff;
+  }
+
+  .opcion-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .opcion-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #00c2ff;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+  }
+
+  .opcion-sub {
+    font-size: 0.84rem;
+    color: #ffffff;
+    line-height: 1.35;
+  }
+
+  .gas-card-pie-nota {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 4px 0 0;
+  }
+
+  /* ==========================================================================
+     CINTILLO INFERIOR CONTINUO
+     ========================================================================== */
+  .gas-hero-cintillo {
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(5, 19, 41, 0.4);
+    padding: 16px 0;
+  }
+
+  .cintillo-contenedor {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+  }
+
+  .cintillo-label {
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .cintillo-items {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  @media (max-width: 640px) {
+    .btn-gas-pildora {
+      font-size: 0.82rem;
+      padding: 8px 10px 8px 16px;
+    }
+    .gas-hero-card {
+      padding: 22px 18px;
+    }
+    .btn-gas-opcion {
+      padding: 12px 14px;
+      gap: 12px;
+    }
+  }
+</style>

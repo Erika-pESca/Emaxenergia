@@ -1,7 +1,7 @@
 ---
 // Componente HeroTarifas para la página "Luz para empresas" (/tarifas)
 // Replicación exacta del diseño oficial de marca con fondo_tarifas.jpg
-// Tipografía Sora + cursiva Merriweather, píldora cian y tarjeta de cristal interactiva
+// Tipografía Poppins + cursiva Literata, píldora cian y tarjeta de cristal interactiva
 import fondoTarifas from "../../imagenes/fondo_tarifas.jpg";
 
 interface TramoGasto {
@@ -208,7 +208,7 @@ const tramosGasto: TramoGasto[] = [
   }
 
   .hero-tarifas-titulo {
-    font-family: "Poppins", "Sora", sans-serif;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: clamp(2.25rem, 1.75rem + 2.1vw, 3.4rem);
     font-weight: 800;
     color: #ffffff;
@@ -219,7 +219,7 @@ const tramosGasto: TramoGasto[] = [
   }
 
   .titulo-cursiva {
-    font-family: "Playfair Display", "Merriweather", Georgia, serif;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;
@@ -328,7 +328,7 @@ const tramosGasto: TramoGasto[] = [
   }
 
   .tarifas-card-titulo {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: 1.45rem;
     font-weight: 800;
     color: #00c2ff;

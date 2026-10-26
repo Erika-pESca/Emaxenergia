@@ -1,0 +1,575 @@
+---
+// Sección: "EMPIEZA POR lo que pagas" — Gas Natural
+// Fiel al boceto del usuario + círculo decorativo con fotografía del consultor como en la Home
+import consultorImg from "../../imagenes/consultor-emax.jpg";
+
+interface SegmentoGas {
+  id: string;
+  titulo: string;
+  subtitulo: string;
+  detalle: string;
+  puntos: string[];
+  ctaTexto: string;
+}
+
+const segmentos: SegmentoGas[] = [
+  {
+    id: "empresa",
+    titulo: "Para mi empresa",
+    subtitulo: "Local, nave, hotel, restaurante u oficina.",
+    detalle: "Analizamos tu curva de consumo, peajes RL.4 a RL.8 y estacionalidad de caldera o procesos productivos.",
+    puntos: [
+      "Revisión de caudal diario contratado (QD) para evitar penalizaciones.",
+      "Comparativa precio fijo vs. indexado MIBGAS según tu estacionalidad.",
+      "Auditoría combinada si tienes luz y gas en el mismo suministro."
+    ],
+    ctaTexto: "Analizar factura de empresa"
+  },
+  {
+    id: "comunidad",
+    titulo: "Para una comunidad",
+    subtitulo: "Calefacción central, agua caliente o la caldera común.",
+    detalle: "Comprobamos si vuestra comunidad cumple con los requisitos de la TUR 4 Vecinal regulada o si estáis pagando de más en mercado libre.",
+    puntos: [
+      "Verificación de acceso a la Tarifa de Último Recurso para calderas comunitarias.",
+      "Revisión de contadores individuales y reparto de costes.",
+      "Informe claro y por escrito para presentar al Administrador o Junta."
+    ],
+    ctaTexto: "Analizar factura comunitaria"
+  },
+  {
+    id: "casa",
+    titulo: "Para mi casa",
+    subtitulo: "Cocina, agua caliente o calefacción.",
+    detalle: "Te decimos con números claros si te compensa seguir en tu compañía actual o acogerte a la TUR regulada por el Gobierno.",
+    puntos: [
+      "Lectura directa de peaje RL.1, RL.2 o RL.3 y consumo anual estimado.",
+      "Detección de servicios de mantenimiento no solicitados o caros.",
+      "Sin permanencia ni cambio de instalación."
+    ],
+    ctaTexto: "Analizar factura del hogar"
+  }
+];
+---
+
+<section class="empieza-gas-seccion" id="empieza-por-lo-que-pagas">
+  <!-- Círculo decorativo en la esquina derecha con la foto del consultor (estilo Home) -->
+  <div class="empieza-circulo-decor" aria-hidden="true">
+    <img
+      src={consultorImg.src}
+      alt="Consultor energético de EMAX revisando informe"
+      class="empieza-circulo-img"
+      loading="lazy"
+    />
+    <div class="empieza-circulo-overlay"></div>
+    <div class="empieza-circulo-borde"></div>
+  </div>
+
+  <div class="empieza-gas-contenedor">
+    <div class="empieza-grid-layout">
+      <!-- Columna Izquierda: Titular impactante -->
+      <div class="empieza-col-titular">
+        <div class="empieza-kicker">
+          <span>EMAX GAS NATURAL</span>
+          <span class="empieza-kicker-bar" aria-hidden="true">|</span>
+        </div>
+        <h2 class="empieza-titulo">
+          EMPIEZA POR<br />
+          <span class="empieza-titulo-cursiva">lo que pagas</span>
+        </h2>
+        <p class="empieza-bajada">
+          Dinos qué tipo de suministro tienes y leemos tu factura de gas sin compromiso antes de recomendarte cualquier paso.
+        </p>
+      </div>
+
+      <!-- Columna Central / Derecha: Tarjetas interactivas + Nota inferior -->
+      <div class="empieza-col-tarjetas">
+        <div class="empieza-cards-stack">
+          {
+            segmentos.map((seg, idx) => (
+              <div class="segmento-card-wrap" data-segmento-id={seg.id}>
+                <!-- Botón / Fila principal de la tarjeta -->
+                <button
+                  type="button"
+                  class="segmento-card-btn"
+                  aria-expanded="false"
+                  aria-controls={`segmento-detalle-${seg.id}`}
+                  id={`segmento-btn-${seg.id}`}
+                >
+                  <div class="segmento-card-info">
+                    <h3 class="segmento-card-tit">{seg.titulo}</h3>
+                    <p class="segmento-card-sub">{seg.subtitulo}</p>
+                  </div>
+                  <div class="segmento-btn-flecha" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="3" y1="8" x2="13" y2="8"></line>
+                      <polyline points="8 3 13 8 8 13"></polyline>
+                    </svg>
+                  </div>
+                </button>
+
+                <!-- Panel desplegable con detalles y llamada a la acción -->
+                <div
+                  class="segmento-drawer"
+                  id={`segmento-detalle-${seg.id}`}
+                  role="region"
+                  aria-labelledby={`segmento-btn-${seg.id}`}
+                >
+                  <div class="segmento-drawer-inner">
+                    <p class="drawer-detalle-txt">{seg.detalle}</p>
+                    <ul class="drawer-puntos-lista">
+                      {seg.puntos.map((pt) => (
+                        <li>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#38b6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                          </svg>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div class="drawer-acciones">
+                      <button
+                        type="button"
+                        class="btn-drawer-cta"
+                        data-abrir-funnel
+                        data-tramo-msg={`Consulta de gas para: ${seg.titulo}`}
+                      >
+                        <span>{seg.ctaTexto}</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Nota al pie oficial del boceto -->
+        <p class="empieza-nota-pie">
+          Si tienes luz y gas, revisamos las dos facturas y te llamamos una vez. Después eliges cómo seguimos, y un consultor te llama con tu informe en la franja que tú elijas.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN OSCURA: EMPIEZA POR LO QUE PAGAS
+     ========================================================================== */
+  .empieza-gas-seccion {
+    position: relative;
+    background: #06152d;
+    padding: clamp(70px, 8vw, 115px) 0;
+    overflow: hidden;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Círculo decorativo con fotografía del consultor (estilo Home) */
+  .empieza-circulo-decor {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: -130px;
+    width: clamp(480px, 44vw, 700px);
+    aspect-ratio: 1 / 1;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    box-shadow: -20px 0 70px rgba(0, 0, 0, 0.6), 0 0 60px rgba(56, 182, 255, 0.15);
+  }
+
+  .empieza-circulo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+    transform: scale(1.04);
+  }
+
+  .empieza-circulo-borde {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid rgba(56, 182, 255, 0.42);
+    pointer-events: none;
+  }
+
+  .empieza-circulo-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 35% 45%,
+      rgba(6, 21, 45, 0.05) 0%,
+      rgba(6, 21, 45, 0.35) 60%,
+      rgba(6, 21, 45, 0.78) 100%
+    );
+  }
+
+  /* Contenedor principal */
+  .empieza-gas-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+  }
+
+  .empieza-grid-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+    gap: clamp(32px, 5vw, 68px);
+    align-items: center;
+  }
+
+  /* Columna Izquierda */
+  .empieza-col-titular {
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+  }
+
+  .empieza-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6da2db;
+    margin-bottom: 14px;
+  }
+
+  .empieza-kicker-bar {
+    color: #38b6ff;
+  }
+
+  .empieza-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.2rem, 2rem + 1.6vw, 3.3rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.12;
+    margin: 0 0 18px;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .empieza-titulo-cursiva {
+    display: block;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #38b6ff;
+    font-size: 1.15em;
+    margin-top: 4px;
+  }
+
+  .empieza-bajada {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  /* Columna Derecha / Central: Tarjetas */
+  .empieza-col-tarjetas {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 660px;
+    width: 100%;
+  }
+
+  .empieza-cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* Tarjeta interactiva con borde fino redondeado */
+  .segmento-card-wrap {
+    background: rgba(10, 28, 58, 0.72);
+    border: 1.5px solid rgba(56, 182, 255, 0.32);
+    border-radius: 22px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+  }
+
+  .segmento-card-wrap:hover {
+    border-color: #38b6ff;
+    background: rgba(14, 38, 78, 0.88);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 25px rgba(56, 182, 255, 0.12);
+  }
+
+  .segmento-card-wrap.abierto {
+    border-color: #38b6ff;
+    background: rgba(12, 32, 68, 0.95);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.45), 0 0 30px rgba(56, 182, 255, 0.18);
+  }
+
+  /* Fila botón principal */
+  .segmento-card-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+    font-family: inherit;
+  }
+
+  .segmento-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .segmento-card-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #38b6ff;
+    margin: 0;
+    line-height: 1.3;
+    transition: color 0.2s ease;
+  }
+
+  .segmento-card-wrap:hover .segmento-card-tit {
+    color: #60c5ff;
+  }
+
+  .segmento-card-sub {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* Botón circular con icono flecha (→) */
+  .segmento-btn-flecha {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .segmento-card-wrap:hover .segmento-btn-flecha {
+    background: #38b6ff;
+    color: #06152d;
+    transform: translateX(2px);
+  }
+
+  /* Giro de flecha hacia abajo cuando está abierto */
+  .segmento-card-wrap.abierto .segmento-btn-flecha {
+    background: #38b6ff;
+    color: #06152d;
+    transform: rotate(90deg);
+  }
+
+  /* Drawer desplegable */
+  .segmento-drawer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .segmento-card-wrap.abierto .segmento-drawer {
+    grid-template-rows: 1fr;
+  }
+
+  .segmento-drawer-inner {
+    overflow: hidden;
+    padding: 0 24px;
+    transition: padding 0.28s ease;
+  }
+
+  .segmento-card-wrap.abierto .segmento-drawer-inner {
+    padding: 0 24px 22px;
+    border-top: 1px solid rgba(56, 182, 255, 0.15);
+    margin-top: 4px;
+    padding-top: 16px;
+  }
+
+  .drawer-detalle-txt {
+    font-size: 0.92rem;
+    color: #e2e8f0;
+    line-height: 1.55;
+    margin: 0 0 12px;
+  }
+
+  .drawer-puntos-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .drawer-puntos-lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.45;
+  }
+
+  .drawer-puntos-lista li svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .drawer-acciones {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-drawer-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #004aad;
+    color: #ffffff;
+    font-family: "Sora", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    border: 1px solid rgba(56, 182, 255, 0.35);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .btn-drawer-cta:hover {
+    background: #0056cc;
+    border-color: #38b6ff;
+    transform: translateY(-1px);
+  }
+
+  /* Nota inferior textual */
+  .empieza-nota-pie {
+    font-size: 0.93rem;
+    line-height: 1.62;
+    color: #cbd5e1;
+    margin: 4px 0 0;
+    max-width: 620px;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1100px) {
+    .empieza-grid-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .empieza-col-titular {
+      max-width: 100%;
+    }
+
+    .empieza-circulo-decor {
+      top: auto;
+      bottom: -120px;
+      right: -80px;
+      width: 420px;
+      opacity: 0.35;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .segmento-card-btn {
+      padding: 16px 18px;
+    }
+
+    .segmento-card-tit {
+      font-size: 1.05rem;
+    }
+
+    .segmento-card-sub {
+      font-size: 0.85rem;
+    }
+
+    .segmento-btn-flecha {
+      width: 34px;
+      height: 34px;
+    }
+
+    .empieza-circulo-decor {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function setupSegmentosAccordion() {
+    const section = document.getElementById('empieza-por-lo-que-pagas');
+    if (!section) return;
+
+    const cards = section.querySelectorAll<HTMLElement>('.segmento-card-wrap');
+
+    cards.forEach((card) => {
+      const btn = card.querySelector<HTMLButtonElement>('.segmento-card-btn');
+      if (!btn) return;
+
+      btn.addEventListener('click', () => {
+        const isOpen = card.classList.contains('abierto');
+
+        // Cerrar otros si se desea acordeón exclusivo o permitir varios
+        cards.forEach((c) => {
+          if (c !== card) {
+            c.classList.remove('abierto');
+            c.querySelector('.segmento-card-btn')?.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        if (isOpen) {
+          card.classList.remove('abierto');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          card.classList.add('abierto');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupSegmentosAccordion);
+  } else {
+    setupSegmentosAccordion();
+  }
+  document.addEventListener('astro:page-load', setupSegmentosAccordion);
+</script>

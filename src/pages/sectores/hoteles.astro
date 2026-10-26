@@ -1,0 +1,41 @@
+---
+// Página: Sector Hoteles y Alojamientos (/sectores/hoteles)
+// "En febrero sigues pagando la potencia de agosto"
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroHoteles from "../../components/sectores/hoteles/HeroHoteles.astro";
+import PorQueElVerano from "../../components/sectores/hoteles/PorQueElVerano.astro";
+import DosHotelesAnosDistintos from "../../components/sectores/hoteles/DosHotelesAnosDistintos.astro";
+import QuePuedesHacerPotencia from "../../components/sectores/hoteles/QuePuedesHacerPotencia.astro";
+import FacturaPrevisible from "../../components/sectores/hoteles/FacturaPrevisible.astro";
+---
+
+<BaseLayout
+  title="Luz para hoteles: en febrero sigues pagando la potencia de agosto | EMAX Energía"
+  description="Un hotel contrata la potencia para su día de más demanda y la paga los 365 días, también a medio gas. Leemos tu año, mes a mes."
+  path="/sectores/hoteles"
+>
+  <div class="hoteles-page-wrapper">
+    <!-- 1. Hero oficial con fotografía del hotel y tarjeta glassmorphic interactiva -->
+    <HeroHoteles />
+
+    <!-- 2. "POR QUÉ EL VERANO, se paga todo el año" (4 tarjetas de estacionalidad hotelera) -->
+    <PorQueElVerano />
+
+    <!-- 3. "DOS HOTELES CON AÑOS DISTINTOS" (Hotel de costa vs Hotel urbano) -->
+    <DosHotelesAnosDistintos />
+
+    <!-- 4. "QUÉ PUEDES HACER hoy con tu potencia" (Qué dice la norma vs Qué hacemos) -->
+    <QuePuedesHacerPotencia />
+
+    <!-- 5. "Ocupación variable, FACTURA PREVISIBLE" (Banner degradado con recursos) -->
+    <FacturaPrevisible />
+  </div>
+</BaseLayout>
+
+<style>
+  .hoteles-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

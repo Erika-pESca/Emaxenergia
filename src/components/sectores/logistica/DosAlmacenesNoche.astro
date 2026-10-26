@@ -1,0 +1,549 @@
+---
+// Componente: DosAlmacenesNoche.astro
+// Sección de Logística y Frío: "DOS ALMACENES QUE TRABAJAN DE NOCHE DISTINTO"
+// Comparativa entre "Almacén seco" vs "Cámara frigorífica"
+// "El frío NO ENTIENDE DE HORARIOS. Tu factura, sí: cada hora cae en un periodo."
+
+import imgAlmacenSeco from "../../../imagenes/logistica_almacen_seco.jpg";
+import imgCamaraFrio from "../../../imagenes/logistica_camara_frio.jpg";
+
+interface FilaAlmacen {
+  titulo: string;
+  icono: "trabaja" | "consume" | "potencia" | "reactiva" | "estructura";
+  textoSeco: string;
+  textoFrio: string;
+}
+
+const caracteristicas: FilaAlmacen[] = [
+  {
+    titulo: "Cómo trabaja",
+    icono: "trabaja",
+    textoSeco:
+      "Un turno de día, de lunes a viernes. Carretillas, iluminación de nave y muelles.",
+    textoFrio:
+      "Frío las 24 horas y picking de madrugada, también el fin de semana.",
+  },
+  {
+    titulo: "Cuándo consume",
+    icono: "consume",
+    textoSeco: "Casi todo de día y entre semana: llano y punta.",
+    textoFrio:
+      "Una base que no para y mucho consumo en P6: madrugadas y fines de semana.",
+  },
+  {
+    titulo: "Su potencia",
+    icono: "potencia",
+    textoSeco:
+      "Su pico es de día, con la nave a pleno rendimiento. Cae en un periodo caro y arrastra a los demás.",
+    textoFrio:
+      "Su pico llega al cargar equipos y arrancar compresores de madrugada. Si cae en P6, se queda en el periodo con el kW más barato.",
+  },
+  {
+    titulo: "Su reactiva",
+    icono: "reactiva",
+    textoSeco: "Poca: pocos motores trabajando a la vez.",
+    textoFrio:
+      "Los compresores la generan día y noche; la de P6 no se paga.",
+  },
+  {
+    titulo: "Su estructura",
+    icono: "estructura",
+    textoSeco:
+      "Le importa menos cómo se reparte el precio que acertar su potencia de día.",
+    textoFrio:
+      "Seis periodos le permiten pagar su madrugada con la parte regulada que le toca.",
+  },
+];
+---
+
+<section
+  class="dos-almacenes-seccion"
+  id="dos-almacenes-comparativa"
+  aria-labelledby="dos-almacenes-tit"
+>
+  <div class="dos-almacenes-contenedor">
+    <!-- Encabezado de la Sección -->
+    <div class="dos-almacenes-header">
+      <div class="etiqueta-kicker">
+        <span>DOS ALMACENES QUE TRABAJAN DE NOCHE DISTINTO</span>
+        <span class="separador-barra" aria-hidden="true">|</span>
+      </div>
+
+      <h2 class="dos-almacenes-titulo" id="dos-almacenes-tit">
+        <span class="tit-cursiva">El frío</span> NO ENTIENDE DE HORARIOS.
+      </h2>
+
+      <p class="dos-almacenes-bajada-destacada">
+        Tu factura, sí: cada hora cae en un periodo.
+      </p>
+
+      <p class="dos-almacenes-subtitulo">
+        Una tarifa "para logística" da por hecho que la noche es toda barata. Estos dos no trabajan igual de noche, ni de día.
+      </p>
+    </div>
+
+    <!-- Rejilla Comparativa de 2 Almacenes -->
+    <div class="comparativa-almacenes-grid">
+      <!-- 1. ALMACÉN SECO -->
+      <article class="tarjeta-almacen" aria-label="Análisis de Almacén seco">
+        <div class="tarjeta-media">
+          <img
+            src={imgAlmacenSeco.src}
+            alt="Interior iluminado de almacén logístico seco con estanterías y carretilla eléctrica"
+            class="tarjeta-foto"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="badge-almacen badge-seco">Almacén seco</div>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <ul class="filas-stack" role="list">
+            {
+              caracteristicas.map((c) => (
+                <li class="fila-detalle">
+                  <div class="circulo-icono-azul" aria-hidden="true">
+                    {c.icono === "trabaja" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                      </svg>
+                    )}
+                    {c.icono === "consume" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    )}
+                    {c.icono === "potencia" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                      </svg>
+                    )}
+                    {c.icono === "reactiva" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M2 12c2.5-6 5.5-6 8 0s5.5 6 8 0 3-4 4-4" />
+                      </svg>
+                    )}
+                    {c.icono === "estructura" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <line x1="18" y1="20" x2="18" y2="10" />
+                        <line x1="12" y1="20" x2="12" y2="4" />
+                        <line x1="6" y1="20" x2="6" y2="14" />
+                      </svg>
+                    )}
+                  </div>
+                  <div class="fila-textos">
+                    <h3 class="fila-titulo">{c.titulo}</h3>
+                    <p class="fila-desc">{c.textoSeco}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </article>
+
+      <!-- 2. CÁMARA FRIGORÍFICA -->
+      <article class="tarjeta-almacen" aria-label="Análisis de Cámara frigorífica">
+        <div class="tarjeta-media">
+          <img
+            src={imgCamaraFrio.src}
+            alt="Cámara frigorífica industrial a baja temperatura con condensación y operario con transpaleta"
+            class="tarjeta-foto"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="badge-almacen badge-frio">Cámara frigorífica</div>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <ul class="filas-stack" role="list">
+            {
+              caracteristicas.map((c) => (
+                <li class="fila-detalle">
+                  <div class="circulo-icono-azul" aria-hidden="true">
+                    {c.icono === "trabaja" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                      </svg>
+                    )}
+                    {c.icono === "consume" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    )}
+                    {c.icono === "potencia" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                      </svg>
+                    )}
+                    {c.icono === "reactiva" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M2 12c2.5-6 5.5-6 8 0s5.5 6 8 0 3-4 4-4" />
+                      </svg>
+                    )}
+                    {c.icono === "estructura" && (
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="2.3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <line x1="18" y1="20" x2="18" y2="10" />
+                        <line x1="12" y1="20" x2="12" y2="4" />
+                        <line x1="6" y1="20" x2="6" y2="14" />
+                      </svg>
+                    )}
+                  </div>
+                  <div class="fila-textos">
+                    <h3 class="fila-titulo">{c.titulo}</h3>
+                    <p class="fila-desc">{c.textoFrio}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: DOS ALMACENES QUE TRABAJAN DE NOCHE DISTINTO
+     ========================================================================== */
+  .dos-almacenes-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7vw, 105px) 0 clamp(75px, 8vw, 115px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .dos-almacenes-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .dos-almacenes-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(38px, 4.5vw, 54px);
+    max-width: 900px;
+  }
+
+  .etiqueta-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .separador-barra {
+    color: #00c2ff;
+    font-weight: 800;
+  }
+
+  .dos-almacenes-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #00c2ff;
+  }
+
+  .dos-almacenes-bajada-destacada {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.3rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    line-height: 1.35;
+  }
+
+  .dos-almacenes-subtitulo {
+    font-size: clamp(0.96rem, 0.92rem + 0.2vw, 1.05rem);
+    line-height: 1.62;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+  }
+
+  /* Rejilla de los 2 Almacenes */
+  .comparativa-almacenes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 3.2vw, 38px);
+    align-items: stretch;
+  }
+
+  /* Tarjeta Individual */
+  .tarjeta-almacen {
+    display: flex;
+    flex-direction: column;
+    background: #f1f5f9;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .tarjeta-almacen:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Media superior */
+  .tarjeta-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9.5;
+    overflow: hidden;
+    background: #001f4d;
+  }
+
+  .tarjeta-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.02);
+    transition: transform 0.4s ease;
+  }
+
+  .tarjeta-almacen:hover .tarjeta-foto {
+    transform: scale(1.05);
+  }
+
+  .badge-almacen {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0052cc;
+    color: #ffffff;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 8px 28px;
+    border-radius: 9999px;
+    box-shadow: 0 6px 18px rgba(0, 82, 204, 0.5);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 2;
+  }
+
+  .badge-frio {
+    background: #0060e6;
+  }
+
+  /* Cuerpo con Filas */
+  .tarjeta-cuerpo {
+    padding: 26px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: #f1f5f9;
+  }
+
+  .filas-stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fila-detalle {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e8f0;
+    box-sizing: border-box;
+  }
+
+  .fila-detalle:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .circulo-icono-azul {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    box-shadow: 0 3px 8px rgba(0, 74, 173, 0.25);
+  }
+
+  .fila-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+  }
+
+  .fila-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #004aad;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .fila-desc {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #334155;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 960px) {
+    .comparativa-almacenes-grid {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .dos-almacenes-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .dos-almacenes-titulo {
+      font-size: 1.85rem;
+    }
+
+    .tarjeta-cuerpo {
+      padding: 20px 18px;
+    }
+  }
+</style>

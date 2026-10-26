@@ -1,0 +1,516 @@
+---
+// Componente: TuTiendaNuncaSeApaga.astro
+// Sección de Supermercados y Alimentación: "TU TIENDA nunca se apaga"
+// 4 tarjetas explicativas sobre la base de frío comercial vs horario de sala:
+// 01. La base
+// 02. Las horas baratas
+// 03. La sala
+// 04. Lo que decide
+// + Cita destacada: "El frío no se puede apagar."
+// + 3 píldoras cian a guías técnicas con flechas en azul oscuro.
+
+interface TarjetaSupermercado {
+  numero: string;
+  titulo: string;
+  icono: "frio" | "horas" | "sala" | "decide";
+  texto: string;
+}
+
+const tarjetas: TarjetaSupermercado[] = [
+  {
+    numero: "01",
+    titulo: "La base",
+    icono: "frio",
+    texto:
+      "El frío es la parte de tu consumo que nunca para: cámaras, murales, congelados. Está ahí a las cuatro de la mañana y el domingo con la persiana bajada.",
+  },
+  {
+    numero: "02",
+    titulo: "Las horas baratas",
+    icono: "horas",
+    texto:
+      "Una parte de esa base cae en las horas con los peajes y cargos más bajos: las noches entre semana, los fines de semana y los festivos. Si cierras el domingo, todo lo que consume tu frío ese día va ahí.",
+  },
+  {
+    numero: "03",
+    titulo: "La sala",
+    icono: "sala",
+    texto:
+      "Encima de la base, en horario comercial, se suma la sala: iluminación, climatización, cajas y, si lo tienes, el obrador. Eso cae en las horas caras.",
+  },
+  {
+    numero: "04",
+    titulo: "Lo que decide",
+    icono: "decide",
+    texto:
+      "Por eso la estructura que te conviene no depende de que seas una tienda de alimentación, sino de cuánto pesa tu base frente a tu sala.",
+  },
+];
+---
+
+<section
+  class="tienda-seccion"
+  id="tu-tienda-nunca-se-apaga"
+  aria-labelledby="tienda-tit"
+>
+  <div class="tienda-contenedor">
+    <!-- Encabezado de la Sección -->
+    <div class="tienda-header">
+      <h2 class="tienda-titulo" id="tienda-tit">
+        TU TIENDA <span class="tienda-cursiva">nunca se apaga</span>
+      </h2>
+    </div>
+
+    <!-- Rejilla de las 4 tarjetas -->
+    <div class="tienda-grid">
+      {
+        tarjetas.map((t) => (
+          <article class="tienda-card">
+            <!-- Insignia circular superior con icono temático y número en relieve -->
+            <div class="tienda-badge-wrap" aria-hidden="true">
+              <div class="badge-circulo-azul">
+                {t.icono === "frio" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="12" y1="2" x2="12" y2="22" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                    <line x1="19.07" y1="4.93" x2="4.93" y2="19.07" />
+                    <circle cx="12" cy="12" r="2.5" fill="#ffffff" />
+                  </svg>
+                )}
+
+                {t.icono === "horas" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                )}
+
+                {t.icono === "sala" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                  </svg>
+                )}
+
+                {t.icono === "decide" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                )}
+              </div>
+
+              <!-- Círculo cian inferior con el número en relieve -->
+              <div class="badge-circulo-cyan">
+                <span class="badge-num">{t.numero}</span>
+              </div>
+            </div>
+
+            <!-- Contenido de la tarjeta -->
+            <h3 class="tienda-card-tit">{t.titulo}</h3>
+            <p class="tienda-card-desc">{t.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Bloque de Cita Destacada: "El frío no se puede apagar." -->
+    <div class="tienda-cita-bloque">
+      <div class="cita-cuadro-suave" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2H4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2 0 4 1.75 6 5 8" />
+          <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.75-2-2-2h-4c-1.25 0-2 .75-2 2v6c0 1.25.75 2 2 2 0 4 1.75 6 5 8" />
+        </svg>
+      </div>
+
+      <div class="cita-textos">
+        <p class="cita-tit">"El frío no se puede apagar."</p>
+        <p class="cita-sub">No se trata de apagarlo, sino de saber en qué periodo cae y cómo se paga.</p>
+      </div>
+    </div>
+
+    <!-- Fila de 3 Píldoras Cian inferiores con flechas en azul oscuro -->
+    <div class="tienda-acciones-bottom" role="navigation" aria-label="Guías recomendadas para supermercados">
+      <a
+        href="/guias/precio-fijo-o-indexado"
+        class="pildora-guia-tienda"
+        aria-label="Ir a la guía de cómo se reparte el precio a lo largo del día"
+      >
+        <span>Cómo se reparte el precio a lo largo del día</span>
+        <span class="pildora-circulo-flecha" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </a>
+
+      <a
+        href="/guias/peaje-3-0td"
+        class="pildora-guia-tienda"
+        aria-label="Ir a la guía del peaje 3.0TD y sus periodos"
+      >
+        <span>El peaje 3.0TD y sus periodos</span>
+        <span class="pildora-circulo-flecha" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </a>
+
+      <a
+        href="/guias/potencia-contratada"
+        class="pildora-guia-tienda"
+        aria-label="Ir a la guía de potencia contratada"
+      >
+        <span>Potencia contratada</span>
+        <span class="pildora-circulo-flecha" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: TU TIENDA NUNCA SE APAGA (SUPERMERCADOS)
+     ========================================================================== */
+  .tienda-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7vw, 105px) 0 clamp(75px, 8vw, 115px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .tienda-contenedor {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
+
+  /* Encabezado */
+  .tienda-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(48px, 6vw, 68px);
+    max-width: 860px;
+  }
+
+  .tienda-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tienda-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #00c2ff;
+  }
+
+  /* Rejilla de 4 tarjetas */
+  .tienda-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2.2vw, 28px);
+    align-items: stretch;
+    margin-top: 24px;
+    margin-bottom: 38px;
+  }
+
+  /* Tarjeta individual */
+  .tienda-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(11, 30, 64, 0.76);
+    border: 1.5px solid rgba(56, 182, 255, 0.26);
+    border-radius: 24px;
+    padding: 56px 24px 34px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    box-sizing: border-box;
+  }
+
+  .tienda-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 194, 255, 0.55);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.44), 0 0 24px rgba(0, 194, 255, 0.12);
+  }
+
+  /* Insignia circular decorativa superior */
+  .tienda-badge-wrap {
+    position: absolute;
+    top: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 82px;
+    height: 76px;
+    pointer-events: none;
+  }
+
+  .badge-circulo-azul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #0052cc;
+    box-shadow: 0 8px 20px rgba(0, 82, 204, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+  }
+
+  .tienda-card:hover .badge-circulo-azul {
+    transform: scale(1.04);
+    background: #0060ed;
+  }
+
+  .badge-svg-icono {
+    margin-top: -3px;
+    margin-left: -3px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  .badge-circulo-cyan {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 194, 255, 0.45);
+    border: 2px solid #081d3e;
+    transition: transform 0.25s ease;
+  }
+
+  .tienda-card:hover .badge-circulo-cyan {
+    transform: scale(1.08);
+  }
+
+  .badge-num {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Título de la tarjeta */
+  .tienda-card-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 0 14px 0;
+    line-height: 1.25;
+  }
+
+  /* Párrafo explicativo */
+  .tienda-card-desc {
+    font-size: 0.89rem;
+    line-height: 1.62;
+    color: #cbd5e1;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  /* ==========================================================================
+     BLOQUE DE CITA DESTACADA: "El frío no se puede apagar."
+     ========================================================================== */
+  .tienda-cita-bloque {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 28px;
+    padding: 8px 0;
+  }
+
+  .cita-cuadro-suave {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: #cbe2fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.2);
+  }
+
+  .cita-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .cita-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.3rem);
+    font-weight: 800;
+    color: #00c2ff;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .cita-sub {
+    font-size: clamp(0.92rem, 0.88rem + 0.2vw, 1.02rem);
+    line-height: 1.55;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     PÍLDORAS CIAN INFERIORES
+     ========================================================================== */
+  .tienda-acciones-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .pildora-guia-tienda {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 10px 16px 10px 22px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 194, 255, 0.32);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pildora-guia-tienda:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 194, 255, 0.45);
+  }
+
+  /* Círculo de la flecha en azul oscuro oficial #003882 */
+  .pildora-circulo-flecha {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .pildora-guia-tienda:hover .pildora-circulo-flecha {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1100px) {
+    .tienda-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 48px 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tienda-cita-bloque {
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .pildora-guia-tienda {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tienda-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .tienda-grid {
+      grid-template-columns: 1fr;
+      gap: 52px;
+    }
+  }
+</style>

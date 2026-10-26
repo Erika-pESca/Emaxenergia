@@ -1,0 +1,339 @@
+---
+// Componente: Hero para la página de Sectores (/sectores)
+// Fiel al diseño oficial con chef en cocina, degradado azul y tarjeta glassmorphic interactiva
+import chefImg from "../../imagenes/hero_chef_sectores.jpg";
+
+const tramosLuz = [
+  { id: "300", label: "MENOS DE 300€", valor: "<300" },
+  { id: "1000", label: "300 – 1.000€", valor: "300-1000" },
+  { id: "3000", label: "1.000 – 3.000€", valor: "1000-3000" },
+  { id: "mas3000", label: "Más de 3.000€", valor: ">3000" }
+];
+---
+
+<section class="sectores-hero-root">
+  <!-- Fondo con imagen de chef en cocina y degradado azul corporativo -->
+  <div class="sectores-hero-bg">
+    <img
+      src={chefImg.src}
+      alt="Chef en cocina profesional de hostelería"
+      class="hero-bg-img"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-bg-gradient"></div>
+  </div>
+
+  <div class="sectores-hero-contenedor">
+
+    <div class="sectores-hero-grid">
+      <!-- Columna Izquierda: Titulares y propuesta de valor -->
+      <div class="sectores-hero-textos">
+        <div class="sectores-kicker">
+          <span>SECTORES</span>
+          <span class="sectores-kicker-bar" aria-hidden="true">|</span>
+        </div>
+
+        <h1 class="sectores-h1">
+          EL SECTOR NO DECIDE TU TARIFA.<br />
+          <span class="h1-cursiva-cyan">Tu consumo, sí.</span>
+        </h1>
+
+        <p class="sectores-subtitulo">
+          Lo que sí hace el sector es decirnos qué mirar primero: el frío que no para, la temporada, los turnos, el servicio de mediodía. Busca el tuyo.
+        </p>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta Glassmorphic con selector de tramos -->
+      <div class="sectores-hero-card-col">
+        <div class="hero-card-glass">
+          <h2 class="card-pregunta-tit">¿Cuánto paga tu empresa de luz al mes?</h2>
+          <p class="card-pregunta-sub">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+
+          <!-- Rejilla de 4 botones azules 2x2 -->
+          <div class="card-tramos-grid">
+            {
+              tramosLuz.map((t) => (
+                <button
+                  type="button"
+                  class="btn-tramo-azul"
+                  data-abrir-funnel
+                  data-tramo-id={t.id}
+                  data-tramo-msg={`Consulta desde Sectores para tramo: ${t.label}`}
+                >
+                  <span class="tramo-txt">{t.label}</span>
+                  <span class="tramo-flecha" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="3" y1="8" x2="13" y2="8"></line>
+                      <polyline points="8 3 13 8 8 13"></polyline>
+                    </svg>
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
+          <!-- Pie de tarjeta -->
+          <p class="card-nota-pie">
+            Tú eliges cómo empezamos: con tu factura, con tu CUPS o con dos datos de tu negocio. El análisis no tiene coste.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO SECTORES: FONDO FOTOGRÁFICO + CRISTALISMO + AZUL CORPORATIVO
+     ========================================================================== */
+  .sectores-hero-root {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    min-height: calc(88vh + 78px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #004aad;
+    overflow: hidden;
+    padding-top: calc(78px + clamp(36px, 5vh, 52px));
+    padding-bottom: clamp(48px, 6vh, 72px);
+  }
+
+  /* Fondo con fotografía y degradado de fusión a la izquierda */
+  .sectores-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+
+  /* Gradiente oficial: Azul sólido y vibrante en la izquierda para legibilidad de textos,
+     abriendo gradualmente hacia la derecha donde se revela la cocina y el chef */
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      rgba(0, 74, 173, 0.96) 32%,
+      rgba(0, 74, 173, 0.78) 55%,
+      rgba(0, 74, 173, 0.42) 78%,
+      rgba(4, 30, 74, 0.58) 100%
+    );
+  }
+
+  /* Contenedor */
+  .sectores-hero-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+  }
+
+
+  /* Grid 2 Columnas */
+  .sectores-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 68px);
+    align-items: center;
+  }
+
+  /* Textos izquierda */
+  .sectores-hero-textos {
+    display: flex;
+    flex-direction: column;
+    max-width: 620px;
+  }
+
+  .sectores-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #38b6ff;
+    margin-bottom: 14px;
+  }
+
+  .sectores-kicker-bar {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .sectores-h1 {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.3rem, 2rem + 1.8vw, 3.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.12;
+    margin: 0 0 20px;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .h1-cursiva-cyan {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    color: #38b6ff;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .sectores-subtitulo {
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    max-width: 540px;
+  }
+
+  /* Tarjeta Glassmorphic derecha */
+  .sectores-hero-card-col {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .hero-card-glass {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.32);
+    border-radius: 28px;
+    padding: clamp(26px, 3.2vw, 38px);
+    box-shadow: 0 20px 50px rgba(0, 24, 70, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card-pregunta-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.48rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .card-pregunta-sub {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 6px;
+  }
+
+  /* Rejilla 2x2 de botones */
+  .card-tramos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .card-tramos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .btn-tramo-azul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 16px;
+    background: #003a88;
+    color: #ffffff;
+    border: 1px solid rgba(56, 182, 255, 0.35);
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    text-align: left;
+  }
+
+  .btn-tramo-azul:hover {
+    background: #004aad;
+    border-color: #38b6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 74, 173, 0.4);
+  }
+
+  .tramo-flecha {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #38b6ff;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover .tramo-flecha {
+    transform: translateX(2px);
+    background: #ffffff;
+  }
+
+  .card-nota-pie {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 8px 0 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .sectores-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .sectores-hero-card-col {
+      justify-content: flex-start;
+    }
+
+    .hero-card-glass {
+      max-width: 100%;
+    }
+
+    .hero-bg-gradient {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 74, 173, 0.95) 0%,
+        rgba(0, 74, 173, 0.88) 50%,
+        rgba(4, 30, 74, 0.96) 100%
+      );
+    }
+  }
+</style>

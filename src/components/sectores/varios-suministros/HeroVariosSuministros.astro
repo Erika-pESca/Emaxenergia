@@ -1,0 +1,432 @@
+---
+// Componente: HeroVariosSuministros.astro
+// Hero oficial para la página: /varios-suministros ("Luz para empresas con varias sedes")
+// Fondo en degradado horizontal azul corporativo que funde a blanco + tarjeta glass con selector de tramos.
+// Sin migas de pan; el hero sube por detrás del header flotante (margin-top: -78px).
+
+const tramosLuz = [
+  {
+    label: "MENOS DE 300€",
+    valor: "<300",
+    rango: "menos de 300 € al mes",
+    msg: "Tengo varios suministros pequeños y quiero revisar potencias y contratos de todos.",
+  },
+  {
+    label: "300 - 1.000€",
+    valor: "300-1000",
+    rango: "entre 300 y 1.000 € al mes",
+    msg: "Tengo varios locales o sedes y quiero que lean cada suministro y el conjunto.",
+  },
+  {
+    label: "1.000 - 3.000€",
+    valor: "1000-3000",
+    rango: "entre 1.000 y 3.000 € al mes",
+    msg: "Gestiono una red de locales o sedes y quiero ordenar potencias, periodos, reactiva y renovaciones.",
+  },
+  {
+    label: "Más de 3.000€",
+    valor: ">3000",
+    rango: "más de 3.000 € al mes",
+    msg: "Grupo multisede con muchos suministros: quiero un gestor que responda por todos.",
+  },
+];
+---
+
+<section class="varios-hero-root" aria-labelledby="varios-hero-h1">
+  <!-- Fondo: degradado azul eléctrico que funde a blanco a la derecha -->
+  <div class="varios-hero-bg" aria-hidden="true">
+    <div class="hero-bg-glow"></div>
+  </div>
+
+  <div class="varios-hero-contenedor">
+    <div class="varios-hero-grid">
+      <!-- Columna Izquierda: titulares -->
+      <div class="varios-hero-textos">
+        <div class="varios-kicker">
+          <span>LUZ PARA EMPRESAS CON VARIAS SEDES</span>
+          <span class="varios-kicker-bar" aria-hidden="true">|</span>
+        </div>
+
+        <h1 class="varios-h1" id="varios-hero-h1">
+          <span class="h1-linea">
+            <span class="h1-mayus">UN LOCAL</span>
+            <span class="h1-cursiva"> con la potencia mal ajustada</span>
+          </span>
+          <span class="h1-mayus h1-bloque">SE NOTA POCO.</span>
+        </h1>
+
+        <p class="varios-destacado">En veinte, se nota en el margen.</p>
+
+        <p class="varios-subtitulo">
+          Leemos cada suministro y todos juntos: potencias, periodos, reactiva y fechas de renovación.
+        </p>
+      </div>
+
+      <!-- Columna Derecha: tarjeta con selector de tramos (abre el funnel) -->
+      <div class="varios-hero-card-col">
+        <div class="hero-card-glass">
+          <h2 class="card-pregunta-tit">¿Cuánto paga tu empresa de luz al mes?</h2>
+          <p class="card-pregunta-sub">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+
+          <div class="card-tramos-grid" role="group" aria-label="Selección de tramo mensual de luz">
+            {
+              tramosLuz.map((t) => (
+                <button
+                  type="button"
+                  class="btn-tramo-azul"
+                  data-abrir-funnel
+                  data-tramo-id={t.valor}
+                  data-tramo-label={t.label}
+                  data-tramo-rango={t.rango}
+                  data-tramo-msg={t.msg}
+                  aria-label={`Seleccionar tramo ${t.label} para abrir el análisis de varios suministros`}
+                >
+                  <span class="tramo-txt">{t.label}</span>
+                  <span class="tramo-flecha" aria-hidden="true">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#003882"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
+          <p class="card-nota-pie">
+            Tú eliges cómo empezamos: con tu factura, con tus CUPS o con dos datos de tu negocio. El análisis no tiene coste.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO: VARIOS SUMINISTROS
+     ========================================================================== */
+  .varios-hero-root {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    min-height: calc(88vh + 78px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: calc(78px + clamp(36px, 5vh, 52px));
+    padding-bottom: clamp(48px, 6vh, 72px);
+    box-sizing: border-box;
+    color: #ffffff;
+    background: #0047ba;
+  }
+
+  .varios-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      #0047ba 0%,
+      #0052d6 24%,
+      #0a63f0 42%,
+      #4f8ff7 56%,
+      #a9c8fb 70%,
+      #e2ecfd 84%,
+      #f7f9ff 100%
+    );
+  }
+
+  .hero-bg-glow {
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    left: -180px;
+    bottom: -260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 194, 255, 0.22) 0%, rgba(0, 194, 255, 0) 70%);
+    animation: glowFloat 9s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowFloat {
+    from { transform: translate(0, 0); }
+    to { transform: translate(60px, -40px); }
+  }
+
+  .varios-hero-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    padding-block: clamp(20px, 3vh, 32px);
+    box-sizing: border-box;
+  }
+
+  .varios-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.02fr;
+    gap: clamp(36px, 5vw, 72px);
+    align-items: center;
+  }
+
+  /* Textos izquierda */
+  .varios-hero-textos {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+  }
+
+  .varios-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #e2e8f0;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .varios-kicker-bar {
+    color: #ffffff;
+    font-weight: 400;
+    animation: blink 1.1s steps(1) infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .varios-h1 {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 18px 0;
+    line-height: 1.12;
+  }
+
+  .h1-mayus {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.05rem, 1.8rem + 1.3vw, 3.05rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .h1-cursiva {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.15rem, 1.9rem + 1.3vw, 3.15rem);
+    color: #00c2ff;
+    letter-spacing: -0.005em;
+  }
+
+  .h1-bloque {
+    display: block;
+    margin-top: 4px;
+  }
+
+  .varios-destacado {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.3rem);
+    font-weight: 600;
+    color: #00c2ff;
+    letter-spacing: 0.02em;
+    margin: 0 0 8px 0;
+  }
+
+  .varios-subtitulo {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.96rem, 0.92rem + 0.22vw, 1.08rem);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    color: #f1f5f9;
+    margin: 0;
+    max-width: 480px;
+  }
+
+  /* Tarjeta derecha (sobre la zona clara del degradado) */
+  .varios-hero-card-col {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hero-card-glass {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(0, 82, 214, 0.55);
+    border-radius: 22px;
+    padding: clamp(26px, 3.2vw, 38px);
+    box-shadow:
+      0 20px 48px rgba(0, 40, 110, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hero-card-glass:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 26px 56px rgba(0, 40, 110, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .card-pregunta-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.2rem, 1.12rem + 0.4vw, 1.5rem);
+    font-weight: 600;
+    color: #0047ba;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+  }
+
+  .card-pregunta-sub {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #0f2547;
+    margin: 0 0 22px 0;
+  }
+
+  .card-tramos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+
+  .btn-tramo-azul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    background: #0047ba;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 6px;
+    padding: 12px 16px 12px 24px;
+    cursor: pointer;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-weight: 600;
+    font-size: 0.86rem;
+    letter-spacing: 0.06em;
+    text-align: left;
+    box-shadow: 0 6px 16px rgba(0, 56, 130, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .btn-tramo-azul:hover {
+    background: #0057e0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 56, 130, 0.35);
+  }
+
+  .btn-tramo-azul:focus-visible {
+    outline: 2px solid #00c2ff;
+    outline-offset: 2px;
+  }
+
+  .tramo-txt {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  .tramo-flecha {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover .tramo-flecha {
+    transform: translateX(3px);
+  }
+
+  .card-nota-pie {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: #0f2547;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 992px) {
+    .varios-hero-bg {
+      background: linear-gradient(180deg, #0047ba 0%, #0a63f0 55%, #a9c8fb 100%);
+    }
+
+    .varios-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .varios-hero-card-col {
+      justify-content: flex-start;
+    }
+
+    .hero-card-glass {
+      max-width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .card-tramos-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .h1-mayus {
+      font-size: 1.85rem;
+    }
+
+    .h1-cursiva {
+      font-size: 1.95rem;
+    }
+
+    .hero-card-glass {
+      padding: 22px 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg-glow,
+    .varios-kicker-bar {
+      animation: none;
+    }
+  }
+</style>

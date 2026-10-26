@@ -1,6 +1,6 @@
 ---
 // Componente de Titular en Dos Tiempos según especificación de EMAX
-// Poppins 700 en mayúsculas con text-transform y acento en cursiva serif Merriweather 400
+// Poppins 700 en mayúsculas con text-transform y acento en cursiva serif Literata 400
 interface Props {
   tag?: "h1" | "h2" | "h3";
   principal: string;
@@ -39,7 +39,7 @@ const Tag = tag;
 
 <style>
   .tit {
-    font-family: var(--f-texto, "Poppins", sans-serif);
+    font-family: var(--f-titulos, "Poppins", sans-serif);
     font-weight: 700;
     font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
     line-height: 1.08;
@@ -52,7 +52,7 @@ const Tag = tag;
   .tit em {
     display: block;
     text-transform: none;
-    font-family: var(--f-acento, "Merriweather", Georgia, serif);
+    font-family: var(--f-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
     font-size: 1em;

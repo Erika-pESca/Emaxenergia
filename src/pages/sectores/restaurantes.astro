@@ -1,0 +1,41 @@
+---
+// Página: Sector Restaurantes y Hostelería (/sectores/restaurantes)
+// "Lo que pasa en tu factura a las dos de la tarde"
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroRestaurantes from "../../components/sectores/restaurantes/HeroRestaurantes.astro";
+import UnServicioLeidoEnFactura from "../../components/sectores/restaurantes/UnServicioLeidoEnFactura.astro";
+import ReglasSegunPotencia from "../../components/sectores/restaurantes/ReglasSegunPotencia.astro";
+import DosRestaurantesMismoTamano from "../../components/sectores/restaurantes/DosRestaurantesMismoTamano.astro";
+import CocinaDeGas from "../../components/sectores/restaurantes/CocinaDeGas.astro";
+---
+
+<BaseLayout
+  title="Luz para restaurantes y hostelería: lo que pasa en tu factura a las dos de la tarde | EMAX Energía"
+  description="En pleno servicio, planchas, freidoras y extracción marcan tu potencia. Leemos tu factura con las reglas de tu peaje y sin permanencia."
+  path="/sectores/restaurantes"
+>
+  <div class="restaurantes-page-wrapper">
+    <!-- 1. Hero oficial con fotografía del restaurante en pleno servicio de comidas y tarjeta glassmorphic interactiva -->
+    <HeroRestaurantes />
+
+    <!-- 2. "UN SERVICIO, leído en la factura" (Las horas, El pico y El frío) -->
+    <UnServicioLeidoEnFactura />
+
+    <!-- 3. "LAS REGLAS CAMBIAN según tu potencia" (Comparativa 2.0TD vs 3.0TD) -->
+    <ReglasSegunPotencia />
+
+    <!-- 4. "DOS RESTAURANTES DEL MISMO TAMAÑO" (Comparativa Restaurante A vs Restaurante B) -->
+    <DosRestaurantesMismoTamano />
+
+    <!-- 5. "Si tu cocina ES DE GAS" (Banner de transición) -->
+    <CocinaDeGas />
+  </div>
+</BaseLayout>
+
+<style>
+  .restaurantes-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

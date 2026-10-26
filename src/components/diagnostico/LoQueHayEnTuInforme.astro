@@ -537,9 +537,9 @@
     --borde-campo: #7b879c;
     --sombra-card: 0 18px 45px rgba(0, 74, 173, 0.08), 0 4px 12px rgba(15, 35, 70, 0.03);
     --sombra-hover: 0 24px 54px rgba(0, 74, 173, 0.12), 0 6px 16px rgba(15, 35, 70, 0.04);
-    --f-marca: "Poppins", "Sora", sans-serif;
+    --f-marca: var(--font-titulos, "Poppins", sans-serif);
     --f-texto: "Poppins", "Inter", sans-serif;
-    --f-dato: "Poppins", "Sora", sans-serif;
+    --f-dato: var(--font-titulos, "Poppins", sans-serif);
 
     background: #ffffff;
     color: var(--tinta);
@@ -599,7 +599,7 @@
   }
 
   .informe-titulo {
-    font-family: var(--f-marca);
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: clamp(2.1rem, 1.7rem + 1.8vw, 3rem);
     font-weight: 800;
     color: var(--tinta);
@@ -610,7 +610,7 @@
   }
 
   .titulo-cursiva {
-    font-family: "Playfair Display", "Merriweather", Georgia, serif;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;

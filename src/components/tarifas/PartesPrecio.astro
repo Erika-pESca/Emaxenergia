@@ -1,93 +1,287 @@
 ---
-// Sección PartesPrecio para la página /tarifas
-// Desglose transparente de componentes del precio: qué se negocia y qué está regulado
-const componentes = [
-  {
-    concepto: "Coste de la energía consumida",
-    quien: "Mercado mayorista (OMIE). La modalidad (fija o indexada) decide cómo te llega.",
-    mover: "Sí: negociamos la fórmula de compra, el fee y las coberturas.",
-    negociable: true
-  },
-  {
-    concepto: "Peajes de acceso (potencia y energía)",
-    quien: "La CNMC (Circular 3/2020).",
-    mover: "No. Regulados por ley, iguales con cualquier comercializadora.",
-    negociable: false
-  },
-  {
-    concepto: "Cargos del sistema eléctrico",
-    quien: "El Ministerio para la Transición Ecológica.",
-    mover: "No. Orden ministerial anual, idénticos para todo el mercado.",
-    negociable: false
-  },
-  {
-    concepto: "Potencia contratada (kW en cada periodo)",
-    quien: "Tu contrato de acceso a la red.",
-    mover: "Sí: se optimiza analizando tus maxímetros para no pagar potencia ociosa.",
-    negociable: true
-  },
-  {
-    concepto: "Impuesto Eléctrico (IEE) e IVA",
-    quien: "Hacienda y legislación tributaria estatal.",
-    mover: "No. Porcentajes fiscales oficiales obligatorios.",
-    negociable: false
-  },
-  {
-    concepto: "Alquiler de equipos de medida / contador",
-    quien: "Distribuidora de zona o propiedad del contador.",
-    mover: "Regulado por el BOE si es de la distribuidora.",
-    negociable: false
-  }
-];
+// Componente PartesPrecio para la página /tarifas
+// "LO QUE ES IGUAL CON cualquier compañía"
+// Desglose visual de las 3 partes de la factura con iconos temáticos y 2 acordeones interactivos
 ---
 
 <section class="partes-seccion" id="partes-precio" aria-labelledby="h2-partes">
   <div class="partes-contenedor">
+    <!-- Cabecera de la sección -->
     <div class="partes-cabecera">
-      <span class="seccion-tag">Transparencia de costes</span>
-      <h2 class="partes-titulo" id="h2-partes">De qué está hecho el precio de tu factura</h2>
+      <h2 class="partes-titulo" id="h2-partes">
+        LO QUE ES IGUAL CON <span class="cursiva-azul">cualquier compañía</span>
+      </h2>
       <p class="partes-subtitulo">
-        Por eso conviene comparar la oferta entera y no solo el precio del kWh: un kWh barato puede esconder una potencia cara o penalizaciones en peajes.
+        Tu peaje de acceso, los cargos, los impuestos y el alquiler del contador los fija la regulación según tu suministro. Lo que construimos es todo lo demás: cómo compras la energía y cuántos kW contratas.
+      </p>
+      <p class="partes-lead-ejemplo">
+        En la factura del obrador, de 1.717,44 € antes de IVA:
       </p>
     </div>
 
-    <div class="partes-tabla-card">
-      <table class="tabla-partes">
-        <thead>
-          <tr>
-            <th scope="col">Componente de la factura</th>
-            <th scope="col">Quién lo fija</th>
-            <th scope="col">¿Se puede optimizar / negociar?</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            componentes.map((c) => (
-              <tr class:list={[{ "fila-negociable": c.negociable }]}>
-                <th scope="row" class="th-concepto">
-                  <span class:list={["punto-estado", c.negociable ? "punto-si" : "punto-no"]} aria-hidden="true"></span>
-                  {c.concepto}
-                </th>
-                <td class="td-quien">{c.quien}</td>
-                <td class="td-mover">
-                  <span class:list={["badge-movible", c.negociable ? "badge-si" : "badge-no"]}>
-                    {c.negociable ? "Optimizable con EMAX" : "Regulado oficial"}
-                  </span>
-                  <p class="desc-mover">{c.mover}</p>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+    <!-- Barra de proporción de costes (70,7% / 4,5% / 24,8%) -->
+    <div class="barra-partes-track" aria-hidden="true" title="Reparto porcentual de costes de la factura">
+      <span class="seg-barra seg-compra" style="width: 70.7%;"></span>
+      <span class="seg-barra seg-datos" style="width: 4.5%;"></span>
+      <span class="seg-barra seg-regulada" style="width: 24.8%;"></span>
+    </div>
+
+    <!-- 3 Tarjetas de partes del coste con iconos representativos -->
+    <div class="tres-partes-grid">
+      <!-- 01 Compra de energía -->
+      <article class="card-parte">
+        <div class="circulo-icono-parte azul-oscuro" aria-hidden="true">
+          <!-- Gráfica de mercado mayorista OMIE: fluctuación y fórmula de compra -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="parte-tit">Lo que depende de cómo se compra la energía</h3>
+        <p class="parte-cifra azul-oscuro">1.214,70 € · 70,7 %</p>
+        <p class="parte-desc">
+          El precio de la energía sin peajes ni cargos. Incluye el coste del mercado mayorista, que ninguna compañía controla; lo que se decide es cómo se compra: la estructura, la modalidad y las condiciones del contrato.
+        </p>
+      </article>
+
+      <!-- 02 Lo que se ajusta con datos -->
+      <article class="card-parte">
+        <div class="circulo-icono-parte cian" aria-hidden="true">
+          <!-- Sliders: Ajuste técnico de potencia y reactiva con datos de consumo -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14"></line>
+            <line x1="4" y1="10" x2="4" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12" y2="3"></line>
+            <line x1="20" y1="21" x2="20" y2="16"></line>
+            <line x1="20" y1="12" x2="20" y2="3"></line>
+            <line x1="1" y1="14" x2="7" y2="14"></line>
+            <line x1="9" y1="8" x2="15" y2="8"></line>
+            <line x1="17" y1="16" x2="23" y2="16"></line>
+          </svg>
+        </div>
+        <h3 class="parte-tit">Lo que se ajusta con tus datos</h3>
+        <p class="parte-cifra azul-oscuro">77,67 € · 4,5 %</p>
+        <p class="parte-desc">
+          La potencia que paga por encima de la que necesita (56,33 €) y la reactiva (21,34 €), que se corrige en la instalación, no en el contrato.
+        </p>
+      </article>
+
+      <!-- 03 Lo que no depende de nadie -->
+      <article class="card-parte">
+        <div class="circulo-icono-parte azul-claro" aria-hidden="true">
+          <!-- Institución / Regulación oficial estatal y peajes regulados CNMC -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="22" x2="21" y2="22"></line>
+            <line x1="6" y1="18" x2="6" y2="11"></line>
+            <line x1="10" y1="18" x2="10" y2="11"></line>
+            <line x1="14" y1="18" x2="14" y2="11"></line>
+            <line x1="18" y1="18" x2="18" y2="11"></line>
+            <polygon points="12 2 20 7 4 7 12 2"></polygon>
+          </svg>
+        </div>
+        <h3 class="parte-tit">Lo que no depende de ninguna compañía</h3>
+        <p class="parte-cifra azul-oscuro">425,07 € · 24,8 %</p>
+        <p class="parte-desc">
+          Los peajes y cargos de la potencia que sí necesita y de la energía, el impuesto eléctrico y el alquiler del contador. Los fija la regulación: los pagaría igual con cualquier compañía.
+        </p>
+      </article>
+    </div>
+
+    <!-- Nota de importes -->
+    <p class="nota-sin-iva">Importes sin IVA.</p>
+
+    <!-- 2 Acordeones Desplegables con contenido interactivo -->
+    <div class="dos-acordeones-grid" data-partes-acordeones>
+      <!-- ========================================================
+           ACORDEÓN 1: QUÉ PEAJE TIENES: 2.0TD, 3.0TD O 6.1TD
+           ======================================================== -->
+      <details class="acordeon-desplegable-item" name="acordeon-partes-precio">
+        <summary class="acordeon-desplegable-trigger">
+          <div class="trigger-icono-badge" aria-hidden="true">
+            <!-- Icono: Capas y niveles de red eléctrica / peaje de acceso -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <div class="trigger-textos">
+            <span class="trigger-tag">TU PEAJE DE ACCESO</span>
+            <h4 class="trigger-tit">Qué peaje tienes: 2.0TD, 3.0TD o 6.1TD</h4>
+            <p class="trigger-sub">Depende de tu potencia contratada y del tipo de suministro.</p>
+          </div>
+          <span class="btn-toggle-circulo" aria-hidden="true">
+            <svg class="icono-toggle-flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </summary>
+
+        <div class="acordeon-desplegable-cuerpo">
+          <h5 class="subtitulo-desplegable">Peajes de acceso, suministro al que corresponden y número de periodos</h5>
+          
+          <div class="tabla-scroll-wrap">
+            <table class="tabla-desplegable">
+              <thead>
+                <tr>
+                  <th scope="col">Peaje</th>
+                  <th scope="col">A qué suministro corresponde</th>
+                  <th scope="col">Periodos de energía</th>
+                  <th scope="col" class="th-cifra">Periodos de potencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><span class="badge-peaje p20">2.0TD</span></th>
+                  <td>Baja tensión, hasta 15 kW</td>
+                  <td>3: punta, llano y valle</td>
+                  <td class="td-cifra">2</td>
+                </tr>
+                <tr class="fila-destacada">
+                  <th scope="row"><span class="badge-peaje p30">3.0TD</span></th>
+                  <td>Baja tensión, más de 15 kW (Pymes y obradores)</td>
+                  <td>6: de P1 a P6</td>
+                  <td class="td-cifra">6</td>
+                </tr>
+                <tr>
+                  <th scope="row"><span class="badge-peaje p61">6.1TD</span></th>
+                  <td>Alta tensión, de 1 a 30 kV</td>
+                  <td>6: de P1 a P6</td>
+                  <td class="td-cifra">6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="acordeon-pie-info">
+            <span class="fuente-peajes">Fuente: Circular 3/2020 de la CNMC</span>
+            <a href="/guias/peaje-3-0td" class="link-accion-pill">
+              <span>El peaje 3.0TD y sus periodos, explicados</span>
+              <span class="icono-flecha-pill" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <!-- ========================================================
+           ACORDEÓN 2: VER EL PRECIO PARTE POR PARTE
+           ======================================================== -->
+      <details class="acordeon-desplegable-item" name="acordeon-partes-precio">
+        <summary class="acordeon-desplegable-trigger">
+          <div class="trigger-icono-badge" aria-hidden="true">
+            <!-- Icono: Factura y desglose transparente de partidas -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <div class="trigger-textos">
+            <span class="trigger-tag">DESGLOSE DE LA FACTURA</span>
+            <h4 class="trigger-tit">Ver el precio parte por parte</h4>
+            <p class="trigger-sub">Consulta cómo se reparten los importes de tu factura.</p>
+          </div>
+          <span class="btn-toggle-circulo" aria-hidden="true">
+            <svg class="icono-toggle-flecha" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </summary>
+
+        <div class="acordeon-desplegable-cuerpo">
+          <h5 class="subtitulo-desplegable">Partes del precio, quién las fija y si se pueden mover</h5>
+
+          <div class="tabla-scroll-wrap">
+            <table class="tabla-desplegable">
+              <thead>
+                <tr>
+                  <th scope="col">Parte del precio</th>
+                  <th scope="col">Quién la fija</th>
+                  <th scope="col">¿Se puede mover?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="fila-movible">
+                  <th scope="row"><strong>El coste de la energía</strong></th>
+                  <td>El mercado. La modalidad decide cómo te llega</td>
+                  <td>
+                    <span class="badge-estado si">Sí: negociamos cómo se compra tu energía y cómo te llega</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><strong>Los peajes, de potencia y de energía</strong></th>
+                  <td>La CNMC</td>
+                  <td>
+                    <span class="badge-estado no">No. Son los mismos con cualquier compañía</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><strong>Los cargos, de potencia y de energía</strong></th>
+                  <td>El Gobierno, por orden ministerial</td>
+                  <td>
+                    <span class="badge-estado no">No. Son los mismos con cualquier compañía</span>
+                  </td>
+                </tr>
+                <tr class="fila-movible">
+                  <th scope="row"><strong>Cuántos kW contratas</strong></th>
+                  <td>Tu contrato</td>
+                  <td>
+                    <span class="badge-estado si">Sí: se ajusta con tus datos</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><strong>El impuesto eléctrico y el IVA</strong></th>
+                  <td>Hacienda</td>
+                  <td>
+                    <span class="badge-estado no">No</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row"><strong>El alquiler del contador</strong></th>
+                  <td>Está regulado, si el contador es de la distribuidora</td>
+                  <td>
+                    <span class="badge-estado no">No</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="acordeon-pie-info">
+            <span class="fuente-peajes">Auditoría transparente EMAX Energía</span>
+            <a href="/guias/factura-luz-empresa#tres-partes" class="link-accion-pill">
+              <span>La factura anotada concepto a concepto</span>
+              <span class="icono-flecha-pill" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- Banner Azul Inferior de Advertencia/Consejo Clave -->
+    <div class="banner-aviso-azul">
+      <div class="banner-aviso-icono" aria-hidden="true">
+        <!-- Bombilla / Consejo clave -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18h6"></path>
+          <path d="M10 22h4"></path>
+          <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+        </svg>
+      </div>
+      <p class="banner-aviso-texto">
+        Por eso conviene comparar la oferta entera y no el precio del kWh: un kWh barato puede venir con una potencia cara.
+      </p>
     </div>
   </div>
 </section>
 
 <style>
   .partes-seccion {
-    padding: clamp(60px, 6vw, 96px) 0;
-    background: #f8fafc;
+    padding: clamp(64px, 7vw, 100px) 0;
+    background: #f4f6f9;
     border-bottom: 1px solid #e2e8f0;
   }
 
@@ -95,133 +289,518 @@ const componentes = [
     width: 100%;
     max-width: 1280px;
     margin-inline: auto;
-    padding-inline: clamp(20px, 4vw, 48px);
+    padding-inline: clamp(20px, 4vw, 56px);
   }
 
+  /* Cabecera */
   .partes-cabecera {
-    max-width: 44rem;
-    margin-bottom: 36px;
-  }
-
-  .seccion-tag {
-    display: inline-block;
-    font-size: 0.78rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #004aad;
-    margin-bottom: 12px;
+    max-width: 900px;
+    margin-bottom: 24px;
   }
 
   .partes-titulo {
-    font-family: "Sora", sans-serif;
-    font-size: clamp(1.75rem, 1.45rem + 1vw, 2.4rem);
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.6rem + 1.8vw, 2.9rem);
     font-weight: 800;
-    color: #0c1c38;
-    line-height: 1.25;
+    color: #0c192c;
+    line-height: 1.15;
     margin: 0 0 16px;
     letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .cursiva-azul {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    color: #0052cc;
+    text-transform: lowercase;
+    letter-spacing: 0;
   }
 
   .partes-subtitulo {
     font-size: 1.05rem;
     line-height: 1.65;
-    color: #4b586d;
+    color: #475569;
+    margin: 0 0 20px;
+  }
+
+  .partes-lead-ejemplo {
+    font-family: "Sora", sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #0052cc;
     margin: 0;
   }
 
-  .partes-tabla-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    overflow-x: auto;
-    box-shadow: 0 10px 30px rgba(15, 35, 70, 0.04);
-  }
-
-  .tabla-partes {
+  /* Barra de proporciones */
+  .barra-partes-track {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 0.92rem;
-    text-align: left;
+    height: 18px;
+    border-radius: 999px;
+    overflow: hidden;
+    display: flex;
+    margin: 16px 0 28px;
+    background: #e2e8f0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
-  .tabla-partes th,
-  .tabla-partes td {
-    padding: 16px 20px;
-    border-top: 1px solid #eef2f6;
-    vertical-align: top;
+  .seg-barra {
+    height: 100%;
+    transition: width 0.3s ease;
   }
 
-  .tabla-partes thead th {
-    border-top: 0;
-    background: #f1f5f9;
-    color: #475569;
-    font-size: 0.78rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  .seg-compra {
+    background: #004aad;
   }
 
-  .th-concepto {
-    font-weight: 700;
-    color: #0c1c38;
+  .seg-datos {
+    background: #00c2ff;
+  }
+
+  .seg-regulada {
+    background: #bfe5ff;
+  }
+
+  /* Rejilla de 3 tarjetas de partes */
+  .tres-partes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  @media (max-width: 960px) {
+    .tres-partes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .card-parte {
+    background: #ffffff;
+    border: 1px solid #dce4ee;
+    border-radius: 22px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 4px 18px rgba(15, 35, 75, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card-parte:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 74, 173, 0.08);
+  }
+
+  /* Círculos con iconos temáticos */
+  .circulo-icono-parte {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
-
-  .punto-estado {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    justify-content: center;
     flex-shrink: 0;
+    margin-bottom: 4px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
   }
 
-  .punto-si {
+  .card-parte:hover .circulo-icono-parte {
+    transform: scale(1.06);
+  }
+
+  .circulo-icono-parte.azul-oscuro {
     background: #004aad;
-    box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.2);
+    color: #ffffff;
   }
 
-  .punto-no {
-    background: #94a3b8;
+  .circulo-icono-parte.cian {
+    background: #00c2ff;
+    color: #0c192c;
   }
 
-  .fila-negociable {
-    background: #f8fbff;
+  .circulo-icono-parte.azul-claro {
+    background: #dbeafe;
+    color: #004aad;
+    border: 1.5px solid #bfdbfe;
   }
 
-  .td-quien {
-    color: #4b586d;
+  .parte-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #004aad;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .parte-cifra {
+    font-family: "Sora", sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #004aad;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .parte-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0;
+  }
+
+  .nota-sin-iva {
+    font-size: 0.88rem;
+    color: #64748b;
+    margin: 22px 0 28px;
     font-weight: 500;
   }
 
-  .td-mover {
-    color: #1e293b;
+  /* ========================================================
+     ACORDEONES DESPLEGABLES CON CONTENIDO (A LO LARGO)
+     ======================================================== */
+  .dos-acordeones-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+    width: 100%;
   }
 
-  .badge-movible {
+  .acordeon-desplegable-item {
+    background: #ffffff;
+    border: 1.5px solid #dce4ee;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(15, 35, 75, 0.03);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .acordeon-desplegable-item:hover {
+    border-color: #92c4fa;
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.08);
+  }
+
+  .acordeon-desplegable-item[open] {
+    border-color: #00c2ff;
+    box-shadow: 0 12px 36px rgba(0, 82, 204, 0.12);
+  }
+
+  /* Resumen / Trigger */
+  .acordeon-desplegable-trigger {
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background 0.15s ease;
+  }
+
+  .acordeon-desplegable-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .acordeon-desplegable-trigger:hover {
+    background: #f8fafc;
+  }
+
+  .acordeon-desplegable-item[open] .acordeon-desplegable-trigger {
+    background: #f0f7ff;
+    border-bottom: 1px solid #dce8f5;
+  }
+
+  .trigger-icono-badge {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #e0f7fa;
+    color: #00838f;
+    box-shadow: 0 2px 8px rgba(0, 131, 143, 0.15);
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .acordeon-desplegable-item[open] .trigger-icono-badge {
+    background: #00c2ff;
+    color: #0c192c;
+    transform: scale(1.05);
+  }
+
+  .trigger-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex-grow: 1;
+  }
+
+  .trigger-tag {
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #00838f;
+  }
+
+  .trigger-tit {
+    font-family: "Sora", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #004aad;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .trigger-sub {
+    font-size: 0.88rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .btn-toggle-circulo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, color 0.2s ease;
+  }
+
+  .icono-toggle-flecha {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .acordeon-desplegable-item[open] .btn-toggle-circulo {
+    background: #004aad;
+    color: #ffffff;
+  }
+
+  .acordeon-desplegable-item[open] .icono-toggle-flecha {
+    transform: rotate(180deg);
+  }
+
+  /* Cuerpo interior expandido */
+  .acordeon-desplegable-cuerpo {
+    padding: 24px 26px 28px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .subtitulo-desplegable {
+    font-family: "Sora", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e0edff;
+  }
+
+  .tabla-scroll-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .tabla-desplegable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+    background: #ffffff;
+  }
+
+  .tabla-desplegable th,
+  .tabla-desplegable td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eef2f6;
+    vertical-align: middle;
+  }
+
+  .tabla-desplegable thead th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1.5px solid #cbd5e1;
+  }
+
+  .th-cifra, .td-cifra {
+    text-align: center;
+  }
+
+  .badge-peaje {
     display: inline-block;
     padding: 3px 8px;
     border-radius: 6px;
-    font-size: 0.76rem;
+    font-family: "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+
+  .badge-peaje.p20 { background: #e0f2fe; color: #0284c7; }
+  .badge-peaje.p30 { background: #dbeafe; color: #0052cc; }
+  .badge-peaje.p61 { background: #ffedd5; color: #ea580c; }
+
+  .fila-destacada {
+    background: #f0f7ff;
+    font-weight: 600;
+  }
+
+  .fila-movible {
+    background: #f0fdf4;
+  }
+
+  .badge-estado {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.82rem;
     font-weight: 700;
-    margin-bottom: 6px;
+    line-height: 1.4;
   }
 
-  .badge-si {
-    background: #dbeafe;
-    color: #004aad;
+  .badge-estado.si {
+    background: #dcfce7;
+    color: #15803d;
   }
 
-  .badge-no {
+  .badge-estado.no {
     background: #f1f5f9;
     color: #64748b;
   }
 
-  .desc-mover {
-    font-size: 0.85rem;
+  .acordeon-pie-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+    padding-top: 12px;
+    border-top: 1px dashed #cbd5e1;
+  }
+
+  .fuente-peajes {
+    font-size: 0.80rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .link-accion-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #0052cc;
+    text-decoration: none;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .link-accion-pill:hover {
+    color: #003680;
+    transform: translateX(2px);
+    text-decoration: underline;
+  }
+
+  .icono-flecha-pill {
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  /* Banner Azul Inferior */
+  .banner-aviso-azul {
+    background: #0052cc;
+    border-radius: 20px;
+    padding: 22px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 6px 20px rgba(0, 82, 204, 0.28);
+  }
+
+  @media (max-width: 640px) {
+    .banner-aviso-azul {
+      padding: 20px;
+      gap: 16px;
+    }
+  }
+
+  .banner-aviso-icono {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #0052cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .banner-aviso-texto {
+    font-family: "Sora", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
     line-height: 1.45;
-    color: #4b586d;
+    color: #ffffff;
     margin: 0;
   }
 </style>
+
+<script>
+  function setupExclusiveAccordions() {
+    const containers = document.querySelectorAll('[data-partes-acordeones]');
+    containers.forEach((container) => {
+      const items = container.querySelectorAll<HTMLDetailsElement>('details.acordeon-desplegable-item');
+      items.forEach((item) => {
+        item.addEventListener('toggle', () => {
+          if (item.open) {
+            items.forEach((otherItem) => {
+              if (otherItem !== item && otherItem.open) {
+                otherItem.open = false;
+              }
+            });
+          }
+        });
+      });
+    });
+  }
+
+  // Inicialización al cargar la página y en transiciones de navegación
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupExclusiveAccordions);
+  } else {
+    setupExclusiveAccordions();
+  }
+  document.addEventListener('astro:page-load', setupExclusiveAccordions);
+</script>

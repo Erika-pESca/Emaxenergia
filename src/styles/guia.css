@@ -109,7 +109,7 @@
 
 .g-hero h1,
 .g-hero .tit {
-  font-family: "Sora", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: clamp(2.2rem, 1.8rem + 1.8vw, 3.2rem);
   font-weight: 800;
   line-height: 1.12;
@@ -124,7 +124,7 @@
 .g-hero .tit em {
   display: block;
   text-transform: none;
-  font-family: "Merriweather", Georgia, serif;
+  font-family: "Literata", Georgia, serif;
   font-style: italic;
   font-weight: 400;
   color: #38bdf8;
@@ -588,7 +588,7 @@ p.destacado::before {
   position: absolute;
   left: 0;
   top: -14px;
-  font-family: var(--f-acento, "Merriweather", Georgia, serif);
+  font-family: var(--f-acento, "Literata", Georgia, serif);
   font-style: italic;
   font-weight: 400;
   font-size: 4.5rem;

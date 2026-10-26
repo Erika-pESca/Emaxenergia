@@ -1,0 +1,238 @@
+---
+// Componente: LoQueRecibes.astro
+// Sección de Varios Suministros: "LO QUE RECIBES"
+// Tarjetas superpuestas: Tarjeta blanca a la izquierda con los 3 conceptos y tarjeta azul a la derecha con la explicación detallada.
+
+const filas = [
+  {
+    id: "informe",
+    titulo: "Informe",
+    desc: "Un informe por suministro y una visión del conjunto: qué cambia en cada sede, qué se mantiene y en qué orden.",
+  },
+  {
+    id: "llamada",
+    titulo: "La llamada",
+    desc: "Te explicamos el informe. Si en la decisión participan más personas (finanzas, mantenimiento, la gerencia), la llamada puede ser con todas.",
+  },
+  {
+    id: "si-no-compensa",
+    titulo: "Si no compensa",
+    desc: "Si tu contrato actual ya encaja con cómo consume una sede, el informe te lo dice en lugar de proponerte otra tarifa.",
+  },
+];
+---
+
+<section class="lo-que-recibes-seccion" id="lo-que-recibes" aria-labelledby="recibes-tit">
+  <div class="lo-que-recibes-contenedor">
+    <!-- Encabezado de la Sección -->
+    <div class="recibes-header">
+      <h2 class="recibes-titulo" id="recibes-tit">LO QUE RECIBES</h2>
+    </div>
+
+    <!-- Bloque de Tarjetas Superpuestas (Blanca + Azul) -->
+    <div class="recibes-cards-wrap">
+      <!-- Tarjeta 1: Izquierda (Blanca) -->
+      <div class="card-recibes-conceptos">
+        {
+          filas.map((item, idx) => (
+            <div class:list={["concepto-fila-item", { "con-divisor": idx < filas.length - 1 }]}>
+              <div class="concepto-circulo-icono" aria-hidden="true">
+                {item.id === "informe" && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0047ba" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                )}
+                {item.id === "llamada" && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0047ba" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                )}
+                {item.id === "si-no-compensa" && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0047ba" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 11 14 15 10" />
+                  </svg>
+                )}
+              </div>
+              <span class="concepto-nombre">{item.titulo}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Tarjeta 2: Derecha (Azul) Superpuesta al frente -->
+      <div class="card-recibes-detalle">
+        {
+          filas.map((item, idx) => (
+            <div class:list={["detalle-fila-item", { "con-divisor-azul": idx < filas.length - 1 }]}>
+              <p class="detalle-texto">{item.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: LO QUE RECIBES (VARIOS SUMINISTROS)
+     ========================================================================== */
+  .lo-que-recibes-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7.5vw, 110px) 0 clamp(75px, 8.5vw, 120px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .lo-que-recibes-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .recibes-header {
+    margin-bottom: clamp(40px, 5vw, 56px);
+  }
+
+  .recibes-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.05rem, 1.85rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  /* ==========================================================================
+     BLOQUE DE TARJETAS SUPERPUESTAS
+     ========================================================================== */
+  .recibes-cards-wrap {
+    display: flex;
+    align-items: center;
+    max-width: 1020px;
+    position: relative;
+  }
+
+  /* Tarjeta 1: Izquierda (Blanca) */
+  .card-recibes-conceptos {
+    flex: 0 0 340px;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 18px 36px 18px 24px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+  .concepto-fila-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 82px;
+    box-sizing: border-box;
+  }
+
+  .con-divisor {
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .concepto-circulo-icono {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #d6e8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .concepto-nombre {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(0.98rem, 0.94rem + 0.18vw, 1.12rem);
+    font-weight: 700;
+    color: #0047ba;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  /* Tarjeta 2: Derecha (Azul) */
+  .card-recibes-detalle {
+    flex: 1 1 auto;
+    background: #0047ba;
+    border-radius: 24px;
+    padding: 18px 32px;
+    margin-left: -28px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34);
+    box-sizing: border-box;
+  }
+
+  .detalle-fila-item {
+    display: flex;
+    align-items: center;
+    min-height: 82px;
+    box-sizing: border-box;
+  }
+
+  .con-divisor-azul {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .detalle-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.86rem, 0.82rem + 0.14vw, 0.94rem);
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 860px) {
+    .recibes-cards-wrap {
+      flex-direction: column;
+      align-items: stretch;
+      max-width: 100%;
+    }
+
+    .card-recibes-conceptos {
+      flex: 1 1 auto;
+      border-radius: 24px 24px 0 0;
+      padding: 16px 20px;
+    }
+
+    .card-recibes-detalle {
+      flex: 1 1 auto;
+      margin-left: 0;
+      margin-top: -12px;
+      border-radius: 0 0 24px 24px;
+      padding: 20px 20px;
+    }
+
+    .concepto-fila-item,
+    .detalle-fila-item {
+      min-height: auto;
+      padding: 12px 0;
+    }
+  }
+</style>

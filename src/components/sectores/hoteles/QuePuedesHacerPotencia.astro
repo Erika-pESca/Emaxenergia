@@ -1,0 +1,674 @@
+---
+// Componente: QuePuedesHacerPotencia.astro
+// Sección de Hoteles: "QUÉ PUEDES HACER hoy con tu potencia"
+// Lo que permite la norma, y cuándo.
+// Comparativa Matrix de 3 columnas: Conceptos | Qué dice la norma | Qué hacemos con eso
+// Con alineación matemática fila a fila mediante CSS Subgrid y sincronización JS.
+
+interface FilaPotenciaNorma {
+  id: string;
+  concepto: string;
+  icono: "regla" | "cnmc";
+  queDice: string;
+  queHacemos: string;
+}
+
+const filas: FilaPotenciaNorma[] = [
+  {
+    id: "regla-general",
+    concepto: "La regla general",
+    icono: "regla",
+    queDice:
+      "Puedes cambiar la potencia, pero la distribuidora puede negarte un segundo cambio si no han pasado doce meses desde el anterior, salvo que cambies de peaje. Bajarla no tiene más coste que el regulado.",
+    queHacemos:
+      "Elegimos la potencia de cada periodo para el año completo, con tus doce meses delante.",
+  },
+  {
+    id: "cnmc-precios",
+    concepto: "Cuando la CNMC fije los precios",
+    icono: "cnmc",
+    queDice:
+      "La norma prevé cambios temporales de potencia por trimestres, meses, días u horas, dentro de tus derechos de extensión. Todavía no se pueden usar.",
+    queHacemos:
+      "Calcularemos si te compensan cuando se conozcan sus precios.",
+  },
+];
+---
+
+<section
+  class="que-puedes-hacer-seccion"
+  id="que-puedes-hacer"
+  aria-labelledby="que-puedes-hacer-tit"
+>
+  <div class="que-puedes-hacer-contenedor">
+    <!-- Encabezado -->
+    <div class="que-puedes-hacer-header">
+      <h2 class="que-puedes-hacer-titulo" id="que-puedes-hacer-tit">
+        QUÉ PUEDES HACER <span class="tit-cursiva">hoy con tu potencia</span>
+      </h2>
+      <p class="que-puedes-hacer-bajada">
+        Lo que permite la norma, y cuándo.
+      </p>
+    </div>
+
+    <!-- Matriz de 3 Columnas con Subgrid -->
+    <div class="matriz-scroll-wrap">
+      <div class="matriz-hoteles-potencia" id="matriz-potencia-hoteles">
+        <!-- Columna 1: Conceptos (Se alinea a las filas de contenido y se conecta detrás de la tarjeta central como en el boceto) -->
+        <div class="col-matriz card-conceptos">
+          {
+            filas.map((f) => (
+              <div class="celda-fila celda-concepto" data-fila-hotel={f.id}>
+                <div class="circulo-suave-solido" aria-hidden="true">
+                  {f.icono === "regla" && (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#004aad"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 3v18" />
+                      <path d="M6 8l6-5 6 5" />
+                      <path d="M4 14l4 2 4-2" />
+                      <path d="M16 14l4 2 4-2" />
+                      <path d="M8 21h8" />
+                    </svg>
+                  )}
+                  {f.icono === "cnmc" && (
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#004aad"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                  )}
+                </div>
+                <span class="texto-concepto">{f.concepto}</span>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Columna 2: Qué dice la norma (Tarjeta Blanca Flotante con Píldora Azul) -->
+        <div class="col-matriz card-norma">
+          <div class="col-matriz-header">
+            <span class="pill-matriz pill-azul-solido">Qué dice la norma</span>
+          </div>
+
+          {
+            filas.map((f) => (
+              <div class="celda-fila celda-norma" data-fila-hotel={f.id}>
+                <span class="etiqueta-movil">{f.concepto}:</span>
+                <p class="parrafo-celda">{f.queDice}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Columna 3: Qué hacemos con eso (Tarjeta Azul Real con Píldora Clara) -->
+        <div class="col-matriz card-hacemos">
+          <div class="col-matriz-header">
+            <span class="pill-matriz pill-celeste-claro">Qué hacemos con eso</span>
+          </div>
+
+          {
+            filas.map((f) => (
+              <div class="celda-fila celda-hacemos" data-fila-hotel={f.id}>
+                <span class="etiqueta-movil">{f.concepto}:</span>
+                <p class="parrafo-celda">{f.queHacemos}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones de Acción: Analizar mi hotel + Repetir secuencia interactiva -->
+    <div class="que-puedes-hacer-acciones">
+      <button
+        type="button"
+        class="btn-analizar-hotel"
+        data-abrir-funnel
+        data-tramo-id="hotel-analizar-potencia"
+        data-tramo-label="Analizar mi hotel"
+        data-tramo-msg="Análisis de potencia y estacionalidad hotelera para hotel o alojamiento."
+        aria-label="Abrir formulario para analizar la potencia de mi hotel"
+      >
+        <span>Analizar mi hotel</span>
+        <span class="btn-flecha-circulo" aria-hidden="true">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#003882"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: QUÉ PUEDES HACER HOY CON TU POTENCIA (HOTELES)
+     ========================================================================== */
+  .que-puedes-hacer-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7vw, 105px) 0 clamp(75px, 8vw, 115px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .que-puedes-hacer-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
+
+  /* Encabezado */
+  .que-puedes-hacer-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(40px, 5vw, 56px);
+    max-width: 860px;
+  }
+
+  .que-puedes-hacer-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #00c2ff;
+  }
+
+  .que-puedes-hacer-bajada {
+    font-size: clamp(0.98rem, 0.94rem + 0.25vw, 1.1rem);
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     MATRIZ COMPARATIVA DE 3 COLUMNAS CON SUBGRID
+     ========================================================================== */
+  .matriz-scroll-wrap {
+    width: 100%;
+    margin-bottom: 38px;
+  }
+
+  .matriz-hoteles-potencia {
+    display: grid;
+    grid-template-columns: minmax(220px, 260px) minmax(0, 1.15fr) minmax(0, 1.15fr);
+    grid-template-rows: 64px repeat(2, auto);
+    gap: clamp(14px, 1.8vw, 24px);
+    align-items: stretch;
+  }
+
+  /* Cada columna usa subgrid */
+  .col-matriz {
+    display: grid;
+    grid-template-rows: subgrid;
+    border-radius: 26px;
+    padding: 24px 28px 28px;
+    box-sizing: border-box;
+  }
+
+  .card-norma,
+  .card-hacemos {
+    grid-row: span 3;
+  }
+
+  .col-matriz-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+  }
+
+  .pill-matriz {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.94rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .pill-azul-solido {
+    background: #0052cc;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 82, 204, 0.35);
+  }
+
+  .pill-celeste-claro {
+    background: #e0f2fe;
+    color: #0052cc;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Celdas individuales alineadas fila a fila */
+  .celda-fila {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 22px 0;
+    box-sizing: border-box;
+  }
+
+  .etiqueta-movil {
+    display: none;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-weight: 700;
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+  }
+
+  .parrafo-celda {
+    font-size: 0.92rem;
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  /* --------------------------------------------------------------------------
+     COLUMNA 1: Tarjeta Blanca para Conceptos (Conectada a la tarjeta central)
+     -------------------------------------------------------------------------- */
+  .card-conceptos {
+    grid-row: 2 / 4;
+    background: #ffffff;
+    border: 1.5px solid #dce8f8;
+    border-radius: 26px;
+    /* Se mete por debajo de la tarjeta central para que no se vea ninguna unión */
+    margin-right: -56px;
+    padding: 0 76px 0 26px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    position: relative;
+    z-index: 1;
+  }
+
+  .celda-concepto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .circulo-suave-solido {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #bfdbfe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #004aad;
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.12);
+  }
+
+  .texto-concepto {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #004aad;
+    line-height: 1.28;
+  }
+
+  .card-conceptos .celda-fila:not(:last-child) {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  /* --------------------------------------------------------------------------
+     COLUMNA 2: Qué dice la norma (Tarjeta Blanca Flotante)
+     -------------------------------------------------------------------------- */
+  .card-norma {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    box-shadow: 0 20px 48px rgba(0, 42, 108, 0.22), 0 4px 14px rgba(0, 0, 0, 0.06);
+    color: #1e293b;
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-norma .celda-fila:not(:last-child) {
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .card-norma .parrafo-celda {
+    color: #334155;
+  }
+
+  /* --------------------------------------------------------------------------
+     COLUMNA 3: Qué hacemos con eso (Tarjeta Azul Real)
+     -------------------------------------------------------------------------- */
+  .card-hacemos {
+    background: #0052cc;
+    color: #ffffff;
+    box-shadow: 0 18px 44px rgba(0, 82, 204, 0.4);
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-hacemos .celda-fila:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .card-hacemos .parrafo-celda {
+    color: #ffffff;
+  }
+
+  /* ==========================================================================
+     TRANSICIÓN SECUENCIAL: "VA AGREGANDO CADA TARJETA"
+     ========================================================================== */
+  /* La central aparece primero; las laterales "salen" desde detrás de ella */
+  .matriz-animable .col-matriz {
+    opacity: 0;
+    transition: opacity 0.7s ease,
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.7s ease;
+    will-change: opacity, transform;
+  }
+
+  .matriz-animable .card-norma {
+    transform: translateY(28px) scale(0.95);
+    filter: blur(6px);
+  }
+
+  .matriz-animable .card-conceptos {
+    transform: translateX(55%) scale(0.92);
+  }
+
+  .matriz-animable .card-hacemos {
+    transform: translateX(-55%) scale(0.92);
+  }
+
+  /* Contenido interno: entra escalonado una vez colocada la tarjeta */
+  .matriz-animable .col-matriz-header,
+  .matriz-animable .celda-fila {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .matriz-animable .col-matriz > :nth-child(2) { transition-delay: 0.3s; }
+  .matriz-animable .col-matriz > :nth-child(3) { transition-delay: 0.42s; }
+  .matriz-animable .col-matriz > :first-child { transition-delay: 0.2s; }
+
+  /* Fase 1: tarjeta central */
+  .matriz-animable.fase-1 .card-norma,
+  .matriz-animable.fase-1 .card-norma > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  /* Fase 2: conceptos se desliza desde detrás hacia la izquierda */
+  .matriz-animable.fase-2 .card-conceptos,
+  .matriz-animable.fase-2 .card-conceptos > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Fase 3: la azul se desliza desde detrás hacia la derecha */
+  .matriz-animable.fase-3 .card-hacemos,
+  .matriz-animable.fase-3 .card-hacemos > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .matriz-animable .col-matriz,
+    .matriz-animable .col-matriz > * {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* ==========================================================================
+     BOTONES DE ACCIÓN: ANALIZAR MI HOTEL + VER SECUENCIA
+     ========================================================================== */
+  .que-puedes-hacer-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 14px;
+  }
+
+  .btn-analizar-hotel {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #004aad;
+    color: #ffffff;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 11px 22px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 74, 173, 0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-analizar-hotel:hover {
+    background: #0056cc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.55);
+  }
+
+  .btn-flecha-circulo {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-analizar-hotel:hover .btn-flecha-circulo {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 960px) {
+    .matriz-hoteles-potencia {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 30px;
+    }
+
+    .col-matriz {
+      grid-row: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-conceptos {
+      display: none;
+    }
+
+    .celda-fila {
+      min-height: auto !important;
+    }
+
+    .etiqueta-movil {
+      display: block;
+      color: #004aad;
+    }
+
+    .card-hacemos .etiqueta-movil {
+      color: #7dd3fc;
+    }
+
+    .col-matriz-header {
+      height: auto;
+      margin-bottom: 12px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .que-puedes-hacer-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .btn-analizar-hotel {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
+
+<script>
+  // Sincronización matemática de alturas para asegurar alineación milimétrica por fila
+  function sincronizarAlturasMatrizHotel() {
+    if (window.innerWidth <= 960) return;
+
+    const matriz = document.getElementById("matriz-potencia-hoteles");
+    if (!matriz) return;
+
+    const filas = ["regla-general", "cnmc-precios"];
+
+    // 1. Limpiar alturas forzadas previas
+    const celdas = matriz.querySelectorAll<HTMLElement>("[data-fila-hotel]");
+    celdas.forEach((c) => {
+      c.style.minHeight = "";
+    });
+
+    // 2. Medir la altura máxima por fila y aplicarla a las 3 celdas de esa fila
+    filas.forEach((id) => {
+      const celdasFila = matriz.querySelectorAll<HTMLElement>(`[data-fila-hotel="${id}"]`);
+      let maxH = 0;
+      celdasFila.forEach((c) => {
+        const h = c.offsetHeight;
+        if (h > maxH) maxH = h;
+      });
+      if (maxH > 0) {
+        celdasFila.forEach((c) => {
+          c.style.minHeight = `${maxH}px`;
+        });
+      }
+    });
+  }
+
+  // ==========================================================================
+  // TRANSICIÓN SECUENCIAL: VA AGREGANDO CADA TARJETA PASO A PASO
+  // ==========================================================================
+  let temporizadoresSecuencia: number[] = [];
+
+  function limpiarTemporizadores() {
+    temporizadoresSecuencia.forEach((t) => clearTimeout(t));
+    temporizadoresSecuencia = [];
+  }
+
+  function ejecutarSecuenciaTarjetas() {
+    const matriz = document.getElementById("matriz-potencia-hoteles");
+    if (!matriz) return;
+
+    limpiarTemporizadores();
+
+    // Asegurar sincronización de alturas antes de animar
+    sincronizarAlturasMatrizHotel();
+
+    // Reiniciar estados de animación
+    matriz.classList.add("matriz-animable");
+    matriz.classList.remove("fase-1", "fase-2", "fase-3");
+
+    // 1. Aparece la tarjeta central (Qué dice la norma)
+    const t1 = window.setTimeout(() => matriz.classList.add("fase-1"), 100);
+    // 2. Conceptos sale desde detrás hacia la izquierda
+    const t2 = window.setTimeout(() => matriz.classList.add("fase-2"), 600);
+    // 3. Qué hacemos con eso sale desde detrás hacia la derecha
+    const t3 = window.setTimeout(() => matriz.classList.add("fase-3"), 950);
+
+    temporizadoresSecuencia.push(t1, t2, t3);
+  }
+
+  function inicializarSecuenciaTarjetas() {
+    sincronizarAlturasMatrizHotel();
+
+    const seccion = document.getElementById("que-puedes-hacer");
+    const matriz = document.getElementById("matriz-potencia-hoteles");
+
+    if (!seccion || !matriz) return;
+
+    // Configurar estado inicial
+    matriz.classList.add("matriz-animable");
+
+    let animado = false;
+
+    // Disparar la transición automáticamente al entrar en el viewport con el scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animado) {
+            animado = true;
+            ejecutarSecuenciaTarjetas();
+          }
+        });
+      },
+      { threshold: 0.22 }
+    );
+
+    observer.observe(seccion);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inicializarSecuenciaTarjetas);
+  } else {
+    inicializarSecuenciaTarjetas();
+  }
+
+  window.addEventListener("resize", sincronizarAlturasMatrizHotel);
+  document.addEventListener("astro:page-load", inicializarSecuenciaTarjetas);
+</script>

@@ -1,0 +1,426 @@
+---
+// Componente: HeroIndustria.astro
+// Hero oficial para la página: /sectores/industria ("Luz para industria y fabricación")
+// Fondo fotográfico de nave industrial / planta de producción + degradado azul corporativo + tarjeta glassmorphic interactiva.
+
+import industriaImg from "../../../imagenes/sector_industria.jpg";
+
+const tramosLuz = [
+  {
+    id: "300",
+    label: "MENOS DE 300€",
+    valor: "<300",
+    rango: "menos de 300 € al mes",
+    msg: "Estudio energético para pequeño taller de mecanizado, carpintería o manufactura ligera.",
+  },
+  {
+    id: "1000",
+    label: "300 – 1.000€",
+    valor: "300-1000",
+    rango: "entre 300 y 1.000 € al mes",
+    msg: "Optimización de potencia y arranque de maquinaria para taller o nave industrial media.",
+  },
+  {
+    id: "3000",
+    label: "1.000 – 3.000€",
+    valor: "1000-3000",
+    rango: "entre 1.000 y 3.000 € al mes",
+    msg: "Auditoría de turnos productivos, peaje 3.0TD / 6.1TD, maxímetros y reactiva para planta fabril.",
+  },
+  {
+    id: "mas3000",
+    label: "Más de 3.000€",
+    valor: ">3000",
+    rango: "más de 3.000 € al mes",
+    msg: "Consultoría integral en alta y baja tensión para gran industria, plantas de proceso continuo y grupos fabriles.",
+  },
+];
+---
+
+<section class="industria-hero-root">
+  <!-- Fondo con fotografía industrial y degradado fluido -->
+  <div class="industria-hero-bg">
+    <img
+      src={industriaImg.src}
+      alt="Planta industrial de fabricación y producción con ingenieros y maquinaria automatizada"
+      class="hero-bg-img"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hero-bg-gradient"></div>
+  </div>
+
+  <div class="industria-hero-contenedor">
+    <div class="industria-hero-grid">
+      <!-- Columna Izquierda: Titulares y propuesta técnica -->
+      <div class="industria-hero-textos">
+        <div class="industria-kicker">
+          <span>LUZ PARA INDUSTRIA</span>
+          <span class="industria-kicker-bar" aria-hidden="true">|</span>
+        </div>
+
+        <h1 class="industria-h1">
+          <span class="h1-bloque-mayus">UN TURNO MÁS</span>
+          <span class="h1-cursiva-cyan">cambia la factura.</span>
+        </h1>
+
+        <p class="industria-subtitulo">
+          En una nave, a qué hora arrancan las máquinas pesa tanto como cuánto consumen. Leemos tus turnos, tu potencia y tus excesos con tus datos.
+        </p>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta Glassmorphic con selector de tramos conectado al formulario modal -->
+      <div class="industria-hero-card-col">
+        <div class="hero-card-glass">
+          <h2 class="card-pregunta-tit">¿Cuánto paga tu empresa de luz al mes?</h2>
+          <p class="card-pregunta-sub">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+
+          <!-- Rejilla 2x2 de botones de tramo -->
+          <div class="card-tramos-grid" role="group" aria-label="Selección de tramo mensual de luz">
+            {
+              tramosLuz.map((t) => (
+                <button
+                  type="button"
+                  class="btn-tramo-azul"
+                  data-abrir-funnel
+                  data-tramo-id={t.valor}
+                  data-tramo-label={t.label}
+                  data-tramo-rango={t.rango}
+                  data-tramo-msg={t.msg}
+                  aria-label={`Seleccionar tramo ${t.label} para abrir estudio energético`}
+                >
+                  <span class="tramo-txt">{t.label}</span>
+                  <span class="tramo-flecha" aria-hidden="true">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#003580"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
+          <!-- Pie de tarjeta -->
+          <p class="card-nota-pie">
+            Tú eliges cómo empezamos: con tu factura, con tu CUPS o con dos datos de tu negocio. El análisis no tiene coste.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO SECTOR: INDUSTRIA
+     ========================================================================== */
+  .industria-hero-root {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    min-height: calc(88vh + 78px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #004aad;
+    overflow: hidden;
+    padding-top: calc(78px + clamp(36px, 5vh, 52px));
+    padding-bottom: clamp(48px, 6vh, 72px);
+    box-sizing: border-box;
+    color: #ffffff;
+  }
+
+  /* Fondo fotográfico y degradados */
+  .industria-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    display: block;
+    opacity: 0.92;
+  }
+
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    /* Degradado fluido desde azul corporativo profundo a la izquierda que revela la imagen hacia la derecha */
+    background: linear-gradient(
+      90deg,
+      #003882 0%,
+      #004aad 32%,
+      rgba(0, 74, 173, 0.92) 52%,
+      rgba(0, 85, 204, 0.72) 72%,
+      rgba(0, 102, 238, 0.35) 90%,
+      rgba(0, 102, 238, 0.12) 100%
+    );
+  }
+
+  /* Contenedor principal */
+  .industria-hero-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    padding-block: clamp(20px, 3vh, 32px);
+    box-sizing: border-box;
+  }
+
+  .industria-hero-grid {
+    display: grid;
+    grid-template-columns: 1.12fr 0.98fr;
+    gap: clamp(36px, 4.5vw, 64px);
+    align-items: center;
+  }
+
+  /* Textos Izquierda */
+  .industria-hero-textos {
+    display: flex;
+    flex-direction: column;
+    max-width: 620px;
+  }
+
+  .industria-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .industria-kicker-bar {
+    color: #00c2ff;
+    font-weight: 800;
+  }
+
+  .industria-h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 0 18px 0;
+    line-height: 1.14;
+  }
+
+  .h1-bloque-mayus {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.05rem, 1.85rem + 1.2vw, 3.05rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .h1-cursiva-cyan {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.35rem, 2.1rem + 1.3vw, 3.45rem);
+    color: #00c2ff;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 16px rgba(0, 194, 255, 0.35);
+  }
+
+  .industria-subtitulo {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.96rem, 0.92rem + 0.22vw, 1.08rem);
+    line-height: 1.62;
+    color: #f1f5f9;
+    margin: 0;
+    max-width: 540px;
+    text-wrap: pretty;
+  }
+
+  /* Tarjeta Glassmorphic Derecha */
+  .industria-hero-card-col {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hero-card-glass {
+    width: 100%;
+    max-width: 510px;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 26px;
+    padding: clamp(26px, 3.2vw, 34px);
+    box-shadow:
+      0 20px 48px rgba(0, 15, 45, 0.38),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-pregunta-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.22rem, 1.15rem + 0.35vw, 1.48rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .card-pregunta-sub {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #e2e8f0;
+    margin: 0 0 22px 0;
+  }
+
+  /* Rejilla de Botones 2x2 */
+  .card-tramos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .btn-tramo-azul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #004aad;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-weight: 700;
+    font-size: 0.86rem;
+    letter-spacing: 0.02em;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .btn-tramo-azul:hover {
+    background: #0059d6;
+    border-color: rgba(255, 255, 255, 0.55);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 74, 173, 0.45);
+  }
+
+  .btn-tramo-azul:focus-visible {
+    outline: 2px solid #00c2ff;
+    outline-offset: 2px;
+  }
+
+  .tramo-txt {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tramo-flecha {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover .tramo-flecha {
+    transform: translateX(2px);
+  }
+
+  .card-nota-pie {
+    font-size: 0.8rem;
+    line-height: 1.48;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 992px) {
+    .industria-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .industria-hero-card-col {
+      justify-content: flex-start;
+    }
+
+    .hero-card-glass {
+      max-width: 100%;
+    }
+
+    .hero-bg-img {
+      width: 100%;
+      opacity: 0.35;
+    }
+
+    .hero-bg-gradient {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 56, 130, 0.95) 0%,
+        rgba(0, 74, 173, 0.96) 65%,
+        #003882 100%
+      );
+    }
+  }
+
+  @media (max-width: 600px) {
+    .card-tramos-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .industria-h1 {
+      line-height: 1.15;
+    }
+
+    .h1-cursiva-cyan {
+      font-size: 2.1rem;
+    }
+
+    .h1-bloque-mayus {
+      font-size: 1.85rem;
+    }
+
+    .hero-card-glass {
+      padding: 22px 18px;
+    }
+  }
+</style>

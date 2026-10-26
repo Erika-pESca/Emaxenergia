@@ -262,7 +262,7 @@ const barras = Array.from({ length: 48 }, (_, i) => {
   }
 
   .hero-h1 {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: clamp(2.3rem, 1.9rem + 2vw, 3.4rem);
     font-weight: 800;
     line-height: 1.12;
@@ -273,7 +273,7 @@ const barras = Array.from({ length: 48 }, (_, i) => {
   }
 
   .hero-cursiva {
-    font-family: "Merriweather", Georgia, serif;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;
@@ -346,7 +346,7 @@ const barras = Array.from({ length: 48 }, (_, i) => {
   }
 
   .ficha-titulo {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: clamp(1.24rem, 1.1rem + 0.4vw, 1.48rem);
     font-weight: 700;
     color: #0056d6;

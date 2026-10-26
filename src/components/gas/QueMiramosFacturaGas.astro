@@ -1,0 +1,389 @@
+---
+// Componente: QueMiramosFacturaGas.astro
+// Sección: "QUÉ MIRAMOS EN TU factura de gas"
+// 4 Tarjetas verticales con fotografías de referencia, fondo azul marino (#081d3e),
+// cápsula glassmorphic inferior con badges cian (1-4) y textos explicativos técnicos.
+
+import imgLlama from "../../imagenes/gas_peaje_llama.jpg";
+import imgValvula from "../../imagenes/gas_temporada_valvula.jpg";
+import imgCalculadora from "../../imagenes/gas_precio_calculadora.jpg";
+import imgContador from "../../imagenes/gas_contador_tubo.jpg";
+
+const puntosGas = [
+  {
+    num: "1",
+    titulo: "Tu peaje",
+    img: imgLlama,
+    alt: "Olla hirviendo sobre fuego de gas natural con llama azul",
+    desc: "Depende solo de tu consumo del año: de RL.1, hasta 5.000 kWh, a RL.11, más de 500 GWh. Se recalcula cada año con tu consumo real; si tu consumo ha cambiado, comprobamos que el tuyo encaje."
+  },
+  {
+    num: "2",
+    titulo: "Tu temporada",
+    img: imgValvula,
+    alt: "Ajuste de válvula termostática de radiador de calefacción",
+    desc: "La calefacción no consume igual en enero que en julio; una cocina, el agua caliente o un proceso, casi igual todo el año. Leemos tu año mes a mes."
+  },
+  {
+    num: "3",
+    titulo: "Tu precio",
+    img: imgCalculadora,
+    alt: "Cálculo y revisión de facturas de suministro de gas con calculadora y bolígrafo",
+    desc: "Fijo, ligado al mercado del gas o la tarifa regulada si te corresponde. Lo comparamos con lo que habrías pagado con tu consumo del año pasado."
+  },
+  {
+    num: "4",
+    titulo: "Lo que pagas aunque no consumas",
+    img: imgContador,
+    alt: "Contador y tubería amarilla de gas natural con válvula reguladora",
+    desc: "El término fijo y el alquiler del contador se pagan cada mes, consumas o no. Comprobamos que corresponden a tu suministro."
+  }
+];
+---
+
+<section class="que-miramos-seccion" id="que-miramos-gas" aria-labelledby="h2-que-miramos">
+  <div class="que-miramos-contenedor">
+    <!-- Encabezado de la Sección -->
+    <header class="que-miramos-header">
+      <h2 class="que-miramos-titulo" id="h2-que-miramos">
+        QUÉ MIRAMOS EN TU <span class="titulo-cursiva-gas">factura de gas</span>
+      </h2>
+      <p class="que-miramos-subtitulo">
+        Las mismas preguntas que en la luz, con las reglas del gas.
+      </p>
+    </header>
+
+    <!-- Rejilla de 4 Tarjetas Fotográficas con Cápsulas de Cristal -->
+    <div class="tarjetas-gas-grid">
+      {
+        puntosGas.map((p) => (
+          <article class="tarjeta-foto-card" tabindex="0">
+            <!-- Imagen de Fondo Fotográfica Oficial -->
+            <img
+              src={p.img.src}
+              alt={p.alt}
+              class="tarjeta-bg-img"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Gradiente oscuro para contraste óptimo -->
+            <div class="tarjeta-gradiente-overlay" aria-hidden="true"></div>
+
+            <!-- Cápsula Glassmorphic Inferior con Textos Oficiales (ocupa todo el borde inferior) -->
+            <div class="tarjeta-capsula-cristal">
+              <div class="capsula-header">
+                <span class="capsula-badge-num" aria-hidden="true">{p.num}</span>
+                <h3 class="capsula-tit">{p.titulo}</h3>
+              </div>
+              <div class="capsula-desc-slider">
+                <p class="capsula-desc">{p.desc}</p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Pie de fuentes regulatorias -->
+    <footer class="que-miramos-pie">
+      <p class="pie-fuentes-texto">
+        Fuentes: Circular 6/2020 de la CNMC (peajes de acceso de gas natural) · Real Decreto 1184/2020 (cargos del sistema gasista)
+      </p>
+    </footer>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: QUÉ MIRAMOS EN TU FACTURA DE GAS
+     ========================================================================== */
+  .que-miramos-seccion {
+    padding: clamp(64px, 7vw, 100px) 0;
+    background: #081d3e;
+    color: #ffffff;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .que-miramos-contenedor {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+  }
+
+  /* Encabezado */
+  .que-miramos-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(32px, 3.5vw, 48px);
+  }
+
+  .que-miramos-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.8rem + 1.2vw, 2.85rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.18;
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva-gas {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #00c2ff;
+    letter-spacing: 0;
+    display: inline;
+  }
+
+  .que-miramos-subtitulo {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 0;
+  }
+
+  /* Rejilla de 4 Columnas */
+  .tarjetas-gas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 1.8vw, 22px);
+    align-items: stretch;
+  }
+
+  @media (max-width: 1100px) {
+    .tarjetas-gas-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tarjetas-gas-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  /* Tarjeta individual vertical */
+  .tarjeta-foto-card {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    cursor: pointer;
+    outline: none;
+    isolation: isolate;
+    transform: translateZ(0);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+  }
+
+  .tarjeta-foto-card:hover,
+  .tarjeta-foto-card:focus-within,
+  .tarjeta-foto-card.is-expanded {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 50px rgba(0, 74, 173, 0.45);
+    border-color: rgba(0, 194, 255, 0.7);
+  }
+
+  /* Imagen de Fondo */
+  .tarjeta-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+
+  .tarjeta-foto-card:hover .tarjeta-bg-img,
+  .tarjeta-foto-card:focus-within .tarjeta-bg-img,
+  .tarjeta-foto-card.is-expanded .tarjeta-bg-img {
+    transform: scale(1.05);
+  }
+
+  /* Gradiente protector para texto */
+  .tarjeta-gradiente-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 29, 62, 0) 25%,
+      rgba(8, 29, 62, 0.35) 50%,
+      rgba(8, 29, 62, 0.88) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Cápsula Glassmorphic inferior ocupando todo el borde inferior de la tarjeta */
+  .tarjeta-capsula-cristal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    background: rgba(8, 29, 62, 0.84);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: none;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 24px 24px 0 0;
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.45);
+    transition: background 0.5s ease, border-top-color 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  .tarjeta-foto-card:hover .tarjeta-capsula-cristal,
+  .tarjeta-foto-card:focus-within .tarjeta-capsula-cristal,
+  .tarjeta-foto-card.is-expanded .tarjeta-capsula-cristal {
+    background: rgba(8, 29, 62, 0.95);
+    border-top-color: #00c2ff;
+    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 194, 255, 0.22);
+  }
+
+  .capsula-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 46px;
+  }
+
+  .capsula-badge-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .capsula-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #00c2ff;
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  /* Slider contenedor de descripción: en reposo muestra exactamente 1 línea con transición suave */
+  .capsula-desc-slider {
+    position: relative;
+    max-height: 22px;
+    overflow: hidden;
+    transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Puntos suspensivos sutiles en la primera línea en reposo que se desvanecen al hacer hover */
+  .capsula-desc-slider::after {
+    content: "...";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 2px;
+    background: linear-gradient(90deg, rgba(8, 29, 62, 0) 0%, rgba(8, 29, 62, 0.84) 40%, rgba(8, 29, 62, 0.96) 100%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.84rem;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  /* Al expandir, el slider se abre suavemente hacia arriba mostrando todo el texto */
+  .tarjeta-foto-card:hover .capsula-desc-slider,
+  .tarjeta-foto-card:focus-within .capsula-desc-slider,
+  .tarjeta-foto-card.is-expanded .capsula-desc-slider {
+    max-height: 200px;
+  }
+
+  .tarjeta-foto-card:hover .capsula-desc-slider::after,
+  .tarjeta-foto-card:focus-within .capsula-desc-slider::after,
+  .tarjeta-foto-card.is-expanded .capsula-desc-slider::after {
+    opacity: 0;
+  }
+
+  .capsula-desc {
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.88);
+    margin: 0;
+    transition: color 0.4s ease;
+  }
+
+  .tarjeta-foto-card:hover .capsula-desc,
+  .tarjeta-foto-card:focus-within .capsula-desc,
+  .tarjeta-foto-card.is-expanded .capsula-desc {
+    color: rgba(255, 255, 255, 0.98);
+  }
+
+  /* Pie de fuentes */
+  .que-miramos-pie {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .pie-fuentes-texto {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .tarjeta-foto-card {
+      height: 420px;
+    }
+  }
+</style>
+
+<script is:inline>
+  function setupQueMiramosCards() {
+    const cards = document.querySelectorAll(".tarjeta-foto-card");
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const isExp = card.classList.contains("is-expanded");
+        cards.forEach((c) => c.classList.remove("is-expanded"));
+        if (!isExp) card.classList.add("is-expanded");
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupQueMiramosCards);
+  } else {
+    setupQueMiramosCards();
+  }
+  document.addEventListener("astro:page-load", setupQueMiramosCards);
+</script>

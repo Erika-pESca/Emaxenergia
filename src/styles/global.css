@@ -36,10 +36,12 @@
   --verde-fondo: #ecfdf3;        /* Fondo badges de ahorro */
   --verde-borde: #abefc6;
 
-  /* Tipografía: Merriweather (Titulares editoriales con serifa), Sora (Cifras/Badges) + Inter (Cuerpo) */
+  /* Tipografía: Poppins para títulos, Literata para acentos cursivos/itálicos + Inter (Cuerpo) */
   --font-texto: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-titulos: "Merriweather", Georgia, "Times New Roman", serif;
-  --font-display: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-titulos: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-acento: "Literata", Georgia, "Times New Roman", serif;
+  --font-cursiva: "Literata", Georgia, "Times New Roman", serif;
   --display: var(--font-titulos);
   --font: var(--font-texto);
 
@@ -112,14 +114,24 @@ button {
   background: transparent;
 }
 
-/* Jerarquía tipográfica con personalidad cercana */
-h1, h2, h3, h4 {
+/* Jerarquía tipográfica: Poppins para títulos */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-titulos);
   color: var(--tinta);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.015em;
   margin: 0;
+}
+
+/* Letra acento cursiva en Literata para toda la web */
+.cursiva,
+.acento-cursiva,
+.tit-cursiva,
+.h1-cursiva-cyan,
+em {
+  font-family: var(--font-acento);
+  font-style: italic;
 }
 
 h1 {

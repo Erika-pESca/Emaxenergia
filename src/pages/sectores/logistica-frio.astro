@@ -1,0 +1,41 @@
+---
+// Página: Sector Logística y Frío (/sectores/logistica-frio)
+// "Trabajar de noche NO ES LO MISMO QUE CONSUMIR EN P6."
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroLogistica from "../../components/sectores/logistica/HeroLogistica.astro";
+import QueParteCaeP6 from "../../components/sectores/logistica/QueParteCaeP6.astro";
+import DosAlmacenesNoche from "../../components/sectores/logistica/DosAlmacenesNoche.astro";
+import CambioDeTurnoPotencia from "../../components/sectores/logistica/CambioDeTurnoPotencia.astro";
+import TurnosCambianClientes from "../../components/sectores/logistica/TurnosCambianClientes.astro";
+---
+
+<BaseLayout
+  title="Luz para logística y frío: trabajar de noche no es lo mismo que consumir en P6 | EMAX Energía"
+  description="Las horas baratas tienen su calendario, y tus turnos tienen otro. Leemos qué parte de tu consumo cae de verdad en ellas, con tus datos."
+  path="/sectores/logistica-frio"
+>
+  <div class="logistica-page-wrapper">
+    <!-- 1. Hero oficial con fotografía de almacén logístico frigorífico y tarjeta glassmorphic interactiva -->
+    <HeroLogistica />
+
+    <!-- 2. "QUÉ PARTE DE TU TURNO cae en P6" (Matriz Turno vs P6 vs Lo que no + banner de reactiva) -->
+    <QueParteCaeP6 />
+
+    <!-- 3. "DOS ALMACENES QUE TRABAJAN DE NOCHE DISTINTO" (Almacén seco vs Cámara frigorífica) -->
+    <DosAlmacenesNoche />
+
+    <!-- 4. "EL CAMBIO DE TURNO marca tu potencia" (4 tarjetas de potencia y turnos + acciones) -->
+    <CambioDeTurnoPotencia />
+
+    <!-- 5. "Si tus turnos cambian CON TUS CLIENTES" (Banner de modalidad y recursos) -->
+    <TurnosCambianClientes />
+  </div>
+</BaseLayout>
+
+<style>
+  .logistica-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

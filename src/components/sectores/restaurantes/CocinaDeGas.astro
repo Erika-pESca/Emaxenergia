@@ -1,0 +1,115 @@
+---
+// Componente: CocinaDeGas.astro
+// Sección banner de Restaurantes y Hostelería: "Si tu cocina ES DE GAS"
+// Fondo con degradado fluido azul eléctrico a blanco y tipografía oficial EMAX.
+---
+
+<section class="cocina-gas-seccion" id="cocina-de-gas" aria-labelledby="cocina-gas-tit">
+  <div class="cocina-gas-contenedor">
+    <div class="cocina-gas-content">
+      <h2 class="cocina-gas-titulo" id="cocina-gas-tit">
+        <span class="cocina-gas-cursiva">Si tu cocina</span> ES DE GAS
+      </h2>
+      <p class="cocina-gas-texto">
+        Con cocina de gas, tu luz es el frío, la extracción, el lavavajillas, la climatización y la sala. Sigue habiendo una potencia que acertar y, si pasas de 15 kW, una reactiva que mirar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN BANNER: SI TU COCINA ES DE GAS (RESTAURANTES)
+     ========================================================================== */
+  .cocina-gas-seccion {
+    position: relative;
+    width: 100%;
+    /* Degradado oficial de azul corporativo intenso a la izquierda, transitando por celeste y fundiendo a blanco a la derecha */
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      #0059d6 28%,
+      #006ef0 44%,
+      #5ca2fc 66%,
+      #bcd9ff 84%,
+      #f0f6ff 95%,
+      #ffffff 100%
+    );
+    color: #ffffff;
+    padding: clamp(60px, 6.5vw, 95px) 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .cocina-gas-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .cocina-gas-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .cocina-gas-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 3rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0 0 18px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .cocina-gas-cursiva {
+    display: inline;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #00c2ff;
+    margin-right: 6px;
+  }
+
+  .cocina-gas-texto {
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
+    line-height: 1.68;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 40, 100, 0.25);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .cocina-gas-seccion {
+      /* En móviles el degradado va ligeramente en diagonal para mantener el fondo azul legible detrás del texto */
+      background: linear-gradient(
+        135deg,
+        #004aad 0%,
+        #0059d6 45%,
+        #3b8dfa 75%,
+        #b8d8ff 100%
+      );
+      padding: 50px 0;
+    }
+
+    .cocina-gas-content {
+      max-width: 100%;
+    }
+
+    .cocina-gas-titulo {
+      font-size: 2rem;
+    }
+  }
+</style>

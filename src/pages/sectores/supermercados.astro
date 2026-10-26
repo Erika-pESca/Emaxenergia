@@ -1,0 +1,41 @@
+---
+// Página: Sector Supermercados y Alimentación (/sectores/supermercados)
+// "El frío no se apaga. PERO NO CUESTA LO MISMO A TODAS HORAS."
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroSupermercados from "../../components/sectores/supermercados/HeroSupermercados.astro";
+import TuTiendaNuncaSeApaga from "../../components/sectores/supermercados/TuTiendaNuncaSeApaga.astro";
+import DosTiendasMismoFrio from "../../components/sectores/supermercados/DosTiendasMismoFrio.astro";
+import ReactivaCamaras from "../../components/sectores/supermercados/ReactivaCamaras.astro";
+import LoQueNoHacemos from "../../components/sectores/supermercados/LoQueNoHacemos.astro";
+---
+
+<BaseLayout
+  title="Luz para supermercados: el frío no se apaga, pero no cuesta lo mismo a todas horas | EMAX Energía"
+  description="Cámaras y murales trabajan día y noche; en horario comercial se suma la sala. Leemos tu frío, tu potencia y tu reactiva, periodo a periodo."
+  path="/sectores/supermercados"
+>
+  <div class="supermercados-page-wrapper">
+    <!-- 1. Hero oficial con fotografía de murales de refrigeración y tarjeta glassmorphic interactiva -->
+    <HeroSupermercados />
+
+    <!-- 2. "TU TIENDA nunca se apaga" (4 tarjetas de base de frío vs sala comercial + cita) -->
+    <TuTiendaNuncaSeApaga />
+
+    <!-- 3. "DOS TIENDAS CON FRÍO QUE NO SE PARECEN" (Comparativa Tienda A vs Supermercado B) -->
+    <DosTiendasMismoFrio />
+
+    <!-- 4. "LA REACTIVA DE TUS CÁMARAS tiene hora" (Lo que dice la norma vs Lo que significa en tu tienda) -->
+    <ReactivaCamaras />
+
+    <!-- 5. "LO QUE NO HACEMOS" (Equipos vs Eficiencia) -->
+    <LoQueNoHacemos />
+  </div>
+</BaseLayout>
+
+<style>
+  .supermercados-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>
