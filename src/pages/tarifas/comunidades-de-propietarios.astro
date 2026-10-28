@@ -1,0 +1,45 @@
+---
+// Página: Luz y gas para comunidades de propietarios (/tarifas/comunidades-de-propietarios)
+// "LO QUE PAGA TU COMUNIDAD aunque nadie esté usando la luz"
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroComunidades from "../../components/tarifas/comunidades/HeroComunidades.astro";
+import PagarPorSiAcaso from "../../components/tarifas/comunidades/PagarPorSiAcaso.astro";
+import DosComunidadesComparativa from "../../components/tarifas/comunidades/DosComunidadesComparativa.astro";
+import QueTarifaComunidad from "../../components/tarifas/comunidades/QueTarifaComunidad.astro";
+import ComoLoHacemosComunidades from "../../components/tarifas/comunidades/ComoLoHacemosComunidades.astro";
+import ProximaFactura from "../../components/home/ProximaFactura.astro";
+---
+
+<BaseLayout
+  title="Luz y gas para comunidades de propietarios | EMAX Energía"
+  description="El ascensor, la escalera, el garaje: casi siempre parados, pero su potencia se paga cada día. Leemos cuánta necesita de verdad tu comunidad antes de cambiar nada."
+  path="/tarifas/comunidades-de-propietarios"
+>
+  <div class="comunidades-page-wrapper">
+    <!-- 1. Hero oficial con diseño de tarifas y selector de tramos comunitarios -->
+    <HeroComunidades />
+
+    <!-- 2. "Pagar por si acaso": 4 tarjetas de potencia comunitaria, ascensor y peajes -->
+    <PagarPorSiAcaso />
+
+    <!-- 3. "Dos comunidades, dos facturas que no se parecen": Comparativa Comunidad A vs Comunidad B -->
+    <DosComunidadesComparativa />
+
+    <!-- 4. "Qué tarifa puede tener tu comunidad": 2.0TD vs 3.0TD, umbral 15 kW y gas natural -->
+    <QueTarifaComunidad />
+
+    <!-- 5. "Cómo lo hacemos": Quién nos llama, si llevas varias y al comparar ofertas -->
+    <ComoLoHacemosComunidades />
+
+    <!-- 6. Formulario / Cierre oficial: "La tarifa no se elige: se construye" -->
+    <ProximaFactura />
+  </div>
+</BaseLayout>
+
+<style>
+  .comunidades-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

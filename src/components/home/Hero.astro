@@ -7,16 +7,16 @@
 //    Con hover/tap interactivo para revelar la explicación diagnóstica.
 // 4. Barra inferior de 3 píldoras azules.
 // 5. Formulario modal: Colores originales corporativos (fondo blanco, paneles claros, tipografía ejecutiva).
-import imagenCasa from "../../imagenes/casa.jpeg";
+import bannerHome from "../../imagenes/home/Banner-home.png";
 import logoEmax from "../../imagenes/logo-principal.png";
 ---
 
 <section class="hero-seccion" id="inicio" aria-labelledby="hero-h1">
-  <!-- Fondo fotográfico con imagen casa.jpeg original oscurecida con overlay (Intacto tal cual solicitado) -->
+  <!-- Fondo fotográfico con imagen Banner-home.png -->
   <div class="hero-bg" aria-hidden="true">
     <img
-      src={imagenCasa.src}
-      alt=""
+      src={bannerHome.src}
+      alt="Consultor energético de EMAX analizando optimización de factura"
       class="hero-bg-img"
       loading="eager"
       decoding="async"
@@ -388,7 +388,7 @@ import logoEmax from "../../imagenes/logo-principal.png";
     flex-direction: column;
     justify-content: space-between;
     padding: calc(78px + 52px) 0 0;
-    background-color: #06142e;
+    background-color: #061b40;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     overflow: visible;
     isolation: isolate;
@@ -408,9 +408,9 @@ import logoEmax from "../../imagenes/logo-principal.png";
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 46%;
-    transform: scale(1.02);
-    filter: brightness(0.82) saturate(1.10);
+    object-position: right 28%;
+    transform: translateX(55px) scale(1.06);
+    filter: brightness(0.96) saturate(1.04);
   }
 
   .hero-bg-overlay {
@@ -419,17 +419,19 @@ import logoEmax from "../../imagenes/logo-principal.png";
     background:
       linear-gradient(
         to right,
-        rgba(5, 14, 30, 0.90) 0%,
-        rgba(6, 17, 36, 0.78) 42%,
-        rgba(6, 17, 36, 0.55) 70%,
-        rgba(6, 17, 36, 0.42) 100%
+        #061b40 0%,
+        #061b40 35%,
+        rgba(6, 27, 64, 0.95) 46%,
+        rgba(6, 27, 64, 0.76) 58%,
+        rgba(6, 27, 64, 0.30) 72%,
+        transparent 88%
       ),
       linear-gradient(
         to bottom,
-        rgba(5, 14, 30, 0.45) 0%,
-        transparent 28%,
-        transparent 68%,
-        rgba(5, 14, 30, 0.65) 100%
+        rgba(6, 27, 64, 0.40) 0%,
+        transparent 18%,
+        transparent 78%,
+        rgba(6, 27, 64, 0.45) 100%
       );
   }
 
@@ -556,24 +558,29 @@ import logoEmax from "../../imagenes/logo-principal.png";
     justify-content: flex-end;
   }
 
+  /* Rejilla medida sobre el boceto (ancho total = 530 unidades):
+     |0 —50|50 —230|230—290|290—350|350—388|388—530|
+     Consumo: 0–230 · Potencia: 50–290 · Reactiva: 350–530 · Precio: 50–388 */
   .factura-tarjetas-contenedor {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-columns:
+      minmax(0, 50fr) minmax(0, 180fr) minmax(0, 60fr)
+      minmax(0, 60fr) minmax(0, 38fr) minmax(0, 142fr);
     grid-template-areas:
-      "consumo potencia"
-      "consumo reactiva"
-      "precio  precio";
-    gap: 12px;
+      "consumo  consumo  .        .  .        .       "
+      ".        potencia potencia .  reactiva reactiva"
+      ".        precio   precio   precio precio .     ";
+    row-gap: 26px;
+    column-gap: 0;
     width: 100%;
-    max-width: 630px;
+    max-width: 740px;
     margin-top: 10px;
+    align-items: start;
   }
 
-  /* Tarjeta 1: Cuándo consume (Columna Izquierda, Ocupa 2 Filas) */
+  /* Tarjeta 1: Cuándo consume (arriba a la izquierda, deja libre el rostro) */
   .fac-card-consumo {
     grid-area: consumo;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -582,21 +589,19 @@ import logoEmax from "../../imagenes/logo-principal.png";
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 14px;
-    height: 100%;
+    gap: 12px;
+    height: auto;
   }
 
   .fac-card-consumo .fac-card-cuerpo {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
-  /* Tarjeta 2: Potencia (Fila 1, Derecha) */
+  /* Tarjeta 2: Potencia (debajo de Consumo, sangrada a la derecha) */
   .fac-card-potencia {
     grid-area: potencia;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -606,14 +611,13 @@ import logoEmax from "../../imagenes/logo-principal.png";
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
-    height: 100%;
+    height: auto;
   }
 
-  /* Tarjeta 3: Reactiva (Fila 2, Derecha) */
+  /* Tarjeta 3: Reactiva (a la derecha de Potencia, un poco más abajo) */
   .fac-card-reactiva {
     grid-area: reactiva;
-    width: 100%;
-    height: 100%;
+    margin-top: 52px;
     display: flex;
     flex-direction: column;
   }
@@ -623,19 +627,45 @@ import logoEmax from "../../imagenes/logo-principal.png";
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
-    height: 100%;
+    height: auto;
+    padding: 14px 16px;
   }
 
-  /* Tarjeta 4: Precio (Fila 3, Ancho Completo) */
+  /* Reactiva es más estrecha: título compacto y columnas de barra ajustadas */
+  .fac-card-reactiva .fac-bloque-tit {
+    white-space: normal;
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+
+  .fac-card-reactiva .fac-tit-cian {
+    font-size: 0.92rem;
+  }
+
+  .fac-card-reactiva .fac-tit-sub {
+    font-size: 0.72rem;
+  }
+
+  .fac-card-reactiva .fac-barra-fila {
+    grid-template-columns: 24px 1fr 60px;
+    gap: 10px;
+  }
+
+  /* Tarjeta 4: Precio (abajo, alineada con Potencia) */
   .fac-card-precio {
     grid-area: precio;
-    width: 100%;
+    min-height: 156px;
+    display: flex;
+    flex-direction: column;
   }
 
   .fac-card-precio .fac-card-front {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 12px;
+    height: 100%;
+    min-height: 156px;
   }
 
   /* Diseño Glassmorphism idéntico al boceto */
@@ -720,7 +750,8 @@ import logoEmax from "../../imagenes/logo-principal.png";
     flex-direction: column;
     justify-content: space-between;
     gap: 8px;
-    padding: 14px 20px;
+    padding: 13px 18px 12px;
+    box-sizing: border-box;
   }
 
   .fac-reveal-precio-top {
@@ -739,7 +770,13 @@ import logoEmax from "../../imagenes/logo-principal.png";
 
   .fac-card-precio .fac-card-reveal .fac-back-texto {
     font-size: 0.76rem;
-    line-height: 1.35;
+    line-height: 1.34;
+    margin: 0;
+  }
+
+  .fac-card-precio .fac-card-reveal .fac-back-solucion {
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
   /* Cabecera Tarjeta 1 (Exacta al boceto) */
@@ -941,6 +978,8 @@ import logoEmax from "../../imagenes/logo-principal.png";
     justify-content: space-between;
     gap: 10px;
     padding: 16px 20px;
+    height: 100%;
+    min-height: 156px;
     border-radius: 22px !important;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 24, 34, 0.62) 100%) !important;
     border: 1.5px solid rgba(255, 255, 255, 0.30) !important;
@@ -1312,6 +1351,13 @@ import logoEmax from "../../imagenes/logo-principal.png";
     .factura-tarjetas-contenedor {
       margin-inline: auto;
     }
+
+    .fac-card-potencia,
+    .fac-card-reactiva,
+    .fac-card-precio {
+      margin-left: 0 !important;
+      margin-top: 0 !important;
+    }
   }
 
   @media (max-width: 768px) {
@@ -1327,6 +1373,7 @@ import logoEmax from "../../imagenes/logo-principal.png";
         "reactiva"
         "precio";
       max-width: 100%;
+      gap: 12px;
     }
 
     .fac-card-consumo,
@@ -1335,6 +1382,8 @@ import logoEmax from "../../imagenes/logo-principal.png";
     .fac-card-precio {
       max-width: 100%;
       height: auto;
+      margin-left: 0 !important;
+      margin-top: 0 !important;
     }
 
     .hero-pills-grid {

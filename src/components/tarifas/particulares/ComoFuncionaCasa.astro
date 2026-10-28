@@ -1,0 +1,711 @@
+---
+// Componente: ComoFuncionaCasa.astro
+// Sección: "CÓMO funciona" para /particulares (Luz y gas para tu casa)
+// - Fondo azul oscuro (#081d3e)
+// - Tipografía combinada: CÓMO (Poppins 800 mayúsculas) + funciona (Literata 400 cursiva cian)
+// - Subtítulo: "Una tarifa construida con los datos de tu casa. El estudio lo hacemos en una llamada, con tu factura delante."
+// - Barra interactiva idéntica a la del inicio (ComoEmpezar.astro): pista base, línea de llenado dinámica, cursor neón luminoso y estados 1 → 2 → 3 con halo
+// - Caja informativa Bono Social
+// - Botón píldora: "¿También tienes gas en casa? Lo revisamos en el mismo estudio" con flecha azul oscuro (#003882)
+
+interface Props {
+  id?: string;
+}
+
+const { id = "como-funciona-casa" } = Astro.props;
+
+interface PasoCasa {
+  num: string;
+  titulo: string;
+  desc: string;
+}
+
+const pasos: PasoCasa[] = [
+  {
+    num: "1",
+    titulo: "Nos dices cuánto pagas",
+    desc: "Una cifra aproximada basta.",
+  },
+  {
+    num: "2",
+    titulo: "Te llamamos",
+    desc: "En la franja que elijas. En la llamada leemos tu factura contigo: tu potencia, cuándo consumes y lo que pagas.",
+  },
+  {
+    num: "3",
+    titulo: "Decides",
+    desc: "Con una propuesta hecha con tus datos delante. Y no cambias de compañía sin firmarlo.",
+  },
+];
+---
+
+<!-- Contenedor alto: la sección azul queda fija (sticky) mientras el scroll avanza la línea 1 → 2 → 3 -->
+<div class="como-funciona-pin" id="como-funciona-pin">
+<section
+  class="como-funciona-seccion"
+  id={id}
+  aria-labelledby="como-funciona-tit"
+>
+  <!-- Resplandor sutil de fondo -->
+  <div class="como-funciona-resplandor" aria-hidden="true"></div>
+
+  <div class="como-funciona-contenedor">
+    <!-- Encabezado con combinación de tipografías Poppins + Literata -->
+    <header class="como-funciona-header">
+      <div class="etiqueta-kicker">
+        <span>PASO A PASO · SIN COMPROMISO</span>
+        <span class="separador-barra" aria-hidden="true">|</span>
+      </div>
+
+      <h2 class="como-funciona-titulo" id="como-funciona-tit">
+        CÓMO <span class="como-funciona-cursiva">funciona</span>
+      </h2>
+
+      <p class="como-funciona-bajada">
+        Una tarifa construida con los datos de tu casa. El estudio lo hacemos en una llamada, con tu factura delante.
+      </p>
+    </header>
+
+    <!-- Widget de la línea horizontal interactiva (estilo ComoEmpezar.astro de inicio) -->
+    <div class="timeline-widget-casa" id="timeline-widget-casa" data-timeline-casa>
+      <!-- Carril de la línea horizontal con cursor luminoso viajero -->
+      <div class="timeline-track" id="timeline-track-casa" aria-hidden="true">
+        <div class="timeline-base-line"></div>
+        <div class="timeline-fill-line" id="timeline-fill-casa"></div>
+        <div class="timeline-glow-cursor" id="timeline-cursor-casa"></div>
+      </div>
+
+      <!-- Fila de los 3 pasos interactivos -->
+      <div class="pasos-row" role="list">
+        {
+          pasos.map((p, idx) => (
+            <button
+              type="button"
+              class={`paso-btn ${idx === 0 ? "active current" : ""}`}
+              data-paso-btn={idx}
+              role="listitem"
+              aria-label={`Paso ${p.num}: ${p.titulo}`}
+            >
+              <!-- Nodo circular numerado con halo luminoso -->
+              <div class="paso-circulo-wrap">
+                <span class="paso-circulo-num">{p.num}</span>
+                <span class="paso-circulo-glow" aria-hidden="true"></span>
+              </div>
+
+              <!-- Textos del paso -->
+              <div class="paso-textos">
+                <h3 class="paso-titulo">{p.titulo}</h3>
+                <p class="paso-desc">{p.desc}</p>
+              </div>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Panel de aviso de Bono Social (conforme al diseño) -->
+    <div class="aviso-bono-social-panel" role="note">
+      <div class="bono-icono" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00c2ff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+      </div>
+      <p class="bono-texto">
+        Si tienes bono social, solo se mantiene con la tarifa regulada. Te lo diremos antes de proponerte nada.
+      </p>
+    </div>
+
+    <!-- Botón píldora Gas Natural: "¿También tienes gas en casa? Lo revisamos en el mismo estudio" -->
+    <div class="gas-enlace-accion-wrap">
+      <a href="/tarifas/gas-natural" class="boton-pildora-gas-casa">
+        <span>¿También tienes gas en casa? Lo revisamos en el mismo estudio</span>
+        <span class="icono-flecha-azul" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+  function setupTimelineCasa() {
+    const widget = document.getElementById("timeline-widget-casa");
+    if (!widget) return;
+
+    const track = document.getElementById("timeline-track-casa");
+    const fillLine = document.getElementById("timeline-fill-casa");
+    const cursor = document.getElementById("timeline-cursor-casa");
+    const buttons = Array.from(widget.querySelectorAll<HTMLButtonElement>("[data-paso-btn]"));
+
+    if (!buttons.length || !fillLine || !cursor || !track) return;
+
+    let currentIndex = 0;
+
+    // Calcular posición y anchura exacta de la línea entre el centro del primer y tercer círculo
+    function updateTrackGeometry() {
+      if (window.innerWidth <= 820) return;
+
+      const widgetRect = widget.getBoundingClientRect();
+      const circleFirst = buttons[0].querySelector(".paso-circulo-num") as HTMLElement;
+      const circleLast = buttons[buttons.length - 1].querySelector(".paso-circulo-num") as HTMLElement;
+
+      if (!circleFirst || !circleLast) return;
+
+      const rectFirst = circleFirst.getBoundingClientRect();
+      const rectLast = circleLast.getBoundingClientRect();
+
+      const x1 = (rectFirst.left + rectFirst.right) / 2 - widgetRect.left;
+      const xLast = (rectLast.left + rectLast.right) / 2 - widgetRect.left;
+      const yCenter = (rectFirst.top + rectFirst.bottom) / 2 - widgetRect.top;
+
+      const totalWidth = Math.max(0, xLast - x1);
+
+      track.style.top = `${yCenter}px`;
+      track.style.left = `${x1}px`;
+      track.style.width = `${totalWidth}px`;
+
+      // Actualizar progreso según el scroll actual
+      updateProgress();
+    }
+
+    // Progreso (0..1) ligado al scroll.
+    // Escritorio: la sección queda fija (sticky) y el scroll dentro del contenedor alto
+    // hace avanzar la línea 1 → 2 → 3. Al llegar al 3 la página sigue bajando con normalidad.
+    const pin = document.getElementById("como-funciona-pin");
+    const TOP_BAR_H = 76; // altura de la barra superior fija
+    const pinMedia = window.matchMedia("(min-width: 821px) and (min-height: 620px)");
+
+    function calcProgress(): number {
+      const vh = window.innerHeight;
+      if (pin && pinMedia.matches) {
+        const r = pin.getBoundingClientRect();
+        const recorrido = r.height - (vh - TOP_BAR_H);
+        if (recorrido <= 0) return 1;
+        const raw = (TOP_BAR_H - r.top) / recorrido;
+        // Se completa al 80% del recorrido: el 20% restante deja ver el paso 3 antes de soltar la sección
+        return Math.max(0, Math.min(1, raw / 0.8));
+      }
+      // Móvil: avance según la posición del widget en pantalla
+      const rect = widget.getBoundingClientRect();
+      const inicio = vh * 0.8;
+      const fin = vh * 0.3;
+      return Math.max(0, Math.min(1, (inicio - rect.top) / (inicio - fin)));
+    }
+
+    function updateProgress() {
+      const p = calcProgress();
+      const last = buttons.length - 1;
+
+      // Pasos activos según lo que ha avanzado la línea
+      let currentIdx = 0;
+      buttons.forEach((btn, idx) => {
+        const umbral = last > 0 ? idx / last : 0;
+        const isActive = p >= umbral - 0.001;
+        if (isActive) currentIdx = idx;
+        btn.classList.toggle("active", isActive);
+      });
+      buttons.forEach((btn, idx) => btn.classList.toggle("current", idx === currentIdx));
+
+      if (window.innerWidth <= 820) return;
+
+      const total = track.getBoundingClientRect().width;
+      const px = total * p;
+      fillLine.style.transition = "none";
+      cursor.style.transition = "opacity 0.2s ease";
+      fillLine.style.width = `${px}px`;
+      cursor.style.left = `${px}px`;
+      cursor.style.opacity = p > 0.01 ? "1" : "0.7";
+    }
+
+    // Inicializar geometría y progreso
+    updateTrackGeometry();
+
+    let ticking = false;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+      },
+      { passive: true }
+    );
+
+    // Reajustar en cambio de tamaño de ventana con debounce ligero
+    let resizeTimer: number | null = null;
+    window.addEventListener("resize", () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(updateTrackGeometry, 80);
+    });
+  }
+
+  // Ejecución inicial y al navegar con transiciones de Astro
+  setupTimelineCasa();
+  document.addEventListener("astro:page-load", setupTimelineCasa);
+</script>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: CÓMO FUNCIONA (FONDO AZUL OSCURO #081d3e)
+     ========================================================================== */
+  .como-funciona-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(65px, 7vw, 105px) 0 clamp(70px, 8vw, 115px);
+    overflow: hidden;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Contenedor alto con el mismo fondo para que no se vean huecos al fijar la sección */
+  .como-funciona-pin {
+    position: relative;
+    background: #081d3e;
+  }
+
+  /* Escritorio: la sección azul queda fija bajo la barra superior mientras avanza la línea */
+  @media (min-width: 821px) and (min-height: 620px) {
+    .como-funciona-pin {
+      height: 240vh;
+    }
+
+    .como-funciona-seccion {
+      position: sticky;
+      top: 76px;
+      min-height: calc(100vh - 76px);
+      display: flex;
+      align-items: center;
+      padding: clamp(28px, 4vh, 56px) 0;
+    }
+
+    .como-funciona-header {
+      margin-bottom: clamp(28px, 4.5vh, 56px) !important;
+    }
+
+    .timeline-widget-casa {
+      margin-bottom: clamp(24px, 4vh, 48px) !important;
+    }
+  }
+
+  /* Resplandor radial elegante en azul eléctrico de fondo */
+  .como-funciona-resplandor {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(500px, 60vw, 950px);
+    height: clamp(350px, 40vw, 600px);
+    background: radial-gradient(circle, rgba(0, 194, 255, 0.12) 0%, rgba(0, 74, 173, 0.08) 45%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .como-funciona-contenedor {
+    position: relative;
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  /* ==========================================================================
+     ENCABEZADO: CÓMO funciona (POPPINS + LITERATA)
+     ========================================================================== */
+  .como-funciona-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(48px, 6vw, 68px);
+    max-width: 860px;
+  }
+
+  .etiqueta-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .separador-barra {
+    color: #00c2ff;
+    font-weight: 800;
+  }
+
+  .como-funciona-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.2rem, 1.95rem + 1.25vw, 3.1rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .como-funciona-cursiva {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 0;
+    color: #00c2ff;
+    margin-left: 8px;
+  }
+
+  .como-funciona-bajada {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: clamp(1.02rem, 0.96rem + 0.2vw, 1.15rem);
+    line-height: 1.62;
+    color: #cbd5e1;
+    margin: 0;
+    max-width: 780px;
+  }
+
+  /* ==========================================================================
+     TIMELINE INTERACTIVO (ESTILO COMOEMPEZAR.ASTRO)
+     ========================================================================== */
+  .timeline-widget-casa {
+    position: relative;
+    width: 100%;
+    margin-bottom: clamp(42px, 5vw, 56px);
+  }
+
+  /* Pista de la línea horizontal */
+  .timeline-track {
+    position: absolute;
+    height: 3px;
+    transform: translateY(-50%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Línea base sutil */
+  .timeline-base-line {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 99px;
+  }
+
+  /* Línea de relleno con gradiente dinámico */
+  .timeline-fill-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0px;
+    background: linear-gradient(90deg, #004aad 0%, #00c2ff 55%, #12b76a 100%);
+    border-radius: 99px;
+    box-shadow: 0 0 14px rgba(0, 194, 255, 0.6);
+    will-change: width;
+  }
+
+  /* Nodo cursor neón luminoso que viaja en la punta de la línea */
+  .timeline-glow-cursor {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 194, 255, 0.55),
+                0 0 16px 4px rgba(0, 194, 255, 0.85);
+    z-index: 2;
+    will-change: left;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Fila de los 3 pasos interactivos */
+  .pasos-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+    z-index: 3;
+  }
+
+  .paso-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    transition: transform 0.2s ease;
+  }
+
+  .paso-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .paso-btn:focus-visible .paso-circulo-num {
+    outline: 2px solid #00c2ff;
+    outline-offset: 4px;
+  }
+
+  /* Círculo numérico */
+  .paso-circulo-wrap {
+    position: relative;
+    margin-bottom: 22px;
+  }
+
+  .paso-circulo-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #0b1f40;
+    border: 2px solid rgba(255, 255, 255, 0.28);
+    color: #94a3b8;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .paso-circulo-glow {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    z-index: 1;
+    transform: scale(0.8);
+    pointer-events: none;
+  }
+
+  /* Estados activos por paso: Colores diferenciados con aura */
+  /* Paso 1: Azul Real EMAX */
+  .paso-btn[data-paso-btn="0"].active .paso-circulo-num {
+    background: #004aad;
+    border-color: #00c2ff;
+    color: #ffffff;
+    box-shadow: 0 4px 18px rgba(0, 74, 173, 0.5), 0 0 12px rgba(0, 194, 255, 0.4);
+  }
+  .paso-btn[data-paso-btn="0"].current .paso-circulo-glow {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(0, 194, 255, 0.4) 0%, transparent 70%);
+    transform: scale(1.25);
+  }
+
+  /* Paso 2: Cian Eléctrico */
+  .paso-btn[data-paso-btn="1"].active .paso-circulo-num {
+    background: #0099e6;
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 4px 18px rgba(0, 153, 230, 0.6), 0 0 14px rgba(56, 182, 255, 0.6);
+  }
+  .paso-btn[data-paso-btn="1"].current .paso-circulo-glow {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(56, 182, 255, 0.45) 0%, transparent 70%);
+    transform: scale(1.25);
+  }
+
+  /* Paso 3: Verde Éxito EMAX */
+  .paso-btn[data-paso-btn="2"].active .paso-circulo-num {
+    background: #12b76a;
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 4px 18px rgba(18, 183, 106, 0.6), 0 0 14px rgba(18, 183, 106, 0.5);
+  }
+  .paso-btn[data-paso-btn="2"].current .paso-circulo-glow {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(18, 183, 106, 0.45) 0%, transparent 70%);
+    transform: scale(1.25);
+  }
+
+  /* Textos de los pasos */
+  .paso-textos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 8px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .paso-btn.active .paso-textos {
+    opacity: 1;
+  }
+
+  .paso-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.16rem, 1.08rem + 0.28vw, 1.32rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    transition: color 0.25s ease;
+  }
+
+  .paso-btn.current .paso-titulo {
+    color: #00c2ff;
+  }
+
+  .paso-desc {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: clamp(0.94rem, 0.90rem + 0.15vw, 1.02rem);
+    line-height: 1.62;
+    color: #cbd5e1;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     AVISO BONO SOCIAL
+     ========================================================================== */
+  .aviso-bono-social-panel {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(11, 28, 59, 0.85);
+    border: 1px solid rgba(56, 182, 255, 0.28);
+    border-left: 4px solid #00c2ff;
+    border-radius: 14px;
+    padding: 16px 22px;
+    box-sizing: border-box;
+    margin-bottom: 28px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  .bono-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .bono-texto {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: clamp(0.92rem, 0.88rem + 0.15vw, 0.98rem);
+    line-height: 1.55;
+    color: #e2e8f0;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     BOTÓN PÍLDORA GAS NATURAL
+     ========================================================================== */
+  .gas-enlace-accion-wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  .boton-pildora-gas-casa {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #003882;
+    background: #ffffff;
+    border: 1.5px solid #ffffff;
+    border-radius: 999px;
+    padding: 11px 26px;
+    text-decoration: none;
+    box-sizing: border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  }
+
+  .boton-pildora-gas-casa:hover {
+    background: #f0f7ff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0, 194, 255, 0.35);
+  }
+
+  .boton-pildora-gas-casa:focus-visible {
+    outline: 2px solid #00c2ff;
+    outline-offset: 3px;
+  }
+
+  .icono-flecha-azul {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 150ms ease;
+  }
+
+  .boton-pildora-gas-casa:hover .icono-flecha-azul {
+    transform: translateX(4px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 820px) {
+    .timeline-track {
+      display: none !important;
+    }
+
+    .pasos-row {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .paso-btn {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .paso-circulo-wrap {
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .boton-pildora-gas-casa {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* ==========================================================================
+     ACCESIBILIDAD: PREFERS-REDUCED-MOTION
+     ========================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-fill-line,
+    .timeline-glow-cursor,
+    .paso-circulo-num,
+    .boton-pildora-gas-casa,
+    .icono-flecha-azul {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>

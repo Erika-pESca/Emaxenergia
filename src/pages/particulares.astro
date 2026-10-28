@@ -1,0 +1,37 @@
+---
+// Página: Luz y gas para tu casa / Hogares (/particulares)
+// "LA FACTURA DE TU CASA, leída antes de cambiar nada."
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroParticulares from "../components/tarifas/particulares/HeroParticulares.astro";
+import QueMiramosFacturaCasa from "../components/tarifas/particulares/QueMiramosFacturaCasa.astro";
+import ComoFuncionaCasa from "../components/tarifas/particulares/ComoFuncionaCasa.astro";
+import ProximaFactura from "../components/home/ProximaFactura.astro";
+---
+
+<BaseLayout
+  title="Luz y gas para tu casa | EMAX Energía"
+  description="La factura de tu casa, leída antes de cambiar nada. Te llamamos y leemos tu factura contigo: si tu contrato encaja con cómo consumes en casa, te lo decimos."
+  path="/particulares"
+>
+  <div class="particulares-page-wrapper">
+    <!-- 1. Hero oficial con diseño de tarifas y selector de tramos de gasto doméstico -->
+    <HeroParticulares />
+
+    <!-- 2. "Qué miramos en la factura de tu casa": Potencia, Horarios 24h, Regulada vs Libre, Gas -->
+    <QueMiramosFacturaCasa />
+
+    <!-- 3. "CÓMO funciona": Proceso en 3 pasos con barra interactiva ligada al scroll, aviso bono social y botón gas -->
+    <ComoFuncionaCasa />
+
+    <!-- 4. Formulario / Cierre oficial: "La tarifa no se elige: se construye" -->
+    <ProximaFactura />
+  </div>
+</BaseLayout>
+
+<style>
+  .particulares-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

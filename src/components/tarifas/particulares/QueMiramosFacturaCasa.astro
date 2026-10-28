@@ -1,0 +1,793 @@
+---
+// Componente: QueMiramosFacturaCasa.astro
+// Sección: "QUÉ MIRAMOS EN LA factura de tu casa" para /particulares (Hogares)
+// 4 Tarjetas: 1. Tu potencia, 2. Cuándo consumes (gráfico interactivo 24h L-V vs Fines de semana),
+// 3. Regulada o libre (selector PVPC vs Libre), 4. Tu gas, si lo tienes (tarjeta azul destacada).
+
+interface Props {
+  id?: string;
+}
+
+const { id = "que-miramos-casa" } = Astro.props;
+
+// 24 horas de lunes a viernes:
+// 0-7: Valle, 8-9: Llano, 10-13: Punta, 14-17: Llano, 18-21: Punta, 22-23: Llano
+const horasSemana = [
+  { hora: 0, tipo: "valle", label: "00:00 - 01:00 · Valle" },
+  { hora: 1, tipo: "valle", label: "01:00 - 02:00 · Valle" },
+  { hora: 2, tipo: "valle", label: "02:00 - 03:00 · Valle" },
+  { hora: 3, tipo: "valle", label: "03:00 - 04:00 · Valle" },
+  { hora: 4, tipo: "valle", label: "04:00 - 05:00 · Valle" },
+  { hora: 5, tipo: "valle", label: "05:00 - 06:00 · Valle" },
+  { hora: 6, tipo: "valle", label: "06:00 - 07:00 · Valle" },
+  { hora: 7, tipo: "valle", label: "07:00 - 08:00 · Valle" },
+  { hora: 8, tipo: "llano", label: "08:00 - 09:00 · Llano" },
+  { hora: 9, tipo: "llano", label: "09:00 - 10:00 · Llano" },
+  { hora: 10, tipo: "punta", label: "10:00 - 11:00 · Punta" },
+  { hora: 11, tipo: "punta", label: "11:00 - 12:00 · Punta" },
+  { hora: 12, tipo: "punta", label: "12:00 - 13:00 · Punta" },
+  { hora: 13, tipo: "punta", label: "13:00 - 14:00 · Punta" },
+  { hora: 14, tipo: "llano", label: "14:00 - 15:00 · Llano" },
+  { hora: 15, tipo: "llano", label: "15:00 - 16:00 · Llano" },
+  { hora: 16, tipo: "llano", label: "16:00 - 17:00 · Llano" },
+  { hora: 17, tipo: "llano", label: "17:00 - 18:00 · Llano" },
+  { hora: 18, tipo: "punta", label: "18:00 - 19:00 · Punta" },
+  { hora: 19, tipo: "punta", label: "19:00 - 20:00 · Punta" },
+  { hora: 20, tipo: "punta", label: "20:00 - 21:00 · Punta" },
+  { hora: 21, tipo: "punta", label: "21:00 - 22:00 · Punta" },
+  { hora: 22, tipo: "llano", label: "22:00 - 23:00 · Llano" },
+  { hora: 23, tipo: "llano", label: "23:00 - 24:00 · Llano" },
+];
+---
+
+<section
+  class="que-miramos-casa-seccion"
+  id={id}
+  aria-labelledby="que-miramos-casa-tit"
+>
+  <div class="que-miramos-casa-contenedor">
+    <!-- Encabezado de la Sección -->
+    <header class="que-miramos-header">
+      <div class="etiqueta-kicker">
+        <span>FACTURA DOMÉSTICA Y REGLAS DEL HOGAR</span>
+        <span class="separador-barra" aria-hidden="true">|</span>
+      </div>
+
+      <h2 class="que-miramos-titulo" id="que-miramos-casa-tit">
+        QUÉ MIRAMOS EN LA
+        <span class="subtitulo-destacado">factura de tu casa</span>
+      </h2>
+    </header>
+
+    <!-- Rejilla Principal de 4 Tarjetas -->
+    <div class="bloques-casa-grid">
+      <!-- FILA SUPERIOR -->
+      <div class="fila-superior-grid">
+        <!-- TARJETA 1: TU POTENCIA -->
+        <article class="casa-card card-potencia" aria-labelledby="tit-card-potencia">
+          <div class="card-header-line">
+            <span class="badge-numero" aria-hidden="true">1</span>
+            <h3 class="card-titulo" id="tit-card-potencia">Tu potencia</h3>
+          </div>
+
+          <p class="card-texto">
+            En casa puedes tener dos potencias: una para punta y llano y otra para valle. Si te sobra, la pagas todos los días. Si te falta, salta el contador.
+          </p>
+
+          <!-- Gráfico de las 2 potencias domésticas -->
+          <div class="mini-potencias-grafico" aria-label="Comparativa de potencias punta y valle">
+            <div class="potencia-fila">
+              <span class="potencia-label">Punta y llano</span>
+              <div class="potencia-track" aria-hidden="true">
+                <div class="potencia-fill fill-punta" style="width: 68%;"></div>
+              </div>
+            </div>
+
+            <div class="potencia-fila">
+              <span class="potencia-label">Valle</span>
+              <div class="potencia-track" aria-hidden="true">
+                <div class="potencia-fill fill-valle" style="width: 44%;"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- TARJETA 2: CUÁNDO CONSUMES (GRÁFICO INTERACTIVO 24H) -->
+        <article class="casa-card card-horarios" aria-labelledby="tit-card-horarios">
+          <div class="card-header-line">
+            <span class="badge-numero" aria-hidden="true">2</span>
+            <h3 class="card-titulo" id="tit-card-horarios">Cuándo consumes</h3>
+          </div>
+
+          <p class="card-texto">
+            Punta es de lunes a viernes de 10 a 14 y de 18 a 22. Valle, las noches de 0 a 8, los fines de semana y los festivos. El resto es llano.
+          </p>
+
+          <!-- Selector de Pestañas: Lunes a viernes vs Fines de semana -->
+          <div class="horarios-tabs-wrap" role="tablist" aria-label="Selecciona tipo de día">
+            <button
+              type="button"
+              class="btn-tab-horario activo"
+              id="tab-semana"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-horario-24h"
+              data-modo-horario="semana"
+            >
+              De lunes a viernes
+            </button>
+            <button
+              type="button"
+              class="btn-tab-horario"
+              id="tab-finde"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-horario-24h"
+              data-modo-horario="finde"
+            >
+              Fines de semana y festivos
+            </button>
+          </div>
+
+          <!-- Gráfico de 24 Barras Horarias -->
+          <div
+            class="grafico-24h-wrap"
+            id="panel-horario-24h"
+            role="tabpanel"
+            aria-labelledby="tab-semana"
+          >
+            <div class="barras-24h-grid" id="barras-24h-contenedor">
+              {
+                horasSemana.map((h) => (
+                  <div
+                    class={`barra-hora barra-${h.tipo}`}
+                    data-hora={h.hora}
+                    data-tipo-semana={h.tipo}
+                    title={h.label}
+                    tabindex="0"
+                  />
+                ))
+              }
+            </div>
+
+            <!-- Etiquetas de Horas de Referencia -->
+            <div class="horas-eje-marcas" aria-hidden="true">
+              <span>0 h</span>
+              <span>6 h</span>
+              <span>12 h</span>
+              <span>18 h</span>
+              <span>24 h</span>
+            </div>
+
+            <!-- Leyenda de colores -->
+            <div class="horarios-leyenda" aria-hidden="true">
+              <span class="leyenda-item">
+                <span class="cuadro-color cuadro-punta"></span>
+                <span>Punta</span>
+              </span>
+              <span class="leyenda-item">
+                <span class="cuadro-color cuadro-llano"></span>
+                <span>Llano</span>
+              </span>
+              <span class="leyenda-item">
+                <span class="cuadro-color cuadro-valle"></span>
+                <span>Valle</span>
+              </span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- FILA INFERIOR -->
+      <div class="fila-inferior-grid">
+        <!-- TARJETA 3: REGULADA O LIBRE -->
+        <article class="casa-card card-modalidad" aria-labelledby="tit-card-modalidad">
+          <div class="card-header-line">
+            <span class="badge-numero" aria-hidden="true">3</span>
+            <h3 class="card-titulo" id="tit-card-modalidad">Regulada o libre</h3>
+          </div>
+
+          <!-- Selector de Modo: Regulada (PVPC) vs Libre -->
+          <div class="modalidad-tabs-wrap" role="tablist" aria-label="Tipo de mercado">
+            <button
+              type="button"
+              class="btn-tab-modalidad activo"
+              id="tab-pvpc"
+              role="tab"
+              aria-selected="true"
+              data-mercado="pvpc"
+            >
+              Regulada (PVPC)
+            </button>
+            <button
+              type="button"
+              class="btn-tab-modalidad"
+              id="tab-libre"
+              role="tab"
+              aria-selected="false"
+              data-mercado="libre"
+            >
+              Libre
+            </button>
+          </div>
+
+          <!-- Textos descriptivos según el modo seleccionado -->
+          <div class="modalidad-textos-panel">
+            <p class="card-texto modalidad-desc" id="desc-pvpc">
+              Con la tarifa regulada (PVPC) el precio cambia cada hora con el mercado. Solo existe hasta 10 kW y es la única con la que se mantiene el bono social.
+            </p>
+            <p class="card-texto modalidad-desc" id="desc-libre" hidden>
+              En el mercado libre puedes pactar un precio fijo las 24 horas, precio fijo por tramos (Punta, Llano, Valle) o una cuota fija mensual. No da acceso al bono social.
+            </p>
+          </div>
+        </article>
+
+        <!-- TARJETA 4: TU GAS, SI LO TIENES (FONDO AZUL CORPORATIVO) -->
+        <article class="casa-card card-gas-azul" aria-labelledby="tit-card-gas">
+          <div class="card-header-line">
+            <span class="badge-numero badge-gas-cyan" aria-hidden="true">4</span>
+            <h3 class="card-titulo blanco" id="tit-card-gas">Tu gas, si lo tienes</h3>
+          </div>
+
+          <p class="card-texto sobre-azul">
+            Si consumes hasta 50.000 kWh de gas al año puedes estar en la tarifa regulada (TUR). Te decimos si te compensa seguir en ella.
+          </p>
+
+          <div class="gas-casa-enlace-wrap">
+            <a href="/tarifas/gas-natural" class="enlace-gas-casa">
+              <span>El gas de casa, explicado</span>
+              <span class="flecha-gas-azul" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#003882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Fuente oficial al pie -->
+    <footer class="casa-fuentes-pie">
+      <p>Fuentes: Circular 3/2020 de la CNMC (periodos y potencias del 2.0TD) · IDAE, Tarifas reguladas (julio de 2026)</p>
+    </footer>
+  </div>
+</section>
+
+<script>
+  function initQueMiramosCasa() {
+    // 1. Selector de Horarios: L-V vs Finde
+    const tabsHorario = document.querySelectorAll<HTMLButtonElement>(".btn-tab-horario");
+    const barras = document.querySelectorAll<HTMLElement>(".barra-hora");
+
+    if (tabsHorario.length && barras.length) {
+      tabsHorario.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabsHorario.forEach((t) => {
+            t.classList.remove("activo");
+            t.setAttribute("aria-selected", "false");
+          });
+          tab.classList.add("activo");
+          tab.setAttribute("aria-selected", "true");
+
+          const modo = tab.getAttribute("data-modo-horario");
+
+          barras.forEach((b) => {
+            b.classList.remove("barra-punta", "barra-llano", "barra-valle");
+            if (modo === "finde") {
+              // Fines de semana: todas las 24 horas son valle
+              b.classList.add("barra-valle");
+              const hora = b.getAttribute("data-hora");
+              b.setAttribute("title", `${hora}:00 - ${parseInt(hora || "0", 10) + 1}:00 · Valle`);
+            } else {
+              // De lunes a viernes: restaurar tipo correspondiente
+              const tipoSemana = b.getAttribute("data-tipo-semana") || "valle";
+              b.classList.add(`barra-${tipoSemana}`);
+              const hora = b.getAttribute("data-hora");
+              const capitalTipo = tipoSemana.charAt(0).toUpperCase() + tipoSemana.slice(1);
+              b.setAttribute("title", `${hora}:00 - ${parseInt(hora || "0", 10) + 1}:00 · ${capitalTipo}`);
+            }
+          });
+        });
+      });
+    }
+
+    // 2. Selector de Modalidad: Regulada (PVPC) vs Libre
+    const tabsModalidad = document.querySelectorAll<HTMLButtonElement>(".btn-tab-modalidad");
+    const descPvpc = document.getElementById("desc-pvpc");
+    const descLibre = document.getElementById("desc-libre");
+
+    if (tabsModalidad.length && descPvpc && descLibre) {
+      tabsModalidad.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabsModalidad.forEach((t) => {
+            t.classList.remove("activo");
+            t.setAttribute("aria-selected", "false");
+          });
+          tab.classList.add("activo");
+          tab.setAttribute("aria-selected", "true");
+
+          const mercado = tab.getAttribute("data-mercado");
+          if (mercado === "libre") {
+            descPvpc.hidden = true;
+            descLibre.hidden = false;
+          } else {
+            descPvpc.hidden = false;
+            descLibre.hidden = true;
+          }
+        });
+      });
+    }
+  }
+
+  // Inicializar al cargar y tras navegaciones Astro
+  initQueMiramosCasa();
+  document.addEventListener("astro:page-load", initQueMiramosCasa);
+</script>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: QUÉ MIRAMOS EN LA FACTURA DE TU CASA
+     Fondo blanco puro, estética EMAX con contrastes AA, tipografía Poppins + Literata
+     ========================================================================== */
+  .que-miramos-casa-seccion {
+    position: relative;
+    width: 100%;
+    background: #eef2f6;
+    color: var(--tinta, #0F2346);
+    padding: clamp(65px, 7vw, 105px) 0 clamp(65px, 7vw, 100px);
+    border-bottom: 1px solid #d9e1ec;
+    box-sizing: border-box;
+  }
+
+  .que-miramos-casa-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .que-miramos-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(34px, 4vw, 48px);
+    max-width: 860px;
+  }
+
+  .etiqueta-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #004aad;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .separador-barra {
+    color: #38b6ff;
+    font-weight: 800;
+  }
+
+  .que-miramos-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #0c192c;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .subtitulo-destacado {
+    display: block;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 0;
+    color: #004aad;
+    margin-top: 4px;
+  }
+
+  /* ==========================================================================
+     REJILLA DE TARJETAS
+     ========================================================================== */
+  .bloques-casa-grid {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3vw, 32px);
+    margin-bottom: clamp(34px, 4vw, 48px);
+  }
+
+  .fila-superior-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+    gap: clamp(20px, 2.5vw, 32px);
+    align-items: stretch;
+  }
+
+  .fila-inferior-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(20px, 2.5vw, 32px);
+    align-items: stretch;
+  }
+
+  @media (max-width: 960px) {
+    .fila-superior-grid,
+    .fila-inferior-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Tarjeta base */
+  .casa-card {
+    background: #ffffff;
+    border: 1px solid #d0dbe9;
+    border-radius: 24px;
+    padding: clamp(26px, 3vw, 36px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(15, 35, 70, 0.05);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  }
+
+  .casa-card:hover {
+    transform: translateY(-2px);
+    border-color: #b9d5f7;
+    box-shadow: 0 14px 32px rgba(0, 74, 173, 0.08);
+  }
+
+  /* Cabecera interna de tarjeta con badge numérico */
+  .card-header-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .badge-numero {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #004aad;
+    color: #ffffff;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.2rem, 1.1rem + 0.3vw, 1.35rem);
+    font-weight: 700;
+    color: #0c192c;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .card-titulo.blanco {
+    color: #ffffff;
+  }
+
+  .card-texto {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: clamp(0.94rem, 0.90rem + 0.15vw, 1.02rem);
+    line-height: 1.62;
+    color: #4A5A75;
+    margin: 0 0 20px 0;
+  }
+
+  .card-texto.sobre-azul {
+    color: #cbd5e1;
+  }
+
+  /* ==========================================================================
+     TARJETA 1: MINI GRÁFICO DE POTENCIAS
+     ========================================================================== */
+  .mini-potencias-grafico {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .potencia-fila {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .potencia-label {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #3b4d66;
+  }
+
+  .potencia-track {
+    width: 100%;
+    height: 14px;
+    background: #f1f5f9;
+    border: 1px solid #c9d3e3;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .potencia-fill {
+    height: 100%;
+    background: #004aad;
+    border-radius: 3px 0 0 3px;
+    transition: width 0.3s ease;
+  }
+
+  .fill-valle {
+    background: #004aad;
+  }
+
+  /* ==========================================================================
+     TARJETA 2: HORARIOS Y GRÁFICO 24H
+     ========================================================================== */
+  .horarios-tabs-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .btn-tab-horario {
+    height: 34px;
+    padding: 0 16px;
+    border-radius: 999px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3b4d66;
+    background: #f1f5f9;
+    border: 1px solid #dbe6f5;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .btn-tab-horario:hover {
+    background: #e2e8f0;
+  }
+
+  .btn-tab-horario.activo {
+    background: #004aad;
+    color: #ffffff;
+    border-color: #004aad;
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.25);
+  }
+
+  .grafico-24h-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+  }
+
+  .barras-24h-grid {
+    display: flex;
+    align-items: stretch;
+    height: 36px;
+    gap: 3px;
+    width: 100%;
+    background: #f8fafc;
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-sizing: border-box;
+  }
+
+  .barra-hora {
+    flex: 1;
+    border-radius: 3px;
+    transition: background-color 0.25s ease, transform 0.15s ease;
+    cursor: pointer;
+  }
+
+  .barra-hora:hover {
+    transform: scaleY(1.12);
+  }
+
+  /* Colores de las 3 franjas */
+  .barra-valle {
+    background: #38b6ff;
+  }
+
+  .barra-llano {
+    background: #5271ff;
+  }
+
+  .barra-punta {
+    background: #0b1e40;
+  }
+
+  .horas-eje-marcas {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: #64748b;
+    margin: 8px 0 14px 0;
+    padding-inline: 4px;
+  }
+
+  .horarios-leyenda {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .leyenda-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cuadro-color {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+  }
+
+  .cuadro-punta {
+    background: #0b1e40;
+  }
+
+  .cuadro-llano {
+    background: #5271ff;
+  }
+
+  .cuadro-valle {
+    background: #38b6ff;
+  }
+
+  /* ==========================================================================
+     TARJETA 3: REGULADA O LIBRE
+     ========================================================================== */
+  .modalidad-tabs-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .btn-tab-modalidad {
+    height: 34px;
+    padding: 0 16px;
+    border-radius: 999px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #3b4d66;
+    background: #f1f5f9;
+    border: 1px solid #dbe6f5;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .btn-tab-modalidad:hover {
+    background: #e2e8f0;
+  }
+
+  .btn-tab-modalidad.activo {
+    background: #004aad;
+    color: #ffffff;
+    border-color: #004aad;
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.25);
+  }
+
+  .modalidad-textos-panel {
+    min-height: 72px;
+  }
+
+  .modalidad-desc {
+    margin: 0;
+  }
+
+  .modalidad-desc[hidden] {
+    display: none;
+  }
+
+  /* ==========================================================================
+     TARJETA 4: TU GAS, SI LO TIENES (AZUL CORPORATIVO)
+     ========================================================================== */
+  .card-gas-azul {
+    background: linear-gradient(145deg, #0d2752 0%, #081d3e 100%);
+    border: 1px solid rgba(56, 182, 255, 0.28);
+    box-shadow: 0 12px 32px rgba(8, 29, 62, 0.22);
+    color: #ffffff;
+  }
+
+  .card-gas-azul:hover {
+    border-color: #00c2ff;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 194, 255, 0.15);
+  }
+
+  .badge-gas-cyan {
+    background: #00c2ff;
+    color: #081d3e;
+  }
+
+  .gas-casa-enlace-wrap {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+
+  .enlace-gas-casa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #004aad;
+    background: #ffffff;
+    padding: 8px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .enlace-gas-casa:hover {
+    background: #f0f7ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 194, 255, 0.35);
+  }
+
+  .flecha-gas-azul {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+  }
+
+  .enlace-gas-casa:hover .flecha-gas-azul {
+    transform: translateX(3px);
+  }
+
+  /* ==========================================================================
+     PIE DE FUENTES OFICIALES
+     ========================================================================== */
+  .casa-fuentes-pie {
+    padding-top: 8px;
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    color: #64748b;
+    line-height: 1.5;
+  }
+
+  .casa-fuentes-pie p {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,737 @@
+---
+// Componente: QueTarifaComunidad.astro
+// Sección: "QUÉ TARIFA PUEDE TENER tu comunidad"
+// Explica la diferencia entre el peaje 2.0TD (<=15 kW) y 3.0TD (>15 kW) mediante
+// un selector funcional interactivo de kW contratados, dos tarjetas comparativas y tarjeta de gas natural.
+
+interface Props {
+  id?: string;
+}
+
+const { id = "que-tarifa-puede-tener" } = Astro.props;
+---
+
+<section
+  class="que-tarifa-seccion"
+  id={id}
+  aria-labelledby="que-tarifa-tit"
+>
+  <div class="que-tarifa-contenedor">
+    <!-- Encabezado de la Sección -->
+    <div class="que-tarifa-header">
+      <div class="etiqueta-kicker">
+        <span>PEAJES Y POTENCIA REGULADA</span>
+        <span class="separador-barra" aria-hidden="true">|</span>
+      </div>
+
+      <h2 class="que-tarifa-titulo" id="que-tarifa-tit">
+        QUÉ TARIFA PUEDE TENER
+        <span class="subtitulo-destacado">tu comunidad</span>
+      </h2>
+
+      <p class="que-tarifa-bajada">
+        Depende de la potencia que tenga contratada. Está en la factura.
+      </p>
+    </div>
+
+    <!-- Selector Funcional de Potencia (Se activa únicamente con JS; sin JS se mantiene oculto y las 2 tarjetas se ven normales) -->
+    <div
+      class="selector-kw-contenedor"
+      id="selector-kw-comunidad"
+      hidden
+    >
+      <p class="selector-kw-pregunta" id="pregunta-kw-label">
+        ¿Cuántos kW tiene contratados tu comunidad?
+      </p>
+
+      <div
+        class="selector-kw-grupo"
+        role="group"
+        aria-labelledby="pregunta-kw-label"
+      >
+        <button
+          type="button"
+          class="btn-selector-kw"
+          data-kw="hasta15"
+          aria-pressed="false"
+        >
+          15 kW o menos
+        </button>
+        <button
+          type="button"
+          class="btn-selector-kw"
+          data-kw="mas15"
+          aria-pressed="false"
+        >
+          Más de 15 kW
+        </button>
+        <button
+          type="button"
+          class="btn-selector-kw"
+          data-kw="nose"
+          aria-pressed="false"
+        >
+          No lo sé
+        </button>
+      </div>
+
+      <!-- Línea de resultado dinámico -->
+      <p
+        class="selector-kw-resultado"
+        id="resultado-peaje-kw"
+        aria-live="polite"
+        hidden
+      ></p>
+
+      <!-- Panel de aviso de ayuda cuando elige "No lo sé" -->
+      <div class="aviso-no-se-panel" id="aviso-no-se" hidden>
+        <p class="aviso-no-se-texto">
+          Búscalo en tu factura, en <strong>‘Potencia contratada (kW)’</strong>. Si no lo encuentras, te lo leemos en la llamada.
+        </p>
+        <a href="/diagnostico" class="aviso-no-se-enlace">
+          <span>Pedir lectura en llamada</span>
+          <span class="icono-flecha-azul" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#003882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Rejilla de las 2 Tarjetas de Peajes: 2.0TD vs 3.0TD -->
+    <div class="peajes-tarjetas-grid">
+      <!-- TARJETA 1: 2.0TD (CON 15 KW O MENOS) -->
+      <article
+        class="peaje-card card-20td"
+        id="tarjeta-peaje-20td"
+        aria-labelledby="peaje-20td-tit"
+      >
+        <div class="card-interior">
+          <div class="peaje-header-wrap">
+            <span class="peaje-kicker-tag">CON 15 KW O MENOS</span>
+            <h3 class="peaje-codigo-titulo" id="peaje-20td-tit">2.0TD</h3>
+          </div>
+
+          <p class="peaje-descripcion">
+            Tres periodos de energía y dos potencias. Aquí la tarifa se construye con Ingenio (día y noche) o Deseo (un precio las 24 horas). Genio no existe en este peaje.
+          </p>
+        </div>
+
+        <!-- Botón / Enlace Píldora inferior -->
+        <div class="peaje-accion-wrap">
+          <a href="/tarifas#modalidad" class="boton-pildora-tarifa">
+            <span>Las cuatro piezas de una tarifa</span>
+            <span class="icono-flecha-azul" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- TARJETA 2: 3.0TD (CON MÁS DE 15 KW) -->
+      <article
+        class="peaje-card card-30td"
+        id="tarjeta-peaje-30td"
+        aria-labelledby="peaje-30td-tit"
+      >
+        <div class="card-interior">
+          <div class="peaje-header-wrap">
+            <span class="peaje-kicker-tag cian">CON MÁS DE 15 KW</span>
+            <h3 class="peaje-codigo-titulo blanco" id="peaje-30td-tit">3.0TD</h3>
+          </div>
+
+          <p class="peaje-descripcion sobre-azul">
+            Seis periodos y seis potencias, y la reactiva se paga. Pasa en comunidades con ascensores grandes, garaje con ventilación o piscina. Aquí también cabe Genio.
+          </p>
+        </div>
+
+        <div class="peaje-accion-wrap">
+          <a href="/tarifas#modalidad" class="boton-pildora-tarifa boton-pildora-blanco">
+            <span>Ver opciones para 3.0TD</span>
+            <span class="icono-flecha-azul" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- TARJETA INFERIOR: Y SI LA COMUNIDAD TIENE GAS -->
+    <article class="tarjeta-gas-comunidad" aria-labelledby="gas-comunidad-tit">
+      <div class="gas-icono-col" aria-hidden="true">
+        <div class="gas-circulo-icono">
+          <!-- Icono de llama/gas natural con estilo moderno EMAX -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#004aad" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="gas-contenido-col">
+        <h3 class="gas-titulo" id="gas-comunidad-tit">
+          Y si la comunidad tiene gas
+        </h3>
+
+        <p class="gas-descripcion">
+          Con calefacción central o agua caliente común, lo primero es saber si podéis acogeros a la tarifa regulada de gas y qué os cuesta frente al mercado libre. Lo revisamos en el mismo estudio.
+        </p>
+
+        <div class="gas-enlace-wrap">
+          <a href="/tarifas/gas-natural" class="boton-pildora-tarifa boton-pildora-gas">
+            <span>El gas de la comunidad, explicado</span>
+            <span class="icono-flecha-azul" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#003882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script>
+  function initSelectorKw() {
+    const contenedor = document.getElementById("selector-kw-comunidad");
+    if (!contenedor) return;
+
+    // Al ejecutarse el script, revelamos el selector
+    contenedor.removeAttribute("hidden");
+
+    const botones = contenedor.querySelectorAll<HTMLButtonElement>(".btn-selector-kw");
+    const resultado = document.getElementById("resultado-peaje-kw");
+    const aviso = document.getElementById("aviso-no-se");
+    const card20 = document.getElementById("tarjeta-peaje-20td");
+    const card30 = document.getElementById("tarjeta-peaje-30td");
+
+    if (!botones.length || !resultado || !aviso || !card20 || !card30) return;
+
+    botones.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tipo = btn.getAttribute("data-kw");
+        const yaActivo = btn.getAttribute("aria-pressed") === "true";
+
+        // Resetear todos los botones
+        botones.forEach((b) => b.setAttribute("aria-pressed", "false"));
+
+        // Si se pulsa de nuevo el mismo botón activo, vuelve al estado inicial
+        if (yaActivo) {
+          resultado.hidden = true;
+          resultado.textContent = "";
+          aviso.hidden = true;
+          card20.classList.remove("resaltada", "atenuada");
+          card30.classList.remove("resaltada", "atenuada");
+          return;
+        }
+
+        btn.setAttribute("aria-pressed", "true");
+
+        if (tipo === "hasta15") {
+          card20.classList.add("resaltada");
+          card20.classList.remove("atenuada");
+          card30.classList.add("atenuada");
+          card30.classList.remove("resaltada");
+          resultado.textContent = "Con esa potencia tu comunidad está en el peaje 2.0TD.";
+          resultado.hidden = false;
+          aviso.hidden = true;
+        } else if (tipo === "mas15") {
+          card30.classList.add("resaltada");
+          card30.classList.remove("atenuada");
+          card20.classList.add("atenuada");
+          card20.classList.remove("resaltada");
+          resultado.textContent = "Con esa potencia tu comunidad está en el peaje 3.0TD.";
+          resultado.hidden = false;
+          aviso.hidden = true;
+        } else if (tipo === "nose") {
+          card20.classList.remove("resaltada", "atenuada");
+          card30.classList.remove("resaltada", "atenuada");
+          resultado.hidden = true;
+          resultado.textContent = "";
+          aviso.hidden = false;
+        }
+      });
+    });
+  }
+
+  // Inicializar en carga y tras navegaciones de Astro
+  initSelectorKw();
+  document.addEventListener("astro:page-load", initSelectorKw);
+</script>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: QUÉ TARIFA PUEDE TENER TU COMUNIDAD
+     Fondo gris institucional, selector dinámico accesible y tarjetas de peaje.
+     ========================================================================== */
+  .que-tarifa-seccion {
+    position: relative;
+    width: 100%;
+    background: #eef2f6;
+    color: var(--tinta, #0F2346);
+    padding: clamp(65px, 7vw, 105px) 0 clamp(75px, 8vw, 115px);
+    overflow: hidden;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d9e1ec;
+  }
+
+  .que-tarifa-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .que-tarifa-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(32px, 4vw, 44px);
+    max-width: 860px;
+  }
+
+  .etiqueta-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #004aad;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .separador-barra {
+    color: #38b6ff;
+    font-weight: 800;
+  }
+
+  .que-tarifa-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #0c192c;
+    line-height: 1.15;
+    margin: 0 0 14px 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .subtitulo-destacado {
+    display: block;
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: #004aad;
+    margin-top: 4px;
+  }
+
+  .que-tarifa-bajada {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
+    line-height: 1.55;
+    color: #4A5A75;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     SELECTOR FUNCIONAL DE POTENCIA (kW CONTRATADOS)
+     ========================================================================== */
+  .selector-kw-contenedor {
+    margin-bottom: clamp(34px, 4vw, 46px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .selector-kw-contenedor[hidden] {
+    display: none;
+  }
+
+  .selector-kw-pregunta {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.02rem, 0.96rem + 0.2vw, 1.15rem);
+    font-weight: 600;
+    color: #0c192c;
+    margin: 0 0 14px 0;
+  }
+
+  .selector-kw-grupo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-selector-kw {
+    height: 44px;
+    padding: 0 24px;
+    border-radius: 999px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--tinta, #0F2346);
+    background: #ffffff;
+    border: 1px solid var(--linea, #C9D3E3);
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 150ms ease, box-shadow 150ms ease, background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+
+  .btn-selector-kw:hover {
+    background: #f0f4f9;
+    border-color: #004aad;
+  }
+
+  .btn-selector-kw:focus-visible {
+    outline: 2px solid #004aad;
+    outline-offset: 2px;
+  }
+
+  .btn-selector-kw[aria-pressed="true"] {
+    background: #004aad;
+    color: #ffffff;
+    border-color: #004aad;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.28);
+  }
+
+  /* Línea de resultado dinámico */
+  .selector-kw-resultado {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #004aad;
+    margin: 14px 0 0 0;
+    line-height: 1.5;
+    transition: opacity 150ms ease;
+  }
+
+  .selector-kw-resultado[hidden] {
+    display: none;
+  }
+
+  /* Panel de ayuda "No lo sé" */
+  .aviso-no-se-panel {
+    background: var(--resalte, #DDF1FF);
+    border: 1px solid #bfe0fc;
+    border-radius: 14px;
+    padding: 14px 20px;
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    box-sizing: border-box;
+    transition: opacity 150ms ease;
+  }
+
+  .aviso-no-se-panel[hidden] {
+    display: none;
+  }
+
+  .aviso-no-se-texto {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: #0F2346;
+    margin: 0;
+    flex: 1 1 320px;
+  }
+
+  .aviso-no-se-enlace {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #004aad;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 150ms ease;
+  }
+
+  .aviso-no-se-enlace:hover {
+    color: #003882;
+  }
+
+  @media (max-width: 640px) {
+    .selector-kw-grupo {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .btn-selector-kw {
+      width: 100%;
+    }
+  }
+
+  /* ==========================================================================
+     REJILLA DE TARJETAS DE PEAJE: 2.0TD vs 3.0TD
+     ========================================================================== */
+  .peajes-tarjetas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 36px);
+    margin-bottom: clamp(32px, 4vw, 44px);
+    align-items: stretch;
+  }
+
+  @media (max-width: 860px) {
+    .peajes-tarjetas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .peaje-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 24px;
+    padding: clamp(26px, 3.2vw, 38px);
+    box-sizing: border-box;
+    transition: opacity 150ms ease, box-shadow 150ms ease;
+  }
+
+  /* Tarjeta 2.0TD: Blanca con Borde Azul Refinado */
+  .card-20td {
+    background: #ffffff;
+    border: 1.5px solid #004aad;
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.06);
+  }
+
+  /* Estado resaltado 2.0TD */
+  .card-20td.resaltada {
+    border-width: 2.5px;
+    border-color: var(--azul-900, #004aad);
+    box-shadow: 0 16px 36px rgba(0, 74, 173, 0.22);
+    opacity: 1;
+  }
+
+  /* Tarjeta 3.0TD: Fondo Azul Royal EMAX */
+  .card-30td {
+    background: linear-gradient(145deg, #004aad 0%, #003680 100%);
+    border: 1.5px solid #004aad;
+    box-shadow: 0 12px 30px rgba(0, 74, 173, 0.22);
+    color: #ffffff;
+  }
+
+  /* Estado resaltado 3.0TD */
+  .card-30td.resaltada {
+    box-shadow: 0 20px 44px rgba(0, 74, 173, 0.44), 0 0 0 2px #38b6ff;
+    opacity: 1;
+  }
+
+  /* Estado atenuado para cualquiera de las dos tarjetas */
+  .peaje-card.atenuada {
+    opacity: 0.55;
+    box-shadow: none;
+  }
+
+  .card-interior {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .peaje-kicker-tag {
+    display: inline-block;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #004aad;
+    margin-bottom: 8px;
+  }
+
+  .peaje-kicker-tag.cian {
+    color: #38b6ff;
+  }
+
+  .peaje-codigo-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.4rem, 2rem + 1.4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #0c192c;
+    margin: 0 0 18px 0;
+  }
+
+  .peaje-codigo-titulo.blanco {
+    color: #ffffff;
+  }
+
+  .peaje-descripcion {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: clamp(0.98rem, 0.92rem + 0.2vw, 1.05rem);
+    line-height: 1.65;
+    color: #4A5A75;
+    margin: 0;
+  }
+
+  .peaje-descripcion.sobre-azul {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  /* Botones Píldora de Acción */
+  .peaje-accion-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .boton-pildora-tarifa {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #004aad;
+    background: #ffffff;
+    border: 1.5px solid #004aad;
+    border-radius: 999px;
+    padding: 10px 22px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .boton-pildora-tarifa:hover {
+    background: #f0f7ff;
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.12);
+  }
+
+  /* Botón blanco sobre tarjeta azul */
+  .boton-pildora-blanco {
+    background: #ffffff;
+    color: #004aad;
+    border-color: #ffffff;
+  }
+
+  .boton-pildora-blanco:hover {
+    background: #f8fbfe;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  }
+
+  .icono-flecha-azul {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 150ms ease;
+  }
+
+  .boton-pildora-tarifa:hover .icono-flecha-azul {
+    transform: translateX(4px);
+  }
+
+  /* ==========================================================================
+     TARJETA INFERIOR: Y SI LA COMUNIDAD TIENE GAS
+     ========================================================================== */
+  .tarjeta-gas-comunidad {
+    background: #ffffff;
+    border: 1px solid #d0dbe9;
+    border-radius: 22px;
+    padding: clamp(26px, 3.5vw, 36px);
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(20px, 2.5vw, 28px);
+    align-items: start;
+    box-shadow: 0 4px 18px rgba(15, 35, 70, 0.04);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .tarjeta-gas-comunidad:hover {
+    border-color: #b9d5f7;
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.08);
+  }
+
+  @media (max-width: 640px) {
+    .tarjeta-gas-comunidad {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gas-circulo-icono {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: #eef4fc;
+    border: 1px solid #cce2fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .gas-contenido-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gas-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
+    font-weight: 800;
+    color: #0c192c;
+    letter-spacing: -0.015em;
+    margin: 0 0 10px 0;
+  }
+
+  .gas-descripcion {
+    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-size: clamp(0.96rem, 0.92rem + 0.15vw, 1.04rem);
+    line-height: 1.65;
+    color: #4A5A75;
+    margin: 0 0 20px 0;
+    max-width: 1040px;
+  }
+
+  .gas-enlace-wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  .boton-pildora-gas {
+    background: #ffffff;
+    border-color: #004aad;
+  }
+
+  /* ==========================================================================
+     ACCESIBILIDAD: PREFERS-REDUCED-MOTION
+     ========================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .peaje-card,
+    .btn-selector-kw,
+    .aviso-no-se-panel,
+    .selector-kw-resultado,
+    .boton-pildora-tarifa,
+    .tarjeta-gas-comunidad,
+    .icono-flecha-azul {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>

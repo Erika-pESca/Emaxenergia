@@ -1,6 +1,41 @@
 ---
-// Redirección y compatibilidad para la ruta /tarifas/gas-natural -> /gas-natural
-import GasPage from "../gas-natural.astro";
+// Página: Gas Natural para Empresas, Comunidades y Hogares (/tarifas/gas-natural)
+// Diseño oficial de alta fidelidad basado en Figma
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroGas from "../../components/tarifas/gas/HeroGas.astro";
+import SegunQuienPaga from "../../components/tarifas/gas/SegunQuienPaga.astro";
+import QueMiramosFacturaGas from "../../components/tarifas/gas/QueMiramosFacturaGas.astro";
+import QueFijaLaNormaGas from "../../components/tarifas/gas/QueFijaLaNormaGas.astro";
+import EmpiezaPorLoQuePagas from "../../components/tarifas/gas/EmpiezaPorLoQuePagas.astro";
 ---
 
-<GasPage />
+<BaseLayout
+  title="Gas natural para empresas, comunidades y hogares | EMAX Energía"
+  description="Tu factura de gas también se lee antes de cambiarla. Tu peaje, tu consumo del año, tu temporada, tu precio y si te corresponde tarifa regulada."
+  path="/tarifas/gas-natural"
+>
+  <div class="gas-page-wrapper">
+    <!-- 1. Hero oficial con selector de segmento interactivo -->
+    <HeroGas />
+
+    <!-- 2. Áreas de análisis: SEGÚN QUIÉN paga la factura (Empresas, Comunidades, Hogares) -->
+    <SegunQuienPaga />
+
+    <!-- 3. QUÉ MIRAMOS EN TU factura de gas (Peaje, Temporada, Precio, Término fijo) -->
+    <QueMiramosFacturaGas />
+
+    <!-- 4. Áreas de análisis: QUÉ fija la norma Y QUÉ SE PUEDE DECIDIR -->
+    <QueFijaLaNormaGas />
+
+    <!-- 5. Segmentos: EMPIEZA POR LO QUE PAGAS (Empresa, Comunidad, Casa) con foto de consultor estilo Home -->
+    <EmpiezaPorLoQuePagas />
+  </div>
+</BaseLayout>
+
+<style>
+  .gas-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+</style>

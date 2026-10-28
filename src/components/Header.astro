@@ -36,8 +36,8 @@ const sectoresItems = [
 
 const tarifasItems = [
   { href: "/tarifas", label: "Luz para empresas", desc: "Estructura, modalidad, potencia y condiciones", id: "luz" },
-  { href: "/gas-natural", label: "Gas para empresas", desc: "Tu peaje, tu temporada y tu precio", id: "gas" },
-  { href: "/comunidades-de-propietarios", label: "Comunidades de propietarios", desc: "Luz y gas: ascensor, garaje y calefacción central", id: "comunidades" },
+  { href: "/tarifas/gas-natural", label: "Gas para empresas", desc: "Tu peaje, tu temporada y tu precio", id: "gas" },
+  { href: "/tarifas/comunidades-de-propietarios", label: "Comunidades de propietarios", desc: "Luz y gas: ascensor, garaje y calefacción central", id: "comunidades" },
   { href: "/particulares", label: "Hogares", desc: "Luz y gas para hogares y particulares", id: "hogares" },
 ];
 ---
@@ -199,7 +199,7 @@ const tarifasItems = [
             <!-- Separador y enlaces inferiores fieles al boceto del usuario -->
             <div class="dropdown-sectores-inferior">
               <div class="dropdown-sep-line"></div>
-              <a href="/varios-suministros" class="dropdown-link-varios">Varios suministros</a>
+              <a href="/sectores/varios-suministros" class="dropdown-link-varios">Varios suministros</a>
               <a href="/sectores" class:list={["dropdown-btn-todos-sectores", { "todos-activo": current === "/sectores" }]}>
                 <span>Todos los sectores</span>
                 <span class="todos-flecha-icon" aria-hidden="true">→</span>

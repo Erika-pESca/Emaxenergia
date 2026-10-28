@@ -4,6 +4,11 @@
 // y columna derecha con las 4 tarjetas de diagnóstico con imágenes reales y acabados premium.
 // Colores y tipografía alineados al boceto y a la paleta oficial: #004AAD · #5271ff · #38b6ff
 
+import fotoCurva from "../../imagenes/home/tarjeta-curva-negocio.jpg";
+import fotoPotencia from "../../imagenes/home/tarjeta-tecnico-potencia.jpg";
+import fotoReactiva from "../../imagenes/home/tarjeta-energia-reactiva.jpg";
+import fotoPropuesta from "../../imagenes/home/tarjeta-propuesta-medida.jpg";
+
 const atajos = [
   "Elegir de un catálogo.",
   "Aplicar la regla de tu tipo de negocio.",
@@ -17,7 +22,7 @@ const pilaresEmax = [
     titulo: "Cuánto y cuándo consume tu empresa",
     desc: "Tu consumo por periodos y por meses, traducido a las horas de tu negocio: cuánto va a las horas caras y cuánto a las baratas.",
     tag: "Curva horaria",
-    foto: "/imagenes/tarjeta-curva-negocio.jpg",
+    foto: fotoCurva.src,
     alt: "Curva de consumo horario en tablet sobre mesa de panadería",
   },
   {
@@ -25,7 +30,7 @@ const pilaresEmax = [
     titulo: "Tu potencia",
     desc: "La potencia que tienes contratada en cada periodo frente a la que usas de verdad. Si te sobra, si te falta y si pagas excesos.",
     tag: "Ajuste P1–P6",
-    foto: "/imagenes/tarjeta-tecnico-potencia.jpg",
+    foto: fotoPotencia.src,
     alt: "Auditoría de potencias en cuadro eléctrico industrial",
   },
   {
@@ -33,7 +38,7 @@ const pilaresEmax = [
     titulo: "Tu energía reactiva",
     desc: "Si la pagas, en qué periodos, cuánto al año y si compensa corregirla.",
     tag: "0 € penalizaciones",
-    foto: "/imagenes/tarjeta-energia-reactiva.jpg",
+    foto: fotoReactiva.src,
     alt: "Batería de condensadores y análisis de reactiva industrial",
   },
   {
@@ -41,7 +46,7 @@ const pilaresEmax = [
     titulo: "Tu propuesta de tarifa",
     desc: "La tarifa que sale de los tres bloques anteriores: estructura, modalidad, potencias y condiciones.",
     tag: "A medida",
-    foto: "/imagenes/tarjeta-propuesta-medida.jpg",
+    foto: fotoPropuesta.src,
     alt: "Propuesta de tarifa y estudio técnico detallado",
   },
 ];

@@ -45,8 +45,8 @@ export const footerNav = [
     links: [
       { href: "/metodo", label: "El Método EMAX" },
       { href: "/tarifas", label: "Tarifas de Luz y Gas" },
-      { href: "/gas-natural", label: "Gas natural" },
-      { href: "/varios-suministros", label: "Varios suministros" },
+      { href: "/tarifas/gas-natural", label: "Gas natural" },
+      { href: "/sectores/varios-suministros", label: "Varios suministros" },
     ],
   },
   {

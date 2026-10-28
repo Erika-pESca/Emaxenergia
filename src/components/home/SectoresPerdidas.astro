@@ -1,12 +1,20 @@
 ---
 // Sección: "¿A qué se dedica TU EMPRESA?"
 // Especialización por sectores de negocio con tarjetas visuales según boceto
-import imagenPrueba from "../../imagenes/imagen de prueba.png";
+import imgRestaurantes from "../../imagenes/home/restaurantes.png";
+import imgHoteles from "../../imagenes/home/hoteles.png";
+import imgSupermercado from "../../imagenes/home/sectores-indice-restaurante.png";
+import imgLogistica from "../../imagenes/home/logisticca y frio.png";
+import imgIndustria from "../../imagenes/home/sectores-indice-industria.png";
+import imgTalleres from "../../imagenes/home/talleres mecanicos.png";
+import imgClinicas from "../../imagenes/home/clinicas.png";
 
 interface SectorItem {
   id: string;
   titulo: string;
   desc: string;
+  img: ImageMetadata;
+  href: string;
 }
 
 const sectores: SectorItem[] = [
@@ -14,36 +22,50 @@ const sectores: SectorItem[] = [
     id: "hosteleria",
     titulo: "Restaurante u hostelería",
     desc: "Los dos servicios caen en las horas caras, y el frío no para ni el día de cierre.",
+    img: imgRestaurantes,
+    href: "/sectores/restaurantes",
   },
   {
     id: "hotel",
     titulo: "Hotel",
     desc: "En febrero sigues pagando la potencia de agosto.",
+    img: imgHoteles,
+    href: "/sectores/hoteles",
   },
   {
     id: "supermercado",
     titulo: "Supermercado o alimentación",
     desc: "Tu tienda nunca se apaga: el frío pesa más que los picos.",
+    img: imgSupermercado,
+    href: "/sectores/supermercados",
   },
   {
     id: "logistica",
     titulo: "Logística y frío",
     desc: "Trabajar de noche no es lo mismo que consumir en P6.",
+    img: imgLogistica,
+    href: "/sectores/logistica-frio",
   },
   {
     id: "industria",
     titulo: "Industria",
     desc: "Un turno más cambia la factura.",
+    img: imgIndustria,
+    href: "/sectores/industria",
   },
   {
     id: "multisede",
     titulo: "Varios locales o sedes",
     desc: "Un local con la potencia mal ajustada se nota poco. En veinte, se nota en el margen.",
+    img: imgTalleres,
+    href: "/sectores/varios-suministros",
   },
   {
     id: "otro",
     titulo: "Otro negocio",
     desc: "Talleres, clínicas, oficinas, comercios: lo que cuenta es cuándo consumes, no a qué te dedicas.",
+    img: imgClinicas,
+    href: "/#estudio",
   },
 ];
 ---
@@ -70,10 +92,11 @@ const sectores: SectorItem[] = [
             <!-- Imagen superior con corte diagonal -->
             <div class="sector-card-media">
               <img
-                src={imagenPrueba.src}
+                src={s.img.src}
                 alt={s.titulo}
                 class="sector-card-img"
                 loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -95,7 +118,7 @@ const sectores: SectorItem[] = [
               <div class="sector-card-header">
                 <h3 class="sector-card-titulo">{s.titulo}</h3>
                 <a
-                  href="/#estudio"
+                  href={s.href}
                   class="sector-card-btn"
                   aria-label={`Ver solución para ${s.titulo}`}
                   data-abrir-funnel

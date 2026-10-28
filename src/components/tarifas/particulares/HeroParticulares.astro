@@ -1,0 +1,409 @@
+---
+// Componente HeroParticulares para la página "Luz y gas para tu casa / Hogares" (/particulares)
+// Estilo visual oficial idéntico a HeroTarifas y HeroComunidades con fondo_tarifas.jpg
+// Tipografía Poppins + cursiva Literata, píldora cian y tarjeta de cristal interactiva con 4 tramos de gasto doméstico
+
+import fondoTarifas from "../../../imagenes/fondo_tarifas.jpg";
+
+interface TramoGasto {
+  id: string;
+  etiqueta: string;
+  rango: string;
+  msg: string;
+}
+
+const tramosGasto: TramoGasto[] = [
+  {
+    id: "<50",
+    etiqueta: "MENOS DE 50€",
+    rango: "menos de 50 € al mes",
+    msg: "Revisamos tu término de potencia contratada en P1 y P2 y si te conviene precio fijo o discriminación horaria en casa.",
+  },
+  {
+    id: "50-100",
+    etiqueta: "50 - 100€",
+    rango: "entre 50 y 100 € al mes",
+    msg: "Comprobamos si estás pagando servicios de mantenimiento ocultos y optimizamos el tramo de potencia de tu hogar.",
+  },
+  {
+    id: "100-150",
+    etiqueta: "100 - 150€",
+    rango: "entre 100 y 150 € al mes",
+    msg: "Analizamos si tu consumo se concentra en horas punta o valle y si tienes calefacción eléctrica o aire acondicionado.",
+  },
+  {
+    id: ">150",
+    etiqueta: "Más de 150€",
+    rango: "más de 150 € al mes en el hogar",
+    msg: "Auditoría personalizada para vivienda unifamiliar o con aerotermia / coche eléctrico para recortar potencia y precio por kWh.",
+  },
+];
+---
+
+<section class="hero-tarifas-seccion" aria-labelledby="h1-particulares">
+  <!-- Fondo fotográfico fondo_tarifas.jpg oficial -->
+  <div class="hero-bg" aria-hidden="true">
+    <img
+      src={fondoTarifas.src}
+      alt=""
+      class="hero-bg-img"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="hero-tarifas-contenedor">
+    <!-- Columna Izquierda: Mensaje principal y propuesta de valor para el hogar -->
+    <div class="hero-tarifas-col-izq">
+      <p class="hero-tarifas-kicker">
+        EMAX ENERGÍA · LUZ Y GAS PARA TU CASA <span class="kicker-sep" aria-hidden="true">|</span>
+      </p>
+
+      <h1 class="hero-tarifas-titulo" id="h1-particulares">
+        LA FACTURA DE TU CASA<br />
+        <span class="titulo-cursiva">leída antes de cambiar nada.</span>
+      </h1>
+
+      <div class="hero-tarifas-subbloque">
+        <p class="hero-tarifas-desc">
+          Te llamamos y leemos tu factura contigo. Si tu contrato ya encaja con cómo consumes en casa, te lo decimos en lugar de proponerte otra tarifa.
+        </p>
+      </div>
+
+      <!-- Píldora de redirección para empresas o comunidades -->
+      <div class="hero-pildora-wrap">
+        <a href="/tarifas" class="btn-comunidad-pildora">
+          <span>¿Buscas luz para tu empresa o negocio? Haz clic aquí</span>
+          <span class="btn-pildora-circulo" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#003882" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Columna Derecha: Tarjeta de cristal interactiva con los 4 tramos de gasto doméstico -->
+    <div class="hero-tarifas-col-der">
+      <div class="hero-tarifas-card-cristal">
+        <h2 class="tarifas-card-titulo">¿Cuánto pagas de luz al mes?</h2>
+        <p class="tarifas-card-subtitulo">
+          Con una cifra aproximada nos basta.
+        </p>
+
+        <!-- Rejilla 2x2 de botones de gasto con círculo cian y chevron -->
+        <div class="tarifas-tramos-grid">
+          {
+            tramosGasto.map((t) => (
+              <button
+                type="button"
+                class="btn-tramo-tarifa"
+                data-abrir-funnel
+                data-tramo-id={t.id}
+                data-tramo-label={t.etiqueta}
+                data-tramo-rango={t.rango}
+                data-tramo-msg={t.msg}
+              >
+                <span class="btn-txt">{t.etiqueta}</span>
+                <span class="btn-circulo" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#003882" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 3.5 10.5 8 6 12.5"></path>
+                  </svg>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+
+        <p class="tarifas-card-nota">
+          Tú eliges cómo empezamos: con la factura de casa o con el CUPS. El análisis no tiene coste.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     HERO PARTICULARES / HOGARES - FONDO fondo_tarifas.jpg Y DISEÑO OFICIAL
+     ========================================================================== */
+  .hero-tarifas-seccion {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    min-height: calc(84vh + 78px);
+    display: flex;
+    align-items: center;
+    padding: calc(78px + 48px) 0 72px;
+    background-color: #004aad;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-tarifas-contenedor {
+    width: 100%;
+    max-width: 1360px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 52px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 56px);
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-tarifas-contenedor {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  /* ==========================================================================
+     COLUMNA IZQUIERDA
+     ========================================================================== */
+  .hero-tarifas-col-izq {
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .hero-tarifas-kicker {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .kicker-sep {
+    color: #00c2ff;
+    font-weight: 300;
+    font-size: 1.1em;
+    margin-left: 2px;
+  }
+
+  .hero-tarifas-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.2rem, 1.7rem + 2vw, 3.3rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.16;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  .titulo-cursiva {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    color: #00c2ff;
+    letter-spacing: 0;
+    font-size: 1.05em;
+    display: block;
+    margin-top: 4px;
+    text-shadow: 0 2px 14px rgba(0, 194, 255, 0.35);
+  }
+
+  .hero-tarifas-subbloque {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-tarifas-desc {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: clamp(0.96rem, 0.90rem + 0.3vw, 1.08rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.90);
+    font-weight: 400;
+    margin: 0;
+    max-width: 33rem;
+  }
+
+  /* Píldora cian */
+  .hero-pildora-wrap {
+    margin-top: 6px;
+  }
+
+  .btn-comunidad-pildora {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #00c2ff;
+    color: #002554;
+    padding: 10px 18px 10px 22px;
+    border-radius: 999px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(0, 194, 255, 0.35);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-comunidad-pildora:hover {
+    background: #38b6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 194, 255, 0.5);
+    color: #001736;
+  }
+
+  .btn-pildora-circulo {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #003882;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-comunidad-pildora:hover .btn-pildora-circulo {
+    transform: translateX(2px);
+    background: #ffffff;
+  }
+
+  /* ==========================================================================
+     COLUMNA DERECHA: TARJETA DE CRISTAL INTERACTIVA
+     ========================================================================== */
+  .hero-tarifas-col-der {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-tarifas-col-der {
+      justify-content: stretch;
+    }
+  }
+
+  .hero-tarifas-card-cristal {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    border-radius: 28px;
+    padding: 34px 30px;
+    box-shadow:
+      0 20px 48px rgba(0, 15, 45, 0.2),
+      0 4px 14px rgba(0, 74, 173, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tarifas-card-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #00c2ff;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+  }
+
+  .tarifas-card-subtitulo {
+    font-family: "Inter", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 24px;
+  }
+
+  /* Rejilla 2x2 */
+  .tarifas-tramos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 540px) {
+    .tarifas-tramos-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+
+  .btn-tramo-tarifa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 14px 13px 18px;
+    background: #004aad;
+    color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    font-family: "Sora", sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.28);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-tramo-tarifa:hover {
+    background: #003c8c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 74, 173, 0.45);
+  }
+
+  .btn-txt {
+    letter-spacing: 0.02em;
+  }
+
+  .btn-circulo {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    color: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-tramo-tarifa:hover .btn-circulo {
+    transform: translateX(2px);
+    background: #ffffff;
+  }
+
+  .tarifas-card-nota {
+    font-family: "Inter", sans-serif;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 400;
+    margin: 22px 0 0;
+  }
+</style>

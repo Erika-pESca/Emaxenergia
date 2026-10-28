@@ -1,0 +1,391 @@
+---
+// Componente: PagarPorSiAcaso.astro
+// Sección: "Pagar por si acaso" para la página de Comunidades de Propietarios (/tarifas/comunidades-de-propietarios)
+// 4 tarjetas en fondo gris neutral (#9fa7b5) con insignia superior circular azul (#004aad) + número cian en relieve (#00c2ff)
+// Mismo estilo y acabado visual utilizado en las demás páginas oficiales de EMAX.
+
+interface TarjetaPotencia {
+  numero: string;
+  titulo: string;
+  icono: "potencia" | "ascensor" | "usos" | "finde";
+  texto: string;
+}
+
+const tarjetas: TarjetaPotencia[] = [
+  {
+    numero: "01",
+    titulo: "La potencia",
+    icono: "potencia",
+    texto:
+      "La potencia contratada se paga por días, se use o no. En una comunidad, casi todo el día no se usa: el ascensor está parado, la escalera a oscuras, la puerta del garaje cerrada.",
+  },
+  {
+    numero: "02",
+    titulo: "El ascensor manda",
+    icono: "ascensor",
+    texto:
+      "Lo que decide la potencia es el momento en que coinciden varias cosas: el ascensor arrancando mientras está encendido el alumbrado o funciona el garaje. Si la potencia se queda corta, en una comunidad de 15 kW o menos el contador corta. Por eso hay que acertarla, no recortarla a ojo.",
+  },
+  {
+    numero: "03",
+    titulo: "Usos que van y vienen",
+    icono: "usos",
+    texto:
+      "Alumbrado, garaje, bombas, depuradora de la piscina en verano: consumos intermitentes, algunos solo unos meses al año.",
+  },
+  {
+    numero: "04",
+    titulo: "El fin de semana",
+    icono: "finde",
+    texto:
+      "En 2.0TD, los sábados y domingos son valle también para la potencia. El ascensor se usa igual el domingo: la potencia de valle tiene que cubrirlo.",
+  },
+];
+---
+
+<section
+  class="pagar-potencia-seccion"
+  id="pagar-por-si-acaso"
+  aria-labelledby="pagar-potencia-tit"
+>
+  <div class="pagar-potencia-contenedor">
+    <!-- Encabezado -->
+    <div class="pagar-potencia-header">
+      <h2 class="pagar-potencia-titulo" id="pagar-potencia-tit">
+        PAGAR POR SI ACASO
+      </h2>
+    </div>
+
+    <!-- Rejilla de las 4 Tarjetas en Fondo Gris -->
+    <div class="pagar-potencia-grid">
+      {
+        tarjetas.map((t) => (
+          <article class="potencia-card">
+            <!-- Insignia superior con círculos solapados: azul con icono + cian con número -->
+            <div class="potencia-badge-wrap" aria-hidden="true">
+              <div class="badge-circulo-azul">
+                {t.icono === "potencia" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                )}
+
+                {t.icono === "ascensor" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="4" y="3" width="16" height="18" rx="2" />
+                    <polyline points="9 9 12 6 15 9" />
+                    <polyline points="9 15 12 18 15 15" />
+                  </svg>
+                )}
+
+                {t.icono === "usos" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2v2" />
+                    <path d="M12 20v2" />
+                    <path d="M4.93 4.93l1.41 1.41" />
+                    <path d="M17.66 17.66l1.41 1.41" />
+                    <path d="M2 12h2" />
+                    <path d="M20 12h2" />
+                    <path d="M6.34 17.66l-1.41 1.41" />
+                    <path d="M19.07 4.93l-1.41 1.41" />
+                    <circle cx="12" cy="12" r="4" />
+                  </svg>
+                )}
+
+                {t.icono === "finde" && (
+                  <svg
+                    class="badge-svg-icono"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                )}
+              </div>
+
+              <!-- Círculo cian inferior con el número -->
+              <div class="badge-circulo-cyan">
+                <span class="badge-num">{t.numero}</span>
+              </div>
+            </div>
+
+            <!-- Contenido de la tarjeta -->
+            <h3 class="potencia-card-tit">{t.titulo}</h3>
+            <p class="potencia-card-desc">{t.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Píldora inferior a la Guía técnica -->
+    <div class="pagar-potencia-cta">
+      <a
+        href="/guias/potencia-contratada"
+        class="pildora-guia-potencia"
+        aria-label="Ir a la guía de potencia contratada"
+      >
+        <span>Potencia contratada: cuánta necesitas</span>
+        <span class="pildora-circulo-flecha" aria-hidden="true">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#003882"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: PAGAR POR SI ACASO (COMUNIDADES DE PROPIETARIOS)
+     ========================================================================== */
+  .pagar-potencia-seccion {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    color: #081d3e;
+    padding: clamp(65px, 7.5vw, 110px) 0 clamp(75px, 8.5vw, 120px);
+    overflow: hidden;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .pagar-potencia-contenedor {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Encabezado */
+  .pagar-potencia-header {
+    margin-bottom: clamp(42px, 5vw, 64px);
+    max-width: 900px;
+  }
+
+  .pagar-potencia-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+
+  /* Rejilla 4 Tarjetas */
+  .pagar-potencia-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2.2vw, 28px);
+    align-items: stretch;
+    margin-bottom: clamp(38px, 4.5vw, 52px);
+  }
+
+  /* Tarjeta Individual Gris Neutral (como en el boceto y demás páginas) */
+  .potencia-card {
+    background: #9fa7b5;
+    border-radius: 24px;
+    padding: 34px 22px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(8, 29, 62, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .potencia-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(8, 29, 62, 0.16);
+    background: #949dae;
+  }
+
+  /* Insignia Circular Solapada */
+  .potencia-badge-wrap {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    margin: -10px auto 18px auto;
+  }
+
+  .badge-circulo-azul {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0, 74, 173, 0.4);
+  }
+
+  .badge-circulo-cyan {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 194, 255, 0.5);
+    border: 2px solid #9fa7b5;
+    transition: border-color 0.25s ease;
+  }
+
+  .potencia-card:hover .badge-circulo-cyan {
+    border-color: #949dae;
+  }
+
+  .badge-num {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1;
+  }
+
+  /* Textos de la Tarjeta */
+  .potencia-card-tit {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .potencia-card-desc {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: #f1f5f9;
+    margin: 0;
+  }
+
+  /* CTA inferior: enlace a la guía */
+  .pagar-potencia-cta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .pildora-guia-potencia {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    color: #004aad;
+    border: 1.5px solid #004aad;
+    padding: 10px 18px 10px 22px;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.94rem;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.12);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pildora-guia-potencia:hover {
+    background: #004aad;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 74, 173, 0.25);
+  }
+
+  .pildora-circulo-flecha {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .pildora-guia-potencia:hover .pildora-circulo-flecha {
+    transform: translateX(3px);
+    background: #ffffff;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .pagar-potencia-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pagar-potencia-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .potencia-card {
+      padding: 30px 18px 24px;
+    }
+  }
+</style>
