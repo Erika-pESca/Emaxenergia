@@ -4,6 +4,7 @@
 // Derecha: imagen grande de Maxi (círculo que sale por el borde derecho).
 // Paleta oficial: #004AAD · #5271ff · #38b6ff
 import maxiImg from "../../imagenes/home/maxi.jpg";
+import maxiAvatar from "../../imagenes/home/Maxi.png";
 import personalImg from "../../imagenes/home/personal.jpg";
 
 const funcionesMaxi = [
@@ -51,8 +52,8 @@ const iconos: Record<string, string> = {
     <div class="maxi-tarjetas">
       <article class="maxi-card" tabindex="0">
         <header class="maxi-card-head">
-          <div class="avatar-foto-wrap" aria-hidden="true">
-            <img src={maxiImg.src} alt="Maxi" class="avatar-foto-circulo" />
+          <div class="avatar-foto-wrap avatar-maxi-wrap" aria-hidden="true">
+            <img src={maxiAvatar.src} alt="Maxi" class="avatar-foto-circulo avatar-foto-maxi" />
           </div>
           <h3 class="maxi-card-nombre">Maxi</h3>
         </header>
@@ -99,7 +100,7 @@ const iconos: Record<string, string> = {
 
   <!-- ================= DERECHA: imagen grande de Maxi ================= -->
   <div class="maxi-imagen-grande" aria-hidden="true">
-    <img src={maxiImg.src} alt="" class="maxi-imagen-grande-img" loading="lazy" decoding="async" />
+    <img src={maxiAvatar.src} alt="Maxi" class="maxi-imagen-grande-img" loading="lazy" decoding="async" />
     <div class="maxi-imagen-overlay-azul"></div>
   </div>
 </section>
@@ -267,6 +268,16 @@ const iconos: Record<string, string> = {
     display: block;
   }
 
+  .avatar-maxi-wrap {
+    background: radial-gradient(circle at 50% 35%, #18529e 0%, #081a36 100%);
+  }
+
+  .avatar-foto-maxi {
+    object-fit: contain;
+    object-position: center 8%;
+    transform: scale(1.35) translateY(4px);
+  }
+
   .maxi-card-nombre {
     font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: 1rem;
@@ -331,38 +342,34 @@ const iconos: Record<string, string> = {
     position: absolute;
     z-index: 1;
     top: 50%;
-    right: -140px;
+    right: -120px;
     width: clamp(520px, 48vw, 760px);
     aspect-ratio: 1 / 1;
     transform: translateY(-50%);
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid rgba(56, 182, 255, 0.4);
-    background: #081d3d;
-    box-shadow: -15px 0 60px rgba(0, 0, 0, 0.45), 0 0 50px rgba(56, 182, 255, 0.15);
+    border: 3px solid rgba(56, 182, 255, 0.45);
+    background: radial-gradient(circle at 45% 45%, #154e99 0%, #0c2d5c 50%, #06162f 100%);
+    box-shadow: -15px 0 60px rgba(0, 0, 0, 0.45), 0 0 50px rgba(56, 182, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .maxi-imagen-grande-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: 35% 24%;
+    object-fit: contain;
+    object-position: 35% center;
     display: block;
-    transform: scale(1.05);
+    padding: clamp(20px, 3.5vw, 45px);
+    transform: scale(1.12);
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
   }
 
-  /* Capa de azul transparente sobre la imagen para fusionar con el fondo y la estética corporativa */
+  /* Capa de azul sutil sobre la imagen */
   .maxi-imagen-overlay-azul {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(10, 35, 73, 0.42) 0%,
-      rgba(0, 74, 173, 0.35) 50%,
-      rgba(6, 17, 36, 0.45) 100%
-    );
-    mix-blend-mode: multiply;
-    pointer-events: none;
+    display: none;
   }
 
   /* ---------------- Responsive ---------------- */
