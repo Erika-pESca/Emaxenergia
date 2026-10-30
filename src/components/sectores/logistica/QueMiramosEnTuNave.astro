@@ -1,0 +1,438 @@
+---
+// Componente: QueMiramosEnTuNave.astro
+// Sección para /sectores/logistica-frio: "QUÉ miramos EN TU NAVE"
+// Mismo diseño que QueMiramosEnTuLocal.astro: Fondo gris claro (#f1f5f9), tabla limpia con líneas de acento azul, enlaces inferiores, nota explicativa y CTA "Analizar mi nave".
+
+const filasMiramos = [
+  {
+    que: "Cómo se reparte tu consumo por periodos, entre semana y en fin de semana",
+    deDonde: "Tu factura y los datos de tu suministro",
+  },
+  {
+    que: "Si tu consumo en llano es más alto de lo que esperarías con tus turnos",
+    deDonde: "Lo mismo, frente a tus horarios",
+  },
+  {
+    que: "La potencia que usas en cada periodo y en cuál está tu pico",
+    deDonde: "Los datos de tu suministro",
+  },
+  {
+    que: "Tu reactiva por periodo",
+    deDonde: "Tu factura y los datos de tu suministro",
+  },
+  {
+    que: "Tus turnos y lo que va a cambiar: un cliente nuevo, más cámaras, otro horario",
+    deDonde: "La conversación con tu consultor",
+  },
+  {
+    que: "Cuándo termina tu contrato actual",
+    deDonde: "Tu factura y tu contrato",
+  },
+];
+
+const enlacesRelacionados = [
+  { texto: "Qué incluye tu informe", href: "/diagnostico" },
+  { texto: "Qué se ve con tu CUPS y qué no", href: "/diagnostico#empezar-con-poco" },
+];
+---
+
+<section class="miramos-nave-seccion" id="que-miramos" aria-labelledby="miramos-nave-tit">
+  <div class="contenedor-miramos-nave">
+    <!-- Encabezado editorial superior -->
+    <header class="miramos-header">
+      <div class="miramos-kicker">
+        <span>QUÉ MIRAMOS EN TU NAVE</span>
+        <span class="miramos-kicker-bar" aria-hidden="true">|</span>
+      </div>
+      <h2 id="miramos-nave-tit" class="miramos-h2">
+        QUÉ <span class="miramos-cursiva">miramos</span> EN TU NAVE
+      </h2>
+    </header>
+
+    <!-- Tabla con líneas azules de marca -->
+    <div class="miramos-tabla-wrap">
+      <table class="miramos-tabla" role="table">
+        <thead>
+          <tr>
+            <th scope="col" class="th-que">Qué</th>
+            <th scope="col" class="th-de-donde">De dónde sale</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            filasMiramos.map((fila) => (
+              <tr class="fila-tabla">
+                <td class="td-que" data-label="Qué">
+                  <span class="barra-cian-acento" aria-hidden="true"></span>
+                  <strong class="item-titulo">{fila.que}</strong>
+                </td>
+                <td class="td-de-donde" data-label="De dónde sale">
+                  <p class="td-texto">{fila.deDonde}</p>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Enlaces relacionados -->
+    <nav class="miramos-enlaces-nav" aria-label="Enlaces relacionados del estudio">
+      {
+        enlacesRelacionados.map((enlace) => (
+          <a href={enlace.href} class="miramos-enlace-item">
+            <span>{enlace.texto}</span>
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Pie inferior: Nota sobre curva de consumo + Botón Analizar mi nave -->
+    <footer class="miramos-pie">
+      <p class="pie-frase-curva">
+        Para ver hora a hora qué parte de cada turno cae fuera de P6 hace falta tu curva de consumo, y esa solo se ve si nos autorizas. Con la factura y los datos de tu suministro se ve el reparto por periodos, que ya dice mucho.
+      </p>
+
+      <div class="pie-accion-wrap">
+        <button
+          type="button"
+          class="btn-miramos-cta"
+          data-abrir-funnel
+          data-tramo-msg="Quiero analizar el suministro de mi nave logística o almacén frigorífico."
+        >
+          <span>Analizar mi nave</span>
+          <span class="btn-circulo-icono" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: QUÉ MIRAMOS EN TU NAVE
+     Fondo gris claro (#f1f5f9), estructura homóloga a QueMiramosEnTuLocal.astro
+     ========================================================================== */
+  .miramos-nave-seccion {
+    background-color: #f1f5f9;
+    padding: clamp(72px, 8vw, 108px) 0 clamp(80px, 9vw, 120px);
+    color: #081d3e;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contenedor-miramos-nave {
+    width: 100%;
+    max-width: 1220px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
+
+  /* Encabezado editorial superior */
+  .miramos-header {
+    margin-bottom: clamp(32px, 4vw, 46px);
+    max-width: 58rem;
+  }
+
+  .miramos-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 12px;
+  }
+
+  .miramos-kicker-bar {
+    color: #0066ff;
+    font-weight: 800;
+  }
+
+  .miramos-h2 {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.1rem, 1.7rem + 1.8vw, 3.2rem);
+    font-weight: 800;
+    color: #081d3e;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .miramos-cursiva {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 600;
+    color: #0052cc;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  /* ==========================================================================
+     TABLA TRANSPARENTE CON LÍNEAS AZULES
+     ========================================================================== */
+  .miramos-tabla-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: clamp(28px, 3.2vw, 38px);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .miramos-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 640px;
+  }
+
+  .miramos-tabla thead th {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: clamp(1.02rem, 0.96rem + 0.25vw, 1.18rem);
+    font-weight: 700;
+    color: #081d3e;
+    padding: 18px 24px 20px 0;
+    border-bottom: 2px solid #cbd5e1;
+    letter-spacing: -0.01em;
+  }
+
+  .th-que {
+    width: 56%;
+  }
+
+  .th-de-donde {
+    width: 44%;
+    padding-right: 0 !important;
+  }
+
+  .fila-tabla {
+    border-bottom: 1px solid #cbd5e1;
+    transition: background-color 0.2s ease;
+  }
+
+  .fila-tabla:hover {
+    background-color: rgba(0, 82, 204, 0.03);
+  }
+
+  .miramos-tabla tbody td {
+    padding: 24px 24px 24px 0;
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+
+  .td-que {
+    padding-right: 40px !important;
+  }
+
+  .barra-cian-acento {
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: #0066ff;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  .item-titulo {
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #081d3e;
+    display: block;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+  }
+
+  .td-de-donde {
+    padding-right: 0 !important;
+    vertical-align: middle !important;
+  }
+
+  .td-texto {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     ENLACES RELACIONADOS
+     ========================================================================== */
+  .miramos-enlaces-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 14px;
+    margin-bottom: clamp(28px, 3.4vw, 38px);
+    padding-bottom: clamp(24px, 2.8vw, 32px);
+    border-bottom: 1px solid #cbd5e1;
+  }
+
+  .miramos-enlace-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0052cc;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .miramos-enlace-item:hover {
+    background: #0052cc;
+    border-color: #0052cc;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  /* ==========================================================================
+     PIE INFERIOR: FRASE + BOTÓN DE ACCIÓN
+     ========================================================================== */
+  .miramos-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .pie-frase-curva {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #334155;
+    line-height: 1.62;
+    margin: 0;
+    max-width: 720px;
+  }
+
+  .pie-accion-wrap {
+    flex-shrink: 0;
+  }
+
+  .btn-miramos-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px 12px 26px;
+    background: #0052cc;
+    color: #ffffff;
+    font-family: "Poppins", "Sora", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 82, 204, 0.3);
+    transition: all 0.25s ease;
+  }
+
+  .btn-miramos-cta:hover {
+    background: #0066ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(0, 82, 204, 0.45);
+  }
+
+  .btn-circulo-icono {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .btn-miramos-cta:hover .btn-circulo-icono {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE EN MÓVIL
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .miramos-tabla-wrap {
+      overflow-x: visible;
+    }
+
+    .miramos-tabla {
+      display: block;
+      min-width: 0;
+    }
+
+    .miramos-tabla thead {
+      display: none;
+    }
+
+    .miramos-tabla tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .fila-tabla {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 16px;
+    }
+
+    .miramos-tabla tbody td {
+      padding: 0 !important;
+      border: none !important;
+    }
+
+    .td-de-donde {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .td-de-donde::before {
+      content: "DE DÓNDE SALE";
+      font-family: "Poppins", "Sora", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #0052cc;
+      letter-spacing: 0.05em;
+    }
+
+    .miramos-pie {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+
+    .btn-miramos-cta {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
+

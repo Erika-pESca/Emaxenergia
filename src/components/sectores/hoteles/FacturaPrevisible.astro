@@ -1,7 +1,9 @@
 ---
 // Componente: FacturaPrevisible.astro
 // Sección Banner de Hoteles: "Ocupación variable, FACTURA PREVISIBLE"
-// Fondo degradado de azul corporativo a blanco, con explicación de modalidades y píldoras interactivas.
+// Fondo fotográfico con el director de hotel a la derecha + degradado azul corporativo a la izquierda y píldoras interactivas según boceto oficial.
+
+import bannerHotelImg from "../../../imagenes/sectores/sectores_hoteles/banner (1).png";
 ---
 
 <section
@@ -9,6 +11,20 @@
   id="factura-previsible"
   aria-labelledby="factura-previsible-tit"
 >
+  <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
+  <div class="factura-previsible-bg" aria-hidden="true">
+    <div class="factura-previsible-foto-wrap">
+      <img
+        src={bannerHotelImg.src}
+        alt=""
+        class="factura-previsible-img"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="factura-previsible-gradient"></div>
+  </div>
+
   <div class="factura-previsible-contenedor">
     <div class="factura-previsible-content">
       <!-- Título con cursiva en Literata y mayúsculas en Poppins -->
@@ -97,24 +113,62 @@
   .factura-previsible-seccion {
     position: relative;
     width: 100%;
-    /* Degradado horizontal de azul corporativo intenso que transita a celeste y funde a blanco */
-    background: linear-gradient(
-      90deg,
-      #004aad 0%,
-      #0059d6 28%,
-      #006ef0 44%,
-      #5ca2fc 66%,
-      #bcd9ff 84%,
-      #f0f6ff 95%,
-      #ffffff 100%
-    );
+    min-height: clamp(460px, 44vw, 560px);
+    display: flex;
+    align-items: center;
+    background: #004aad;
     color: #ffffff;
     padding: clamp(65px, 7vw, 105px) 0;
     overflow: hidden;
     box-sizing: border-box;
   }
 
+  /* Fondo fotográfico posicionado en el bloque derecho como en el boceto */
+  .factura-previsible-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    background: #004aad;
+  }
+
+  .factura-previsible-foto-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -2%;
+    width: 80%;
+    overflow: hidden;
+  }
+
+  .factura-previsible-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    display: block;
+  }
+
+  /* Degradado oficial: Azul intenso a la izquierda fundiéndose suavemente hacia el centro-derecha */
+  .factura-previsible-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #003d99 0%,
+      #004aad 24%,
+      #005ce6 40%,
+      rgba(0, 92, 230, 0.94) 45%,
+      rgba(0, 92, 230, 0.62) 53%,
+      rgba(0, 92, 230, 0.22) 61%,
+      transparent 69%
+    );
+  }
+
   .factura-previsible-contenedor {
+    position: relative;
+    z-index: 2;
     width: 100%;
     max-width: 1260px;
     margin-inline: auto;
@@ -127,7 +181,7 @@
   .factura-previsible-content {
     display: flex;
     flex-direction: column;
-    max-width: 660px;
+    max-width: 560px;
     width: 100%;
   }
 
@@ -239,15 +293,23 @@
   }
 
   @media (max-width: 768px) {
-    .factura-previsible-seccion {
+    .factura-previsible-foto-wrap {
+      right: 0;
+      width: 100%;
+    }
+
+    .factura-previsible-gradient {
       background: linear-gradient(
-        135deg,
-        #004aad 0%,
-        #0059d6 45%,
-        #3b8dfa 75%,
-        #b8d8ff 100%
+        180deg,
+        rgba(0, 61, 153, 0.92) 0%,
+        rgba(0, 74, 173, 0.85) 60%,
+        rgba(0, 74, 173, 0.72) 100%
       );
+    }
+
+    .factura-previsible-seccion {
       padding: 55px 0 65px;
+      min-height: auto;
     }
 
     .factura-previsible-content {

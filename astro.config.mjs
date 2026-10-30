@@ -7,4 +7,9 @@ export default defineConfig({
   site: 'https://emaxenergia.com',
   output: 'static',
   integrations: [sitemap()],
+  vite: {
+    server: {
+      allowedHosts: ['oil-diaper-snort.ngrok-free.dev', '.ngrok-free.dev'],
+    },
+  },
 });

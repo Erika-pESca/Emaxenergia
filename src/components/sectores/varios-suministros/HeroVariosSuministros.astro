@@ -1,8 +1,9 @@
 ---
 // Componente: HeroVariosSuministros.astro
-// Hero oficial para la página: /varios-suministros ("Luz para empresas con varias sedes")
-// Fondo en degradado horizontal azul corporativo que funde a blanco + tarjeta glass con selector de tramos.
-// Sin migas de pan; el hero sube por detrás del header flotante (margin-top: -78px).
+// Hero oficial para la página: /sectores/varios-suministros ("Luz para empresas con varias sedes")
+// Diseño fiel al boceto oficial varios suministros manteniendo el ancho completo original.
+
+import variosImg from "../../../imagenes/sectores/varios_sumistros/hero (8).png";
 
 const tramosLuz = [
   {
@@ -33,9 +34,19 @@ const tramosLuz = [
 ---
 
 <section class="varios-hero-root" aria-labelledby="varios-hero-h1">
-  <!-- Fondo: degradado azul eléctrico que funde a blanco a la derecha -->
+  <!-- Fondo con fotografía encuadrada a la derecha y degradado de fusión azul a la izquierda -->
   <div class="varios-hero-bg" aria-hidden="true">
-    <div class="hero-bg-glow"></div>
+    <div class="varios-foto-wrap">
+      <img
+        src={variosImg.src}
+        alt=""
+        class="hero-bg-img"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="hero-bg-gradient"></div>
   </div>
 
   <div class="varios-hero-contenedor">
@@ -48,11 +59,7 @@ const tramosLuz = [
         </div>
 
         <h1 class="varios-h1" id="varios-hero-h1">
-          <span class="h1-linea">
-            <span class="h1-mayus">UN LOCAL</span>
-            <span class="h1-cursiva"> con la potencia mal ajustada</span>
-          </span>
-          <span class="h1-mayus h1-bloque">SE NOTA POCO.</span>
+          UN LOCAL <span class="h1-cursiva">con la potencia mal ajustada</span> SE NOTA POCO.
         </h1>
 
         <p class="varios-destacado">En veinte, se nota en el margen.</p>
@@ -88,14 +95,14 @@ const tramosLuz = [
                     <svg
                       width="13"
                       height="13"
-                      viewBox="0 0 24 24"
+                      viewBox="0 0 16 16"
                       fill="none"
-                      stroke="#003882"
-                      stroke-width="3"
+                      stroke="currentColor"
+                      stroke-width="2.8"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <polyline points="9 18 15 12 9 6" />
+                      <path d="M6 3.5 10.5 8 6 12.5"></path>
                     </svg>
                   </span>
                 </button>
@@ -104,7 +111,7 @@ const tramosLuz = [
           </div>
 
           <p class="card-nota-pie">
-            Tú eliges cómo empezamos: con tu factura, con tus CUPS o con dos datos de tu negocio. El análisis no tiene coste.
+            Tú eliges cómo empezamos: con tu factura, con tu CUPS o con dos datos de tu negocio. El análisis no tiene coste.
           </p>
         </div>
       </div>
@@ -114,7 +121,7 @@ const tramosLuz = [
 
 <style>
   /* ==========================================================================
-     HERO: VARIOS SUMINISTROS
+     HERO VARIOS SUMINISTROS: DISEÑO OFICIAL BOCETO (ANCHO COMPLETO ORIGINAL)
      ========================================================================== */
   .varios-hero-root {
     position: relative;
@@ -130,57 +137,68 @@ const tramosLuz = [
     padding-bottom: clamp(48px, 6vh, 72px);
     box-sizing: border-box;
     color: #ffffff;
-    background: #0047ba;
+    background: #004aad;
   }
 
+  /* Fondo con fotografía encuadrada a la derecha y degradado de fusión azul a la izquierda */
   .varios-hero-bg {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
+    overflow: hidden;
+    background: #004aad;
+  }
+
+  .varios-foto-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -2%;
+    width: 78%;
+    overflow: hidden;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+
+  /* Gradiente oficial: Azul corporativo sólido a la izquierda fusionándose hacia la derecha */
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
     background: linear-gradient(
       90deg,
-      #0047ba 0%,
-      #0052d6 24%,
-      #0a63f0 42%,
-      #4f8ff7 56%,
-      #a9c8fb 70%,
-      #e2ecfd 84%,
-      #f7f9ff 100%
+      #004aad 0%,
+      #004aad 38%,
+      rgba(0, 74, 173, 0.9) 45%,
+      rgba(10, 82, 184, 0.55) 53%,
+      rgba(20, 92, 194, 0.22) 62%,
+      rgba(20, 92, 194, 0.05) 70%,
+      transparent 78%
     );
   }
 
-  .hero-bg-glow {
-    position: absolute;
-    width: 620px;
-    height: 620px;
-    left: -180px;
-    bottom: -260px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 194, 255, 0.22) 0%, rgba(0, 194, 255, 0) 70%);
-    animation: glowFloat 9s ease-in-out infinite alternate;
-  }
-
-  @keyframes glowFloat {
-    from { transform: translate(0, 0); }
-    to { transform: translate(60px, -40px); }
-  }
-
+  /* Contenedor principal */
   .varios-hero-contenedor {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1260px;
+    max-width: 1360px;
     margin-inline: auto;
-    padding-inline: clamp(20px, 4vw, 48px);
-    padding-block: clamp(20px, 3vh, 32px);
+    padding-inline: clamp(20px, 4vw, 52px);
     box-sizing: border-box;
   }
 
+  /* Grid 2 Columnas */
   .varios-hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1.02fr;
-    gap: clamp(36px, 5vw, 72px);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 68px);
     align-items: center;
   }
 
@@ -188,167 +206,153 @@ const tramosLuz = [
   .varios-hero-textos {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    max-width: 620px;
   }
 
   .varios-kicker {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: #e2e8f0;
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    color: rgba(255, 255, 255, 0.92);
+    margin-bottom: 14px;
   }
 
   .varios-kicker-bar {
-    color: #ffffff;
-    font-weight: 400;
-    animation: blink 1.1s steps(1) infinite;
-  }
-
-  @keyframes blink {
-    50% { opacity: 0; }
+    color: #00c2ff;
+    font-weight: 700;
+    font-size: 1.15em;
   }
 
   .varios-h1 {
-    display: flex;
-    flex-direction: column;
-    margin: 0 0 18px 0;
-    line-height: 1.12;
-  }
-
-  .h1-mayus {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(2.05rem, 1.8rem + 1.3vw, 3.05rem);
+    font-size: clamp(2.25rem, 1.95rem + 1.6vw, 3.25rem);
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    line-height: 1.16;
+    margin: 0 0 18px 0;
+    letter-spacing: -0.015em;
   }
 
   .h1-cursiva {
     font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
-    font-size: clamp(2.15rem, 1.9rem + 1.3vw, 3.15rem);
     color: #00c2ff;
-    letter-spacing: -0.005em;
-  }
-
-  .h1-bloque {
-    display: block;
-    margin-top: 4px;
+    text-transform: none;
+    letter-spacing: 0;
   }
 
   .varios-destacado {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.3rem);
-    font-weight: 600;
+    font-size: clamp(1.08rem, 1rem + 0.35vw, 1.32rem);
+    font-weight: 700;
     color: #00c2ff;
-    letter-spacing: 0.02em;
-    margin: 0 0 8px 0;
+    letter-spacing: 0.01em;
+    margin: 0 0 10px 0;
   }
 
   .varios-subtitulo {
-    font-family: var(--font-cuerpo, "Sora", sans-serif);
-    font-size: clamp(0.96rem, 0.92rem + 0.22vw, 1.08rem);
-    line-height: 1.6;
-    letter-spacing: 0.01em;
-    color: #f1f5f9;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
+    line-height: 1.62;
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
-    max-width: 480px;
+    max-width: 520px;
   }
 
-  /* Tarjeta derecha (sobre la zona clara del degradado) */
+  /* Tarjeta Glassmorphic derecha */
   .varios-hero-card-col {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
   }
 
   .hero-card-glass {
     width: 100%;
-    max-width: 520px;
-    background: rgba(255, 255, 255, 0.28);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1.5px solid rgba(0, 82, 214, 0.55);
+    max-width: 630px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(220, 234, 252, 0.14) 100%
+    );
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 22px;
-    padding: clamp(26px, 3.2vw, 38px);
-    box-shadow:
-      0 20px 48px rgba(0, 40, 110, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    box-sizing: border-box;
+    padding: clamp(26px, 3.2vw, 38px) clamp(26px, 3.4vw, 42px);
+    box-shadow: 0 20px 48px rgba(0, 20, 60, 0.2);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .hero-card-glass:hover {
-    transform: translateY(-3px);
-    box-shadow:
-      0 26px 56px rgba(0, 40, 110, 0.24),
-      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    gap: 14px;
+    box-sizing: border-box;
   }
 
   .card-pregunta-tit {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(1.2rem, 1.12rem + 0.4vw, 1.5rem);
-    font-weight: 600;
-    color: #0047ba;
-    margin: 0 0 6px 0;
+    font-size: clamp(1.3rem, 1.15rem + 0.45vw, 1.58rem);
+    font-weight: 700;
+    color: #004aad;
     line-height: 1.25;
-    letter-spacing: 0.01em;
+    margin: 0;
+    letter-spacing: -0.01em;
   }
 
   .card-pregunta-sub {
-    font-family: var(--font-cuerpo, "Sora", sans-serif);
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     line-height: 1.5;
-    color: #0f2547;
-    margin: 0 0 22px 0;
+    color: #111827;
+    font-weight: 500;
+    margin: -4px 0 8px;
+    max-width: 480px;
   }
 
+  /* Rejilla 2x2 de botones */
   .card-tramos-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-    margin-bottom: 26px;
+    gap: 14px 20px;
+  }
+
+  @media (max-width: 540px) {
+    .card-tramos-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .btn-tramo-azul {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 56px;
-    background: #0047ba;
+    gap: 10px;
+    padding: 15px 18px 15px 22px;
+    background: #004aad;
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 6px;
-    padding: 12px 16px 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
     cursor: pointer;
-    font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-weight: 600;
+    font-family: "Sora", sans-serif;
     font-size: 0.86rem;
-    letter-spacing: 0.06em;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 14px rgba(0, 40, 110, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     text-align: left;
-    box-shadow: 0 6px 16px rgba(0, 56, 130, 0.25);
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-sizing: border-box;
+    outline: none;
   }
 
   .btn-tramo-azul:hover {
-    background: #0057e0;
+    background: #0059cf;
+    border-color: #00c2ff;
     transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(0, 56, 130, 0.35);
+    box-shadow: 0 8px 22px rgba(0, 50, 130, 0.4);
   }
 
-  .btn-tramo-azul:focus-visible {
-    outline: 2px solid #00c2ff;
-    outline-offset: 2px;
+  .btn-tramo-azul:active {
+    transform: translateY(0);
   }
 
   .tramo-txt {
@@ -356,42 +360,49 @@ const tramosLuz = [
     white-space: nowrap;
   }
 
+  /* Círculo cian con icono chevron */
   .tramo-flecha {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: #00c2ff;
+    color: #004aad;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin-left: 8px;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease;
   }
 
   .btn-tramo-azul:hover .tramo-flecha {
-    transform: translateX(3px);
+    transform: translateX(2px);
+    background: #ffffff;
   }
 
   .card-nota-pie {
-    font-family: var(--font-cuerpo, "Sora", sans-serif);
-    font-size: 0.84rem;
-    line-height: 1.5;
-    color: #0f2547;
-    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.48;
+    color: #111827;
+    margin: 10px 0 0;
   }
 
   /* ==========================================================================
      RESPONSIVE
      ========================================================================== */
-  @media (max-width: 992px) {
-    .varios-hero-bg {
-      background: linear-gradient(180deg, #0047ba 0%, #0a63f0 55%, #a9c8fb 100%);
+  @media (max-width: 1024px) {
+    .varios-foto-wrap {
+      right: 0;
+      width: 100%;
     }
 
     .varios-hero-grid {
       grid-template-columns: 1fr;
       gap: 36px;
+    }
+
+    .varios-hero-textos {
+      max-width: 100%;
     }
 
     .varios-hero-card-col {
@@ -400,33 +411,32 @@ const tramosLuz = [
 
     .hero-card-glass {
       max-width: 100%;
-      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-bg-gradient {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 74, 173, 0.92) 0%,
+        rgba(0, 74, 173, 0.84) 55%,
+        rgba(4, 40, 100, 0.88) 100%
+      );
     }
   }
 
-  @media (max-width: 600px) {
-    .card-tramos-grid {
-      grid-template-columns: 1fr;
-      gap: 10px;
+  @media (max-width: 640px) {
+    .varios-hero-root {
+      min-height: auto;
+      padding-top: calc(78px + 28px);
+      padding-bottom: 48px;
     }
 
-    .h1-mayus {
-      font-size: 1.85rem;
-    }
-
-    .h1-cursiva {
-      font-size: 1.95rem;
+    .varios-h1 {
+      font-size: 2.05rem;
     }
 
     .hero-card-glass {
       padding: 22px 18px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-bg-glow,
-    .varios-kicker-bar {
-      animation: none;
+      border-radius: 20px;
     }
   }
 </style>

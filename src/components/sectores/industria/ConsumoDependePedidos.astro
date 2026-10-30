@@ -1,0 +1,329 @@
+---
+// Componente: ConsumoDependePedidos.astro
+// Sección Banner de Industria: "Si tu consumo DEPENDE DE LOS PEDIDOS"
+// Fondo fotográfico a la derecha (`banner 2.png`) + degradado azul corporativo a la izquierda y píldoras interactivas según boceto oficial.
+
+import bannerPedidosImg from "../../../imagenes/sectores/sectores_industria/banner 2.png";
+---
+
+<section
+  class="consumo-pedidos-seccion"
+  id="consumo-pedidos"
+  aria-labelledby="consumo-pedidos-tit"
+>
+  <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
+  <div class="consumo-pedidos-bg" aria-hidden="true">
+    <div class="consumo-pedidos-foto-wrap">
+      <img
+        src={bannerPedidosImg.src}
+        alt=""
+        class="consumo-pedidos-img"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="consumo-pedidos-gradient"></div>
+  </div>
+
+  <div class="consumo-pedidos-contenedor">
+    <div class="consumo-pedidos-content">
+      <h2 class="consumo-pedidos-titulo" id="consumo-pedidos-tit">
+        <span class="tit-cursiva">Si tu consumo</span> DEPENDE<br />
+        DE LOS PEDIDOS
+      </h2>
+
+      <p class="consumo-pedidos-texto">
+        La pregunta no es qué hará el mercado, sino cuánto riesgo puede asumir tu empresa. Con precio fijo, asumes pagar más si el mercado baja. Con indexado, la volatilidad. Con Cuota Fija, que tu consumo se aparte del previsto, y en una nave eso lo mueven los pedidos.
+      </p>
+
+      <div class="consumo-pedidos-pildoras">
+        <!-- Fila 1: 2 Píldoras de Guía y Método -->
+        <div class="pildoras-fila">
+          <a
+            href="/guias/precio-fijo-o-indexado"
+            class="pildora-cyan-banner"
+            aria-label="Ir a la guía de precio fijo o indexado: cómo decidir"
+          >
+            <span>Precio fijo o indexado: cómo decidir</span>
+            <span class="circulo-flecha-azul" aria-hidden="true">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00c2ff"
+                stroke-width="3.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+
+          <a
+            href="/metodo#decisiones"
+            class="pildora-cyan-banner"
+            aria-label="Ver la decisión 4 del método EMAX"
+          >
+            <span>La decisión 4 del método</span>
+            <span class="circulo-flecha-azul" aria-hidden="true">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00c2ff"
+                stroke-width="3.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </a>
+        </div>
+
+        <!-- Fila 2: Modal Varias Naves -->
+        <div class="pildoras-fila">
+          <button
+            type="button"
+            class="pildora-cyan-banner btn-pildora-modal"
+            data-abrir-funnel
+            data-tramo-id="industria-varias-naves"
+            data-tramo-label="¿Tienes varias naves?"
+            data-tramo-msg="Tengo varias naves o plantas industriales y quiero optimizar la energía de todo el grupo."
+            aria-label="Abrir formulario para consultar varias naves"
+          >
+            <span>¿Tienes varias naves?</span>
+            <span class="circulo-flecha-azul" aria-hidden="true">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#00c2ff"
+                stroke-width="3.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN BANNER: SI TU CONSUMO DEPENDE DE LOS PEDIDOS (INDUSTRIA)
+     ========================================================================== */
+  .consumo-pedidos-seccion {
+    position: relative;
+    width: 100%;
+    min-height: clamp(460px, 44vw, 560px);
+    display: flex;
+    align-items: center;
+    background: #004aad;
+    color: #ffffff;
+    padding: clamp(65px, 7.5vw, 105px) 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Fondo fotográfico posicionado en el bloque derecho como en el boceto */
+  .consumo-pedidos-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    background: #004aad;
+  }
+
+  .consumo-pedidos-foto-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -2%;
+    width: 78%;
+    overflow: hidden;
+  }
+
+  .consumo-pedidos-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+
+  /* Degradado oficial: Azul intenso a la izquierda fundiéndose hacia la derecha */
+  .consumo-pedidos-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #003d99 0%,
+      #004aad 26%,
+      #005ce6 42%,
+      rgba(0, 92, 230, 0.92) 48%,
+      rgba(0, 92, 230, 0.58) 57%,
+      rgba(0, 92, 230, 0.22) 66%,
+      transparent 75%
+    );
+  }
+
+  .consumo-pedidos-contenedor {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .consumo-pedidos-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .consumo-pedidos-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.8rem + 1vw, 2.75rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px 0;
+    line-height: 1.18;
+    text-transform: uppercase;
+  }
+
+  .tit-cursiva {
+    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.05em;
+    color: #00c2ff;
+    letter-spacing: -0.01em;
+    text-transform: none;
+  }
+
+  .consumo-pedidos-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.94rem, 0.9rem + 0.2vw, 1.02rem);
+    line-height: 1.62;
+    color: #ffffff;
+    margin: 0 0 clamp(28px, 3.5vw, 38px) 0;
+    font-weight: 400;
+  }
+
+  /* Píldoras */
+  .consumo-pedidos-pildoras {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pildoras-fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pildora-cyan-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #00c2ff;
+    color: #081d3e;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 10px 16px 10px 20px;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 194, 255, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .btn-pildora-modal {
+    border: none;
+    cursor: pointer;
+  }
+
+  .pildora-cyan-banner:hover {
+    background: #33d1ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 194, 255, 0.5);
+  }
+
+  .circulo-flecha-azul {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #003882;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .pildora-cyan-banner:hover .circulo-flecha-azul {
+    transform: translateX(2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 900px) {
+    .pildora-cyan-banner {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .consumo-pedidos-foto-wrap {
+      width: 100%;
+      right: 0;
+    }
+
+    .consumo-pedidos-gradient {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 61, 153, 0.9) 0%,
+        rgba(0, 74, 173, 0.85) 55%,
+        rgba(0, 61, 153, 0.94) 100%
+      );
+    }
+
+    .consumo-pedidos-seccion {
+      padding: 55px 0 65px;
+    }
+
+    .consumo-pedidos-content {
+      max-width: 100%;
+    }
+
+    .pildora-cyan-banner {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .pildoras-fila {
+      width: 100%;
+    }
+  }
+</style>
+

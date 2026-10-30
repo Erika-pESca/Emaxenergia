@@ -1,0 +1,416 @@
+---
+// Componente: CierreSupermercadosGasto.astro
+// Sección de cierre final para /sectores/supermercados: "TU FRÍO NO PARA. Lo que se puede decidir es cómo se paga."
+// Conexión total al formulario / funnel modal de EMAX mediante delegación global `data-abrir-funnel`.
+
+import { site } from "../../../data/site";
+
+const tramos = [
+  {
+    id: "<300",
+    label: "MENOS DE 300€",
+    rango: "menos de 300 € al mes",
+    msg: "Revisaremos la factura eléctrica de tu tienda para detectar sobrecostes en término de potencia y reactiva de tus cámaras.",
+  },
+  {
+    id: "300-1000",
+    label: "300 - 1.000€",
+    rango: "entre 300 y 1.000 € al mes",
+    msg: "Auditamos tu base de frío 24 h, tu potencia periodo a periodo y posibles recargos por reactiva en tu supermercado.",
+  },
+  {
+    id: "1000-3000",
+    label: "1.000 - 3.000€",
+    rango: "entre 1.000 y 3.000 € al mes",
+    msg: "Un consultor senior analiza tus maxímetros, la reactiva de tus murales y cámaras, y la modalidad óptima para tu tienda.",
+  },
+  {
+    id: ">3000",
+    label: "Más de 3.000€",
+    rango: "más de 3.000 € al mes",
+    msg: "Auditoría integral para supermercados o cadenas de alimentación: optimización de potencias 3.0TD / 6.1TD, reactiva y contrato.",
+  },
+];
+---
+
+<section class="cierre-supermercados-seccion" id="cierre-supermercados" aria-labelledby="cierre-supermercados-tit">
+  <div class="cierre-supermercados-contenedor">
+    <div class="cierre-supermercados-grid">
+      <!-- Columna Izquierda: Titular y subtítulo -->
+      <div class="cierre-col-izq">
+        <h2 class="cierre-tit-empieza" id="cierre-supermercados-tit">
+          TU FRÍO NO PARA.
+        </h2>
+        <p class="cierre-subtitulo-izq">
+          Lo que se puede decidir es cómo se paga.
+        </p>
+      </div>
+
+      <!-- Columna Derecha: Selector de tramos + Línea + Horario de llamada -->
+      <div class="cierre-col-der">
+        <div class="cierre-caja-gasto">
+          <h3 class="gasto-pregunta">¿Cuánto paga tu empresa de luz al mes?</h3>
+          <p class="gasto-aclaracion">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+
+          <!-- Rejilla 2x2 de botones de tramos -->
+          <div class="gasto-tramos-grid" role="group" aria-label="Selecciona tu tramo mensual aproximado">
+            {
+              tramos.map((t) => (
+                <button
+                  type="button"
+                  class="btn-tramo-azul"
+                  data-abrir-funnel
+                  data-tramo-id={t.id}
+                  data-tramo-label={t.label}
+                  data-tramo-rango={t.rango}
+                  data-tramo-msg={t.msg}
+                  aria-label={`Seleccionar tramo ${t.label} para abrir estudio energético`}
+                >
+                  <span class="btn-tramo-label">{t.label}</span>
+                  <span class="btn-tramo-circulo" aria-hidden="true">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#003580"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </span>
+                </button>
+              ))
+            }
+          </div>
+
+          <!-- Línea divisoria horizontal -->
+          <div class="gasto-separador" aria-hidden="true"></div>
+
+          <!-- Texto descriptivo en mayúsculas -->
+          <p class="gasto-pasos-info">
+            DESPUÉS ELIGES CÓMO SEGUIMOS, Y UN CONSULTOR TE LLAMA CON TU INFORME EN LA FRANJA QUE TÚ ELIJAS.
+          </p>
+
+          <!-- Bloque de teléfono directo -->
+          <div class="cierre-contacto-fila">
+            <div class="contacto-icono-circulo" aria-hidden="true">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <circle cx="11.5" cy="14.5" r="2.8" />
+                <line x1="13.5" y1="16.5" x2="16" y2="19" />
+              </svg>
+            </div>
+
+            <div class="contacto-textos">
+              <div class="contacto-linea-principal">
+                <span class="contacto-lead">Llama al </span>
+                <a href={site.phoneHref} class="contacto-tel-link" title={`Llamar al ${site.phone}`}>
+                  {site.phone}
+                </a>
+              </div>
+              <span class="contacto-horario">
+                De lunes a viernes, de 9:00 a 13:00 y de 15:00 a 19:00
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN OSCURA: TU FRÍO NO PARA (SUPERMERCADOS)
+     ========================================================================== */
+  .cierre-supermercados-seccion {
+    position: relative;
+    width: 100%;
+    background: #081d3e;
+    color: #ffffff;
+    padding: clamp(70px, 7vw, 110px) 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .cierre-supermercados-contenedor {
+    width: 100%;
+    max-width: 1260px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+  }
+
+  .cierre-supermercados-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: clamp(36px, 5.5vw, 72px);
+    align-items: center;
+  }
+
+  /* Columna Izquierda: Gran titular + subtítulo */
+  .cierre-col-izq {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cierre-tit-empieza {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.2rem, 2rem + 1.5vw, 3.3rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.12;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .cierre-subtitulo-izq {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.15rem, 1.05rem + 0.35vw, 1.4rem);
+    font-weight: 600;
+    line-height: 1.45;
+    color: #ffffff;
+    margin: 0;
+    max-width: 440px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Columna Derecha */
+  .cierre-col-der {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cierre-caja-gasto {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 620px;
+  }
+
+  .gasto-pregunta {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.35rem, 1.25rem + 0.6vw, 1.8rem);
+    font-weight: 700;
+    color: #00c2ff;
+    line-height: 1.3;
+    margin: 0 0 10px 0;
+  }
+
+  .gasto-aclaracion {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #cbd5e1;
+    margin: 0 0 24px 0;
+  }
+
+  /* Rejilla 2x2 de botones de tramos */
+  .gasto-tramos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+  }
+
+  .btn-tramo-azul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    background: #0052cc;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9px;
+    padding: 18px 20px;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    outline: none;
+  }
+
+  .btn-tramo-azul:hover {
+    background: #0060ed;
+    border-color: rgba(0, 194, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 82, 204, 0.38);
+  }
+
+  .btn-tramo-azul:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 82, 204, 0.3);
+  }
+
+  .btn-tramo-label {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  /* Círculo cian con la flecha '>' */
+  .btn-tramo-circulo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #00c2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 194, 255, 0.35);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .btn-tramo-azul:hover .btn-tramo-circulo {
+    transform: scale(1.08) translateX(1px);
+    background: #33d1ff;
+  }
+
+  /* Separador horizontal */
+  .gasto-separador {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.16);
+    margin: 28px 0 20px 0;
+  }
+
+  /* Texto legal / pasos en mayúsculas */
+  .gasto-pasos-info {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.055em;
+    color: #94a3b8;
+    line-height: 1.55;
+    text-transform: uppercase;
+    margin: 0 0 22px 0;
+  }
+
+  /* Fila de llamada y teléfono */
+  .cierre-contacto-fila {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contacto-icono-circulo {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #0052cc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .contacto-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .contacto-linea-principal {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .contacto-lead {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .contacto-tel-link {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #00c2ff;
+    text-decoration: none;
+    line-height: 1.2;
+    transition: color 0.18s ease, text-decoration-color 0.18s ease;
+  }
+
+  .contacto-tel-link:hover {
+    color: #38b6ff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .contacto-horario {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.4;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 980px) {
+    .cierre-supermercados-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .cierre-col-izq {
+      text-align: left;
+    }
+
+    .cierre-caja-gasto {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gasto-tramos-grid {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .btn-tramo-azul {
+      padding: 16px 18px;
+    }
+
+    .contacto-lead,
+    .contacto-tel-link {
+      font-size: 1.15rem;
+    }
+
+    .contacto-icono-circulo {
+      width: 48px;
+      height: 48px;
+    }
+
+    .contacto-icono-circulo svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>
+

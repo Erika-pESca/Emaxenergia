@@ -6,7 +6,7 @@
 // 3. Columna derecha: Tarjeta glassmórfica sobre la zona de luz con título azul #0056d6, subtítulo oscuro y botones azul #004aad con flecha cian
 // 4. Conexión nativa con el modal unificado Formulario.astro
 import { site } from "../../data/site";
-import fondoMetodo from "../../imagenes/fondo_metodo.jpg";
+import heroMetodoImg from "../../imagenes/metodo/Hero.png";
 
 interface TramoGasto {
   id: string;
@@ -48,16 +48,17 @@ const tramos: TramoGasto[] = [
   id="hero-metodo"
   aria-labelledby="hero-metodo-h1"
 >
-  <!-- Fondo fotográfico fondo_metodo.jpg oficial -->
+  <!-- Fondo fotográfico con degradado corporativo oficial -->
   <div class="hero-bg" aria-hidden="true">
     <img
-      src={fondoMetodo.src}
+      src={heroMetodoImg.src}
       alt=""
       class="hero-bg-img"
       loading="eager"
       decoding="async"
       fetchpriority="high"
     />
+    <div class="hero-bg-overlay"></div>
   </div>
 
   <div class="hero-metodo-contenedor">
@@ -200,7 +201,33 @@ const tramos: TramoGasto[] = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: 85% center;
+  }
+
+  .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      #004aad 28%,
+      rgba(0, 74, 173, 0.82) 40%,
+      rgba(0, 74, 173, 0.35) 54%,
+      rgba(0, 74, 173, 0.05) 68%,
+      transparent 85%
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-bg-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 74, 173, 0.96) 0%,
+        rgba(0, 74, 173, 0.88) 55%,
+        rgba(0, 74, 173, 0.75) 100%
+      );
+    }
   }
 
   .hero-metodo-contenedor {
@@ -399,13 +426,18 @@ const tramos: TramoGasto[] = [
   .ficha-auditoria {
     width: 100%;
     max-width: 530px;
-    background: rgba(255, 255, 255, 0.28);
-    border: 2px solid rgba(255, 255, 255, 0.85);
+    /* Vidrio esmerilado: deja intuir la foto detrás pero garantiza la lectura */
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(235, 244, 255, 0.5) 100%
+    );
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
     border-radius: 28px;
     padding: clamp(28px, 3.4vw, 38px);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 24px 60px rgba(0, 16, 48, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: 0 24px 60px rgba(0, 16, 48, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.9);
   }
 
   .ficha-header {
@@ -416,7 +448,7 @@ const tramos: TramoGasto[] = [
     font-family: var(--font-titulos, "Poppins", sans-serif);
     font-size: clamp(1.24rem, 1.1rem + 0.4vw, 1.48rem);
     font-weight: 700;
-    color: #0056d6;
+    color: #004aad;
     line-height: 1.25;
     margin: 0 0 8px;
     letter-spacing: -0.015em;
@@ -424,7 +456,7 @@ const tramos: TramoGasto[] = [
 
   .ficha-sub {
     font-size: 0.94rem;
-    color: #1e293b;
+    color: #0f172a;
     margin: 0;
     line-height: 1.5;
     font-weight: 500;

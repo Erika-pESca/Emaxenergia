@@ -376,12 +376,20 @@ const iconos: Record<string, string> = {
   @media (max-width: 1100px) {
     .maxi-layout {
       grid-template-columns: 1fr;
+      padding-right: 0;
+    }
+    .maxi-texto {
+      max-width: 600px;
+    }
+    .maxi-bajada {
+      max-width: 100%;
     }
     .maxi-imagen-grande {
       top: auto;
       bottom: -100px;
       right: -80px;
-      width: 420px;
+      width: 380px;
+      max-width: 70vw;
       opacity: 0.35;
       transform: none;
     }
@@ -396,6 +404,9 @@ const iconos: Record<string, string> = {
     }
     .maxi-card {
       width: 100%;
+    }
+    .maxi-imagen-grande {
+      display: none;
     }
   }
 </style>

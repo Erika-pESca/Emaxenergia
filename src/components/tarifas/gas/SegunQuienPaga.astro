@@ -4,16 +4,17 @@
 // 3 Tarjetas con imágenes de referencia, corte superior, badge circular temático,
 // bloque azul corporativo con textos explicativos y botones píldora cian.
 
-import imgEmpresas from "../../../imagenes/gas_empresas.jpg";
-import imgComunidades from "../../../imagenes/gas_comunidades.jpg";
-import imgHogares from "../../../imagenes/gas_hogares.jpg";
+import imgEmpresas from "../../../imagenes/tarifas/gas/empresas.png";
+import imgComunidades from "../../../imagenes/tarifas/gas/comunidad.png";
+import imgHogares from "../../../imagenes/tarifas/gas/hogares.png";
 
 const areas = [
   {
     id: "empresa",
     titulo: "Empresas",
     img: imgEmpresas,
-    alt: "Cocina y suministro de gas natural profesional en empresa hostelera",
+    imgPos: "center 20%",
+    alt: "Consultor de EMAX revisando el suministro de gas natural en un obrador y cocina profesional",
     icono: "empresa",
     desc: "Tu peaje depende de cuánto consumes al año, y el precio puede ser fijo o ligado al mercado del gas. Si el gas va a un proceso o a una cocina, consume casi igual todo el año; si va a calefacción, se concentra en invierno.",
     btnTexto: "Analizar el gas de mi empresa",
@@ -23,7 +24,8 @@ const areas = [
     id: "comunidad",
     titulo: "Comunidades de propietarios",
     img: imgComunidades,
-    alt: "Edificio residencial comunitario con calefacción central y caldera de gas",
+    imgPos: "center 20%",
+    alt: "Revisión de sala de calderas comunitaria y calefacción central en comunidad de propietarios",
     icono: "comunidad",
     desc: "Con calefacción central o agua caliente común, lo primero es saber si podéis acogeros a la tarifa regulada y qué os cuesta frente al mercado libre.",
     btnTexto: "Analizar el gas de la comunidad",
@@ -33,7 +35,8 @@ const areas = [
     id: "hogares",
     titulo: "Hogares",
     img: imgHogares,
-    alt: "Vivienda familiar con cocina de gas natural y calefacción por radiadores",
+    imgPos: "center 46%",
+    alt: "Familia en el salón de su casa con calefacción por radiadores revisando su tarifa",
     icono: "hogar",
     desc: "Si consumes hasta 50.000 kWh al año puedes estar en la tarifa regulada (TUR). Te decimos si te compensa seguir en ella o pasar al mercado libre.",
     btnTexto: "Revisar el gas de mi casa",
@@ -72,6 +75,7 @@ const areas = [
                   src={area.img.src}
                   alt={area.alt}
                   class="card-img"
+                  style={`object-position: ${area.imgPos};`}
                   loading="lazy"
                   decoding="async"
                 />

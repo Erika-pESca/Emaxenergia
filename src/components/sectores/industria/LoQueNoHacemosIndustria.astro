@@ -1,0 +1,166 @@
+---
+// Componente: LoQueNoHacemosIndustria.astro
+// Sección para /sectores/industria: "LO QUE NO HACEMOS"
+// Tarjeta solapada "Obras" sobre fondo claro según boceto oficial.
+---
+
+<section
+  class="no-hacemos-ind-seccion"
+  id="lo-que-no-hacemos"
+  aria-labelledby="no-hacemos-ind-tit"
+>
+  <div class="no-hacemos-ind-contenedor">
+    <h2 class="no-hacemos-ind-titulo" id="no-hacemos-ind-tit">
+      LO QUE NO HACEMOS
+    </h2>
+
+    <div class="no-hacemos-ind-wrap">
+      <!-- Bloque izquierdo: Píldora celeste con círculo + "Obras" -->
+      <div class="etiqueta-obras-caja">
+        <div class="circulo-icono-obras" aria-hidden="true">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#004aad"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+          </svg>
+        </div>
+        <span class="etiqueta-obras-nombre">Obras</span>
+      </div>
+
+      <!-- Bloque derecho: Tarjeta azul solapada -->
+      <div class="descripcion-obras-tarjeta">
+        <p class="descripcion-obras-texto">
+          No hacemos obras ni correcciones en tu instalación. Si tienes ingeniería o mantenedor, no interferimos con su trabajo: miramos otra cosa.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: LO QUE NO HACEMOS (INDUSTRIA)
+     ========================================================================== */
+  .no-hacemos-ind-seccion {
+    position: relative;
+    width: 100%;
+    background: #f8fafc;
+    padding: clamp(68px, 7.5vw, 108px) 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .no-hacemos-ind-contenedor {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .no-hacemos-ind-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.85rem, 1.65rem + 1vw, 2.4rem);
+    font-weight: 800;
+    color: #0066ff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 clamp(32px, 4vw, 46px) 0;
+  }
+
+  .no-hacemos-ind-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 760px;
+    position: relative;
+  }
+
+  /* Píldora izquierda celeste */
+  .etiqueta-obras-caja {
+    background: #e1effe;
+    border-radius: 999px 0 0 999px;
+    padding: 18px 46px 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 195px;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+  .circulo-icono-obras {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #bfd7ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .etiqueta-obras-nombre {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #004aad;
+    letter-spacing: 0.01em;
+  }
+
+  /* Tarjeta derecha azul profundo que solapa */
+  .descripcion-obras-tarjeta {
+    background: #004aad;
+    border-radius: 26px;
+    padding: clamp(28px, 3.5vw, 38px) clamp(28px, 4vw, 44px);
+    flex: 1;
+    margin-left: -24px;
+    z-index: 2;
+    box-shadow: 0 14px 34px rgba(0, 48, 120, 0.25);
+    box-sizing: border-box;
+  }
+
+  .descripcion-obras-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.9rem, 0.86rem + 0.16vw, 0.96rem);
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 680px) {
+    .no-hacemos-ind-wrap {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .etiqueta-obras-caja {
+      border-radius: 20px 20px 0 0;
+      padding: 16px 22px;
+      min-width: 100%;
+    }
+
+    .descripcion-obras-tarjeta {
+      margin-left: 0;
+      margin-top: -10px;
+      border-radius: 20px;
+      padding: 24px 22px;
+    }
+  }
+</style>
+

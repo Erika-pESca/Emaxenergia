@@ -124,7 +124,7 @@ const guias: GuiaItem[] = [
 
 <script>
   function setupGuiasAcordeon() {
-    const items = document.querySelectorAll<HTMLElement>("[data-acordeon-item]");
+    const items = document.querySelectorAll<HTMLElement>(".guias-acordeon-seccion [data-acordeon-item]");
     if (!items.length) return;
 
     items.forEach((item) => {
@@ -134,8 +134,19 @@ const guias: GuiaItem[] = [
 
       trigger.addEventListener("click", () => {
         const isOpen = item.classList.contains("abierto");
-        item.classList.toggle("abierto", !isOpen);
-        trigger.setAttribute("aria-expanded", String(!isOpen));
+
+        // Cerrar todos los demás acordeones
+        items.forEach((otherItem) => {
+          otherItem.classList.remove("abierto");
+          const otherTrigger = otherItem.querySelector<HTMLButtonElement>("[data-acordeon-trigger]");
+          if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+        });
+
+        // Si el actual estaba cerrado, abrirlo
+        if (!isOpen) {
+          item.classList.add("abierto");
+          trigger.setAttribute("aria-expanded", "true");
+        }
       });
     });
   }

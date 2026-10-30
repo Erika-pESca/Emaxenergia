@@ -556,6 +556,17 @@ const tarifasItems = [
       popoverPanel?.setAttribute("hidden", "true");
       popoverBtn?.setAttribute("aria-expanded", "false");
     }
+    if (
+      drawerMovil &&
+      !drawerMovil.hasAttribute("hidden") &&
+      !target.closest("[data-menu-movil]") &&
+      !target.closest("[data-toggle-movil]")
+    ) {
+      drawerMovil.setAttribute("hidden", "true");
+      toggleMovilBtn?.setAttribute("aria-expanded", "false");
+      toggleMovilBtn?.classList.remove("activo");
+      document.body.style.overflow = "";
+    }
   });
 
   // 5. Control de Menú Móvil
@@ -1346,6 +1357,7 @@ const tarifasItems = [
     overflow-y: auto;
     max-height: calc(100vh - 110px);
     padding: 20px;
+    pointer-events: auto;
     animation: drawerFade 0.2s ease;
   }
 
@@ -1434,7 +1446,11 @@ const tarifasItems = [
      ======================================================== */
   @media (max-width: 1540px) {
     .capsula-globo {
-      grid-template-columns: minmax(0, 1fr) auto max-content;
+      grid-template-columns: minmax(max-content, 1fr) auto max-content;
+    }
+
+    .capsula-logo {
+      margin-left: clamp(16px, 3.5vw, 110px);
     }
   }
 
@@ -1444,13 +1460,21 @@ const tarifasItems = [
     }
 
     .capsula-globo {
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+    }
+
+    .capsula-logo {
+      margin-left: clamp(8px, 2vw, 32px);
     }
   }
 
   @media (max-width: 1120px) {
     .caja-telefono-sonar {
       display: none;
+    }
+
+    .capsula-logo {
+      margin-left: 0;
     }
   }
 
@@ -1466,6 +1490,7 @@ const tarifasItems = [
     .capsula-globo {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 12px;
     }
 
@@ -1475,11 +1500,13 @@ const tarifasItems = [
     }
 
     .capsula-logo {
+      margin-left: 0;
       padding: 0 16px;
     }
 
     .capsula-logo :global(.logo img) {
       height: 32px;
+      max-width: none;
     }
 
     .btn-cta-shimmer {
@@ -1495,16 +1522,25 @@ const tarifasItems = [
     }
 
     .capsula-logo {
+      margin-left: 0;
       padding: 0 12px;
+      height: 46px;
     }
 
     .capsula-logo :global(.logo img) {
       height: 28px;
+      max-width: none;
+    }
+
+    .capsula-acciones {
+      height: 46px;
+      padding: 0 4px;
     }
 
     .btn-cta-shimmer {
       padding: 0 12px;
       font-size: 0.78rem;
+      height: 36px;
     }
   }
 </style>

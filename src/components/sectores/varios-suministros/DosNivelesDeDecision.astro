@@ -1,0 +1,486 @@
+---
+// Componente: DosNivelesDeDecision.astro
+// Sección para /sectores/varios-suministros: "Dos niveles de decisión" + "Cinco sedes, cinco decisiones" + "El calendario del grupo"
+// Diseño homólogo a la referencia visual pero sobre fondo blanco (#ffffff).
+
+const niveles = [
+  {
+    etiqueta: "Por suministro",
+    texto:
+      "Para cada CUPS, las cinco decisiones del método: si paga la potencia que usa, si tiene penalizaciones que se corrigen fuera del contrato, cuándo consume, qué riesgo puede asumir y cuándo y en qué condiciones conviene cambiar.",
+  },
+  {
+    etiqueta: "En conjunto",
+    texto:
+      "Qué sedes merece la pena cambiar y cuáles no. Si conviene la misma modalidad para todas o una distinta según su patrón. En qué orden entra cada cambio, según sus vencimientos.",
+  },
+];
+
+const sedesEjemplo = [
+  {
+    sede: "Almacén frigorífico · 3.0TD",
+    comoConsume: "Frío las 24 horas, carga y descarga de madrugada",
+    finContrato: "31-03-2027",
+    decisionDestacada: "Ajustar la potencia",
+    decisionResto:
+      " de P1 a P5 con sus maxímetros: su pico llega de madrugada, con la carga, no de día.",
+  },
+  {
+    sede: "Tienda A · 3.0TD",
+    comoConsume: "Horario comercial, frío continuo",
+    finContrato: "30-11-2026",
+    decisionDestacada: "Cambiar al vencimiento,",
+    decisionResto: " con su tarifa construida para su perfil.",
+  },
+  {
+    sede: "Tienda B · 3.0TD",
+    comoConsume: "Obrador y apertura larga, de 7 a 22",
+    finContrato: "30-06-2027, con permanencia",
+    decisionDestacada: "Esperar al vencimiento.",
+    decisionResto: " Salir antes le costaría más de lo que ganaría.",
+  },
+  {
+    sede: "Tienda C · 2.0TD",
+    comoConsume: "Local pequeño, de día",
+    finContrato: "31-01-2027",
+    decisionDestacada: "Se mantiene.",
+    decisionResto: " Su potencia y su contrato ya encajan con cómo consume.",
+  },
+  {
+    sede: "Oficina central · 2.0TD",
+    comoConsume: "Solo de día, de lunes a viernes",
+    finContrato: "31-12-2026",
+    decisionDestacada: "Bajar la potencia,",
+    decisionResto:
+      " que es la de cuando había más puestos. La modalidad se mantiene.",
+  },
+];
+
+const calendarioGrupo = [
+  { fecha: "01-12-2026", hito: "Tienda A: nueva tarifa", activo: true },
+  { fecha: "01-01-2027", hito: "Oficina: nueva potencia", activo: true },
+  { fecha: "01-04-2027", hito: "Almacén: nueva potencia", activo: true },
+  { fecha: "01-07-2027", hito: "Tienda B: nueva tarifa", activo: true },
+  { fecha: "—", hito: "Tienda C: sin cambios", activo: false },
+];
+---
+
+<section
+  class="dos-niveles-seccion"
+  id="dos-niveles-decision"
+  aria-labelledby="dos-niveles-tit"
+>
+  <div class="dos-niveles-contenedor">
+    <!-- 1. Bloque Superior: Dos niveles de decisión -->
+    <div class="niveles-bloque-sup">
+      <h2 class="niveles-h2" id="dos-niveles-tit">Dos niveles de decisión</h2>
+      <p class="niveles-intro">
+        Cada sede tiene su consumo, y su tarifa sale de él. Pero lo que conviene hacer con cada una depende también de las demás.
+      </p>
+
+      <div class="niveles-filas">
+        {
+          niveles.map((item) => (
+            <div class="nivel-fila">
+              <div class="nivel-etiqueta">{item.etiqueta}</div>
+              <p class="nivel-texto">{item.texto}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="niveles-enlace-wrap">
+        <a href="/metodo#decisiones" class="niveles-enlace">
+          Las cinco decisiones
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. Bloque Inferior: Cinco sedes, cinco decisiones + Calendario del grupo -->
+    <div class="cinco-sedes-bloque">
+      <div class="cinco-sedes-header">
+        <h3 class="cinco-sedes-h3">Cinco sedes, cinco decisiones</h3>
+        <p class="cinco-sedes-desc">
+          Un grupo de alimentación con un almacén frigorífico, tres tiendas y una oficina central. Cada sede consume distinto, y cada contrato termina en una fecha distinta.
+        </p>
+        <p class="cinco-sedes-nota">Ejemplo ilustrativo. Sin importes.</p>
+      </div>
+
+      <div class="cinco-sedes-grid">
+        <!-- Columna Izquierda: Tabla en tarjeta blanca con borde -->
+        <div class="tabla-sedes-card">
+          <div class="tabla-sedes-scroll">
+            <table class="tabla-sedes" aria-label="Cinco sedes del ejemplo: cómo consumen, fin de contrato y qué se decide">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-sede">Sede</th>
+                  <th scope="col" class="col-consume">Cómo consume</th>
+                  <th scope="col" class="col-fin">Fin del contrato</th>
+                  <th scope="col" class="col-decide">Qué se decide</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  sedesEjemplo.map((fila) => (
+                    <tr>
+                      <td class="td-sede" data-label="Sede">
+                        <strong>{fila.sede}</strong>
+                      </td>
+                      <td class="td-consume" data-label="Cómo consume">
+                        {fila.comoConsume}
+                      </td>
+                      <td class="td-fin" data-label="Fin del contrato">
+                        {fila.finContrato}
+                      </td>
+                      <td class="td-decide" data-label="Qué se decide">
+                        <strong class="decide-azul">{fila.decisionDestacada}</strong>
+                        <span>{fila.decisionResto}</span>
+                      </td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta El calendario del grupo -->
+        <aside class="calendario-grupo-card" aria-labelledby="calendario-tit">
+          <h4 class="calendario-h4" id="calendario-tit">El calendario del grupo</h4>
+          <ul class="calendario-lista">
+            {
+              calendarioGrupo.map((item) => (
+                <li class:list={["calendario-item", { "sin-cambio": !item.activo }]}>
+                  <span class="calendario-fecha">{item.fecha}</span>
+                  <span class="calendario-hito">{item.hito}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </aside>
+      </div>
+
+      <!-- Cita inferior con barra azul a la izquierda -->
+      <div class="cinco-sedes-cierre">
+        <p class="cierre-frase">
+          Cuatro sedes cambian, cada una en su momento, y una se queda como está. Nadie te pide cambiarlo todo a la vez.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     SECCIÓN: DOS NIVELES DE DECISIÓN + CINCO SEDES (FONDO BLANCO)
+     ========================================================================== */
+  .dos-niveles-seccion {
+    background-color: #ffffff;
+    color: #081d3e;
+    padding: clamp(72px, 8vw, 112px) 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    box-sizing: border-box;
+  }
+
+  .dos-niveles-contenedor {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(52px, 6vw, 72px);
+  }
+
+  /* --------------------------------------------------------------------------
+     1. BLOQUE SUPERIOR: DOS NIVELES DE DECISIÓN
+     -------------------------------------------------------------------------- */
+  .niveles-bloque-sup {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .niveles-h2 {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2rem, 1.75rem + 1.2vw, 2.75rem);
+    font-weight: 700;
+    color: #081d3e;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px 0;
+  }
+
+  .niveles-intro {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: clamp(0.98rem, 0.94rem + 0.2vw, 1.08rem);
+    line-height: 1.62;
+    color: #475569;
+    max-width: 620px;
+    margin: 0 0 28px 0;
+  }
+
+  .niveles-filas {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #cbd5e1;
+  }
+
+  .nivel-fila {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid #cbd5e1;
+    align-items: baseline;
+  }
+
+  .nivel-etiqueta {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0066ff;
+  }
+
+  .nivel-texto {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.94rem;
+    line-height: 1.62;
+    color: #1e293b;
+    margin: 0;
+  }
+
+  .niveles-enlace-wrap {
+    margin-top: 20px;
+  }
+
+  .niveles-enlace {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #081d3e;
+    text-decoration: underline;
+    text-decoration-color: #0066ff;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    transition: color 0.2s ease;
+  }
+
+  .niveles-enlace:hover {
+    color: #0066ff;
+  }
+
+  /* --------------------------------------------------------------------------
+     2. BLOQUE INFERIOR: CINCO SEDES, CINCO DECISIONES + CALENDARIO
+     -------------------------------------------------------------------------- */
+  .cinco-sedes-bloque {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cinco-sedes-header {
+    margin-bottom: 24px;
+  }
+
+  .cinco-sedes-h3 {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.68rem);
+    font-weight: 700;
+    color: #081d3e;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.015em;
+  }
+
+  .cinco-sedes-desc {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0 0 6px 0;
+    max-width: 880px;
+  }
+
+  .cinco-sedes-nota {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .cinco-sedes-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 275px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* Tabla dentro de tarjeta blanca */
+  .tabla-sedes-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+  }
+
+  .tabla-sedes-scroll {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .tabla-sedes {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 620px;
+  }
+
+  .tabla-sedes thead th {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
+  }
+
+  .col-sede {
+    width: 21%;
+  }
+
+  .col-consume {
+    width: 24%;
+  }
+
+  .col-fin {
+    width: 19%;
+  }
+
+  .col-decide {
+    width: 36%;
+  }
+
+  .tabla-sedes tbody tr {
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .tabla-sedes tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .tabla-sedes tbody td {
+    padding: 16px 18px;
+    vertical-align: top;
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.84rem;
+    line-height: 1.52;
+    color: #334155;
+  }
+
+  .td-sede strong {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 0.86rem;
+  }
+
+  .decide-azul {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-weight: 700;
+    color: #0052cc;
+  }
+
+  /* Tarjeta Derecha: El calendario del grupo */
+  .calendario-grupo-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    box-sizing: border-box;
+  }
+
+  .calendario-h4 {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.96rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 16px 0;
+  }
+
+  .calendario-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .calendario-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 12px;
+    border-left: 2px solid #0066ff;
+  }
+
+  .calendario-item.sin-cambio {
+    border-left-color: #cbd5e1;
+  }
+
+  .calendario-fecha {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.3;
+  }
+
+  .calendario-hito {
+    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-size: 0.82rem;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+  /* Frase de cierre inferior con borde izquierdo azul */
+  .cinco-sedes-cierre {
+    margin-top: 26px;
+    padding-left: 14px;
+    border-left: 3px solid #0066ff;
+  }
+
+  .cierre-frase {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.55;
+    color: #081d3e;
+    margin: 0;
+    max-width: 580px;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 980px) {
+    .cinco-sedes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .calendario-grupo-card {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .nivel-fila {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+</style>
+

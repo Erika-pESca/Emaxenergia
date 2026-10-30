@@ -7,6 +7,8 @@ import PorQueElVerano from "../../components/sectores/hoteles/PorQueElVerano.ast
 import DosHotelesAnosDistintos from "../../components/sectores/hoteles/DosHotelesAnosDistintos.astro";
 import QuePuedesHacerPotencia from "../../components/sectores/hoteles/QuePuedesHacerPotencia.astro";
 import FacturaPrevisible from "../../components/sectores/hoteles/FacturaPrevisible.astro";
+import QueMiramosEnTuHotel from "../../components/sectores/hoteles/QueMiramosEnTuHotel.astro";
+import CierreHotelesGasto from "../../components/sectores/hoteles/CierreHotelesGasto.astro";
 ---
 
 <BaseLayout
@@ -29,6 +31,12 @@ import FacturaPrevisible from "../../components/sectores/hoteles/FacturaPrevisib
 
     <!-- 5. "Ocupación variable, FACTURA PREVISIBLE" (Banner degradado con recursos) -->
     <FacturaPrevisible />
+
+    <!-- 6. "QUÉ miramos EN TU HOTEL" (Tabla sobre fondo gris claro + enlace + CTA) -->
+    <QueMiramosEnTuHotel />
+
+    <!-- 7. "EL HUÉSPED PAGA por una habitación." (Cierre con selector de tramos y teléfono) -->
+    <CierreHotelesGasto />
   </div>
 </BaseLayout>
 

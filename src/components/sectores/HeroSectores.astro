@@ -1,42 +1,46 @@
 ---
 // Componente: Hero para la página de Sectores (/sectores)
-// Fiel al diseño oficial con chef en cocina, degradado azul y tarjeta glassmorphic interactiva
-import chefImg from "../../imagenes/hero_chef_sectores.jpg";
+// Fiel al boceto oficial con consultor de EMAX y cliente revisando tablet, degradado azul y tarjeta translúcida
+import sectoresHeroImg from "../../imagenes/sectores/sectores indice/Hero (4).png";
 
 const tramosLuz = [
   { id: "300", label: "MENOS DE 300€", valor: "<300" },
-  { id: "1000", label: "300 – 1.000€", valor: "300-1000" },
-  { id: "3000", label: "1.000 – 3.000€", valor: "1000-3000" },
+  { id: "1000", label: "300 - 1.000€", valor: "300-1000" },
+  { id: "3000", label: "1.000 - 3.000€", valor: "1000-3000" },
   { id: "mas3000", label: "Más de 3.000€", valor: ">3000" }
 ];
 ---
 
-<section class="sectores-hero-root">
-  <!-- Fondo con imagen de chef en cocina y degradado azul corporativo -->
-  <div class="sectores-hero-bg">
-    <img
-      src={chefImg.src}
-      alt="Chef en cocina profesional de hostelería"
-      class="hero-bg-img"
-      loading="eager"
-      fetchpriority="high"
-    />
+<section class="sectores-hero-root" aria-labelledby="h1-sectores">
+  <!-- Fondo con fotografía posicionada en el bloque derecho como en el boceto y fusión azul corporativa -->
+  <div class="sectores-hero-bg" aria-hidden="true">
+    <div class="sectores-foto-wrap">
+      <img
+        src={sectoresHeroImg.src}
+        alt=""
+        class="hero-bg-img"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
     <div class="hero-bg-gradient"></div>
   </div>
 
   <div class="sectores-hero-contenedor">
-
     <div class="sectores-hero-grid">
-      <!-- Columna Izquierda: Titulares y propuesta de valor -->
+      <!-- Columna Izquierda: Miga de pan, titulares y propuesta de valor -->
       <div class="sectores-hero-textos">
+        
+
         <div class="sectores-kicker">
           <span>SECTORES</span>
           <span class="sectores-kicker-bar" aria-hidden="true">|</span>
         </div>
 
-        <h1 class="sectores-h1">
-          EL SECTOR NO DECIDE TU TARIFA.<br />
-          <span class="h1-cursiva-cyan">Tu consumo, sí.</span>
+        <h1 class="sectores-h1" id="h1-sectores">
+          EL SECTOR NO DECIDE<br />
+          TU TARIFA. <span class="h1-cursiva-cyan">Tu<br />consumo, sí.</span>
         </h1>
 
         <p class="sectores-subtitulo">
@@ -44,7 +48,7 @@ const tramosLuz = [
         </p>
       </div>
 
-      <!-- Columna Derecha: Tarjeta Glassmorphic con selector de tramos -->
+      <!-- Columna Derecha: Tarjeta translúcida con selector de tramos -->
       <div class="sectores-hero-card-col">
         <div class="hero-card-glass">
           <h2 class="card-pregunta-tit">¿Cuánto paga tu empresa de luz al mes?</h2>
@@ -65,9 +69,8 @@ const tramosLuz = [
                 >
                   <span class="tramo-txt">{t.label}</span>
                   <span class="tramo-flecha" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="3" y1="8" x2="13" y2="8"></line>
-                      <polyline points="8 3 13 8 8 13"></polyline>
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 3.5 10.5 8 6 12.5"></path>
                     </svg>
                   </span>
                 </button>
@@ -87,51 +90,64 @@ const tramosLuz = [
 
 <style>
   /* ==========================================================================
-     HERO SECTORES: FONDO FOTOGRÁFICO + CRISTALISMO + AZUL CORPORATIVO
+     HERO SECTORES: DISEÑO OFICIAL BOCETO
      ========================================================================== */
   .sectores-hero-root {
     position: relative;
     z-index: 20;
     margin-top: -78px;
     width: 100%;
-    min-height: calc(88vh + 78px);
+    min-height: clamp(620px, 80vh, 740px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     background: #004aad;
     overflow: hidden;
-    padding-top: calc(78px + clamp(36px, 5vh, 52px));
-    padding-bottom: clamp(48px, 6vh, 72px);
+    padding-top: calc(78px + 28px);
+    padding-bottom: clamp(32px, 4.5vh, 52px);
   }
 
-  /* Fondo con fotografía y degradado de fusión a la izquierda */
+  /* Fondo con fotografía encuadrando a las dos personas en el bloque centro-derecha */
   .sectores-hero-bg {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
+    overflow: hidden;
+    background: #004aad;
+  }
+
+  .sectores-foto-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -6%;
+    width: 74%;
+    overflow: hidden;
   }
 
   .hero-bg-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center 18%;
     display: block;
   }
 
-  /* Gradiente oficial: Azul sólido y vibrante en la izquierda para legibilidad de textos,
-     abriendo gradualmente hacia la derecha donde se revela la cocina y el chef */
+  /* Gradiente oficial: Azul corporativo sólido a la izquierda (ocultando las vitrinas de la foto),
+     suavizándose sobre el cliente y dejando nítido al consultor EMAX a la derecha */
   .hero-bg-gradient {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       90deg,
       #004aad 0%,
-      rgba(0, 74, 173, 0.96) 32%,
-      rgba(0, 74, 173, 0.78) 55%,
-      rgba(0, 74, 173, 0.42) 78%,
-      rgba(4, 30, 74, 0.58) 100%
+      #004aad 44%,
+      rgba(0, 74, 173, 0.95) 50%,
+      rgba(10, 82, 184, 0.65) 58%,
+      rgba(20, 92, 194, 0.34) 66%,
+      rgba(20, 92, 194, 0.1) 73%,
+      transparent 79%
     );
   }
 
@@ -142,50 +158,85 @@ const tramosLuz = [
     width: 100%;
     max-width: 1360px;
     margin-inline: auto;
-    padding-inline: clamp(20px, 4vw, 52px);
+    margin-top: auto;
+    padding-inline: clamp(24px, 4.5vw, 64px);
   }
 
-
-  /* Grid 2 Columnas */
+  /* Grid 2 Columnas: columna derecha más amplia para la tarjeta 2x2 del boceto */
   .sectores-hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    gap: clamp(32px, 5vw, 68px);
-    align-items: center;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.25fr);
+    gap: clamp(24px, 3.5vw, 48px);
+    align-items: start;
   }
 
   /* Textos izquierda */
   .sectores-hero-textos {
     display: flex;
     flex-direction: column;
-    max-width: 620px;
+    max-width: 490px;
+    padding-top: 6px;
+  }
+
+  .sectores-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Sora", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: clamp(28px, 4.5vh, 48px);
+  }
+
+  .sectores-breadcrumb a {
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .sectores-breadcrumb a:hover {
+    color: #ffffff;
+  }
+
+  .bc-dot {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .bc-actual {
+    color: #ffffff;
+    font-weight: 700;
   }
 
   .sectores-kicker {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-family: "Sora", sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #38b6ff;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 14px;
   }
 
   .sectores-kicker-bar {
-    color: rgba(255, 255, 255, 0.5);
+    color: #00c2ff;
+    font-weight: 700;
+    font-size: 1.15em;
   }
 
   .sectores-h1 {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(2.3rem, 2rem + 1.8vw, 3.4rem);
+    font-size: clamp(2.2rem, 1.85rem + 1.85vw, 3.15rem);
     font-weight: 800;
     color: #ffffff;
-    line-height: 1.12;
+    line-height: 1.15;
     margin: 0 0 20px;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
     text-transform: uppercase;
   }
 
@@ -194,65 +245,73 @@ const tramosLuz = [
     font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
-    color: #38b6ff;
+    color: #00c2ff;
     text-transform: none;
     letter-spacing: 0;
   }
 
   .sectores-subtitulo {
-    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
-    line-height: 1.62;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.08rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
     margin: 0;
-    max-width: 540px;
+    max-width: 470px;
   }
 
-  /* Tarjeta Glassmorphic derecha */
+  /* Tarjeta Glassmorphic derecha posicionada debajo de los rostros como en el boceto */
   .sectores-hero-card-col {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    padding-top: clamp(54px, 8.5vh, 88px);
   }
 
   .hero-card-glass {
     width: 100%;
-    max-width: 520px;
-    background: rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(255, 255, 255, 0.32);
-    border-radius: 28px;
-    padding: clamp(26px, 3.2vw, 38px);
-    box-shadow: 0 20px 50px rgba(0, 24, 70, 0.35);
+    max-width: 630px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(220, 234, 252, 0.2) 100%
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 22px;
+    padding: clamp(26px, 3.2vw, 38px) clamp(26px, 3.4vw, 42px);
+    box-shadow: 0 20px 48px rgba(0, 20, 60, 0.2);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
   .card-pregunta-tit {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.48rem);
-    font-weight: 800;
-    color: #ffffff;
+    font-size: clamp(1.3rem, 1.15rem + 0.45vw, 1.58rem);
+    font-weight: 700;
+    color: #004aad;
     line-height: 1.25;
     margin: 0;
+    letter-spacing: -0.01em;
   }
 
   .card-pregunta-sub {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 6px;
+    color: #111827;
+    font-weight: 500;
+    margin: -4px 0 8px;
+    max-width: 480px;
   }
 
   /* Rejilla 2x2 de botones */
   .card-tramos-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 14px 20px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 540px) {
     .card-tramos-grid {
       grid-template-columns: 1fr;
     }
@@ -262,34 +321,34 @@ const tramosLuz = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    padding: 14px 16px;
-    background: #003a88;
+    gap: 10px;
+    padding: 15px 18px 15px 22px;
+    background: #004aad;
     color: #ffffff;
-    border: 1px solid rgba(56, 182, 255, 0.35);
-    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
     cursor: pointer;
     font-family: "Sora", sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 14px rgba(0, 40, 110, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     text-align: left;
   }
 
   .btn-tramo-azul:hover {
-    background: #004aad;
-    border-color: #38b6ff;
+    background: #0059cf;
+    border-color: #00c2ff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 74, 173, 0.4);
+    box-shadow: 0 8px 22px rgba(0, 50, 130, 0.4);
   }
 
   .tramo-flecha {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: #38b6ff;
+    background: #00c2ff;
     color: #004aad;
     display: flex;
     align-items: center;
@@ -304,23 +363,30 @@ const tramosLuz = [
   }
 
   .card-nota-pie {
-    font-size: 0.84rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.82);
-    margin: 8px 0 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.48;
+    color: #111827;
+    margin: 10px 0 0;
   }
 
   /* ==========================================================================
      RESPONSIVE
      ========================================================================== */
   @media (max-width: 1024px) {
+    .sectores-foto-wrap {
+      right: 0;
+      width: 100%;
+    }
+
     .sectores-hero-grid {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 36px;
     }
 
     .sectores-hero-card-col {
       justify-content: flex-start;
+      padding-top: 0;
     }
 
     .hero-card-glass {
@@ -330,9 +396,9 @@ const tramosLuz = [
     .hero-bg-gradient {
       background: linear-gradient(
         180deg,
-        rgba(0, 74, 173, 0.95) 0%,
-        rgba(0, 74, 173, 0.88) 50%,
-        rgba(4, 30, 74, 0.96) 100%
+        rgba(0, 74, 173, 0.92) 0%,
+        rgba(0, 74, 173, 0.84) 55%,
+        rgba(4, 40, 100, 0.88) 100%
       );
     }
   }

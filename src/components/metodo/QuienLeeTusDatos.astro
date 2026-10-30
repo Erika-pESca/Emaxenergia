@@ -1,9 +1,9 @@
 ---
 // Componente QuienLeeTusDatos de la sección El Método
 // 3 tarjetas interactivas con imágenes reales y animación expansiva al hover
-import fotoPersonal from "../../imagenes/personal.jpg";
-import fotoMaxi from "../../imagenes/maxi.jpg";
-import fotoConsultor from "../../imagenes/consultor-emax.jpg";
+import fotoPersonal from "../../imagenes/metodo/La persona}.png";
+import fotoMaxi from "../../imagenes/metodo/Maxi (1).png";
+import fotoConsultor from "../../imagenes/metodo/lo que maxi no hace.png";
 
 interface TarjetaData {
   titulo: string;
@@ -147,7 +147,7 @@ const tarjetas: TarjetaData[] = [
     }
   }
 
-  /* Tarjeta base con el mismo borde sutil de las tarjetas del sitio */
+  /* Tarjeta base */
   .tarjeta-quien {
     position: relative;
     height: 540px;
@@ -158,12 +158,11 @@ const tarjetas: TarjetaData[] = [
     flex-direction: column;
     justify-content: flex-end;
     box-shadow: 0 8px 24px rgba(15, 35, 70, 0.08);
-    border: 1.5px solid var(--linea, #d6e0ee);
+    border: none;
     cursor: pointer;
     transition:
       transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 0.35s ease,
       opacity 0.35s ease;
     will-change: transform, box-shadow;
   }
@@ -174,14 +173,10 @@ const tarjetas: TarjetaData[] = [
     transform: scale(0.985);
   }
 
-  /* Hover de la tarjeta activa: se eleva y aparece una línea azul brillante a los alrededores */
+  /* Hover de la tarjeta activa: se eleva */
   .tarjeta-quien:hover {
     transform: scale(1.05) translateY(-8px);
-    border-color: #38b6ff;
-    box-shadow:
-      0 22px 48px rgba(15, 35, 70, 0.16),
-      0 0 0 2px #38b6ff,
-      0 0 22px rgba(56, 182, 255, 0.55);
+    box-shadow: 0 22px 48px rgba(15, 35, 70, 0.22);
     z-index: 5;
     opacity: 1 !important;
   }
@@ -208,55 +203,65 @@ const tarjetas: TarjetaData[] = [
     transform: scale(1.12);
   }
 
-  /* Gradiente para asegurar legibilidad */
+  /* Gradiente suave inferior para dar un toque de profundidad sin tapar la foto */
   .tarjeta-sombra-gradiente {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(8, 23, 46, 0.05) 0%,
-      rgba(8, 23, 46, 0.25) 45%,
-      rgba(8, 23, 46, 0.86) 82%,
-      rgba(8, 23, 46, 0.98) 100%
+      transparent 0%,
+      transparent 55%,
+      rgba(8, 23, 46, 0.15) 80%,
+      rgba(8, 23, 46, 0.35) 100%
     );
     pointer-events: none;
   }
 
-  /* Caja inferior de información:
-     - En reposo es compacta para lucir la imagen
-     - Al pasar el cursor SE HACE MÁS GRANDE hacia arriba revelando la tipografía ampliada */
+  /* Caja inferior de información: unida directamente a la tarjeta */
   .tarjeta-info-caja {
     position: relative;
     z-index: 2;
-    background: rgba(14, 34, 64, 0.84);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(35, 45, 62, 0.5) 45%,
+      rgba(16, 22, 32, 0.68) 100%
+    );
+    backdrop-filter: blur(16px) saturate(125%);
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
     border-radius: 22px 22px 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-bottom: none;
-    padding: 16px 20px 20px;
+    padding: 18px 22px 22px;
     margin: 0;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.25);
     transition:
       padding 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 0.35s ease,
+      background 0.35s ease,
       border-color 0.35s ease,
-      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow 0.35s ease;
   }
 
-  /* Al pasar el cursor: SE HACE MÁS GRANDE LA PARTE DE LA INFORMACIÓN */
+  /* Al pasar el cursor sobre la tarjeta: SE AGRANDA LA INFORMACIÓN HACIA ARRIBA */
   .tarjeta-quien:hover .tarjeta-info-caja {
-    background: rgba(10, 26, 52, 0.96);
-    border-color: rgba(255, 255, 255, 0.24);
-    padding: 22px 22px 26px;
-    transform: translateY(-4px);
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(30, 42, 58, 0.65) 45%,
+      rgba(14, 18, 28, 0.8) 100%
+    );
+    border-color: rgba(56, 182, 255, 0.45);
+    border-bottom: none;
+    padding: 28px 22px 30px;
+    box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35);
   }
 
-  /* Título de la tarjeta: crece y brilla en cian al hover */
+  /* Título de la tarjeta: crece y brilla al hover */
   .tarjeta-titulo {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #00c2ff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #00d4ff;
     line-height: 1.2;
     margin: 0 0 6px;
     letter-spacing: -0.015em;
@@ -268,17 +273,17 @@ const tarjetas: TarjetaData[] = [
   }
 
   .tarjeta-quien:hover .tarjeta-titulo {
-    font-size: 1.4rem;
-    color: #00d4ff;
-    margin-bottom: 8px;
-    text-shadow: 0 0 16px rgba(0, 212, 255, 0.6);
+    font-size: 1.65rem;
+    color: #38b6ff;
+    margin-bottom: 10px;
+    text-shadow: 0 0 16px rgba(56, 182, 255, 0.6);
   }
 
-  /* Descripción: en hover se amplía y resalta en blanco de alto contraste como en la captura */
+  /* Descripción: en hover se amplía y resalta en blanco de alto contraste */
   .tarjeta-desc {
     font-family: "Inter", sans-serif;
-    font-size: 0.86rem;
-    color: rgba(226, 234, 245, 0.88);
+    font-size: 0.88rem;
+    color: rgba(240, 246, 255, 0.88);
     line-height: 1.46;
     margin: 0;
     transition:
@@ -288,8 +293,8 @@ const tarjetas: TarjetaData[] = [
   }
 
   .tarjeta-quien:hover .tarjeta-desc {
-    font-size: 0.94rem;
-    line-height: 1.5;
+    font-size: 0.98rem;
+    line-height: 1.55;
     color: #ffffff;
     font-weight: 500;
   }

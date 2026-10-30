@@ -1,8 +1,8 @@
 ---
 // Componente HeroQueRecibes de la sección "Qué recibes" (Diagnóstico)
-// Diseño exacto del boceto con la imagen de fondo oficial fondo_metodo.jpg
-// Tipografía Poppins + cursiva Literata y tarjeta de cristal interactiva conectada al modal de consulta
-import fondoMetodo from "../../imagenes/fondo_metodo.jpg";
+// Diseño exacto del boceto con la imagen de fondo oficial Hero (1).png
+// Degradado corporativo oficial #004aad y tarjeta de cristal esmerilado idéntica al método
+import heroDiagnosticoImg from "../../imagenes/diagnostico/Hero (1).png";
 
 interface TramoGasto {
   id: string;
@@ -13,7 +13,7 @@ interface TramoGasto {
 
 const tramosGasto: TramoGasto[] = [
   {
-    id: "<300",
+    id: "menos-300",
     etiqueta: "MENOS DE 300€",
     rango: "menos de 300 € al mes",
     msg: "Construimos una propuesta técnica con el término de potencia ajustado al milímetro para que no pagues de más.",
@@ -31,7 +31,7 @@ const tramosGasto: TramoGasto[] = [
     msg: "Auditoría exhaustiva de cuartohorarias, penalizaciones de reactiva y oportunidad en mercado indexado vs fijo.",
   },
   {
-    id: ">3000",
+    id: "mas-3000",
     etiqueta: "Más de 3.000€",
     rango: "más de 36.000 € al año en energía",
     msg: "Un consultor senior de EMAX revisa tus peajes, maxímetros y coberturas OMIE de forma personalizada.",
@@ -40,16 +40,17 @@ const tramosGasto: TramoGasto[] = [
 ---
 
 <section class="hero-qr-seccion" aria-labelledby="h1-que-recibes">
-  <!-- Fondo fotográfico fondo_metodo.jpg oficial -->
+  <!-- Fondo fotográfico con degradado corporativo oficial -->
   <div class="hero-bg" aria-hidden="true">
     <img
-      src={fondoMetodo.src}
+      src={heroDiagnosticoImg.src}
       alt=""
       class="hero-bg-img"
       loading="eager"
       decoding="async"
       fetchpriority="high"
     />
+    <div class="hero-bg-overlay"></div>
   </div>
 
   <div class="hero-qr-contenedor">
@@ -61,7 +62,8 @@ const tramosGasto: TramoGasto[] = [
 
       <h1 class="hero-qr-titulo" id="h1-que-recibes">
         TU TARIFA DE LUZ NO<br />
-        ESTÁ EN UNA <span class="titulo-cursiva">lista de<br />precios.</span>
+        ESTÁ EN UNA <span class="titulo-cursiva">lista de</span><br />
+        <span class="titulo-cursiva">precios.</span>
       </h1>
 
       <p class="hero-qr-desc">
@@ -86,24 +88,29 @@ const tramosGasto: TramoGasto[] = [
                 class="btn-tramo-qr"
                 data-abrir-funnel
                 data-tramo-id={t.id}
-                data-tramo-label={t.etiqueta}
+                data-tramo-label={`Estudio para empresa: ${t.etiqueta}`}
                 data-tramo-rango={t.rango}
                 data-tramo-msg={t.msg}
               >
                 <span class="btn-txt">{t.etiqueta}</span>
                 <span class="btn-circulo" aria-hidden="true">
-                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 3.5 10.5 8 6 12.5"></path>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </span>
               </button>
             ))
           }
         </div>
-
-        <p class="qr-card-nota">
-          Tú eliges cómo empezamos: con tu factura, con tu CUPS o con dos datos de tu negocio. El análisis no tiene coste.
-        </p>
       </div>
     </div>
   </div>
@@ -111,7 +118,7 @@ const tramosGasto: TramoGasto[] = [
 
 <style>
   /* ==========================================================================
-     HERO QUÉ RECIBES - FONDO fondo_metodo.jpg Y DISEÑO OFICIAL DE MARCA
+     HERO QUÉ RECIBES / DIAGNÓSTICO - FONDO Hero (1).png Y DISEÑO OFICIAL
      ========================================================================== */
   .hero-qr-seccion {
     position: relative;
@@ -140,7 +147,33 @@ const tramosGasto: TramoGasto[] = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: 85% center;
+  }
+
+  .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #004aad 0%,
+      #004aad 28%,
+      rgba(0, 74, 173, 0.88) 42%,
+      rgba(0, 74, 173, 0.42) 55%,
+      rgba(235, 244, 255, 0.28) 70%,
+      rgba(235, 244, 255, 0.42) 100%
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-bg-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 74, 173, 0.96) 0%,
+        rgba(0, 74, 173, 0.88) 55%,
+        rgba(0, 74, 173, 0.75) 100%
+      );
+    }
   }
 
   .hero-qr-contenedor {
@@ -149,15 +182,15 @@ const tramosGasto: TramoGasto[] = [
     margin-inline: auto;
     padding-inline: clamp(20px, 4vw, 52px);
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: clamp(32px, 4vw, 56px);
+    grid-template-columns: minmax(0, 1.24fr) minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 60px);
     align-items: center;
   }
 
   @media (max-width: 1024px) {
-    .hero-qr-layout {
+    .hero-qr-contenedor {
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 40px;
     }
   }
 
@@ -168,37 +201,36 @@ const tramosGasto: TramoGasto[] = [
     color: #ffffff;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
   }
 
   .hero-qr-kicker {
     font-family: "Poppins", "Sora", sans-serif;
     font-size: 0.82rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.78);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin: 0;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   }
 
   .kicker-sep {
-    color: #00c2ff;
-    font-weight: 300;
-    font-size: 1.1em;
-    margin-left: 2px;
+    color: #00d4ff;
+    font-weight: 400;
+    font-size: 1.15em;
   }
 
   .hero-qr-titulo {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(2.25rem, 1.75rem + 2.1vw, 3.4rem);
+    font-size: clamp(2.1rem, 1.7rem + 1.8vw, 3.2rem);
     font-weight: 800;
     color: #ffffff;
-    line-height: 1.14;
+    line-height: 1.15;
     margin: 0;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
   }
 
@@ -207,19 +239,18 @@ const tramosGasto: TramoGasto[] = [
     font-style: italic;
     font-weight: 400;
     text-transform: none;
-    color: #00c2ff;
-    letter-spacing: 0;
-    font-size: 1.08em;
+    color: #38bdf8;
+    letter-spacing: -0.01em;
+    display: inline;
   }
 
   .hero-qr-desc {
-    font-family: "Poppins", "Inter", sans-serif;
-    font-size: clamp(0.98rem, 0.92rem + 0.35vw, 1.12rem);
-    line-height: 1.62;
-    color: rgba(255, 255, 255, 0.92);
+    font-size: clamp(1.02rem, 1.15vw, 1.15rem);
+    line-height: 1.6;
+    color: rgba(240, 248, 255, 0.95);
     font-weight: 400;
     margin: 4px 0 0;
-    max-width: 33rem;
+    max-width: 560px;
   }
 
   /* ==========================================================================
@@ -232,112 +263,107 @@ const tramosGasto: TramoGasto[] = [
 
   @media (max-width: 1024px) {
     .hero-qr-col-der {
-      justify-content: stretch;
+      justify-content: flex-start;
     }
   }
 
   .hero-qr-card-cristal {
     width: 100%;
-    max-width: 520px;
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1.5px solid rgba(135, 185, 255, 0.6);
+    max-width: 530px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(235, 244, 255, 0.5) 100%
+    );
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
     border-radius: 28px;
-    padding: 34px 30px;
-    box-shadow:
-      0 18px 45px rgba(0, 74, 173, 0.12),
-      0 4px 12px rgba(15, 35, 70, 0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: clamp(28px, 3.4vw, 38px);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: 0 24px 60px rgba(0, 16, 48, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.9);
   }
 
   .qr-card-titulo {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: 1.45rem;
-    font-weight: 800;
+    font-size: clamp(1.24rem, 1.1rem + 0.4vw, 1.48rem);
+    font-weight: 700;
     color: #004aad;
     line-height: 1.25;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     letter-spacing: -0.015em;
   }
 
   .qr-card-subtitulo {
-    font-family: "Inter", sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.94rem;
+    color: #0f172a;
+    margin: 0 0 22px;
     line-height: 1.5;
-    color: #3a4b68;
-    margin: 0 0 24px;
+    font-weight: 500;
   }
 
   /* Rejilla 2x2 */
   .qr-tramos-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 13px;
   }
 
   @media (max-width: 540px) {
     .qr-tramos-grid {
       grid-template-columns: 1fr;
-      gap: 10px;
     }
   }
 
   .btn-tramo-qr {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 13px 14px 13px 18px;
+    padding: 15px 17px;
     background: #004aad;
-    color: #ffffff;
+    border: 1.5px solid rgba(0, 74, 173, 0.25);
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer;
+    color: #ffffff;
     font-family: "Sora", sans-serif;
-    font-size: 0.86rem;
+    font-size: 0.92rem;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.22);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 6px 16px rgba(0, 25, 75, 0.25);
+    transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
   }
 
   .btn-tramo-qr:hover {
-    background: #003c8c;
+    background: #005ce6;
     transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(0, 74, 173, 0.35);
+    box-shadow: 0 12px 26px rgba(0, 74, 173, 0.4);
   }
 
   .btn-txt {
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
     letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
   .btn-circulo {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: #00c2ff;
-    color: #ffffff;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #00d4ff;
+    color: #004aad;
     flex-shrink: 0;
-    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
   }
 
   .btn-tramo-qr:hover .btn-circulo {
-    transform: translateX(2px);
+    transform: translateX(3px);
     background: #ffffff;
     color: #004aad;
-  }
-
-  .qr-card-nota {
-    font-family: "Inter", sans-serif;
-    font-size: 0.84rem;
-    line-height: 1.45;
-    color: #3a4b68;
-    font-weight: 500;
-    margin: 22px 0 0;
-    padding-top: 0;
-    border-top: none;
   }
 </style>

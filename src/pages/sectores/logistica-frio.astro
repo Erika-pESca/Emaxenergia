@@ -7,6 +7,8 @@ import QueParteCaeP6 from "../../components/sectores/logistica/QueParteCaeP6.ast
 import DosAlmacenesNoche from "../../components/sectores/logistica/DosAlmacenesNoche.astro";
 import CambioDeTurnoPotencia from "../../components/sectores/logistica/CambioDeTurnoPotencia.astro";
 import TurnosCambianClientes from "../../components/sectores/logistica/TurnosCambianClientes.astro";
+import QueMiramosEnTuNave from "../../components/sectores/logistica/QueMiramosEnTuNave.astro";
+import CierreLogisticaGasto from "../../components/sectores/logistica/CierreLogisticaGasto.astro";
 ---
 
 <BaseLayout
@@ -29,6 +31,12 @@ import TurnosCambianClientes from "../../components/sectores/logistica/TurnosCam
 
     <!-- 5. "Si tus turnos cambian CON TUS CLIENTES" (Banner de modalidad y recursos) -->
     <TurnosCambianClientes />
+
+    <!-- 6. "QUÉ miramos EN TU NAVE" (Tabla Qué / De dónde sale + CTA Analizar mi nave) -->
+    <QueMiramosEnTuNave />
+
+    <!-- 7. Cierre con formulario de tramos ("TUS CÁMARAS no pueden parar. Lo que sí puede cambiar es cómo se paga lo que consumen.") -->
+    <CierreLogisticaGasto />
   </div>
 </BaseLayout>
 

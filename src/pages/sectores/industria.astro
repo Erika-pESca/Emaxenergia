@@ -7,6 +7,10 @@ import PorQueNoDaIgualTurno from "../../components/sectores/industria/PorQueNoDa
 import DosNavesMismaPotencia from "../../components/sectores/industria/DosNavesMismaPotencia.astro";
 import Peaje61tdNoDependePotencia from "../../components/sectores/industria/Peaje61tdNoDependePotencia.astro";
 import ExcesosYReactivaNave from "../../components/sectores/industria/ExcesosYReactivaNave.astro";
+import QueMiramosEnTuNaveIndustria from "../../components/sectores/industria/QueMiramosEnTuNaveIndustria.astro";
+import ConsumoDependePedidos from "../../components/sectores/industria/ConsumoDependePedidos.astro";
+import LoQueNoHacemosIndustria from "../../components/sectores/industria/LoQueNoHacemosIndustria.astro";
+import CierreIndustriaGasto from "../../components/sectores/industria/CierreIndustriaGasto.astro";
 ---
 
 <BaseLayout
@@ -29,6 +33,18 @@ import ExcesosYReactivaNave from "../../components/sectores/industria/ExcesosYRe
 
     <!-- 5. "EXCESOS Y REACTIVA en la nave" (Comparativa Concepto vs Nave vs Norma) -->
     <ExcesosYReactivaNave />
+
+    <!-- 6. "QUÉ miramos EN TU NAVE" (Tabla Qué / De dónde sale + CTA Analizar mi nave) -->
+    <QueMiramosEnTuNaveIndustria />
+
+    <!-- 7. "Si tu consumo DEPENDE DE LOS PEDIDOS" (Banner de modalidad y pedidos) -->
+    <ConsumoDependePedidos />
+
+    <!-- 8. "LO QUE NO HACEMOS" (Tarjeta solapada Obras) -->
+    <LoQueNoHacemosIndustria />
+
+    <!-- 9. Cierre con formulario de tramos ("UN CÉNTIMO POR kWh parece poco. Hasta que lo multiplicas por todos tus turnos.") -->
+    <CierreIndustriaGasto />
   </div>
 </BaseLayout>
 

@@ -1,8 +1,8 @@
 ---
 // Componente HeroTarifas para la página "Luz para empresas" (/tarifas)
-// Replicación exacta del diseño oficial de marca con fondo_tarifas.jpg
-// Tipografía Poppins + cursiva Literata, píldora cian y tarjeta de cristal interactiva
-import fondoTarifas from "../../imagenes/fondo_tarifas.jpg";
+// Replicación exacta del diseño oficial de marca con Hero (2).png
+// Fondo azul oscuro oficial de Gas Natural (#03142e -> #062350 -> #082c62), tipografía Poppins + Literata, píldora cian y tarjeta de cristal interactiva idéntica a Método
+import heroTarifasImg from "../../imagenes/tarifas/Hero (2).png";
 
 interface TramoGasto {
   id: string;
@@ -13,7 +13,7 @@ interface TramoGasto {
 
 const tramosGasto: TramoGasto[] = [
   {
-    id: "<300",
+    id: "menos-300",
     etiqueta: "MENOS DE 300€",
     rango: "menos de 300 € al mes",
     msg: "Construimos una propuesta técnica con el término de potencia ajustado al milímetro para que no pagues de más.",
@@ -31,7 +31,7 @@ const tramosGasto: TramoGasto[] = [
     msg: "Auditoría exhaustiva de cuartohorarias, penalizaciones de reactiva y oportunidad en mercado indexado vs fijo.",
   },
   {
-    id: ">3000",
+    id: "mas-3000",
     etiqueta: "Más de 3.000€",
     rango: "más de 36.000 € al año en energía",
     msg: "Un consultor senior de EMAX revisa tus peajes, maxímetros y coberturas OMIE de forma personalizada.",
@@ -40,23 +40,24 @@ const tramosGasto: TramoGasto[] = [
 ---
 
 <section class="hero-tarifas-seccion" aria-labelledby="h1-tarifas-luz">
-  <!-- Fondo fotográfico fondo_tarifas.jpg oficial -->
+  <!-- Fondo fotográfico con degradado azul oscuro corporativo de Gas Natural -->
   <div class="hero-bg" aria-hidden="true">
     <img
-      src={fondoTarifas.src}
+      src={heroTarifasImg.src}
       alt=""
       class="hero-bg-img"
       loading="eager"
       decoding="async"
       fetchpriority="high"
     />
+    <div class="hero-bg-overlay"></div>
   </div>
 
   <div class="hero-tarifas-contenedor">
     <!-- Columna Izquierda: Mensaje principal y propuesta de valor -->
     <div class="hero-tarifas-col-izq">
       <p class="hero-tarifas-kicker">
-        EMAX ENERGÍA · LUZ PARA EMPRESAS <span class="kicker-sep" aria-hidden="true">|</span>
+        EMAX ENERGÍA · QUÉ RECIBES <span class="kicker-sep" aria-hidden="true">|</span>
       </p>
 
       <h1 class="hero-tarifas-titulo" id="h1-tarifas-luz">
@@ -77,8 +78,17 @@ const tramosGasto: TramoGasto[] = [
         <a href="/tarifas/comunidades-de-propietarios" class="btn-comunidad-pildora">
           <span>¿Comunidad de vecinos o vivienda? Empieza aquí</span>
           <span class="btn-pildora-circulo" aria-hidden="true">
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 3.5 10.5 8 6 12.5"></path>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </span>
         </a>
@@ -102,14 +112,23 @@ const tramosGasto: TramoGasto[] = [
                 class="btn-tramo-tarifa"
                 data-abrir-funnel
                 data-tramo-id={t.id}
-                data-tramo-label={t.etiqueta}
+                data-tramo-label={`Estudio para empresa: ${t.etiqueta}`}
                 data-tramo-rango={t.rango}
                 data-tramo-msg={t.msg}
               >
                 <span class="btn-txt">{t.etiqueta}</span>
                 <span class="btn-circulo" aria-hidden="true">
-                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 3.5 10.5 8 6 12.5"></path>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </span>
               </button>
@@ -127,7 +146,7 @@ const tramosGasto: TramoGasto[] = [
 
 <style>
   /* ==========================================================================
-     HERO TARIFAS - FONDO fondo_metodo.jpg Y DISEÑO OFICIAL
+     HERO TARIFAS - FONDO Hero (2).png CON AZUL OSCURO OFICIAL DE GAS NATURAL
      ========================================================================== */
   .hero-tarifas-seccion {
     position: relative;
@@ -137,8 +156,8 @@ const tramosGasto: TramoGasto[] = [
     display: flex;
     align-items: center;
     padding: calc(78px + 48px) 0 72px;
-    background-color: #004aad;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    background-color: #03142e;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
   }
 
@@ -156,7 +175,35 @@ const tramosGasto: TramoGasto[] = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: right center;
+  }
+
+  /* Degradado oficial de Gas Natural (#03142e hacia azul profundo y transparente) */
+  .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      #03142e 0%,
+      #03142e 26%,
+      #041a3c 36%,
+      rgba(7, 35, 78, 0.94) 46%,
+      rgba(8, 44, 98, 0.6) 58%,
+      rgba(10, 56, 126, 0.18) 72%,
+      transparent 88%
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-bg-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(3, 20, 46, 0.98) 0%,
+        rgba(4, 26, 60, 0.92) 55%,
+        rgba(7, 35, 78, 0.82) 100%
+      );
+    }
   }
 
   .hero-tarifas-contenedor {
@@ -166,14 +213,14 @@ const tramosGasto: TramoGasto[] = [
     padding-inline: clamp(20px, 4vw, 52px);
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: clamp(32px, 4vw, 56px);
+    gap: clamp(32px, 4vw, 60px);
     align-items: center;
   }
 
   @media (max-width: 1024px) {
     .hero-tarifas-contenedor {
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 40px;
     }
   }
 
@@ -190,31 +237,30 @@ const tramosGasto: TramoGasto[] = [
   .hero-tarifas-kicker {
     font-family: "Poppins", "Sora", sans-serif;
     font-size: 0.82rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.78);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin: 0;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   }
 
   .kicker-sep {
-    color: #00c2ff;
-    font-weight: 300;
-    font-size: 1.1em;
-    margin-left: 2px;
+    color: #00d4ff;
+    font-weight: 400;
+    font-size: 1.15em;
   }
 
   .hero-tarifas-titulo {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(2.25rem, 1.75rem + 2.1vw, 3.4rem);
+    font-size: clamp(2.1rem, 1.7rem + 1.8vw, 3.2rem);
     font-weight: 800;
     color: #ffffff;
-    line-height: 1.14;
+    line-height: 1.15;
     margin: 0;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
   }
 
@@ -223,9 +269,9 @@ const tramosGasto: TramoGasto[] = [
     font-style: italic;
     font-weight: 400;
     text-transform: none;
-    color: #00c2ff;
-    letter-spacing: 0;
-    font-size: 1.08em;
+    color: #00d4ff;
+    letter-spacing: -0.01em;
+    display: inline;
   }
 
   .hero-tarifas-subbloque {
@@ -235,39 +281,38 @@ const tramosGasto: TramoGasto[] = [
   }
 
   .hero-sub-bold {
-    font-family: "Poppins", "Sora", sans-serif;
-    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.25rem);
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.3rem);
     font-weight: 700;
-    color: #ffffff;
+    color: #00d4ff;
     margin: 0;
-    line-height: 1.35;
+    line-height: 1.3;
   }
 
   .hero-tarifas-desc {
-    font-family: "Poppins", "Inter", sans-serif;
-    font-size: clamp(0.96rem, 0.90rem + 0.3vw, 1.08rem);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.90);
+    color: rgba(240, 248, 255, 0.95);
     font-weight: 400;
     margin: 0;
-    max-width: 33rem;
+    max-width: 520px;
   }
 
   /* Píldora cian */
   .hero-pildora-wrap {
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   .btn-comunidad-pildora {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: #00c2ff;
     color: #002554;
     padding: 10px 18px 10px 22px;
     border-radius: 999px;
     font-family: "Sora", sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     font-weight: 700;
     text-decoration: none;
     box-shadow: 0 4px 18px rgba(0, 194, 255, 0.35);
@@ -282,8 +327,8 @@ const tramosGasto: TramoGasto[] = [
   }
 
   .btn-pildora-circulo {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: #004aad;
     color: #ffffff;
@@ -308,110 +353,116 @@ const tramosGasto: TramoGasto[] = [
 
   @media (max-width: 1024px) {
     .hero-tarifas-col-der {
-      justify-content: stretch;
+      justify-content: flex-start;
     }
   }
 
   .hero-tarifas-card-cristal {
     width: 100%;
-    max-width: 520px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1.5px solid rgba(255, 255, 255, 0.28);
+    max-width: 530px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(235, 244, 255, 0.5) 100%
+    );
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
     border-radius: 28px;
-    padding: 34px 30px;
-    box-shadow:
-      0 20px 48px rgba(0, 15, 45, 0.2),
-      0 4px 14px rgba(0, 74, 173, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: clamp(28px, 3.4vw, 38px);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: 0 24px 60px rgba(0, 16, 48, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.9);
   }
 
   .tarifas-card-titulo {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: 1.45rem;
-    font-weight: 800;
-    color: #00c2ff;
+    font-size: clamp(1.24rem, 1.1rem + 0.4vw, 1.48rem);
+    font-weight: 700;
+    color: #004aad;
     line-height: 1.25;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     letter-spacing: -0.015em;
   }
 
   .tarifas-card-subtitulo {
-    font-family: "Inter", sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.94rem;
+    color: #0f172a;
+    margin: 0 0 22px;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0 0 24px;
+    font-weight: 500;
   }
 
   /* Rejilla 2x2 */
   .tarifas-tramos-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 13px;
   }
 
   @media (max-width: 540px) {
     .tarifas-tramos-grid {
       grid-template-columns: 1fr;
-      gap: 10px;
     }
   }
 
   .btn-tramo-tarifa {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 13px 14px 13px 18px;
+    padding: 15px 17px;
     background: #004aad;
-    color: #ffffff;
+    border: 1.5px solid rgba(0, 74, 173, 0.25);
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    cursor: pointer;
+    color: #ffffff;
     font-family: "Sora", sans-serif;
-    font-size: 0.86rem;
+    font-size: 0.92rem;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.28);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 6px 16px rgba(0, 25, 75, 0.25);
+    transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
   }
 
   .btn-tramo-tarifa:hover {
-    background: #003c8c;
+    background: #005ce6;
     transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(0, 74, 173, 0.45);
+    box-shadow: 0 12px 26px rgba(0, 74, 173, 0.4);
   }
 
   .btn-txt {
+    font-family: "Sora", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
     letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
   .btn-circulo {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: #00c2ff;
-    color: #ffffff;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #00d4ff;
+    color: #004aad;
     flex-shrink: 0;
-    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
   }
 
   .btn-tramo-tarifa:hover .btn-circulo {
-    transform: translateX(2px);
+    transform: translateX(3px);
     background: #ffffff;
     color: #004aad;
   }
 
   .tarifas-card-nota {
     font-family: "Inter", sans-serif;
-    font-size: 0.84rem;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.78);
-    font-weight: 400;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: #0f172a;
+    font-weight: 500;
     margin: 22px 0 0;
   }
 </style>

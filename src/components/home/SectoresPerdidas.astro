@@ -65,7 +65,7 @@ const sectores: SectorItem[] = [
     titulo: "Otro negocio",
     desc: "Talleres, clínicas, oficinas, comercios: lo que cuenta es cuándo consumes, no a qué te dedicas.",
     img: imgClinicas,
-    href: "/#estudio",
+    href: "/sectores#no-esta-en-la-lista",
   },
 ];
 ---
@@ -89,50 +89,48 @@ const sectores: SectorItem[] = [
       {
         sectores.map((s) => (
           <article class="sector-card">
-            <!-- Imagen superior con corte diagonal -->
-            <div class="sector-card-media">
-              <img
-                src={s.img.src}
-                alt={s.titulo}
-                class="sector-card-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-
-            <!-- Contenido inferior con botón y textos -->
-            <div class="sector-card-body">
-              <!-- Curva blanca orgánica idéntica al boceto de Figma -->
-              <svg
-                class="sector-card-curve"
-                viewBox="0 0 300 46"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M 0,36 C 80,34 160,24 220,13 C 255,7 278,5 292,10 C 297,12 300,15 300,18 L 300,46 L 0,46 Z"
-                  fill="#ffffff"
+            <a
+              href={s.href}
+              class="sector-card-link"
+              aria-label={`Ver solución para ${s.titulo}`}
+            >
+              <!-- Imagen superior con corte diagonal -->
+              <div class="sector-card-media">
+                <img
+                  src={s.img.src}
+                  alt={s.titulo}
+                  class="sector-card-img"
+                  loading="lazy"
+                  decoding="async"
                 />
-              </svg>
-
-              <div class="sector-card-header">
-                <h3 class="sector-card-titulo">{s.titulo}</h3>
-                <a
-                  href={s.href}
-                  class="sector-card-btn"
-                  aria-label={`Ver solución para ${s.titulo}`}
-                  data-abrir-funnel
-                  data-tramo-label={s.titulo}
-                  data-tramo-rango="Auditoría energética personalizada"
-                  data-tramo-msg={`Nos centramos en la operativa de ${s.titulo} para auditar tu potencia, reactiva y periodos.`}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </a>
               </div>
-              <p class="sector-card-desc">{s.desc}</p>
-            </div>
+
+              <!-- Contenido inferior con botón y textos -->
+              <div class="sector-card-body">
+                <!-- Curva blanca orgánica idéntica al boceto de Figma -->
+                <svg
+                  class="sector-card-curve"
+                  viewBox="0 0 300 46"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M 0,36 C 80,34 160,24 220,13 C 255,7 278,5 292,10 C 297,12 300,15 300,18 L 300,46 L 0,46 Z"
+                    fill="#ffffff"
+                  />
+                </svg>
+
+                <div class="sector-card-header">
+                  <h3 class="sector-card-titulo">{s.titulo}</h3>
+                  <span class="sector-card-btn" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </span>
+                </div>
+                <p class="sector-card-desc">{s.desc}</p>
+              </div>
+            </a>
           </article>
         ))
       }
@@ -229,6 +227,15 @@ const sectores: SectorItem[] = [
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                 border-color 0.35s ease;
+  }
+
+  .sector-card-link {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
   }
 
   /* Resplandor y borde azul a los alrededores al pasar el cursor + agrandamiento dinámico */

@@ -8,13 +8,36 @@
   <div class="contenedor-obrador">
     <!-- Barra superior: Caso de ejemplo y supuestos técnicos -->
       <div class="caso-supuestos-bar">
-        <span class="caso-pill-azul">Caso de ejemplo</span>
+        <span class="caso-pill-azul">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px; vertical-align: -2px;">
+            <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"></path>
+          </svg>
+          Caso de ejemplo
+        </span>
         <span class="caso-supuestos-texto">
           Los peajes, los cargos y los impuestos son los oficiales de 2026.
         </span>
-        <button type="button" class="btn-supuestos-enlace" data-abrir-funnel data-tramo-msg="Consulta los supuestos técnicos del caso real de panadería.">
+        <button type="button" class="btn-supuestos-enlace" id="btn-toggle-supuestos" aria-expanded="false" aria-controls="panel-supuestos">
           Ver los supuestos
         </button>
+      </div>
+
+      <!-- Ventana emergente / desplegable de supuestos -->
+      <div class="caso-supuestos-panel" id="panel-supuestos" hidden>
+        <div class="supuestos-card">
+          <div class="supuestos-card-header">
+            <h4 class="supuestos-card-titulo">Sobre este ejemplo</h4>
+            <button type="button" class="btn-cerrar-supuestos" id="btn-cerrar-supuestos" aria-label="Cerrar supuestos">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <p>Un obrador de panadería con tienda, en la Península, con peaje 3.0TD y un solo suministro. Su consumo, su contrato actual y el precio de la energía son los del ejemplo.</p>
+          <p>Son reales los precios regulados de 2026: los peajes (resolución de la CNMC de 18 de diciembre de 2025), los cargos (Orden TED/1524/2025), el precio de la energía reactiva, el impuesto eléctrico al tipo general y el calendario de periodos (Circular 3/2020 de la CNMC). El alquiler del contador es orientativo.</p>
+          <p>Por eso las lecturas son de verdad aunque la empresa no lo sea: con otro consumo, los números cambian, pero la forma de leerlos es la misma.</p>
+        </div>
       </div>
 
       <!-- Encabezado editorial del caso -->
@@ -303,7 +326,7 @@
           </span>
         </button>
 
-        <a href="/metodo#decisiones" class="bottom-enlace-guia">
+        <a href="/guias/factura-luz-empresa" class="bottom-enlace-guia">
           <span>Cómo leer la factura de luz de tu empresa</span>
         </a>
       </footer>
@@ -369,6 +392,84 @@
 
   .btn-supuestos-enlace:hover {
     color: #0f5bd8;
+  }
+
+  /* Ventana emergente / desplegable de supuestos */
+  .caso-supuestos-panel {
+    margin-bottom: 28px;
+    animation: fadeInSupuestos 0.22s ease-out;
+  }
+
+  .caso-supuestos-panel[hidden] {
+    display: none;
+  }
+
+  @keyframes fadeInSupuestos {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .supuestos-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #c8d4e4;
+    border-left: 3.5px solid #004aad;
+    padding: 24px 28px;
+    box-shadow: 0 8px 24px rgba(10, 27, 63, 0.08);
+    position: relative;
+    max-width: 860px;
+  }
+
+  .supuestos-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .supuestos-card-titulo {
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0;
+  }
+
+  .btn-cerrar-supuestos {
+    all: unset;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: #4a5a75;
+    background: #edf2f7;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .btn-cerrar-supuestos:hover {
+    background: #e2e8f0;
+    color: #0f2346;
+  }
+
+  .supuestos-card p {
+    font-family: "Poppins", "Inter", sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.62;
+    color: #334460;
+    margin: 0 0 12px;
+  }
+
+  .supuestos-card p:last-child {
+    margin-bottom: 0;
   }
 
   /* Encabezado editorial */
@@ -983,6 +1084,17 @@
       width: 26px;
       background: #004aad;
     }
+
+    .caso-bottom-bar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .btn-analizar-cta {
+      justify-content: center;
+    }
   }
 </style>
 
@@ -1099,6 +1211,27 @@
           pasos[idx].scrollIntoView({ behavior, block: "center" });
         }
       });
+    });
+
+    // Control de la ventana emergente / desplegable de supuestos
+    const btnToggleSupuestos = document.getElementById("btn-toggle-supuestos");
+    const panelSupuestos = document.getElementById("panel-supuestos");
+    const btnCerrarSupuestos = document.getElementById("btn-cerrar-supuestos");
+
+    btnToggleSupuestos?.addEventListener("click", () => {
+      const estaOculto = panelSupuestos?.hasAttribute("hidden");
+      if (estaOculto) {
+        panelSupuestos?.removeAttribute("hidden");
+        btnToggleSupuestos.setAttribute("aria-expanded", "true");
+      } else {
+        panelSupuestos?.setAttribute("hidden", "");
+        btnToggleSupuestos.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    btnCerrarSupuestos?.addEventListener("click", () => {
+      panelSupuestos?.setAttribute("hidden", "");
+      btnToggleSupuestos?.setAttribute("aria-expanded", "false");
     });
   })();
 </script>

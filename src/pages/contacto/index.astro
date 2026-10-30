@@ -1,0 +1,31 @@
+---
+// Página: Contacto (/contacto)
+// "Para que te respondamos mejor, dinos qué buscas."
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroContacto from "../../components/contacto/HeroContacto.astro";
+import HablaConNosotros from "../../components/contacto/HablaConNosotros.astro";
+---
+
+<BaseLayout
+  title="Contacto | EMAX Energía"
+  description="Habla con EMAX Energía. Analizamos la factura de tu empresa, atendemos dudas de clientes y colaboramos con gestorías, asesorías, administradores de fincas e instaladores."
+  path="/contacto"
+>
+  <div class="contacto-page-wrapper">
+    <!-- 1. Hero con las 3 opciones principales de contacto -->
+    <HeroContacto />
+
+    <!-- 2. Sección "HABLA CON nosotros." y formulario "¿Es otra cosa? Escríbenos" -->
+    <HablaConNosotros />
+  </div>
+</BaseLayout>
+
+<style>
+  .contacto-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #f9fafc;
+  }
+</style>
+

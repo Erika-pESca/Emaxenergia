@@ -4,7 +4,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HeroVariosSuministros from "../../components/sectores/varios-suministros/HeroVariosSuministros.astro";
 import DoceContratosNoSonUnContrato from "../../components/sectores/varios-suministros/DoceContratosNoSonUnContrato.astro";
+import DosNivelesDeDecision from "../../components/sectores/varios-suministros/DosNivelesDeDecision.astro";
 import LoQueRecibes from "../../components/sectores/varios-suministros/LoQueRecibes.astro";
+import ParaEmpezarBastaFactura from "../../components/sectores/varios-suministros/ParaEmpezarBastaFactura.astro";
+import LoQueNoHacemosVarios from "../../components/sectores/varios-suministros/LoQueNoHacemosVarios.astro";
+import CierreVariosSuministrosGasto from "../../components/sectores/varios-suministros/CierreVariosSuministrosGasto.astro";
 ---
 
 <BaseLayout
@@ -19,8 +23,20 @@ import LoQueRecibes from "../../components/sectores/varios-suministros/LoQueReci
     <!-- 2. "DOCE CONTRATOS NO SON UN contrato multiplicado por doce." (5 tarjetas de problemas con varias sedes) -->
     <DoceContratosNoSonUnContrato />
 
-    <!-- 3. "LO QUE RECIBES" (Tarjetas superpuestas de Informe, Llamada y Compensación) -->
+    <!-- 3. "Dos niveles de decisión" + "Cinco sedes, cinco decisiones" + "El calendario del grupo" (Fondo blanco) -->
+    <DosNivelesDeDecision />
+
+    <!-- 4. "LO QUE RECIBES" (Tarjetas superpuestas de Informe, Llamada y Compensación) -->
     <LoQueRecibes />
+
+    <!-- 5. "Para empezar TE BASTA UNA FACTURA" (Banner con hero (8).png y degradado azul) -->
+    <ParaEmpezarBastaFactura />
+
+    <!-- 6. "LO QUE NO HACEMOS" (Comparativas / Panel + Analizar mis locales) -->
+    <LoQueNoHacemosVarios />
+
+    <!-- 7. Cierre con formulario de tramos ("CIERRAS LA PERSIANA. La potencia se sigue pagando.") -->
+    <CierreVariosSuministrosGasto />
   </div>
 </BaseLayout>
 

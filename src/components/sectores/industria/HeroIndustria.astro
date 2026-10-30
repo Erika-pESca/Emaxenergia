@@ -1,9 +1,9 @@
 ---
 // Componente: HeroIndustria.astro
 // Hero oficial para la página: /sectores/industria ("Luz para industria y fabricación")
-// Fondo fotográfico de nave industrial / planta de producción + degradado azul corporativo + tarjeta glassmorphic interactiva.
+// Diseño fiel al boceto oficial Sectores_industria manteniendo el ancho completo original.
 
-import industriaImg from "../../../imagenes/sector_industria.jpg";
+import industriaImg from "../../../imagenes/sectores/sectores_industria/sectores-indice-industria (2).png";
 
 const tramosLuz = [
   {
@@ -15,14 +15,14 @@ const tramosLuz = [
   },
   {
     id: "1000",
-    label: "300 – 1.000€",
+    label: "300 - 1.000€",
     valor: "300-1000",
     rango: "entre 300 y 1.000 € al mes",
     msg: "Optimización de potencia y arranque de maquinaria para taller o nave industrial media.",
   },
   {
     id: "3000",
-    label: "1.000 – 3.000€",
+    label: "1.000 - 3.000€",
     valor: "1000-3000",
     rango: "entre 1.000 y 3.000 € al mes",
     msg: "Auditoría de turnos productivos, peaje 3.0TD / 6.1TD, maxímetros y reactiva para planta fabril.",
@@ -37,16 +37,19 @@ const tramosLuz = [
 ];
 ---
 
-<section class="industria-hero-root">
-  <!-- Fondo con fotografía industrial y degradado fluido -->
-  <div class="industria-hero-bg">
-    <img
-      src={industriaImg.src}
-      alt="Planta industrial de fabricación y producción con ingenieros y maquinaria automatizada"
-      class="hero-bg-img"
-      loading="eager"
-      fetchpriority="high"
-    />
+<section class="industria-hero-root" aria-labelledby="h1-industria">
+  <!-- Fondo con fotografía industrial encuadrada a la derecha (volteada como en el boceto) y degradado azul a la izquierda -->
+  <div class="industria-hero-bg" aria-hidden="true">
+    <div class="industria-foto-wrap">
+      <img
+        src={industriaImg.src}
+        alt=""
+        class="hero-bg-img"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
     <div class="hero-bg-gradient"></div>
   </div>
 
@@ -59,7 +62,7 @@ const tramosLuz = [
           <span class="industria-kicker-bar" aria-hidden="true">|</span>
         </div>
 
-        <h1 class="industria-h1">
+        <h1 class="industria-h1" id="h1-industria">
           <span class="h1-bloque-mayus">UN TURNO MÁS</span>
           <span class="h1-cursiva-cyan">cambia la factura.</span>
         </h1>
@@ -69,7 +72,7 @@ const tramosLuz = [
         </p>
       </div>
 
-      <!-- Columna Derecha: Tarjeta Glassmorphic con selector de tramos conectado al formulario modal -->
+      <!-- Columna Derecha: Tarjeta translúcida con selector de tramos conectado al formulario modal -->
       <div class="industria-hero-card-col">
         <div class="hero-card-glass">
           <h2 class="card-pregunta-tit">¿Cuánto paga tu empresa de luz al mes?</h2>
@@ -96,14 +99,14 @@ const tramosLuz = [
                     <svg
                       width="13"
                       height="13"
-                      viewBox="0 0 24 24"
+                      viewBox="0 0 16 16"
                       fill="none"
-                      stroke="#003580"
-                      stroke-width="3"
+                      stroke="currentColor"
+                      stroke-width="2.8"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <polyline points="9 18 15 12 9 6" />
+                      <path d="M6 3.5 10.5 8 6 12.5"></path>
                     </svg>
                   </span>
                 </button>
@@ -123,7 +126,7 @@ const tramosLuz = [
 
 <style>
   /* ==========================================================================
-     HERO SECTOR: INDUSTRIA
+     HERO INDUSTRIA: DISEÑO OFICIAL BOCETO (ANCHO COMPLETO ORIGINAL)
      ========================================================================== */
   .industria-hero-root {
     position: relative;
@@ -142,35 +145,47 @@ const tramosLuz = [
     color: #ffffff;
   }
 
-  /* Fondo fotográfico y degradados */
+  /* Fondo con fotografía encuadrada a la derecha y degradado de fusión azul a la izquierda */
   .industria-hero-bg {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
+    overflow: hidden;
+    background: #004aad;
+  }
+
+  .industria-foto-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -2%;
+    width: 78%;
+    overflow: hidden;
   }
 
   .hero-bg-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center right;
+    object-position: center 20%;
+    transform: scaleX(-1);
     display: block;
-    opacity: 0.92;
   }
 
+  /* Gradiente oficial: Azul corporativo sólido a la izquierda fusionándose hacia la derecha */
   .hero-bg-gradient {
     position: absolute;
     inset: 0;
-    /* Degradado fluido desde azul corporativo profundo a la izquierda que revela la imagen hacia la derecha */
     background: linear-gradient(
       90deg,
-      #003882 0%,
-      #004aad 32%,
-      rgba(0, 74, 173, 0.92) 52%,
-      rgba(0, 85, 204, 0.72) 72%,
-      rgba(0, 102, 238, 0.35) 90%,
-      rgba(0, 102, 238, 0.12) 100%
+      #004aad 0%,
+      #004aad 38%,
+      rgba(0, 74, 173, 0.9) 45%,
+      rgba(10, 82, 184, 0.55) 53%,
+      rgba(20, 92, 194, 0.22) 62%,
+      rgba(20, 92, 194, 0.05) 70%,
+      transparent 78%
     );
   }
 
@@ -179,21 +194,21 @@ const tramosLuz = [
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1260px;
+    max-width: 1360px;
     margin-inline: auto;
-    padding-inline: clamp(20px, 4vw, 48px);
-    padding-block: clamp(20px, 3vh, 32px);
+    padding-inline: clamp(20px, 4vw, 52px);
     box-sizing: border-box;
   }
 
+  /* Grid 2 Columnas */
   .industria-hero-grid {
     display: grid;
-    grid-template-columns: 1.12fr 0.98fr;
-    gap: clamp(36px, 4.5vw, 64px);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 68px);
     align-items: center;
   }
 
-  /* Textos Izquierda */
+  /* Textos izquierda */
   .industria-hero-textos {
     display: flex;
     flex-direction: column;
@@ -204,178 +219,194 @@ const tramosLuz = [
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: 0.78rem;
+    font-family: "Sora", sans-serif;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.14em;
-    color: #cbd5e1;
     text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
     margin-bottom: 14px;
   }
 
   .industria-kicker-bar {
     color: #00c2ff;
-    font-weight: 800;
+    font-weight: 700;
+    font-size: 1.15em;
   }
 
   .industria-h1 {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin: 0 0 18px 0;
+    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-size: clamp(2.3rem, 2rem + 1.8vw, 3.4rem);
+    font-weight: 800;
+    color: #ffffff;
     line-height: 1.14;
+    margin: 0 0 20px;
+    letter-spacing: -0.015em;
   }
 
   .h1-bloque-mayus {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(2.05rem, 1.85rem + 1.2vw, 3.05rem);
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: -0.015em;
+    display: block;
     text-transform: uppercase;
   }
 
   .h1-cursiva-cyan {
+    display: block;
     font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
     font-weight: 400;
-    font-size: clamp(2.35rem, 2.1rem + 1.3vw, 3.45rem);
     color: #00c2ff;
-    letter-spacing: -0.01em;
-    text-shadow: 0 2px 16px rgba(0, 194, 255, 0.35);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 4px;
   }
 
   .industria-subtitulo {
-    font-family: var(--font-cuerpo, "Sora", sans-serif);
-    font-size: clamp(0.96rem, 0.92rem + 0.22vw, 1.08rem);
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.12rem);
     line-height: 1.62;
-    color: #f1f5f9;
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
     max-width: 540px;
-    text-wrap: pretty;
   }
 
-  /* Tarjeta Glassmorphic Derecha */
+  /* Tarjeta Glassmorphic derecha */
   .industria-hero-card-col {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
   }
 
   .hero-card-glass {
     width: 100%;
-    max-width: 510px;
-    background: rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 26px;
-    padding: clamp(26px, 3.2vw, 34px);
-    box-shadow:
-      0 20px 48px rgba(0, 15, 45, 0.38),
-      inset 0 1px 0 rgba(255, 255, 255, 0.45);
-    box-sizing: border-box;
+    max-width: 630px;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(220, 234, 252, 0.14) 100%
+    );
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 22px;
+    padding: clamp(26px, 3.2vw, 38px) clamp(26px, 3.4vw, 42px);
+    box-shadow: 0 20px 48px rgba(0, 20, 60, 0.2);
     display: flex;
     flex-direction: column;
+    gap: 14px;
+    box-sizing: border-box;
   }
 
   .card-pregunta-tit {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(1.22rem, 1.15rem + 0.35vw, 1.48rem);
+    font-size: clamp(1.3rem, 1.15rem + 0.45vw, 1.58rem);
     font-weight: 700;
-    color: #ffffff;
-    margin: 0 0 6px 0;
+    color: #004aad;
     line-height: 1.25;
+    margin: 0;
     letter-spacing: -0.01em;
   }
 
   .card-pregunta-sub {
-    font-size: 0.88rem;
-    line-height: 1.45;
-    color: #e2e8f0;
-    margin: 0 0 22px 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: #111827;
+    font-weight: 500;
+    margin: -4px 0 8px;
+    max-width: 480px;
   }
 
-  /* Rejilla de Botones 2x2 */
+  /* Rejilla 2x2 de botones */
   .card-tramos-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-bottom: 22px;
+    gap: 14px 20px;
+  }
+
+  @media (max-width: 540px) {
+    .card-tramos-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .btn-tramo-azul {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
+    padding: 15px 18px 15px 22px;
     background: #004aad;
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 12px;
-    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
     cursor: pointer;
-    font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-weight: 700;
+    font-family: "Sora", sans-serif;
     font-size: 0.86rem;
-    letter-spacing: 0.02em;
-    transition:
-      background-color 0.2s ease,
-      transform 0.2s ease,
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 14px rgba(0, 40, 110, 0.25);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     text-align: left;
-    box-sizing: border-box;
+    outline: none;
   }
 
   .btn-tramo-azul:hover {
-    background: #0059d6;
-    border-color: rgba(255, 255, 255, 0.55);
+    background: #0059cf;
+    border-color: #00c2ff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0, 74, 173, 0.45);
+    box-shadow: 0 8px 22px rgba(0, 50, 130, 0.4);
   }
 
-  .btn-tramo-azul:focus-visible {
-    outline: 2px solid #00c2ff;
-    outline-offset: 2px;
+  .btn-tramo-azul:active {
+    transform: translateY(0);
   }
 
   .tramo-txt {
     flex: 1;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
+  /* Círculo cian con icono chevron */
   .tramo-flecha {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: #00c2ff;
+    color: #004aad;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin-left: 8px;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease;
   }
 
   .btn-tramo-azul:hover .tramo-flecha {
     transform: translateX(2px);
+    background: #ffffff;
   }
 
   .card-nota-pie {
-    font-size: 0.8rem;
+    font-size: 0.88rem;
+    font-weight: 700;
     line-height: 1.48;
-    color: #cbd5e1;
-    margin: 0;
+    color: #111827;
+    margin: 10px 0 0;
   }
 
   /* ==========================================================================
      RESPONSIVE
      ========================================================================== */
-  @media (max-width: 992px) {
+  @media (max-width: 1024px) {
+    .industria-foto-wrap {
+      right: 0;
+      width: 100%;
+    }
+
     .industria-hero-grid {
       grid-template-columns: 1fr;
       gap: 36px;
+    }
+
+    .industria-hero-textos {
+      max-width: 100%;
     }
 
     .industria-hero-card-col {
@@ -386,41 +417,30 @@ const tramosLuz = [
       max-width: 100%;
     }
 
-    .hero-bg-img {
-      width: 100%;
-      opacity: 0.35;
-    }
-
     .hero-bg-gradient {
       background: linear-gradient(
         180deg,
-        rgba(0, 56, 130, 0.95) 0%,
-        rgba(0, 74, 173, 0.96) 65%,
-        #003882 100%
+        rgba(0, 74, 173, 0.92) 0%,
+        rgba(0, 74, 173, 0.84) 55%,
+        rgba(4, 40, 100, 0.88) 100%
       );
     }
   }
 
-  @media (max-width: 600px) {
-    .card-tramos-grid {
-      grid-template-columns: 1fr;
-      gap: 10px;
+  @media (max-width: 640px) {
+    .industria-hero-root {
+      min-height: auto;
+      padding-top: calc(78px + 28px);
+      padding-bottom: 48px;
     }
 
     .industria-h1 {
-      line-height: 1.15;
-    }
-
-    .h1-cursiva-cyan {
       font-size: 2.1rem;
-    }
-
-    .h1-bloque-mayus {
-      font-size: 1.85rem;
     }
 
     .hero-card-glass {
       padding: 22px 18px;
+      border-radius: 20px;
     }
   }
 </style>

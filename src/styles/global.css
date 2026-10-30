@@ -80,6 +80,13 @@ html {
   color-scheme: light;
 }
 
+html,
+body {
+  overflow-x: clip;
+  max-width: 100vw;
+  width: 100%;
+}
+
 body {
   margin: 0;
   font-family: var(--font-texto);
@@ -96,9 +103,21 @@ body.con-dock > main {
 }
 
 img,
-svg {
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+
+/* Evitar desbordes de palabras o cadenas largas en pantallas estrechas */
+p, span, a, h1, h2, h3, h4, h5, h6, strong, b, dt, dd, li {
+  overflow-wrap: break-word;
 }
 
 a {
