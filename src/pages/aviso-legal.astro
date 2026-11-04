@@ -1,0 +1,414 @@
+---
+// Página: Aviso Legal
+// Diseño: Hero institucional oscuro + cápsulas de navegación + tarjeta titular + prosa estructurada
+// Contenido: Texto técnico oficial del borrador v12.16 con etiquetas [PENDIENTE] y [ASESORÍA]
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Aviso legal · EMAX Energía"
+  description="Información legal, titular de la web (ENERGYMAX ADVISORY, S.L.U.) y condiciones de uso de emaxenergia.com conforme a la legislación española."
+  path="/aviso-legal"
+>
+  <!-- Hero oscuro institucional con navegación de políticas -->
+  <section class="legal-hero" aria-labelledby="h1-aviso-legal">
+    <div class="legal-hero-contenedor">
+      <span class="legal-kicker">INFORMACIÓN LEGAL · LSSI-CE</span>
+      <h1 class="legal-h1" id="h1-aviso-legal">AVISO LEGAL</h1>
+      <p class="legal-subtitulo">
+        Quién está detrás de esta web, para qué sirve y cuáles son las reglas de uso conforme a la legislación española.
+      </p>
+
+      <nav class="legal-nav-pills" aria-label="Páginas legales">
+        <a href="/aviso-legal" class="legal-pill is-active" aria-current="page">Aviso legal</a>
+        <a href="/privacidad" class="legal-pill">Privacidad</a>
+        <a href="/cookies" class="legal-pill">Cookies</a>
+        <button type="button" class="legal-pill legal-pill--btn" data-abrir-cookies>
+          Configurar cookies
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Cuerpo del documento legal con diseño en tarjeta -->
+  <section class="legal-cuerpo">
+    <div class="legal-contenedor">
+      <!-- Tarjeta destacada de datos del titular -->
+      <div class="legal-card-titular">
+        <div class="titular-cabecera">
+          <span class="titular-etiqueta">Titular del sitio web (art. 10 Ley 34/2002, LSSI-CE)</span>
+          <h2 class="titular-nombre">ENERGYMAX ADVISORY, S.L.U.</h2>
+        </div>
+        <dl class="titular-grid">
+          <div class="titular-dato">
+            <dt>Denominación social</dt>
+            <dd>ENERGYMAX ADVISORY, S.L.U.</dd>
+          </div>
+          <div class="titular-dato">
+            <dt>Marca comercial</dt>
+            <dd>EMAX Energía (marca de Grupo EMAX)</dd>
+          </div>
+          <div class="titular-dato">
+            <dt>NIF</dt>
+            <dd>B02994333</dd>
+          </div>
+          <div class="titular-dato">
+            <dt>Domicilio</dt>
+            <dd>Carrer Esteve Gilabert Bruniquer, 52, 08402 Granollers (Barcelona)</dd>
+          </div>
+          <div class="titular-dato">
+            <dt>Email</dt>
+            <dd><a href="mailto:hola@emaxenergia.com">hola@emaxenergia.com</a></dd>
+          </div>
+          <div class="titular-dato">
+            <dt>Teléfono</dt>
+            <dd><a href="tel:933949343">933 949 343</a> (L-V 9:00-13:00 y 15:00-19:00)</dd>
+          </div>
+          <div class="titular-dato titular-dato--ancho">
+            <dt>Registro Mercantil</dt>
+            <dd><span class="pendiente">[PENDIENTE: tomo, folio y hoja (31 L1)]</span></dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Prosa del contenido legal oficial 12.16 -->
+      <article class="legal-prosa">
+        <div class="legal-borrador-aviso">
+          <strong>BORRADOR TÉCNICO para la asesoría</strong> · no se publica · lo marcado entre corchetes falta o lo decide la asesoría
+        </div>
+
+        <h2>Quién es el titular de esta web</h2>
+        <p>
+          El titular de emaxenergia.com es ENERGYMAX ADVISORY, S.L.U., con NIF B02994333 y domicilio en Carrer Esteve Gilabert Bruniquer, 52, 08402 Granollers (Barcelona). <span class="pendiente">[PENDIENTE: datos de inscripción en el Registro Mercantil de Barcelona: tomo, folio, hoja e inscripción]</span>
+        </p>
+        <p>
+          Puedes contactar con nosotros en el 933 949 343 o en <a href="mailto:hola@emaxenergia.com">hola@emaxenergia.com</a>, de lunes a viernes, de 9:00 a 13:00 y de 15:00 a 19:00. EMAX Energía es una marca de Grupo EMAX.
+        </p>
+
+        <h2>A qué nos dedicamos</h2>
+        <p>
+          EMAX Energía analiza cómo consume la energía cada empresa y construye con esos datos su propuesta de tarifa. El suministro de electricidad lo realiza una comercializadora habilitada, que aparece identificada con su razón social en el contrato y en la factura. <span class="pendiente">[ASESORÍA: confirmar la redacción y si la web debe nombrar a la comercializadora o comercializadoras con las que se trabaja (doc 03 §5)]</span>
+        </p>
+
+        <h2>Uso de la web</h2>
+        <p>
+          Los contenidos de esta web, incluidas las guías, son información general. Los ejemplos y las cifras que aparecen están etiquetados como ilustrativos y no son una oferta ni el análisis de tu suministro: ese análisis se hace con tus datos y por escrito.
+        </p>
+        <p>
+          Al usar la web te comprometes a no introducir datos falsos o de terceros sin su autorización, en particular el CUPS o la factura de un suministro del que no seas titular ni estés autorizado.
+        </p>
+
+        <h2>Propiedad intelectual e industrial</h2>
+        <p>
+          La marca EMAX Energía, su logotipo, el personaje de Maxi, los textos, las ilustraciones y el diseño de esta web pertenecen a <span class="pendiente">[PENDIENTE: titular de la marca y del personaje (¿ENERGYMAX ADVISORY o Grupo EMAX?)]</span> o se usan con su autorización. No se pueden reproducir con fines comerciales sin permiso por escrito.
+        </p>
+
+        <h2>Enlaces a otras webs</h2>
+        <p>
+          Enlazamos a fuentes oficiales (BOE, CNMC, OMIE y otras) para que puedas comprobar lo que decimos. No respondemos de los contenidos de esas webs ni de sus cambios.
+        </p>
+
+        <h2>Ley aplicable</h2>
+        <p>
+          Esta web se rige por la ley española. <span class="pendiente">[ASESORÍA: jurisdicción: con consumidores, la del domicilio del consumidor; con empresas, la que se pacte]</span>
+        </p>
+
+        <div class="legal-pie-actualizacion">
+          <p>
+            <strong>Contacto directo:</strong> Puedes contactar con nosotros en el <a href="tel:933949343">933 949 343</a> o a través de nuestra página de <a href="/contacto">Contacto</a>.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      #06183b 0%,
+      #05255d 26%,
+      #004aad 47%,
+      #0051be 50%,
+      #004aad 53%,
+      #05255d 74%,
+      #06183b 100%
+    );
+    border-radius: 0 0 28px 28px;
+    padding: calc(78px + 84px) 0 64px;
+    color: #ffffff;
+  }
+
+  .legal-hero-contenedor {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .legal-kicker {
+    display: inline-block;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #bae6fd;
+    background: rgba(37, 181, 248, 0.16);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .legal-h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    color: #25b5f8;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
+  .legal-subtitulo {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(0.98rem, 1.3vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: #e8f2ff;
+    max-width: 680px;
+    margin: 0 auto 30px;
+  }
+
+  .legal-nav-pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(4, 18, 46, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px;
+    border-radius: 999px;
+  }
+
+  .legal-pill {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #dbe8f8;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .legal-pill:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .legal-pill.is-active {
+    background: #14a9f5;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(20, 169, 245, 0.35);
+  }
+
+  .legal-pill--btn {
+    color: #7dd3fc;
+  }
+
+  /* Cuerpo */
+  .legal-cuerpo {
+    background: #e6ecf5;
+    padding: 64px 0 88px;
+  }
+
+  .legal-contenedor {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .legal-card-titular {
+    background: #06183b;
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 36px;
+    box-shadow: 0 16px 40px rgba(4, 18, 46, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+  }
+
+  .titular-cabecera {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .titular-etiqueta {
+    display: block;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #38bdf8;
+    margin-bottom: 4px;
+  }
+
+  .titular-nombre {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .titular-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 28px;
+    margin: 0;
+  }
+
+  .titular-dato dt {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #93c5fd;
+    margin-bottom: 2px;
+  }
+
+  .titular-dato dd {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .titular-dato dd a {
+    color: #38bdf8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .titular-dato--ancho {
+    grid-column: 1 / -1;
+  }
+
+  /* Prosa */
+  .legal-prosa {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: clamp(28px, 5vw, 48px);
+    box-shadow: 0 12px 34px rgba(6, 24, 59, 0.06);
+    border: 1px solid #d5e0f0;
+    font-family: "Poppins", sans-serif;
+    color: #1e293b;
+  }
+
+  .legal-borrador-aviso {
+    background: #fff8eb;
+    border: 1.5px dashed #f59e0b;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 0.84rem;
+    color: #92400e;
+    line-height: 1.45;
+  }
+
+  .pendiente {
+    color: #b91c1c;
+    background: #fee2e2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.92em;
+  }
+
+  .legal-prosa h2 {
+    font-size: 1.22rem;
+    font-weight: 800;
+    color: #06183b;
+    margin: 32px 0 12px;
+    line-height: 1.3;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e6f0fc;
+  }
+
+  .legal-prosa h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .legal-prosa p {
+    font-size: 0.92rem;
+    line-height: 1.72;
+    color: #334155;
+    margin: 0 0 14px;
+  }
+
+  .legal-prosa a {
+    color: #0051be;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal-prosa a:hover {
+    color: #14a9f5;
+  }
+
+  .legal-pie-actualizacion {
+    margin-top: 32px;
+    padding: 18px 22px;
+    background: #f0f6ff;
+    border-left: 4px solid #0051be;
+    border-radius: 10px;
+  }
+
+  .legal-pie-actualizacion p {
+    margin: 0;
+    font-size: 0.86rem;
+    color: #1e3a5f;
+  }
+
+  @media (max-width: 700px) {
+    .legal-hero {
+      padding: calc(78px + 52px) 0 48px;
+    }
+
+    .legal-nav-pills {
+      border-radius: 18px;
+      padding: 8px;
+    }
+
+    .titular-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .legal-card-titular {
+      padding: 22px 20px;
+    }
+
+    .legal-cuerpo {
+      padding: 40px 0 64px;
+    }
+  }
+</style>

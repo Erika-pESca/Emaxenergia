@@ -139,7 +139,13 @@ const columnasFooter: FooterCol[] = [
             >
               {columna.links.map((link) => (
                 <li class={link.spacedTop ? "item-espaciado" : undefined}>
-                  <a href={link.href} class="columna-enlace">{link.label}</a>
+                  <a
+                    href={link.href}
+                    class="columna-enlace"
+                    data-abrir-cookies={link.href === "#configurar-cookies" ? "" : undefined}
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -153,7 +159,8 @@ const columnasFooter: FooterCol[] = [
     <!-- Línea legal inferior -->
     <div class="pie-legal-contenido">
       <p class="copia-legal">
-        © 2026 {site.legalName} · NIF {site.cif} · Carrer Esteve Gilabert Bruniquer, 52, 08402 Granollers (Barcelona) · EMAX Energía es una marca de Grupo EMAX. [LEGAL]
+        © 2026 {site.legalName} · NIF {site.cif} · Carrer Esteve Gilabert Bruniquer, 52, 08402 Granollers (Barcelona) · EMAX Energía es una marca de Grupo EMAX.
+        <span class="pendiente">[LEGAL]</span>
       </p>
     </div>
   </div>
@@ -314,6 +321,11 @@ const columnasFooter: FooterCol[] = [
     margin: 0;
     letter-spacing: 0.04em;
     line-height: 1.5;
+  }
+
+  .copia-legal .pendiente {
+    color: #ffb4a8;
+    font-weight: 600;
   }
 
   /* ===================== RESPONSIVE ===================== */

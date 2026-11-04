@@ -3,7 +3,7 @@
 // Basado fielmente en el boceto oficial de Contacto
 ---
 
-<section class="habla-root" aria-labelledby="tit-habla-nosotros">
+<section class="habla-root" id="habla-con-nosotros" aria-labelledby="tit-habla-nosotros">
   <div class="habla-contenedor">
     <div class="habla-grid">
       <!-- Columna Izquierda: Información de contacto directo -->
@@ -69,7 +69,7 @@
             <span class="escribenos-serif">Escríbenos</span>
           </h3>
 
-          <form class="escribenos-form" data-form-contacto novalidate>
+          <form class="escribenos-form" action="/contacto/recibido" method="GET" data-form-contacto novalidate>
             <div class="campo-grupo">
               <label for="contacto-nombre" class="campo-label">Tu nombre</label>
               <input
@@ -153,29 +153,35 @@
 </section>
 
 <script>
-  const formContacto = document.querySelector<HTMLFormElement>("[data-form-contacto]");
-  const feedbackEl = formContacto?.querySelector<HTMLParagraphElement>("[data-contacto-feedback]");
+  function setupFormContacto() {
+    const formContacto = document.querySelector<HTMLFormElement>("[data-form-contacto]");
+    const feedbackEl = formContacto?.querySelector<HTMLParagraphElement>("[data-contacto-feedback]");
+    if (!formContacto || formContacto.dataset.ready === "1") return;
+    formContacto.dataset.ready = "1";
 
-  formContacto?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (!feedbackEl) return;
+    formContacto.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    const nombre = (formContacto.querySelector<HTMLInputElement>("#contacto-nombre")?.value || "").trim();
-    const email = (formContacto.querySelector<HTMLInputElement>("#contacto-email")?.value || "").trim();
-    const mensaje = (formContacto.querySelector<HTMLTextAreaElement>("#contacto-mensaje")?.value || "").trim();
+      const nombre = (formContacto.querySelector<HTMLInputElement>("#contacto-nombre")?.value || "").trim();
+      const email = (formContacto.querySelector<HTMLInputElement>("#contacto-email")?.value || "").trim();
+      const mensaje = (formContacto.querySelector<HTMLTextAreaElement>("#contacto-mensaje")?.value || "").trim();
 
-    if (!nombre || !email || !mensaje) {
-      feedbackEl.hidden = false;
-      feedbackEl.textContent = "Por favor, completa tu nombre, tu email y tu mensaje.";
-      feedbackEl.dataset.estado = "error";
-      return;
-    }
+      if (!nombre || !email || !mensaje) {
+        if (feedbackEl) {
+          feedbackEl.hidden = false;
+          feedbackEl.textContent = "Por favor, completa tu nombre, tu email y tu mensaje.";
+          feedbackEl.dataset.estado = "error";
+        }
+        return;
+      }
 
-    feedbackEl.hidden = false;
-    feedbackEl.textContent = "Gracias por escribirnos. Hemos recibido tu mensaje y te responderemos muy pronto.";
-    feedbackEl.dataset.estado = "ok";
-    formContacto.reset();
-  });
+      // Redirigir a la página de confirmación Contacto/recibido
+      window.location.href = "/contacto/recibido";
+    });
+  }
+
+  setupFormContacto();
+  document.addEventListener("astro:page-load", setupFormContacto);
 </script>
 
 <style>

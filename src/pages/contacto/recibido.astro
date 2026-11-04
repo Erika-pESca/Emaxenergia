@@ -1,0 +1,26 @@
+---
+// Página: Confirmación de Contacto (/contacto/recibido)
+// Basada fielmente en el boceto oficial de Contacto/recibido
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroContactoRecibido from "../../components/contacto/HeroContactoRecibido.astro";
+---
+
+<BaseLayout
+  title="Mensaje Recibido | Contacto EMAX Energía"
+  description="Hemos recibido tu consulta. Te respondemos a tu email lo antes posible. Si es urgente, llámanos directamente."
+  path="/contacto/recibido"
+>
+  <div class="contacto-recibido-page">
+    <HeroContactoRecibido />
+  </div>
+</BaseLayout>
+
+<style>
+  .contacto-recibido-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #06183b;
+  }
+</style>
+

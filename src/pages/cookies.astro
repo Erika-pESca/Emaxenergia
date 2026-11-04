@@ -1,0 +1,474 @@
+---
+// Página: Política de Cookies
+// Diseño: Hero institucional oscuro + cápsulas de navegación + tarjeta de control de consentimiento + tabla técnica
+// Contenido: Texto técnico oficial del borrador v12.16 con etiquetas [PENDIENTE] y tabla exacta
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Política de cookies · EMAX Energía"
+  description="Política de cookies de EMAX Energía. Qué almacenamiento y cookies guarda esta web en tu navegador, durante cuánto tiempo y cómo cambiar tu elección."
+  path="/cookies"
+>
+  <!-- Hero oscuro institucional con navegación de políticas -->
+  <section class="legal-hero" aria-labelledby="h1-cookies">
+    <div class="legal-hero-contenedor">
+      <span class="legal-kicker">NORMATIVA ESPAÑOLA · LSSI-CE Y GUÍA AEPD</span>
+      <h1 class="legal-h1" id="h1-cookies">POLÍTICA DE COOKIES</h1>
+      <p class="legal-subtitulo">
+        Qué guarda esta web en tu navegador, durante cuánto tiempo y cómo puedes cambiar tu elección cuando quieras.
+      </p>
+
+      <nav class="legal-nav-pills" aria-label="Páginas legales">
+        <a href="/aviso-legal" class="legal-pill">Aviso legal</a>
+        <a href="/privacidad" class="legal-pill">Privacidad</a>
+        <a href="/cookies" class="legal-pill is-active" aria-current="page">Cookies</a>
+        <button type="button" class="legal-pill legal-pill--btn" data-abrir-cookies>
+          Configurar cookies
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Cuerpo del documento legal con diseño en tarjeta -->
+  <section class="legal-cuerpo">
+    <div class="legal-contenedor">
+      <!-- Tarjeta interactiva para cambiar el consentimiento en un clic -->
+      <div class="cookies-control-card">
+        <div class="cookies-control-info">
+          <span class="cookies-control-badge">Panel de consentimiento</span>
+          <h2 class="cookies-control-titulo">Gestiona tus preferencias de cookies ahora mismo</h2>
+          <p class="cookies-control-desc">
+            Puedes abrir el panel de configuración en cualquier momento para activar o desactivar las cookies de analítica o dejar únicamente las necesarias.
+          </p>
+        </div>
+        <div class="cookies-control-acciones">
+          <button type="button" class="btn-configurar-ahora" data-abrir-cookies>
+            Configurar cookies
+          </button>
+        </div>
+      </div>
+
+      <!-- Prosa con contenido oficial v12.16 -->
+      <article class="legal-prosa">
+        <div class="legal-borrador-aviso">
+          <strong>BORRADOR TÉCNICO para la asesoría</strong> · no se publica · lo marcado entre corchetes falta o lo decide la asesoría
+        </div>
+
+        <h2>Qué guarda esta web en tu navegador</h2>
+        <p>
+          Usamos lo mínimo para que la web funcione y, solo si lo aceptas, analítica para saber qué páginas sirven y dónde se atasca la gente. <span class="pendiente">[PENDIENTE: confirmar que no hay cookies de publicidad (flag sinCookiesPublicidad)]</span>
+        </p>
+
+        <div class="tabla-scroll">
+          <table class="tabla-legal">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Para qué</th>
+                <th scope="col">Duración</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>emax:consentimiento</code></td>
+                <td>localStorage · técnico</td>
+                <td>Recordar tu elección de cookies.</td>
+                <td>12 meses</td>
+              </tr>
+              <tr>
+                <td><code>emax:funnel</code></td>
+                <td>sessionStorage · técnico</td>
+                <td>Mantener tus respuestas mientras completas el formulario. El nombre, el teléfono y el email se borran al registrar la solicitud.</td>
+                <td>Hasta cerrar la pestaña</td>
+              </tr>
+              <tr>
+                <td><code>emax:formulario</code></td>
+                <td>sessionStorage · técnico</td>
+                <td>Mostrarte lo que has enviado en Contacto o Canal Directo en la página de confirmación. Se borra al mostrarla.</td>
+                <td>Hasta cerrar la pestaña</td>
+              </tr>
+              <tr>
+                <td><code>emax:presolicitud:[referencia]</code></td>
+                <td>sessionStorage · técnico</td>
+                <td>No avisarnos dos veces cuando abres WhatsApp desde el formulario.</td>
+                <td>Hasta cerrar la pestaña</td>
+              </tr>
+              <tr>
+                <td><code>emax:origen</code></td>
+                <td>sessionStorage · técnico</td>
+                <td>Saber desde qué página empezaste la solicitud.</td>
+                <td>Hasta cerrar la pestaña</td>
+              </tr>
+              <tr>
+                <td><code>_ga, _ga_*</code></td>
+                <td>Cookie · analítica (Google Analytics 4)</td>
+                <td>Contar visitas y ver dónde se atasca la gente, sin identificarte. Solo si la aceptas.</td>
+                <td>Según Google (hasta 2 años)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Cómo cambiar tu elección</h2>
+        <p>
+          Puedes aceptar o rechazar la analítica en el aviso que aparece al entrar, y cambiar de opinión cuando quieras con el botón «Configurar cookies» de esta página o del pie de la web. Rechazar es igual de fácil que aceptar, y la web funciona igual.
+        </p>
+        <p>
+          También puedes borrar estos datos desde la configuración de tu navegador.
+        </p>
+
+        <div class="legal-accion-centrada">
+          <button type="button" class="btn-configurar-ahora" data-abrir-cookies>
+            Configurar cookies
+          </button>
+        </div>
+
+        <div class="legal-pie-actualizacion">
+          <p>
+            <strong>Transparencia técnica:</strong> No vendemos ni cedemos datos a redes de publicidad. Para más información sobre el tratamiento de tus datos, consulta nuestra <a href="/privacidad">Política de Privacidad</a>.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      #06183b 0%,
+      #05255d 26%,
+      #004aad 47%,
+      #0051be 50%,
+      #004aad 53%,
+      #05255d 74%,
+      #06183b 100%
+    );
+    border-radius: 0 0 28px 28px;
+    padding: calc(78px + 84px) 0 64px;
+    color: #ffffff;
+  }
+
+  .legal-hero-contenedor {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .legal-kicker {
+    display: inline-block;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #bae6fd;
+    background: rgba(37, 181, 248, 0.16);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .legal-h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    color: #25b5f8;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
+  .legal-subtitulo {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(0.98rem, 1.3vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: #e8f2ff;
+    max-width: 680px;
+    margin: 0 auto 30px;
+  }
+
+  .legal-nav-pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(4, 18, 46, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px;
+    border-radius: 999px;
+  }
+
+  .legal-pill {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #dbe8f8;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .legal-pill:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .legal-pill.is-active {
+    background: #14a9f5;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(20, 169, 245, 0.35);
+  }
+
+  .legal-pill--btn {
+    color: #7dd3fc;
+  }
+
+  /* Cuerpo */
+  .legal-cuerpo {
+    background: #e6ecf5;
+    padding: 64px 0 88px;
+  }
+
+  .legal-contenedor {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Control de cookies */
+  .cookies-control-card {
+    background: #06183b;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 36px;
+    box-shadow: 0 16px 40px rgba(4, 18, 46, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .cookies-control-info {
+    flex: 1;
+  }
+
+  .cookies-control-badge {
+    display: inline-block;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #38bdf8;
+    margin-bottom: 6px;
+  }
+
+  .cookies-control-titulo {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px;
+  }
+
+  .cookies-control-desc {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .btn-configurar-ahora {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #14a9f5;
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(20, 169, 245, 0.35);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn-configurar-ahora:hover {
+    background: #38bdf8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.45);
+  }
+
+  /* Prosa */
+  .legal-prosa {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: clamp(28px, 5vw, 48px);
+    box-shadow: 0 12px 34px rgba(6, 24, 59, 0.06);
+    border: 1px solid #d5e0f0;
+    font-family: "Poppins", sans-serif;
+    color: #1e293b;
+  }
+
+  .legal-borrador-aviso {
+    background: #fff8eb;
+    border: 1.5px dashed #f59e0b;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 0.84rem;
+    color: #92400e;
+    line-height: 1.45;
+  }
+
+  .pendiente {
+    color: #b91c1c;
+    background: #fee2e2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.92em;
+  }
+
+  .legal-prosa h2 {
+    font-size: 1.22rem;
+    font-weight: 800;
+    color: #06183b;
+    margin: 32px 0 12px;
+    line-height: 1.3;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e6f0fc;
+  }
+
+  .legal-prosa h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .legal-prosa p {
+    font-size: 0.92rem;
+    line-height: 1.72;
+    color: #334155;
+    margin: 0 0 14px;
+  }
+
+  .legal-prosa a {
+    color: #0051be;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal-prosa a:hover {
+    color: #14a9f5;
+  }
+
+  .legal-accion-centrada {
+    margin: 28px 0;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  /* Tabla Legal */
+  .tabla-scroll {
+    overflow-x: auto;
+    margin: 18px 0 28px;
+    border: 1px solid #d5e0f0;
+    border-radius: 12px;
+  }
+
+  .tabla-legal {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+    background: #ffffff;
+  }
+
+  .tabla-legal th {
+    background: #f1f6fd;
+    color: #06183b;
+    font-weight: 700;
+    padding: 12px 16px;
+    border-bottom: 1.5px solid #d5e0f0;
+    white-space: nowrap;
+  }
+
+  .tabla-legal td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eef3f9;
+    vertical-align: top;
+    line-height: 1.5;
+    color: #334155;
+  }
+
+  .tabla-legal tr:last-child td {
+    border-bottom: none;
+  }
+
+  .tabla-legal code {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.84rem;
+    background: #edf4fe;
+    color: #004aad;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .legal-pie-actualizacion {
+    margin-top: 32px;
+    padding: 18px 22px;
+    background: #f0f6ff;
+    border-left: 4px solid #0051be;
+    border-radius: 10px;
+  }
+
+  .legal-pie-actualizacion p {
+    margin: 0;
+    font-size: 0.86rem;
+    color: #1e3a5f;
+  }
+
+  @media (max-width: 768px) {
+    .cookies-control-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 22px 20px;
+    }
+
+    .legal-hero {
+      padding: calc(78px + 52px) 0 48px;
+    }
+
+    .legal-nav-pills {
+      border-radius: 18px;
+      padding: 8px;
+    }
+
+    .legal-cuerpo {
+      padding: 40px 0 64px;
+    }
+  }
+</style>

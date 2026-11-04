@@ -1,0 +1,576 @@
+---
+// Banner flotante de cookies + panel modal de configuración
+// Diseño Premium EMAX: tarjeta flotante con sombras suaves, bordes redondeados y botones píldora oficiales
+---
+
+<section class="ck" data-cookies hidden aria-labelledby="ck-t">
+  <div class="ck__caja">
+    <div class="ck__header">
+      <div class="ck__badge">
+        <span class="ck__badge-txt">Privacidad y cookies</span>
+      </div>
+    </div>
+
+    <h3 class="ck__t" id="ck-t">Control de cookies</h3>
+
+    <p class="ck__texto">
+      Usamos cookies técnicas indispensables para que la web funcione. Si nos autorizas, también usamos cookies de analítica para saber qué contenidos te son útiles y mejorar el servicio.
+    </p>
+
+    <div class="ck__botones">
+      <button type="button" class="ck__b ck__b--aceptar" data-ck="todas">
+        Aceptar todas
+      </button>
+      <button type="button" class="ck__b ck__b--rechazar" data-ck="ninguna">
+        Rechazar todas
+      </button>
+    </div>
+
+    <div class="ck__footer">
+      <button type="button" class="ck__btn-configurar" data-abrir-cookies>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>Configurar</span>
+      </button>
+
+      <a href="/cookies" class="ck__enlace-politica">
+        Política de cookies →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Panel modal de configuración avanzada de cookies -->
+<dialog class="ck-panel" data-cookies-panel data-sin-captacion aria-labelledby="ckp-t">
+  <form method="dialog" class="ck-panel__caja">
+    <div class="ck-panel__cabecera">
+      <div>
+        <span class="ck__badge-txt-mini">PREFERENCIAS</span>
+        <h3 class="ck-panel__t" id="ckp-t">Elige qué cookies aceptas</h3>
+      </div>
+      <button type="button" class="ck-panel__cerrar" data-cerrar-cookies-panel aria-label="Cerrar ventana">
+        ✕
+      </button>
+    </div>
+
+    <div class="ck-panel__fila">
+      <div class="ck-panel__fila-texto">
+        <strong>Necesarias · siempre activas</strong>
+        <p>Hacen que la web funcione correctamente: recordar tu elección de cookies o mantener tus respuestas mientras completas los formularios.</p>
+      </div>
+      <span class="ck-panel__tag-fija">Obligatorias</span>
+    </div>
+
+    <label class="ck-panel__fila ck-panel__fila--opcion">
+      <div class="ck-panel__fila-texto">
+        <strong>Analítica</strong>
+        <p>Nos indican de forma anónima cuántas personas visitan cada página para mejorar la web y el servicio técnico.</p>
+      </div>
+      <input type="checkbox" data-ck-analitica class="ck-panel__check" />
+    </label>
+
+    <div class="ck-panel__acciones">
+      <button type="submit" class="ck__b ck__b--aceptar" data-ck="guardar" value="guardar">
+        Guardar mi elección
+      </button>
+      <a href="/cookies" class="ck-panel__link-info">Más información en Política de cookies</a>
+    </div>
+  </form>
+</dialog>
+
+<script is:inline>
+  (function () {
+    var CLAVE = "emax:consentimiento";
+    var banner = document.querySelector("[data-cookies]");
+    var modal = document.querySelector("[data-cookies-panel]");
+    var checkAnalitica = document.querySelector("[data-ck-analitica]");
+
+    // Inicializar Google Consent Mode v2 por defecto en denied
+    window.dataLayer = window.dataLayer || [];
+    window.gtag =
+      window.gtag ||
+      function () {
+        window.dataLayer.push(arguments);
+      };
+
+    window.gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      functionality_storage: "granted",
+      security_storage: "granted",
+      wait_for_update: 500,
+    });
+
+    function leerConsentimiento() {
+      try {
+        var raw = localStorage.getItem(CLAVE);
+        if (!raw) return null;
+        var datos = JSON.parse(raw);
+        if (datos && datos.caduca && Date.now() > datos.caduca) {
+          localStorage.removeItem(CLAVE);
+          return null;
+        }
+        return datos;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function aplicarYGuardar(analiticaActiva) {
+      try {
+        localStorage.setItem(
+          CLAVE,
+          JSON.stringify({
+            analitica: !!analiticaActiva,
+            caduca: Date.now() + 31536000000,
+            version: 1,
+          })
+        );
+      } catch (e) {}
+
+      if (typeof window.gtag === "function") {
+        window.gtag("consent", "update", {
+          analytics_storage: analiticaActiva ? "granted" : "denied",
+        });
+      }
+
+      if (banner) banner.hidden = true;
+      document.documentElement.classList.remove("con-banner");
+    }
+
+    // Comprobar si ya existe consentimiento guardado
+    var guardado = leerConsentimiento();
+    if (!guardado) {
+      if (banner) banner.hidden = false;
+      document.documentElement.classList.add("con-banner");
+    } else {
+      if (typeof window.gtag === "function") {
+        window.gtag("consent", "update", {
+          analytics_storage: guardado.analitica ? "granted" : "denied",
+        });
+      }
+    }
+
+    // Botones del banner
+    if (banner) {
+      var btnTodas = banner.querySelector('[data-ck="todas"]');
+      if (btnTodas) {
+        btnTodas.addEventListener("click", function () {
+          aplicarYGuardar(true);
+        });
+      }
+
+      var btnNinguna = banner.querySelector('[data-ck="ninguna"]');
+      if (btnNinguna) {
+        btnNinguna.addEventListener("click", function () {
+          aplicarYGuardar(false);
+        });
+      }
+    }
+
+    // Abridor de modal desde cualquier enlace o botón data-abrir-cookies
+    document.addEventListener("click", function (e) {
+      var target = e.target;
+      if (!(target instanceof Element)) return;
+      var trigger = target.closest('[data-abrir-cookies], a[href="#configurar-cookies"]');
+      if (trigger) {
+        e.preventDefault();
+        var c = leerConsentimiento();
+        if (checkAnalitica) {
+          checkAnalitica.checked = !!(c && c.analitica);
+        }
+        if (modal) {
+          if (typeof modal.showModal === "function") {
+            modal.showModal();
+          } else {
+            modal.setAttribute("open", "");
+          }
+        }
+      }
+    });
+
+    if (modal) {
+      var btnCerrar = modal.querySelector("[data-cerrar-cookies-panel]");
+      if (btnCerrar) {
+        btnCerrar.addEventListener("click", function () {
+          if (typeof modal.close === "function") {
+            modal.close();
+          } else {
+            modal.removeAttribute("open");
+          }
+        });
+      }
+
+      modal.addEventListener("click", function (e) {
+        var rect = modal.getBoundingClientRect();
+        var isInDialog =
+          rect.top <= e.clientY &&
+          e.clientY <= rect.top + rect.height &&
+          rect.left <= e.clientX &&
+          e.clientX <= rect.left + rect.width;
+        if (!isInDialog) {
+          if (typeof modal.close === "function") {
+            modal.close();
+          } else {
+            modal.removeAttribute("open");
+          }
+        }
+      });
+
+      var formModal = modal.querySelector("form");
+      if (formModal) {
+        formModal.addEventListener("submit", function (e) {
+          e.preventDefault();
+          aplicarYGuardar(checkAnalitica ? checkAnalitica.checked : false);
+          if (typeof modal.close === "function") {
+            modal.close();
+          } else {
+            modal.removeAttribute("open");
+          }
+        });
+      }
+
+      modal.addEventListener("close", function () {
+        if (modal.returnValue === "guardar") {
+          aplicarYGuardar(checkAnalitica ? checkAnalitica.checked : false);
+        }
+      });
+
+      var btnGuardar = modal.querySelector('[data-ck="guardar"]');
+      if (btnGuardar) {
+        btnGuardar.addEventListener("click", function () {
+          modal.returnValue = "guardar";
+        });
+      }
+    }
+  })();
+</script>
+
+<style>
+  /* =========================================================================
+     BANNER FLOTANTE DE COOKIES - ESTILO PREMIUM EMAX
+     ========================================================================= */
+  .ck {
+    position: fixed;
+    z-index: 9999;
+    left: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    width: min(440px, calc(100vw - 32px));
+    font-family: var(--f-texto, "Inter", sans-serif);
+    animation: ckSubir 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes ckSubir {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ck[hidden] {
+    display: none !important;
+  }
+
+  .ck__caja {
+    background: #ffffff;
+    border: 1px solid #d5dfed;
+    border-radius: 20px;
+    padding: 22px 24px;
+    box-shadow: 0 16px 44px rgba(6, 24, 59, 0.18);
+    color: #06183b;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ck__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ck__badge {
+    display: inline-flex;
+    align-items: center;
+    background: #e8f1fc;
+    color: #004aad;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .ck__t {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #06183b;
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .ck__texto {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #4a5d78;
+    margin: 0;
+  }
+
+  .ck__botones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .ck__b {
+    min-height: 42px;
+    padding: 0 16px;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .ck__b--aceptar {
+    background: #004aad;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 74, 173, 0.3);
+  }
+
+  .ck__b--aceptar:hover {
+    background: #003b8a;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 74, 173, 0.4);
+  }
+
+  .ck__b--rechazar {
+    background: #ffffff;
+    color: #415470;
+    border: 1.5px solid #d5dfed;
+  }
+
+  .ck__b--rechazar:hover {
+    background: #f1f5fb;
+    color: #06183b;
+    border-color: #cbd5e1;
+  }
+
+  .ck__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px solid #edf2f7;
+    font-size: 0.8125rem;
+    margin-top: 2px;
+  }
+
+  .ck__btn-configurar {
+    background: none;
+    border: none;
+    padding: 4px 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #004aad;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+  }
+
+  .ck__btn-configurar:hover {
+    text-decoration: underline;
+    color: #003b8a;
+  }
+
+  .ck__enlace-politica {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    transition: color 0.15s ease;
+  }
+
+  .ck__enlace-politica:hover {
+    color: #004aad;
+    text-decoration: underline;
+  }
+
+  /* MODAL DE CONFIGURACIÓN */
+  .ck-panel {
+    border-radius: 24px;
+    border: 1px solid #d5dfed;
+    width: min(540px, calc(100vw - 32px));
+    padding: 0;
+    box-shadow: 0 24px 64px rgba(6, 24, 59, 0.3);
+    font-family: var(--f-texto, "Inter", sans-serif);
+    color: #06183b;
+    overflow: hidden;
+  }
+
+  .ck-panel::backdrop {
+    background: rgba(6, 24, 59, 0.65);
+    backdrop-filter: blur(3px);
+  }
+
+  .ck-panel__caja {
+    padding: 28px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 0;
+    background: #ffffff;
+  }
+
+  .ck-panel__cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .ck__badge-txt-mini {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #004aad;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .ck-panel__t {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #06183b;
+    margin: 0;
+  }
+
+  .ck-panel__cerrar {
+    background: #f1f5fb;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 0.875rem;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+
+  .ck-panel__cerrar:hover {
+    background: #e2e8f0;
+    color: #06183b;
+  }
+
+  .ck-panel__fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    background: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #eef2f6;
+  }
+
+  .ck-panel__fila--opcion {
+    cursor: pointer;
+  }
+
+  .ck-panel__fila-texto strong {
+    display: block;
+    font-size: 0.9375rem;
+    color: #06183b;
+    margin-bottom: 3px;
+  }
+
+  .ck-panel__fila-texto p {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: #4a5d78;
+    margin: 0;
+  }
+
+  .ck-panel__tag-fija {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #e2eaf5;
+    color: #004aad;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .ck-panel__check {
+    width: 22px;
+    height: 22px;
+    accent-color: #004aad;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ck-panel__acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-top: 6px;
+  }
+
+  .ck-panel__acciones .ck__b {
+    width: 100%;
+    min-height: 46px;
+    font-size: 0.9375rem;
+  }
+
+  .ck-panel__link-info {
+    font-size: 0.8125rem;
+    color: #64748b;
+    text-decoration: underline;
+  }
+
+  .ck-panel__link-info:hover {
+    color: #004aad;
+  }
+
+  /* Dispositivos móviles */
+  @media (max-width: 480px) {
+    .ck {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      width: auto;
+    }
+
+    .ck__caja {
+      padding: 18px 18px;
+    }
+
+    .ck__botones {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

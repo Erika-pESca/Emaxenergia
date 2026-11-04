@@ -1,0 +1,984 @@
+---
+// Página: Canal Directo para Profesionales y Colaboradores (/canal-directo)
+// Diseño: Hero institucional oscuro degradado + Tarjetas para "Para quién es" + Bloques "Qué recibe tu cliente" y "Con su permiso, siempre" + Formulario "Hablemos" estilizado
+// Contenido: Texto exacto oficial del borrador v12.16 con [LEGAL: validar] y [LEGAL: 31 L2]
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const whatsappColaboradorHref =
+  "https://wa.me/34933949343?text=" +
+  encodeURIComponent(
+    "Hola EMAX Energía, soy profesional / colaborador y me interesa el Canal Directo."
+  );
+
+const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
+  "Canal Directo · Colaboración profesional con EMAX Energía"
+)}`;
+---
+
+<BaseLayout
+  title="Canal Directo · Colabora con EMAX Energía"
+  description="Recomienda a tus clientes a alguien que mira antes de vender. Para profesionales que asesoran a empresas y quieren recomendar a alguien que mire su consumo antes de proponerles una tarifa."
+  path="/canal-directo"
+>
+  <!-- Hero institucional oscuro degradado -->
+  <section class="cd-hero" aria-labelledby="h1-canal-directo">
+    <div class="cd-hero-contenedor">
+      <span class="cd-kicker">CANAL DIRECTO</span>
+      <h1 class="cd-h1" id="h1-canal-directo">
+        Recomienda a tus clientes a alguien que mira antes de vender.
+      </h1>
+      <p class="cd-subtitulo">
+        Para profesionales que asesoran a empresas y quieren recomendar a alguien que mire su consumo antes de proponerles una tarifa.
+      </p>
+
+      <!-- Salidas directas del hero -->
+      <div class="cd-hero-botones">
+        <a href="#hablemos" class="cd-btn cd-btn--primario">
+          Quiero canal directo
+          <span class="cd-btn-flecha" aria-hidden="true">↓</span>
+        </a>
+        <a
+          href={whatsappColaboradorHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cd-btn cd-btn--whatsapp"
+        >
+          Hablar por WhatsApp
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href={emailColaboradorHref} class="cd-btn cd-btn--secundario">
+          Escribir a {site.email}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cuerpo de contenido -->
+  <div class="cd-cuerpo">
+    <div class="cd-contenedor">
+      <!-- 1. Para quién es -->
+      <section class="cd-seccion" aria-labelledby="h2-para">
+        <header class="cd-seccion-header">
+          <span class="cd-seccion-kicker">PERFILES PROFESIONALES</span>
+          <h2 class="cd-seccion-h2" id="h2-para">Para quién es</h2>
+          <p class="cd-seccion-sub">
+            Diseñado para quienes asesoran a negocios y conocen el peso de sus facturas cada mes.
+          </p>
+        </header>
+
+        <div class="cd-perfiles-grid">
+          <!-- Gestorías y asesorías -->
+          <article class="cd-perfil-card">
+            <div class="cd-perfil-icono-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <h3 class="cd-perfil-titulo">Gestorías y asesorías</h3>
+            <p class="cd-perfil-texto">
+              Ves las facturas de tus clientes cada mes y sabes cuáles pesan.
+            </p>
+          </article>
+
+          <!-- Administradores de fincas -->
+          <article class="cd-perfil-card">
+            <div class="cd-perfil-icono-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h3 class="cd-perfil-titulo">Administradores de fincas</h3>
+            <p class="cd-perfil-texto">
+              Llevas comunidades y, a menudo, los locales de sus bajos.
+            </p>
+          </article>
+
+          <!-- Instaladores -->
+          <article class="cd-perfil-card">
+            <div class="cd-perfil-icono-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="cd-perfil-titulo">Instaladores</h3>
+            <p class="cd-perfil-texto">
+              Entras en naves, cocinas y tiendas, y ves qué equipos tienen y cómo trabajan.
+            </p>
+          </article>
+
+          <!-- Colaboradores comerciales -->
+          <article class="cd-perfil-card">
+            <div class="cd-perfil-icono-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3 class="cd-perfil-titulo">Colaboradores comerciales</h3>
+            <p class="cd-perfil-texto">
+              Tienes cartera de empresas y quieres ofrecerles algo que se pueda explicar.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 2. Qué recibe tu cliente y Con su permiso, siempre -->
+      <section class="cd-bloques-grid" aria-labelledby="h2-cliente">
+        <!-- Bloque Qué recibe tu cliente -->
+        <article class="cd-bloque-card">
+          <span class="cd-bloque-tag">VALOR DIFERENCIAL</span>
+          <h2 class="cd-bloque-titulo" id="h2-cliente">Qué recibe tu cliente</h2>
+          <p class="cd-bloque-texto">
+            Lo mismo que cualquier empresa que llega a EMAX: leemos cómo consume antes de proponerle nada, le explicamos las decisiones de su tarifa por escrito y una persona le responde después de firmar.
+          </p>
+          <div class="cd-bloque-enlace-wrap">
+            <a href="/metodo" class="cd-bloque-enlace">
+              <span>Cómo trabajamos</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Bloque Con su permiso, siempre -->
+        <article class="cd-bloque-card cd-bloque-card--permiso" aria-labelledby="h2-permiso">
+          <span class="cd-bloque-tag cd-bloque-tag--alerta">GARANTÍA Y ÉTICA</span>
+          <h2 class="cd-bloque-titulo" id="h2-permiso">
+            Con su permiso, siempre <span class="pendiente">[LEGAL: validar]</span>
+          </h2>
+          <p class="cd-bloque-texto">
+            Solo contactamos con quien ha aceptado que lo hagamos. No hacemos llamadas que tu cliente no haya pedido, y nadie habla en nombre de EMAX sin que lo sepa. Si buscas un programa para captar por volumen, este no es el tuyo.
+          </p>
+        </article>
+      </section>
+
+      <!-- 3. Formulario Hablemos -->
+      <section class="cd-hablemos-seccion" id="hablemos" aria-labelledby="h2-hablemos">
+        <div class="cd-hablemos-layout">
+          <!-- Columna Izquierda: Información de acompañamiento -->
+          <div class="cd-hablemos-info">
+            <span class="cd-seccion-kicker">PROPUESTA DE CANAL DIRECTO</span>
+            <h2 class="cd-hablemos-titulo" id="h2-hablemos">Hablemos</h2>
+            <p class="cd-hablemos-sub">
+              Rellena este formulario para que podamos contactar contigo y explicarte los detalles de colaboración, acuerdos y proceso técnico.
+            </p>
+
+            <div class="cd-info-vias">
+              <div class="cd-via-item">
+                <span class="cd-via-icon" aria-hidden="true">📞</span>
+                <div>
+                  <strong>Teléfono directo</strong>
+                  <a href={site.phoneHref} class="cd-via-enlace">{site.phone}</a>
+                </div>
+              </div>
+
+              <div class="cd-via-item">
+                <span class="cd-via-icon" aria-hidden="true">✉️</span>
+                <div>
+                  <strong>Email para profesionales</strong>
+                  <a href={emailColaboradorHref} class="cd-via-enlace">{site.email}</a>
+                </div>
+              </div>
+
+              <div class="cd-via-item">
+                <span class="cd-via-icon" aria-hidden="true">💬</span>
+                <div>
+                  <strong>WhatsApp directo</strong>
+                  <a href={whatsappColaboradorHref} target="_blank" rel="noopener noreferrer" class="cd-via-enlace">
+                    Iniciar conversación técnica →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Tarjeta de formulario con diseño oficial EMAX -->
+          <div class="cd-form-contenedor">
+            <div class="cd-form-card">
+              <div class="cd-form-card-head">
+                <h3 class="cd-form-tit">Solicitar Canal Directo</h3>
+                <p class="cd-form-bajada">Déjanos tus datos profesionales y te responderemos en el mismo día.</p>
+              </div>
+
+              <form
+                class="cd-form"
+                id="form-canal-directo"
+                action="/canal-directo/enviado"
+                method="GET"
+                data-form-simple="canal"
+                novalidate
+              >
+                <!-- Tu nombre -->
+                <div class="cd-campo">
+                  <label for="cd-nombre" class="cd-label">Tu nombre *</label>
+                  <input
+                    id="cd-nombre"
+                    name="nombre"
+                    type="text"
+                    class="cd-input"
+                    autocomplete="name"
+                    required
+                    placeholder="Ej. Carmen Navarro"
+                  />
+                  <p class="cd-error" id="err-canal-nombre" data-error-de="nombre" hidden></p>
+                </div>
+
+                <!-- Tu empresa o despacho -->
+                <div class="cd-campo">
+                  <label for="cd-empresa" class="cd-label">Tu empresa o despacho *</label>
+                  <input
+                    id="cd-empresa"
+                    name="empresa"
+                    type="text"
+                    class="cd-input"
+                    autocomplete="organization"
+                    required
+                    placeholder="Ej. Asesoría Navarro & Asociados"
+                  />
+                  <p class="cd-error" id="err-canal-empresa" data-error-de="empresa" hidden></p>
+                </div>
+
+                <!-- ¿A qué te dedicas? -->
+                <div class="cd-campo">
+                  <label for="cd-perfil" class="cd-label">¿A qué te dedicas? *</label>
+                  <select id="cd-perfil" name="perfil" class="cd-select" required>
+                    <option value="">Elige una opción</option>
+                    <option value="gestoria">Gestoría o asesoría</option>
+                    <option value="fincas">Administración de fincas</option>
+                    <option value="instalaciones">Instalaciones</option>
+                    <option value="comercial">Colaboración comercial</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                  <p class="cd-error" id="err-canal-perfil" data-error-de="perfil" hidden></p>
+                </div>
+
+                <!-- Provincia -->
+                <div class="cd-campo">
+                  <label for="cd-provincia" class="cd-label">Provincia *</label>
+                  <input
+                    id="cd-provincia"
+                    name="provincia"
+                    type="text"
+                    class="cd-input"
+                    autocomplete="address-level2"
+                    required
+                    placeholder="Ej. Barcelona, Madrid, Valencia..."
+                  />
+                  <p class="cd-error" id="err-canal-provincia" data-error-de="provincia" hidden></p>
+                </div>
+
+                <!-- Tu email -->
+                <div class="cd-campo">
+                  <label for="cd-email" class="cd-label">Tu email *</label>
+                  <input
+                    id="cd-email"
+                    name="email"
+                    type="email"
+                    inputmode="email"
+                    class="cd-input"
+                    autocomplete="email"
+                    required
+                    placeholder="tu@empresa.com"
+                  />
+                  <p class="cd-error" id="err-canal-email" data-error-de="email" hidden></p>
+                </div>
+
+                <!-- Tu teléfono -->
+                <div class="cd-campo">
+                  <label for="cd-tel" class="cd-label">Tu teléfono *</label>
+                  <input
+                    id="cd-tel"
+                    name="telefono"
+                    type="tel"
+                    inputmode="tel"
+                    class="cd-input"
+                    autocomplete="tel"
+                    required
+                    placeholder="600 000 000"
+                  />
+                  <p class="cd-error" id="err-canal-telefono" data-error-de="telefono" hidden></p>
+                </div>
+
+                <!-- Web (campo trampa antispam oculto) -->
+                <div class="cd-trampa" aria-hidden="true">
+                  <label for="cd-web">Web</label>
+                  <input id="cd-web" name="web" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <!-- Aviso legal con corchete exacto de borrador -->
+                <p class="cd-legal">
+                  Usaremos tus datos para hablar contigo sobre el Canal Directo. <a href="/privacidad" class="cd-legal-enlace">Política de privacidad</a> <span class="pendiente">[LEGAL: 31 L2]</span>
+                </p>
+
+                <!-- Mensaje de error general de envío -->
+                <p class="cd-error-envio" data-error-envio role="alert" hidden></p>
+
+                <!-- Botón de acción -->
+                <button type="submit" class="cd-btn-submit" id="cd-btn-submit">
+                  <span>Quiero canal directo</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  // Script de envío e integración del Canal Directo
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("form-canal-directo");
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Comprobar trampa antispam
+      var trampa = form.querySelector("#cd-web");
+      if (trampa && trampa.value) {
+        return; // Antispam silencioso
+      }
+
+      var inputNombre = form.querySelector("#cd-nombre");
+      var inputEmpresa = form.querySelector("#cd-empresa");
+      var selectPerfil = form.querySelector("#cd-perfil");
+      var inputProvincia = form.querySelector("#cd-provincia");
+      var inputEmail = form.querySelector("#cd-email");
+      var inputTel = form.querySelector("#cd-tel");
+
+      var nombre = inputNombre ? inputNombre.value.trim() : "";
+      var empresa = inputEmpresa ? inputEmpresa.value.trim() : "";
+      var perfil = selectPerfil ? selectPerfil.value : "";
+      var provincia = inputProvincia ? inputProvincia.value.trim() : "";
+      var email = inputEmail ? inputEmail.value.trim() : "";
+      var telefono = inputTel ? inputTel.value.trim() : "";
+
+      var hayError = false;
+
+      function checkField(val, idErr, msg) {
+        var elErr = document.getElementById(idErr);
+        if (!val) {
+          if (elErr) {
+            elErr.textContent = msg;
+            elErr.hidden = false;
+          }
+          hayError = true;
+        } else {
+          if (elErr) elErr.hidden = true;
+        }
+      }
+
+      checkField(nombre, "err-canal-nombre", "Escribe tu nombre.");
+      checkField(empresa, "err-canal-empresa", "Indica tu empresa o despacho.");
+      checkField(perfil, "err-canal-perfil", "Selecciona tu actividad.");
+      checkField(provincia, "err-canal-provincia", "Escribe tu provincia.");
+      checkField(email, "err-canal-email", "Escribe un email de contacto válido.");
+      checkField(telefono, "err-canal-telefono", "Indica tu teléfono de contacto.");
+
+      if (hayError) {
+        var primerErr = form.querySelector(".cd-error:not([hidden])");
+        if (primerErr) {
+          var inputAsociado = primerErr.previousElementSibling;
+          if (inputAsociado && typeof inputAsociado.focus === "function") {
+            inputAsociado.focus();
+          }
+        }
+        return;
+      }
+
+      // Guardar en sessionStorage para que /canal-directo/enviado lo muestre de forma personalizada
+      try {
+        sessionStorage.setItem(
+          "emax:formulario",
+          JSON.stringify({
+            tipo: "canal",
+            nombre: nombre,
+            empresa: empresa,
+            perfil: perfil,
+            provincia: provincia,
+            email: email,
+            telefono: telefono
+          })
+        );
+      } catch (err) {
+        console.warn("Storage error", err);
+      }
+
+      // Redirigir a la página de confirmación oficial
+      window.location.href = "/canal-directo/enviado";
+    });
+  });
+</script>
+
+<style>
+  /* =========================================================================
+     ESTILOS CANAL DIRECTO - DISEÑO ELEGANTE PREMIUM EMAX
+     ========================================================================= */
+
+  /* HERO INSTITUCIONAL OSCURO */
+  .cd-hero {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      #06183b 0%,
+      #05255d 26%,
+      #004aad 47%,
+      #0051be 50%,
+      #004aad 53%,
+      #05255d 74%,
+      #06183b 100%
+    );
+    border-radius: 0 0 28px 28px;
+    padding: calc(78px + 84px) 0 68px;
+    color: #ffffff;
+    box-shadow: 0 10px 30px rgba(6, 24, 59, 0.25);
+  }
+
+  .cd-hero-contenedor {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .cd-kicker {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #19a9f0;
+    margin-bottom: 12px;
+  }
+
+  .cd-h1 {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 0 auto 16px;
+    max-width: 820px;
+  }
+
+  .cd-subtitulo {
+    font-size: clamp(1rem, 1.8vw, 1.1875rem);
+    line-height: 1.6;
+    color: #c7d8f2;
+    max-width: 760px;
+    margin: 0 auto 32px;
+  }
+
+  .cd-hero-botones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .cd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 9999px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .cd-btn--primario {
+    background: #004aad;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.35);
+  }
+
+  .cd-btn--primario:hover {
+    background: #003b8a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 74, 173, 0.45);
+  }
+
+  .cd-btn-flecha {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .cd-btn--whatsapp {
+    background: #25d366;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+  }
+
+  .cd-btn--whatsapp:hover {
+    background: #1eb956;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  }
+
+  .cd-btn--secundario {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .cd-btn--secundario:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+  }
+
+  /* CUERPO Y CONTENEDOR */
+  .cd-cuerpo {
+    width: 100%;
+    background-color: #e6ecf5;
+    padding: 64px 0 96px;
+  }
+
+  .cd-contenedor {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  /* CABECERAS DE SECCIÓN */
+  .cd-seccion-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 36px;
+  }
+
+  .cd-seccion-kicker {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #004aad;
+    margin-bottom: 8px;
+  }
+
+  .cd-seccion-h2 {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: #06183b;
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+
+  .cd-seccion-sub {
+    font-size: 1rem;
+    color: #4a5d78;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* 1. PERFILES GRID */
+  .cd-perfiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .cd-perfil-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #d5dfed;
+    padding: 28px 24px;
+    box-shadow: 0 4px 16px rgba(6, 24, 59, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cd-perfil-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(6, 24, 59, 0.08);
+  }
+
+  .cd-perfil-icono-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #e8f1fc;
+    color: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .cd-perfil-titulo {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #06183b;
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+
+  .cd-perfil-texto {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: #4a5d78;
+    margin: 0;
+  }
+
+  /* 2. BLOQUES DE VALOR Y GARANTÍA */
+  .cd-bloques-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 840px) {
+    .cd-bloques-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .cd-bloque-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #d5dfed;
+    padding: 36px 32px;
+    box-shadow: 0 6px 20px rgba(6, 24, 59, 0.05);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cd-bloque-card--permiso {
+    border-left: 4px solid #004aad;
+  }
+
+  .cd-bloque-tag {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #004aad;
+    background: #e0edfe;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    margin-bottom: 16px;
+  }
+
+  .cd-bloque-tag--alerta {
+    color: #05255d;
+    background: #e2eaf5;
+  }
+
+  .cd-bloque-titulo {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #06183b;
+    margin: 0 0 14px;
+    line-height: 1.3;
+  }
+
+  .cd-bloque-texto {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #415470;
+    margin: 0 0 20px;
+    flex-grow: 1;
+  }
+
+  .cd-bloque-enlace-wrap {
+    margin-top: auto;
+  }
+
+  .cd-bloque-enlace {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: #004aad;
+    text-decoration: none;
+    transition: gap 0.15s ease;
+  }
+
+  .cd-bloque-enlace:hover {
+    gap: 10px;
+    text-decoration: underline;
+  }
+
+  /* 3. SECCIÓN HABLEMOS Y FORMULARIO */
+  .cd-hablemos-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .cd-hablemos-layout {
+      grid-template-columns: 1fr 1.25fr;
+      gap: 48px;
+    }
+  }
+
+  .cd-hablemos-info {
+    padding-top: 8px;
+  }
+
+  .cd-hablemos-titulo {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    color: #06183b;
+    margin: 8px 0 14px;
+  }
+
+  .cd-hablemos-sub {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: #4a5d78;
+    margin: 0 0 32px;
+  }
+
+  .cd-info-vias {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cd-via-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #d5dfed;
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(6, 24, 59, 0.03);
+  }
+
+  .cd-via-icon {
+    font-size: 1.35rem;
+    flex-shrink: 0;
+  }
+
+  .cd-via-item strong {
+    display: block;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 2px;
+  }
+
+  .cd-via-enlace {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #004aad;
+    text-decoration: none;
+  }
+
+  .cd-via-enlace:hover {
+    text-decoration: underline;
+  }
+
+  /* TARJETA DEL FORMULARIO */
+  .cd-form-contenedor {
+    width: 100%;
+  }
+
+  .cd-form-card {
+    background: #071a3c;
+    border-radius: 24px;
+    padding: 36px 32px;
+    color: #ffffff;
+    box-shadow: 0 12px 36px rgba(6, 24, 59, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  @media (max-width: 600px) {
+    .cd-form-card {
+      padding: 24px 20px;
+      border-radius: 20px;
+    }
+  }
+
+  .cd-form-card-head {
+    margin-bottom: 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 20px;
+  }
+
+  .cd-form-tit {
+    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 6px;
+  }
+
+  .cd-form-bajada {
+    font-size: 0.875rem;
+    color: #a8bcd8;
+    margin: 0;
+  }
+
+  .cd-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .cd-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cd-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #e2edfd;
+  }
+
+  .cd-input,
+  .cd-select {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transition: all 0.2s ease;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+
+  .cd-input::placeholder {
+    color: #7995ba;
+  }
+
+  .cd-select option {
+    background-color: #071a3c;
+    color: #ffffff;
+  }
+
+  .cd-input:focus,
+  .cd-select:focus {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: #19a9f0;
+    box-shadow: 0 0 0 3px rgba(25, 169, 240, 0.25);
+  }
+
+  .cd-trampa {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .cd-legal {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: #9cb5d6;
+    margin: 6px 0 4px;
+  }
+
+  .cd-legal-enlace {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cd-legal-enlace:hover {
+    color: #19a9f0;
+  }
+
+  .cd-error {
+    font-size: 0.75rem;
+    color: #ff8585;
+    margin: 2px 0 0;
+    font-weight: 500;
+  }
+
+  .cd-error-envio {
+    color: #ff8585;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .cd-btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 52px;
+    margin-top: 8px;
+    background: #004aad;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 74, 173, 0.4);
+    transition: all 0.2s ease;
+  }
+
+  .cd-btn-submit:hover {
+    background: #003b8a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 74, 173, 0.55);
+  }
+
+  /* ETIQUETAS DE ASESORÍA / PENDIENTE TÉCNICO OFICIAL */
+  .pendiente {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #c9513e;
+    background: #ffedea;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+
+  .cd-bloque-card--permiso .pendiente {
+    color: #b93822;
+    background: #ffedea;
+  }
+
+  .cd-legal .pendiente {
+    color: #ff9d8f;
+    background: rgba(255, 110, 90, 0.15);
+  }
+</style>

@@ -1,0 +1,479 @@
+---
+// Página: Política de Privacidad
+// Diseño: Hero institucional oscuro + cápsulas de navegación + resumen por capas + tabla legal estilizada
+// Contenido: Texto técnico oficial del borrador v12.16 con notas de asesoría y etiquetas [PENDIENTE]
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Política de privacidad · EMAX Energía"
+  description="Política de privacidad de EMAX Energía (ENERGYMAX ADVISORY, S.L.U.). Quién trata tus datos, finalidades, bases jurídicas, derechos y consulta del CUPS."
+  path="/privacidad"
+>
+  <!-- Hero oscuro institucional con navegación de políticas -->
+  <section class="legal-hero" aria-labelledby="h1-privacidad">
+    <div class="legal-hero-contenedor">
+      <span class="legal-kicker">PROTECCIÓN DE DATOS · RGPD Y LOPDGDD</span>
+      <h1 class="legal-h1" id="h1-privacidad">POLÍTICA DE PRIVACIDAD</h1>
+      <p class="legal-subtitulo">
+        Qué datos nos das cuando nos pides revisar tu factura o nos escribes, para qué los usamos y cómo puedes pedirnos que los borremos en cualquier momento.
+      </p>
+
+      <nav class="legal-nav-pills" aria-label="Páginas legales">
+        <a href="/aviso-legal" class="legal-pill">Aviso legal</a>
+        <a href="/privacidad" class="legal-pill is-active" aria-current="page">Privacidad</a>
+        <a href="/cookies" class="legal-pill">Cookies</a>
+        <button type="button" class="legal-pill legal-pill--btn" data-abrir-cookies>
+          Configurar cookies
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Cuerpo del documento legal con diseño en tarjeta -->
+  <section class="legal-cuerpo">
+    <div class="legal-contenedor">
+      <!-- Resumen rápido en lenguaje claro (primera capa informativa) -->
+      <div class="resumen-privacidad">
+        <h2 class="resumen-titulo">Resumen claro de nuestra política de datos</h2>
+        <div class="resumen-grid">
+          <div class="resumen-item">
+            <span class="resumen-label">Responsable</span>
+            <p><strong>ENERGYMAX ADVISORY, S.L.U.</strong> (NIF B02994333) · Carrer Esteve Gilabert Bruniquer, 52, 08402 Granollers (Barcelona).</p>
+          </div>
+          <div class="resumen-item">
+            <span class="resumen-label">Para qué los usamos</span>
+            <p>Preparar el diagnóstico de tu factura, consultar el CUPS si nos autorizas, llamarte en la franja elegida y atender tu consulta.</p>
+          </div>
+          <div class="resumen-item">
+            <span class="resumen-label">Lo que NO hacemos</span>
+            <p>No tomamos decisiones automatizadas sin revisión humana ni vendemos tus datos a call centers o bases de datos comerciales.</p>
+          </div>
+          <div class="resumen-item">
+            <span class="resumen-label">Tus derechos</span>
+            <p>Acceso, rectificación, supresión, limitación y oposición cuando quieras escribiendo a <a href="mailto:hola@emaxenergia.com">hola@emaxenergia.com</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prosa con contenido oficial v12.16 -->
+      <article class="legal-prosa">
+        <div class="legal-borrador-aviso">
+          <strong>BORRADOR TÉCNICO para la asesoría</strong> · no se publica · lo marcado entre corchetes falta o lo decide la asesoría
+        </div>
+
+        <div class="legal-nota-asesoria">
+          <span class="pendiente">[ASESORÍA: DECISIÓN PREVIA: quién es responsable del tratamiento en cada fase. Propuesta técnica: EMAX es responsable de la solicitud de análisis (funnel, contacto, Canal Directo, WhatsApp); la comercializadora que suministra es responsable desde la contratación. Si hay cesión o corresponsabilidad, se dice aquí y en la primera capa del funnel (doc 03 §5)]</span>
+        </div>
+
+        <h2>Quién trata tus datos</h2>
+        <p>
+          ENERGYMAX ADVISORY, S.L.U. (EMAX Energía), NIF B02994333, Carrer Esteve Gilabert Bruniquer, 52, 08402 Granollers (Barcelona). Contacto para protección de datos: <span class="pendiente">[PENDIENTE: buzón de privacidad; si no hay, hola@emaxenergia.com]</span>. <span class="pendiente">[ASESORÍA: ¿hay delegado de protección de datos? Si existe, sus datos de contacto]</span>
+        </p>
+
+        <h2>Qué datos tratamos</h2>
+        <ul>
+          <li><strong>Cuando pides un análisis:</strong> tu nombre, tu teléfono, la franja en la que quieres que te llamemos, el email si nos lo das, para quién es (empresa, comunidad u hogar), cuánto pagáis al mes, cuántos suministros hay y, si vienes de una página de sector, tu actividad.</li>
+          <li><strong>Si nos mandas tus datos de suministro:</strong> la factura (que incluye el CUPS, la dirección del suministro y los datos del titular), el CUPS o tus respuestas si sigues sin factura.</li>
+          <li><strong>En Contacto y Canal Directo:</strong> lo que escribes en el formulario.</li>
+          <li><strong>Si nos escribes por WhatsApp:</strong> tu número y la conversación.</li>
+          <li><strong>Seguridad:</strong> un resumen cifrado de tu dirección IP (no guardamos la IP completa), para limitar los envíos repetidos.</li>
+          <li><strong>Analítica:</strong> solo si la aceptas en el aviso de cookies (ver la <a href="/cookies">política de cookies</a>).</li>
+        </ul>
+
+        <h2>Para qué y con qué base</h2>
+        <div class="tabla-scroll">
+          <table class="tabla-legal">
+            <thead>
+              <tr>
+                <th scope="col">Finalidad</th>
+                <th scope="col">Base jurídica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Atender tu solicitud de análisis, llamarte en la franja que elijas y mandarte el informe</td>
+                <td>Aplicar medidas precontractuales a petición tuya (RGPD, art. 6.1.b)</td>
+              </tr>
+              <tr>
+                <td>Consultar los datos técnicos y de consumo de tu suministro con el CUPS, si nos lo das</td>
+                <td>Tu solicitud y tu declaración de que eres el titular o estás autorizado (art. 6.1.b) <span class="pendiente">[ASESORÍA: confirmar quién accede al SIPS y en virtud de qué acuerdo (doc 03 §5, RD 88/2026, art. 8)]</span></td>
+              </tr>
+              <tr>
+                <td>Mandarte información comercial por WhatsApp o por email</td>
+                <td>Tu consentimiento, solo si marcas la casilla (art. 6.1.a)</td>
+              </tr>
+              <tr>
+                <td>Medir el uso de la web</td>
+                <td>Tu consentimiento en el aviso de cookies (art. 6.1.a)</td>
+              </tr>
+              <tr>
+                <td>Evitar abusos y envíos automáticos</td>
+                <td>Interés legítimo en proteger el servicio (art. 6.1.f)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Quién decide lo que te recomendamos</h2>
+        <p>
+          Maxi, nuestra tecnología de análisis, nos ayuda a leer tus datos. Lo que te recomendamos lo revisa y lo decide una persona. No tomamos decisiones basadas únicamente en un tratamiento automatizado que tengan efectos jurídicos sobre ti.
+        </p>
+
+        <h2>Cuánto tiempo guardamos tus datos</h2>
+        <p>
+          <span class="pendiente">[PENDIENTE: plazo. Propuesta técnica para la asesoría: si no llegas a contratar, la solicitud y la factura se borran a los 12 meses de tu último contacto; si contratas, el tiempo que dure la relación y los plazos legales de conservación]</span>
+        </p>
+
+        <h2>A quién se comunican</h2>
+        <ul>
+          <li>Proveedores que nos prestan servicios y solo tratan los datos por nuestra cuenta: alojamiento de la web y de los datos (Hostinger), <span class="pendiente">[PENDIENTE: CRM]</span>, <span class="pendiente">[PENDIENTE: proveedor de email]</span> y, si aceptas la analítica, Google.</li>
+          <li>La comercializadora que realiza el suministro, solo si decides contratar. <span class="pendiente">[ASESORÍA: base y forma de esta comunicación]</span></li>
+          <li>Administraciones y tribunales, cuando una ley lo exige.</li>
+        </ul>
+        <p>
+          <span class="pendiente">[ASESORÍA: transferencias fuera del Espacio Económico Europeo: Google (analítica) y Meta (WhatsApp); garantía aplicable, p. ej. el Marco de Privacidad de Datos UE-EE. UU.]</span>
+        </p>
+
+        <h2>Tus derechos</h2>
+        <p>
+          Puedes pedir acceso a tus datos, que los corrijamos o los borremos, oponerte a que los tratemos, limitar su uso y llevártelos a otro proveedor. También puedes retirar tu consentimiento cuando quieras, sin que afecte a lo anterior. Escríbenos a <span class="pendiente">[PENDIENTE: buzón de privacidad]</span> indicando qué pides.
+        </p>
+        <p>
+          Si crees que no hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">aepd.es</a>).
+        </p>
+
+        <div class="legal-pie-actualizacion">
+          <p>
+            <strong>¿Tienes dudas sobre cómo tratamos tus datos?</strong> Puedes escribirnos a <a href="mailto:hola@emaxenergia.com">hola@emaxenergia.com</a> o acudir a nuestra página de <a href="/contacto">Contacto</a>.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-hero {
+    position: relative;
+    z-index: 20;
+    margin-top: -78px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      #06183b 0%,
+      #05255d 26%,
+      #004aad 47%,
+      #0051be 50%,
+      #004aad 53%,
+      #05255d 74%,
+      #06183b 100%
+    );
+    border-radius: 0 0 28px 28px;
+    padding: calc(78px + 84px) 0 64px;
+    color: #ffffff;
+  }
+
+  .legal-hero-contenedor {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .legal-kicker {
+    display: inline-block;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #bae6fd;
+    background: rgba(37, 181, 248, 0.16);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .legal-h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    color: #25b5f8;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
+  .legal-subtitulo {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(0.98rem, 1.3vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: #e8f2ff;
+    max-width: 680px;
+    margin: 0 auto 30px;
+  }
+
+  .legal-nav-pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(4, 18, 46, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px;
+    border-radius: 999px;
+  }
+
+  .legal-pill {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #dbe8f8;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .legal-pill:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .legal-pill.is-active {
+    background: #14a9f5;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(20, 169, 245, 0.35);
+  }
+
+  .legal-pill--btn {
+    color: #7dd3fc;
+  }
+
+  /* Cuerpo */
+  .legal-cuerpo {
+    background: #e6ecf5;
+    padding: 64px 0 88px;
+  }
+
+  .legal-contenedor {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Resumen por capas */
+  .resumen-privacidad {
+    background: #06183b;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 36px;
+    box-shadow: 0 16px 40px rgba(4, 18, 46, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    color: #ffffff;
+  }
+
+  .resumen-titulo {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #38bdf8;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .resumen-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 28px;
+  }
+
+  .resumen-label {
+    display: block;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #bae6fd;
+    margin-bottom: 4px;
+  }
+
+  .resumen-item p {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.86rem;
+    color: #e2e8f0;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .resumen-item a {
+    color: #38bdf8;
+    text-decoration: underline;
+  }
+
+  /* Prosa */
+  .legal-prosa {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: clamp(28px, 5vw, 48px);
+    box-shadow: 0 12px 34px rgba(6, 24, 59, 0.06);
+    border: 1px solid #d5e0f0;
+    font-family: "Poppins", sans-serif;
+    color: #1e293b;
+  }
+
+  .legal-borrador-aviso {
+    background: #fff8eb;
+    border: 1.5px dashed #f59e0b;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 0.84rem;
+    color: #92400e;
+    line-height: 1.45;
+  }
+
+  .legal-nota-asesoria {
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    background: #fef2f2;
+    border-radius: 8px;
+  }
+
+  .pendiente {
+    color: #b91c1c;
+    background: #fee2e2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.92em;
+  }
+
+  .legal-prosa h2 {
+    font-size: 1.22rem;
+    font-weight: 800;
+    color: #06183b;
+    margin: 32px 0 12px;
+    line-height: 1.3;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e6f0fc;
+  }
+
+  .legal-prosa h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .legal-prosa p {
+    font-size: 0.92rem;
+    line-height: 1.72;
+    color: #334155;
+    margin: 0 0 14px;
+  }
+
+  .legal-prosa ul {
+    margin: 0 0 16px;
+    padding-left: 20px;
+  }
+
+  .legal-prosa li {
+    font-size: 0.9rem;
+    line-height: 1.68;
+    color: #334155;
+    margin-bottom: 8px;
+  }
+
+  .legal-prosa a {
+    color: #0051be;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .legal-prosa a:hover {
+    color: #14a9f5;
+  }
+
+  /* Tabla Legal Estilizada */
+  .tabla-scroll {
+    overflow-x: auto;
+    margin: 18px 0 28px;
+    border: 1px solid #d5e0f0;
+    border-radius: 12px;
+  }
+
+  .tabla-legal {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+    background: #ffffff;
+  }
+
+  .tabla-legal th {
+    background: #f1f6fd;
+    color: #06183b;
+    font-weight: 700;
+    padding: 12px 16px;
+    border-bottom: 1.5px solid #d5e0f0;
+    white-space: nowrap;
+  }
+
+  .tabla-legal td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eef3f9;
+    vertical-align: top;
+    line-height: 1.5;
+    color: #334155;
+  }
+
+  .tabla-legal tr:last-child td {
+    border-bottom: none;
+  }
+
+  .legal-pie-actualizacion {
+    margin-top: 32px;
+    padding: 18px 22px;
+    background: #f0f6ff;
+    border-left: 4px solid #0051be;
+    border-radius: 10px;
+  }
+
+  .legal-pie-actualizacion p {
+    margin: 0;
+    font-size: 0.86rem;
+    color: #1e3a5f;
+  }
+
+  @media (max-width: 700px) {
+    .legal-hero {
+      padding: calc(78px + 52px) 0 48px;
+    }
+
+    .legal-nav-pills {
+      border-radius: 18px;
+      padding: 8px;
+    }
+
+    .resumen-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .resumen-privacidad {
+      padding: 22px 20px;
+    }
+
+    .legal-cuerpo {
+      padding: 40px 0 64px;
+    }
+  }
+</style>
