@@ -1,12 +1,20 @@
 ---
-// Componente: Hero de la página de confirmación de Contacto (/contacto/recibido)
-// Basado fielmente en el boceto oficial de Contacto/recibido
+// Componente Unificado: Pantalla de confirmación oficial de envío
+// Utilizado tanto para Contacto (/contacto/recibido) como para Canal Directo (/canal-directo/enviado)
+// Diseño fiel al boceto oficial con fondo azul degradado, círculo con checkmark y tipografías cuidadas
 import { site } from "../../data/site";
+
+interface Props {
+  tipo?: "contacto" | "canal";
+}
+
+const { tipo = "contacto" } = Astro.props;
+const esCanal = tipo === "canal";
 ---
 
 <section class="contacto-recibido-hero" aria-labelledby="tit-recibido">
   <div class="recibido-contenedor">
-    <!-- Círculo decorativo central del boceto -->
+    <!-- Círculo central con checkmark del boceto oficial -->
     <div class="recibido-circulo-wrap" aria-hidden="true">
       <div class="recibido-circulo">
         <svg
@@ -26,9 +34,19 @@ import { site } from "../../data/site";
     </div>
 
     <!-- Título y subtítulos -->
-    <h1 class="recibido-titulo" id="tit-recibido">Recibido.</h1>
+    <h1 class="recibido-titulo" id="tit-recibido">
+      Recibido<span data-nombre></span>.
+    </h1>
 
-    <p class="recibido-subtitulo">Te respondemos a tu email.</p>
+    {esCanal ? (
+      <p class="recibido-subtitulo">
+        Te contactamos en <b data-email>tu email</b><span data-telefono></span> para conocer tu despacho y contarte cómo trabajamos.
+      </p>
+    ) : (
+      <p class="recibido-subtitulo">
+        Te respondemos a <span data-email>tu email</span>.
+      </p>
+    )}
 
     <p class="recibido-urgente">
       Si es urgente, llámanos al <a href={site.phoneHref} class="recibido-tel-link">{site.phone}</a>.
@@ -36,14 +54,20 @@ import { site } from "../../data/site";
 
     <!-- Fila de acciones -->
     <div class="recibido-acciones">
-      <a
-        href="/#estudio"
-        class="recibido-link-factura"
-        data-abrir-funnel
-        data-tramo-msg="Consulta desde página de Contacto Recibido: Quiero que reviséis la factura de mi empresa"
-      >
-        En cambio, quieres que revisemos tu factura
-      </a>
+      {esCanal ? (
+        <a href="/metodo" class="recibido-link-factura">
+          Mientras tanto, cómo trabajamos →
+        </a>
+      ) : (
+        <a
+          href="/#estudio"
+          class="recibido-link-factura"
+          data-abrir-funnel
+          data-tramo-msg="Consulta desde página de Contacto Recibido: Quiero que reviséis la factura de mi empresa"
+        >
+          En cambio, quieres que revisemos tu factura
+        </a>
+      )}
 
       <a href="/" class="btn-volver-inicio">
         <span>Volver al inicio</span>
@@ -57,6 +81,29 @@ import { site } from "../../data/site";
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    try {
+      var raw = sessionStorage.getItem("emax:formulario");
+      if (raw) {
+        var data = JSON.parse(raw);
+        if (data.nombre) {
+          var elNom = document.querySelector("[data-nombre]");
+          if (elNom) elNom.textContent = ", " + data.nombre;
+        }
+        if (data.email) {
+          var elEm = document.querySelector("[data-email]");
+          if (elEm) elEm.textContent = data.email;
+        }
+        if (data.telefono) {
+          var elTel = document.querySelector("[data-telefono]");
+          if (elTel) elTel.textContent = " o en el " + data.telefono;
+        }
+      }
+    } catch (e) {}
+  })();
+</script>
 
 <style>
   .contacto-recibido-hero {
@@ -127,22 +174,28 @@ import { site } from "../../data/site";
   .recibido-titulo {
     font-family: var(--font-acento, "Literata", Georgia, serif);
     font-style: italic;
-    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-size: clamp(2.4rem, 4.8vw, 3.8rem);
     font-weight: 400;
     color: #ffffff;
-    line-height: 1.1;
-    margin: 0 0 12px;
+    line-height: 1.15;
+    margin: 0 0 14px;
     letter-spacing: -0.01em;
   }
 
   .recibido-subtitulo {
     font-family: var(--font-titulos, "Poppins", sans-serif);
-    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
     font-weight: 500;
     color: #ffffff;
-    line-height: 1.35;
-    margin: 0 0 14px;
+    line-height: 1.45;
+    margin: 0 0 16px;
     letter-spacing: 0.01em;
+    max-width: 720px;
+  }
+
+  .recibido-subtitulo b {
+    color: #38b6ff;
+    font-weight: 600;
   }
 
   .recibido-urgente {
@@ -249,4 +302,3 @@ import { site } from "../../data/site";
     }
   }
 </style>
-

@@ -1,5 +1,8 @@
 ---
+// Página: Confirmación de Canal Directo (/canal-directo/enviado)
+// Unificado con el diseño oficial de confirmación de Contacto
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroContactoRecibido from "../../components/contacto/HeroContactoRecibido.astro";
 ---
 
 <BaseLayout
@@ -7,75 +10,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   description="Hemos recibido tu solicitud para el Canal Directo de EMAX Energía."
   path="/canal-directo/enviado"
 >
-  <section class="seccion seccion-enviado" aria-labelledby="h1" data-confirmacion>
-    <div class="contenedor" style="max-width:46rem">
-      <h1 class="h1" id="h1">Recibido<span data-nombre></span>.</h1>
-      <p class="entradilla">
-        Te contactamos en <b data-email>tu email</b><span data-telefono></span> para conocer tu despacho y contarte cómo trabajamos.
-      </p>
-      <p style="margin-top:var(--e-5, 24px);font-weight:600">
-        <a href="/metodo" class="enlace-metodo">Mientras tanto, cómo trabajamos →</a>
-      </p>
-    </div>
-  </section>
+  <div class="canal-recibido-page">
+    <HeroContactoRecibido tipo="canal" />
+  </div>
 </BaseLayout>
 
-<script is:inline>
-  (function() {
-    try {
-      var raw = sessionStorage.getItem('emax:formulario');
-      if (raw) {
-        var data = JSON.parse(raw);
-        if (data.nombre) {
-          var elNom = document.querySelector('[data-nombre]');
-          if (elNom) elNom.textContent = ', ' + data.nombre;
-        }
-        if (data.email) {
-          var elEm = document.querySelector('[data-email]');
-          if (elEm) elEm.textContent = data.email;
-        }
-        if (data.telefono) {
-          var elTel = document.querySelector('[data-telefono]');
-          if (elTel) elTel.textContent = ' o en el ' + data.telefono;
-        }
-        sessionStorage.removeItem('emax:formulario');
-      }
-    } catch (e) {}
-  })();
-</script>
-
 <style>
-  .seccion-enviado {
-    padding-top: calc(78px + var(--e-8, 64px));
-    padding-bottom: var(--e-8, 64px);
-    background: var(--papel, #ffffff);
-    min-height: 50vh;
-  }
-
-  .contenedor {
-    margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 2rem);
-  }
-
-  .h1 {
-    font-size: clamp(2rem, 1.6rem + 2vw, 3rem);
-    font-weight: 700;
-    color: var(--tinta, #0f2346);
-    line-height: 1.15;
-    margin: 0;
-  }
-
-  .entradilla {
-    font-size: clamp(1.1rem, 1rem + 0.3vw, 1.35rem);
-    line-height: 1.5;
-    color: var(--tinta-2, #475569);
-    margin-top: var(--e-4, 16px);
-  }
-
-  .enlace-metodo {
-    color: var(--azul-900, #004aad);
-    text-decoration: underline;
-    font-size: 1.05rem;
+  .canal-recibido-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #06183b;
   }
 </style>
-
