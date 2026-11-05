@@ -164,6 +164,11 @@ const ctaFinal: CtaGuia = p.cta || d.cta || {
   origen: `guia-${slugFinal} · final`,
 };
 
+// Valor especial de `cta.enlace`: abre el funnel (con /contacto/ como respaldo sin JS)
+const ENLACE_FUNNEL = "#abrir-funnel";
+const ctaAbreFunnel = ctaFinal.enlace === ENLACE_FUNNEL;
+const ctaHref = ctaAbreFunnel ? "/contacto/" : ctaFinal.enlace;
+
 const relacionadasFinal: Array<{ titulo: string; href: string }> = p.relacionadas || d.relacionadas || [
   ...calcRelacionadas(slugFinal, 3),
   { titulo: "Qué incluye el análisis de tu factura", href: "/diagnostico" },
@@ -360,8 +365,9 @@ const schemaArticle = JSON.stringify({
       <p>{ctaFinal.texto}</p>
       <a
         class="btn"
-        href={ctaFinal.enlace}
+        href={ctaHref}
         data-cta
+        data-abrir-funnel={ctaAbreFunnel ? true : undefined}
         data-origen={ctaFinal.origen}
       >
         {ctaFinal.boton} <i>→</i>
