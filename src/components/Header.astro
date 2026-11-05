@@ -13,13 +13,13 @@ const current = Astro.url.pathname;
 
 const metodoItems = [
   {
-    href: "/metodo",
+    href: "/metodo/",
     label: "El método",
     desc: "Diagnóstico, tres etapas y cinco decisiones antes de elegir tarifa",
     id: "metodo"
   },
   {
-    href: "/diagnostico",
+    href: "/diagnostico/",
     label: "Qué recibes",
     desc: "Tu estudio de consumo, maxímetros y reactiva bloque a bloque",
     id: "diagnostico"
@@ -27,18 +27,18 @@ const metodoItems = [
 ];
 
 const sectoresItems = [
-  { href: "/sectores/restaurantes", label: "Restaurantes y hostelería", desc: "Los dos servicios caen en las horas caras.", id: "restaurantes" },
-  { href: "/sectores/hoteles", label: "Hoteles", desc: "En febrero sigues pagando la potencia de agosto.", id: "hoteles" },
-  { href: "/sectores/supermercados", label: "Supermercados y alimentación", desc: "El frío pesa más que los picos.", id: "supermercados" },
-  { href: "/sectores/logistica-frio", label: "Logística y frío", desc: "Trabajar de noche no es lo mismo que consumir en P6.", id: "frio" },
-  { href: "/sectores/industria", label: "Industria", desc: "Un turno más cambia la factura.", id: "industria" },
+  { href: "/sectores/restaurantes/", label: "Restaurantes y hostelería", desc: "Los dos servicios caen en las horas caras.", id: "restaurantes" },
+  { href: "/sectores/hoteles/", label: "Hoteles", desc: "En febrero sigues pagando la potencia de agosto.", id: "hoteles" },
+  { href: "/sectores/supermercados/", label: "Supermercados y alimentación", desc: "El frío pesa más que los picos.", id: "supermercados" },
+  { href: "/sectores/logistica-frio/", label: "Logística y frío", desc: "Trabajar de noche no es lo mismo que consumir en P6.", id: "frio" },
+  { href: "/sectores/industria/", label: "Industria", desc: "Un turno más cambia la factura.", id: "industria" },
 ];
 
 const tarifasItems = [
-  { href: "/tarifas", label: "Luz para empresas", desc: "Estructura, modalidad, potencia y condiciones", id: "luz" },
-  { href: "/tarifas/gas-natural", label: "Gas para empresas", desc: "Tu peaje, tu temporada y tu precio", id: "gas" },
-  { href: "/tarifas/comunidades-de-propietarios", label: "Comunidades de propietarios", desc: "Luz y gas: ascensor, garaje y calefacción central", id: "comunidades" },
-  { href: "/particulares", label: "Hogares", desc: "Luz y gas para hogares y particulares", id: "hogares" },
+  { href: "/tarifas/", label: "Luz para empresas", desc: "Estructura, modalidad, potencia y condiciones", id: "luz" },
+  { href: "/tarifas/gas-natural/", label: "Gas para empresas", desc: "Tu peaje, tu temporada y tu precio", id: "gas" },
+  { href: "/tarifas/comunidades-de-propietarios/", label: "Comunidades de propietarios", desc: "Luz y gas: ascensor, garaje y calefacción central", id: "comunidades" },
+  { href: "/particulares/", label: "Hogares", desc: "Luz y gas para hogares y particulares", id: "hogares" },
 ];
 ---
 
@@ -114,7 +114,7 @@ const tarifasItems = [
               }
             </div>
             <div class="dropdown-footer-link">
-              <a href="/metodo">Conoce las tres etapas y cinco decisiones <span aria-hidden="true">→</span></a>
+              <a href="/metodo/">Conoce las tres etapas y cinco decisiones <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
@@ -199,8 +199,8 @@ const tarifasItems = [
             <!-- Separador y enlaces inferiores fieles al boceto del usuario -->
             <div class="dropdown-sectores-inferior">
               <div class="dropdown-sep-line"></div>
-              <a href="/sectores/varios-suministros" class="dropdown-link-varios">Varios suministros</a>
-              <a href="/sectores" class:list={["dropdown-btn-todos-sectores", { "todos-activo": current === "/sectores" }]}>
+              <a href="/sectores/varios-suministros/" class="dropdown-link-varios">Varios suministros</a>
+              <a href="/sectores/" class:list={["dropdown-btn-todos-sectores", { "todos-activo": current === "/sectores" }]}>
                 <span>Todos los sectores</span>
                 <span class="todos-flecha-icon" aria-hidden="true">→</span>
               </a>
@@ -267,12 +267,12 @@ const tarifasItems = [
               }
             </div>
             <div class="dropdown-footer-link">
-              <a href="/tarifas">Ver todas las tarifas y comparativa técnica <span aria-hidden="true">→</span></a>
+              <a href="/tarifas/">Ver todas las tarifas y comparativa técnica <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
 
-        <a href="/guias" class:list={["nav-enlace", { activo: current.startsWith("/guias") }]} data-glider-target>
+        <a href="/guias/" class:list={["nav-enlace", { activo: current.startsWith("/guias") }]} data-glider-target>
           <span>Guías</span>
         </a>
 
@@ -374,8 +374,8 @@ const tarifasItems = [
       <nav class="movil-links-lista" aria-label="Navegación móvil">
         <a href="/" class="movil-link">Inicio</a>
         <div class="movil-grupo-titulo">El Método</div>
-        <a href="/metodo" class="movil-sublink">El método · Tres etapas y cinco decisiones</a>
-        <a href="/diagnostico" class="movil-sublink">Qué recibes · Informe de tu empresa</a>
+        <a href="/metodo/" class="movil-sublink">El método · Tres etapas y cinco decisiones</a>
+        <a href="/diagnostico/" class="movil-sublink">Qué recibes · Informe de tu empresa</a>
 
         <div class="movil-grupo-titulo">Sectores empresariales</div>
         {
@@ -392,8 +392,8 @@ const tarifasItems = [
         }
 
         <div class="movil-grupo-titulo">Otros</div>
-        <a href="/guias" class="movil-link">Guías energéticas</a>
-        <a href="/contacto" class="movil-link">Contacto y oficinas</a>
+        <a href="/guias/" class="movil-link">Guías energéticas</a>
+        <a href="/contacto/" class="movil-link">Contacto y oficinas</a>
       </nav>
 
       <div class="movil-cta-bottom">

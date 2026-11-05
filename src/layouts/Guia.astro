@@ -134,7 +134,7 @@ function calcSiguienteGuia(slug: string) {
   if (idx !== -1 && idx < guiasData.length - 1) {
     return guiasData[idx + 1];
   }
-  return guiasData[0] || { titulo: "Siguiente guía", descripcion: "", href: "/guias" };
+  return guiasData[0] || { titulo: "Siguiente guía", descripcion: "", href: "/guias/" };
 }
 
 function calcRelacionadas(slug: string, limite = 3) {
@@ -160,7 +160,7 @@ const siguienteFinal = p.siguienteGuia || d.siguienteGuia || {
 const ctaFinal: CtaGuia = p.cta || d.cta || {
   texto: "Con tu factura te decimos cuánta potencia usas de verdad en cada periodo.",
   boton: "Comprobar mi potencia",
-  enlace: "/diagnostico",
+  enlace: "/diagnostico/",
   origen: `guia-${slugFinal} · final`,
 };
 
@@ -171,7 +171,7 @@ const ctaHref = ctaAbreFunnel ? "/contacto/" : ctaFinal.enlace;
 
 const relacionadasFinal: Array<{ titulo: string; href: string }> = p.relacionadas || d.relacionadas || [
   ...calcRelacionadas(slugFinal, 3),
-  { titulo: "Qué incluye el análisis de tu factura", href: "/diagnostico" },
+  { titulo: "Qué incluye el análisis de tu factura", href: "/diagnostico/" },
 ];
 
 const fuentesFinal =
@@ -204,7 +204,7 @@ const schemaArticle = JSON.stringify({
 });
 ---
 
-<BaseLayout title={titleSeo} description={descSeo} path={`/guias/${slugFinal}`}>
+<BaseLayout title={titleSeo} description={descSeo} path={`/guias/${slugFinal}/`}>
   <!-- 1. Barra de progreso de lectura (4px sticky arriba) -->
   <div class="prog" aria-hidden="true"><i id="prog"></i></div>
 
@@ -229,7 +229,7 @@ const schemaArticle = JSON.stringify({
           <span>Lectura de {tiempoLecturaFinal}</span>
           <span>Revisada el {fechaRevisionFinal}</span>
           <span>Tema: {temaFinal}</span>
-          <a href="/guias" class="btn-volver-guias" title="Volver al índice de todas las guías">
+          <a href="/guias/" class="btn-volver-guias" title="Volver al índice de todas las guías">
             <span class="btn-volver-guias__icono" aria-hidden="true">←</span>
             <span>Volver a todas las guías</span>
           </a>

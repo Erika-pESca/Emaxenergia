@@ -19,7 +19,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
 <BaseLayout
   title="Canal Directo · Colabora con EMAX Energía"
   description="Recomienda a tus clientes a alguien que mira antes de vender. Para profesionales que asesoran a empresas y quieren recomendar a alguien que mire su consumo antes de proponerles una tarifa."
-  path="/canal-directo"
+  path="/canal-directo/"
 >
   <!-- Hero institucional oscuro degradado -->
   <section class="cd-hero" aria-labelledby="h1-canal-directo">
@@ -137,7 +137,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
             Lo mismo que cualquier empresa que llega a EMAX: leemos cómo consume antes de proponerle nada, le explicamos las decisiones de su tarifa por escrito y una persona le responde después de firmar.
           </p>
           <div class="cd-bloque-enlace-wrap">
-            <a href="/metodo" class="cd-bloque-enlace">
+            <a href="/metodo/" class="cd-bloque-enlace">
               <span>Cómo trabajamos</span>
               <span aria-hidden="true">→</span>
             </a>
@@ -207,7 +207,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
               <form
                 class="cd-form"
                 id="form-canal-directo"
-                action="/canal-directo/enviado"
+                action="/canal-directo/enviado/"
                 method="GET"
                 data-form-simple="canal"
                 novalidate
@@ -311,7 +311,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
 
                 <!-- Aviso legal con corchete exacto de borrador -->
                 <p class="cd-legal">
-                  Usaremos tus datos para hablar contigo sobre el Canal Directo. <a href="/privacidad" class="cd-legal-enlace">Política de privacidad</a> <span class="pendiente">[LEGAL: 31 L2]</span>
+                  Usaremos tus datos para hablar contigo sobre el Canal Directo. <a href="/privacidad/" class="cd-legal-enlace">Política de privacidad</a> <span class="pendiente">[LEGAL: 31 L2]</span>
                 </p>
 
                 <!-- Mensaje de error general de envío -->
@@ -415,7 +415,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
       }
 
       // Redirigir a la página de confirmación oficial
-      window.location.href = "/canal-directo/enviado";
+      window.location.href = "/canal-directo/enviado/";
     });
   });
 </script>

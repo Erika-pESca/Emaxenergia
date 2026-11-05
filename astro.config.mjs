@@ -6,5 +6,6 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://emaxenergia.com',
   output: 'static',
+  trailingSlash: 'always',
   integrations: [sitemap()],
 });

@@ -9,7 +9,11 @@ interface Props {
 }
 
 const { title, description, path = "/" } = Astro.props;
-const canonical = new URL(path, Astro.site ?? site.url).href;
+// Canonical siempre con barra final (trailingSlash: "always"), igual que las URLs del sitemap.
+const pathNormalizado = path.endsWith("/") ? path : `${path}/`;
+const canonical = new URL(pathNormalizado, Astro.site ?? site.url).href;
+// El sufijo se añade una sola vez: solo si el título no menciona ya a EMAX
+// (algunas páginas lo llevan con otro separador, p. ej. "· EMAX Energía").
 const fullTitle = title.includes("EMAX") ? title : `${title} | EMAX Energía`;
 ---
 
