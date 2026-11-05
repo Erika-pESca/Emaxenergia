@@ -100,7 +100,7 @@ const tarjetas: TarjetaData[] = [
   }
 
   .seccion-kicker {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 0.82rem;
     font-weight: 700;
     color: #8da4be;
@@ -118,7 +118,7 @@ const tarjetas: TarjetaData[] = [
   }
 
   .seccion-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(2rem, 1.6rem + 1.8vw, 2.85rem);
     font-weight: 800;
     color: #0f2346;
@@ -258,7 +258,7 @@ const tarjetas: TarjetaData[] = [
 
   /* Título de la tarjeta: crece y brilla al hover */
   .tarjeta-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: 1.4rem;
     font-weight: 700;
     color: #00d4ff;
@@ -281,7 +281,7 @@ const tarjetas: TarjetaData[] = [
 
   /* Descripción: en hover se amplía y resalta en blanco de alto contraste */
   .tarjeta-desc {
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 0.88rem;
     color: rgba(240, 246, 255, 0.88);
     line-height: 1.46;
@@ -308,7 +308,7 @@ const tarjetas: TarjetaData[] = [
   }
 
   .quien-lema-texto {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
     font-weight: 700;
     color: #0f2346;

@@ -85,7 +85,7 @@
 }
 
 .kicker-texto {
-  font-family: "Sora", sans-serif;
+  font-family: var(--font-sora), sans-serif;
   font-size: 0.8rem;
   font-weight: 700;
   color: #ffffff;
@@ -99,7 +99,7 @@
 }
 
 .kicker-sub {
-  font-family: "Sora", sans-serif;
+  font-family: var(--font-sora), sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   color: #38bdf8;
@@ -109,7 +109,7 @@
 
 .g-hero h1,
 .g-hero .tit {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins), sans-serif;
   font-size: clamp(2.2rem, 1.8rem + 1.8vw, 3.2rem);
   font-weight: 800;
   line-height: 1.12;
@@ -124,7 +124,7 @@
 .g-hero .tit em {
   display: block;
   text-transform: none;
-  font-family: "Literata", Georgia, serif;
+  font-family: var(--font-literata), Georgia, serif;
   font-style: italic;
   font-weight: 400;
   color: #38bdf8;
@@ -145,7 +145,7 @@
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 9999px;
   font-size: 0.8rem;
-  font-family: "Sora", sans-serif;
+  font-family: var(--font-sora), sans-serif;
   font-weight: 500;
   color: #e0f2fe;
   backdrop-filter: blur(6px);
@@ -161,7 +161,7 @@
   border: 1.5px solid #ffffff !important;
   border-radius: 9999px;
   font-size: 0.84rem;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   color: #004aad !important;
   text-decoration: none;
@@ -273,7 +273,7 @@
 }
 
 .res__r b {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 0.78rem;
   line-height: 1;
@@ -283,7 +283,7 @@
 }
 
 .res__r p {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 1.125rem;
   line-height: 1.55;
@@ -327,7 +327,7 @@
 }
 
 .res dt {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--tinta, #0f2346);
@@ -373,7 +373,7 @@
 }
 
 .ind>p {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -420,7 +420,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--tinta-2, #4a5a75);
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
 }
 
 /* Desplegable móvil de índice */
@@ -434,7 +434,7 @@
 
 .ind-m summary {
   cursor: pointer;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   color: var(--tinta, #0f2346);
   font-size: 0.95rem;
@@ -464,7 +464,7 @@
 .lect {
   max-width: 46rem;
   min-width: 0;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 1.0625rem;
   line-height: 1.75;
 }
@@ -496,7 +496,7 @@
   border-radius: 999px;
   background: var(--resalte, #ddf1ff);
   color: var(--azul-900, #004aad);
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 0.75rem;
   line-height: 1.4;
@@ -505,7 +505,7 @@
 
 .sh h2,
 .cuerpo h2 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
   line-height: 1.2;
@@ -521,7 +521,7 @@
 }
 
 .cuerpo h3 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.35;
@@ -571,7 +571,7 @@ span.fuente {
 p.destacado {
   position: relative;
   padding: 8px 0 8px 56px;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 1.35rem;
   line-height: 1.45;
@@ -588,7 +588,7 @@ p.destacado::before {
   position: absolute;
   left: 0;
   top: -14px;
-  font-family: var(--f-acento, "Literata", Georgia, serif);
+  font-family: var(--f-acento, var(--font-literata), Georgia, serif);
   font-style: italic;
   font-weight: 400;
   font-size: 4.5rem;
@@ -655,7 +655,7 @@ dl.guia-reglas > div {
 
 .reglas b,
 dl.guia-reglas dt {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.3;
@@ -690,7 +690,7 @@ dl.guia-reglas dd {
 }
 
 .ej__t h3 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.3;
@@ -738,7 +738,7 @@ dl.guia-reglas dd {
   padding: 12px 18px;
   background: var(--suave, #f3f6fb);
   border-bottom: 1px solid var(--linea-fina, #e6ebf3);
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 0.8125rem;
   line-height: 1.4;
@@ -776,7 +776,7 @@ dl.guia-reglas dd {
   justify-content: space-between;
   gap: 16px;
   padding: 18px 4px;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 1.0625rem;
   line-height: 1.4;
@@ -828,7 +828,7 @@ dl.guia-reglas dd {
 }
 
 .no b {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 0.75rem;
   line-height: 1.4;
@@ -838,7 +838,7 @@ dl.guia-reglas dd {
 }
 
 .no p {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 1.125rem;
   line-height: 1.55;
@@ -915,7 +915,7 @@ dl.guia-reglas dd {
   border-radius: 12px;
   background: var(--noche, #0a1b3f);
   color: #ffffff;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
@@ -1034,7 +1034,7 @@ dl.guia-reglas dd {
 }
 
 .vs small {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1069,7 +1069,7 @@ dl.guia-reglas dd {
 }
 
 .graf h3 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.3;
@@ -1149,7 +1149,7 @@ dl.guia-reglas dd {
   position: absolute;
   right: 0;
   top: -22px;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--tinta-2, #4a5a75);
@@ -1197,7 +1197,7 @@ dl.guia-reglas dd {
 }
 
 .sen h2 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 1.35rem;
   line-height: 1.25;
@@ -1265,7 +1265,7 @@ dl.guia-reglas dd {
 }
 
 .sig small {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1274,7 +1274,7 @@ dl.guia-reglas dd {
 }
 
 .sig b {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 1.35rem;
   font-weight: 700;
   line-height: 1.25;
@@ -1301,7 +1301,7 @@ dl.guia-reglas dd {
 }
 
 .g-cta p {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
   line-height: 1.3;
@@ -1318,7 +1318,7 @@ dl.guia-reglas dd {
   color: #ffffff;
   padding: 12px 24px;
   border-radius: 9999px;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
@@ -1371,7 +1371,7 @@ dl.guia-reglas dd {
 
 .rel h2,
 .rel-titulo {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: clamp(1.4rem, 1.2rem + 1vw, 1.85rem);
   font-weight: 700;
   line-height: 1.25;
@@ -1425,7 +1425,7 @@ dl.guia-reglas dd {
 
 .rel a span:first-child,
 .rel-card__txt {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 0.98rem;
   line-height: 1.4;
@@ -1643,7 +1643,7 @@ dl.guia-reglas dd {
 
 .guia-reglas dt,
 .guia-dl dt {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--tinta, #0f2346);
@@ -1714,7 +1714,7 @@ dl.guia-reglas dd {
 
 .card-rapida__tag {
   display: block;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1734,7 +1734,7 @@ dl.guia-reglas dd {
 /* 2. Encabezados de sección en color corporativo #004AAD */
 .lectura--moderna .cuerpo h2,
 .lectura--moderna .sh h2 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   color: #004AAD;
   font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
   font-weight: 700;
@@ -1780,7 +1780,7 @@ dl.guia-reglas dd {
 
 .lectura--moderna .vs h3,
 .lectura--moderna .vs b {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 1.15rem;
   font-weight: 700;
   color: #004AAD;
@@ -1877,7 +1877,7 @@ dl.guia-reglas dd {
 }
 
 .ind-card__titulo {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1914,7 +1914,7 @@ dl.guia-reglas dd {
   margin-top: 22px;
   padding-top: 18px;
   border-top: 1px solid #E6EDF5;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1941,7 +1941,7 @@ dl.guia-reglas dd {
   border-radius: 999px;
   box-shadow: 0 4px 14px rgba(10, 27, 63, 0.05);
   color: #0F2346;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
@@ -1982,7 +1982,7 @@ dl.guia-reglas dd {
 }
 
 .resumen-card b {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.92rem;
   font-weight: 700;
   color: #004AAD;
@@ -2047,7 +2047,7 @@ dl.guia-reglas dd {
 }
 
 .palanca-header b {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 1.15rem;
   font-weight: 700;
   color: #004AAD;
@@ -2150,7 +2150,7 @@ dl.guia-reglas dd {
   background: #EBF3FF !important;
   border-top: 0 !important;
   border-bottom: 1.5px solid #C4D9FD !important;
-  font-family: var(--f-texto, "Poppins", sans-serif) !important;
+  font-family: var(--f-texto, var(--font-poppins), sans-serif) !important;
   font-size: 0.82rem !important;
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
@@ -2217,7 +2217,7 @@ span.periodo,
 .lectura--moderna table.tabla-periodos td.periodo {
   text-align: center !important;
   vertical-align: middle !important;
-  font-family: var(--f-texto, "Poppins", sans-serif) !important;
+  font-family: var(--f-texto, var(--font-poppins), sans-serif) !important;
   font-weight: 700 !important;
   font-size: 0.94rem !important;
   border-left: 1px solid rgba(255, 255, 255, 0.65) !important;
@@ -2271,7 +2271,7 @@ span.periodo,
 
 /* Herramienta interactiva "¿Qué periodo es?" (form.consultor) */
 .cuerpo h3 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   color: #0F2346;
@@ -2301,7 +2301,7 @@ form.consultor {
 }
 
 form.consultor label {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 0.95rem;
   color: #0F2346;
@@ -2315,7 +2315,7 @@ form.consultor input[type="date"] {
   border: 1px solid #8A99AD;
   border-radius: 10px;
   background-color: #FFFFFF;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 1rem;
   color: #0F2346;
   outline: none;
@@ -2338,7 +2338,7 @@ form.consultor .boton--principal {
   border: 0;
   border-radius: 10px;
   padding: 14px 28px;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 0.98rem;
   font-weight: 700;
   cursor: pointer;
@@ -2413,7 +2413,7 @@ form.consultor .consultor__aviso .pendiente {
 }
 
 .lectura--moderna .guia-dl dt {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   font-size: 1.05rem;
   color: #004AAD;
@@ -2444,7 +2444,7 @@ form.consultor .consultor__aviso .pendiente {
   border: 1.5px solid #C4D9FD;
   border-radius: 999px;
   color: #004AAD;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 0.88rem;
   text-decoration: none;
@@ -2473,7 +2473,7 @@ form.consultor .consultor__aviso .pendiente {
 }
 
 .lectura--moderna .ej__t h3 {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 700;
   color: #004AAD;
   font-size: 1.25rem;
@@ -2492,7 +2492,7 @@ form.consultor .consultor__aviso .pendiente {
 
 .lectura--moderna .faq summary {
   padding: 18px 4px;
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-weight: 600;
   font-size: 1.05rem;
   color: #004AAD;
@@ -2575,7 +2575,7 @@ form.consultor .consultor__aviso .pendiente {
 }
 
 .lectura--moderna .sig b {
-  font-family: var(--f-texto, "Poppins", sans-serif);
+  font-family: var(--f-texto, var(--font-poppins), sans-serif);
   font-size: 1.15rem;
   font-weight: 700;
   color: #0F2346;

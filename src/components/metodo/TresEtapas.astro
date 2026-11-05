@@ -156,7 +156,7 @@ const etapas: Etapa[] = [
   }
 
   .seccion-kicker {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 0.82rem;
     font-weight: 700;
     color: #8da4be;
@@ -175,7 +175,7 @@ const etapas: Etapa[] = [
   }
 
   .seccion-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(1.85rem, 1.5rem + 1.8vw, 2.75rem);
     font-weight: 800;
     color: #0f2346;
@@ -186,7 +186,7 @@ const etapas: Etapa[] = [
   }
 
   .titulo-cursiva {
-    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-family: var(--font-acento, var(--font-literata), Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;
@@ -426,7 +426,7 @@ const etapas: Etapa[] = [
 
   /* Etiqueta de fase (Etapa 1, 2, 3) */
   .paso-fase-etiqueta {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 0.8rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -454,7 +454,7 @@ const etapas: Etapa[] = [
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 0.78rem;
     font-weight: 600;
     padding: 4px 12px;
@@ -484,7 +484,7 @@ const etapas: Etapa[] = [
 
   /* Título y descripción con transición de color fluida mediante color-mix */
   .paso-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: 1.45rem;
     font-weight: 800;
     line-height: 1.25;

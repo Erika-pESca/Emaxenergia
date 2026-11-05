@@ -76,7 +76,7 @@ const items = [
   }
 
   .seccion-titulo-noche {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(2.1rem, 1.7rem + 2vw, 3rem);
     font-weight: 800;
     line-height: 1.15;
@@ -87,7 +87,7 @@ const items = [
   }
 
   .titulo-cursiva-noche {
-    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-family: var(--font-acento, var(--font-literata), Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;
@@ -131,7 +131,7 @@ const items = [
     border-radius: 8px;
     background: rgba(56, 189, 248, 0.12);
     border: 1px solid rgba(56, 189, 248, 0.28);
-    font-family: "Sora", monospace, sans-serif;
+    font-family: var(--font-sora), monospace, sans-serif;
     font-size: 0.78rem;
     line-height: 1.4;
     font-weight: 700;
@@ -140,7 +140,7 @@ const items = [
   }
 
   .hecha h3 {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: 1.35rem;
     line-height: 1.25;
     font-weight: 800;

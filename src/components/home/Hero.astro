@@ -437,7 +437,7 @@ import bannerHome from "../../imagenes/home/Banner-home.png";
   }
 
   .hero-h1 {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(2.3rem, 4vw, 3.7rem);
     font-weight: 800;
     line-height: 1.08;
@@ -448,7 +448,7 @@ import bannerHome from "../../imagenes/home/Banner-home.png";
   }
 
   .hero-cursiva {
-    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-family: var(--font-acento, var(--font-literata), Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;
@@ -477,7 +477,7 @@ import bannerHome from "../../imagenes/home/Banner-home.png";
     gap: 14px;
     background: #004aad;
     color: #38bdf8;
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 1.02rem;
     font-weight: 700;
     padding: 11px 16px 11px 24px;
@@ -1014,7 +1014,7 @@ import bannerHome from "../../imagenes/home/Banner-home.png";
   }
 
   .fac-back-cifra strong {
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 1.15rem;
     font-weight: 800;
     color: #ffffff;

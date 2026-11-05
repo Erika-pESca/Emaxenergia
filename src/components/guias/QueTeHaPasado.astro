@@ -123,7 +123,7 @@ const situaciones: ItemPasado[] = [
   }
 
   .seccion-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(1.85rem, 1.5rem + 1.8vw, 2.75rem);
     font-weight: 800;
     color: var(--tinta, #0f2346);
@@ -134,7 +134,7 @@ const situaciones: ItemPasado[] = [
   }
 
   .titulo-cursiva {
-    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-family: var(--font-acento, var(--font-literata), Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;
@@ -144,7 +144,7 @@ const situaciones: ItemPasado[] = [
   }
 
   .seccion-subtitulo {
-    font-family: var(--font-texto, "Inter", sans-serif);
+    font-family: var(--font-texto, var(--font-inter), sans-serif);
     font-size: 1.05rem;
     color: #63738e;
     line-height: 1.5;
@@ -201,7 +201,7 @@ const situaciones: ItemPasado[] = [
 
   /* Duda en texto negrita oscuro */
   .gx__s {
-    font-family: var(--font-texto, "Inter", sans-serif);
+    font-family: var(--font-texto, var(--font-inter), sans-serif);
     font-size: 1.05rem;
     font-weight: 600;
     color: var(--tinta, #0f2346);
@@ -217,7 +217,7 @@ const situaciones: ItemPasado[] = [
 
   /* Nombre de la guía en azul corporativo */
   .gx__g {
-    font-family: var(--font-texto, "Inter", sans-serif);
+    font-family: var(--font-texto, var(--font-inter), sans-serif);
     font-size: 0.9375rem;
     color: var(--azul-900, #004aad);
     line-height: 1.4;

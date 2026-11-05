@@ -197,7 +197,7 @@ const items: ItemNoHacemos[] = [
 
   /* Título */
   .no-hacemos-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(1.8rem, 1.6rem + 1vw, 2.35rem);
     font-weight: 800;
     color: #ffffff;
@@ -252,7 +252,7 @@ const items: ItemNoHacemos[] = [
   }
 
   .etiqueta-nombre {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: 1.02rem;
     font-weight: 700;
     color: #004aad;
@@ -288,7 +288,7 @@ const items: ItemNoHacemos[] = [
   }
 
   .descripcion-texto {
-    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-family: var(--font-cuerpo, var(--font-sora), sans-serif);
     font-size: clamp(0.88rem, 0.84rem + 0.16vw, 0.95rem);
     line-height: 1.55;
     color: #ffffff;

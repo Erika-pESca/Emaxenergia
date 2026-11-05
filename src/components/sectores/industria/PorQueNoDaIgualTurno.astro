@@ -186,7 +186,7 @@ const tarjetas: TarjetaTurnoIndustria[] = [
   }
 
   .no-da-igual-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(2.1rem, 1.9rem + 1.2vw, 2.95rem);
     font-weight: 800;
     color: #ffffff;
@@ -198,7 +198,7 @@ const tarjetas: TarjetaTurnoIndustria[] = [
 
   .tit-cursiva {
     display: inline;
-    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-family: var(--font-acento, var(--font-literata), Georgia, serif);
     font-style: italic;
     font-weight: 400;
     text-transform: none;
@@ -280,7 +280,7 @@ const tarjetas: TarjetaTurnoIndustria[] = [
   }
 
   .badge-num {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: 0.8rem;
     font-weight: 800;
     color: #081d3e;
@@ -289,7 +289,7 @@ const tarjetas: TarjetaTurnoIndustria[] = [
 
   /* Textos de la Tarjeta */
   .industria-card-tit {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: 1.18rem;
     font-weight: 700;
     color: #ffffff;
@@ -299,7 +299,7 @@ const tarjetas: TarjetaTurnoIndustria[] = [
   }
 
   .industria-card-desc {
-    font-family: var(--font-cuerpo, "Sora", sans-serif);
+    font-family: var(--font-cuerpo, var(--font-sora), sans-serif);
     font-size: 0.88rem;
     line-height: 1.58;
     color: #cbd5e1;

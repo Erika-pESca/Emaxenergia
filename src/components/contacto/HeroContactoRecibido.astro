@@ -172,7 +172,7 @@ const esCanal = tipo === "canal";
 
   /* Tipografía */
   .recibido-titulo {
-    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-family: var(--font-acento, var(--font-literata), Georgia, serif);
     font-style: italic;
     font-size: clamp(2.4rem, 4.8vw, 3.8rem);
     font-weight: 400;
@@ -183,7 +183,7 @@ const esCanal = tipo === "canal";
   }
 
   .recibido-subtitulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(1.1rem, 1.6vw, 1.4rem);
     font-weight: 500;
     color: #ffffff;
@@ -199,7 +199,7 @@ const esCanal = tipo === "canal";
   }
 
   .recibido-urgente {
-    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-family: var(--font-cuerpo, var(--font-poppins), sans-serif);
     font-size: clamp(0.92rem, 1.2vw, 1rem);
     font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
@@ -230,7 +230,7 @@ const esCanal = tipo === "canal";
   }
 
   .recibido-link-factura {
-    font-family: var(--font-cuerpo, "Poppins", sans-serif);
+    font-family: var(--font-cuerpo, var(--font-poppins), sans-serif);
     font-size: clamp(0.88rem, 1.1vw, 0.96rem);
     font-weight: 500;
     color: #25b5f8;
@@ -252,7 +252,7 @@ const esCanal = tipo === "canal";
     gap: 10px;
     background: #25b5f8;
     color: #071f49;
-    font-family: var(--font-display, "Sora", sans-serif);
+    font-family: var(--font-display, var(--font-sora), sans-serif);
     font-size: clamp(0.88rem, 1.1vw, 0.95rem);
     font-weight: 700;
     text-decoration: none;

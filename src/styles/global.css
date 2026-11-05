@@ -37,11 +37,11 @@
   --verde-borde: #abefc6;
 
   /* Tipografía: Poppins para títulos, Literata para acentos cursivos/itálicos + Inter (Cuerpo) */
-  --font-texto: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-titulos: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-acento: "Literata", Georgia, "Times New Roman", serif;
-  --font-cursiva: "Literata", Georgia, "Times New Roman", serif;
+  --font-texto: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-titulos: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-acento: var(--font-literata), Georgia, "Times New Roman", serif;
+  --font-cursiva: var(--font-literata), Georgia, "Times New Roman", serif;
   --display: var(--font-titulos);
   --font: var(--font-texto);
 

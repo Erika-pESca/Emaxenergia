@@ -130,7 +130,7 @@ const comprobaciones = [
   }
 
   .comparar-titulo {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: clamp(2rem, 1.8rem + 1.4vw, 2.75rem);
     font-weight: 800;
     color: #ffffff;
@@ -140,7 +140,7 @@ const comprobaciones = [
   }
 
   .titulo-destacado-cursiva {
-    font-family: var(--font-acento, "Literata", Georgia, serif);
+    font-family: var(--font-acento, var(--font-literata), Georgia, serif);
     font-style: italic;
     font-weight: 400;
     color: #00c2ff;
@@ -209,7 +209,7 @@ const comprobaciones = [
     border-radius: 50%;
     background: #00c2ff;
     color: #081d3e;
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 1.02rem;
     font-weight: 800;
     display: flex;
@@ -221,7 +221,7 @@ const comprobaciones = [
 
   /* Título de la comprobación en cian */
   .comprobacion-tit {
-    font-family: var(--font-titulos, "Poppins", sans-serif);
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
     font-size: 1.05rem;
     font-weight: 700;
     color: #00c2ff;
@@ -306,7 +306,7 @@ const comprobaciones = [
     gap: 14px;
     background: #00c2ff;
     color: #081d3e;
-    font-family: "Sora", sans-serif;
+    font-family: var(--font-sora), sans-serif;
     font-size: 0.96rem;
     font-weight: 800;
     padding: 8px 10px 8px 24px;
