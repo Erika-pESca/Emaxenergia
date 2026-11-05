@@ -18,7 +18,8 @@ const areas = [
     icono: "empresa",
     desc: "Tu peaje depende de cuánto consumes al año, y el precio puede ser fijo o ligado al mercado del gas. Si el gas va a un proceso o a una cocina, consume casi igual todo el año; si va a calefacción, se concentra en invierno.",
     btnTexto: "Analizar el gas de mi empresa",
-    btnHref: "#estudio"
+    btnHref: "/contacto/",
+    abreFunnel: true
   },
   {
     id: "comunidad",
@@ -123,7 +124,7 @@ const areas = [
               <a
                 href={area.btnHref}
                 class="btn-area-pildora"
-                data-abrir-funnel={area.btnHref === "#estudio" ? true : undefined}
+                data-abrir-funnel={area.abreFunnel ? true : undefined}
                 data-tipo-gas={area.id}
               >
                 <span>{area.btnTexto}</span>

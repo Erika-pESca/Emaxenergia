@@ -27,7 +27,7 @@ export const headerNav = [
 
 // Botón de llamada a la acción principal
 export const primaryCta = {
-  href: "/#estudio",
+  href: "/contacto/",
   label: "Analizar mi factura",
 } as const;
 
