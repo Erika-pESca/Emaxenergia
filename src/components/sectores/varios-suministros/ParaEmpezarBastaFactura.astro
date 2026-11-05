@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: ParaEmpezarBastaFactura.astro
 // Sección Banner para /sectores/varios-suministros: "Para empezar TE BASTA UNA FACTURA"
 // Fondo fotográfico a la derecha (`hero-8.jpg`) + degradado azul corporativo a la izquierda según boceto oficial.
@@ -14,12 +15,14 @@ import bannerVariosImg from "../../../imagenes/sectores/varios-suministros/hero-
   <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
   <div class="basta-factura-bg" aria-hidden="true">
     <div class="basta-factura-foto-wrap">
-      <img
-        src={bannerVariosImg.src}
+      <Picture
+        src={bannerVariosImg}
         alt=""
         class="basta-factura-img"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
         loading="lazy"
-        decoding="async"
       />
     </div>
     <div class="basta-factura-gradient"></div>

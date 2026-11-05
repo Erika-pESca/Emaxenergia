@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: FacturaPrevisible.astro
 // Sección Banner de Hoteles: "Ocupación variable, FACTURA PREVISIBLE"
 // Fondo fotográfico con el director de hotel a la derecha + degradado azul corporativo a la izquierda y píldoras interactivas según boceto oficial.
@@ -14,12 +15,14 @@ import bannerHotelImg from "../../../imagenes/sectores/sectores-hoteles/banner-1
   <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
   <div class="factura-previsible-bg" aria-hidden="true">
     <div class="factura-previsible-foto-wrap">
-      <img
-        src={bannerHotelImg.src}
+      <Picture
+        src={bannerHotelImg}
         alt=""
         class="factura-previsible-img"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
         loading="lazy"
-        decoding="async"
       />
     </div>
     <div class="factura-previsible-gradient"></div>

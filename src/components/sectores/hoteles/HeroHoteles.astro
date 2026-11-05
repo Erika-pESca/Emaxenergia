@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: HeroHoteles.astro
 // Hero oficial para la página: /sectores/hoteles ("Luz para hoteles y alojamientos")
 // Diseño fiel al boceto oficial Sectores_hoteles manteniendo el ancho completo original.
@@ -40,13 +41,15 @@ const tramosLuz = [
 <section class="hoteles-hero-root" aria-labelledby="h1-hoteles">
   <!-- Fondo con fotografía a ancho completo y degradado de fusión azul a la izquierda -->
   <div class="hoteles-hero-bg" aria-hidden="true">
-    <img
-      src={hotelImg.src}
+    <Picture
+      src={hotelImg}
       alt=""
       class="hero-bg-img"
-      loading="eager"
-      decoding="async"
       fetchpriority="high"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      loading="eager"
     />
     <div class="hero-bg-gradient"></div>
   </div>

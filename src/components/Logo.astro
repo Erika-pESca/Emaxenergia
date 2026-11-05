@@ -1,6 +1,7 @@
 ---
 // Logo de src/imagenes/logo-principal.png.
 // "dark" en la cabecera. "light" en el pie: el filtro lo deja blanco.
+import { Picture } from "astro:assets";
 import logo from "../imagenes/logo-principal.png";
 
 interface Props {
@@ -13,7 +14,16 @@ const width = Math.round((height * logo.width) / logo.height);
 ---
 
 <a class:list={["logo", variant]} href="/" aria-label="EMAX Energía, ir al inicio">
-  <img src={logo.src} alt="" width={width} height={height} />
+  <Picture
+    src={logo}
+    alt=""
+    width={width}
+    height={height}
+    densities={[1, 2]}
+    formats={['avif', 'webp']}
+    fallbackFormat="png"
+    loading="eager"
+  />
 </a>
 
 <style>
@@ -21,6 +31,11 @@ const width = Math.round((height * logo.width) / logo.height);
     display: inline-flex;
     align-items: center;
     flex-shrink: 0;
+  }
+
+  /* Aquí <picture> sí genera caja (inline): con display: contents el baseline del enlace cambia y el pie crece 7 px menos */
+  .logo :global(picture) {
+    display: inline;
   }
 
   .logo img {

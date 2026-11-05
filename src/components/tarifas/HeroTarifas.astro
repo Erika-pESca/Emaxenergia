@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente HeroTarifas para la página "Luz para empresas" (/tarifas)
 // Replicación exacta del diseño oficial de marca con hero-2.jpg
 // Fondo azul oscuro oficial de Gas Natural (#03142e -> #062350 -> #082c62), tipografía Poppins + Literata, píldora cian y tarjeta de cristal interactiva idéntica a Método
@@ -42,13 +43,15 @@ const tramosGasto: TramoGasto[] = [
 <section class="hero-tarifas-seccion" aria-labelledby="h1-tarifas-luz">
   <!-- Fondo fotográfico con degradado azul oscuro corporativo de Gas Natural -->
   <div class="hero-bg" aria-hidden="true">
-    <img
-      src={heroTarifasImg.src}
+    <Picture
+      src={heroTarifasImg}
       alt=""
       class="hero-bg-img"
-      loading="eager"
-      decoding="async"
       fetchpriority="high"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      loading="eager"
     />
     <div class="hero-bg-overlay"></div>
   </div>

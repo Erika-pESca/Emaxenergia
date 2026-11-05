@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: SiTuNegocioNoEsta.astro
 // Sección: "TU NEGOCIO | SI TU NEGOCIO no está en la lista"
 // Acordeón interactivo con 4 actividades empresariales y fotografía dinámica asociada a cada actividad.
@@ -242,13 +243,15 @@ const negocios: NegocioItem[] = [
         <div class="mecanico-card" id="contenedor-foto-sectores">
           {
             negocios.map((item, index) => (
-              <img
-                src={item.img.src}
+              <Picture
+                src={item.img}
                 alt={item.alt}
                 class={`sector-dinamico-img ${index === 0 ? "is-active" : ""}`}
                 data-sector-img={item.id}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
+                widths={[400, 640, 960]}
+                sizes="(min-width: 960px) 480px, 100vw"
+                formats={['avif', 'webp']}
+                loading="lazy"
               />
             ))
           }

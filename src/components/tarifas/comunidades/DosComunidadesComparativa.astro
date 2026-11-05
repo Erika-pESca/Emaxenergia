@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: DosComunidadesComparativa.astro
 // Sección de Comunidades: "DOS COMUNIDADES, DOS facturas que no se parecen"
 // Comparativa visual de alta fidelidad entre "Comunidad A" vs "Comunidad B" con fotografía real y tarjeta de conclusión
@@ -71,12 +72,14 @@ const caracteristicas: FilaComunidad[] = [
       <!-- 1. COMUNIDAD A -->
       <article class="tarjeta-comunidad" aria-label="Análisis de Comunidad A">
         <div class="tarjeta-media">
-          <img
-            src={imgComunidadA.src}
+          <Picture
+            src={imgComunidadA}
             alt="Complejo residencial con ascensor exterior, garaje comunitario y piscina"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-comunidad badge-comunidad-a">Comunidad A</div>
         </div>
@@ -169,12 +172,14 @@ const caracteristicas: FilaComunidad[] = [
       <!-- 2. COMUNIDAD B -->
       <article class="tarjeta-comunidad" aria-label="Análisis de Comunidad B">
         <div class="tarjeta-media">
-          <img
-            src={imgComunidadB.src}
+          <Picture
+            src={imgComunidadB}
             alt="Edificio residencial tradicional de tres plantas sin ascensor en calle tranquila"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-comunidad badge-comunidad-b">Comunidad B</div>
         </div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: "CINCO SECTORES, LEÍDOS POR cómo consumen"
 // Rejilla de 8 tarjetas según el boceto oficial de Figma
 import imgRestaurante from "../../imagenes/sectores/sectores-indice/sectores-indice.jpg";
@@ -111,13 +112,15 @@ const sectoresCards: SectorCardItem[] = [
             >
               <!-- Imagen superior fotográfica con curva orgánica de transición -->
               <div class="sector-card-media">
-                <img
-                  src={card.imagen.src}
+                <Picture
+                  src={card.imagen}
                   alt={card.titulo}
                   class="sector-card-img"
                   style={`object-position: ${card.imgPos};`}
+                  widths={[400, 640, 960]}
+                  sizes="(min-width: 960px) 480px, 100vw"
+                  formats={['avif', 'webp']}
                   loading="lazy"
-                  decoding="async"
                 />
                 <!-- Curva blanca orgánica idéntica al boceto -->
                 <svg

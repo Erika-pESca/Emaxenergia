@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: CocinaDeGas.astro
 // Sección banner de Restaurantes y Hostelería: "Si tu cocina ES DE GAS"
 // Fondo fotográfico de cocina de gas a la derecha con degradado azul corporativo a la izquierda según boceto oficial.
@@ -10,12 +11,14 @@ import bannerGasImg from "../../../imagenes/sectores/sectores-restaurante/banner
   <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
   <div class="cocina-gas-bg" aria-hidden="true">
     <div class="cocina-gas-foto-wrap">
-      <img
-        src={bannerGasImg.src}
+      <Picture
+        src={bannerGasImg}
         alt=""
         class="cocina-gas-img"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
         loading="lazy"
-        decoding="async"
       />
     </div>
     <div class="cocina-gas-gradient"></div>

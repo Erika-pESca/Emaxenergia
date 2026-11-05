@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente QuienLeeTusDatos de la sección El Método
 // 3 tarjetas interactivas con imágenes reales y animación expansiva al hover
 import fotoPersonal from "../../imagenes/metodo/la-persona.jpg";
@@ -51,10 +52,13 @@ const tarjetas: TarjetaData[] = [
         tarjetas.map((t, idx) => (
           <article class:list={["tarjeta-quien", `tarjeta-${idx + 1}`]}>
             <div class="tarjeta-img-wrap">
-              <img
-                src={t.foto.src}
+              <Picture
+                src={t.foto}
                 alt={t.alt}
                 class="tarjeta-foto"
+                widths={[480, 768, 1200]}
+                sizes="(min-width: 960px) 600px, 100vw"
+                formats={['avif', 'webp']}
                 loading="lazy"
               />
               <div class="tarjeta-sombra-gradiente" aria-hidden="true"></div>

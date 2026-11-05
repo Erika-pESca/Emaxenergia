@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: HeroSupermercados.astro
 // Hero oficial para la página: /sectores/supermercados ("Luz para supermercados y tiendas de alimentación")
 // Diseño fiel al boceto oficial Sectores_supermercados manteniendo el ancho completo original.
@@ -41,13 +42,15 @@ const tramosLuz = [
   <!-- Fondo con fotografía de supermercado encuadrada a la derecha y degradado de fusión azul a la izquierda -->
   <div class="supermercados-hero-bg" aria-hidden="true">
     <div class="supermercados-foto-wrap">
-      <img
-        src={supermercadoImg.src}
+      <Picture
+        src={supermercadoImg}
         alt=""
         class="hero-bg-img"
-        loading="eager"
-        decoding="async"
         fetchpriority="high"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        loading="eager"
       />
     </div>
     <div class="hero-bg-gradient"></div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Sección 2: "Cambiar de compañía es fácil. Saber si te conviene, no tanto."
 // Diseño editorial de alta gama: Columna izquierda anclada con titular y "Los atajos habituales",
 // y columna derecha con las 4 tarjetas de diagnóstico con imágenes reales y acabados premium.
@@ -22,7 +23,7 @@ const pilaresEmax = [
     titulo: "Cuánto y cuándo consume tu empresa",
     desc: "Tu consumo por periodos y por meses, traducido a las horas de tu negocio: cuánto va a las horas caras y cuánto a las baratas.",
     tag: "Curva horaria",
-    foto: fotoCurva.src,
+    foto: fotoCurva,
     alt: "Curva de consumo horario en tablet sobre mesa de panadería",
   },
   {
@@ -30,7 +31,7 @@ const pilaresEmax = [
     titulo: "Tu potencia",
     desc: "La potencia que tienes contratada en cada periodo frente a la que usas de verdad. Si te sobra, si te falta y si pagas excesos.",
     tag: "Ajuste P1–P6",
-    foto: fotoPotencia.src,
+    foto: fotoPotencia,
     alt: "Auditoría de potencias en cuadro eléctrico industrial",
   },
   {
@@ -38,7 +39,7 @@ const pilaresEmax = [
     titulo: "Tu energía reactiva",
     desc: "Si la pagas, en qué periodos, cuánto al año y si compensa corregirla.",
     tag: "0 € penalizaciones",
-    foto: fotoReactiva.src,
+    foto: fotoReactiva,
     alt: "Batería de condensadores y análisis de reactiva industrial",
   },
   {
@@ -46,7 +47,7 @@ const pilaresEmax = [
     titulo: "Tu propuesta de tarifa",
     desc: "La tarifa que sale de los tres bloques anteriores: estructura, modalidad, potencias y condiciones.",
     tag: "A medida",
-    foto: fotoPropuesta.src,
+    foto: fotoPropuesta,
     alt: "Propuesta de tarifa y estudio técnico detallado",
   },
 ];
@@ -120,13 +121,14 @@ const pilaresEmax = [
                 </div>
 
                 <div class="factor-foto-lado">
-                  <img
+                  <Picture
                     src={pilar.foto}
                     alt={pilar.alt}
                     class="factor-thumb-img"
+                    widths={[260, 520]}
+                    sizes="(min-width: 960px) 200px, 273px"
+                    formats={['avif', 'webp']}
                     loading="lazy"
-                    width="260"
-                    height="190"
                   />
                   <div class="factor-foto-shimmer" aria-hidden="true"></div>
                 </div>

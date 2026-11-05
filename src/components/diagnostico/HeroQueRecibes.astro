@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente HeroQueRecibes de la sección "Qué recibes" (Diagnóstico)
 // Diseño exacto del boceto con la imagen de fondo oficial hero-1.jpg
 // Degradado corporativo oficial #004aad y tarjeta de cristal esmerilado idéntica al método
@@ -42,13 +43,15 @@ const tramosGasto: TramoGasto[] = [
 <section class="hero-qr-seccion" aria-labelledby="h1-que-recibes">
   <!-- Fondo fotográfico con degradado corporativo oficial -->
   <div class="hero-bg" aria-hidden="true">
-    <img
-      src={heroDiagnosticoImg.src}
+    <Picture
+      src={heroDiagnosticoImg}
       alt=""
       class="hero-bg-img"
-      loading="eager"
-      decoding="async"
       fetchpriority="high"
+      widths={[640, 1024, 1440, 1920]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      loading="eager"
     />
     <div class="hero-bg-overlay"></div>
   </div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: DosAlmacenesNoche.astro
 // Sección de Logística y Frío: "DOS ALMACENES QUE TRABAJAN DE NOCHE DISTINTO"
 // Comparativa entre "Almacén seco" vs "Cámara frigorífica"
@@ -87,12 +88,14 @@ const caracteristicas: FilaAlmacen[] = [
       <!-- 1. ALMACÉN SECO -->
       <article class="tarjeta-almacen" aria-label="Análisis de Almacén seco">
         <div class="tarjeta-media">
-          <img
-            src={imgAlmacenSeco.src}
+          <Picture
+            src={imgAlmacenSeco}
             alt="Interior iluminado de almacén logístico seco con estanterías y carretilla eléctrica"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-almacen badge-seco">Almacén seco</div>
         </div>
@@ -192,12 +195,14 @@ const caracteristicas: FilaAlmacen[] = [
       <!-- 2. CÁMARA FRIGORÍFICA -->
       <article class="tarjeta-almacen" aria-label="Análisis de Cámara frigorífica">
         <div class="tarjeta-media">
-          <img
-            src={imgCamaraFrio.src}
+          <Picture
+            src={imgCamaraFrio}
             alt="Cámara frigorífica industrial a baja temperatura con condensación y operario con transpaleta"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-almacen badge-frio">Cámara frigorífica</div>
         </div>

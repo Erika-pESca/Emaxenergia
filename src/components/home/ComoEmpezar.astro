@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 import { site } from "../../data/site";
 import imagenNoTePrometemos from "../../imagenes/home/no-te-prometemos.jpg";
 
@@ -117,10 +118,13 @@ const compromisos = [
 <section class="compromisos-seccion" id="transparencia">
   <!-- Círculo decorativo en la esquina superior derecha con imagen del consultor -->
   <div class="compromisos-circulo-decor" aria-hidden="true">
-    <img
-      src={imagenNoTePrometemos.src}
+    <Picture
+      src={imagenNoTePrometemos}
       alt="Consultor energético de EMAX analizando factura de electricidad"
       class="compromisos-circulo-img"
+      widths={[320, 640, 1024]}
+      sizes="(min-width: 960px) 700px, 90vw"
+      formats={['avif', 'webp']}
       loading="lazy"
     />
     <div class="compromisos-circulo-overlay"></div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: DosRestaurantesMismoTamano.astro
 // Sección: "DOS RESTAURANTES DEL MISMO TAMAÑO | Puedes llenar TODAS LAS MESAS. Y seguir dejándote margen en la factura."
 // Comparativa entre Restaurante A (cocina eléctrica, cenas y fin de semana) vs Restaurante B (cocina de gas, menú del día).
@@ -73,12 +74,14 @@ const caracteristicas: FilaCaracteristica[] = [
       <!-- RESTAURANTE A -->
       <article class="tarjeta-restaurante" aria-label="Análisis de Restaurante A">
         <div class="tarjeta-media">
-          <img
-            src={imgRestauranteA.src}
+          <Picture
+            src={imgRestauranteA}
             alt="Cocina abierta y comedor lleno de comensales en el Restaurante A"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-restaurante">Restaurante A</div>
         </div>
@@ -139,12 +142,14 @@ const caracteristicas: FilaCaracteristica[] = [
       <!-- RESTAURANTE B -->
       <article class="tarjeta-restaurante" aria-label="Análisis de Restaurante B">
         <div class="tarjeta-media">
-          <img
-            src={imgRestauranteB.src}
+          <Picture
+            src={imgRestauranteB}
             alt="Cocina de gas cerrada de noche en el Restaurante B con sillas recogidas"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-restaurante">Restaurante B</div>
         </div>

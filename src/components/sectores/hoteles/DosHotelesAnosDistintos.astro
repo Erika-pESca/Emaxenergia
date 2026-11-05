@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: DosHotelesAnosDistintos.astro
 // Sección de Hoteles: "DOS HOTELES CON AÑOS DISTINTOS | TU HOTEL puede estar al 60 %. Tu término de potencia, no."
 // Comparativa entre "Hotel de costa" vs "Hotel urbano"
@@ -78,12 +79,14 @@ const caracteristicas: FilaHotel[] = [
       <!-- 1. HOTEL DE COSTA -->
       <article class="tarjeta-hotel" aria-label="Análisis del Hotel de costa">
         <div class="tarjeta-media">
-          <img
-            src={imgHotelCosta.src}
+          <Picture
+            src={imgHotelCosta}
             alt="Terraza exterior con vistas al mar de un hotel de costa en verano"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-hotel badge-costa">Hotel de costa</div>
         </div>
@@ -170,12 +173,14 @@ const caracteristicas: FilaHotel[] = [
       <!-- 2. HOTEL URBANO -->
       <article class="tarjeta-hotel" aria-label="Análisis del Hotel urbano">
         <div class="tarjeta-media">
-          <img
-            src={imgHotelUrbano.src}
+          <Picture
+            src={imgHotelUrbano}
             alt="Lobby moderno de un hotel urbano con ventanales hacia los rascacielos"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-hotel badge-urbano">Hotel urbano</div>
         </div>

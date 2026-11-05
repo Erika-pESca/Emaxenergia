@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Hero Principal EMAX Energía
 // Basado fielmente en el diseño de la imagen:
 // 1. Fondo fotográfico del panadero con degradado a azul marino a la izquierda.
@@ -14,13 +15,15 @@ import bannerHome from "../../imagenes/home/banner-home.jpg";
   <!-- Fondo fotográfico con imagen banner-home.jpg encuadrada a la derecha y fusión azul corporativa -->
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-foto-wrap">
-      <img
-        src={bannerHome.src}
+      <Picture
+        src={bannerHome}
         alt="Consultor energético de EMAX analizando optimización de factura"
         class="hero-bg-img"
-        loading="eager"
-        decoding="async"
         fetchpriority="high"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        loading="eager"
       />
     </div>
     <div class="hero-bg-overlay"></div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: DosTiendasMismoFrio.astro
 // Sección de Supermercados: "DOS TIENDAS CON FRÍO QUE NO SE PARECEN | BAJAS LA PERSIANA. Las cámaras siguen."
 // Comparativa entre "Tienda A" vs "Supermercado B"
@@ -75,12 +76,14 @@ const caracteristicas: FilaSupermercado[] = [
       <!-- 1. TIENDA A -->
       <article class="tarjeta-tienda" aria-label="Análisis de Tienda A">
         <div class="tarjeta-media">
-          <img
-            src={imgTiendaA.src}
+          <Picture
+            src={imgTiendaA}
             alt="Murales e islas de refrigeración y congelados en una tienda de alimentación"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-tienda badge-tienda-a">Tienda A</div>
         </div>
@@ -180,12 +183,14 @@ const caracteristicas: FilaSupermercado[] = [
       <!-- 2. SUPERMERCADO B -->
       <article class="tarjeta-tienda" aria-label="Análisis de Supermercado B">
         <div class="tarjeta-media">
-          <img
-            src={imgTiendaB.src}
+          <Picture
+            src={imgTiendaB}
             alt="Interior amplio de supermercado con zona de frescos, panadería y pasillos iluminados"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-tienda badge-tienda-b">Supermercado B</div>
         </div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: SegunQuienPaga.astro
 // Sección: "ÁREAS DE ANÁLISIS | SEGÚN QUIÉN paga la factura"
 // 3 Tarjetas con imágenes de referencia, corte superior, badge circular temático,
@@ -72,13 +73,15 @@ const areas = [
             <article class="area-gas-card">
               <!-- Contenedor de la Imagen de Referencia -->
               <div class="card-img-wrap">
-                <img
-                  src={area.img.src}
+                <Picture
+                  src={area.img}
                   alt={area.alt}
                   class="card-img"
                   style={`object-position: ${area.imgPos};`}
+                  widths={[400, 640, 960]}
+                  sizes="(min-width: 960px) 480px, 100vw"
+                  formats={['avif', 'webp']}
                   loading="lazy"
-                  decoding="async"
                 />
                 <!-- Curva inclinada orgánica idéntica al boceto -->
                 <svg class="card-curva-svg" viewBox="0 0 400 48" preserveAspectRatio="none" aria-hidden="true">

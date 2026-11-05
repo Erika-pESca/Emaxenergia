@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: Hero para la página de Sectores (/sectores)
 // Fiel al boceto oficial con consultor de EMAX y cliente revisando tablet, degradado azul y tarjeta translúcida
 import sectoresHeroImg from "../../imagenes/sectores/sectores-indice/hero-4.jpg";
@@ -15,13 +16,15 @@ const tramosLuz = [
   <!-- Fondo con fotografía posicionada en el bloque derecho como en el boceto y fusión azul corporativa -->
   <div class="sectores-hero-bg" aria-hidden="true">
     <div class="sectores-foto-wrap">
-      <img
-        src={sectoresHeroImg.src}
+      <Picture
+        src={sectoresHeroImg}
         alt=""
         class="hero-bg-img"
-        loading="eager"
-        decoding="async"
         fetchpriority="high"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
+        loading="eager"
       />
     </div>
     <div class="hero-bg-gradient"></div>

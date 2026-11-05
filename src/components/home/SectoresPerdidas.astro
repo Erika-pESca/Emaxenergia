@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Sección: "¿A qué se dedica TU EMPRESA?"
 // Especialización por sectores de negocio con tarjetas visuales según boceto
 import imgRestaurantes from "../../imagenes/home/restaurantes.jpg";
@@ -96,12 +97,14 @@ const sectores: SectorItem[] = [
             >
               <!-- Imagen superior con corte diagonal -->
               <div class="sector-card-media">
-                <img
-                  src={s.img.src}
+                <Picture
+                  src={s.img}
                   alt={s.titulo}
                   class="sector-card-img"
+                  widths={[400, 640, 960]}
+                  sizes="(min-width: 960px) 480px, 100vw"
+                  formats={['avif', 'webp']}
                   loading="lazy"
-                  decoding="async"
                 />
               </div>
 

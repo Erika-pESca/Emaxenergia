@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: DosRestaurantesComparativa.astro
 // Sección: "EJEMPLO ILUSTRATIVO | Dos restaurantes DEL MISMO TAMAÑO"
 // Comparativa visual entre Restaurante A (cocina eléctrica) y Restaurante B (cocina de gas)
@@ -26,12 +27,14 @@ import imgRestauranteB from "../../imagenes/sectores/sectores-indice/sectores-re
       <!-- RESTAURANTE A -->
       <article class="restaurante-card">
         <div class="restaurante-media">
-          <img
-            src={imgRestauranteA.src}
+          <Picture
+            src={imgRestauranteA}
             alt="Chef emplatando en la cocina eléctrica de Restaurante A"
             class="restaurante-img"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
         </div>
         <div class="restaurante-info">
@@ -76,12 +79,14 @@ import imgRestauranteB from "../../imagenes/sectores/sectores-indice/sectores-re
       <!-- RESTAURANTE B -->
       <article class="restaurante-card">
         <div class="restaurante-media">
-          <img
-            src={imgRestauranteB.src}
+          <Picture
+            src={imgRestauranteB}
             alt="Camarera preparando mesa en el comedor de Restaurante B"
             class="restaurante-img"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
         </div>
         <div class="restaurante-info">

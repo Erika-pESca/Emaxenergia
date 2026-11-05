@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: TurnosCambianClientes.astro
 // Sección Banner de Logística y Frío: "Si tus turnos cambian CON TUS CLIENTES"
 // Fondo fotográfico a la derecha + degradado azul corporativo a la izquierda y píldoras interactivas según boceto oficial.
@@ -14,12 +15,14 @@ import bannerLogisticaImg from "../../../imagenes/sectores/sectores-logistica/ba
   <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
   <div class="turnos-clientes-bg" aria-hidden="true">
     <div class="turnos-clientes-foto-wrap">
-      <img
-        src={bannerLogisticaImg.src}
+      <Picture
+        src={bannerLogisticaImg}
         alt=""
         class="turnos-clientes-img"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
         loading="lazy"
-        decoding="async"
       />
     </div>
     <div class="turnos-clientes-gradient"></div>

@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: QueMiramosFacturaGas.astro
 // Sección: "QUÉ MIRAMOS EN TU factura de gas"
 // 4 Tarjetas verticales con fotografías de referencia, fondo azul marino (#081d3e),
@@ -59,12 +60,14 @@ const puntosGas = [
         puntosGas.map((p) => (
           <article class="tarjeta-foto-card" tabindex="0">
             <!-- Imagen de Fondo Fotográfica Oficial -->
-            <img
-              src={p.img.src}
+            <Picture
+              src={p.img}
               alt={p.alt}
               class="tarjeta-bg-img"
+              widths={[400, 640, 960]}
+              sizes="(min-width: 960px) 480px, 100vw"
+              formats={['avif', 'webp']}
               loading="lazy"
-              decoding="async"
             />
 
             <!-- Gradiente oscuro para contraste óptimo -->

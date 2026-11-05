@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: ConsumoDependePedidos.astro
 // Sección Banner de Industria: "Si tu consumo DEPENDE DE LOS PEDIDOS"
 // Fondo fotográfico a la derecha (`banner-2.jpg`) + degradado azul corporativo a la izquierda y píldoras interactivas según boceto oficial.
@@ -14,12 +15,14 @@ import bannerPedidosImg from "../../../imagenes/sectores/sectores-industria/bann
   <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
   <div class="consumo-pedidos-bg" aria-hidden="true">
     <div class="consumo-pedidos-foto-wrap">
-      <img
-        src={bannerPedidosImg.src}
+      <Picture
+        src={bannerPedidosImg}
         alt=""
         class="consumo-pedidos-img"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
         loading="lazy"
-        decoding="async"
       />
     </div>
     <div class="consumo-pedidos-gradient"></div>

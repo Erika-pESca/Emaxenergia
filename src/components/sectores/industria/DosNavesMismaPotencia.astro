@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: DosNavesMismaPotencia.astro
 // Sección de Industria: "DOS NAVES CON LA MISMA POTENCIA MÁXIMA"
 // Comparativa entre "Nave A" vs "Nave B"
@@ -79,12 +80,14 @@ const caracteristicas: FilaNave[] = [
       <!-- 1. NAVE A -->
       <article class="tarjeta-nave" aria-label="Análisis de Nave A">
         <div class="tarjeta-media">
-          <img
-            src={imgNaveA.src}
+          <Picture
+            src={imgNaveA}
             alt="Línea de envasado y producción industrial de día con operarios trabajando"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-nave badge-nave-a">Nave A</div>
         </div>
@@ -185,12 +188,14 @@ const caracteristicas: FilaNave[] = [
       <!-- 2. NAVE B -->
       <article class="tarjeta-nave" aria-label="Análisis de Nave B">
         <div class="tarjeta-media">
-          <img
-            src={imgNaveB.src}
+          <Picture
+            src={imgNaveB}
             alt="Planta de fabricación automatizada en turno de noche con operario nocturno"
             class="tarjeta-foto"
+            widths={[480, 768, 1200]}
+            sizes="(min-width: 960px) 600px, 100vw"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
           <div class="badge-nave badge-nave-b">Nave B</div>
         </div>

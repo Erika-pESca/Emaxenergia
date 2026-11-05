@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Sección: "EMPIEZA POR lo que pagas" — Gas Natural
 // Fiel al boceto del usuario + círculo decorativo con fotografía del consultor como en la Home
 import consultorImg from "../../../imagenes/consultor-emax.jpg";
@@ -55,10 +56,13 @@ const segmentos: SegmentoGas[] = [
 <section class="empieza-gas-seccion" id="empieza-por-lo-que-pagas">
   <!-- Círculo decorativo en la esquina derecha con la foto del consultor (estilo Home) -->
   <div class="empieza-circulo-decor" aria-hidden="true">
-    <img
-      src={consultorImg.src}
+    <Picture
+      src={consultorImg}
       alt="Consultor energético de EMAX revisando informe"
       class="empieza-circulo-img"
+      widths={[320, 640, 1024]}
+      sizes="(min-width: 960px) 700px, 90vw"
+      formats={['avif', 'webp']}
       loading="lazy"
     />
     <div class="empieza-circulo-overlay"></div>

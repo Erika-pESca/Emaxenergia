@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Sección 3: "Maxi hace los números." — fiel al boceto.
 // Izquierda: titular + botón. Centro: tarjetas Maxi → Tu especialista (avatares circulares pequeños).
 // Derecha: imagen grande de Maxi (círculo que sale por el borde derecho).
@@ -53,7 +54,7 @@ const iconos: Record<string, string> = {
       <article class="maxi-card" tabindex="0">
         <header class="maxi-card-head">
           <div class="avatar-foto-wrap avatar-maxi-wrap" aria-hidden="true">
-            <img src={maxiAvatar.src} alt="Maxi" class="avatar-foto-circulo avatar-foto-maxi" />
+            <Picture src={maxiAvatar} alt="Maxi" class="avatar-foto-circulo avatar-foto-maxi" widths={[140, 280]} sizes="70px" formats={['avif', 'webp']} loading="lazy" />
           </div>
           <h3 class="maxi-card-nombre">Maxi</h3>
         </header>
@@ -78,7 +79,7 @@ const iconos: Record<string, string> = {
       <article class="maxi-card" tabindex="0">
         <header class="maxi-card-head">
           <div class="avatar-foto-wrap" aria-hidden="true">
-            <img src={personalImg.src} alt="Tu especialista EMAX" class="avatar-foto-circulo" />
+            <Picture src={personalImg} alt="Tu especialista EMAX" class="avatar-foto-circulo" widths={[140, 280]} sizes="70px" formats={['avif', 'webp']} loading="lazy" />
           </div>
           <h3 class="maxi-card-nombre">Tu especialista</h3>
         </header>
@@ -100,7 +101,7 @@ const iconos: Record<string, string> = {
 
   <!-- ================= DERECHA: imagen grande de Maxi ================= -->
   <div class="maxi-imagen-grande" aria-hidden="true">
-    <img src={maxiAvatar.src} alt="Maxi" class="maxi-imagen-grande-img" loading="lazy" decoding="async" />
+    <Picture src={maxiAvatar} alt="Maxi" class="maxi-imagen-grande-img" widths={[320, 640, 1024]} sizes="(min-width: 960px) 700px, 90vw" formats={['avif', 'webp']} loading="lazy" />
     <div class="maxi-imagen-overlay-azul"></div>
   </div>
 </section>

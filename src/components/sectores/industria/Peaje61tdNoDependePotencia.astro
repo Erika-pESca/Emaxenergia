@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Componente: Peaje61tdNoDependePotencia.astro
 // Sección Banner de Industria: "La 6.1TD no depende DE TU POTENCIA"
 // Aclaración técnica sobre tensión vs potencia (Circular 3/2020)
@@ -15,12 +16,14 @@ import banner61tdImg from "../../../imagenes/sectores/sectores-industria/banner-
   <!-- Fondo fotográfico encuadrado a la derecha + degradado azul corporativo -->
   <div class="peaje-61td-bg" aria-hidden="true">
     <div class="peaje-61td-foto-wrap">
-      <img
-        src={banner61tdImg.src}
+      <Picture
+        src={banner61tdImg}
         alt=""
         class="peaje-61td-img"
+        widths={[640, 1024, 1440, 1920]}
+        sizes="100vw"
+        formats={['avif', 'webp']}
         loading="lazy"
-        decoding="async"
       />
     </div>
     <div class="peaje-61td-gradient"></div>

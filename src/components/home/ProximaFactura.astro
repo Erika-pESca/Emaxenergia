@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 // Sección Cierre Final / Formulario: "La tarifa no se elige: se construye."
 // Diseño fiel al boceto de Figma con selectores de tramo y llamada directa
 
@@ -57,12 +58,14 @@ const tramosCierre = [
 
         <!-- Círculo con la foto de la consultora (ordenado y limpio debajo del texto) -->
         <div class="cierre-circulo-foto" aria-hidden="true">
-          <img
-            src={personalImg.src}
+          <Picture
+            src={personalImg}
             alt="Consultora energética de Emax Energía"
             class="cierre-img-circulo"
+            widths={[320, 640]}
+            sizes="280px"
+            formats={['avif', 'webp']}
             loading="lazy"
-            decoding="async"
           />
         </div>
       </div>
