@@ -6,9 +6,11 @@ interface Props {
   title: string;
   description: string;
   path?: string;
+  /** Páginas que no deben indexarse (confirmaciones de envío, 404). */
+  noindex?: boolean;
 }
 
-const { title, description, path = "/" } = Astro.props;
+const { title, description, path = "/", noindex = false } = Astro.props;
 // Canonical siempre con barra final (trailingSlash: "always"), igual que las URLs del sitemap.
 const pathNormalizado = path.endsWith("/") ? path : `${path}/`;
 const canonical = new URL(pathNormalizado, Astro.site ?? site.url).href;
@@ -20,6 +22,7 @@ const fullTitle = title.includes("EMAX") ? title : `${title} | EMAX Energía`;
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={site.name} />
 <meta property="og:title" content={fullTitle} />

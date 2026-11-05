@@ -1,0 +1,68 @@
+# =============================================================================
+# EMAX Energía · .htaccess (Hostinger, Apache/LiteSpeed)
+#
+# IMPORTANTE · HSTS: empieza con max-age=300 (5 minutos) a propósito. Cuando
+# se haya confirmado que HTTPS funciona en todo el dominio y en todas las
+# páginas (y que no hace falta volver atrás), hay que subirlo a 31536000
+# (1 año) en la cabecera Strict-Transport-Security de más abajo.
+#
+# Este archivo solo lo interpreta Apache/LiteSpeed. Otros hostings (Vercel,
+# Netlify...) lo ignoran. Después de publicar, comprueba las cabeceras reales:
+#   curl -I https://emaxenergia.com/
+#
+# La CSP se ha ajustado a lo que el sitio carga de verdad: todo es del propio
+# dominio (scripts y estilos inline de Astro incluidos, de ahí 'unsafe-inline').
+# Si se añade un recurso externo (analítica, mapas, vídeo, servicio de
+# formularios...) hay que incluir su dominio aquí.
+# =============================================================================
+
+Options -Indexes
+AddDefaultCharset UTF-8
+
+# --- HTTPS y dominio canónico (https://emaxenergia.com, sin www) -------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # http -> https (y quita el www de paso, en una sola redirección)
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://emaxenergia.com%{REQUEST_URI} [L,R=301]
+
+  # https://www.emaxenergia.com -> https://emaxenergia.com
+  RewriteCond %{HTTP_HOST} ^www\.emaxenergia\.com$ [NC]
+  RewriteRule ^ https://emaxenergia.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- Página de error ---------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Cabeceras de seguridad --------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()"
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # HSTS: ver el aviso al principio del archivo. Subir a 31536000 cuando HTTPS esté confirmado.
+  Header always set Strict-Transport-Security "max-age=300; includeSubDomains"
+
+  # CSP: todo es del propio dominio. 'unsafe-inline' hace falta por los <script> y <style> inline que genera Astro.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+</IfModule>
+
+# --- Caché -------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Todo lo de /_astro/ lleva hash en el nombre: se puede cachear un año sin riesgo.
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+
+  # El HTML no se cachea: siempre se revalida para ver los cambios al publicar.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# --- Compresión --------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/javascript text/javascript application/json image/svg+xml
+</IfModule>
