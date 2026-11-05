@@ -469,7 +469,7 @@ const tarifasItems = [
   const dropdownWrappers = document.querySelectorAll("[data-dropdown]");
   dropdownWrappers.forEach((dd) => {
     const btn = dd.querySelector("button");
-    let timerCierre: any;
+    let timerCierre: ReturnType<typeof setTimeout> | undefined;
 
     dd.addEventListener("mouseenter", () => {
       clearTimeout(timerCierre);

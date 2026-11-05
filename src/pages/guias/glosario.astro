@@ -4,11 +4,10 @@
 // Layout: Guia.astro con estilos oficiales guia.css
 
 import Guia from "../../layouts/Guia.astro";
-import Termino from "../../components/guias/Termino.astro";
 
-const secciones = [];
-const resumen = [];
-const senales = [];
+const secciones: Array<{ id: string; titulo: string }> = [];
+const resumen: Array<{ dt: string; dd: string }> = [];
+const senales: string[] = [];
 const cta = {
   "texto": "Si prefieres que te lo expliquemos con tu factura delante, empieza por ahí.",
   "enlace": "/calcular-ahorro",

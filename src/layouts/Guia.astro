@@ -164,7 +164,7 @@ const ctaFinal: CtaGuia = p.cta || d.cta || {
   origen: `guia-${slugFinal} · final`,
 };
 
-const relacionadasFinal = p.relacionadas || d.relacionadas || [
+const relacionadasFinal: Array<{ titulo: string; href: string }> = p.relacionadas || d.relacionadas || [
   ...calcRelacionadas(slugFinal, 3),
   { titulo: "Qué incluye el análisis de tu factura", href: "/diagnostico" },
 ];

@@ -196,7 +196,7 @@
 
     // 2. Gráfico de potencia contratada vs registrada
     function renderPotenciaVisual() {
-      const filas = [
+      const filas: [string, number, number, number, string][] = [
         ["P1", 80, 52, 0, "Potencia contratada holgada"],
         ["P2", 60, 60, 16, "Exceso registrado en maxímetro"],
         ["P3", 50, 38, 0, "Potencia contratada ajustada"],
@@ -368,8 +368,8 @@
     }
 
     const ind = document.getElementById("ind-bloques");
-    const hoja = document.getElementById("hoja-contenido-dinamico");
-    const pag = document.getElementById("hoja-pag-contador");
+    const hoja = document.getElementById("hoja-contenido-dinamico") as HTMLElement;
+    const pag = document.getElementById("hoja-pag-contador") as HTMLElement;
     const dotsContainer = document.getElementById("hoja-dots-indicador");
     const btnAnt = document.getElementById("btn-hoja-ant") as HTMLButtonElement | null;
     const btnSig = document.getElementById("btn-hoja-sig") as HTMLButtonElement | null;

@@ -569,8 +569,8 @@ const etapas: Etapa[] = [
   // ANIMACIÓN DE HAZ DE LUZ VERTICAL (BEAM) CON PINTURA SUAVE Y CONTINUA
   // =========================================================================
   function initProcesoBeamVertical() {
-    const timeline = document.getElementById("procesoTimeline");
-    const beam = document.getElementById("procesoBeam");
+    const timeline = document.getElementById("procesoTimeline") as HTMLElement;
+    const beam = document.getElementById("procesoBeam") as HTMLElement;
     const btnDestino = document.getElementById("btnDiagnosticoDestino");
     if (!timeline || !beam) return;
 

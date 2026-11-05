@@ -135,12 +135,12 @@ const pasos: PasoCasa[] = [
 
 <script>
   function setupTimelineCasa() {
-    const widget = document.getElementById("timeline-widget-casa");
+    const widget = document.getElementById("timeline-widget-casa") as HTMLElement;
     if (!widget) return;
 
-    const track = document.getElementById("timeline-track-casa");
-    const fillLine = document.getElementById("timeline-fill-casa");
-    const cursor = document.getElementById("timeline-cursor-casa");
+    const track = document.getElementById("timeline-track-casa") as HTMLElement;
+    const fillLine = document.getElementById("timeline-fill-casa") as HTMLElement;
+    const cursor = document.getElementById("timeline-cursor-casa") as HTMLElement;
     const buttons = Array.from(widget.querySelectorAll<HTMLButtonElement>("[data-paso-btn]"));
 
     if (!buttons.length || !fillLine || !cursor || !track) return;
