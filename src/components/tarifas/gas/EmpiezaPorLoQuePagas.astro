@@ -136,6 +136,7 @@ const segmentos: SegmentoGas[] = [
                         type="button"
                         class="btn-drawer-cta"
                         data-abrir-funnel
+                        data-segmento={seg.id === "casa" ? "hogar" : seg.id}
                         data-tramo-msg={`Consulta de gas para: ${seg.titulo}`}
                       >
                         <span>{seg.ctaTexto}</span>

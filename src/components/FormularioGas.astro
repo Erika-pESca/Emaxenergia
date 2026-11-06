@@ -1,0 +1,1587 @@
+---
+// Componente: FormularioGas.astro
+// Formulario / Funnel específico para la página de Gas Natural (/tarifas/gas-natural/)
+// Mantiene la estructura y estética de Formulario.astro adaptando el Paso 1 al boceto de Gas
+// (selector "¿Para quién es?" con Empresa o negocio / Comunidad de vecinos / Hogar y 4 tramos de gasto).
+
+import { site } from "../data/site";
+import Logo from "./Logo.astro";
+---
+
+<!-- =========================================================================
+     MODAL GAS: FORMULARIO DE ESTUDIO TÉCNICO Y CONTACTO (GAS NATURAL)
+     ========================================================================= -->
+<div
+  class="modal-backdrop"
+  id="modal-funnel-gas"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-funnel-gas-titulo"
+  hidden
+>
+  <div class="modal-dialog">
+    <!-- Cabecera: logo original, teléfono y cierre -->
+    <header class="modal-cabecera">
+      <div class="modal-marca-wrap">
+        <Logo />
+        <span class="modal-marca-sep" aria-hidden="true">|</span>
+        <a href={site.phoneHref} class="modal-tel" title={`Llamar al ${site.phone}`}>{site.phone}</a>
+      </div>
+
+      <button
+        type="button"
+        class="modal-btn-cerrar"
+        id="btn-cerrar-funnel-gas"
+        aria-label="Cerrar ventana y volver a la web"
+      >
+        <span>Volver a la web</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Barra de progreso paso a paso: cada etapa con su color -->
+    <nav class="fn-stepper" aria-label="Progreso del estudio de gas">
+      <div class="fn-step activa" data-gas-etapa-indicador="1" style="--c: #004aad; --c-suave: #e0edfe;">
+        <span class="fn-step-circulo">
+          <span class="fn-step-num">1</span>
+          <svg class="fn-step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+        <span class="fn-step-textos">
+          <span class="fn-step-label">Tu gasto</span>
+          <span class="fn-step-desc">Importe mensual</span>
+        </span>
+      </div>
+
+      <div class="fn-step-linea" data-gas-step-linea="1" style="--c: #004aad;" aria-hidden="true"></div>
+
+      <div class="fn-step" data-gas-etapa-indicador="2" style="--c: #19a9f0; --c-suave: #e1f4fd;">
+        <span class="fn-step-circulo">
+          <span class="fn-step-num">2</span>
+          <svg class="fn-step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+        <span class="fn-step-textos">
+          <span class="fn-step-label">Cómo empezamos</span>
+          <span class="fn-step-desc">Llamada o factura</span>
+        </span>
+      </div>
+
+      <div class="fn-step-linea" data-gas-step-linea="2" style="--c: #19a9f0;" aria-hidden="true"></div>
+
+      <div class="fn-step" data-gas-etapa-indicador="3" style="--c: #f26a1b; --c-suave: #fdeadd;">
+        <span class="fn-step-circulo">
+          <span class="fn-step-num">3</span>
+          <svg class="fn-step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+        <span class="fn-step-textos">
+          <span class="fn-step-label">Tus datos</span>
+          <span class="fn-step-desc">Contacto y franja</span>
+        </span>
+      </div>
+
+      <div class="fn-step-linea" data-gas-step-linea="3" style="--c: #f26a1b;" aria-hidden="true"></div>
+
+      <div class="fn-step" data-gas-etapa-indicador="4" style="--c: #12b76a; --c-suave: #e3f7ee;">
+        <span class="fn-step-circulo">
+          <span class="fn-step-num">4</span>
+          <svg class="fn-step-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+        <span class="fn-step-textos">
+          <span class="fn-step-label">Listo</span>
+          <span class="fn-step-desc">Solicitud enviada</span>
+        </span>
+      </div>
+    </nav>
+
+    <div class="modal-cuerpo-grid">
+      <!-- COLUMNA IZQUIERDA: Formulario -->
+      <div class="fn-col-izq">
+        <!-- PASO 1: Tu gasto de gas (según boceto) -->
+        <div class="fn-paso-vista" id="fn-gas-paso-1" style="--c: #004aad;">
+          <p class="fn-eyebrow">Paso 1 de 4 · Tu gasto</p>
+
+          <!-- Selector de segmento: ¿Para quién es? -->
+          <div class="fn-para-quien-bloque">
+            <p class="fn-para-quien-label" id="fn-gas-para-quien-lbl">¿Para quién es?</p>
+            <div class="fn-segmento-pills" role="group" aria-labelledby="fn-gas-para-quien-lbl">
+              <button
+                type="button"
+                class="fn-seg-pill activo"
+                data-gas-segmento="empresa"
+                aria-pressed="true"
+              >
+                Empresa o negocio
+              </button>
+              <button
+                type="button"
+                class="fn-seg-pill"
+                data-gas-segmento="comunidad"
+                aria-pressed="false"
+              >
+                Comunidad de vecinos
+              </button>
+              <button
+                type="button"
+                class="fn-seg-pill"
+                data-gas-segmento="hogar"
+                aria-pressed="false"
+              >
+                Hogar
+              </button>
+            </div>
+          </div>
+
+          <h2 id="modal-funnel-gas-titulo" class="fn-titulo">
+            ¿Cuánto paga tu empresa de gas al mes?
+          </h2>
+
+          <p class="fn-sub" id="fn-gas-subtitulo">
+            En total, sumando todos tus suministros. Con una cifra aproximada nos basta.
+          </p>
+
+          <!-- 4 Botones de tramo de gasto -->
+          <div class="fn-cuatro-botones" id="fn-gas-tramos-grid">
+            <button type="button" class="fn-opcion-btn" data-elegir-gasto-gas="menos-300">
+              Menos de 300 €
+            </button>
+            <button type="button" class="fn-opcion-btn" data-elegir-gasto-gas="300-1000">
+              300 – 1.000 €
+            </button>
+            <button type="button" class="fn-opcion-btn" data-elegir-gasto-gas="1000-3000">
+              1.000 – 3.000 €
+            </button>
+            <button type="button" class="fn-opcion-btn" data-elegir-gasto-gas="mas-3000">
+              Más de 3.000 €
+            </button>
+          </div>
+
+          <p class="fn-ayuda" id="fn-gas-ayuda">
+            Es el importe total de la factura. Si te llega cada dos meses, divide entre dos.
+          </p>
+
+          <div class="fn-no-lo-se-wrap">
+            <button
+              type="button"
+              class="fn-no-lo-se-btn"
+              id="fn-gas-no-lo-se-btn"
+              aria-expanded="false"
+              aria-controls="fn-gas-no-lo-se-texto"
+            >
+              No lo sé
+            </button>
+            <p id="fn-gas-no-lo-se-texto" class="fn-no-lo-se-desplegado" hidden>
+              Busca en tu última factura el importe total a pagar. Si tienes varios suministros, suma las facturas de un mismo mes.
+            </p>
+          </div>
+
+          <div class="fn-porque">
+            <p class="fn-porque-t">Por qué te lo preguntamos</p>
+            <p class="fn-porque-c" id="fn-gas-porque-texto">
+              El tipo de análisis que tiene sentido, y quién te atiende, dependen de cuánto se juega tu empresa.
+            </p>
+          </div>
+        </div>
+
+        <!-- PASO 1B: Suministros (empresa / comunidad tras elegir gasto, igual que en v12.16) -->
+        <div class="fn-paso-vista" id="fn-gas-paso-1b" style="--c: #004aad;" hidden>
+          <p class="fn-eyebrow">Paso 1 de 4 · Tu gasto</p>
+
+          <div class="fn-resultado" id="fn-gas-resultado-box">
+            <p class="fn-resultado-cifra" id="fn-gas-resultado-cifra">
+              Con lo que nos dices, tu empresa paga entre 3.600 y 12.000 € al año en gas.
+            </p>
+            <p class="fn-resultado-comun">No es lo que vas a ahorrar: es lo que está en juego.</p>
+            <p class="fn-resultado-msg" id="fn-gas-resultado-msg">
+              Con este gasto merece la pena mirar tu factura con detalle: el peaje, el consumo anual y las condiciones.
+            </p>
+          </div>
+
+          <h2 class="fn-titulo" id="fn-gas-suministros-titulo">¿Cuántos suministros tiene tu empresa?</h2>
+
+          <div class="fn-dos-botones">
+            <button type="button" class="fn-opcion-btn fn-opcion-grande" data-gas-elegir-suministro="uno">
+              Uno
+            </button>
+            <button type="button" class="fn-opcion-btn fn-opcion-grande" data-gas-elegir-suministro="varios">
+              Varios
+            </button>
+          </div>
+
+          <p class="fn-ayuda">Cada local, nave o sede con su propio contador es un suministro.</p>
+
+          <div class="fn-porque">
+            <p class="fn-porque-t">Por qué te lo preguntamos</p>
+            <p class="fn-porque-c">
+              Con varios suministros te atiende un gestor que mira cada uno y el conjunto.
+            </p>
+          </div>
+
+          <button type="button" class="fn-atras-btn" id="fn-gas-volver-gasto">
+            ← Atrás
+          </button>
+        </div>
+
+        <!-- PASO 2: Cómo empezamos -->
+        <div class="fn-paso-vista" id="fn-gas-paso-2" style="--c: #19a9f0;" hidden>
+          <p class="fn-eyebrow">Paso 2 de 4 · Cómo empezamos</p>
+          <h2 class="fn-titulo">¿Cómo prefieres empezar?</h2>
+          <p class="fn-sub">Elige lo que te resulte más cómodo para poner en marcha el estudio.</p>
+
+          <div class="fn-canales-lista">
+            <button type="button" class="fn-canal-tarjeta" data-gas-elegir-canal="llamada">
+              <div class="fn-canal-info">
+                <strong class="fn-canal-tit">Una llamada</strong>
+                <span class="fn-canal-desc">Un consultor te llama en la franja que elijas, con tu informe técnico delante.</span>
+              </div>
+              <span class="fn-canal-flecha" aria-hidden="true">→</span>
+            </button>
+
+            <button type="button" class="fn-canal-tarjeta" data-gas-elegir-canal="factura">
+              <div class="fn-canal-info">
+                <strong class="fn-canal-tit">Subir mi factura</strong>
+                <span class="fn-canal-desc">Foto o PDF de tu factura más reciente para hacer la auditoría inmediata.</span>
+              </div>
+              <span class="fn-canal-flecha" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="fn-porque">
+            <p class="fn-porque-t">Sin compromiso comercial</p>
+            <p class="fn-porque-c">Te explicamos los números antes de pedirte nada. Si no te compensa, te lo decimos con honestidad.</p>
+          </div>
+
+          <button type="button" class="fn-atras-btn" data-gas-ir-paso="1">
+            ← Atrás
+          </button>
+        </div>
+
+        <!-- PASO 3: Datos de contacto -->
+        <div class="fn-paso-vista" id="fn-gas-paso-3" style="--c: #f26a1b;" hidden>
+          <p class="fn-eyebrow">Paso 3 de 4 · Tus datos</p>
+          <h2 class="fn-titulo">¿Dónde te llamamos?</h2>
+          <p class="fn-sub">Dinos a quién preguntar y en qué franja horaria te va mejor hablar.</p>
+
+          <form class="fn-formulario" id="fn-gas-form-datos">
+            <!-- Campos ocultos para metadatos de lead y backend -->
+            <input type="hidden" id="fn-gas-input-segmento" name="segmento" value="empresa" />
+            <input type="hidden" id="fn-gas-input-gasto" name="gasto_mensual" value="" />
+            <input type="hidden" id="fn-gas-input-suministros" name="suministros" value="uno" />
+            <input type="hidden" id="fn-gas-input-canal" name="canal" value="llamada" />
+            <input type="hidden" id="fn-gas-input-tramo" name="tramo_origen" value="gas-natural" />
+
+            <div class="fn-campo">
+              <label for="fn-gas-input-nombre" id="fn-gas-label-nombre">Tu nombre o empresa</label>
+              <input type="text" id="fn-gas-input-nombre" name="nombre" required placeholder="Ej. Obrador La Espiga" autocomplete="organization" />
+            </div>
+
+            <div class="fn-campo">
+              <label for="fn-gas-input-telefono">Teléfono de contacto</label>
+              <input type="tel" id="fn-gas-input-telefono" name="telefono" required placeholder="Ej. 600 000 000" autocomplete="tel" />
+            </div>
+
+            <fieldset class="fn-grupo-franja">
+              <legend>¿Cuándo te va mejor que te llamemos?</legend>
+              <label class="fn-radio-label">
+                <input type="radio" name="franja" value="manana" checked />
+                <span>Por la mañana, de 9:00 a 13:00</span>
+              </label>
+              <label class="fn-radio-label">
+                <input type="radio" name="franja" value="tarde" />
+                <span>Por la tarde, de 15:00 a 19:00</span>
+              </label>
+            </fieldset>
+
+            <p class="fn-antes-boton">
+              Al pulsar, un consultor técnico te llamará con tu informe elaborado sin ningún coste ni permanencia.
+            </p>
+
+            <button type="submit" class="boton-fn-enviar" id="btn-submit-formulario-gas">
+              <span>Solicitar la llamada con mi informe</span>
+            </button>
+          </form>
+
+          <button type="button" class="fn-atras-btn" data-gas-ir-paso="2">
+            ← Atrás
+          </button>
+        </div>
+
+        <!-- PASO 4: Confirmación -->
+        <div class="fn-paso-vista" id="fn-gas-paso-4" style="--c: #12b76a;" hidden>
+          <p class="fn-eyebrow">Paso 4 de 4 · Listo</p>
+
+          <div class="fn-exito-tarjeta">
+            <span class="fn-exito-check" aria-hidden="true">✓</span>
+            <h2 class="fn-titulo">Hecho. Hemos recibido tu solicitud.</h2>
+            <p class="fn-sub">
+              Un consultor especialista de EMAX revisará los datos de tu suministro de gas y te contactará en la franja elegida.
+            </p>
+          </div>
+
+          <div class="fn-resumen-confirmacion">
+            <p><strong>Lo que va a pasar ahora:</strong></p>
+            <ul>
+              <li>Revisamos tu peaje de gas, tu consumo anual y tu temporada.</li>
+              <li>Te llamamos para explicártelo por teléfono con tu informe delante.</li>
+              <li>Te lo mandamos por escrito decidas lo que decidas.</li>
+            </ul>
+          </div>
+
+          <button type="button" class="boton-fn-enviar" id="btn-finalizar-funnel-gas">
+            Volver a la web
+          </button>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: Qué va a pasar -->
+      <aside class="fn-panel" aria-label="Información del proceso de EMAX">
+        <div>
+          <h3 class="fn-panel-t">Qué va a pasar</h3>
+
+          <ol class="fn-panel-pasos">
+            <li data-gas-panel-paso="1" class="paso-actual" style="--c: #004aad; --c-suave: #e0edfe;">
+              <span class="cifra">1</span>
+              <div>
+                <strong>Nos dices cuánto pagas y cómo prefieres empezar.</strong>
+              </div>
+            </li>
+            <li data-gas-panel-paso="2" style="--c: #19a9f0; --c-suave: #e1f4fd;">
+              <span class="cifra">2</span>
+              <div>
+                <strong>Maxi lee tu factura o los datos de tu suministro, y un especialista revisa lo que ha leído.</strong>
+              </div>
+            </li>
+            <li data-gas-panel-paso="3" style="--c: #f26a1b; --c-suave: #fdeadd;">
+              <span class="cifra">3</span>
+              <div>
+                <strong>Un consultor te llama, cuando tú digas, con tu informe delante.</strong>
+              </div>
+            </li>
+            <li data-gas-panel-paso="4" style="--c: #12b76a; --c-suave: #e3f7ee;">
+              <span class="cifra">4</span>
+              <div>
+                <strong>Te lo mandamos por escrito. Y decides tú.</strong>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="fn-panel-cierre">
+          <p class="fn-panel-cierre-linea">Recibes tu informe decidas lo que decidas.</p>
+          <p class="fn-panel-sin-coste">El análisis no tiene coste.</p>
+          <p class="fn-panel-cierre-sub" id="fn-gas-cierre-sub">
+            Si tu contrato actual ya encaja con cómo consume tu empresa, el informe te lo dice en lugar de proponerte otra tarifa.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+  // =========================================================================
+  // CONTROL DEL FORMULARIO DE GAS NATURAL
+  // =========================================================================
+  interface TramoGas {
+    id: string;
+    label: string;
+    resultado: string;
+    msg?: string;
+  }
+
+  interface ConfigSegmentoGas {
+    titulo: string;
+    subtitulo: string;
+    mostrarAyuda: boolean;
+    porque: string;
+    cierreSub: string;
+    preguntaSuministros: string;
+    labelNombre: string;
+    placeholderNombre: string;
+    tramos: TramoGas[];
+  }
+
+  const CONFIG_SEGMENTOS_GAS: Record<string, ConfigSegmentoGas> = {
+    empresa: {
+      titulo: "¿Cuánto paga tu empresa de gas al mes?",
+      subtitulo: "En total, sumando todos tus suministros. Con una cifra aproximada nos basta.",
+      mostrarAyuda: true,
+      porque:
+        "El tipo de análisis que tiene sentido, y quién te atiende, dependen de cuánto se juega tu empresa.",
+      cierreSub:
+        "Si tu contrato actual ya encaja con cómo consume tu empresa, el informe te lo dice en lugar de proponerte otra tarifa.",
+      preguntaSuministros: "¿Cuántos suministros tiene tu empresa?",
+      labelNombre: "Tu nombre o empresa",
+      placeholderNombre: "Ej. Obrador La Espiga",
+      tramos: [
+        {
+          id: "menos-300",
+          label: "Menos de 300\u00a0€",
+          resultado: "Con lo que nos dices, tu empresa paga menos de 3.600 € al año en gas.",
+          msg: "Con este gasto hacemos un estudio sencillo.",
+        },
+        {
+          id: "300-1000",
+          label: "300 – 1.000\u00a0€",
+          resultado: "Con lo que nos dices, tu empresa paga entre 3.600 y 12.000 € al año en gas.",
+          msg: "Con este gasto merece la pena mirar tu factura con detalle: la potencia, los periodos y las condiciones.",
+        },
+        {
+          id: "1000-3000",
+          label: "1.000 – 3.000\u00a0€",
+          resultado: "Con lo que nos dices, tu empresa paga entre 12.000 y 36.000 € al año en gas.",
+          msg: "Con este gasto te atiende un gestor, que revisa tu suministro completo. Si después del análisis no podemos plantearte un ahorro con garantías suficientes, no queremos hacerte perder el tiempo.",
+        },
+        {
+          id: "mas-3000",
+          label: "Más de 3.000\u00a0€",
+          resultado: "Con lo que nos dices, tu empresa paga más de 36.000 € al año en gas.",
+          msg: "Con este gasto te atiende un gestor, que revisa tu suministro completo. Si después del análisis no podemos plantearte un ahorro con garantías suficientes, no queremos hacerte perder el tiempo.",
+        },
+      ],
+    },
+    comunidad: {
+      titulo: "¿Cuánto paga la comunidad de gas al mes?",
+      subtitulo: "Suma todas las facturas de la comunidad: portal, ascensor, garaje, piscina.",
+      mostrarAyuda: false,
+      porque:
+        "El tipo de análisis que tiene sentido, y quién te atiende, dependen de cuánto se juega tu empresa.",
+      cierreSub:
+        "Si tu contrato actual ya encaja con cómo consume tu empresa, el informe te lo dice en lugar de proponerte otra tarifa.",
+      preguntaSuministros: "¿Cuántos suministros tiene la comunidad?",
+      labelNombre: "Tu nombre o comunidad",
+      placeholderNombre: "Ej. Comunidad C/ Mayor 14",
+      tramos: [
+        {
+          id: "com-menos-100",
+          label: "Menos de 100\u00a0€",
+          resultado: "Con lo que nos dices, la comunidad paga menos de 1.200 € al año en gas.",
+        },
+        {
+          id: "com-100-200",
+          label: "100 – 200\u00a0€",
+          resultado: "Con lo que nos dices, la comunidad paga entre 1.200 y 2.400 € al año en gas.",
+        },
+        {
+          id: "com-200-300",
+          label: "200 – 300\u00a0€",
+          resultado: "Con lo que nos dices, la comunidad paga entre 2.400 y 3.600 € al año en gas.",
+        },
+        {
+          id: "com-mas-300",
+          label: "Más de 300\u00a0€",
+          resultado: "Con lo que nos dices, la comunidad paga más de 3.600 € al año en gas.",
+        },
+      ],
+    },
+    hogar: {
+      titulo: "¿Cuánto pagas de gas al mes?",
+      subtitulo: "Con una cifra aproximada nos basta.",
+      mostrarAyuda: false,
+      porque:
+        "El tipo de análisis que tiene sentido, y quién te atiende, dependen de cuánto se juega tu empresa.",
+      cierreSub:
+        "Si tu contrato actual ya encaja con cómo consume tu empresa, el informe te lo dice en lugar de proponerte otra tarifa.",
+      preguntaSuministros: "¿Cuántos suministros tiene tu casa?",
+      labelNombre: "Tu nombre",
+      placeholderNombre: "Ej. María García",
+      tramos: [
+        {
+          id: "hog-menos-50",
+          label: "Menos de 50\u00a0€",
+          resultado: "Con lo que nos dices, en casa pagas menos de 600 € al año de gas.",
+        },
+        {
+          id: "hog-50-100",
+          label: "50 – 100\u00a0€",
+          resultado: "Con lo que nos dices, en casa pagas entre 600 y 1.200 € al año de gas.",
+        },
+        {
+          id: "hog-100-150",
+          label: "100 – 150\u00a0€",
+          resultado: "Con lo que nos dices, en casa pagas entre 1.200 y 1.800 € al año de gas.",
+        },
+        {
+          id: "hog-mas-150",
+          label: "Más de 150\u00a0€",
+          resultado: "Con lo que nos dices, en casa pagas más de 1.800 € al año de gas.",
+        },
+      ],
+    },
+  };
+
+  function inicializarFormularioGas() {
+    const modalFunnel = document.getElementById("modal-funnel-gas");
+    if (!modalFunnel || modalFunnel.dataset.iniciado === "true") return;
+    modalFunnel.dataset.iniciado = "true";
+
+    const btnCerrarFunnel = document.getElementById("btn-cerrar-funnel-gas");
+    const btnFinalizarFunnel = document.getElementById("btn-finalizar-funnel-gas");
+
+    const pasoVistas: Record<number, HTMLElement | null> = {
+      1: document.getElementById("fn-gas-paso-1"),
+      2: document.getElementById("fn-gas-paso-2"),
+      3: document.getElementById("fn-gas-paso-3"),
+      4: document.getElementById("fn-gas-paso-4"),
+    };
+    const paso1bVista = document.getElementById("fn-gas-paso-1b");
+
+    const etapaIndicadores = modalFunnel.querySelectorAll("[data-gas-etapa-indicador]");
+
+    // Campos ocultos
+    const inputSegmento = document.getElementById("fn-gas-input-segmento") as HTMLInputElement | null;
+    const inputGasto = document.getElementById("fn-gas-input-gasto") as HTMLInputElement | null;
+    const inputSuministros = document.getElementById("fn-gas-input-suministros") as HTMLInputElement | null;
+    const inputCanal = document.getElementById("fn-gas-input-canal") as HTMLInputElement | null;
+    const inputTramo = document.getElementById("fn-gas-input-tramo") as HTMLInputElement | null;
+
+    // Elementos dinámicos del paso 1 y 1b
+    const tituloPaso1 = document.getElementById("modal-funnel-gas-titulo");
+    const subtituloPaso1 = document.getElementById("fn-gas-subtitulo");
+    const ayudaPaso1 = document.getElementById("fn-gas-ayuda");
+    const porquePaso1 = document.getElementById("fn-gas-porque-texto");
+    const cierreSub = document.getElementById("fn-gas-cierre-sub");
+    const tramosGrid = document.getElementById("fn-gas-tramos-grid");
+    const labelNombre = document.getElementById("fn-gas-label-nombre");
+    const inputNombre = document.getElementById("fn-gas-input-nombre") as HTMLInputElement | null;
+    const pillsSegmento = modalFunnel.querySelectorAll<HTMLButtonElement>("[data-gas-segmento]");
+    const btnNoLoSe = document.getElementById("fn-gas-no-lo-se-btn");
+    const txtNoLoSe = document.getElementById("fn-gas-no-lo-se-texto");
+    const resultadoCifra = document.getElementById("fn-gas-resultado-cifra");
+    const resultadoMsg = document.getElementById("fn-gas-resultado-msg");
+    const suministrosTitulo = document.getElementById("fn-gas-suministros-titulo");
+    const btnVolverGasto = document.getElementById("fn-gas-volver-gasto");
+
+    function normalizarSegmento(raw?: string | null): string {
+      if (!raw) return "empresa";
+      const val = raw.toLowerCase();
+      if (val.includes("comunidad")) return "comunidad";
+      if (val.includes("hogar") || val.includes("casa") || val.includes("particular")) return "hogar";
+      return "empresa";
+    }
+
+    function aplicarSegmentoGas(segKey: string) {
+      const clave = CONFIG_SEGMENTOS_GAS[segKey] ? segKey : "empresa";
+      const cfg = CONFIG_SEGMENTOS_GAS[clave];
+
+      if (inputSegmento) inputSegmento.value = clave;
+
+      pillsSegmento.forEach((pill) => {
+        const esActivo = pill.getAttribute("data-gas-segmento") === clave;
+        pill.classList.toggle("activo", esActivo);
+        pill.setAttribute("aria-pressed", esActivo ? "true" : "false");
+      });
+
+      if (tituloPaso1) tituloPaso1.textContent = cfg.titulo;
+      if (subtituloPaso1) subtituloPaso1.textContent = cfg.subtitulo;
+      if (ayudaPaso1) {
+        if (cfg.mostrarAyuda) {
+          ayudaPaso1.removeAttribute("hidden");
+        } else {
+          ayudaPaso1.setAttribute("hidden", "true");
+        }
+      }
+      if (porquePaso1) porquePaso1.textContent = cfg.porque;
+      if (cierreSub) cierreSub.textContent = cfg.cierreSub;
+      if (labelNombre) labelNombre.textContent = cfg.labelNombre;
+      if (inputNombre) inputNombre.placeholder = cfg.placeholderNombre;
+
+      if (tramosGrid) {
+        const botones = tramosGrid.querySelectorAll<HTMLButtonElement>("[data-elegir-gasto-gas]");
+        cfg.tramos.forEach((tramo, idx) => {
+          const btn = botones[idx];
+          if (btn) {
+            btn.setAttribute("data-elegir-gasto-gas", tramo.id);
+            btn.textContent = tramo.label;
+          }
+        });
+      }
+    }
+
+    function irAlPaso(numPaso: number) {
+      paso1bVista?.setAttribute("hidden", "true");
+      Object.keys(pasoVistas).forEach((key) => {
+        const k = Number(key);
+        const vista = pasoVistas[k];
+        if (vista) {
+          if (k === numPaso) {
+            vista.removeAttribute("hidden");
+          } else {
+            vista.setAttribute("hidden", "true");
+          }
+        }
+      });
+
+      etapaIndicadores.forEach((ind) => {
+        const idx = Number(ind.getAttribute("data-gas-etapa-indicador"));
+        ind.classList.remove("activa", "completada");
+        ind.removeAttribute("aria-current");
+        if (idx === numPaso) {
+          ind.classList.add("activa");
+          ind.setAttribute("aria-current", "step");
+        } else if (idx < numPaso) {
+          ind.classList.add("completada");
+        }
+      });
+
+      // Líneas conectoras del stepper
+      modalFunnel!.querySelectorAll("[data-gas-step-linea]").forEach((linea) => {
+        const lineIdx = Number(linea.getAttribute("data-gas-step-linea"));
+        linea.classList.toggle("completada", lineIdx < numPaso);
+      });
+
+      // Pasos informativos de la columna derecha
+      modalFunnel!.querySelectorAll("[data-gas-panel-paso]").forEach((li) => {
+        const pIdx = Number(li.getAttribute("data-gas-panel-paso"));
+        li.classList.remove("paso-actual", "paso-hecho");
+        if (pIdx === numPaso) li.classList.add("paso-actual");
+        else if (pIdx < numPaso) li.classList.add("paso-hecho");
+      });
+    }
+
+    function abrirModalFunnelGas(btn?: HTMLElement | null) {
+      if (btn) {
+        const segAttr =
+          btn.getAttribute("data-segmento") ||
+          btn.getAttribute("data-tipo-gas") ||
+          btn.getAttribute("data-tramo-msg") ||
+          "empresa";
+        aplicarSegmentoGas(normalizarSegmento(segAttr));
+
+        const tramoId = btn.getAttribute("data-tramo-id") || "gas-natural";
+        if (inputTramo) inputTramo.value = tramoId;
+      } else {
+        aplicarSegmentoGas("empresa");
+      }
+
+      irAlPaso(1);
+      modalFunnel!.removeAttribute("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function cerrarModalFunnelGas() {
+      modalFunnel!.setAttribute("hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // Delegación global: cualquier botón con data-abrir-funnel en la página de Gas abre este modal
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement | null;
+      const btn = target?.closest<HTMLElement>("[data-abrir-funnel]");
+      if (btn) {
+        e.preventDefault();
+        abrirModalFunnelGas(btn);
+      }
+    });
+
+    btnCerrarFunnel?.addEventListener("click", cerrarModalFunnelGas);
+    btnFinalizarFunnel?.addEventListener("click", cerrarModalFunnelGas);
+
+    // Cerrar con Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modalFunnel.hasAttribute("hidden")) {
+        cerrarModalFunnelGas();
+      }
+    });
+
+    // Cerrar al hacer clic fuera
+    modalFunnel.addEventListener("click", (e) => {
+      if (e.target === modalFunnel) {
+        cerrarModalFunnelGas();
+      }
+    });
+
+    // Cambio de segmento en Paso 1 (Empresa o negocio / Comunidad de vecinos / Hogar)
+    pillsSegmento.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const seg = pill.getAttribute("data-gas-segmento") || "empresa";
+        aplicarSegmentoGas(seg);
+      });
+    });
+
+    // Botón desplegable "No lo sé" (v12.16)
+    btnNoLoSe?.addEventListener("click", () => {
+      if (!txtNoLoSe) return;
+      const estaAbierto = !txtNoLoSe.hasAttribute("hidden");
+      if (estaAbierto) {
+        txtNoLoSe.setAttribute("hidden", "true");
+        btnNoLoSe.setAttribute("aria-expanded", "false");
+      } else {
+        txtNoLoSe.removeAttribute("hidden");
+        btnNoLoSe.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    // Paso 1: Selección de tramo de gasto
+    modalFunnel.querySelectorAll<HTMLButtonElement>("[data-elegir-gasto-gas]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const val = b.getAttribute("data-elegir-gasto-gas") || "menos-300";
+        if (inputGasto) inputGasto.value = val;
+
+        const segActual = inputSegmento?.value || "empresa";
+        const cfg = CONFIG_SEGMENTOS_GAS[segActual] || CONFIG_SEGMENTOS_GAS.empresa;
+        const tramoObj = cfg.tramos.find((t) => t.id === val) || cfg.tramos[0];
+
+        if (segActual === "hogar") {
+          if (inputSuministros) inputSuministros.value = "uno";
+          irAlPaso(2);
+          return;
+        }
+
+        if (resultadoCifra) resultadoCifra.textContent = tramoObj.resultado;
+        if (resultadoMsg) {
+          if (tramoObj.msg) {
+            resultadoMsg.textContent = tramoObj.msg;
+            resultadoMsg.removeAttribute("hidden");
+          } else {
+            resultadoMsg.setAttribute("hidden", "true");
+          }
+        }
+        if (suministrosTitulo) suministrosTitulo.textContent = cfg.preguntaSuministros;
+
+        pasoVistas[1]?.setAttribute("hidden", "true");
+        paso1bVista?.removeAttribute("hidden");
+      });
+    });
+
+    // Paso 1B: Selección de nº de suministros (Uno / Varios)
+    modalFunnel.querySelectorAll<HTMLButtonElement>("[data-gas-elegir-suministro]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const val = b.getAttribute("data-gas-elegir-suministro") || "uno";
+        if (inputSuministros) inputSuministros.value = val;
+        irAlPaso(2);
+      });
+    });
+
+    btnVolverGasto?.addEventListener("click", () => {
+      irAlPaso(1);
+    });
+
+    // Paso 2: Selección de canal de contacto
+    modalFunnel.querySelectorAll<HTMLButtonElement>("[data-gas-elegir-canal]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const canal = b.getAttribute("data-gas-elegir-canal") || "llamada";
+        if (inputCanal) inputCanal.value = canal;
+        irAlPaso(3);
+      });
+    });
+
+    // Botones de vuelta atrás
+    modalFunnel.querySelectorAll<HTMLButtonElement>("[data-gas-ir-paso]").forEach((b) => {
+      b.addEventListener("click", () => {
+        const target = Number(b.getAttribute("data-gas-ir-paso")) || 1;
+        irAlPaso(target);
+      });
+    });
+
+    async function enviarLeadGasAlBackend(datos: Record<string, string>) {
+      console.log("Lead de Gas Natural capturado para el backend:", datos);
+      return true;
+    }
+
+    // Paso 3: Envío del formulario
+    const formDatos = document.getElementById("fn-gas-form-datos") as HTMLFormElement | null;
+    formDatos?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(formDatos);
+      const datosLead: Record<string, string> = {
+        nombre: String(formData.get("nombre") || ""),
+        telefono: String(formData.get("telefono") || ""),
+        franja: String(formData.get("franja") || "manana"),
+        segmento: inputSegmento?.value || "empresa",
+        gasto_mensual: inputGasto?.value || "",
+        suministros: inputSuministros?.value || "uno",
+        canal: inputCanal?.value || "llamada",
+        tramo_origen: inputTramo?.value || "gas-natural",
+        fecha: new Date().toISOString(),
+      };
+
+      await enviarLeadGasAlBackend(datosLead);
+      irAlPaso(4);
+    });
+  }
+
+  inicializarFormularioGas();
+  document.addEventListener("astro:page-load", inicializarFormularioGas);
+</script>
+
+<style>
+  /* ==========================================================================
+     MODAL FUNNEL GAS NATURAL EMAX
+     Misma base visual de Formulario.astro + selector de segmento y 4 tramos.
+     ========================================================================== */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(8, 20, 42, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 3vw, 32px);
+    overflow-y: auto;
+  }
+
+  .modal-backdrop[hidden] {
+    display: none !important;
+  }
+
+  .modal-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 1040px;
+    background: #ffffff;
+    border: 1px solid #dce6f2;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 20, 50, 0.35);
+    overflow: hidden;
+  }
+
+  /* ---------- Cabecera ---------- */
+  .modal-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    background: #ffffff;
+    border-bottom: 1px solid #e8eef6;
+  }
+
+  .modal-marca-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .modal-marca-wrap :global(.logo) {
+    display: flex;
+    align-items: center;
+  }
+
+  .modal-marca-wrap :global(.logo img) {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  .modal-marca-sep {
+    color: #cbd5e1;
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+
+  .modal-tel {
+    font-size: 0.88rem;
+    color: #0f2346;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .modal-tel:hover {
+    color: #004aad;
+  }
+
+  .modal-btn-cerrar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid #dce6f2;
+    color: #3a4b68;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 7px 13px;
+    border-radius: 9999px;
+    cursor: pointer;
+  }
+
+  .modal-btn-cerrar:hover {
+    background: #f1f5f9;
+    color: #0f2346;
+  }
+
+  /* ==========================================================================
+     STEPPER PASO A PASO
+     ========================================================================== */
+  .fn-stepper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 28px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e8eef6;
+  }
+
+  .fn-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    color: #8a97ab;
+  }
+
+  .fn-step-circulo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    color: #8a97ab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .fn-step-check {
+    display: none;
+  }
+
+  .fn-step-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.2;
+  }
+
+  .fn-step-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .fn-step-desc {
+    font-size: 0.74rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .fn-step-linea {
+    flex: 1;
+    min-width: 16px;
+    height: 3px;
+    background: #dbe3ee;
+    border-radius: 2px;
+  }
+
+  .fn-step-linea.completada {
+    background: var(--c);
+  }
+
+  .fn-step.activa {
+    color: #0f2346;
+  }
+
+  .fn-step.activa .fn-step-circulo {
+    background: var(--c);
+    border-color: var(--c);
+    color: #ffffff;
+  }
+
+  .fn-step.activa .fn-step-label {
+    color: var(--c);
+  }
+
+  .fn-step.activa .fn-step-desc {
+    color: #3a4b68;
+  }
+
+  .fn-step.completada {
+    color: #0f2346;
+  }
+
+  .fn-step.completada .fn-step-circulo {
+    background: var(--c-suave);
+    border-color: var(--c);
+    color: var(--c);
+  }
+
+  .fn-step.completada .fn-step-num {
+    display: none;
+  }
+
+  .fn-step.completada .fn-step-check {
+    display: block;
+    stroke: var(--c);
+  }
+
+  .fn-step.completada .fn-step-desc {
+    color: #3a4b68;
+  }
+
+  /* ---------- Cuerpo ---------- */
+  .modal-cuerpo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  }
+
+  .fn-col-izq {
+    padding: 28px 32px 34px;
+    background: #ffffff;
+  }
+
+  .fn-eyebrow {
+    display: inline-block;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--c);
+    border-left: 4px solid var(--c);
+    padding-left: 10px;
+    margin: 0 0 18px;
+  }
+
+  /* ---------- Selector "¿Para quién es?" (Paso 1 Gas) ---------- */
+  .fn-para-quien-bloque {
+    margin-bottom: 22px;
+  }
+
+  .fn-para-quien-label {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #3a4b68;
+    margin: 0 0 10px;
+  }
+
+  .fn-segmento-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .fn-seg-pill {
+    padding: 9px 18px;
+    border-radius: 9999px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    color: #3a4b68;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .fn-seg-pill:hover {
+    border-color: #004aad;
+    color: #004aad;
+  }
+
+  .fn-seg-pill.activo {
+    background: #004aad;
+    border-color: #004aad;
+    color: #ffffff;
+  }
+
+  .fn-titulo {
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+
+  .fn-sub {
+    font-size: 0.92rem;
+    color: #475569;
+    margin: 0 0 20px;
+    line-height: 1.5;
+  }
+
+  /* Rejilla de 4 botones de gasto mensual (como en el boceto) */
+  .fn-cuatro-botones {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .fn-dos-botones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .fn-resultado {
+    background: #f0f7ff;
+    border: 1px solid #c7e0fc;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+  }
+
+  .fn-resultado-cifra {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #004aad;
+    margin: 0 0 4px;
+  }
+
+  .fn-resultado-comun {
+    font-size: 0.82rem;
+    color: #0f2346;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .fn-resultado-msg {
+    font-size: 0.8rem;
+    color: #3a4b68;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .fn-opcion-grande {
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
+    font-size: 1rem;
+  }
+
+  .fn-opcion-btn {
+    padding: 15px 10px;
+    background: #ffffff;
+    border: 1.5px solid #93b4e0;
+    border-radius: 8px;
+    color: #004aad;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .fn-opcion-btn:hover {
+    background: #f0f7ff;
+    border-color: #004aad;
+    color: #00357a;
+  }
+
+  .fn-ayuda {
+    font-size: 0.8rem;
+    color: #63738e;
+    margin: 0 0 10px;
+    line-height: 1.45;
+  }
+
+  .fn-no-lo-se-wrap {
+    margin-bottom: 22px;
+  }
+
+  .fn-no-lo-se-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #004aad;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .fn-no-lo-se-btn:hover {
+    color: #0f2346;
+  }
+
+  .fn-no-lo-se-desplegado {
+    font-size: 0.82rem;
+    color: #3a4b68;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 10px 0 0;
+    line-height: 1.45;
+  }
+
+  .fn-no-lo-se-desplegado[hidden] {
+    display: none !important;
+  }
+
+  .fn-porque {
+    background: #f8fafc;
+    border-left: 3px solid var(--c);
+    padding: 12px 15px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 8px;
+  }
+
+  .fn-porque-t {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--c);
+    margin: 0 0 4px;
+  }
+
+  .fn-porque-c {
+    font-size: 0.82rem;
+    color: #3a4b68;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* ---------- Paso 2: Canales ---------- */
+  .fn-canales-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .fn-canal-tarjeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: #ffffff;
+    border: 1.5px solid #dce6f2;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .fn-canal-tarjeta:hover {
+    background: #f8fbff;
+    border-color: var(--c);
+  }
+
+  .fn-canal-tit {
+    display: block;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin-bottom: 3px;
+  }
+
+  .fn-canal-desc {
+    display: block;
+    font-size: 0.78rem;
+    color: #63738e;
+    line-height: 1.35;
+  }
+
+  .fn-canal-flecha {
+    font-size: 1.2rem;
+    color: var(--c);
+    padding-left: 10px;
+  }
+
+  /* ---------- Paso 3: Formulario ---------- */
+  .fn-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .fn-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .fn-campo label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #0f2346;
+  }
+
+  .fn-campo input {
+    background: #ffffff;
+    border: 1.5px solid #d0deef;
+    border-radius: 8px;
+    padding: 11px 13px;
+    color: #0f2346;
+    font-size: 0.92rem;
+    outline: none;
+  }
+
+  .fn-campo input:focus {
+    border-color: var(--c);
+  }
+
+  .fn-grupo-franja {
+    border: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .fn-grupo-franja legend {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #0f2346;
+    margin-bottom: 4px;
+    padding: 0;
+  }
+
+  .fn-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid #dce6f2;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: #0f2346;
+    cursor: pointer;
+  }
+
+  .fn-radio-label input {
+    accent-color: var(--c);
+  }
+
+  .fn-radio-label:hover {
+    background: #f8fbff;
+  }
+
+  .fn-antes-boton {
+    font-size: 0.76rem;
+    color: #63738e;
+    margin: 4px 0 0;
+    line-height: 1.35;
+  }
+
+  .boton-fn-enviar {
+    background: var(--c, #004aad);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
+    font-size: 0.96rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .boton-fn-enviar:hover {
+    filter: brightness(0.92);
+  }
+
+  .fn-atras-btn {
+    background: transparent;
+    border: none;
+    color: #63738e;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 14px;
+    padding: 0;
+  }
+
+  .fn-atras-btn:hover {
+    color: #0f2346;
+  }
+
+  /* ---------- Paso 4: Éxito ---------- */
+  .fn-exito-tarjeta {
+    text-align: center;
+    padding: 8px 0 16px;
+  }
+
+  .fn-exito-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #ecfdf3;
+    color: #067647;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .fn-resumen-confirmacion {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 0.82rem;
+    color: #3a4b68;
+    margin-bottom: 20px;
+  }
+
+  .fn-resumen-confirmacion ul {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Columna derecha: Qué va a pasar ---------- */
+  .fn-panel {
+    background: #f8fafc;
+    border-left: 1px solid #e2e8f0;
+    padding: 28px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .fn-panel-t {
+    font-family: var(--font-titulos, var(--font-poppins), sans-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0 0 20px;
+  }
+
+  .fn-panel-pasos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .fn-panel-pasos li {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 10px;
+    align-items: start;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: #64748b;
+  }
+
+  .fn-panel-pasos .cifra {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #8a97ab;
+    border: 1.5px solid #cbd5e1;
+    font-weight: 800;
+    font-size: 0.74rem;
+  }
+
+  .fn-panel-pasos li.paso-actual {
+    color: #0f2346;
+  }
+
+  .fn-panel-pasos li.paso-actual strong {
+    color: var(--c);
+  }
+
+  .fn-panel-pasos li.paso-actual .cifra {
+    background: var(--c);
+    color: #ffffff;
+    border-color: var(--c);
+  }
+
+  .fn-panel-pasos li.paso-hecho .cifra {
+    background: var(--c-suave);
+    color: var(--c);
+    border-color: var(--c);
+  }
+
+  .fn-panel-cierre {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 16px;
+  }
+
+  .fn-panel-cierre-linea {
+    font-weight: 600;
+    color: #3a4b68;
+    font-size: 0.84rem;
+    margin: 0 0 3px;
+  }
+
+  .fn-panel-sin-coste {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #0f2346;
+    margin: 0 0 6px;
+  }
+
+  .fn-panel-cierre-sub {
+    font-size: 0.76rem;
+    color: #63738e;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE
+     ========================================================================== */
+  @media (max-width: 960px) {
+    .fn-step-desc {
+      display: none;
+    }
+
+    .fn-cuatro-botones {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 860px) {
+    .modal-cuerpo-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .fn-panel {
+      border-left: none;
+      border-top: 1px solid #e2e8f0;
+      padding: 24px 20px;
+    }
+
+    .fn-col-izq {
+      padding: 24px 20px;
+    }
+
+    .fn-stepper {
+      padding: 14px 20px;
+      gap: 8px;
+    }
+
+    .fn-step:not(.activa) .fn-step-textos {
+      display: none;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .modal-cabecera {
+      padding: 14px 16px;
+    }
+
+    .modal-tel,
+    .modal-marca-sep {
+      display: none;
+    }
+
+    .fn-cuatro-botones {
+      grid-template-columns: 1fr;
+    }
+
+    .fn-step-circulo {
+      width: 30px;
+      height: 30px;
+      font-size: 0.8rem;
+    }
+  }
+</style>
+

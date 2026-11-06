@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Dock from "../components/Dock.astro";
 import Formulario from "../components/Formulario.astro";
+import FormularioGas from "../components/FormularioGas.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import Seo from "../components/Seo.astro";
 import { Font } from "astro:assets";
@@ -14,9 +15,10 @@ interface Props {
   description: string;
   path?: string;
   noindex?: boolean;
+  tipoFormulario?: "general" | "gas";
 }
 
-const { title, description, path, noindex } = Astro.props;
+const { title, description, path, noindex, tipoFormulario = "general" } = Astro.props;
 ---
 
 <!doctype html>
@@ -39,7 +41,7 @@ const { title, description, path, noindex } = Astro.props;
     </main>
     <Dock />
     <Footer />
-    <Formulario />
+    {tipoFormulario === "gas" ? <FormularioGas /> : <Formulario />}
     <CookieBanner />
   </body>
 </html>

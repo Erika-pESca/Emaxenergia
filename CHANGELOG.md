@@ -4,6 +4,21 @@ Este archivo registra los cambios del proyecto desde la tanda de correcciones de
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Los códigos entre paréntesis (C-2, A-3, M-10…) son los hallazgos de [AUDITORIA.md](AUDITORIA.md).
 
+## [Sin publicar] - 2026-11-06 — Formulario específico de Gas Natural
+
+Cambios realizados por Erika Fernanda Pesca Alfonso (epescaalfonso@gmail.com).
+
+### Agregado
+
+- **Formulario específico para Gas Natural**: [src/components/FormularioGas.astro](src/components/FormularioGas.astro). Conserva la estructura, cabecera, stepper de 4 pasos y columna lateral de [src/components/Formulario.astro](src/components/Formulario.astro), adaptando el Paso 1 ("Tu gasto") al boceto de Gas Natural: selector de segmento `¿Para quién es?` (`Empresa o negocio`, `Comunidad de vecinos`, `Hogar`), pregunta e importes mensuales dinámicos en 4 botones (`Menos de 300 €`, `300 – 1.000 €`, `1.000 – 3.000 €`, `Más de 3.000 €` para empresas/comunidades; tramos domésticos para hogar), enlace `No lo sé` y bloque explicativo `Por qué te lo preguntamos`.
+
+### Cambiado
+
+- **Layout base y página de Gas Natural**:
+  - [src/layouts/BaseLayout.astro](src/layouts/BaseLayout.astro): nueva prop opcional `tipoFormulario?: "general" | "gas"` para renderizar `FormularioGas.astro` sin alterar el `Formulario.astro` del resto de páginas.
+  - [src/pages/tarifas/gas-natural.astro](src/pages/tarifas/gas-natural.astro): pasa `tipoFormulario="gas"` a `BaseLayout`.
+  - [src/components/tarifas/gas/EmpiezaPorLoQuePagas.astro](src/components/tarifas/gas/EmpiezaPorLoQuePagas.astro): añade `data-segmento` a los botones de cada tarjeta desplegable para preseleccionar el segmento al abrir el formulario de gas y elimina el parámetro `idx` no usado.
+
 ## [0.1.0] - 2026-11-05 — Auditoría fase 1
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) en la rama `fix/auditoria-fase-1`.
