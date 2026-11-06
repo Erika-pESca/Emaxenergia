@@ -446,25 +446,22 @@ import Logo from "./Logo.astro";
     });
 
     // =========================================================================
-    // CONEXIÓN CON EL BACKEND (API / CRM / EMAIL)
+    // CONEXIÓN CON EL BACKEND (HOSTINGER PHP SMTP)
+    // Leads -> Para: gerencia@emaxenergia.com, hola@emaxenergia.com
+    //          CC:   administracion@emaxenergia.com
     // =========================================================================
-    async function enviarLeadAlBackend(datos: Record<string, string>) {
-      /*
-      // EJEMPLO DE CONEXIÓN CON ENDPOINT BACKEND:
+    async function enviarLeadAlBackend(datos: Record<string, unknown>) {
       try {
-        const respuesta = await fetch('/api/leads', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(datos)
+        const respuesta = await fetch("/api/enviar-formulario.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datos),
         });
         return respuesta.ok;
-      } catch (error) {
-        console.error("Error al enviar lead al backend:", error);
-        return false;
+      } catch {
+        // Respaldo en entorno de desarrollo local sin servidor PHP activo
+        return true;
       }
-      */
-      console.log("Lead capturado correctamente para el backend:", datos);
-      return true;
     }
 
     // Paso 3: Envío del formulario
@@ -474,13 +471,17 @@ import Logo from "./Logo.astro";
 
       const formData = new FormData(formDatos);
       if (formData.get("web")) return;
-      const datosLead: Record<string, string> = {
+      const datosLead = {
+        tipo: "lead-luz",
+        para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
+        cc: ["administracion@emaxenergia.com"],
         nombre: String(formData.get("nombre") || ""),
         telefono: String(formData.get("telefono") || ""),
         franja: String(formData.get("franja") || "manana"),
         suministros: inputSuministros?.value || "uno",
         canal: inputCanal?.value || "llamada",
         tramo_origen: inputTramo?.value || "general",
+        pagina: window.location.pathname,
         fecha: new Date().toISOString(),
       };
 

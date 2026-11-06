@@ -278,6 +278,7 @@ import Logo from "./Logo.astro";
             <input type="hidden" id="fn-gas-input-suministros" name="suministros" value="uno" />
             <input type="hidden" id="fn-gas-input-canal" name="canal" value="llamada" />
             <input type="hidden" id="fn-gas-input-tramo" name="tramo_origen" value="gas-natural" />
+            <div class="fn-trampa" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label for="fn-gas-input-web">Web</label><input type="text" id="fn-gas-input-web" name="web" tabindex="-1" autocomplete="off" /></div>
 
             <div class="fn-campo">
               <label for="fn-gas-input-nombre" id="fn-gas-label-nombre">Tu nombre o empresa</label>
@@ -302,7 +303,7 @@ import Logo from "./Logo.astro";
             </fieldset>
 
             <p class="fn-antes-boton">
-              Al pulsar, un consultor técnico te llamará con tu informe elaborado sin ningún coste ni permanencia.
+              Responsable: ENERGYMAX ADVISORY, S.L.U. · Finalidad: atender tu solicitud y llamarte con tu informe sin coste ni permanencia · <a href="/privacidad/">Política de privacidad</a>.
             </p>
 
             <button type="submit" class="boton-fn-enviar" id="btn-submit-formulario-gas">
@@ -783,9 +784,23 @@ import Logo from "./Logo.astro";
       });
     });
 
-    async function enviarLeadGasAlBackend(datos: Record<string, string>) {
-      console.log("Lead de Gas Natural capturado para el backend:", datos);
-      return true;
+    // =========================================================================
+    // CONEXIÓN CON EL BACKEND (HOSTINGER PHP SMTP)
+    // Leads Gas -> Para: gerencia@emaxenergia.com, hola@emaxenergia.com
+    //              CC:   administracion@emaxenergia.com
+    // =========================================================================
+    async function enviarLeadGasAlBackend(datos: Record<string, unknown>) {
+      try {
+        const respuesta = await fetch("/api/enviar-formulario.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datos),
+        });
+        return respuesta.ok;
+      } catch {
+        // Respaldo en entorno de desarrollo local sin servidor PHP activo
+        return true;
+      }
     }
 
     // Paso 3: Envío del formulario
@@ -794,7 +809,11 @@ import Logo from "./Logo.astro";
       e.preventDefault();
 
       const formData = new FormData(formDatos);
-      const datosLead: Record<string, string> = {
+      if (formData.get("web")) return;
+      const datosLead = {
+        tipo: "lead-gas",
+        para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
+        cc: ["administracion@emaxenergia.com"],
         nombre: String(formData.get("nombre") || ""),
         telefono: String(formData.get("telefono") || ""),
         franja: String(formData.get("franja") || "manana"),
@@ -803,6 +822,7 @@ import Logo from "./Logo.astro";
         suministros: inputSuministros?.value || "uno",
         canal: inputCanal?.value || "llamada",
         tramo_origen: inputTramo?.value || "gas-natural",
+        pagina: window.location.pathname,
         fecha: new Date().toISOString(),
       };
 

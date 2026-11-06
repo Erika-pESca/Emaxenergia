@@ -4,16 +4,26 @@ Este archivo registra los cambios del proyecto desde la tanda de correcciones de
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Los códigos entre paréntesis (C-2, A-3, M-10…) son los hallazgos de [AUDITORIA.md](AUDITORIA.md).
 
-## [Sin publicar] - 2026-11-06 — Formulario específico de Gas Natural
+## [Sin publicar] - 2026-11-06 — Formulario específico de Gas Natural y enrutamiento de correos / SMTP Hostinger
 
 Cambios realizados por Erika Fernanda Pesca Alfonso (epescaalfonso@gmail.com).
 
 ### Agregado
 
 - **Formulario específico para Gas Natural**: [src/components/FormularioGas.astro](src/components/FormularioGas.astro). Conserva la estructura, cabecera, stepper de 4 pasos y columna lateral de [src/components/Formulario.astro](src/components/Formulario.astro), adaptando el Paso 1 ("Tu gasto") al boceto de Gas Natural: selector de segmento `¿Para quién es?` (`Empresa o negocio`, `Comunidad de vecinos`, `Hogar`), pregunta e importes mensuales dinámicos en 4 botones (`Menos de 300 €`, `300 – 1.000 €`, `1.000 – 3.000 €`, `Más de 3.000 €` para empresas/comunidades; tramos domésticos para hogar), enlace `No lo sé` y bloque explicativo `Por qué te lo preguntamos`.
+- **Endpoint PHP con soporte SMTP para Hostinger** (C-1): [public/api/enviar-formulario.php](public/api/enviar-formulario.php). Recibe los envíos de todos los formularios web, valida el campo trampa antispam (`web`) y enruta los correos por SMTP (`smtp.hostinger.com`, puerto 465 SSL / 587 TLS, con respaldo en `mail()`):
+  - **Leads comerciales** (`lead-luz`, `lead-gas`, `lead-llamada`, `lead-canal-directo`) → **Para**: `gerencia@emaxenergia.com`, `hola@emaxenergia.com` · **CC**: `administracion@emaxenergia.com`.
+  - **Soporte y página de Contacto** (`soporte-contacto`) → **Para**: `administracion@emaxenergia.com` · **CC**: `gerencia@emaxenergia.com`, `hola@emaxenergia.com`.
 
 ### Cambiado
 
+- **Configuración centralizada de correos y conexión de formularios** (C-1):
+  - [src/data/site.ts](src/data/site.ts): añade `emailGerencia` (`gerencia@emaxenergia.com`), `emailAdministracion` / `emailSoporte` (`administracion@emaxenergia.com`) y el mapa `correosFormularios` (`leads` y `soporteContacto`).
+  - [src/components/Formulario.astro](src/components/Formulario.astro) y [src/components/FormularioGas.astro](src/components/FormularioGas.astro): conectan el envío de leads a `/api/enviar-formulario.php` (`gerencia@emaxenergia.com` y `hola@emaxenergia.com`, CC `administracion@emaxenergia.com`).
+  - [src/components/Header.astro](src/components/Header.astro): conecta el formulario *"Te llamamos gratis"* a `/api/enviar-formulario.php` con destino a `gerencia@emaxenergia.com` y `hola@emaxenergia.com` (CC `administracion@emaxenergia.com`).
+  - [src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro): conecta el formulario *"¿Es otra cosa? Escríbenos"* a `/api/enviar-formulario.php` con destino a `administracion@emaxenergia.com` (CC `gerencia@emaxenergia.com`, `hola@emaxenergia.com`), guarda los datos en `sessionStorage` para `/contacto/recibido/` y actualiza los enlaces `mailto:` de contacto.
+  - [src/pages/atencion-al-cliente.astro](src/pages/atencion-al-cliente.astro): actualiza los enlaces de correo de soporte y reclamaciones a `administracion@emaxenergia.com` (con copia a `gerencia@emaxenergia.com` y `hola@emaxenergia.com`).
+  - [src/pages/canal-directo/index.astro](src/pages/canal-directo/index.astro): conecta el formulario de Canal Directo a `/api/enviar-formulario.php` (`gerencia@emaxenergia.com` y `hola@emaxenergia.com`, CC `administracion@emaxenergia.com`), corrige el guardado en `sessionStorage` y reemplaza la fuente suelta por `var(--font-poppins)`.
 - **Layout base y página de Gas Natural**:
   - [src/layouts/BaseLayout.astro](src/layouts/BaseLayout.astro): nueva prop opcional `tipoFormulario?: "general" | "gas"` para renderizar `FormularioGas.astro` sin alterar el `Formulario.astro` del resto de páginas.
   - [src/pages/tarifas/gas-natural.astro](src/pages/tarifas/gas-natural.astro): pasa `tipoFormulario="gas"` a `BaseLayout`.
@@ -279,53 +289,14 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) en la rama `fix/au
 
 - **C-1**: los formularios no envían datos a ningún sitio y muestran confirmación igualmente.
 - **C-3**: marcadores `[PENDIENTE]`, `[ASESORÍA]` y `[LEGAL]` visibles en las páginas legales y en el footer.
-- ✅ **C-4** (resuelto en 0.2.0): información de protección de datos en el punto de recogida de cada formulario.
-- ✅ **A-6** (resuelto en 0.2.0): banner de cookies (peso visual de aceptar y rechazar, e interfaz corporativa).
-- ✅ **A-8** (resuelto en 0.2.0): lógica de los desplegables del header (estado, teclado, táctil).
-- ✅ **M-3** (resuelto en 0.2.0): imagen Open Graph y datos estructurados de organización.
-- ✅ **M-4, M-5, M-6** (resueltos en 0.2.0): formularios POST, anti-spam honeypot y eliminación de datos personales en `sessionStorage`.
-- ✅ **M-7, M-8** (resueltos en 0.2.0): foco del modal del formulario y del menú móvil.
-- ✅ **M-9** (resuelto en 0.2.0): tablas en móvil y revisión visual por página.
-- ✅ **B-4, B-5, B-7** (resueltos en 0.2.0): limpieza de código muerto en `site.ts`, atributos duplicados y traslado de `canal-directo/index.astro`.
-- ✅ **Imágenes sin uso en `src/imagenes/`** (resuelto en 0.2.0): eliminadas `home/oficinas-y-comercios.jpg`, `home/varios.jpg` y `home/maxi.jpg`.
-- ✅ **Imágenes duplicadas en `src/imagenes/`** (resuelto en 0.2.0): deduplicadas `personal.jpg`, `maxi.jpg`, `sectores-indice-industria` y duplicados entre `home/` y `sectores/`.
-- ✅ **Los 9 avisos** de `astro check` por variables sin usar (resuelto en 0.2.0: 0 errores, 0 warnings, 0 hints).
-
-
-## [0.2.0] - 2026-11-05 — Fase 2: Diseño, Limpieza, Frontend y Accesibilidad
-
-Cambios realizados por Erika Pesca y Antigravity en la rama principal.
-
-### Agregado
-
-- **Estructura estándar de rutas** (B-7): [src/pages/canal-directo/index.astro](src/pages/canal-directo/index.astro) sustituye a la ruta suelta anterior, homogeneizando la arquitectura con el resto de páginas (como contacto/index.astro, metodo/index.astro, etc.).
-- **Unificación de pantalla de confirmación**: [src/components/contacto/HeroContactoRecibido.astro](src/components/contacto/HeroContactoRecibido.astro) ahora es un componente unificado reutilizable que sirve tanto a Contacto ([src/pages/contacto/recibido.astro](src/pages/contacto/recibido.astro)) como a Canal Directo ([src/pages/canal-directo/enviado.astro](src/pages/canal-directo/enviado.astro)), con fondo degradado corporativo, círculo central con checkmark azul y enlaces de retorno.
-- **Variable CSS --font-cuerpo** (N-2): definida en [src/styles/global.css](src/styles/global.css) como var(--font-poppins) para garantizar consistencia tipográfica en todos los componentes que la consumen.
-- **Imagen Open Graph y datos estructurados JSON-LD de Organización** (M-3): incorporados en [src/components/Seo.astro](src/components/Seo.astro) (`og:image`, `twitter:image` con imagen corporativa y esquema `Organization` con nombre fiscal, CIF, teléfono, email y dirección).
-- **Información de protección de datos en primera capa y honeypot anti-spam** (C-4, M-5): añadidos en el paso 3 del formulario modal ([src/components/Formulario.astro](src/components/Formulario.astro)), en el popover "Te llamamos gratis" ([src/components/Header.astro](src/components/Header.astro)) y en el formulario de contacto ([src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro)).
-
-### Cambiado
-
-- **Atención al Cliente en tarjetas fijas**: [src/pages/atencion-al-cliente.astro](src/pages/atencion-al-cliente.astro) se rediseñó sustituyendo los antiguos desplegables (<details>) por una cuadrícula de 6 tarjetas fijas y visibles (01 a 06), con las citas legales exactas de la normativa (RD 88/2026).
-- **Canal Directo**: [src/pages/canal-directo/index.astro](src/pages/canal-directo/index.astro) actualizado con el hero corporativo en degradado, tarjetas para los 4 perfiles profesionales, garantías legales y formulario "Hablemos" en tarjeta azul marino oscuro.
-- **Banner de cookies corporativo** (A-6): [src/components/CookieBanner.astro](src/components/CookieBanner.astro) rediseñado con estilo flotante de tarjeta redondeada (20px), insignia sobria "PRIVACIDAD Y COOKIES" (sin icono de galleta), botones píldora equilibrados para "Aceptar todas" y "Rechazar todas", y modal accesible con desenfoque de fondo y botón de cierre.
-- **Accesibilidad del menú móvil** (M-8, A-8): [src/components/Header.astro](src/components/Header.astro) ahora alterna dinámicamente el aria-label ("Abrir menú" / "Cerrar menú"), cierra el cajón con la tecla Escape y restaura automáticamente el scroll del body si la ventana se redimensiona a más de 960 px.
-- **Gestión de foco en el modal del formulario** (M-7): [src/components/Formulario.astro](src/components/Formulario.astro) enfoca automáticamente el botón de cierre al abrir el modal y devuelve el foco al elemento disparador al cerrarse.
-- **Control unificado de desplegables del Header** (A-8): en [src/components/Header.astro](src/components/Header.astro), la clase `.abierto` es la única fuente de verdad (sin conflicto con `:hover` en CSS), `mouseenter`/`mouseleave` se limitan a dispositivos con puntero (`(hover: hover)`) y `focusout` cierra el desplegable al salir con el teclado.
-- **Endurecimiento de formularios y privacidad** (M-4, M-6): [src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro) y [src/pages/canal-directo/index.astro](src/pages/canal-directo/index.astro) pasan de `method="GET"` a `method="post"`, y se elimina la escritura de datos personales en `sessionStorage` en Canal Directo.
-- **Adaptación móvil en tablas y tarjetas** (M-9): ajustes responsivos para 375 px en `.tabla-desplegable` ([src/components/tarifas/PartesPrecio.astro](src/components/tarifas/PartesPrecio.astro)) y `.paso-tarjeta` ([src/components/diagnostico/CasoRealObrador.astro](src/components/diagnostico/CasoRealObrador.astro)).
-- **Tipografías locales en CSS** (A-1): sustituidas las referencias residuales a `"Instrument Serif"` en [src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro) y `"Baloo 2"` en [src/components/CookieBanner.astro](src/components/CookieBanner.astro) por `var(--font-literata)` y `var(--font-poppins)`.
-- **Deduplicación de imágenes entre carpetas** (N-1): unificados los imports de imágenes idénticas en [src/components/home/ProximaFactura.astro](src/components/home/ProximaFactura.astro), [src/components/home/TecnologiaPersonas.astro](src/components/home/TecnologiaPersonas.astro), [src/components/home/SectoresPerdidas.astro](src/components/home/SectoresPerdidas.astro), [src/components/sectores/CincoSectoresCards.astro](src/components/sectores/CincoSectoresCards.astro), [src/components/sectores/industria/HeroIndustria.astro](src/components/sectores/industria/HeroIndustria.astro) y [src/components/sectores/SiTuNegocioNoEsta.astro](src/components/sectores/SiTuNegocioNoEsta.astro).
-
-### Eliminado
-
-- **Archivo suelto de ruta** (B-7): eliminado src/pages/canal-directo.astro al integrarse en su carpeta correspondiente.
-- **Código muerto en site.ts** (B-5): eliminadas las constantes sin uso headerNav, footerNav, legalNav y phoneCta de [src/data/site.ts](src/data/site.ts).
-- **Imágenes huérfanas sin uso** (N-1): eliminada src/imagenes/home/oficinas-y-comercios.jpg (no se importaba en ninguna parte).
-- **Imports sin uso** (N-1, N-8): eliminados todos los imports y variables sin uso reportados por `astro check` (`maxiImg` en [src/components/home/TecnologiaPersonas.astro](src/components/home/TecnologiaPersonas.astro), `primaryCta` en [src/components/Header.astro](src/components/Header.astro) y [src/data/site.ts](src/data/site.ts), `site` y comentario obsoleto en [src/components/metodo/HeroMetodo.astro](src/components/metodo/HeroMetodo.astro), `TituloAcento` en [src/components/guias/ComoEstanHechas.astro](src/components/guias/ComoEstanHechas.astro), [src/components/guias/FacturaInteractiva.astro](src/components/guias/FacturaInteractiva.astro), [src/components/guias/MosaicoTemas.astro](src/components/guias/MosaicoTemas.astro) y [src/components/guias/VistaSituaciones.astro](src/components/guias/VistaSituaciones.astro), `idx` en [src/components/tarifas/gas/EmpiezaPorLoQuePagas.astro](src/components/tarifas/gas/EmpiezaPorLoQuePagas.astro) y `currentIndex` en [src/components/tarifas/particulares/ComoFuncionaCasa.astro](src/components/tarifas/particulares/ComoFuncionaCasa.astro)).
-- **Copias de imágenes duplicadas y huérfanas** (N-1): eliminadas `src/imagenes/home/maxi.jpg`, `src/imagenes/home/varios.jpg`, `src/imagenes/home/personal.jpg`, `src/imagenes/home/hoteles.jpg`, `src/imagenes/home/logistica-y-frio.jpg`, `src/imagenes/sectores/sectores-indice/sectores-indice-industria-1.jpg`, `src/imagenes/sectores/sectores-industria/sectores-indice-industria-2.jpg`, `src/imagenes/sectores/sectores-indice/sectores-indice-restaurante-1.jpg`, `src/imagenes/sectores/sectores-indice/clinicas-1.jpg` y `src/imagenes/sectores/sectores-indice/talleres-mecanicos-1.jpg`.
-
-### Pendiente (para el equipo de Backend y Asesoría Legal)
-
-- **C-1 (Backend)**: conectar los 4 formularios (`Formulario.astro`, `HablaConNosotros.astro`, `canal-directo/index.astro` y el popover de `Header.astro`) al endpoint real de backend/CRM y añadir su dominio a `connect-src` y `form-action` en `public/.htaccess`.
-- **C-3 (Legal)**: completar los marcadores `[PENDIENTE]`, `[ASESORÍA]` y `[LEGAL]` con los datos definitivos de asesoría jurídica (registro mercantil, mediación, DPO y tablas de conservación).
+- **C-4**: información de protección de datos en el punto de recogida de cada formulario.
+- **A-6**: banner de cookies (peso visual de aceptar y rechazar, y desajuste con las políticas sobre Google Analytics).
+- **A-8**: lógica de los desplegables del header (estado, teclado, táctil).
+- **M-3**: imagen Open Graph y datos estructurados de organización.
+- **M-4, M-5, M-6**: formularios GET, anti-spam y datos personales en `sessionStorage`.
+- **M-7, M-8**: foco del modal del formulario y del menú móvil.
+- **M-9**: tablas en móvil y revisión visual por página.
+- **B-1, B-2, B-4, B-5, B-7, B-9 a B-14**: limpieza (código muerto en `site.ts`, atributos duplicados, mover `canal-directo.astro`, unificar componentes de sectores, etc.).
+- **Imágenes sin uso en `src/imagenes/`**: `home/oficinas-y-comercios.jpg` y `home/varios.jpg` no se importan en ningún sitio, y `home/maxi.jpg` se importa pero no se usa (`maxiImg` en `TecnologiaPersonas.astro`).
+- **Imágenes duplicadas** en `src/imagenes/`: `personal.jpg` y `maxi.jpg` están en la raíz y en `home/`, y `sectores-indice-industria` está tres veces.
+- **Los 9 avisos** de `astro check` por variables sin usar.

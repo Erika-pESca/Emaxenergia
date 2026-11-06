@@ -11,7 +11,7 @@ const whatsappColaboradorHref =
     "Hola EMAX Energía, soy profesional / colaborador y me interesa el Canal Directo."
   );
 
-const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
+const emailColaboradorHref = `mailto:${site.correosFormularios.leads.para.join(",")}?cc=${site.correosFormularios.leads.cc.join(",")}&subject=${encodeURIComponent(
   "Canal Directo · Colaboración profesional con EMAX Energía"
 )}`;
 ---
@@ -398,7 +398,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
 
       // Guardar en sessionStorage para que /canal-directo/enviado lo muestre de forma personalizada
       try {
-        void (
+        sessionStorage.setItem(
           "emax:formulario",
           JSON.stringify({
             tipo: "canal",
@@ -414,8 +414,29 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
         console.warn("Storage error", err);
       }
 
-      // Redirigir a la página de confirmación oficial
-      window.location.href = "/canal-directo/enviado/";
+      // Enviar a gerencia@emaxenergia.com y hola@emaxenergia.com (copia a administracion@emaxenergia.com)
+      fetch("/api/enviar-formulario.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tipo: "lead-canal-directo",
+          para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
+          cc: ["administracion@emaxenergia.com"],
+          nombre: nombre,
+          empresa: empresa,
+          perfil: perfil,
+          provincia: provincia,
+          email: email,
+          telefono: telefono,
+          pagina: window.location.pathname,
+          fecha: new Date().toISOString()
+        })
+      })
+        .catch(function () {})
+        .finally(function () {
+          // Redirigir a la página de confirmación oficial
+          window.location.href = "/canal-directo/enviado/";
+        });
     });
   });
 </script>
@@ -465,7 +486,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
   }
 
   .cd-h1 {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--font-poppins), sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     line-height: 1.15;
@@ -580,7 +601,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
   }
 
   .cd-seccion-h2 {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--font-poppins), sans-serif;
     font-size: clamp(1.75rem, 3vw, 2.25rem);
     font-weight: 700;
     color: #06183b;
@@ -631,7 +652,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
   }
 
   .cd-perfil-titulo {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--font-poppins), sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
     color: #06183b;
@@ -693,7 +714,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
   }
 
   .cd-bloque-titulo {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--font-poppins), sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     color: #06183b;
@@ -749,7 +770,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
   }
 
   .cd-hablemos-titulo {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--font-poppins), sans-serif;
     font-size: clamp(2rem, 3.5vw, 2.5rem);
     font-weight: 700;
     color: #06183b;
@@ -833,7 +854,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
   }
 
   .cd-form-tit {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--font-poppins), sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     color: #ffffff;

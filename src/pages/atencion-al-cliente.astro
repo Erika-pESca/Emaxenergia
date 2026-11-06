@@ -11,6 +11,9 @@ const whatsappHref =
   encodeURIComponent(
     "Hola EMAX Energía, ya soy cliente y necesito ayuda con mi suministro."
   );
+
+const ccSoporte = site.correosFormularios.soporteContacto.cc.join(",");
+const mailtoSoporte = `mailto:${site.emailSoporte}?cc=${ccSoporte}`;
 ---
 
 <BaseLayout
@@ -28,7 +31,7 @@ const whatsappHref =
       </p>
 
       <p class="ac-canales-directos">
-        <a href={site.phoneHref} class="ac-link-blanco">{site.phone}</a> · <a href={`mailto:${site.email}`} class="ac-link-blanco">{site.email}</a><br />
+        <a href={site.phoneHref} class="ac-link-blanco">{site.phone}</a> · <a href={mailtoSoporte} class="ac-link-blanco">{site.emailSoporte}</a><br />
         De lunes a viernes, de 9:00 a 13:00 y de 15:00 a 19:00
       </p>
 
@@ -46,7 +49,7 @@ const whatsappHref =
         >
           WhatsApp directo
         </a>
-        <a href={`mailto:${site.email}?subject=${encodeURIComponent("Atención al cliente · EMAX Energía")}`} class="ac-btn ac-btn--secundario">
+        <a href={`${mailtoSoporte}&subject=${encodeURIComponent("Atención al cliente · EMAX Energía")}`} class="ac-btn ac-btn--secundario">
           Enviar email
         </a>
         <a href={site.phoneHref} class="ac-btn ac-btn--secundario">
@@ -198,7 +201,7 @@ const whatsappHref =
           </div>
 
           <div class="ac-card-pie">
-            <a href={`mailto:${site.email}?subject=Reclamación`} class="ac-card-enlace">Escribir a {site.email} →</a>
+            <a href={`${mailtoSoporte}&subject=${encodeURIComponent("Reclamación · EMAX Energía")}`} class="ac-card-enlace">Escribir a {site.emailSoporte} →</a>
             <a href="#contacto-directo" class="ac-card-btn-mini">Abrir reclamación</a>
           </div>
         </article>
@@ -247,7 +250,7 @@ const whatsappHref =
 
           <div class="ac-card-pie">
             <a href="/privacidad/" class="ac-card-enlace">Política de privacidad →</a>
-            <a href="mailto:hola@emaxenergia.com?subject=Ejercicio%20Derechos%20RGPD" class="ac-card-btn-mini">Ejercer derechos</a>
+            <a href={`${mailtoSoporte}&subject=${encodeURIComponent("Ejercicio Derechos RGPD")}`} class="ac-card-btn-mini">Ejercer derechos</a>
           </div>
         </article>
       </div>

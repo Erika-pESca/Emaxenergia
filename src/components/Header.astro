@@ -536,9 +536,36 @@ const tarifasItems = [
     }
   });
 
-  popoverForm?.addEventListener("submit", (e) => {
-    const trampa = (popoverForm as HTMLFormElement).querySelector<HTMLInputElement>("#popover-web"); if (trampa && trampa.value) { e.preventDefault(); return; }
+  popoverForm?.addEventListener("submit", async (e) => {
+    const formEl = popoverForm as HTMLFormElement;
+    const trampa = formEl.querySelector<HTMLInputElement>("#popover-web");
+    if (trampa && trampa.value) {
+      e.preventDefault();
+      return;
+    }
     e.preventDefault();
+
+    const telInput = formEl.querySelector<HTMLInputElement>('input[name="telefono_llamame"]');
+    const telefono = (telInput?.value || "").trim();
+    if (!telefono) return;
+
+    try {
+      await fetch("/api/enviar-formulario.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tipo: "lead-llamada",
+          para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
+          cc: ["administracion@emaxenergia.com"],
+          telefono,
+          pagina: window.location.pathname,
+          fecha: new Date().toISOString(),
+        }),
+      });
+    } catch {
+      // Respaldo en desarrollo local sin servidor PHP activo
+    }
+
     if (popoverExito) {
       popoverExito.removeAttribute("hidden");
       setTimeout(() => {

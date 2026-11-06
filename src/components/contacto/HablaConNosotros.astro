@@ -40,7 +40,8 @@
             </span>
             <div class="habla-dato-texto">
               <strong class="habla-dato-label">EMAIL</strong>
-              <a href="mailto:hola@emaxenergia.com" class="habla-dato-valor">hola@emaxenergia.com</a>
+              <a href="mailto:administracion@emaxenergia.com?cc=gerencia@emaxenergia.com,hola@emaxenergia.com" class="habla-dato-valor">administracion@emaxenergia.com</a>
+              <a href="mailto:hola@emaxenergia.com?cc=administracion@emaxenergia.com,gerencia@emaxenergia.com" class="habla-dato-valor habla-dato-valor--horario">hola@emaxenergia.com</a>
             </div>
           </li>
 
@@ -160,13 +161,16 @@
     if (!formContacto || formContacto.dataset.ready === "1") return;
     formContacto.dataset.ready = "1";
 
-    formContacto.addEventListener("submit", (e) => {
+    formContacto.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const trampa = formContacto.querySelector<HTMLInputElement>("#contacto-web"); if (trampa && trampa.value) return;
+      const trampa = formContacto.querySelector<HTMLInputElement>("#contacto-web");
+      if (trampa && trampa.value) return;
       const nombre = (formContacto.querySelector<HTMLInputElement>("#contacto-nombre")?.value || "").trim();
       const email = (formContacto.querySelector<HTMLInputElement>("#contacto-email")?.value || "").trim();
+      const asunto = (formContacto.querySelector<HTMLInputElement>("#contacto-asunto")?.value || "").trim();
       const mensaje = (formContacto.querySelector<HTMLTextAreaElement>("#contacto-mensaje")?.value || "").trim();
+      const telefono = (formContacto.querySelector<HTMLInputElement>("#contacto-telefono")?.value || "").trim();
 
       if (!nombre || !email || !mensaje) {
         if (feedbackEl) {
@@ -175,6 +179,43 @@
           feedbackEl.dataset.estado = "error";
         }
         return;
+      }
+
+      try {
+        sessionStorage.setItem(
+          "emax:formulario",
+          JSON.stringify({
+            tipo: "contacto",
+            nombre,
+            email,
+            telefono,
+          })
+        );
+      } catch {
+        // Ignorar errores de almacenamiento privado
+      }
+
+      // Soporte / Página de Contacto -> Para: administracion@emaxenergia.com
+      //                                 CC:   gerencia@emaxenergia.com, hola@emaxenergia.com
+      try {
+        await fetch("/api/enviar-formulario.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tipo: "soporte-contacto",
+            para: ["administracion@emaxenergia.com"],
+            cc: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
+            nombre,
+            email,
+            asunto,
+            mensaje,
+            telefono,
+            pagina: window.location.pathname,
+            fecha: new Date().toISOString(),
+          }),
+        });
+      } catch {
+        // Respaldo en desarrollo local sin servidor PHP activo
       }
 
       // Redirigir a la página de confirmación Contacto/recibido
