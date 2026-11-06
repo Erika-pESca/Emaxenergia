@@ -38,6 +38,7 @@
 
   /* Tipografía: Poppins para títulos, Literata para acentos cursivos/itálicos + Inter (Cuerpo) */
   --font-texto: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-cuerpo: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-titulos: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-acento: var(--font-literata), Georgia, "Times New Roman", serif;

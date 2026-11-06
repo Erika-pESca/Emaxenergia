@@ -1,6 +1,7 @@
 ---
-// Etiquetas del <head> para Google y al compartir el enlace: título, descripción, URL y Open Graph.
+// Etiquetas del <head> para Google y al compartir el enlace: título, descripción, URL, Open Graph y JSON-LD.
 import { site } from "../data/site";
+import ogDefaultImg from "../imagenes/home/banner-home.jpg";
 
 interface Props {
   title: string;
@@ -13,10 +14,30 @@ interface Props {
 const { title, description, path = "/", noindex = false } = Astro.props;
 // Canonical siempre con barra final (trailingSlash: "always"), igual que las URLs del sitemap.
 const pathNormalizado = path.endsWith("/") ? path : `${path}/`;
-const canonical = new URL(pathNormalizado, Astro.site ?? site.url).href;
+const siteBase = Astro.site ?? site.url;
+const canonical = new URL(pathNormalizado, siteBase).href;
+const ogImageUrl = new URL(ogDefaultImg.src, siteBase).href;
 // El sufijo se añade una sola vez: solo si el título no menciona ya a EMAX
 // (algunas páginas lo llevan con otro separador, p. ej. "· EMAX Energía").
 const fullTitle = title.includes("EMAX") ? title : `${title} | EMAX Energía`;
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  email: site.email,
+  telephone: "+34933949343",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Carrer Esteve Gilabert Bruniquer, 52",
+    addressLocality: "Granollers",
+    postalCode: "08402",
+    addressRegion: "Barcelona",
+    addressCountry: "ES",
+  },
+};
 ---
 
 <title>{fullTitle}</title>
@@ -29,6 +50,9 @@ const fullTitle = title.includes("EMAX") ? title : `${title} | EMAX Energía`;
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:locale" content="es_ES" />
+<meta property="og:image" content={ogImageUrl} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(orgSchema)} />

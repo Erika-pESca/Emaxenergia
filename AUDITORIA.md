@@ -257,14 +257,14 @@ Notas: si el formulario acaba enviando a un servicio externo, hay que añadir su
 
 ## Hallazgos nuevos durante la fase 1
 
-- **N-1 (Bajo). Imágenes sin uso y duplicadas en `src/imagenes/`.** `home/oficinas-y-comercios.jpg` y `home/varios.jpg` no se importan; `home/maxi.jpg` se importa (`maxiImg`) pero no se usa. `personal.jpg` y `maxi.jpg` están en la raíz y en `home/`, y `sectores-indice-industria` existe tres veces con el mismo contenido. Corrección: borrar lo que no se usa y dejar una sola copia.
-- **N-2 (Medio). Variable CSS `--font-cuerpo` sin definir.** Se usa 49 veces y no la define ningún archivo, así que siempre cae en el valor por defecto de cada sitio (Sora en unos, Poppins en otros, Inter en uno). Corrección: definirla en `global.css` y decidir qué familia es la del cuerpo.
+- ✅ **N-1 (Bajo, resuelto en 0.2.0). Imágenes sin uso y duplicadas en `src/imagenes/`.** `home/oficinas-y-comercios.jpg` y `home/varios.jpg` no se importan; `home/maxi.jpg` se importa (`maxiImg`) pero no se usa. `personal.jpg` y `maxi.jpg` están en la raíz y en `home/`, y `sectores-indice-industria` existe tres veces con el mismo contenido. Corrección: borrar lo que no se usa y dejar una sola copia.
+- ✅ **N-2 (Medio, resuelto en 0.2.0). Variable CSS `--font-cuerpo` sin definir.** Se usa 49 veces y no la define ningún archivo, así que siempre cae en el valor por defecto de cada sitio (Sora en unos, Poppins en otros, Inter en uno). Corrección: definirla en `global.css` y decidir qué familia es la del cuerpo.
 - **N-3 (Bajo). Sora 400 se pedía pero nunca se cargó.** El navegador lo servía con el peso 500. Se mantuvo igual para no cambiar el aspecto; si se quiere el 400 real hay que añadirlo a `astro.config.mjs`.
 - **N-4 (Medio). El build necesita red para las fuentes.** La API de fuentes baja las fuentes de fontsource en el primer `npm run build` (después las cachea en `node_modules/.astro/fonts`). Un CI o una máquina nueva sin red no podría construir el sitio. Corrección: documentado en el README; si se quiere evitar, usar archivos `.woff2` versionados con el proveedor `local`.
-- **N-5 (Bajo). Comentarios con archivos inexistentes.** `HeroMetodo.astro` cita `fondo_metodo.jpg`, que no existe en el proyecto.
+- ✅ **N-5 (Bajo, resuelto en 0.2.0). Comentarios con archivos inexistentes.** `HeroMetodo.astro` cita `fondo_metodo.jpg`, que no existe en el proyecto.
 - **N-6 (Informativo). La CSP `form-action 'self'` y `connect-src 'self'`** bloquearán un servicio externo de formularios (C-1) hasta que se añada su dominio al `.htaccess`.
 - **N-7 (Informativo). `/metodo` sin barra da 404 en desarrollo** con `trailingSlash: 'always'`; en Hostinger debería redirigir Apache. Comprobar tras publicar.
-- **N-8 (Bajo). 9 avisos de `astro check`** por variables o parámetros sin usar (`primaryCta` en `Header.astro`, `TituloAcento` en 4 componentes de guías, `maxiImg`, `site` en `HeroMetodo.astro`, `idx`, `currentIndex`).
+- ✅ **N-8 (Bajo, resuelto en 0.2.0). 9 avisos de `astro check`** por variables o parámetros sin usar (`primaryCta` en `Header.astro`, `TituloAcento` en 4 componentes de guías, `maxiImg`, `site` en `HeroMetodo.astro`, `idx`, `currentIndex`).
 
 ---
 
@@ -274,7 +274,7 @@ Los puntos marcados con ✅ se resolvieron en la fase 1 (versión 0.1.0).
 
 **Bloqueantes: no publicar sin esto**
 1. **C-1** Elegir backend y enviar los formularios de verdad; no mostrar "recibido" si falla. Unificar los 4 formularios.
-2. **C-3 / C-4** La empresa/asesoría cierra los datos legales pendientes; después se quitan los marcadores y se añade información por capas en cada formulario.
+2. **C-3** (pendiente asesoría) / ✅ **C-4** (resuelto en 0.2.0): La empresa/asesoría cierra los datos legales pendientes; información por capas añadida en cada formulario.
 3. ✅ **C-2** Arreglar los CTA "Analizar mi factura" (`data-abrir-funnel`).
 4. ✅ **A-1** Alojar las fuentes en local.
 
@@ -282,16 +282,16 @@ Los puntos marcados con ✅ se resolvieron en la fase 1 (versión 0.1.0).
 5. ✅ **A-3** Arreglar los 15 enlaces rotos y los anchors.
 6. ✅ **A-2** Optimizar imágenes (`astro:assets` + compresión de los originales).
 7. ✅ **A-4 / A-5** `.htaccess`, `404.astro`, `noindex` y exclusión del sitemap en las páginas de confirmación.
-8. **A-6** Igualar el peso de aceptar/rechazar; alinear políticas y código sobre GA4.
-9. ✅ **M-1, M-2** (resueltos) y **M-3** (pendiente): Títulos únicos, canonical/trailing slash, imagen OG y JSON-LD.
+8. ✅ **A-6** (resuelto en 0.2.0) Igualar el peso de aceptar/rechazar en el banner de cookies.
+9. ✅ **M-1, M-2, M-3** (resueltos): Títulos únicos, canonical/trailing slash, imagen OG y JSON-LD.
 10. ✅ **M-11, M-12** Borrar archivos de prueba y la config de ngrok.
 11. ✅ **A-7** `npm audit fix` / astro 7.4.5, y rehacer el build.
 
 **Después (calidad y accesibilidad)**
-12. **A-8, M-7, M-8** Rehacer el control de desplegables, el modal y el menú móvil con teclado/foco correctos.
-13. **M-4, M-5, M-6** POST en formularios, honeypot en todos, no guardar datos personales en `sessionStorage`.
+12. ✅ **A-8, M-7, M-8** (resueltos en 0.2.0) Rehacer el control de desplegables, el modal y el menú móvil con teclado/foco correctos.
+13. ✅ **M-4, M-5, M-6** (resueltos en 0.2.0) POST en formularios, honeypot en todos, no guardar datos personales en `sessionStorage`.
 14. ✅ **M-10** Instalar `@astrojs/check` y arreglar los tipos.
-15. **B-1…B-14** Limpieza: código muerto en `site.ts`, nombres de imágenes, README/CLAUDE.md, y unificar los componentes de sectores.
+15. ✅ **B-4, B-5, B-7** (resueltos en 0.2.0) Limpieza: código muerto en `site.ts`, atributos duplicados y mover `canal-directo/index.astro`.
 
 **Pendiente de verificar tras publicar:** `curl -I` de cabeceras reales, redirección HTTP→HTTPS y www→apex, 404 real, y una pasada de contraste con herramienta (axe/Lighthouse) y de lector de pantalla.
 

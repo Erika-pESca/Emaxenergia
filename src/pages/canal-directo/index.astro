@@ -2,8 +2,8 @@
 // Página: Canal Directo para Profesionales y Colaboradores (/canal-directo)
 // Diseño: Hero institucional oscuro degradado + Tarjetas para "Para quién es" + Bloques "Qué recibe tu cliente" y "Con su permiso, siempre" + Formulario "Hablemos" estilizado
 // Contenido: Texto exacto oficial del borrador v12.16 con [LEGAL: validar] y [LEGAL: 31 L2]
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { site } from "../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
 
 const whatsappColaboradorHref =
   "https://wa.me/34933949343?text=" +
@@ -208,7 +208,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
                 class="cd-form"
                 id="form-canal-directo"
                 action="/canal-directo/enviado/"
-                method="GET"
+                method="post"
                 data-form-simple="canal"
                 novalidate
               >
@@ -398,7 +398,7 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
 
       // Guardar en sessionStorage para que /canal-directo/enviado lo muestre de forma personalizada
       try {
-        sessionStorage.setItem(
+        void (
           "emax:formulario",
           JSON.stringify({
             tipo: "canal",
@@ -982,3 +982,4 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
     background: rgba(255, 110, 90, 0.15);
   }
 </style>
+

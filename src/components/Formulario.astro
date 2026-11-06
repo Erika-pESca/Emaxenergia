@@ -182,6 +182,7 @@ import Logo from "./Logo.astro";
             <input type="hidden" id="fn-input-suministros" name="suministros" value="uno" />
             <input type="hidden" id="fn-input-canal" name="canal" value="llamada" />
             <input type="hidden" id="fn-input-tramo" name="tramo_origen" value="general" />
+            <div class="fn-trampa" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label for="fn-input-web">Web</label><input type="text" id="fn-input-web" name="web" tabindex="-1" autocomplete="off" /></div>
 
             <div class="fn-campo">
               <label for="fn-input-nombre">Tu nombre o empresa</label>
@@ -206,7 +207,7 @@ import Logo from "./Logo.astro";
             </fieldset>
 
             <p class="fn-antes-boton">
-              Al pulsar, un consultor técnico te llamará con tu informe elaborado sin ningún coste ni permanencia.
+              Responsable: ENERGYMAX ADVISORY, S.L.U. · Finalidad: atender tu solicitud y llamarte con tu informe sin coste ni permanencia · <a href="/privacidad/">Política de privacidad</a>.
             </p>
 
             <button type="submit" class="boton-fn-enviar" id="btn-submit-formulario">
@@ -359,7 +360,11 @@ import Logo from "./Logo.astro";
       });
     }
 
+    let elementoPrevioFoco: HTMLElement | null = null;
+
     function abrirModalFunnel(btn?: HTMLElement | null) {
+      elementoPrevioFoco = btn || (document.activeElement as HTMLElement);
+
       // Personalizar el mensaje según el botón que abrió el modal
       if (btn) {
         const label = btn.getAttribute("data-tramo-label") || "Estudio técnico gratuito para tu empresa.";
@@ -374,11 +379,17 @@ import Logo from "./Logo.astro";
       irAlPaso(1);
       modalFunnel!.removeAttribute("hidden");
       document.body.style.overflow = "hidden";
+      setTimeout(() => {
+        btnCerrarFunnel?.focus();
+      }, 50);
     }
 
     function cerrarModalFunnel() {
       modalFunnel!.setAttribute("hidden", "true");
       document.body.style.overflow = "";
+      if (elementoPrevioFoco && typeof elementoPrevioFoco.focus === "function") {
+        elementoPrevioFoco.focus();
+      }
     }
 
     // Delegación global: cualquier botón con data-abrir-funnel abre este único formulario
@@ -462,6 +473,7 @@ import Logo from "./Logo.astro";
       e.preventDefault();
 
       const formData = new FormData(formDatos);
+      if (formData.get("web")) return;
       const datosLead: Record<string, string> = {
         nombre: String(formData.get("nombre") || ""),
         telefono: String(formData.get("telefono") || ""),

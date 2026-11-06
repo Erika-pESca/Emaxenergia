@@ -7,7 +7,7 @@
 // 5. Barra de lectura y progreso de scroll integrada en la base de la cápsula central.
 // 6. Popover desplegable interactivo "Te llamamos gratis".
 import Logo from "./Logo.astro";
-import { site, primaryCta } from "../data/site";
+import { site } from "../data/site";
 
 const current = Astro.url.pathname;
 
@@ -317,6 +317,7 @@ const tarifasItems = [
               <p>Un consultor de EMAX te llamará con tu informe.</p>
             </div>
             <form class="popover-form" data-form-llamada>
+              <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label for="popover-web">Web</label><input type="text" id="popover-web" name="web" tabindex="-1" autocomplete="off" /></div>
               <div class="popover-input-fila">
                 <input
                   type="tel"
@@ -330,7 +331,7 @@ const tarifasItems = [
                   Llamadme
                 </button>
               </div>
-              <span class="popover-privacidad">Sin compromiso. Respetamos tu privacidad.</span>
+              <span class="popover-privacidad">Responsable: ENERGYMAX ADVISORY, S.L.U. · Finalidad: llamarte para atender tu consulta · <a href="/privacidad/">Política de privacidad</a>.</span>
               <div class="popover-exito" data-popover-exito hidden>
                 ✓ ¡Recibido! Te llamaremos en breve.
               </div>
@@ -472,6 +473,7 @@ const tarifasItems = [
     let timerCierre: ReturnType<typeof setTimeout> | undefined;
 
     dd.addEventListener("mouseenter", () => {
+      if (!window.matchMedia("(hover: hover)").matches) return;
       clearTimeout(timerCierre);
       dropdownWrappers.forEach((d) => {
         if (d !== dd) {
@@ -484,6 +486,7 @@ const tarifasItems = [
     });
 
     dd.addEventListener("mouseleave", () => {
+      if (!window.matchMedia("(hover: hover)").matches) return;
       timerCierre = setTimeout(() => {
         dd.classList.remove("abierto");
         btn?.setAttribute("aria-expanded", "false");
@@ -504,6 +507,7 @@ const tarifasItems = [
     });
 
     // Accesibilidad por teclado
+    dd.addEventListener("focusout", (e) => { const rel = (e as FocusEvent).relatedTarget as Node | null; if (!rel || !dd.contains(rel)) { dd.classList.remove("abierto"); btn?.setAttribute("aria-expanded", "false"); } });
     btn?.addEventListener("focus", () => {
       dropdownWrappers.forEach((d) => {
         if (d !== dd) {
@@ -533,6 +537,7 @@ const tarifasItems = [
   });
 
   popoverForm?.addEventListener("submit", (e) => {
+    const trampa = (popoverForm as HTMLFormElement).querySelector<HTMLInputElement>("#popover-web"); if (trampa && trampa.value) { e.preventDefault(); return; }
     e.preventDefault();
     if (popoverExito) {
       popoverExito.removeAttribute("hidden");
@@ -573,28 +578,57 @@ const tarifasItems = [
   const toggleMovilBtn = document.querySelector("[data-toggle-movil]");
   const drawerMovil = document.querySelector("[data-menu-movil]");
 
+  function cerrarMenuMovil() {
+    if (drawerMovil && !drawerMovil.hasAttribute("hidden")) {
+      drawerMovil.setAttribute("hidden", "true");
+      toggleMovilBtn?.setAttribute("aria-expanded", "false");
+      toggleMovilBtn?.setAttribute("aria-label", "Abrir menú");
+      toggleMovilBtn?.classList.remove("activo");
+      document.body.style.overflow = "";
+    }
+  }
+
+  function abrirMenuMovil() {
+    if (drawerMovil) {
+      drawerMovil.removeAttribute("hidden");
+      toggleMovilBtn?.setAttribute("aria-expanded", "true");
+      toggleMovilBtn?.setAttribute("aria-label", "Cerrar menú");
+      toggleMovilBtn?.classList.add("activo");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
   toggleMovilBtn?.addEventListener("click", () => {
     const isHidden = drawerMovil?.hasAttribute("hidden");
     if (isHidden) {
-      drawerMovil?.removeAttribute("hidden");
-      toggleMovilBtn?.setAttribute("aria-expanded", "true");
-      toggleMovilBtn?.classList.add("activo");
-      document.body.style.overflow = "hidden";
+      abrirMenuMovil();
     } else {
-      drawerMovil?.setAttribute("hidden", "true");
-      toggleMovilBtn?.setAttribute("aria-expanded", "false");
-      toggleMovilBtn?.classList.remove("activo");
-      document.body.style.overflow = "";
+      cerrarMenuMovil();
     }
   });
 
   drawerMovil?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      drawerMovil?.setAttribute("hidden", "true");
-      toggleMovilBtn?.setAttribute("aria-expanded", "false");
-      toggleMovilBtn?.classList.remove("activo");
-      document.body.style.overflow = "";
-    });
+    link.addEventListener("click", cerrarMenuMovil);
+  });
+
+  // Cerrar menú móvil o desplegables con tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      cerrarMenuMovil();
+      popoverPanel?.setAttribute("hidden", "true");
+      popoverBtn?.setAttribute("aria-expanded", "false");
+      dropdownWrappers.forEach((d) => {
+        d.classList.remove("abierto");
+        d.querySelector("button")?.setAttribute("aria-expanded", "false");
+      });
+    }
+  });
+
+  // Restaurar overflow si se redimensiona a pantalla de escritorio
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 960) {
+      cerrarMenuMovil();
+    }
   });
 </script>
 
@@ -745,7 +779,7 @@ const tarifasItems = [
     color: #63738e;
   }
 
-  .nav-dropdown:hover .chevron-svg,
+  .nav-dropdown.abierto .chevron-svg,
   .nav-dropdown.abierto .chevron-svg {
     transform: rotate(180deg);
     color: #004aad;
@@ -811,7 +845,7 @@ const tarifasItems = [
     background: transparent;
   }
 
-  .nav-dropdown:hover .popover-animado,
+  .nav-dropdown.abierto .popover-animado,
   .nav-dropdown.abierto .popover-animado {
     opacity: 1;
     visibility: visible;

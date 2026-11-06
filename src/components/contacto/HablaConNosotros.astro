@@ -69,7 +69,8 @@
             <span class="escribenos-serif">Escríbenos</span>
           </h3>
 
-          <form class="escribenos-form" action="/contacto/recibido/" method="GET" data-form-contacto novalidate>
+          <form class="escribenos-form" action="/contacto/recibido/" method="post" data-form-contacto novalidate>
+            <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label for="contacto-web">Web</label><input type="text" id="contacto-web" name="web" tabindex="-1" autocomplete="off" /></div>
             <div class="campo-grupo">
               <label for="contacto-nombre" class="campo-label">Tu nombre</label>
               <input
@@ -162,6 +163,7 @@
     formContacto.addEventListener("submit", (e) => {
       e.preventDefault();
 
+      const trampa = formContacto.querySelector<HTMLInputElement>("#contacto-web"); if (trampa && trampa.value) return;
       const nombre = (formContacto.querySelector<HTMLInputElement>("#contacto-nombre")?.value || "").trim();
       const email = (formContacto.querySelector<HTMLInputElement>("#contacto-email")?.value || "").trim();
       const mensaje = (formContacto.querySelector<HTMLTextAreaElement>("#contacto-mensaje")?.value || "").trim();
@@ -224,7 +226,7 @@
 
   .habla-cursiva {
     display: inline-block;
-    font-family: "Instrument Serif", Georgia, serif;
+    font-family: var(--font-literata), Georgia, serif;
     font-style: italic;
     font-weight: 400;
     font-size: clamp(2.5rem, 4.2vw, 3.35rem);
@@ -322,7 +324,7 @@
 
   .escribenos-serif {
     display: block;
-    font-family: "Instrument Serif", Georgia, serif;
+    font-family: var(--font-literata), Georgia, serif;
     font-weight: 400;
     font-size: 2.15rem;
     line-height: 1.1;

@@ -311,7 +311,7 @@
   }
 
   .ck__t {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--f-marca, var(--font-poppins), sans-serif);
     font-size: 1.25rem;
     font-weight: 700;
     color: #06183b;
@@ -347,26 +347,26 @@
     text-align: center;
   }
 
-  .ck__b--aceptar {
+  .ck__b--aceptar, .ck__b--rechazar {
     background: #004aad;
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 4px 12px rgba(0, 74, 173, 0.3);
   }
 
-  .ck__b--aceptar:hover {
+  .ck__b--aceptar:hover, .ck__b--rechazar:hover {
     background: #003b8a;
     transform: translateY(-1px);
     box-shadow: 0 6px 16px rgba(0, 74, 173, 0.4);
   }
 
-  .ck__b--rechazar {
+  .ck__b--rechazar-unused {
     background: #ffffff;
     color: #415470;
     border: 1.5px solid #d5dfed;
   }
 
-  .ck__b--rechazar:hover {
+  .ck__b--rechazar-unused:hover {
     background: #f1f5fb;
     color: #06183b;
     border-color: #cbd5e1;
@@ -458,7 +458,7 @@
   }
 
   .ck-panel__t {
-    font-family: var(--f-marca, "Baloo 2", sans-serif);
+    font-family: var(--f-marca, var(--font-poppins), sans-serif);
     font-size: 1.35rem;
     font-weight: 700;
     color: #06183b;
