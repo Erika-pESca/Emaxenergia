@@ -11,7 +11,9 @@
  *    - Para (To): gerencia@emaxenergia.com, hola@emaxenergia.com
  *    - Copia (CC): administracion@emaxenergia.com
  *
- * CONFIGURACIÓN SMTP DE HOSTINGER:
+ * CONFIGURACIÓN SMTP (HOSTINGER O GOOGLE WORKSPACE):
+ * - Opción A (Hostinger directo): $SMTP_HOST = 'smtp.hostinger.com'; $SMTP_PORT = 465;
+ * - Opción B (Google Workspace):  $SMTP_HOST = 'smtp.gmail.com';     $SMTP_PORT = 465; (usar Contraseña de Aplicación de Google de 16 caracteres)
  * Puedes rellenar $SMTP_PASS aquí directamente antes de subir a Hostinger,
  * o crear un archivo fuera de public_html en ../emax-smtp-config.php que devuelva
  * ['smtp_user' => 'hola@emaxenergia.com', 'smtp_pass' => 'TU_CONTRASENA'].

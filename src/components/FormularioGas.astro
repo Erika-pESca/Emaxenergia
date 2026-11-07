@@ -658,7 +658,7 @@ import Logo from "./Logo.astro";
           "empresa";
         aplicarSegmentoGas(normalizarSegmento(segAttr));
 
-        const tramoId = btn.getAttribute("data-tramo-id") || "gas-natural";
+        const tramoId = btn.getAttribute("data-tramo-id") || btn.getAttribute("data-tramo-label") || btn.getAttribute("data-origen") || btn.getAttribute("data-tramo-msg") || "gas-natural";
         if (inputTramo) inputTramo.value = tramoId;
       } else {
         aplicarSegmentoGas("empresa");

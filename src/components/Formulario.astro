@@ -369,7 +369,7 @@ import Logo from "./Logo.astro";
       if (btn) {
         const label = btn.getAttribute("data-tramo-label") || "Estudio técnico gratuito para tu empresa.";
         const msg = btn.getAttribute("data-tramo-msg") || "Revisamos tu curva de consumo, la potencia contratada vs demandada y eliminamos penalizaciones innecesarias.";
-        const tramoId = btn.getAttribute("data-tramo-id") || "general";
+        const tramoId = btn.getAttribute("data-tramo-id") || btn.getAttribute("data-tramo-label") || btn.getAttribute("data-origen") || btn.getAttribute("data-tramo-msg") || "general";
 
         if (resultadoTexto) resultadoTexto.textContent = label;
         if (resultadoMsg) resultadoMsg.textContent = msg;
