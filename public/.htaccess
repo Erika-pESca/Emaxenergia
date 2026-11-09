@@ -19,6 +19,41 @@
 Options -Indexes
 AddDefaultCharset UTF-8
 
+# =============================================================================
+# DÍA DEL LANZAMIENTO · redirección 301 de emaxenergia.es -> https://emaxenergia.com
+# (ahora mismo DESACTIVADA: todo el bloque está comentado)
+#
+# Decisión de dominios:
+#   - Revisión: el sitio se sirve en emaxenergia.es con noindex (regla más abajo).
+#   - Lanzamiento: el sitio se publica en emaxenergia.com y se indexa con normalidad.
+#     emaxenergia.com es el dominio canónico definitivo.
+#   - Desde el lanzamiento, emaxenergia.es redirige con 301 a emaxenergia.com.
+#
+# Cómo activarlo (en el .htaccess que se sirve en emaxenergia.es, NO en el del .com):
+#   1. Quitar el "# " inicial de las líneas del bloque de abajo.
+#   2. El bloque tiene que ir ANTES de la regla "HTTPS y www -> sin www" de más
+#      abajo, para que http://emaxenergia.es/x/ no pase por dos redirecciones.
+#      (Lo más sencillo: dejar en el .htaccess del .es solo este bloque activo.)
+#   3. El .es necesita certificado SSL válido, también para www, o los navegadores
+#      avisarán antes de llegar a la redirección.
+#   4. Comprobar:
+#        curl -I http://emaxenergia.es/metodo/
+#        curl -I https://www.emaxenergia.es/
+#      Los dos tienen que dar 301 con "Location: https://emaxenergia.com/metodo/"
+#      (la misma ruta) y "Location: https://emaxenergia.com/" respectivamente.
+#
+# Con el bloque activo, la regla de noindex del .es (más abajo) deja de importar:
+# ninguna petición al .es llega a servir una página, todas redirigen. Puede
+# dejarse tal cual. El .com nunca recibe esa cabecera.
+#
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   # .es y www.es, en http y en https, con o sin puerto; conserva la ruta y la query
+#   RewriteCond %{HTTP_HOST} ^(?:www\.)?emaxenergia\.es(?::\d+)?$ [NC]
+#   RewriteRule ^ https://emaxenergia.com%{REQUEST_URI} [L,R=301]
+# </IfModule>
+# =============================================================================
+
 # --- HTTPS y www -> sin www, conservando el dominio de la petición ----------
 # Sirve igual para emaxenergia.es (revisión) y emaxenergia.com: ningún dominio va fijo.
 <IfModule mod_rewrite.c>
