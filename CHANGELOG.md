@@ -4,6 +4,12 @@ Este archivo registra los cambios del proyecto desde la tanda de correcciones de
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Los códigos entre paréntesis (C-2, A-3, M-10…) son los hallazgos de [AUDITORIA.md](AUDITORIA.md).
 
+## [0.3.2] - 2026-11-09 — Datos legales y revisión de textos
+
+Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
+
+- **Punto 1, extracción:** respaldo de los datos y citas de `https://emaxenergia.com/`, `https://emaxenergia.com/#/aviso-legal` y `https://emaxenergia.com/#/privacidad`, consultadas con JavaScript el 2026-11-09. Se documentan datos ausentes, contradicciones y ruta de cookies sin contenido. Archivo: `docs/legal-fuente-emaxenergia-com.md`.
+
 ## [0.3.1] - 2026-11-09 — Cierre de formularios y preparación del lanzamiento
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
