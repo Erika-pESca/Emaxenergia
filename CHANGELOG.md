@@ -4,6 +4,12 @@ Este archivo registra los cambios del proyecto desde la tanda de correcciones de
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Los códigos entre paréntesis (C-2, A-3, M-10…) son los hallazgos de [AUDITORIA.md](AUDITORIA.md).
 
+## [0.3.3] - 2026-11-09 — Ajustes previos a publicación
+
+Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
+
+- **Punto 1, contacto legal:** por decisión de Luciano, se sustituye `administracion@consultoriaemax.com` por `administracion@emaxenergia.com` en todo `src/`, incluidas primeras capas de los formularios, páginas legales y `site.emailLegal`. Las citas de la web anterior se conservan intactas en el respaldo, con una nota fechada que explica el contacto vigente. Archivos: `src/data/site.ts`, `src/pages/aviso-legal.astro`, `src/pages/privacidad.astro`, `src/components/Formulario.astro`, `src/components/FormularioGas.astro`, `src/components/Header.astro`, `src/components/contacto/HablaConNosotros.astro`, `docs/legal-fuente-emaxenergia-com.md`. Atención al cliente y Canal Directo consumen el dato centralizado.
+
 ## [0.3.2] - 2026-11-09 — Datos legales y revisión de textos
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.

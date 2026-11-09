@@ -8,7 +8,7 @@ export const site = {
   url: "https://emaxenergia.com",
   email: "hola@emaxenergia.com",
   // Contacto legal publicado en https://emaxenergia.com/#/privacidad (2026-11-09).
-  emailLegal: "administracion@consultoriaemax.com",
+  emailLegal: "administracion@emaxenergia.com",
   // Contacto público del área de atención al cliente (se muestra en /atencion-al-cliente/).
   // Los destinatarios de los formularios NO están aquí: viven solo en emax-forms-config.php.
   emailSoporte: "administracion@emaxenergia.com",

@@ -2,6 +2,8 @@
 
 Extracción: **2026-11-09** (America/Buenos_Aires). Autor: Luciano Lyall (lucianolyall@gmail.com).
 
+**Nota del 2026-11-09:** la web nueva usa **administracion@emaxenergia.com** para ejercer derechos y como contacto legal, por decisión de **Luciano Lyall**. Las citas de `administracion@consultoriaemax.com` se conservan a continuación como respaldo textual de la web anterior; no representan el contacto vigente de la web nueva.
+
 Se consultó la SPA con JavaScript mediante el navegador de TinyFish (`fetch_content`, sin caché), esperando el contenido renderizado de las rutas por hash. Un fetch del HTML inicial no permite leer estos textos. Las citas siguientes conservan las anomalías del original; no constituyen una comprobación registral ni una validación jurídica.
 
 ## Datos publicados
