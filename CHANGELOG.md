@@ -10,6 +10,8 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `m
 
 - **Punto 1, contacto legal:** por decisión de Luciano, se sustituye `administracion@consultoriaemax.com` por `administracion@emaxenergia.com` en todo `src/`, incluidas primeras capas de los formularios, páginas legales y `site.emailLegal`. Las citas de la web anterior se conservan intactas en el respaldo, con una nota fechada que explica el contacto vigente. Archivos: `src/data/site.ts`, `src/pages/aviso-legal.astro`, `src/pages/privacidad.astro`, `src/components/Formulario.astro`, `src/components/FormularioGas.astro`, `src/components/Header.astro`, `src/components/contacto/HablaConNosotros.astro`, `docs/legal-fuente-emaxenergia-com.md`. Atención al cliente y Canal Directo consumen el dato centralizado.
 
+- **Punto 2, HTML inicial de la home:** se comprueba directamente `dist/index.html` y se abre la home en Chromium con JavaScript desactivado a 1440 y 375 px, con y sin movimiento reducido. En los cuatro casos se lee «TÚ HACES TRES COSAS. DEL RESTO nos encargamos.». El título ya es estático y ningún script lo modifica; no se cambia código ni estilos al no reproducirse el fallo. Archivo: `docs/verificacion-previa-0.3.3.md`; evidencia local en `.astro/revision-033/`.
+
 ## [0.3.2] - 2026-11-09 — Datos legales y revisión de textos
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
