@@ -13,6 +13,8 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `m
 
 - **Punto 3, encargados:** se identifican Hostinger (alojamiento), Google Workspace (recepción/gestión de correos) y Resend (notificaciones de formularios), por confirmación expresa del usuario, no por la web actual. CRM y garantías de transferencias internacionales quedan en comentarios no renderizados, sin inventar garantías. Archivo: `src/pages/privacidad.astro`.
 
+- **Punto 4, cookies:** la tabla enumera únicamente `emax:consentimiento` (`localStorage`, campos `analitica`, `caduca`, `version`, validez 365 días) y `emax:formulario` (`sessionStorage`, campos según Contacto/Canal Directo, hasta cerrar la pestaña, borrar datos o sustituir con otro envío). Se retiran GA4 y las claves inexistentes `emax:funnel`, `emax:presolicitud:[referencia]` y `emax:origen`, y la afirmación falsa de borrado al mostrar la confirmación. Privacidad y el texto del banner explican que no se carga analítica. **No se cambia el script, el diseño ni el funcionamiento del banner.** Archivos: `src/pages/cookies.astro`, `src/pages/privacidad.astro`, `src/components/CookieBanner.astro`.
+
 ## [0.3.1] - 2026-11-09 — Cierre de formularios y preparación del lanzamiento
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
