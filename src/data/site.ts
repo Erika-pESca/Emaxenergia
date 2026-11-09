@@ -7,21 +7,9 @@ export const site = {
   cif: "B02994333",
   url: "https://emaxenergia.com",
   email: "hola@emaxenergia.com",
-  emailGerencia: "gerencia@emaxenergia.com",
-  emailAdministracion: "administracion@emaxenergia.com",
+  // Contacto público del área de atención al cliente (se muestra en /atencion-al-cliente/).
+  // Los destinatarios de los formularios NO están aquí: viven solo en emax-forms-config.php.
   emailSoporte: "administracion@emaxenergia.com",
-  correosFormularios: {
-    // Leads (estudio de factura luz/gas, llamada gratis, canal directo) -> gerencia y hola (copia a administracion)
-    leads: {
-      para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
-      cc: ["administracion@emaxenergia.com"],
-    },
-    // Soporte o página de contacto (/contacto/ y /atencion-al-cliente/) -> administracion (copia a gerencia y hola)
-    soporteContacto: {
-      para: ["administracion@emaxenergia.com"],
-      cc: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
-    },
-  },
   phone: "933 949 343",
   phoneHref: "tel:+34933949343",
   horario: "Lunes a viernes de 9:00 a 13:00 y de 15:00 a 19:00",

@@ -12,8 +12,7 @@ const whatsappHref =
     "Hola EMAX Energía, ya soy cliente y necesito ayuda con mi suministro."
   );
 
-const ccSoporte = site.correosFormularios.soporteContacto.cc.join(",");
-const mailtoSoporte = `mailto:${site.emailSoporte}?cc=${ccSoporte}`;
+const mailtoSoporte = `mailto:${site.emailSoporte}`;
 ---
 
 <BaseLayout
@@ -49,7 +48,7 @@ const mailtoSoporte = `mailto:${site.emailSoporte}?cc=${ccSoporte}`;
         >
           WhatsApp directo
         </a>
-        <a href={`${mailtoSoporte}&subject=${encodeURIComponent("Atención al cliente · EMAX Energía")}`} class="ac-btn ac-btn--secundario">
+        <a href={`${mailtoSoporte}?subject=${encodeURIComponent("Atención al cliente · EMAX Energía")}`} class="ac-btn ac-btn--secundario">
           Enviar email
         </a>
         <a href={site.phoneHref} class="ac-btn ac-btn--secundario">
@@ -201,7 +200,7 @@ const mailtoSoporte = `mailto:${site.emailSoporte}?cc=${ccSoporte}`;
           </div>
 
           <div class="ac-card-pie">
-            <a href={`${mailtoSoporte}&subject=${encodeURIComponent("Reclamación · EMAX Energía")}`} class="ac-card-enlace">Escribir a {site.emailSoporte} →</a>
+            <a href={`${mailtoSoporte}?subject=${encodeURIComponent("Reclamación · EMAX Energía")}`} class="ac-card-enlace">Escribir a {site.emailSoporte} →</a>
             <a href="#contacto-directo" class="ac-card-btn-mini">Abrir reclamación</a>
           </div>
         </article>
@@ -250,7 +249,7 @@ const mailtoSoporte = `mailto:${site.emailSoporte}?cc=${ccSoporte}`;
 
           <div class="ac-card-pie">
             <a href="/privacidad/" class="ac-card-enlace">Política de privacidad →</a>
-            <a href={`${mailtoSoporte}&subject=${encodeURIComponent("Ejercicio Derechos RGPD")}`} class="ac-card-btn-mini">Ejercer derechos</a>
+            <a href={`${mailtoSoporte}?subject=${encodeURIComponent("Ejercicio Derechos RGPD")}`} class="ac-card-btn-mini">Ejercer derechos</a>
           </div>
         </article>
       </div>
