@@ -311,7 +311,8 @@ const emailColaboradorHref = `mailto:${site.email}?subject=${encodeURIComponent(
 
                 <!-- Aviso legal con corchete exacto de borrador -->
                 <p class="cd-legal">
-                  Usaremos tus datos para hablar contigo sobre el Canal Directo. <a href="/privacidad/" class="cd-legal-enlace">Política de privacidad</a> <span class="pendiente">[LEGAL: 31 L2]</span>
+                  Responsable: ENERGYMAX ADVISORY, S.L.U. Usaremos tus datos para atender tu solicitud sobre el Canal Directo. Puedes ejercer tus derechos en <a href={`mailto:${site.emailLegal}`} class="cd-legal-enlace">{site.emailLegal}</a>. <a href="/privacidad/" class="cd-legal-enlace">Política de privacidad</a>.
+                  {/* PENDIENTE: validar la base jurídica específica del Canal Directo y las comunicaciones de datos entre colaboradores. */}
                 </p>
 
                 <!-- Mensaje de error general de envío -->

@@ -234,22 +234,22 @@ const mailtoSoporte = `mailto:${site.emailSoporte}`;
           <div class="ac-card-head">
             <span class="ac-card-num">06</span>
             <h3 class="ac-card-tit">
-              Quiero ejercer mis derechos sobre mis datos <span class="pendiente">[LEGAL]</span>
+              Quiero ejercer mis derechos sobre mis datos
             </h3>
           </div>
           <p class="ac-card-bajada">
-            Canal y responsable: pendiente de la asesoría.
+            El responsable es ENERGYMAX ADVISORY, S.L.U. Puedes escribirnos para ejercer tus derechos.
           </p>
 
           <div class="ac-card-cuerpo">
             <div class="ac-pendiente-box">
-              <span class="pendiente">[LEGAL: canal y responsable · art. 6.1.ah · RGPD]</span>
+              Acceso, rectificación, supresión, oposición, portabilidad y limitación: <a href={`mailto:${site.emailLegal}`}>{site.emailLegal}</a>.
             </div>
           </div>
 
           <div class="ac-card-pie">
             <a href="/privacidad/" class="ac-card-enlace">Política de privacidad →</a>
-            <a href={`${mailtoSoporte}?subject=${encodeURIComponent("Ejercicio Derechos RGPD")}`} class="ac-card-btn-mini">Ejercer derechos</a>
+            <a href={`mailto:${site.emailLegal}?subject=${encodeURIComponent("Ejercicio Derechos RGPD")}`} class="ac-card-btn-mini">Ejercer derechos</a>
           </div>
         </article>
       </div>

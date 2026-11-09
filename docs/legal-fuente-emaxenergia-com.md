@@ -35,11 +35,13 @@ Cada fila fue extraída el **2026-11-09**. A = <https://emaxenergia.com/#/aviso-
 | Jurisdicción | «En todo caso, si su situación es como consumidor final, serán competentes los Tribunales correspondientes a su domicilio. En el caso de personas jurídicas, las partes se sujetarán a los Tribunales de Barcelona.» | A, §9 |
 | Propiedad intelectual e industrial | «la información, signos, imágenes, diseños, logotipos, animaciones, vídeos, textos, así como los demás elementos y contenidos, incluidos sus servicios y aplicaciones informáticas, de la Plataforma, están sujetos a derechos de propiedad industrial e intelectual de Energymax Advisory S.L.U o de terceros titulares de los mismos que han autorizado debidamente su inclusión» | A, §3 |
 | Titular registral de marca / personaje Maxi | El texto anterior no identifica por separado el titular registral de EMAX Energía ni el titular de Maxi. No respalda «marca de Grupo EMAX». | A, §3 |
-| Teléfono y horario | No constan en los cuerpos legales extraídos. Los datos operativos ya presentes en el proyecto no se presentan como incorporados desde estas fuentes. | A, P |
+| Teléfono | «933 949 343», enlace `tel:933949343`, verificado adicionalmente en el footer con Chromium headless y Playwright. | H, footer de A |
+| Contacto comercial | «hola@emaxenergia.com», enlace `mailto:hola@emaxenergia.com`, verificado en el footer con Chromium headless y Playwright. | H, footer de A |
+| Horario | No consta en los cuerpos legales ni en el footer. El horario operativo ya presente en el proyecto no se presenta como incorporado desde estas fuentes. | A, P |
 
 ## Rutas y enlaces legales
 
-El footer enlaza `#/privacidad` y `#/aviso-legal`. Los textos mencionan una política de cookies, pero `https://emaxenergia.com/#/cookies` devuelve contenido vacío (`empty_content`) en la extracción con JavaScript. No se ha obtenido una política de cookies publicada ni otro enlace legal desde el footer mediante esta extracción.
+El footer enlaza `#/privacidad` y `#/aviso-legal`, comprobado también con Chromium headless y Playwright el 2026-11-09. Muestra «2025 EMAX energía. Todos los derechos reservados.». Los textos mencionan una política de cookies, pero `https://emaxenergia.com/#/cookies` devuelve contenido vacío (`empty_content`) en la extracción con JavaScript. No se ha obtenido una política de cookies publicada ni otro enlace legal desde el footer.
 
 ## Datos confirmados por el usuario (no atribuidos a la web actual)
 
