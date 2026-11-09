@@ -321,7 +321,7 @@ const tarifasItems = [
               <div class="popover-input-fila">
                 <input
                   type="tel"
-                  name="telefono_llamame"
+                  name="telefono"
                   class="popover-input"
                   placeholder="Ej. 600 000 000"
                   required
@@ -332,6 +332,7 @@ const tarifasItems = [
                 </button>
               </div>
               <span class="popover-privacidad">Responsable: ENERGYMAX ADVISORY, S.L.U. · Finalidad: llamarte para atender tu consulta · <a href="/privacidad/">Política de privacidad</a>.</span>
+              <p class="form-error-envio" role="alert" data-error-envio-popover hidden></p>
               <div class="popover-exito" data-popover-exito hidden>
                 ✓ ¡Recibido! Te llamaremos en breve.
               </div>
@@ -407,6 +408,8 @@ const tarifasItems = [
 </header>
 
 <script>
+  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
+
   // 1. Barra de progreso dinámica al hacer Scroll y efecto de elevación
   const progressBar = document.getElementById("scroll-progress-line");
   const capsula = document.getElementById("capsula-globo");
@@ -536,34 +539,32 @@ const tarifasItems = [
     }
   });
 
-  popoverForm?.addEventListener("submit", async (e) => {
-    const formEl = popoverForm as HTMLFormElement;
-    const trampa = formEl.querySelector<HTMLInputElement>("#popover-web");
-    if (trampa && trampa.value) {
-      e.preventDefault();
-      return;
-    }
-    e.preventDefault();
+  // Marca de tiempo de cuando se renderizó el popover (trampa antispam "t" del endpoint)
+  const tPopover = marcaTiempo();
+  const avisoErrorPopover = document.querySelector<HTMLElement>("[data-error-envio-popover]");
 
-    const telInput = formEl.querySelector<HTMLInputElement>('input[name="telefono_llamame"]');
+  popoverForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formEl = popoverForm as HTMLFormElement;
+    const botonEnviar = formEl.querySelector<HTMLButtonElement>(".popover-submit");
+    if (botonEnviar?.disabled) return;
+
+    const trampa = formEl.querySelector<HTMLInputElement>("#popover-web");
+    if (trampa && trampa.value) return;
+
+    const telInput = formEl.querySelector<HTMLInputElement>('input[name="telefono"]');
     const telefono = (telInput?.value || "").trim();
     if (!telefono) return;
 
-    try {
-      await fetch("/api/enviar-formulario.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tipo: "lead-llamada",
-          para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
-          cc: ["administracion@emaxenergia.com"],
-          telefono,
-          pagina: window.location.pathname,
-          fecha: new Date().toISOString(),
-        }),
-      });
-    } catch {
-      // Respaldo en desarrollo local sin servidor PHP activo
+    limpiarErrorEnvio(avisoErrorPopover, formEl);
+    popoverExito?.setAttribute("hidden", "true");
+    bloquearEnvio(botonEnviar, true);
+    const resultado = await enviarFormulario("lead-llamada", { web: "", telefono }, tPopover);
+    bloquearEnvio(botonEnviar, false);
+
+    if (!resultado.ok) {
+      mostrarErrorEnvio(avisoErrorPopover, resultado, formEl);
+      return;
     }
 
     if (popoverExito) {

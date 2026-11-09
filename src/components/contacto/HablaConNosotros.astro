@@ -147,6 +147,7 @@
             </div>
 
             <p class="escribenos-feedback" data-contacto-feedback hidden></p>
+            <p class="form-error-envio" role="alert" data-error-envio hidden></p>
           </form>
         </div>
       </div>
@@ -155,14 +156,22 @@
 </section>
 
 <script>
+  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../../scripts/enviarFormulario";
+
+  // Marca de tiempo de cuando se renderizó el formulario (trampa antispam "t" del endpoint)
+  const tRenderizado = marcaTiempo();
+
   function setupFormContacto() {
     const formContacto = document.querySelector<HTMLFormElement>("[data-form-contacto]");
     const feedbackEl = formContacto?.querySelector<HTMLParagraphElement>("[data-contacto-feedback]");
+    const avisoError = formContacto?.querySelector<HTMLElement>("[data-error-envio]") ?? null;
+    const botonEnviar = formContacto?.querySelector<HTMLButtonElement>(".btn-enviar-contacto") ?? null;
     if (!formContacto || formContacto.dataset.ready === "1") return;
     formContacto.dataset.ready = "1";
 
     formContacto.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (botonEnviar?.disabled) return;
 
       const trampa = formContacto.querySelector<HTMLInputElement>("#contacto-web");
       if (trampa && trampa.value) return;
@@ -181,44 +190,27 @@
         return;
       }
 
+      if (feedbackEl) feedbackEl.hidden = true;
+      limpiarErrorEnvio(avisoError, formContacto);
+      bloquearEnvio(botonEnviar, true);
+      const resultado = await enviarFormulario(
+        "soporte-contacto",
+        { web: "", nombre, email, asunto, mensaje, telefono },
+        tRenderizado,
+      );
+      bloquearEnvio(botonEnviar, false);
+
+      if (!resultado.ok) {
+        mostrarErrorEnvio(avisoError, resultado, formContacto);
+        return;
+      }
+
+      // Solo si el envío fue bien: guardar el nombre para la página de confirmación y redirigir
       try {
-        sessionStorage.setItem(
-          "emax:formulario",
-          JSON.stringify({
-            tipo: "contacto",
-            nombre,
-            email,
-            telefono,
-          })
-        );
+        sessionStorage.setItem("emax:formulario", JSON.stringify({ tipo: "contacto", nombre, email, telefono }));
       } catch {
         // Ignorar errores de almacenamiento privado
       }
-
-      // Soporte / Página de Contacto -> Para: administracion@emaxenergia.com
-      //                                 CC:   gerencia@emaxenergia.com, hola@emaxenergia.com
-      try {
-        await fetch("/api/enviar-formulario.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            tipo: "soporte-contacto",
-            para: ["administracion@emaxenergia.com"],
-            cc: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
-            nombre,
-            email,
-            asunto,
-            mensaje,
-            telefono,
-            pagina: window.location.pathname,
-            fecha: new Date().toISOString(),
-          }),
-        });
-      } catch {
-        // Respaldo en desarrollo local sin servidor PHP activo
-      }
-
-      // Redirigir a la página de confirmación Contacto/recibido
       window.location.href = "/contacto/recibido/";
     });
   }

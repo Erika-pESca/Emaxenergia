@@ -144,6 +144,30 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+/* Aviso de error al enviar un formulario (role="alert"); lo pinta src/scripts/enviarFormulario.ts */
+.form-error-envio {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border: 1px solid #f1b4b4;
+  border-radius: 10px;
+  background: #fff1f1;
+  color: #8a1c1c;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.form-error-envio a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+[aria-invalid="true"] {
+  outline: 2px solid #c62828;
+  outline-offset: 1px;
+}
+
 /* <picture> (astro:assets) no genera caja propia: el <img> se maqueta igual que antes */
 picture {
   display: contents;

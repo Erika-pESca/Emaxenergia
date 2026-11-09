@@ -334,47 +334,45 @@ const emailColaboradorHref = `mailto:${site.correosFormularios.leads.para.join("
   </div>
 </BaseLayout>
 
-<script is:inline>
-  // Script de envío e integración del Canal Directo
-  document.addEventListener("DOMContentLoaded", function () {
-    var form = document.getElementById("form-canal-directo");
-    if (!form) return;
+<script>
+  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../../scripts/enviarFormulario";
 
-    form.addEventListener("submit", function (e) {
+  // Script de envío del Canal Directo (usa el helper compartido de formularios)
+  const form = document.getElementById("form-canal-directo") as HTMLFormElement | null;
+  if (form) {
+    // Marca de tiempo de cuando se renderizó el formulario (trampa antispam "t" del endpoint)
+    const tRenderizado = marcaTiempo();
+    const avisoError = form.querySelector<HTMLElement>("[data-error-envio]");
+    const botonEnviar = form.querySelector<HTMLButtonElement>("#cd-btn-submit");
+    const valor = (id: string): string =>
+      (form.querySelector<HTMLInputElement | HTMLSelectElement>(id)?.value ?? "").trim();
+
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (botonEnviar?.disabled) return;
 
       // Comprobar trampa antispam
-      var trampa = form.querySelector("#cd-web");
-      if (trampa && trampa.value) {
-        return; // Antispam silencioso
-      }
+      if (valor("#cd-web")) return; // Antispam silencioso
 
-      var inputNombre = form.querySelector("#cd-nombre");
-      var inputEmpresa = form.querySelector("#cd-empresa");
-      var selectPerfil = form.querySelector("#cd-perfil");
-      var inputProvincia = form.querySelector("#cd-provincia");
-      var inputEmail = form.querySelector("#cd-email");
-      var inputTel = form.querySelector("#cd-tel");
+      const nombre = valor("#cd-nombre");
+      const empresa = valor("#cd-empresa");
+      const perfil = valor("#cd-perfil");
+      const provincia = valor("#cd-provincia");
+      const email = valor("#cd-email");
+      const telefono = valor("#cd-tel");
 
-      var nombre = inputNombre ? inputNombre.value.trim() : "";
-      var empresa = inputEmpresa ? inputEmpresa.value.trim() : "";
-      var perfil = selectPerfil ? selectPerfil.value : "";
-      var provincia = inputProvincia ? inputProvincia.value.trim() : "";
-      var email = inputEmail ? inputEmail.value.trim() : "";
-      var telefono = inputTel ? inputTel.value.trim() : "";
+      let hayError = false;
 
-      var hayError = false;
-
-      function checkField(val, idErr, msg) {
-        var elErr = document.getElementById(idErr);
+      function checkField(val: string, idErr: string, msg: string): void {
+        const elErr = document.getElementById(idErr);
         if (!val) {
           if (elErr) {
             elErr.textContent = msg;
             elErr.hidden = false;
           }
           hayError = true;
-        } else {
-          if (elErr) elErr.hidden = true;
+        } else if (elErr) {
+          elErr.hidden = true;
         }
       }
 
@@ -386,59 +384,38 @@ const emailColaboradorHref = `mailto:${site.correosFormularios.leads.para.join("
       checkField(telefono, "err-canal-telefono", "Indica tu teléfono de contacto.");
 
       if (hayError) {
-        var primerErr = form.querySelector(".cd-error:not([hidden])");
-        if (primerErr) {
-          var inputAsociado = primerErr.previousElementSibling;
-          if (inputAsociado && typeof inputAsociado.focus === "function") {
-            inputAsociado.focus();
-          }
-        }
+        const primerErr = form.querySelector(".cd-error:not([hidden])");
+        const inputAsociado = primerErr?.previousElementSibling;
+        if (inputAsociado instanceof HTMLElement) inputAsociado.focus();
         return;
       }
 
-      // Guardar en sessionStorage para que /canal-directo/enviado lo muestre de forma personalizada
+      limpiarErrorEnvio(avisoError, form);
+      bloquearEnvio(botonEnviar, true);
+      const resultado = await enviarFormulario(
+        "lead-canal-directo",
+        { web: "", nombre, empresa, perfil, provincia, email, telefono },
+        tRenderizado,
+      );
+      bloquearEnvio(botonEnviar, false);
+
+      if (!resultado.ok) {
+        mostrarErrorEnvio(avisoError, resultado, form);
+        return;
+      }
+
+      // Solo si el envío fue bien: guardar para que /canal-directo/enviado/ lo muestre personalizado
       try {
         sessionStorage.setItem(
           "emax:formulario",
-          JSON.stringify({
-            tipo: "canal",
-            nombre: nombre,
-            empresa: empresa,
-            perfil: perfil,
-            provincia: provincia,
-            email: email,
-            telefono: telefono
-          })
+          JSON.stringify({ tipo: "canal", nombre, empresa, perfil, provincia, email, telefono }),
         );
-      } catch (err) {
-        console.warn("Storage error", err);
+      } catch {
+        // Ignorar errores de almacenamiento privado
       }
-
-      // Enviar a gerencia@emaxenergia.com y hola@emaxenergia.com (copia a administracion@emaxenergia.com)
-      fetch("/api/enviar-formulario.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tipo: "lead-canal-directo",
-          para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
-          cc: ["administracion@emaxenergia.com"],
-          nombre: nombre,
-          empresa: empresa,
-          perfil: perfil,
-          provincia: provincia,
-          email: email,
-          telefono: telefono,
-          pagina: window.location.pathname,
-          fecha: new Date().toISOString()
-        })
-      })
-        .catch(function () {})
-        .finally(function () {
-          // Redirigir a la página de confirmación oficial
-          window.location.href = "/canal-directo/enviado/";
-        });
+      window.location.href = "/canal-directo/enviado/";
     });
-  });
+  }
 </script>
 
 <style>

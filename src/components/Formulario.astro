@@ -210,6 +210,8 @@ import Logo from "./Logo.astro";
               Responsable: ENERGYMAX ADVISORY, S.L.U. · Finalidad: atender tu solicitud y llamarte con tu informe sin coste ni permanencia · <a href="/privacidad/">Política de privacidad</a>.
             </p>
 
+            <p class="form-error-envio" role="alert" data-error-envio hidden></p>
+
             <button type="submit" class="boton-fn-enviar" id="btn-submit-formulario">
               <span>Solicitar la llamada con mi informe</span>
             </button>
@@ -291,6 +293,8 @@ import Logo from "./Logo.astro";
 </div>
 
 <script>
+  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
+
   // =========================================================================
   // CONTROL GLOBAL DEL FORMULARIO Y CONEXIÓN CON BACKEND
   // =========================================================================
@@ -361,9 +365,12 @@ import Logo from "./Logo.astro";
     }
 
     let elementoPrevioFoco: HTMLElement | null = null;
+    // Marca de tiempo de apertura del modal (trampa antispam "t" del endpoint)
+    let tAbierto = marcaTiempo();
 
     function abrirModalFunnel(btn?: HTMLElement | null) {
       elementoPrevioFoco = btn || (document.activeElement as HTMLElement);
+      tAbierto = marcaTiempo();
 
       // Personalizar el mensaje según el botón que abrió el modal
       if (btn) {
@@ -446,47 +453,42 @@ import Logo from "./Logo.astro";
     });
 
     // =========================================================================
-    // CONEXIÓN CON EL BACKEND (HOSTINGER PHP SMTP)
-    // Leads -> Para: gerencia@emaxenergia.com, hola@emaxenergia.com
-    //          CC:   administracion@emaxenergia.com
+    // ENVÍO (helper compartido: src/scripts/enviarFormulario.ts)
+    // El servidor decide los destinatarios. Solo se avanza al paso 4 si el envío fue bien.
     // =========================================================================
-    async function enviarLeadAlBackend(datos: Record<string, unknown>) {
-      try {
-        const respuesta = await fetch("/api/enviar-formulario.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(datos),
-        });
-        return respuesta.ok;
-      } catch {
-        // Respaldo en entorno de desarrollo local sin servidor PHP activo
-        return true;
-      }
-    }
-
-    // Paso 3: Envío del formulario
     const formDatos = document.getElementById("fn-form-datos") as HTMLFormElement | null;
+    const avisoError = formDatos?.querySelector<HTMLElement>("[data-error-envio]") ?? null;
+    const botonEnviar = document.getElementById("btn-submit-formulario") as HTMLButtonElement | null;
+
     formDatos?.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (botonEnviar?.disabled) return;
 
       const formData = new FormData(formDatos);
       if (formData.get("web")) return;
-      const datosLead = {
-        tipo: "lead-luz",
-        para: ["gerencia@emaxenergia.com", "hola@emaxenergia.com"],
-        cc: ["administracion@emaxenergia.com"],
-        nombre: String(formData.get("nombre") || ""),
-        telefono: String(formData.get("telefono") || ""),
-        franja: String(formData.get("franja") || "manana"),
-        suministros: inputSuministros?.value || "uno",
-        canal: inputCanal?.value || "llamada",
-        tramo_origen: inputTramo?.value || "general",
-        pagina: window.location.pathname,
-        fecha: new Date().toISOString(),
-      };
 
-      await enviarLeadAlBackend(datosLead);
-      irAlPaso(4);
+      limpiarErrorEnvio(avisoError, formDatos);
+      bloquearEnvio(botonEnviar, true);
+      const resultado = await enviarFormulario(
+        "lead-luz",
+        {
+          web: "",
+          nombre: String(formData.get("nombre") || ""),
+          telefono: String(formData.get("telefono") || ""),
+          franja: String(formData.get("franja") || "manana"),
+          suministros: inputSuministros?.value || "uno",
+          canal: inputCanal?.value || "llamada",
+          tramo_origen: inputTramo?.value || "general",
+        },
+        tAbierto,
+      );
+      bloquearEnvio(botonEnviar, false);
+
+      if (resultado.ok) {
+        irAlPaso(4);
+      } else {
+        mostrarErrorEnvio(avisoError, resultado, formDatos);
+      }
     });
   }
 
