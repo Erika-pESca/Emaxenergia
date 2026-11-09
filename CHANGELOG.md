@@ -16,6 +16,8 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `m
 
 - **Punto 4, verificación:** `npx astro check` y `npm run check`: 157 archivos, 0 errores/warnings/hints. Build: 40 páginas, sin warnings. Cero apariciones de `consultoriaemax` en `src/` y cero marcadores internos o dominio anterior en los 791 archivos de `dist/`. Revisión visual de home, aviso legal, privacidad, Canal Directo y atención al cliente a 1440 y 375 px; título de la home también sin JS y con movimiento reducido; 0 errores JS o peticiones externas. Se detecta y corrige el recorte de las tarjetas móviles de atención al cliente con `min-width: 0` y salto de línea de emails, comprobando sus límites y repitiendo check/build. Archivos: `src/pages/atencion-al-cliente.astro`, `docs/verificacion-previa-0.3.3.md`.
 
+- **Punto 5, documentación:** versión 0.3.3 en `package.json` y `package-lock.json`. Se conserva el email anterior únicamente como cita histórica en `docs/legal-fuente-emaxenergia-com.md`, con la decisión fechada de Luciano para la web nueva. Se actualiza `docs/verificacion-legal-0.3.2.md` para delimitar los apartados del CUPS que siguen pendientes y su nueva línea. El inventario de retiradas/restauraciones y las comprobaciones quedan en `docs/revision-e14c2d5.md` y `docs/verificacion-previa-0.3.3.md`. Archivos de este último punto: `CHANGELOG.md`, `package.json`, `package-lock.json`. Cinco commits directamente en `main`, sin push y sin trailers de coautoría.
+
 ## [0.3.2] - 2026-11-09 — Datos legales y revisión de textos
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
