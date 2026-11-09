@@ -14,6 +14,8 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `m
 
 - **Punto 3, revisión de e14c2d5:** inventario de cada bloque retirado, con archivo, línea anterior, texto y decisión en `docs/revision-e14c2d5.md`. Se restaura la descripción del análisis de EMAX en el aviso legal y tres apartados independientes en la guía del CUPS: «Lo que no hacemos», «Si no quieres darlo» y «Responsable del tratamiento». Siguen comentados los apartados de consulta al SIPS, la tabla de potencia y las afirmaciones fiscales/normativas sin validar. En Canal Directo solo se había ocultado un marcador y en atención al cliente los huecos de procedimiento/plazo/entidad; no faltaban secciones útiles que restaurar. Archivos: `src/pages/aviso-legal.astro`, `src/pages/guias/cups-y-tus-datos.astro`, `docs/revision-e14c2d5.md`, `docs/verificacion-legal-0.3.2.md`.
 
+- **Punto 4, verificación:** `npx astro check` y `npm run check`: 157 archivos, 0 errores/warnings/hints. Build: 40 páginas, sin warnings. Cero apariciones de `consultoriaemax` en `src/` y cero marcadores internos o dominio anterior en los 791 archivos de `dist/`. Revisión visual de home, aviso legal, privacidad, Canal Directo y atención al cliente a 1440 y 375 px; título de la home también sin JS y con movimiento reducido; 0 errores JS o peticiones externas. Se detecta y corrige el recorte de las tarjetas móviles de atención al cliente con `min-width: 0` y salto de línea de emails, comprobando sus límites y repitiendo check/build. Archivos: `src/pages/atencion-al-cliente.astro`, `docs/verificacion-previa-0.3.3.md`.
+
 ## [0.3.2] - 2026-11-09 — Datos legales y revisión de textos
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
