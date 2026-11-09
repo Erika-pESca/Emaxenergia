@@ -29,6 +29,7 @@ Consult these guides before working on related tasks:
 - Fuentes locales (declaradas en `astro.config.mjs`): en el CSS se usan `var(--font-inter)`, `var(--font-poppins)`, `var(--font-sora)` y `var(--font-literata)`, nunca el nombre suelto de la familia. No se enlazan recursos de terceros.
 - Las páginas que no deben indexarse pasan la prop `noindex` de `Seo.astro` y se excluyen del sitemap en `astro.config.mjs`.
 - Antes de dar un cambio por bueno: `npm run check` (0 errores) y `npm run build`.
+- Los destinatarios de los formularios y las credenciales (clave de Resend, SMTP) viven solo en `emax-forms-config.php`, fuera de `public_html` y del repositorio; nunca en el PHP, el JS ni `src/`. Todo formulario nuevo envía con el helper `src/scripts/enviarFormulario.ts`.
 - **Cada tanda de cambios agrega su entrada en CHANGELOG.md, con autor y archivos afectados.**
 
 Más detalle en [README.md](README.md), [CHANGELOG.md](CHANGELOG.md) y [AUDITORIA.md](AUDITORIA.md).

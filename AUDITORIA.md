@@ -33,6 +33,8 @@ El sitio compila y no da errores de consola, pero **no está listo para publicar
 ## CRÍTICO
 
 ### C-1. Los formularios no envían nada, pero muestran confirmación
+
+> ✅ **Resuelto en 0.3.0** ([CHANGELOG](CHANGELOG.md)): endpoint PHP con Resend (o SMTP), configuración externa, validación, anti-spam y límite; los cinco formularios usan un helper común y **solo confirman si el servidor responde `ok:true`**. Falta la clave de Resend y una prueba real en Hostinger (N-11).
 - [Formulario.astro:441-456](src/components/Formulario.astro#L441-L456): el `fetch('/api/leads')` está comentado; la función solo hace `console.log` de los datos y devuelve `true`. Luego pasa al paso 4 "Listo".
 - [HablaConNosotros.astro:162-179](src/components/contacto/HablaConNosotros.astro#L162-L179): valida y hace `window.location.href = "/contacto/recibido"`. No hay petición de red.
 - [canal-directo.astro:343-418](src/pages/canal-directo.astro#L343-L418): guarda en `sessionStorage` y redirige a `/canal-directo/enviado`. Tampoco envía.
@@ -150,12 +152,18 @@ Anchors a ids que no existen en la página destino:
 No hay `og:image` ni `twitter:image` (`twitter:card` es `summary_large_image` sin imagen). Tampoco hay datos estructurados de `Organization`/`LocalBusiness` (solo `Article` en guías, [Guia.astro:476](src/layouts/Guia.astro#L476)). **Corrección:** imagen social 1200×630 por defecto + JSON-LD de organización.
 
 ### M-4. Formularios GET con datos personales en la URL
+
+> ✅ **Resuelto en 0.3.0** ([CHANGELOG](CHANGELOG.md)): los formularios de contacto y Canal Directo usan `method="post"` y el envío lo hace el helper por `fetch`.
 [HablaConNosotros.astro:72](src/components/contacto/HablaConNosotros.astro#L72) (`action="/contacto/recibido" method="GET"`) y [canal-directo.astro:210-211](src/pages/canal-directo.astro#L210-L211). Con JS todo bien (hay `preventDefault`), pero sin JS o si falla el script, el envío manda nombre, email, teléfono y mensaje en la query string (historial, logs del servidor, `Referer`). **Corrección:** `method="post"` con el nuevo backend; el `action` de respaldo nunca debe ser GET con datos personales.
 
 ### M-5. Protección anti-spam desigual
+
+> ✅ **Resuelto en 0.3.0** ([CHANGELOG](CHANGELOG.md)): honeypot `web` en todos, trampa de tiempo `t` (< 3 s), límite por IP (429) y origen permitido (403) en el servidor. Ver N-9 y N-10 para los riesgos.
 Solo [canal-directo.astro:309](src/pages/canal-directo.astro) tiene honeypot (`cd-web`). El formulario de contacto, el funnel y el popover no tienen ninguno, ni límite de envío, ni CAPTCHA. Cuando haya backend real, el spam llegará. **Corrección:** honeypot + validación y límite de tasa en servidor (y, si hace falta, Turnstile/hCaptcha, que carga un script de terceros: documentarlo en cookies).
 
 ### M-6. Datos personales en `sessionStorage`
+
+> ⚠️ **Parcial en 0.3.0**: contacto y Canal Directo solo guardan nombre, email y teléfono si el envío fue bien. Se siguen guardando para personalizar la página de confirmación; no se ha eliminado.
 [canal-directo.astro:399-416](src/pages/canal-directo.astro#L399-L416) guarda nombre, empresa, email y teléfono en `emax:formulario` para mostrarlos en la confirmación. Está declarado en la política de cookies, pero no es necesario. Se borra al cerrar la pestaña. **Corrección:** mostrar una confirmación genérica y no guardarlos.
 
 ### M-7. Modal del formulario sin gestión de foco
@@ -268,12 +276,22 @@ Notas: si el formulario acaba enviando a un servicio externo, hay que añadir su
 
 ---
 
+- **N-9 (Medio). Reloj del dispositivo y trampa de tiempo "t".** El servidor compara el `t` del navegador con su propia hora. Un dispositivo con el reloj adelantado más de unos segundos hace que el servidor lo trate como bot y responda 200 sin enviar: el usuario ve "Listo" y el lead se pierde. Es raro, pero hay que vigilarlo en las primeras pruebas. Corrección posible: usar un token firmado por el servidor en vez de la hora del cliente (necesita una petición previa).
+- **N-10 (Medio). Límite por IP detrás de un proxy o CDN.** Se usa `REMOTE_ADDR` y no `X-Forwarded-For` (que se puede falsificar). Si Hostinger o un CDN ponen un proxy delante, todos los visitantes compartirían IP y el límite afectaría a todos a la vez. Comprobar en Hostinger tras publicar; el límite es de 5 envíos cada 10 minutos.
+- **N-11 (Medio). Sin probar con la clave real.** El transporte de Resend se verificó contra la API real solo con una clave falsa (HTTP 401, 502 al usuario, sin datos personales en el log). El camino SMTP no se ha probado contra ningún servidor. Falta la clave real, el dominio remitente verificado en Resend y una prueba de envío desde Hostinger.
+- **N-12 (Bajo). `site.correosFormularios` duplica el `routing` del PHP.** Los destinatarios reales viven solo en `emax-forms-config.php`, pero `site.ts` mantiene una copia que usan los enlaces `mailto:?cc=` de contacto, atención al cliente, Canal Directo y el pie. Dejan `gerencia@` y `administracion@` en el HTML público (spam) y pueden desincronizarse. Corrección: `mailto:` solo a `hola@`, o un buzón público único.
+- **N-13 (Bajo). `<If>` en `.htaccess`.** La regla de caché de `/_astro/` usa `<If>`; Apache 2.4 la admite, pero conviene comprobar que LiteSpeed (Hostinger) la aplica (`curl -I` a un archivo de `/_astro/`). Los permisos de `public/api/.htaccess` (`Require all denied` salvo el PHP) tampoco se han probado en un servidor real.
+- **N-14 (Bajo). El canonical del .es apunta al .com.** `site.url` fija `https://emaxenergia.com` y el sitemap y el canonical lo usan en los dos dominios. En el .es no importa (lleva noindex) pero el sitemap del .es lista URLs del .com.
+- **N-15 (Informativo). `FormularioGas.astro` sigue duplicando `Formulario.astro`.** Los dos comparten ahora el helper de envío, pero los 1.600 líneas de marcado y estilos siguen duplicados.
+
+---
+
 ## Plan de corrección por prioridad
 
 Los puntos marcados con ✅ se resolvieron en la fase 1 (versión 0.1.0).
 
 **Bloqueantes: no publicar sin esto**
-1. **C-1** Elegir backend y enviar los formularios de verdad; no mostrar "recibido" si falla. Unificar los 4 formularios.
+1. ✅ **C-1** (código resuelto en 0.3.0; **falta la clave de Resend y la prueba real**) Enviar los formularios de verdad; no mostrar "recibido" si falla. La unificación de `Formulario` y `FormularioGas` sigue pendiente (N-15).
 2. **C-3** (pendiente asesoría) / ✅ **C-4** (resuelto en 0.2.0): La empresa/asesoría cierra los datos legales pendientes; información por capas añadida en cada formulario.
 3. ✅ **C-2** Arreglar los CTA "Analizar mi factura" (`data-abrir-funnel`).
 4. ✅ **A-1** Alojar las fuentes en local.

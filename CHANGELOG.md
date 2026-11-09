@@ -4,7 +4,99 @@ Este archivo registra los cambios del proyecto desde la tanda de correcciones de
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Los códigos entre paréntesis (C-2, A-3, M-10…) son los hallazgos de [AUDITORIA.md](AUDITORIA.md).
 
-## [Sin publicar] - 2026-11-06 — Formulario específico de Gas Natural y enrutamiento de correos / SMTP Hostinger
+## [0.3.0] - 2026-11-09 — Formularios y despliegue
+
+Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
+
+### Agregado
+
+- **Configuración externa del endpoint** (C-1): [config/emax-forms-config.example.php](config/emax-forms-config.example.php), con todas las claves comentadas y sin secretos (`transport`, `resend_api_key`, `from`, `smtp_*`, `allowed_origins`, `routing`, `rate_limit`, `storage_dir`, `ip_salt`). El PHP la lee de `dirname(__DIR__, 2) . '/emax-forms-config.php'`, fuera de `public_html`. Si falta o está incompleta responde 503 `{"ok":false,"error":"configuracion"}` y no envía.
+- **Helper compartido de envío** (C-1): [src/scripts/enviarFormulario.ts](src/scripts/enviarFormulario.ts). Hace el `fetch`, interpreta la respuesta (éxito solo con 2xx y `ok === true`), bloquea el botón mientras envía y muestra el error accesible. Lo usan los cinco formularios.
+- **Aviso de error de envío**: estilos `.form-error-envio` y `[aria-invalid="true"]` en [src/styles/global.css](src/styles/global.css), y atributos `data-contacto-*` en el `<body>` de [src/layouts/BaseLayout.astro](src/layouts/BaseLayout.astro), de donde el helper toma el teléfono y el email de `site.ts` (así no acaban dentro del JS).
+- **`public/api/.htaccess`**: solo `enviar-formulario.php` es accesible, sin listado de directorio.
+- **Cabecera `X-Robots-Tag: noindex, nofollow`** cuando el host es `emaxenergia.es` ([public/.htaccess](public/.htaccess)).
+
+### Cambiado
+
+- **Endpoint** [public/api/enviar-formulario.php](public/api/enviar-formulario.php) reescrito (C-1, M-5):
+  - Transporte por función, elegido con `transport`: **Resend** (curl a `https://api.resend.com/emails`, `Authorization: Bearer`, timeout 10 s, éxito solo con 2xx e `id`; el log solo lleva el código HTTP y el mensaje de error de Resend) o **SMTP** (la implementación anterior, ahora con el cuerpo en `quoted-printable`).
+  - Destinatarios solo de `routing` (soporte/contacto: `administracion@` con copia a `gerencia@` y `hola@`; leads de luz, gas, llamada y Canal Directo: `gerencia@` y `hola@` con copia a `administracion@`). Ningún email interno queda en el PHP. El navegador ya no manda `para` ni `cc`.
+  - Origen: 403 si `Origin` (o el host del `Referer`) no está en `allowed_origins`.
+  - Solo se aceptan los tipos de `routing` (400 si no) y, por tipo, solo los campos de una lista blanca; el resto se descarta. Si faltan obligatorios o hay email o teléfono inválidos: 422 `{"ok":false,"error":"validacion","campos":[…]}`. Ver "Decisiones tomadas".
+  - Honeypot `web` y trampa de tiempo `t` (envío en menos de 3 s, `t` ausente o inválido): 200 `{"ok":true}` sin enviar.
+  - Límite por IP: un archivo en `storage_dir` por `sha256(ip + ip_salt)` (nunca la IP en claro), 429 al superarlo y limpieza de archivos vencidos.
+  - Respuestas: 200, 502 `envio` si falla el transporte, 405, 400, 403, 413, 422, 429 y 503. Nunca devuelve destinatarios, configuración ni detalles internos.
+  - Compatible con PHP 8.0 y superior.
+- **Los cinco formularios** envían por el helper y ya no confirman en falso (C-1): [src/components/Formulario.astro](src/components/Formulario.astro) (`lead-luz`), [src/components/FormularioGas.astro](src/components/FormularioGas.astro) (`lead-gas`), [src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro) (`soporte-contacto`), el popover "Te llamamos" de [src/components/Header.astro](src/components/Header.astro) (`lead-llamada`) y [src/pages/canal-directo/index.astro](src/pages/canal-directo/index.astro) (`lead-canal-directo`, que pasa de script inline a script empaquetado en TypeScript). Se quitan los `catch` que daban el envío por bueno.
+  - Si falla el envío no se avanza al paso "Listo" ni se redirige a `/contacto/recibido/` o `/canal-directo/enviado/`; se muestra el error junto al botón con teléfono y email, y se conserva lo escrito.
+  - 422 marca los campos con `aria-invalid` y enfoca el primero; 429 muestra "Demasiados intentos. Prueba de nuevo en unos minutos."
+  - Cada formulario manda `t`: el momento de abrir el modal (funnels) o de renderizar la página (contacto, popover y Canal Directo).
+  - El input del popover pasa de `name="telefono_llamame"` a `name="telefono"`.
+  - Contacto y Canal Directo solo guardan datos en `sessionStorage` si el envío fue bien (M-6, parcial).
+- **`.htaccess`** (A-4): HTTP → HTTPS y `www` → sin `www` conservan el host de la petición (`%{HTTP_HOST}`) en lugar de un dominio fijo, así que valen para `emaxenergia.es` y `emaxenergia.com`. La CSP no cambia: el envío a Resend lo hace el servidor, y `connect-src 'self'` alcanza.
+- **`.gitattributes`**: LF también para `*.php` y `public/api/.htaccess`.
+- **`og:image`** (M-3): [src/components/Seo.astro](src/components/Seo.astro) añade `og:image:width`, `og:image:height` (los reales de la imagen, 2048 × 1152) y `og:image:alt`.
+- **Versión** del proyecto: 0.1.0 → 0.3.0 en [package.json](package.json) (la 0.2.0 de Erika no la había subido).
+
+### Corregido
+
+- **Envíos perdidos sin aviso** (C-1): antes el endpoint devolvía `ok:true` aunque ni SMTP ni `mail()` hubieran enviado, y los formularios ignoraban el resultado o daban por bueno cualquier fallo de red. Ahora un envío fallido se ve.
+- **Redirecciones fijas a `emaxenergia.com`** en `.htaccess`: habrían impedido revisar el sitio en el `.es`.
+
+### Eliminado
+
+- **Respaldo con `mail()`** de PHP: si el transporte configurado falla, el envío falló.
+- **Lectura de credenciales fuera del archivo de configuración** (variables de entorno, valores en el propio PHP) y el comentario que sugería escribir la contraseña en el PHP (seguridad).
+- **`$_POST`** como alternativa al JSON: el endpoint solo acepta JSON.
+- **CSS muerto** `.ck__b--rechazar-unused` en [src/components/CookieBanner.astro](src/components/CookieBanner.astro).
+- `para`, `cc` y `fecha` de los payloads del navegador, y los `catch` que ignoraban el error.
+
+### Seguridad
+
+- Las credenciales (clave de Resend, contraseña SMTP) y los destinatarios viven solo en `emax-forms-config.php`, fuera de `public_html` y del repositorio. En `dist/_astro/*.js` y en el PHP no queda ninguna dirección `@emaxenergia.com`.
+- Origen permitido, tipos y campos en lista blanca, honeypot, trampa de tiempo y límite por IP (hash con sal) frenan el spam y el abuso del endpoint. El correo solo contiene campos de la lista con etiquetas fijas, y los saltos de línea se limpian en asunto y cabeceras.
+- `public/api/` solo expone el endpoint.
+
+### Decisiones tomadas
+
+- **Lista blanca y obligatorios por tipo.** Se definieron revisando qué envía hoy cada formulario (los campos que no están en la lista se descartan):
+
+  | Tipo | Formulario | Campos permitidos | Obligatorios |
+  |---|---|---|---|
+  | `lead-luz` | funnel de luz | `nombre`, `telefono`, `franja`, `suministros`, `canal`, `tramo_origen` | `nombre`, `telefono` |
+  | `lead-gas` | funnel de gas | los de `lead-luz` más `segmento`, `gasto_mensual` | `nombre`, `telefono` |
+  | `lead-llamada` | popover "Te llamamos" | `telefono` | `telefono` |
+  | `lead-canal-directo` | Canal Directo | `nombre`, `empresa`, `perfil`, `provincia`, `email`, `telefono` | los seis (el formulario ya los exige) |
+  | `soporte-contacto` | contacto | `nombre`, `email`, `asunto`, `mensaje`, `telefono` | `nombre`, `email`, `mensaje` (los que ya exige el formulario) |
+
+  Todos admiten además `pagina` (solo si es una ruta del propio sitio), `web` y `t`. Cada campo tiene su longitud máxima. El teléfono debe tener al menos 6 dígitos y solo caracteres de teléfono; el email se valida con `FILTER_VALIDATE_EMAIL`. Se quitó `fecha`: la pone el servidor.
+- **Qué cuenta para el límite.** Cuentan los envíos que llegan hasta el transporte y los intentos que saltan el honeypot o la trampa de tiempo; los 422 no consumen. Por defecto, 5 envíos cada 10 minutos por IP (configurable).
+- **Orden de comprobaciones:** método, configuración, origen, JSON, tipo, anti-spam, validación, límite, envío.
+- **Honeypot y trampa de tiempo responden 200 `ok:true`**, como se pidió, para no dar pistas a los bots. Riesgo conocido: un dispositivo con el reloj mal puesto se trata como bot (AUDITORIA N-9).
+- **Se usa `REMOTE_ADDR`, no `X-Forwarded-For`**, porque este último se puede falsificar. Si Hostinger pone un proxy delante hay que revisarlo (N-10).
+- **Un solo commit para el PHP, el ejemplo de configuración y la validación**, porque son el mismo archivo.
+- **Los `mailto:` de las páginas** (`site.correosFormularios` en `site.ts`) no se tocaron: no estaban en el alcance.
+- **Compatibilidad con PHP 8.0**: sin `never` ni `array_is_list`, por si Hostinger no ofrece 8.1.
+
+### Notas de despliegue
+
+- **Crear `emax-forms-config.php` en Hostinger, fuera de `public_html`.** Copiar `config/emax-forms-config.example.php` a la carpeta que está **dos niveles por encima de `public_html/api/`** (en Hostinger suele ser `/home/<usuario>/domains/<dominio>/emax-forms-config.php`), con permisos `600`. Rellenar `resend_api_key`, `from`, `ip_salt` (por ejemplo con `openssl rand -hex 32`) y los orígenes permitidos. Hasta entonces el endpoint responde 503.
+- **`storage_dir`**: carpeta fuera de `public_html` (en el ejemplo, `emax-forms-storage` junto al archivo de configuración), con permisos `700` y escribible por PHP. El endpoint intenta crearla.
+- **`allowed_origins`** debe incluir el dominio donde se sirve el sitio (`https://emaxenergia.es` en la revisión y `https://emaxenergia.com` después). Si no, todos los envíos dan 403.
+- **En el `.es` se envía `X-Robots-Tag: noindex, nofollow`.** Cuando el `.es` sea público (o se retire), borrar las dos líneas marcadas en `public/.htaccess`.
+- **Remitente verificado en Resend**: el dominio de `from` tiene que estar verificado (SPF y DKIM) antes del primer envío real.
+- Comprobar con `curl -I` las cabeceras, que las redirecciones conservan el host y que `/api/` no se lista.
+
+### Pendiente (fuera de esta tanda)
+
+- **API key de Resend** (cuenta del grupo) y su carga en `emax-forms-config.php`.
+- **Verificación del dominio remitente** en Resend.
+- **Prueba real de envío en Hostinger** (Resend y, si se usa, SMTP; solo se han probado con una clave falsa y sin servidor SMTP).
+- **Unificación de `Formulario.astro` y `FormularioGas.astro`** (comparten ya el helper de envío, pero no el marcado ni los estilos).
+- **Textos legales** (C-3): marcadores `[PENDIENTE]`, `[ASESORÍA]` y `[LEGAL]`, y nombrar al proveedor de correo (Resend) en la política de privacidad.
+- Vigilar el reloj del dispositivo y el límite por IP tras publicar (AUDITORIA N-9 y N-10).
+
+## [0.2.0] - 2026-11-06 — Formulario específico de Gas Natural y enrutamiento de correos / SMTP Hostinger
 
 Cambios realizados por Erika Fernanda Pesca Alfonso (epescaalfonso@gmail.com).
 
