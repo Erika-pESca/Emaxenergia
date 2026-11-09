@@ -110,7 +110,7 @@ const pilaresEmax = [
         <div class="feed-tarjetas-factores">
           {
             pilaresEmax.map((pilar) => (
-              <article class="factor-card-horizontal" tabindex="0">
+              <a href="/metodo/" class="factor-card-horizontal">
                 <div class="factor-info-lado">
                   <div class="factor-top-meta">
                     <span class="factor-num-pill">{pilar.num}</span>
@@ -132,7 +132,7 @@ const pilaresEmax = [
                   />
                   <div class="factor-foto-shimmer" aria-hidden="true"></div>
                 </div>
-              </article>
+              </a>
             ))
           }
         </div>
@@ -412,6 +412,7 @@ const pilaresEmax = [
   }
 
   .factor-card-horizontal {
+    text-decoration: none;
     border-radius: 16px;
     border: 0;
     padding: clamp(20px, 3vw, 24px);

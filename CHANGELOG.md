@@ -4,6 +4,14 @@ Este archivo registra los cambios del proyecto desde la tanda de correcciones de
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Los códigos entre paréntesis (C-2, A-3, M-10…) son los hallazgos de [AUDITORIA.md](AUDITORIA.md).
 
+## [0.3.1] - 2026-11-09 — Tarjetas del diagnóstico en la home
+
+Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
+
+### Cambiado
+
+- Las cuatro tarjetas de "Lo que miramos nosotros" de la home pasan de `<article tabindex="0">` a enlaces `<a href="/metodo/">`, el mismo destino que el botón "Ver el método completo". Sin cambios visuales (texto blanco, sin subrayado). Archivo: [src/components/home/Variables.astro](src/components/home/Variables.astro).
+
 ## [0.3.0] - 2026-11-09 — Formularios y despliegue
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
