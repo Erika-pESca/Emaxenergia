@@ -19,17 +19,28 @@
 Options -Indexes
 AddDefaultCharset UTF-8
 
-# --- HTTPS y dominio canónico (https://emaxenergia.com, sin www) -------------
+# --- HTTPS y www -> sin www, conservando el dominio de la petición ----------
+# Sirve igual para emaxenergia.es (revisión) y emaxenergia.com: ningún dominio va fijo.
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
   # http -> https (y quita el www de paso, en una sola redirección)
   RewriteCond %{HTTPS} off
-  RewriteRule ^ https://emaxenergia.com%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} ^(?:www\.)?([^:]+)(?::\d+)?$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-  # https://www.emaxenergia.com -> https://emaxenergia.com
-  RewriteCond %{HTTP_HOST} ^www\.emaxenergia\.com$ [NC]
-  RewriteRule ^ https://emaxenergia.com%{REQUEST_URI} [L,R=301]
+  # https://www.dominio -> https://dominio
+  RewriteCond %{HTTP_HOST} ^www\.([^:]+)(?::\d+)?$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# --- Versión de revisión (emaxenergia.es): que NO se indexe -------------------
+# Mientras el .es sea solo para revisar, se envía X-Robots-Tag: noindex, nofollow.
+# CUANDO EL .es PASE A SER PÚBLICO (o se retire): borrar estas dos líneas
+# (SetEnvIf y Header ... env=NOINDEX_REVISION). El .com nunca lleva esta cabecera.
+SetEnvIf Host "(^|\.)emaxenergia\.es(:\d+)?$" NOINDEX_REVISION
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow" env=NOINDEX_REVISION
 </IfModule>
 
 # --- Página de error ---------------------------------------------------------
@@ -45,7 +56,9 @@ ErrorDocument 404 /404.html
   # HSTS: ver el aviso al principio del archivo. Subir a 31536000 cuando HTTPS esté confirmado.
   Header always set Strict-Transport-Security "max-age=300; includeSubDomains"
 
-  # CSP: todo es del propio dominio. 'unsafe-inline' hace falta por los <script> y <style> inline que genera Astro.
+  # CSP: todo es del propio dominio. El envío de correo (Resend) lo hace el servidor PHP, no el navegador:
+  # el navegador solo habla con /api/enviar-formulario.php (mismo dominio), así que connect-src 'self' alcanza.
+  # CSP: 'unsafe-inline' hace falta por los <script> y <style> inline que genera Astro.
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'self'; frame-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
 </IfModule>
 

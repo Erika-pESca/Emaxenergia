@@ -1,2 +1,4 @@
-# .htaccess siempre con saltos de línea LF (Apache puede fallar con CRLF)
+# .htaccess siempre con saltos de línea LF (Apache puede fallar con CRLF); PHP también
 public/.htaccess text eol=lf
+public/api/.htaccess text eol=lf
+*.php text eol=lf
