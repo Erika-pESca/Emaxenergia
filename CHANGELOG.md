@@ -12,6 +12,8 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `m
 
 - **Punto 2, HTML inicial de la home:** se comprueba directamente `dist/index.html` y se abre la home en Chromium con JavaScript desactivado a 1440 y 375 px, con y sin movimiento reducido. En los cuatro casos se lee «TÚ HACES TRES COSAS. DEL RESTO nos encargamos.». El título ya es estático y ningún script lo modifica; no se cambia código ni estilos al no reproducirse el fallo. Archivo: `docs/verificacion-previa-0.3.3.md`; evidencia local en `.astro/revision-033/`.
 
+- **Punto 3, revisión de e14c2d5:** inventario de cada bloque retirado, con archivo, línea anterior, texto y decisión en `docs/revision-e14c2d5.md`. Se restaura la descripción del análisis de EMAX en el aviso legal y tres apartados independientes en la guía del CUPS: «Lo que no hacemos», «Si no quieres darlo» y «Responsable del tratamiento». Siguen comentados los apartados de consulta al SIPS, la tabla de potencia y las afirmaciones fiscales/normativas sin validar. En Canal Directo solo se había ocultado un marcador y en atención al cliente los huecos de procedimiento/plazo/entidad; no faltaban secciones útiles que restaurar. Archivos: `src/pages/aviso-legal.astro`, `src/pages/guias/cups-y-tus-datos.astro`, `docs/revision-e14c2d5.md`, `docs/verificacion-legal-0.3.2.md`.
+
 ## [0.3.2] - 2026-11-09 — Datos legales y revisión de textos
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.

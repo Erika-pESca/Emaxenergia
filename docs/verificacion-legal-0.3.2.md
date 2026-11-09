@@ -2,6 +2,8 @@
 
 Fecha: 2026-11-09. Cambios realizados por Luciano Lyall (lucianolyall@gmail.com).
 
+**Actualización en 0.3.3 (2026-11-09):** por decisión de Luciano Lyall, el contacto legal y de derechos vigente es `administracion@emaxenergia.com`; el anterior solo queda como cita histórica en las fuentes. La revisión de `e14c2d5` restaura la descripción del análisis de EMAX en el aviso legal y, en la guía del CUPS, «Lo que no hacemos», «Si no quieres darlo» y «Responsable del tratamiento». Siguen sin publicar los dos apartados que atribuyen a EMAX la consulta del SIPS y requieren validar su habilitación; no se considera resuelto ese pendiente. El inventario completo figura en [la revisión del commit](revision-e14c2d5.md). Las comprobaciones anteriores se conservan como evidencia de 0.3.2; las de 0.3.3 constan en [la verificación previa](verificacion-previa-0.3.3.md).
+
 ## Comprobaciones realizadas
 
 | Comprobación | Resultado |
@@ -35,7 +37,7 @@ Las referencias son a los archivos de esta versión. Ocultar las notas no resuel
 | Titular registral de EMAX Energía y titular de Maxi | `src/pages/aviso-legal.astro:100` |
 | Reparto de responsabilidades y cesiones por fase | `src/pages/privacidad.astro:62`, `:123` |
 | Existencia y contacto del delegado de protección de datos | `src/pages/privacidad.astro:67` |
-| Acceso al SIPS, acuerdo habilitante y base específica | `src/pages/privacidad.astro:94`; `src/pages/guias/cups-y-tus-datos.astro:87` |
+| Acceso al SIPS, acuerdo habilitante y base específica | `src/pages/privacidad.astro:94`; `src/pages/guias/cups-y-tus-datos.astro:91` (ubicación actualizada en 0.3.3) |
 | Existencia e identificación de un CRM | `src/pages/privacidad.astro:122` |
 | Transferencias internacionales y garantías de Hostinger, Google Workspace, Resend y, cuando corresponda, WhatsApp | `src/pages/privacidad.astro:126` |
 | Validación jurídica del permiso de contacto y de la base/comunicaciones del Canal Directo | `src/pages/canal-directo/index.astro:151`, `:315` |
