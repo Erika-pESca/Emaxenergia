@@ -72,18 +72,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <tr>
                 <td><code>emax:consentimiento</code></td>
                 <td>localStorage · técnico</td>
-                <td>Recordar tu elección: <code>analitica</code> (sí/no), <code>caduca</code> (fecha de caducidad) y <code>version</code> (1). No guarda datos del formulario.</td>
-                <td>365 días de validez; se elimina al volver a consultar la preferencia una vez caducada.</td>
+                <td>Recordar tu preferencia.</td>
+                <td>365 días</td>
               </tr>
               <tr>
                 <td><code>emax:formulario</code></td>
                 <td>sessionStorage · técnico</td>
-                <td>Personalizar la confirmación tras un envío correcto. Guarda <code>tipo</code>, <code>nombre</code>, <code>email</code> y <code>telefono</code>; en Canal Directo, también <code>empresa</code>, <code>perfil</code> y <code>provincia</code>. No se elimina al mostrar la confirmación.</td>
-                <td>Hasta cerrar la pestaña, borrar los datos del navegador o sustituirlos con otro envío correcto.</td>
+                <td>Personalizar la confirmación de Contacto o Canal Directo.</td>
+                <td>Sesión de la pestaña</td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <p>
+          <strong>Tu preferencia:</strong> guarda <code>analitica</code> (sí/no), <code>caduca</code> (fecha de caducidad) y <code>version</code> (1), sin datos del formulario. Tiene 365 días de validez y se elimina al volver a consultar la preferencia una vez caducada.
+        </p>
+        <p>
+          <strong>Tu confirmación:</strong> guarda <code>tipo</code>, <code>nombre</code>, <code>email</code> y <code>telefono</code>; en Canal Directo, también <code>empresa</code>, <code>perfil</code> y <code>provincia</code>. No se elimina al mostrar la confirmación: permanece hasta cerrar la pestaña, borrar los datos del navegador o sustituirlos con otro envío correcto.
+        </p>
 
         <h2>Cómo cambiar tu elección</h2>
         <p>

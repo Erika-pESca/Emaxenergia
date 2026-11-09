@@ -19,6 +19,8 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `m
 
 - **Punto 6, textos visibles:** se recorren las 40 páginas generadas y se corrigen «ASI» → «ASÍ», las entidades `&quot;` visibles en una cadena, el enlace de confirmación «En cambio, quieres…» y la coma entre «EL VERANO» y «se paga». El título de la home ya decía «DEL RESTO nos encargamos.» tras el pull, por lo que se conserva. Las dudas sobre ejemplos, cifras y resúmenes técnicos se listan sin alterar en `docs/revision-textos-0.3.2.md`. Archivos: `src/components/contacto/HeroContactoRecibido.astro`, `src/components/metodo/QuienLeeTusDatos.astro`, `src/pages/guias/precio-fijo-o-indexado.astro`, `src/components/sectores/hoteles/PorQueElVerano.astro`, `docs/revision-textos-0.3.2.md`.
 
+- **Punto 7, verificación:** `npm run check` y `npx astro check`: 157 archivos, 0 errores/warnings/hints; `npm run build`: 40 páginas, sin warnings. `dist/`: 0 marcadores internos en 791 archivos. Recorrido de 40 páginas en Chromium: 0 errores JS, peticiones externas, enlaces o anchors rotos. Revisión visual de aviso legal, privacidad, cookies y footer a 1440 y 375 px, sin desbordes de página; panel de cookies y guardado comprobados, script idéntico. Por la revisión móvil se abrevian las filas de cookies y se conservan todos sus campos/caducidad en prosa contigua, sin cambiar estilos. Informe y mapa de pendientes con archivo/línea en `docs/verificacion-legal-0.3.2.md`. Archivos: `src/pages/cookies.astro` y `docs/verificacion-legal-0.3.2.md`.
+
 ## [0.3.1] - 2026-11-09 — Cierre de formularios y preparación del lanzamiento
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
