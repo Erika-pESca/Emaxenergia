@@ -156,10 +156,10 @@
 </section>
 
 <script>
-  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../../scripts/enviarFormulario";
+  import { enviarFormulario, marcarInicio, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../../scripts/enviarFormulario";
 
-  // Marca de tiempo de cuando se renderizó el formulario (trampa antispam "t" del endpoint)
-  const tRenderizado = marcaTiempo();
+  // El formulario es visible desde que carga la página (trampa de tiempo "te" del endpoint)
+  marcarInicio("soporte-contacto");
 
   function setupFormContacto() {
     const formContacto = document.querySelector<HTMLFormElement>("[data-form-contacto]");
@@ -196,7 +196,6 @@
       const resultado = await enviarFormulario(
         "soporte-contacto",
         { web: "", nombre, email, asunto, mensaje, telefono },
-        tRenderizado,
       );
       bloquearEnvio(botonEnviar, false);
 

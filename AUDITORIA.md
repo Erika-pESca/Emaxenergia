@@ -158,7 +158,7 @@ No hay `og:image` ni `twitter:image` (`twitter:card` es `summary_large_image` si
 
 ### M-5. Protección anti-spam desigual
 
-> ✅ **Resuelto en 0.3.0** ([CHANGELOG](CHANGELOG.md)): honeypot `web` en todos, trampa de tiempo `t` (< 3 s), límite por IP (429) y origen permitido (403) en el servidor. Ver N-9 y N-10 para los riesgos.
+> ✅ **Resuelto en 0.3.0** ([CHANGELOG](CHANGELOG.md)): honeypot `web` en todos, trampa de tiempo `te` (< 3 s), límite por IP (429) y origen permitido (403) en el servidor. Ver N-9 y N-10 para los riesgos.
 Solo [canal-directo.astro:309](src/pages/canal-directo.astro) tiene honeypot (`cd-web`). El formulario de contacto, el funnel y el popover no tienen ninguno, ni límite de envío, ni CAPTCHA. Cuando haya backend real, el spam llegará. **Corrección:** honeypot + validación y límite de tasa en servidor (y, si hace falta, Turnstile/hCaptcha, que carga un script de terceros: documentarlo en cookies).
 
 ### M-6. Datos personales en `sessionStorage`
@@ -276,7 +276,7 @@ Notas: si el formulario acaba enviando a un servicio externo, hay que añadir su
 
 ---
 
-- **N-9 (Medio). Reloj del dispositivo y trampa de tiempo "t".** El servidor compara el `t` del navegador con su propia hora. Un dispositivo con el reloj adelantado más de unos segundos hace que el servidor lo trate como bot y responda 200 sin enviar: el usuario ve "Listo" y el lead se pierde. Es raro, pero hay que vigilarlo en las primeras pruebas. Corrección posible: usar un token firmado por el servidor en vez de la hora del cliente (necesita una petición previa).
+- ✅ **N-9 (resuelto en 0.3.1). Reloj del dispositivo y trampa de tiempo "t".** *Resuelto: el navegador manda `te`, los milisegundos transcurridos desde que se mostró el formulario medidos con `performance.now()`, y el servidor solo comprueba que sea un entero de al menos 3000, sin comparar con ninguna hora. Texto original:* El servidor compara el `t` del navegador con su propia hora. Un dispositivo con el reloj adelantado más de unos segundos hace que el servidor lo trate como bot y responda 200 sin enviar: el usuario ve "Listo" y el lead se pierde. Es raro, pero hay que vigilarlo en las primeras pruebas. Corrección posible: usar un token firmado por el servidor en vez de la hora del cliente (necesita una petición previa).
 - **N-10 (Medio). Límite por IP detrás de un proxy o CDN.** Se usa `REMOTE_ADDR` y no `X-Forwarded-For` (que se puede falsificar). Si Hostinger o un CDN ponen un proxy delante, todos los visitantes compartirían IP y el límite afectaría a todos a la vez. Comprobar en Hostinger tras publicar; el límite es de 5 envíos cada 10 minutos.
 - **N-11 (Medio). Sin probar con la clave real.** El transporte de Resend se verificó contra la API real solo con una clave falsa (HTTP 401, 502 al usuario, sin datos personales en el log). El camino SMTP no se ha probado contra ningún servidor. Falta la clave real, el dominio remitente verificado en Resend y una prueba de envío desde Hostinger.
 - **N-12 (Bajo). `site.correosFormularios` duplica el `routing` del PHP.** Los destinatarios reales viven solo en `emax-forms-config.php`, pero `site.ts` mantiene una copia que usan los enlaces `mailto:?cc=` de contacto, atención al cliente, Canal Directo y el pie. Dejan `gerencia@` y `administracion@` en el HTML público (spam) y pueden desincronizarse. Corrección: `mailto:` solo a `hola@`, o un buzón público único.

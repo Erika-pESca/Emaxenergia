@@ -293,7 +293,7 @@ import Logo from "./Logo.astro";
 </div>
 
 <script>
-  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
+  import { enviarFormulario, marcarInicio, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
 
   // =========================================================================
   // CONTROL GLOBAL DEL FORMULARIO Y CONEXIÓN CON BACKEND
@@ -365,12 +365,10 @@ import Logo from "./Logo.astro";
     }
 
     let elementoPrevioFoco: HTMLElement | null = null;
-    // Marca de tiempo de apertura del modal (trampa antispam "t" del endpoint)
-    let tAbierto = marcaTiempo();
 
     function abrirModalFunnel(btn?: HTMLElement | null) {
       elementoPrevioFoco = btn || (document.activeElement as HTMLElement);
-      tAbierto = marcaTiempo();
+      marcarInicio("lead-luz"); // la trampa de tiempo arranca de nuevo en cada apertura
 
       // Personalizar el mensaje según el botón que abrió el modal
       if (btn) {
@@ -480,7 +478,6 @@ import Logo from "./Logo.astro";
           canal: inputCanal?.value || "llamada",
           tramo_origen: inputTramo?.value || "general",
         },
-        tAbierto,
       );
       bloquearEnvio(botonEnviar, false);
 

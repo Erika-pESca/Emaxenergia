@@ -261,19 +261,16 @@ function limite_excedido(array $config): bool {
 }
 
 // =============================================================================
-// 7. ANTI-SPAM: honeypot "web" y trampa de tiempo "t"
+// 7. ANTI-SPAM: honeypot "web" y trampa de tiempo "te"
 //    Si salta, se responde 200 {"ok":true} sin enviar nada (el bot no aprende nada).
 // =============================================================================
 function es_bot(array $datos): bool {
   if (isset($datos['web']) && is_scalar($datos['web']) && trim((string) $datos['web']) !== '') return true;
 
-  $t = $datos['t'] ?? null;
-  if (is_string($t) && ctype_digit($t)) $t = (int) $t;
-  if (!is_int($t) && !(is_float($t) && is_finite($t))) return true;      // falta o no es un número
-  $transcurrido = (time() * 1000) - (int) $t;
-  if ($transcurrido < 3000) return true;                                  // enviado en menos de 3 s (o con fecha futura)
-  if ($transcurrido > 30 * 24 * 3600 * 1000) return true;                // marca absurdamente antigua
-  return false;
+  // "te" = milisegundos que el formulario llevaba visible, medidos en el navegador con
+  // performance.now(). No se compara con la hora del servidor ni con el reloj del cliente.
+  $te = $datos['te'] ?? null;
+  return !is_int($te) || $te < 3000;   // falta, no es un entero o se envió en menos de 3 s
 }
 
 if (es_bot($datos)) {

@@ -391,7 +391,7 @@ import Logo from "./Logo.astro";
 </div>
 
 <script>
-  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
+  import { enviarFormulario, marcarInicio, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
 
   // =========================================================================
   // CONTROL DEL FORMULARIO DE GAS NATURAL
@@ -653,11 +653,8 @@ import Logo from "./Logo.astro";
       });
     }
 
-    // Marca de tiempo de apertura del modal (trampa antispam "t" del endpoint)
-    let tAbierto = marcaTiempo();
-
     function abrirModalFunnelGas(btn?: HTMLElement | null) {
-      tAbierto = marcaTiempo();
+      marcarInicio("lead-gas"); // la trampa de tiempo arranca de nuevo en cada apertura
       if (btn) {
         const segAttr =
           btn.getAttribute("data-segmento") ||
@@ -822,7 +819,6 @@ import Logo from "./Logo.astro";
           canal: inputCanal?.value || "llamada",
           tramo_origen: inputTramo?.value || "gas-natural",
         },
-        tAbierto,
       );
       bloquearEnvio(botonEnviar, false);
 

@@ -27,27 +27,37 @@ export type ResultadoEnvio =
       campos: string[];
     };
 
-/** Marca de tiempo (ms) para el campo "t". Llamar al abrir o renderizar el formulario. */
-export function marcaTiempo(): number {
-  return Date.now();
+// Trampa de tiempo: el servidor recibe "te" = milisegundos desde que el formulario se mostró al
+// usuario, medidos aquí con performance.now() (reloj monotónico). Así no depende de la hora del
+// dispositivo ni de la del servidor.
+const inicios = new Map<TipoFormulario, number>();
+
+/**
+ * Marca el instante en que el formulario se vuelve visible para el usuario: al abrir el modal
+ * (funnels), al abrir el popover, o al cargar la página (contacto y Canal Directo).
+ * Se llama de nuevo cada vez que se vuelve a mostrar: el contador arranca de cero.
+ */
+export function marcarInicio(tipo: TipoFormulario): void {
+  inicios.set(tipo, performance.now());
 }
 
 /**
- * Envía el formulario y devuelve el resultado ya interpretado.
- * `t` es la marca de tiempo de cuando se abrió o renderizó el formulario (trampa antispam).
+ * Envía el formulario y devuelve el resultado ya interpretado. Añade solo el campo "te"
+ * (ms desde `marcarInicio(tipo)`); si nunca se marcó, "te" es 0 y el servidor lo trata como bot.
  */
 export async function enviarFormulario(
   tipo: TipoFormulario,
   campos: Record<string, string>,
-  t: number,
 ): Promise<ResultadoEnvio> {
+  const inicio = inicios.get(tipo);
+  const te = inicio === undefined ? 0 : Math.round(performance.now() - inicio);
   const control = new AbortController();
   const temporizador = setTimeout(() => control.abort(), 15000);
   try {
     const respuesta = await fetch(ENDPOINT_FORMULARIOS, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...campos, tipo, t, pagina: window.location.pathname }),
+      body: JSON.stringify({ ...campos, tipo, te, pagina: window.location.pathname }),
       signal: control.signal,
     });
 

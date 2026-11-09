@@ -408,7 +408,7 @@ const tarifasItems = [
 </header>
 
 <script>
-  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
+  import { enviarFormulario, marcarInicio, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../scripts/enviarFormulario";
 
   // 1. Barra de progreso dinámica al hacer Scroll y efecto de elevación
   const progressBar = document.getElementById("scroll-progress-line");
@@ -533,14 +533,13 @@ const tarifasItems = [
     if (isHidden) {
       popoverPanel?.removeAttribute("hidden");
       popoverBtn?.setAttribute("aria-expanded", "true");
+      marcarInicio("lead-llamada"); // el popover se acaba de mostrar: la trampa de tiempo arranca de nuevo
     } else {
       popoverPanel?.setAttribute("hidden", "true");
       popoverBtn?.setAttribute("aria-expanded", "false");
     }
   });
 
-  // Marca de tiempo de cuando se renderizó el popover (trampa antispam "t" del endpoint)
-  const tPopover = marcaTiempo();
   const avisoErrorPopover = document.querySelector<HTMLElement>("[data-error-envio-popover]");
 
   popoverForm?.addEventListener("submit", async (e) => {
@@ -559,7 +558,7 @@ const tarifasItems = [
     limpiarErrorEnvio(avisoErrorPopover, formEl);
     popoverExito?.setAttribute("hidden", "true");
     bloquearEnvio(botonEnviar, true);
-    const resultado = await enviarFormulario("lead-llamada", { web: "", telefono }, tPopover);
+    const resultado = await enviarFormulario("lead-llamada", { web: "", telefono });
     bloquearEnvio(botonEnviar, false);
 
     if (!resultado.ok) {

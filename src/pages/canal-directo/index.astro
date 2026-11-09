@@ -335,13 +335,13 @@ const emailColaboradorHref = `mailto:${site.correosFormularios.leads.para.join("
 </BaseLayout>
 
 <script>
-  import { enviarFormulario, marcaTiempo, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../../scripts/enviarFormulario";
+  import { enviarFormulario, marcarInicio, bloquearEnvio, limpiarErrorEnvio, mostrarErrorEnvio } from "../../scripts/enviarFormulario";
 
   // Script de envío del Canal Directo (usa el helper compartido de formularios)
   const form = document.getElementById("form-canal-directo") as HTMLFormElement | null;
   if (form) {
-    // Marca de tiempo de cuando se renderizó el formulario (trampa antispam "t" del endpoint)
-    const tRenderizado = marcaTiempo();
+    // El formulario es visible desde que carga la página (trampa de tiempo "te" del endpoint)
+    marcarInicio("lead-canal-directo");
     const avisoError = form.querySelector<HTMLElement>("[data-error-envio]");
     const botonEnviar = form.querySelector<HTMLButtonElement>("#cd-btn-submit");
     const valor = (id: string): string =>
@@ -395,7 +395,6 @@ const emailColaboradorHref = `mailto:${site.correosFormularios.leads.para.join("
       const resultado = await enviarFormulario(
         "lead-canal-directo",
         { web: "", nombre, empresa, perfil, provincia, email, telefono },
-        tRenderizado,
       );
       bloquearEnvio(botonEnviar, false);
 
