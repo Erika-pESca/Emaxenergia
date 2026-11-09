@@ -21,6 +21,8 @@ Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `m
 
 - **Punto 7, verificación:** `npm run check` y `npx astro check`: 157 archivos, 0 errores/warnings/hints; `npm run build`: 40 páginas, sin warnings. `dist/`: 0 marcadores internos en 791 archivos. Recorrido de 40 páginas en Chromium: 0 errores JS, peticiones externas, enlaces o anchors rotos. Revisión visual de aviso legal, privacidad, cookies y footer a 1440 y 375 px, sin desbordes de página; panel de cookies y guardado comprobados, script idéntico. Por la revisión móvil se abrevian las filas de cookies y se conservan todos sus campos/caducidad en prosa contigua, sin cambiar estilos. Informe y mapa de pendientes con archivo/línea en `docs/verificacion-legal-0.3.2.md`. Archivos: `src/pages/cookies.astro` y `docs/verificacion-legal-0.3.2.md`.
 
+- **Punto 8, documentación:** versión 0.3.2 en `package.json` y `package-lock.json`; C-3 y C-4 de `AUDITORIA.md` quedan parcialmente resueltos y A-6 distingue la documentación corregida del diseño/decisión de analítica todavía abiertos. La fuente, las contradicciones, las dudas editoriales y todos los pendientes con archivo/línea quedan en `docs/legal-fuente-emaxenergia-com.md`, `docs/revision-textos-0.3.2.md` y `docs/verificacion-legal-0.3.2.md`. No se crean ramas ni se hace push. Archivos de este último punto: `CHANGELOG.md`, `AUDITORIA.md`, `package.json`, `package-lock.json`.
+
 ## [0.3.1] - 2026-11-09 — Cierre de formularios y preparación del lanzamiento
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.

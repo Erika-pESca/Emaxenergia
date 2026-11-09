@@ -3,6 +3,8 @@
 Fecha: 2026-11-05 · Auditoría sobre `main`. La fase 1 de correcciones se aplicó el mismo día en la rama `fix/auditoria-fase-1` (versión 0.1.0, ver [CHANGELOG.md](CHANGELOG.md)); cada hallazgo resuelto lo indica con ✅. · Astro 7.3.6, `output: 'static'` · Destino: Hostinger (Apache/LiteSpeed, sin Node).
 El informe original se hizo en modo solo lectura. Lo que sigue es ese informe más el estado tras la fase 1.
 
+Actualización 2026-11-09, versión 0.3.2: los marcadores internos ya no se publican; se incorporan los datos legales verificables de la web actual y los encargados confirmados por el usuario. C-3 y C-4 quedan parcialmente resueltos y A-6 tiene corregida la documentación técnica. Los detalles y los asuntos jurídicos que siguen abiertos constan debajo, en [las fuentes legales](docs/legal-fuente-emaxenergia-com.md) y en [la revisión de textos](docs/revision-textos-0.3.2.md). La eliminación de marcadores no acredita que estén completos todos los extremos legales pendientes.
+
 ## Cómo se hizo y qué NO se pudo comprobar
 
 | Comprobación | Resultado |
@@ -51,6 +53,12 @@ El sitio compila y no da errores de consola, pero **no está listo para publicar
 - **Corrección:** añadir `data-abrir-funnel` a esos enlaces (el `href` queda como respaldo sin JS, p. ej. `/contacto`). Revisar que `SegunQuienPaga` también lo lleve.
 
 ### C-3. Texto legal en borrador visible al público (RGPD / LSSI)
+
+> **Parcialmente resuelto en 0.3.2.** Se incorporan desde `https://emaxenergia.com/#/aviso-legal` y `https://emaxenergia.com/#/privacidad` el domicilio social publicado (Calle Gerona 38 Local, Santa Eulalia de Ronçana, 08187 Barcelona), el responsable ENERGYMAX ADVISORY, S.L.U., NIF B02994333, el contacto legal y de derechos `administracion@consultoriaemax.com`, la conservación de clientes potenciales hasta tres años y de clientes según contrato, la propiedad intelectual general y la jurisdicción. El footer y el JSON-LD se alinean con el domicilio, se retira «marca de Grupo EMAX» y se identifican Hostinger, Google Workspace y Resend por confirmación del usuario. Los datos y citas están en `docs/legal-fuente-emaxenergia-com.md`.
+>
+> **Sigue pendiente:** inscripción registral (la fuente dice «Registro Mercantil de Madrid de Granollers», sin tomo, folio, hoja ni inscripción), titular registral de la marca y de Maxi, papel de EMAX como asesoría/comercializadora y entidad suministradora, DPD, CRM, responsabilidades y cesiones por fase, acceso al SIPS y su base/acuerdo, garantías de transferencias internacionales, validación del Canal Directo, reclamaciones y validaciones fiscales/normativas de las guías. Todo queda en comentarios no renderizados; se retiran también las afirmaciones que dependían de datos sin confirmar. No se inventan garantías ni se declara validado el conjunto legal.
+
+Evidencia original de la auditoría, anterior a estas correcciones:
 - 42 apariciones de `[LEGAL]` y más de 10 marcadores distintos en producción. Ejemplos:
   - [Footer.astro:163](src/components/Footer.astro#L163): `[LEGAL]` en el copyright de **todas** las páginas.
   - [aviso-legal.astro:70](src/pages/aviso-legal.astro#L70), [:83](src/pages/aviso-legal.astro#L83): Registro Mercantil (tomo, folio, hoja) pendiente. La LSSI (art. 10) exige los datos de inscripción registral.
@@ -61,6 +69,10 @@ El sitio compila y no da errores de consola, pero **no está listo para publicar
 - **Corrección:** esto lo tiene que cerrar la empresa o su asesoría, no el código. Lista de datos que hacen falta: inscripción registral; titular de marca; responsable del tratamiento en cada fase; email de privacidad; DPD (sí/no); plazos; proveedores (CRM, email, hosting); transferencias internacionales; jurisdicción. Después, quitar las clases/etiquetas `.pendiente`. Mientras no estén, **no publicar**.
 
 ### C-4. Los formularios no informan de la protección de datos en el punto de recogida
+
+> **Parcialmente resuelto en 0.3.2.** Los cinco formularios (funnel de luz, funnel de gas, popover «Te llamamos», Contacto y Canal Directo) identifican a ENERGYMAX ADVISORY, S.L.U., describen su finalidad, enlazan a `/privacidad/` y ofrecen el contacto publicado para ejercer derechos. Atención al cliente usa también ese buzón para derechos. **Falta validar la base jurídica específica de cada flujo, las responsabilidades/cesiones del Canal Directo y quién accede al SIPS con qué habilitación.** La fuente actual no resuelve estos tratamientos del nuevo sitio, por lo que no se añade una base jurídica inventada a las primeras capas ni se da por cerrado el hallazgo.
+
+Evidencia original:
 - [Formulario.astro:176-216](src/components/Formulario.astro#L176-L216) (paso 3, el que pide nombre y teléfono): solo dice "un consultor técnico te llamará…". No hay enlace a la política, ni responsable, ni finalidad, ni derechos.
 - [HablaConNosotros.astro:132-134](src/components/contacto/HablaConNosotros.astro#L132-L134) y [canal-directo.astro:314](src/pages/canal-directo.astro#L314) sí enlazan `/privacidad`, pero sin información por capas (responsable, finalidad, base, derechos). El popover de la cabecera tampoco la lleva.
 - **Corrección:** primera capa en cada formulario (responsable, finalidad, derechos, enlace). No hace falta casilla para contactos basados en la solicitud del usuario; sí si se van a enviar comunicaciones comerciales. Para el funnel, que además lee datos de consumo, conviene confirmar la base legal con la asesoría.
@@ -114,6 +126,10 @@ Anchors a ids que no existen en la página destino:
 - **Corrección:** prop `noindex` en `Seo.astro` que emita `<meta name="robots" content="noindex, nofollow">`, y `sitemap({ filter: ... })` para excluirlas.
 
 ### A-6. Consentimiento de cookies: aceptar y rechazar no pesan igual, y el texto legal no coincide con el código
+
+> **Documentación corregida en 0.3.2; hallazgo parcialmente abierto.** Cookies y privacidad ya no describen GA4 ni cookies inexistentes. Las únicas claves persistidas por el frontend son `emax:consentimiento` en `localStorage` (`analitica`, `caduca`, `version`, 365 días de validez con retirada al leer tras caducar) y `emax:formulario` en `sessionStorage` (datos de confirmación tras envío correcto de Contacto/Canal Directo, sin borrado al mostrar la confirmación). Se eliminan de la tabla `emax:funnel`, `emax:presolicitud:[referencia]` y `emax:origen`, que el código no usa. El texto del banner aclara que la categoría Analítica solo guarda una preferencia y no carga un servicio. **El script y el comportamiento del banner no cambian, como pidió el usuario.** Siguen abiertos el distinto peso visual de aceptar/rechazar y la decisión de simplificar el banner o activar una analítica futura con información y carga acordes. El Consent Mode local no constituye una carga de Google Analytics.
+
+Evidencia original:
 - [CookieBanner.astro:21-26](src/components/CookieBanner.astro#L21-L26), estilos `.ck__b--aceptar` (relleno azul, sombra) vs `.ck__b--rechazar` (borde blanco, texto gris): mismo tamaño, **distinto peso visual**. La guía de cookies de la AEPD (2023) exige que rechazar sea tan fácil y visible como aceptar.
 - Lo que sí está bien: consentimiento por defecto `denied` (Consent Mode v2, [CookieBanner.astro:92-104](src/components/CookieBanner.astro#L92-L104)); elección guardada en `localStorage` con caducidad de 1 año; se puede cambiar desde el footer ("Configurar cookies" → `data-abrir-cookies`); panel con `<dialog>`; solo se registra la categoría "Analítica".
 - **Desajuste:** [cookies.astro:105](src/pages/cookies.astro#L105) y la política de privacidad describen Google Analytics 4 (`_ga`, `_ga_*`). **El código no carga GA4 ni ningún script de Google**: solo define un `gtag` y el consentimiento por defecto. Hoy el banner no bloquea nada porque no hay nada que bloquear. Cuando se añada GA4 hay que cargarlo **solo tras** `granted` (no solo `gtag("consent","update")`; con Consent Mode básico el script no debe cargarse hasta el consentimiento).
