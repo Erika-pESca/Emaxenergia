@@ -8,6 +8,8 @@ interface FooterLink {
   href: string;
   label: string;
   spacedTop?: boolean;
+  target?: "_blank";
+  rel?: string;
 }
 
 interface FooterCol {
@@ -67,6 +69,12 @@ const columnasFooter: FooterCol[] = [
       { href: "/contacto/", label: "Contacto" },
       { href: "/atencion-al-cliente/", label: "Atención al cliente" },
       { href: "/canal-directo/", label: "Canal directo" },
+      {
+        href: "https://app.grupo-emax.com/",
+        label: "Portal Colaboradores",
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
     ],
   },
   {
@@ -142,6 +150,8 @@ const columnasFooter: FooterCol[] = [
                   <a
                     href={link.href}
                     class="columna-enlace"
+                    target={link.target}
+                    rel={link.rel}
                     data-abrir-cookies={link.href === "#configurar-cookies" ? "" : undefined}
                   >
                     {link.label}
