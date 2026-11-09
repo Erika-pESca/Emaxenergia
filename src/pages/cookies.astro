@@ -51,9 +51,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <!-- Prosa con contenido oficial v12.16 -->
       <article class="legal-prosa">
-        <div class="legal-borrador-aviso">
-          <strong>BORRADOR TÉCNICO para la asesoría</strong> · no se publica · lo marcado entre corchetes falta o lo decide la asesoría
-        </div>
+        {/* PENDIENTE: cerrar la revisión jurídica de los extremos identificados en los comentarios de esta página. */}
 
         <h2>Qué guarda esta web en tu navegador</h2>
         <p>
@@ -306,26 +304,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     border: 1px solid #d5e0f0;
     font-family: var(--font-poppins), sans-serif;
     color: #1e293b;
-  }
-
-  .legal-borrador-aviso {
-    background: #fff8eb;
-    border: 1.5px dashed #f59e0b;
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin-bottom: 24px;
-    font-size: 0.84rem;
-    color: #92400e;
-    line-height: 1.45;
-  }
-
-  .pendiente {
-    color: #b91c1c;
-    background: #fee2e2;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 0.92em;
   }
 
   .legal-prosa h2 {

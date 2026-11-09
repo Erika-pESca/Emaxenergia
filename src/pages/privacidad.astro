@@ -43,7 +43,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
           <div class="resumen-item">
             <span class="resumen-label">Para qué los usamos</span>
-            <p>Preparar el diagnóstico de tu factura, consultar el CUPS si nos autorizas, llamarte en la franja elegida y atender tu consulta.</p>
+            <p>Preparar el diagnóstico de tu factura, llamarte en la franja elegida y atender tu consulta.</p>
           </div>
           <div class="resumen-item">
             <span class="resumen-label">Lo que NO hacemos</span>
@@ -58,17 +58,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <!-- Prosa con contenido oficial v12.16 -->
       <article class="legal-prosa">
-        <div class="legal-borrador-aviso">
-          <strong>BORRADOR TÉCNICO para la asesoría</strong> · no se publica · lo marcado entre corchetes falta o lo decide la asesoría
-        </div>
+        {/* PENDIENTE: cerrar la revisión jurídica de los extremos identificados en los comentarios de esta página. */}
+        {/* PENDIENTE: confirmar el reparto de responsabilidades con las comercializadoras y las cesiones o corresponsabilidad en cada fase del nuevo sitio; la fuente solo identifica a ENERGYMAX como responsable de los datos recogidos en su web. */}
 
-        <div class="legal-nota-asesoria">
-          {/* PENDIENTE: confirmar el reparto de responsabilidades con las comercializadoras y las cesiones o corresponsabilidad en cada fase del nuevo sitio; la fuente solo identifica a ENERGYMAX como responsable de los datos recogidos en su web. */}
-        </div>
 
         <h2>Quién trata tus datos</h2>
         <p>
-          El responsable de los datos recogidos a través de esta web es ENERGYMAX ADVISORY, S.L.U. (EMAX Energía), NIF B02994333, con domicilio en Calle Gerona 38 Local, Santa Eulalia de Ronçana, 08187 Barcelona. Para asuntos de protección de datos y para ejercer tus derechos, puedes escribir a <a href="mailto:administracion@consultoriaemax.com">administracion@consultoriaemax.com</a> o a esa dirección postal. <span class="pendiente">[ASESORÍA: ¿hay delegado de protección de datos? La fuente no lo identifica]</span>
+          El responsable de los datos recogidos a través de esta web es ENERGYMAX ADVISORY, S.L.U. (EMAX Energía), NIF B02994333, con domicilio en Calle Gerona 38 Local, Santa Eulalia de Ronçana, 08187 Barcelona. Para asuntos de protección de datos y para ejercer tus derechos, puedes escribir a <a href="mailto:administracion@consultoriaemax.com">administracion@consultoriaemax.com</a> o a esa dirección postal. {/* PENDIENTE: ¿hay delegado de protección de datos? La fuente no lo identifica. */}
         </p>
 
         <h2>Qué datos tratamos</h2>
@@ -95,10 +91,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 <td>Atender tu solicitud de análisis, llamarte en la franja que elijas y mandarte el informe</td>
                 <td>Aplicar medidas precontractuales a petición tuya (RGPD, art. 6.1.b)</td>
               </tr>
-              <tr>
-                <td>Consultar los datos técnicos y de consumo de tu suministro con el CUPS, si nos lo das</td>
-                <td>Tu solicitud y tu declaración de que eres el titular o estás autorizado (art. 6.1.b) <span class="pendiente">[ASESORÍA: confirmar quién accede al SIPS y en virtud de qué acuerdo (doc 03 §5, RD 88/2026, art. 8)]</span></td>
-              </tr>
+              {/* PENDIENTE: validar quién accede al SIPS, el acuerdo que lo habilita y la base jurídica específica. La fuente no los identifica. Se retira la fila que atribuía ese acceso a EMAX con base en el artículo 6.1.b. */}
               <tr>
                 <td>Mandarte información comercial por WhatsApp o por email</td>
                 <td>Tu consentimiento, solo si marcas la casilla (art. 6.1.a)</td>
@@ -127,12 +120,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <li>Google Workspace: recepción y gestión de los correos.</li>
           <li>Resend: envío de las notificaciones de los formularios.</li>
           {/* PENDIENTE: confirmar si existe un CRM y, en su caso, identificarlo; no consta en las fuentes. */}
-          <li>La comercializadora que realiza el suministro, solo si decides contratar. <span class="pendiente">[ASESORÍA: base y forma de esta comunicación]</span></li>
+          <li>La comercializadora que realiza el suministro, solo si decides contratar. {/* PENDIENTE: base y forma de esta comunicación. */}</li>
           <li>Administraciones y tribunales, cuando una ley lo exige.</li>
         </ul>
-        <p>
-          {/* PENDIENTE: determinar las transferencias internacionales y las garantías aplicables de Hostinger, Google Workspace y Resend, y las que correspondan al uso de WhatsApp. La fuente no publica garantías; no se presume DPF ni cláusulas contractuales. */}
-        </p>
+        {/* PENDIENTE: determinar las transferencias internacionales y las garantías aplicables de Hostinger, Google Workspace y Resend, y las que correspondan al uso de WhatsApp. La fuente no publica garantías; no se presume DPF ni cláusulas contractuales. */}
 
         <h2>Tus derechos</h2>
         <p>
@@ -328,24 +319,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     border: 1px solid #d5e0f0;
     font-family: var(--font-poppins), sans-serif;
     color: #1e293b;
-  }
-
-  .legal-borrador-aviso {
-    background: #fff8eb;
-    border: 1.5px dashed #f59e0b;
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin-bottom: 24px;
-    font-size: 0.84rem;
-    color: #92400e;
-    line-height: 1.45;
-  }
-
-  .legal-nota-asesoria {
-    margin-bottom: 24px;
-    padding: 12px 16px;
-    background: #fef2f2;
-    border-radius: 8px;
   }
 
   .pendiente {

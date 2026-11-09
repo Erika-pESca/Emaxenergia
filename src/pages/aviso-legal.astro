@@ -64,22 +64,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             <dt>Teléfono</dt>
             <dd><a href="tel:933949343">933 949 343</a> (L-V 9:00-13:00 y 15:00-19:00)</dd>
           </div>
-          <div class="titular-dato titular-dato--ancho">
-            <dt>Registro Mercantil</dt>
-            <dd><span class="pendiente">[PENDIENTE: tomo, folio y hoja (31 L1)]</span></dd>
-          </div>
+          {/* PENDIENTE: confirmar el Registro Mercantil, tomo, folio, hoja e inscripción; el registro publicado «de Madrid de Granollers» es incoherente. */}
         </dl>
       </div>
 
       <!-- Prosa del contenido legal oficial 12.16 -->
       <article class="legal-prosa">
-        <div class="legal-borrador-aviso">
-          <strong>BORRADOR TÉCNICO para la asesoría</strong> · no se publica · lo marcado entre corchetes falta o lo decide la asesoría
-        </div>
+        {/* PENDIENTE: cerrar la revisión jurídica de los extremos identificados en los comentarios de esta página. */}
 
         <h2>Quién es el titular de esta web</h2>
         <p>
-          El titular de emaxenergia.com es ENERGYMAX ADVISORY, S.L.U., con NIF B02994333 y domicilio en Calle Gerona 38 Local, Santa Eulalia de Ronçana, 08187 Barcelona. <span class="pendiente">[PENDIENTE: datos de inscripción en el Registro Mercantil; la fuente dice «de Madrid de Granollers» y no publica tomo, folio, hoja ni inscripción]</span>
+          El titular de emaxenergia.com es ENERGYMAX ADVISORY, S.L.U., con NIF B02994333 y domicilio en Calle Gerona 38 Local, Santa Eulalia de Ronçana, 08187 Barcelona. {/* PENDIENTE: datos de inscripción en el Registro Mercantil; la fuente dice «de Madrid de Granollers» y no publica tomo, folio, hoja ni inscripción. */}
         </p>
         <p>
           Puedes contactar con nosotros en el 933 949 343 o, para asuntos legales, en <a href="mailto:administracion@consultoriaemax.com">administracion@consultoriaemax.com</a>.
@@ -87,7 +82,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
         <h2>A qué nos dedicamos</h2>
         <p>
-          EMAX Energía analiza cómo consume la energía cada empresa y construye con esos datos su propuesta de tarifa. El suministro de electricidad lo realiza una comercializadora habilitada, que aparece identificada con su razón social en el contrato y en la factura. <span class="pendiente">[ASESORÍA: confirmar la redacción y si la web debe nombrar a la comercializadora o comercializadoras con las que se trabaja (doc 03 §5)]</span>
+          EMAX Energía informa sobre servicios y ofertas relacionados con el suministro de luz y gas en el mercado energético.
+          {/* PENDIENTE: confirmar la condición de EMAX como asesoría o comercializadora y la identificación de la entidad que realiza el suministro; la home actual dice «Comercializadora 100% B2B», sin acreditar habilitación. */}
         </p>
 
         <h2>Uso de la web</h2>
@@ -320,26 +316,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     border: 1px solid #d5e0f0;
     font-family: var(--font-poppins), sans-serif;
     color: #1e293b;
-  }
-
-  .legal-borrador-aviso {
-    background: #fff8eb;
-    border: 1.5px dashed #f59e0b;
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin-bottom: 28px;
-    font-size: 0.84rem;
-    color: #92400e;
-    line-height: 1.45;
-  }
-
-  .pendiente {
-    color: #b91c1c;
-    background: #fee2e2;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 0.92em;
   }
 
   .legal-prosa h2 {

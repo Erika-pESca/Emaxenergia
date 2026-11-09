@@ -24,8 +24,8 @@ const resumen = [
   { dt: "Dos modelos", dd: "En 2.0TD hay dos potencias; en 3.0TD, seis, y ninguna puede ser menor que la del periodo anterior." },
   { dt: "Se decide con datos", dd: "La que importa es la que tu empresa ha usado de verdad en cada periodo, no la suma de las placas de tus equipos." },
   { dt: "Contratar de menos no compensa", dd: "El precio del exceso está pensado para que no salga a cuenta." },
-  { dt: "Cambiarla tiene reglas", dd: "Doce meses entre cambios, costes y plazos." },
-  { dt: "Por temporadas, todavía no", dd: "La norma lo prevé, pero aún no se puede usar." },
+  // PENDIENTE: reponer el resumen de reglas y plazos cuando se valide la tabla del art. 38.
+  // PENDIENTE: reponer el estado de potencias temporales cuando se compruebe en la CNMC.
 ];
 
 const senales = [
@@ -240,11 +240,8 @@ const datosObrador = [
   </p>
 
   <h2 id="cambiar">Cambiar la potencia: cuándo, cuánto cuesta y cuánto tarda</h2>
-  <p class="fuente">
-    <span class="pendiente">[PENDIENTE: fecha de revisión]</span>
-    <span class="pendiente">[VERIFICAR: RD 88/2026, art. 38; esta tabla no se publica hasta verificarlo]</span>
-  </p>
-  <div class="tabla-guia">
+  {/* PENDIENTE: fecha de revisión y verificación del RD 88/2026, art. 38. La tabla original indicaba que no se publicase sin verificar; se conserva aquí sin renderizar.
+<div class="tabla-guia">
     <table>
       <caption class="solo-lector">Cambiar la potencia: preguntas, respuestas y fuente</caption>
       <thead>
@@ -287,21 +284,23 @@ const datosObrador = [
         </tr>
         <tr>
           <th scope="row">¿Quién lo tramita?</th>
-          <td data-label="Respuesta">El cambio se hace sobre tu contrato de acceso con la distribuidora, normalmente a través de tu comercializadora. <span class="pendiente">[PENDIENTE: cómo lo gestiona EMAX (31 O5)]</span></td>
+          <td data-label="Respuesta">El cambio se hace sobre tu contrato de acceso con la distribuidora, normalmente a través de tu comercializadora. PENDIENTE: cómo lo gestiona EMAX (31 O5).</td>
           <td data-label="Fuente" class="fuente">—</td>
         </tr>
       </tbody>
     </table>
   </div>
+  */}
+  <p>Para revisar un cambio de potencia en tu suministro, <a href="/contacto/">contacta con nosotros</a>.</p>
   <p class="destacado">
     <b>Lo que no te diremos:</b> "Cámbiala cuando quieras." Tiene reglas, y bajarla a ojo puede salirte más caro en excesos de lo que ahorras.
   </p>
 
   <h2 id="temporadas">¿Y por temporadas?</h2>
-  <p>
-    La norma prevé que puedas tener una potencia distinta por trimestres, meses, días u horas, dentro de tus derechos de extensión. Pero todavía no se puede usar: empezará a aplicarse cuando la CNMC fije los precios de esas potencias temporales. <span class="fuente">(RD 88/2026, disposición final novena)</span> <span class="pendiente">[VERIFICAR el estado en la CNMC el día de publicar]</span>
-  </p>
-  <p>Cuando se pueda, tendrá su propia guía.</p>
+  {/* PENDIENTE: comprobar en la CNMC la aplicación de las potencias temporales antes de publicar el estado normativo del borrador.
+  La norma prevé que puedas tener una potencia distinta por trimestres, meses, días u horas, dentro de tus derechos de extensión. Pero todavía no se puede usar: empezará a aplicarse cuando la CNMC fije los precios de esas potencias temporales. <span class="fuente">(RD 88/2026, disposición final novena)</span>
+  */}
+  <p>Si tu consumo cambia por temporadas, <a href="/contacto/">contacta con nosotros</a> para revisar tu caso.</p>
   <p class="enlaces">
     <a href="/sectores/hoteles/#por-que-el-verano">El caso de un hotel</a>
   </p>
