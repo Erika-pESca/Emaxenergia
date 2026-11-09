@@ -48,7 +48,7 @@ En desarrollo, una URL sin barra final (`/metodo`) da 404 porque `trailingSlash`
 - **Botones que abren el formulario**: llevan `data-abrir-funnel` (el modal lo gestiona `Formulario.astro`) y un `href` de respaldo a `/contacto/`.
 - **Fuentes locales.** Se declaran en `astro.config.mjs` (Inter, Poppins, Sora y Literata) y se cargan con `<Font>` en `BaseLayout.astro`. En el CSS no se escriben nombres de familia sueltos: se usan `var(--font-inter)`, `var(--font-poppins)`, `var(--font-sora)` y `var(--font-literata)`, o los alias de `global.css` (`--font-texto`, `--font-titulos`, `--font-acento`). No se enlaza ningún recurso de terceros.
 - **SEO.** Cada página pasa `title`, `description` y `path` (con barra final) a `BaseLayout`, que los entrega a `Seo.astro`. Los títulos son únicos y no llevan el sufijo "| EMAX Energía" (lo añade `Seo.astro`). Las páginas que no deben indexarse (confirmaciones de envío, 404) pasan la prop `noindex` y se excluyen del sitemap en `astro.config.mjs`.
-- **Formularios.** Todo formulario nuevo envía con el helper `src/scripts/enviarFormulario.ts` (no se escribe otro `fetch`), tiene un tipo en `routing` y su lista blanca de campos en el PHP, y lleva el honeypot `web` y el campo `t`. Los destinatarios y las credenciales no se escriben nunca en el código: viven solo en `emax-forms-config.php`.
+- **Formularios.** Todo formulario nuevo envía con el helper `src/scripts/enviarFormulario.ts` (no se escribe otro `fetch`), tiene un tipo en `routing` y su lista blanca de campos en el PHP, y lleva el honeypot `web` y marca su inicio con `marcarInicio(tipo)` (el helper añade el campo `te`). Los destinatarios y las credenciales no se escriben nunca en el código: viven solo en `emax-forms-config.php`.
 - **Rutas nuevas con enlaces nuevos**: tras añadirlas, `npm run build` y revisar que `dist/` no tiene enlaces ni anchors rotos.
 
 ## Formularios y envío de correo
@@ -57,7 +57,7 @@ En desarrollo, una URL sin barra final (`/metodo`) da 404 porque `trailingSlash`
 
 **Configuración externa.** El PHP lee toda su configuración (credenciales, destinatarios, orígenes permitidos, límite de envíos) de `dirname(__DIR__, 2) . '/emax-forms-config.php'`, es decir, **dos niveles por encima de `public_html/api/`**: fuera de `public_html` y fuera del repositorio. La plantilla, con todas las claves comentadas y sin secretos, es [config/emax-forms-config.example.php](config/emax-forms-config.example.php). Los destinatarios y las credenciales viven solo ahí: ninguna dirección interna se escribe en el PHP ni en el JS.
 
-**Tipos de formulario** (cada uno tiene su lista blanca de campos y sus obligatorios en el PHP; solo se aceptan los que están en `routing`): `lead-luz`, `lead-gas`, `lead-llamada`, `lead-canal-directo` y `soporte-contacto`. Los campos de control son `web` (honeypot, tiene que ir vacío) y `t` (milisegundos del momento en que se abrió o renderizó el formulario; si el envío llega en menos de 3 s se trata como bot).
+**Tipos de formulario** (cada uno tiene su lista blanca de campos y sus obligatorios en el PHP; solo se aceptan los que están en `routing`): `lead-luz`, `lead-gas`, `lead-llamada`, `lead-canal-directo` y `soporte-contacto`. Los campos de control son `web` (honeypot, tiene que ir vacío) y `te` (milisegundos transcurridos desde que el formulario se mostró al usuario, medidos en el navegador con `performance.now()`, sin depender del reloj del dispositivo; si falta, no es un entero o es menor de 3000, se trata como bot). El inicio se marca al abrir el modal (funnels, en cada apertura) o el popover, y al cargar la página (contacto y Canal Directo).
 
 **Códigos de respuesta** (siempre JSON):
 
@@ -78,7 +78,7 @@ En desarrollo, una URL sin barra final (`/metodo`) da 404 porque `trailingSlash`
 1. `npm run build`.
 2. Crear una carpeta temporal con la misma estructura que Hostinger, fuera del repositorio, por ejemplo `prueba/public_html` (copia de `dist/`) y `prueba/emax-forms-config.php` (copia del ejemplo con `transport` = `resend`, una `resend_api_key` falsa, `allowed_origins` = `['http://localhost:8080']`, el `routing` de prueba y `storage_dir` = `__DIR__ . '/storage'`).
 3. `php -S localhost:8080 -t prueba/public_html`.
-4. Probar con `curl` (`-H "Origin: http://localhost:8080"`, `Content-Type: application/json`): un GET da 405; otro origen, 403; un tipo desconocido, 400; faltan obligatorios, 422; con `t` de hace menos de 3 s, 200 sin enviar; con la clave falsa, 502; y superado el límite, 429.
+4. Probar con `curl` (`-H "Origin: http://localhost:8080"`, `Content-Type: application/json`): un GET da 405; otro origen, 403; un tipo desconocido, 400; faltan obligatorios, 422; con `"te"` ausente o menor de 3000, 200 sin enviar; con `"te":3500` y datos válidos, llega al transporte; con la clave falsa, 502; y superado el límite, 429.
 5. Borrar la carpeta temporal al terminar.
 
 Los errores del transporte (código HTTP y mensaje de Resend, sin datos del formulario) van al `error_log` de PHP.
@@ -91,6 +91,26 @@ Los errores del transporte (código HTTP y mensaje de Resend, sin datos del form
 4. Comprobar con `curl -I https://emaxenergia.com/` las cabeceras (CSP, HSTS…), la redirección a HTTPS y sin `www`, y que una URL inexistente devuelve `404.html`.
 
 `public/.htaccess` solo lo interpreta Apache/LiteSpeed. El HSTS arranca con `max-age=300`; hay que subirlo a `31536000` cuando HTTPS esté confirmado (el archivo lo explica). Si se añade un servicio externo (formularios, analítica…), hay que añadir su dominio a la CSP.
+
+## Lanzamiento en .com
+
+**Dominios.** Durante la revisión el sitio se sirve en `emaxenergia.es` con `X-Robots-Tag: noindex, nofollow` (regla de `public/.htaccess`). En el lanzamiento se publica en `emaxenergia.com`, que es el dominio canónico definitivo y se indexa con normalidad. Desde el lanzamiento, `emaxenergia.es` redirige con 301 a `emaxenergia.com`. El código ya apunta al `.com` (canonical, sitemap, `robots.txt`, JSON-LD); no hay nada que cambiar en `src/`.
+
+**Checklist (no se puede saltear ningún punto):**
+
+- [ ] **a) Subir el contenido de `dist/` a `public_html` de `emaxenergia.com`**, incluidos `.htaccess` y `api/.htaccess` (son archivos ocultos).
+- [ ] **b) Crear `emax-forms-config.php` del .com** fuera de `public_html`, con `allowed_origins` = `['https://emaxenergia.com']` (más `https://www.emaxenergia.com` si se quiere aceptar), la clave de Resend, `from`, `routing` y `ip_salt`. Ver [Formularios y envío de correo](#formularios-y-envío-de-correo). Sin él, los formularios responden 503.
+- [ ] **c) Verificar que el .com se puede indexar:**
+  - `curl -I https://emaxenergia.com/` y `curl -I https://emaxenergia.com/metodo/` **sin** cabecera `X-Robots-Tag`.
+  - `https://emaxenergia.com/robots.txt` con `Allow: /` y `Sitemap: https://emaxenergia.com/sitemap-index.xml`.
+  - Ver el código fuente de la home y confirmar que **no hay** `<meta name="robots" content="noindex…">`. Solo llevan `noindex` la 404, `/contacto/recibido/` y `/canal-directo/enviado/`.
+- [ ] **d) Activar el bloque de redirección en el `.htaccess` del `.es`** (el bloque comentado "DÍA DEL LANZAMIENTO" de `public/.htaccess`; sus instrucciones están en el propio archivo). Debe ir antes de la regla genérica de HTTPS y el `.es` necesita SSL válido, también para `www`. Verificar que devuelven 301 a `https://emaxenergia.com` con la misma ruta:
+  - `curl -I http://emaxenergia.es/metodo/` → `Location: https://emaxenergia.com/metodo/`
+  - `curl -I https://www.emaxenergia.es/` → `Location: https://emaxenergia.com/`
+
+  Con el bloque activo, la regla de `noindex` del `.es` deja de importar: toda petición redirige y ninguna página se sirve. El `.com` nunca recibe esa cabecera.
+- [ ] **e) Enviar `https://emaxenergia.com/sitemap-index.xml` en Google Search Console** (propiedad del `.com`).
+- [ ] **f) Hacer un envío real de cada formulario desde el .com** (funnel de luz, funnel de gas, popover "Te llamamos", contacto y Canal Directo) y confirmar que el correo llega a los destinatarios de `routing`.
 
 ## Más información
 
