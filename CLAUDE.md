@@ -30,6 +30,7 @@ Consult these guides before working on related tasks:
 - Las páginas que no deben indexarse pasan la prop `noindex` de `Seo.astro` y se excluyen del sitemap en `astro.config.mjs`.
 - Antes de dar un cambio por bueno: `npm run check` (0 errores) y `npm run build`.
 - Los destinatarios de los formularios y las credenciales (clave de Resend, SMTP) viven solo en `emax-forms-config.php`, fuera de `public_html` y del repositorio; nunca en el PHP, el JS ni `src/`. Todo formulario nuevo envía con el helper `src/scripts/enviarFormulario.ts`.
+- **emaxenergia.com es el dominio canónico e indexable; emaxenergia.es solo sirve como revisión con noindex y, desde el lanzamiento, redirige con 301 al .com.**
 - **Cada tanda de cambios agrega su entrada en CHANGELOG.md, con autor y archivos afectados.**
 
 Más detalle en [README.md](README.md), [CHANGELOG.md](CHANGELOG.md) y [AUDITORIA.md](AUDITORIA.md).

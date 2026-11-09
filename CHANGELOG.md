@@ -4,13 +4,49 @@ Este archivo registra los cambios del proyecto desde la tanda de correcciones de
 
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). Los códigos entre paréntesis (C-2, A-3, M-10…) son los hallazgos de [AUDITORIA.md](AUDITORIA.md).
 
-## [0.3.1] - 2026-11-09 — Tarjetas del diagnóstico en la home
+## [0.3.1] - 2026-11-09 — Cierre de formularios y preparación del lanzamiento
 
 Cambios realizados por Luciano Lyall (lucianolyall@gmail.com) directamente en `main`.
 
+### Agregado
+
+- **Bloque de lanzamiento en `public/.htaccess`** (comentado, desactivado): redirección 301 de `emaxenergia.es` (con y sin `www`, http y https) a `https://emaxenergia.com` conservando ruta y query. Lleva instrucciones de activación y comprobación, y explica que con el bloque activo la regla de `noindex` del `.es` deja de importar porque todo redirige. Hoy el comportamiento no cambia: el `.es` sirve el sitio con `noindex`.
+- **Sección "Lanzamiento en .com"** en [README.md](README.md) con el checklist a-f (subida de `dist/`, configuración del .com, verificación de indexación, redirección del .es, Search Console y envíos reales).
+- **Regla de dominios** en [CLAUDE.md](CLAUDE.md) y [AGENTS.md](AGENTS.md): emaxenergia.com es el canónico e indexable; el .es solo es revisión con noindex y, tras el lanzamiento, redirige con 301.
+
 ### Cambiado
 
+- **Trampa de tiempo sin depender del reloj** (N-9): el campo `t` (timestamp absoluto del cliente) se sustituye por `te`, los milisegundos transcurridos desde que el formulario se mostró, medidos con `performance.now()`. Un dispositivo con el reloj mal puesto ya no se trata como bot. El helper expone `marcarInicio(tipo)` y añade `te` solo; el inicio se marca al abrir el modal (funnels de luz y gas, en cada apertura), al abrir el popover "Te llamamos" y al cargar la página (contacto y Canal Directo). El PHP solo considera bot si `te` falta, no es un entero o es menor de 3000, sin comparar con la hora del servidor. Archivos: [src/scripts/enviarFormulario.ts](src/scripts/enviarFormulario.ts), [public/api/enviar-formulario.php](public/api/enviar-formulario.php), [src/components/Formulario.astro](src/components/Formulario.astro), [src/components/FormularioGas.astro](src/components/FormularioGas.astro), [src/components/Header.astro](src/components/Header.astro), [src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro) y [src/pages/canal-directo/index.astro](src/pages/canal-directo/index.astro). `te` no está en la lista blanca de campos del correo: es un campo de control que el PHP consume aparte, igual que `web`.
+- **Los `mailto:` ya no llevan `?cc=`** (N-12): pie ([src/components/Footer.astro](src/components/Footer.astro)), contacto ([src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro)), atención al cliente ([src/pages/atencion-al-cliente.astro](src/pages/atencion-al-cliente.astro), que pasa a `?subject=` sin copia) y Canal Directo ([src/pages/canal-directo/index.astro](src/pages/canal-directo/index.astro), que enlaza a `hola@` en lugar de a `gerencia@` y `hola@` con copia). Así `gerencia@` ya no aparece en ninguna parte del HTML y `administracion@` solo donde una página la presenta como contacto del área.
+- **Documentación**: README y ejemplo de configuración pasan de `t` a `te`.
 - Las cuatro tarjetas de "Lo que miramos nosotros" de la home pasan de `<article tabindex="0">` a enlaces `<a href="/metodo/">`, el mismo destino que el botón "Ver el método completo". Sin cambios visuales (texto blanco, sin subrayado). Archivo: [src/components/home/Variables.astro](src/components/home/Variables.astro).
+
+### Eliminado
+
+- `site.correosFormularios`, `emailGerencia` y `emailAdministracion` de [src/data/site.ts](src/data/site.ts): duplicaban el `routing` del PHP (los dos últimos no se usaban). Los destinatarios de los formularios viven solo en `emax-forms-config.php`. Usos que había: Canal Directo (el `mailto:` mostraba `gerencia@` y `hola@` con copia) y atención al cliente (la copia del `mailto:`); ambos reemplazados como se indica arriba. `emailSoporte` se mantiene, con un comentario, porque atención al cliente la muestra como contacto del área.
+- El campo `t` del payload y su comprobación en el PHP.
+
+### Seguridad
+
+- Ya no hay direcciones internas en enlaces de copia ni en el JS: `gerencia@` no aparece en ningún archivo de `dist/`.
+- Un dispositivo con el reloj mal puesto ya no pierde envíos por la trampa de tiempo.
+
+### Decisiones tomadas
+
+- **Direcciones que se dejan a decisión de Luciano** (aparecen en el HTML porque una página las presenta como contacto de un área): `administracion@emaxenergia.com` en [src/pages/atencion-al-cliente.astro](src/pages/atencion-al-cliente.astro) (líneas 33, 51, 203 y 252, a través de `site.emailSoporte`, definido en [src/data/site.ts](src/data/site.ts) línea 12) y en [src/components/contacto/HablaConNosotros.astro](src/components/contacto/HablaConNosotros.astro) línea 43.
+- **`noindex` solo en el .es**: se comprobó con un Apache local simulando hosts. `X-Robots-Tag` solo sale con host `emaxenergia.es` (con o sin `www`, con o sin puerto) y nunca con `emaxenergia.com` ni con hosts parecidos. En `dist/` solo llevan meta robots `noindex` la 404, `/contacto/recibido/` y `/canal-directo/enviado/`; `robots.txt` permite todo y apunta a `https://emaxenergia.com/sitemap-index.xml`, y canonical y sitemap son del .com.
+- **El bloque de redirección va antes de la regla genérica de HTTPS** para que `http://emaxenergia.es/x/` no dé dos saltos; se comprobó con Apache local que, activado, el .es y `www.` redirigen con 301 al .com con la misma ruta y query.
+- **La trampa de tiempo se marca por tipo de formulario** (`marcarInicio(tipo)`) y, si nunca se marcó, `te` es 0 y el servidor lo trata como bot.
+
+### Notas de despliegue
+
+- El bloque de redirección del .es **no se activa hasta el lanzamiento** (checklist del README). El .es necesita SSL válido, también para `www`.
+- Tras el cambio de `t` a `te`, hay que subir juntos el PHP y el `dist/`: un PHP nuevo con un JS viejo (que manda `t`) trataría todos los envíos como bot sin enviar nada.
+
+### Pendiente (fuera de esta tanda)
+
+- Las mismas pendientes de 0.3.0: clave de Resend, verificación del dominio remitente, prueba real de envío en Hostinger, unificación de `Formulario` y `FormularioGas`, y textos legales.
+- Decidir si `administracion@` se queda visible en atención al cliente y en contacto.
 
 ## [0.3.0] - 2026-11-09 — Formularios y despliegue
 
